@@ -2,7 +2,7 @@
 
 ## 1. Introduction
 
-
+TODO: Add introduction
 
 ### 1.1 Useful Links
 
@@ -12,7 +12,7 @@ TODO: Add development deployment link
 
 ## 2. Domain
 
-
+TODO: Add domain
 
 ## 3. Requirements
 
