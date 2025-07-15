@@ -4,11 +4,11 @@ import {
 	type DefaultValues,
 	type FieldErrors,
 	type FieldValues,
+	useForm,
 	type UseFormHandleSubmit,
-	UseFormProps,
+	type UseFormProps,
 	type ValidationMode,
 } from "react-hook-form";
-import { useForm } from "react-hook-form";
 
 import { type ValidationSchema } from "~/libs/types/types.js";
 

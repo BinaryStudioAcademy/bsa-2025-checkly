@@ -1,3 +1,5 @@
+import React, { type JSX } from "react";
+
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
@@ -28,17 +30,18 @@ const Auth: React.FC = () => {
 		[dispatch],
 	);
 
-	const getScreen = (screen: string): React.ReactNode => {
+	const getScreen = (screen: string): JSX.Element => {
 		switch (screen) {
 			case AppRoute.SIGN_IN: {
 				return <SignInForm onSubmit={handleSignInSubmit} />;
 			}
+
 			case AppRoute.SIGN_UP: {
 				return <SignUpForm onSubmit={handleSignUpSubmit} />;
 			}
 		}
 
-		return null;
+		return <></>;
 	};
 
 	return (

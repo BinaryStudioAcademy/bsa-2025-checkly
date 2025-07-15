@@ -11,6 +11,10 @@ const ColumnName = {
 	UPDATED_AT: "updated_at",
 } as const;
 
+function down(knex: Knex): Promise<void> {
+	return knex.schema.dropTableIfExists(TABLE_NAME);
+}
+
 function up(knex: Knex): Promise<void> {
 	return knex.schema.createTable(TABLE_NAME, (table) => {
 		table.increments(ColumnName.ID).primary();
@@ -26,10 +30,6 @@ function up(knex: Knex): Promise<void> {
 			.notNullable()
 			.defaultTo(knex.fn.now());
 	});
-}
-
-function down(knex: Knex): Promise<void> {
-	return knex.schema.dropTableIfExists(TABLE_NAME);
 }
 
 export { down, up };

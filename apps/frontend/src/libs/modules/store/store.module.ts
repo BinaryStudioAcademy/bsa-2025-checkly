@@ -10,14 +10,14 @@ import { type Config } from "~/libs/modules/config/config.js";
 import { authApi, reducer as authReducer } from "~/modules/auth/auth.js";
 import { userApi, reducer as usersReducer } from "~/modules/users/users.js";
 
-type RootReducer = {
-	auth: ReturnType<typeof authReducer>;
-	users: ReturnType<typeof usersReducer>;
-};
-
 type ExtraArguments = {
 	authApi: typeof authApi;
 	userApi: typeof userApi;
+};
+
+type RootReducer = {
+	auth: ReturnType<typeof authReducer>;
+	users: ReturnType<typeof usersReducer>;
 };
 
 class Store {
@@ -28,6 +28,13 @@ class Store {
 			Tuple<[ThunkMiddleware<RootReducer, UnknownAction, ExtraArguments>]>
 		>
 	>;
+
+	public get extraArguments(): ExtraArguments {
+		return {
+			authApi,
+			userApi,
+		};
+	}
 
 	public constructor(config: Config) {
 		this.instance = configureStore({
@@ -44,13 +51,6 @@ class Store {
 				users: usersReducer,
 			},
 		});
-	}
-
-	public get extraArguments(): ExtraArguments {
-		return {
-			authApi,
-			userApi,
-		};
 	}
 }
 

@@ -5,8 +5,8 @@
 	"main": "build/index.js",
 	"types": "src/index.ts",
 	"engines": {
-		"node": "20.x.x",
-		"npm": "10.x.x"
+		"node": "22.x.x",
+		"npm": "11.x.x"
 	},
 	"scripts": {
 		"lint:type": "npx tsc --noEmit",
@@ -14,7 +14,7 @@
 		"lint": "concurrently \"npm:lint:*\"",
 		"build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json"
 	},
-	"devDependencies": {
-		"zod": "3.23.8"
+	"dependencies": {
+		"zod": "3.25.76"
 	}
 }

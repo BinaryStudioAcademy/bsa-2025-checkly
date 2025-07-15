@@ -56,77 +56,6 @@ class BaseServerApplication implements ServerApplication {
 		});
 	}
 
-	private initErrorHandler(): void {
-		this.app.setErrorHandler(
-			(error: FastifyError | ValidationError, _request, reply) => {
-				if ("issues" in error) {
-					this.logger.error(`[Validation Error]: ${error.message}`);
-
-					for (let issue of error.issues) {
-						this.logger.error(`[${issue.path.toString()}] — ${issue.message}`);
-					}
-
-					const response: ServerValidationErrorResponse = {
-						details: error.issues.map((issue) => ({
-							message: issue.message,
-							path: issue.path,
-						})),
-						errorType: ServerErrorType.VALIDATION,
-						message: error.message,
-					};
-
-					return reply.status(HTTPCode.UNPROCESSED_ENTITY).send(response);
-				}
-
-				if (error instanceof HTTPError) {
-					this.logger.error(
-						`[HTTP Error]: ${String(error.status)} – ${error.message}`,
-					);
-
-					const response: ServerCommonErrorResponse = {
-						errorType: ServerErrorType.COMMON,
-						message: error.message,
-					};
-
-					return reply.status(error.status).send(response);
-				}
-
-				this.logger.error(error.message);
-
-				const response: ServerCommonErrorResponse = {
-					errorType: ServerErrorType.COMMON,
-					message: error.message,
-				};
-
-				return reply.status(HTTPCode.INTERNAL_SERVER_ERROR).send(response);
-			},
-		);
-	}
-
-	private async initServe(): Promise<void> {
-		const staticPath = path.join(
-			path.dirname(fileURLToPath(import.meta.url)),
-			"../../../../public",
-		);
-
-		await this.app.register(fastifyStatic, {
-			prefix: "/",
-			root: staticPath,
-		});
-
-		this.app.setNotFoundHandler(async (_request, response) => {
-			await response.sendFile("index.html", staticPath);
-		});
-	}
-
-	private initValidationCompiler(): void {
-		this.app.setValidatorCompiler<ValidationSchema>(({ schema }) => {
-			return (data): ReturnType<ValidationSchema["parse"]> => {
-				return schema.parse(data);
-			};
-		});
-	}
-
 	public addRoute(parameters: ServerApplicationRouteParameters): void {
 		const { handler, method, path, validation } = parameters;
 
@@ -213,6 +142,77 @@ class BaseServerApplication implements ServerApplication {
 		const routers = this.apis.flatMap((api) => api.routes);
 
 		this.addRoutes(routers);
+	}
+
+	private initErrorHandler(): void {
+		this.app.setErrorHandler(
+			(error: FastifyError | ValidationError, _request, reply) => {
+				if ("issues" in error) {
+					this.logger.error(`[Validation Error]: ${error.message}`);
+
+					for (let issue of error.issues) {
+						this.logger.error(`[${issue.path.toString()}] — ${issue.message}`);
+					}
+
+					const response: ServerValidationErrorResponse = {
+						details: error.issues.map((issue) => ({
+							message: issue.message,
+							path: issue.path,
+						})),
+						errorType: ServerErrorType.VALIDATION,
+						message: error.message,
+					};
+
+					return reply.status(HTTPCode.UNPROCESSED_ENTITY).send(response);
+				}
+
+				if (error instanceof HTTPError) {
+					this.logger.error(
+						`[HTTP Error]: ${String(error.status)} – ${error.message}`,
+					);
+
+					const response: ServerCommonErrorResponse = {
+						errorType: ServerErrorType.COMMON,
+						message: error.message,
+					};
+
+					return reply.status(error.status).send(response);
+				}
+
+				this.logger.error(error.message);
+
+				const response: ServerCommonErrorResponse = {
+					errorType: ServerErrorType.COMMON,
+					message: error.message,
+				};
+
+				return reply.status(HTTPCode.INTERNAL_SERVER_ERROR).send(response);
+			},
+		);
+	}
+
+	private async initServe(): Promise<void> {
+		const staticPath = path.join(
+			path.dirname(fileURLToPath(import.meta.url)),
+			"../../../../public",
+		);
+
+		await this.app.register(fastifyStatic, {
+			prefix: "/",
+			root: staticPath,
+		});
+
+		this.app.setNotFoundHandler(async (_request, response) => {
+			await response.sendFile("index.html", staticPath);
+		});
+	}
+
+	private initValidationCompiler(): void {
+		this.app.setValidatorCompiler<ValidationSchema>(({ schema }) => {
+			return (data): ReturnType<ValidationSchema["parse"]> => {
+				return schema.parse(data);
+			};
+		});
 	}
 }
 

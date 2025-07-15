@@ -6,10 +6,6 @@ import { type Config, type EnvironmentSchema } from "./libs/types/types.js";
 class BaseConfig implements Config {
 	public ENV: EnvironmentSchema;
 
-	public constructor() {
-		this.ENV = this.envSchema;
-	}
-
 	private get envSchema(): EnvironmentSchema {
 		return {
 			API: {
@@ -21,6 +17,10 @@ class BaseConfig implements Config {
 				>,
 			},
 		};
+	}
+
+	public constructor() {
+		this.ENV = this.envSchema;
 	}
 }
 

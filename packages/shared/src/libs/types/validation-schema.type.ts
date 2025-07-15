@@ -1,1 +1,1 @@
-export { type Schema as ValidationSchema } from "zod";
+export { type ZodTypeAny as ValidationSchema } from "zod";

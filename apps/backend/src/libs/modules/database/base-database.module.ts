@@ -9,30 +9,19 @@ import { DatabaseTableName } from "./libs/enums/enums.js";
 import { type Database } from "./libs/types/types.js";
 
 class BaseDatabase implements Database {
-	private appConfig: Config;
-
-	private logger: Logger;
-
-	public constructor(config: Config, logger: Logger) {
-		this.appConfig = config;
-		this.logger = logger;
-	}
-
-	public connect(): ReturnType<Database["connect"]> {
-		this.logger.info("Establish DB connection...");
-
-		Model.knex(knex.default(this.environmentConfig));
-	}
-
-	private get environmentConfig(): Knex.Config {
-		return this.environmentsConfig[this.appConfig.ENV.APP.ENVIRONMENT];
-	}
-
 	public get environmentsConfig(): Database["environmentsConfig"] {
 		return {
 			[AppEnvironment.DEVELOPMENT]: this.initialConfig,
 			[AppEnvironment.PRODUCTION]: this.initialConfig,
 		};
+	}
+
+	private appConfig: Config;
+
+	private logger: Logger;
+
+	private get environmentConfig(): Knex.Config {
+		return this.environmentsConfig[this.appConfig.ENV.APP.ENVIRONMENT];
 	}
 
 	private get initialConfig(): Knex.Config {
@@ -50,6 +39,17 @@ class BaseDatabase implements Database {
 			},
 			...knexSnakeCaseMappers({ underscoreBetweenUppercaseLetters: true }),
 		};
+	}
+
+	public constructor(config: Config, logger: Logger) {
+		this.appConfig = config;
+		this.logger = logger;
+	}
+
+	public connect(): ReturnType<Database["connect"]> {
+		this.logger.info("Establish DB connection...");
+
+		Model.knex(knex.default(this.environmentConfig));
 	}
 }
 

@@ -1,170 +1,62 @@
-import js from "@eslint/js";
-import ts from "@typescript-eslint/eslint-plugin";
-import tsParser from "@typescript-eslint/parser";
-import { resolve as tsResolver } from "eslint-import-resolver-typescript";
-import importPlugin from "eslint-plugin-import";
-import jsdoc from "eslint-plugin-jsdoc";
-import perfectionist from "eslint-plugin-perfectionist";
-import sonarjs from "eslint-plugin-sonarjs";
-import unicorn from "eslint-plugin-unicorn";
+import jsxA11y from "eslint-plugin-jsx-a11y";
+import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
 import globals from "globals";
 
-const JS_MAX_PARAMS_ALLOWED = 3;
+import baseConfig from "../../eslint.config.js";
 
 /** @typedef {import("eslint").Linter.Config} */
 let Config;
-/** @typedef {import("eslint").Linter.ParserModule} */
-let ParserModule;
-
-/** @type {Config} */
-const filesConfig = {
-	files: ["**/*.{js,ts,tsx}"],
-};
 
 /** @type {Config} */
 const ignoresConfig = {
-	ignores: ["apps", "packages", "dangerfile.ts"],
+	ignores: ["build"],
 };
 
 /** @type {Config} */
-const jsConfig = {
+const mainConfig = {
 	languageOptions: {
-		globals: globals.node,
-		parserOptions: {
-			ecmaVersion: 14,
-			sourceType: "module",
-		},
-	},
-	rules: {
-		...js.configs.recommended.rules,
-		"arrow-parens": ["error", "always"],
-		curly: ["error", "all"],
-		"max-params": ["error", JS_MAX_PARAMS_ALLOWED],
-		"no-console": ["error"],
-		"no-multiple-empty-lines": [
-			"error",
-			{
-				max: 1,
-			},
-		],
-		"no-restricted-syntax": [
-			"error",
-			{
-				message: "Export/Import all (*) is forbidden.",
-				selector: "ExportAllDeclaration,ImportAllDeclaration",
-			},
-			{
-				message: "Exports should be at the end of the file.",
-				selector: "ExportNamedDeclaration[declaration!=null]",
-			},
-			{
-				message: "TS features are forbidden.",
-				selector: "TSEnumDeclaration,ClassDeclaration[abstract=true]",
-			},
-			{
-				message:
-					"Avoid import/export type { Type } from './module'. Prefer import/export { type Type } from './module'.",
-				selector:
-					"ImportDeclaration[importKind=type],ExportNamedDeclaration[exportKind=type]",
-			},
-		],
-		quotes: ["error", "double"],
-	},
-};
-
-/** @type {Config} */
-const importConfig = {
-	plugins: {
-		import: importPlugin,
-	},
-	rules: {
-		...importPlugin.configs.recommended.rules,
-		"import/exports-last": ["error"],
-		"import/extensions": [
-			"error",
-			{
-				js: "always",
-			},
-		],
-		"import/newline-after-import": ["error"],
-		"import/no-default-export": ["error"],
-		"import/no-duplicates": ["error"],
-	},
-	settings: {
-		"import/parsers": {
-			espree: [".js", ".cjs"],
-		},
-		"import/resolver": {
-			typescript: tsResolver,
+		globals: {
+			...globals.node,
+			...globals.browser,
+			JSX: true,
+			React: true,
 		},
 	},
 };
 
 /** @type {Config} */
-const sonarConfig = {
+const reactConfig = {
+	files: ["**/*.tsx"],
 	plugins: {
-		sonarjs,
+		react,
 	},
 	rules: {
-		...sonarjs.configs.recommended.rules,
-		"sonarjs/no-duplicate-string": ["off"],
+		...react.configs["jsx-runtime"].rules,
+		...react.configs["recommended"].rules,
+		"react/jsx-boolean-value": ["error"],
+		"react/jsx-curly-brace-presence": ["error"],
+		"react/jsx-no-bind": ["error", { ignoreRefs: true }],
+		"react/self-closing-comp": ["error"],
 	},
 };
 
 /** @type {Config} */
-const unicornConfig = {
+const reactHooksConfig = {
+	files: ["**/*.tsx"],
 	plugins: {
-		unicorn,
+		"react-hooks": reactHooks,
 	},
-	rules: {
-		...unicorn.configs.recommended.rules,
-		"unicorn/no-null": ["off"],
-	},
+	rules: reactHooks.configs.recommended.rules,
 };
 
 /** @type {Config} */
-const perfectionistConfig = {
+const jsxA11yConfig = {
+	files: ["**/*.tsx"],
 	plugins: {
-		perfectionist,
+		"jsx-a11y": jsxA11y,
 	},
-	rules: perfectionist.configs["recommended-natural"].rules,
-};
-
-/** @type {Config} */
-const typescriptConfig = {
-	ignores: ["eslint.config.js", "lint-staged.config.js", "stylelint.config.js"],
-	languageOptions: {
-		parser: /** @type {ParserModule} */ (tsParser),
-		parserOptions: {
-			project: "./tsconfig.json",
-		},
-	},
-	plugins: {
-		"@typescript-eslint": ts,
-	},
-	rules: {
-		...ts.configs["strict-type-checked"].rules,
-		"@typescript-eslint/no-magic-numbers": [
-			"error",
-			{
-				ignoreEnums: true,
-				ignoreReadonlyClassProperties: true,
-			},
-		],
-		"@typescript-eslint/return-await": ["error", "always"],
-	},
-};
-
-/** @type {Config} */
-const jsdocConfig = {
-	files: ["eslint.config.js", "lint-staged.config.js"],
-	plugins: {
-		jsdoc,
-	},
-	rules: {
-		...jsdoc.configs["recommended-typescript-flavor-error"].rules,
-		"jsdoc/no-undefined-types": ["error"],
-	},
+	rules: jsxA11y.configs.recommended.rules,
 };
 
 /** @type {Config} */
@@ -180,32 +72,27 @@ const explicitGenericsConfig = {
 /** @type {Config[]} */
 const overridesConfigs = [
 	{
-		files: [
-			"commitlint.config.ts",
-			"prettier.config.ts",
-			"stylelint.config.ts",
-			"knip.config.ts",
-			"packages.d.ts",
-			"lint-staged.config.js",
-			"eslint.config.js",
-		],
+		files: ["vite.config.ts"],
 		rules: {
 			"import/no-default-export": ["off"],
+		},
+	},
+	{
+		files: ["src/vite-env.d.ts"],
+		rules: {
+			"unicorn/prevent-abbreviations": ["off"],
 		},
 	},
 ];
 
 /** @type {Config[]} */
 const config = [
-	filesConfig,
+	...baseConfig,
 	ignoresConfig,
-	jsConfig,
-	importConfig,
-	sonarConfig,
-	unicornConfig,
-	perfectionistConfig,
-	typescriptConfig,
-	jsdocConfig,
+	mainConfig,
+	reactConfig,
+	reactHooksConfig,
+	jsxA11yConfig,
 	explicitGenericsConfig,
 	...overridesConfigs,
 ];

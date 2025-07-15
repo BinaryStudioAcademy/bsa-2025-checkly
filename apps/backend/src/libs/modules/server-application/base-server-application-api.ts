@@ -9,11 +9,10 @@ import {
 } from "./libs/types/types.js";
 
 class BaseServerApplicationApi implements ServerApplicationApi {
-	private config: Config;
-
 	public routes: ServerApplicationRouteParameters[];
 
 	public version: string;
+	private config: Config;
 
 	public constructor(
 		version: string,

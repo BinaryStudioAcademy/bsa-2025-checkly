@@ -1,6 +1,7 @@
-import { Config } from "prettier";
+/** @typedef {import("prettier").Config} Config */
 
-const config: Config = {
+/** @type {Config} */
+const config = {
 	arrowParens: "always",
 	bracketSpacing: true,
 	printWidth: 80,

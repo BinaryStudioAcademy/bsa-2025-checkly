@@ -1,5 +1,5 @@
 const ProjectPrefix = {
-	APP: "bb",
+	APP: "cy",
 	CHANGE_TYPES: [
 		"build",
 		"chore",
@@ -14,7 +14,7 @@ const ProjectPrefix = {
 		"test",
 	],
 	ENVIRONMENT: "main",
-	ISSUE_PREFIXES: ["bb", "release"],
+	ISSUE_PREFIXES: ["cy", "release"],
 	SCOPES: {
 		APPS: ["frontend", "backend"],
 		PACKAGES: ["main", "shared"],

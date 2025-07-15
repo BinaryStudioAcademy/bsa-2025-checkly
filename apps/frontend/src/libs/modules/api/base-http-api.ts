@@ -38,12 +38,29 @@ class BaseHTTPApi implements HTTPApi {
 		this.storage = storage;
 	}
 
-	protected getFullEndpoint<T extends Record<string, string>>(
-		...parameters: [...string[], T]
+	public async load(
+		path: string,
+		options: HTTPApiOptions,
+	): Promise<HTTPApiResponse> {
+		const { contentType, hasAuth, method, payload = null } = options;
+
+		const headers = await this.getHeaders(contentType, hasAuth);
+
+		const response = await this.http.load(path, {
+			headers,
+			method,
+			payload,
+		});
+
+		return (await this.checkResponse(response)) as HTTPApiResponse;
+	}
+
+	protected getFullEndpoint(
+		...parameters: [...string[], Record<string, string>]
 	): string {
 		const copiedParameters = [...parameters];
 
-		const options = copiedParameters.pop() as T;
+		const options = copiedParameters.pop() as Record<string, string>;
 
 		return configureString(
 			this.baseUrl,
@@ -100,23 +117,6 @@ class BaseHTTPApi implements HTTPApi {
 			message: parsedException.message,
 			status: response.status as ValueOf<typeof HTTPCode>,
 		});
-	}
-
-	public async load(
-		path: string,
-		options: HTTPApiOptions,
-	): Promise<HTTPApiResponse> {
-		const { contentType, hasAuth, method, payload = null } = options;
-
-		const headers = await this.getHeaders(contentType, hasAuth);
-
-		const response = await this.http.load(path, {
-			headers,
-			method,
-			payload,
-		});
-
-		return (await this.checkResponse(response)) as HTTPApiResponse;
 	}
 }
 

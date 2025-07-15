@@ -14,3 +14,6 @@ indent_style = space
 
 [*.yml]
 indent_style = space
+
+[*.yaml]
+indent_style = space

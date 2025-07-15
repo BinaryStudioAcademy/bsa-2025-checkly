@@ -1,10 +1,12 @@
 import js from "@eslint/js";
+import stylistic from "@stylistic/eslint-plugin";
 import ts from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import { resolve as tsResolver } from "eslint-import-resolver-typescript";
 import importPlugin from "eslint-plugin-import";
 import jsdoc from "eslint-plugin-jsdoc";
 import perfectionist from "eslint-plugin-perfectionist";
+import explicitGenerics from "eslint-plugin-require-explicit-generics";
 import sonarjs from "eslint-plugin-sonarjs";
 import unicorn from "eslint-plugin-unicorn";
 import globals from "globals";
@@ -12,21 +14,21 @@ import globals from "globals";
 const JS_MAX_PARAMS_ALLOWED = 3;
 
 /** @typedef {import("eslint").Linter.Config} */
-let FlatConfig;
+let Config;
 /** @typedef {import("eslint").Linter.ParserModule} */
 let ParserModule;
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const filesConfig = {
 	files: ["**/*.{js,ts,tsx}"],
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const ignoresConfig = {
 	ignores: ["apps", "packages", "dangerfile.ts"],
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const jsConfig = {
 	languageOptions: {
 		globals: globals.node,
@@ -58,8 +60,14 @@ const jsConfig = {
 				selector: "ExportNamedDeclaration[declaration!=null]",
 			},
 			{
-				message: "TS features are forbidden",
+				message: "TS features are forbidden.",
 				selector: "TSEnumDeclaration,ClassDeclaration[abstract=true]",
+			},
+			{
+				message:
+					"Avoid import/export type { Type } from './module'. Prefer import/export { type Type } from './module'.",
+				selector:
+					"ImportDeclaration[importKind=type],ExportNamedDeclaration[exportKind=type]",
 			},
 		],
 		"object-shorthand": ["error"],
@@ -68,7 +76,7 @@ const jsConfig = {
 	},
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const importConfig = {
 	plugins: {
 		import: importPlugin,
@@ -96,18 +104,21 @@ const importConfig = {
 	},
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const sonarConfig = {
 	plugins: {
 		sonarjs,
 	},
 	rules: {
 		...sonarjs.configs.recommended.rules,
+		"sonarjs/no-async-constructor": ["off"],
 		"sonarjs/no-duplicate-string": ["off"],
+		"sonarjs/no-hardcoded-passwords": ["off"],
+		"sonarjs/todo-tag": ["off"],
 	},
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const unicornConfig = {
 	plugins: {
 		unicorn,
@@ -118,7 +129,7 @@ const unicornConfig = {
 	},
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const perfectionistConfig = {
 	plugins: {
 		perfectionist,
@@ -126,7 +137,7 @@ const perfectionistConfig = {
 	rules: perfectionist.configs["recommended-natural"].rules,
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const typescriptConfig = {
 	ignores: ["eslint.config.js", "lint-staged.config.js", "stylelint.config.js"],
 	languageOptions: {
@@ -164,7 +175,7 @@ const typescriptConfig = {
 	},
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const jsdocConfig = {
 	files: ["eslint.config.js", "lint-staged.config.js"],
 	plugins: {
@@ -210,13 +221,13 @@ const explicitGenericsConfig = {
 	},
 };
 
-/** @type {FlatConfig[]} */
+/** @type {Config[]} */
 const overridesConfigs = [
 	{
 		files: [
 			"commitlint.config.ts",
-			"prettier.config.ts",
-			"stylelint.config.ts",
+			"prettier.config.js",
+			"stylelint.config.js",
 			"knip.config.ts",
 			"packages.d.ts",
 			"lint-staged.config.js",
@@ -234,7 +245,7 @@ const overridesConfigs = [
 	},
 ];
 
-/** @type {FlatConfig[]} */
+/** @type {Config[]} */
 const config = [
 	filesConfig,
 	ignoresConfig,

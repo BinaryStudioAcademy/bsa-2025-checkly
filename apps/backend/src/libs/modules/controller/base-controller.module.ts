@@ -9,16 +9,27 @@ import {
 } from "./libs/types/types.js";
 
 class BaseController implements Controller {
+	public routes: ServerApplicationRouteParameters[];
+
 	private apiUrl: string;
 
 	private logger: Logger;
-
-	public routes: ServerApplicationRouteParameters[];
 
 	public constructor(logger: Logger, apiPath: string) {
 		this.logger = logger;
 		this.apiUrl = apiPath;
 		this.routes = [];
+	}
+
+	public addRoute(options: ControllerRouteParameters): void {
+		const { handler, path } = options;
+		const fullPath = this.apiUrl + path;
+
+		this.routes.push({
+			...options,
+			handler: (request, reply) => this.mapHandler(handler, request, reply),
+			path: fullPath,
+		});
 	}
 
 	private async mapHandler(
@@ -44,17 +55,6 @@ class BaseController implements Controller {
 			params,
 			query,
 		};
-	}
-
-	public addRoute(options: ControllerRouteParameters): void {
-		const { handler, path } = options;
-		const fullPath = this.apiUrl + path;
-
-		this.routes.push({
-			...options,
-			handler: (request, reply) => this.mapHandler(handler, request, reply),
-			path: fullPath,
-		});
 	}
 }
 

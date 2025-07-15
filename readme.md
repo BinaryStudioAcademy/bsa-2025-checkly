@@ -16,8 +16,8 @@ TODO: Add domain
 
 ## 3. Requirements
 
-- [NodeJS](https://nodejs.org/en) (20.x.x);
-- [npm](https://www.npmjs.com/) (10.x.x);
+- [NodeJS](https://nodejs.org/en) (22.x.x);
+- [npm](https://www.npmjs.com/) (11.x.x);
 - [PostgreSQL](https://www.postgresql.org/) (15.4)
 
 ## 4. Database Schema
@@ -132,7 +132,7 @@ For the full list of types check [Conventional Commits](https://github.com/conve
 
 Examples:
 
-- `feat: add dashboard screen bb-123`
+- `feat: add dashboard screen cy-123`
 
 ### 7.2 Branch Flow
 
@@ -156,8 +156,8 @@ We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0) to 
 
 Examples:
 
-- `feat: add dashboard component bb-45`
-- `fix: update dashboard card size bb-212`
+- `feat: add dashboard component cy-45`
+- `fix: update dashboard card size cy-212`
 
 ## 8. Deployment
 

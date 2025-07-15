@@ -4,8 +4,8 @@ import { logger } from "~/libs/modules/logger/logger.js";
 import { authController } from "~/modules/auth/auth.js";
 import { userController } from "~/modules/users/users.js";
 
-import { BaseServerApplication } from "./base-server-application.js";
 import { BaseServerApplicationApi } from "./base-server-application-api.js";
+import { BaseServerApplication } from "./base-server-application.js";
 
 const apiV1 = new BaseServerApplicationApi(
 	"v1",
