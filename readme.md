@@ -2,7 +2,7 @@
 
 ## 1. Introduction
 
-TODO: Add introduction
+Create personalised checklists and action plans for any life goal - development, career, health, creativity, and more. Just complete a short quiz and get an individual plan with tasks, tips and structure for 5, 14 or 21 days.
 
 ### 1.1 Useful Links
 
@@ -12,7 +12,7 @@ TODO: Add development deployment link
 
 ## 2. Domain
 
-TODO: Add domain
+The app helps users achieve their life goals—whether in development, career, health, or creativity—by generating personalized checklists and action plans. After completing a short quiz, users receive a structured plan with tasks and tips for 5, 14, or 21 days.
 
 ## 3. Requirements
 
@@ -26,7 +26,30 @@ TODO: add database schema
 
 ## 5. Architecture
 
-TODO: add application schema
+```mermaid
+
+erDiagram
+    users {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        varchar email
+        text password_hash
+        text password_salt
+    }
+
+    user_details ||--|| users: user_id
+    user_details {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        varchar name
+        int user_id FK
+        string notification_frequency
+        int avatar_file_id FK
+    }
+
+```
 
 ### 5.1 Global
 
