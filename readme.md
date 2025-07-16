@@ -34,19 +34,9 @@ erDiagram
         dateTime created_at
         dateTime updated_at
         varchar email
+        varchar name
         text password_hash
         text password_salt
-    }
-
-    user_details ||--|| users: user_id
-    user_details {
-        int id PK
-        dateTime created_at
-        dateTime updated_at
-        varchar name
-        int user_id FK
-        string notification_frequency
-        int avatar_file_id FK
     }
 
 ```
