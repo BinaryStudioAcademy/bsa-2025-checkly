@@ -127,11 +127,13 @@ You should use .env.example files as a reference.
 
 3. Run database. You can run it by installing postgres on your computer.
 
-4. Apply migrations: `npm run migrate:dev -w backend`
+4. Build 'shared' folder. `npm run build -w shared`
 
-5. Run backend: `npm run start:dev -w backend`
+5. Apply migrations: `npm run migrate:dev -w backend`
 
-6. Run frontend: `npm run start:dev -w frontend`
+6. Run backend: `npm run start:dev -w backend`
+
+7. Run frontend: `npm run start:dev -w frontend`
 
 ## 7. Development Flow
 
