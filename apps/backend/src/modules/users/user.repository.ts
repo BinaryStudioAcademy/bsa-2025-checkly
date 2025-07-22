@@ -32,18 +32,20 @@ class UserRepository implements Repository {
 		return Promise.resolve(null);
 	}
 
-	public async findById(id: number): Promise<UserEntity | null> {
-		const user = await this.userModel.query().findById(id).execute();
-
-		if (!user) return null;
-
-		return UserEntity.initialize(user);
-	}
-
 	public async findAll(): Promise<UserEntity[]> {
 		const users = await this.userModel.query().execute();
 
 		return users.map((user) => UserEntity.initialize(user));
+	}
+
+	public async findById(id: number): Promise<null | UserEntity> {
+		const user = await this.userModel.query().findById(id).execute();
+
+		if (!user) {
+			return null;
+		}
+
+		return UserEntity.initialize(user);
 	}
 
 	public update(): ReturnType<Repository["update"]> {

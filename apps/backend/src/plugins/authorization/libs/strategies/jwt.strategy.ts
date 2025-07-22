@@ -1,15 +1,12 @@
 import { type FastifyRequest } from "fastify";
-import { jwtVerify, type JWTPayload } from "jose";
+import { type JWTPayload, jwtVerify } from "jose";
 
 import { config } from "~/libs/modules/config/config.js";
 import { type UserEntity } from "~/modules/users/user.entity.js";
-import { type UserService } from "~/modules/users/user.service.js";
 
 import { AuthorizationError } from "../../exceptions/exceptions.js";
 
-const verifyJwt = async (
-	request: FastifyRequest
-): Promise<UserEntity> => {
+const verifyJwt = async (request: FastifyRequest): Promise<UserEntity> => {
 	try {
 		const { authorization } = request.headers;
 
@@ -20,12 +17,12 @@ const verifyJwt = async (
 		}
 
 		const token = authorization.replace("Bearer ", "");
-		const { payload } = await jwtVerify<{ id: number } & JWTPayload>(
+		const { payload } = await jwtVerify<JWTPayload & { id: number }>(
 			token,
-			new TextEncoder().encode(config.ENV.JWT.SECRET_KEY)
+			new TextEncoder().encode(config.ENV.JWT.SECRET_KEY),
 		);
 
-		const userService: UserService = request.server.userService;
+		const { userService } = request.server;
 		const user = await userService.findById(payload.id);
 
 		if (!user) {
@@ -37,8 +34,8 @@ const verifyJwt = async (
 		return user;
 	} catch (error) {
 		throw new AuthorizationError({
-			message: "Authentication failed.",
 			cause: error,
+			message: "Authentication failed.",
 		});
 	}
 };

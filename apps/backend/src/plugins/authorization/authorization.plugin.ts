@@ -1,19 +1,17 @@
 import fp from "fastify-plugin";
 
-import { type UserEntity } from "~/modules/users/user.entity.js";
-import { type UserService } from "~/modules/users/user.service.js";
-
+import { type UserEntity } from "../../modules/users/user.entity.js";
+import { type UserService } from "../../modules/users/user.service.js";
 import { verifyJwt } from "./libs/strategies/jwt.strategy.js";
 
 declare module "fastify" {
-	interface FastifyRequest {
-		user: UserEntity;
-		authenticate: () => Promise<void>;
-	}
-
 	interface FastifyInstance {
 		authenticate: (request: FastifyRequest) => Promise<void>;
 		userService: UserService;
+	}
+
+	interface FastifyRequest {
+		user: UserEntity;
 	}
 }
 
@@ -23,7 +21,7 @@ type AuthPluginOptions = {
 };
 
 const authorization = fp<AuthPluginOptions>(
-	async (fastify, { userService, whiteRoutes }) => {
+	(fastify, { userService, whiteRoutes }, done) => {
 		fastify.decorate("userService", userService);
 		fastify.decorate("authenticate", async function (request) {
 			request.user = await verifyJwt(request);
@@ -38,12 +36,14 @@ const authorization = fp<AuthPluginOptions>(
 			}
 
 			try {
-				await request.authenticate();
+				await fastify.authenticate(request);
 			} catch (error) {
-				await reply.send(error);
+				await reply.send(error as Error);
 			}
 		});
-	}
+
+		done();
+	},
 );
 
 export { authorization };

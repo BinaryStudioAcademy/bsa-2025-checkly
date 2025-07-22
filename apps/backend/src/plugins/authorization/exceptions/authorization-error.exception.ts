@@ -2,16 +2,16 @@ import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
 
 class AuthorizationError extends HTTPError {
 	public constructor({
-		message = "Authorization failed",
 		cause,
+		message = "Authorization failed",
 	}: {
-		message?: string;
 		cause?: unknown;
+		message?: string;
 	} = {}) {
 		super({
+			cause,
 			message,
 			status: HTTPCode.UNAUTHORIZED,
-			cause,
 		});
 	}
 }

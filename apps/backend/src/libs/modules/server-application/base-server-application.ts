@@ -16,9 +16,7 @@ import {
 	type ServerValidationErrorResponse,
 	type ValidationSchema,
 } from "~/libs/types/types.js";
-
-import { authController } from "~/modules/auth/auth.js";
-import { userController, userService } from "~/modules/users/users.js"; // Importe o userService
+import { userService } from "~/modules/users/users.js";
 import { authorization as authorizationPlugin } from "~/plugins/authorization/authorization.js";
 
 import {
@@ -119,17 +117,6 @@ class BaseServerApplication implements ServerApplication {
 		}
 	}
 
-	private async initPlugins(): Promise<void> {
-		await this.app.register(authorizationPlugin, {
-			userService,
-			whiteRoutes: this.apis.flatMap((api) =>
-				api.routes
-					.filter((route) => route.isPublic)
-					.map((route) => route.path)
-			),
-		});
-	}
-	
 	public async initMiddlewares(): Promise<void> {
 		await Promise.all(
 			this.apis.map(async (api) => {
@@ -204,6 +191,15 @@ class BaseServerApplication implements ServerApplication {
 				return reply.status(HTTPCode.INTERNAL_SERVER_ERROR).send(response);
 			},
 		);
+	}
+
+	private async initPlugins(): Promise<void> {
+		await this.app.register(authorizationPlugin, {
+			userService,
+			whiteRoutes: this.apis.flatMap((api) =>
+				api.routes.filter((route) => route.isPublic).map((route) => route.path),
+			),
+		});
 	}
 
 	private async initServe(): Promise<void> {
