@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import "~/assets/css/styles.css";
 import {
 	App,
+	ProtectedRoute,
 	RouterProvider,
 	StoreProvider,
 } from "~/libs/components/components.js";
@@ -19,7 +20,13 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 					{
 						children: [
 							{
-								element: "Root",
+								children: [
+									{
+										element: "Root",
+										path: "",
+									},
+								],
+								element: <ProtectedRoute />,
 								path: AppRoute.ROOT,
 							},
 							{
