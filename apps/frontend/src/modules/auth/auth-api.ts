@@ -10,6 +10,8 @@ import {
 
 import { AuthApiPath } from "./libs/enums/enums.js";
 
+const TEMPORARY_USER_ID = 1;
+
 type Constructor = {
 	baseUrl: string;
 	http: HTTP;
@@ -32,7 +34,6 @@ class AuthApi extends BaseHTTPApi {
 		}
 
 		// For now, use hardcoded ID until JWT middleware is implemented
-		const temporaryUserId = 1;
 
 		// When JWT middleware is ready, will change to:
 		// const response = await this.load(
@@ -46,7 +47,7 @@ class AuthApi extends BaseHTTPApi {
 
 		const response = await this.load(
 			this.getFullEndpoint(AuthApiPath.PROFILE, {
-				id: String(temporaryUserId),
+				id: String(TEMPORARY_USER_ID),
 			}),
 			{
 				contentType: ContentType.JSON,
