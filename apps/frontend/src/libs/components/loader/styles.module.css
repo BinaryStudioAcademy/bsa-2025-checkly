@@ -2,7 +2,7 @@
 	--loader-base-size: 16px;
 }
 
-.loader-fullscreen {
+.fullscreen {
 	z-index: 9999;
 	display: flex;
 	align-items: center;
@@ -11,37 +11,37 @@
 	background-color: #e0e0e09f;
 }
 
-.loader-inline {
+.inline {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.loader-small {
+.small {
 	--loader-base-size: 12px;
 }
 
-.loader-medium {
+.medium {
 	--loader-base-size: 20px;
 }
 
-.loader-large {
+.large {
 	--loader-base-size: 32px;
 }
 
-.loader-brand {
+.brand {
 	color: #75a5be;
 }
 
-.loader-muted {
+.muted {
 	color: #dcf3b6;
 }
 
-.loader-accent {
+.accent {
 	color: #ff7171;
 }
 
-.loader-spinner {
+.spinner {
 	display: inline-block;
 	width: var(--loader-base-size);
 	height: var(--loader-base-size);
@@ -52,7 +52,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.loader-spinner {
+	.spinner {
 		animation: spin 1.5s linear infinite;
 	}
 }
