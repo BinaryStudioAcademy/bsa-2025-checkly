@@ -7,6 +7,7 @@ import {
 	useEffect,
 	useLocation,
 } from "~/libs/hooks/hooks.js";
+import { useAuthInitialization } from "~/libs/hooks/use-auth-initialization/index.js";
 import { actions as userActions } from "~/modules/users/users.js";
 
 const App: React.FC = () => {
@@ -16,6 +17,9 @@ const App: React.FC = () => {
 		dataStatus: users.dataStatus,
 		users: users.users,
 	}));
+
+	// Initialize authentication from localStorage token
+	useAuthInitialization();
 
 	const isRoot = pathname === AppRoute.ROOT;
 
