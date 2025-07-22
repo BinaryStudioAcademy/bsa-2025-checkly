@@ -38,6 +38,10 @@ class UserService implements Service {
 		return Promise.resolve(null);
 	}
 
+	public async findById(id: number): Promise<UserEntity | null> {
+		return await this.userRepository.findById(id);
+	}
+	
 	public async findAll(): Promise<UserGetAllResponseDto> {
 		const items = await this.userRepository.findAll();
 
