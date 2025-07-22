@@ -7,6 +7,7 @@ type ControllerRouteParameters = {
 	handler: APIHandler;
 	method: HTTPMethod;
 	path: string;
+	isPublic?: boolean;
 	validation?: {
 		body?: ValidationSchema;
 	};

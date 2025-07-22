@@ -10,6 +10,7 @@ type ServerApplicationRouteParameters = {
 	) => Promise<void> | void;
 	method: HTTPMethod;
 	path: string;
+	isPublic?: boolean;
 	validation?: {
 		body?: ValidationSchema;
 	};

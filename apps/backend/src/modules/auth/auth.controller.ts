@@ -31,6 +31,7 @@ class AuthController extends BaseController {
 				),
 			method: "POST",
 			path: AuthApiPath.SIGN_UP,
+			isPublic: true,
 			validation: {
 				body: userSignUpValidationSchema,
 			},
