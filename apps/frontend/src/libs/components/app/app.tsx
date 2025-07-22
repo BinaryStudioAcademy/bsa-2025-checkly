@@ -63,9 +63,10 @@ const App: React.FC = () => {
 					width: "max-content",
 				}}
 			>
-				<Loader container="inline" />
+				<Loader container="inline" size="base" />
 				<span>Button with loader</span>
 			</button>
+
 			<div>
 				<RouterOutlet />
 			</div>

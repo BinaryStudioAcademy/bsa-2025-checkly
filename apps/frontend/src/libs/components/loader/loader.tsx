@@ -16,7 +16,7 @@ type Properties = {
 
 const Loader = ({
 	container = "fullscreen",
-	size = "base",
+	size = "large",
 	theme = "brand",
 }: Properties): JSX.Element => {
 	return (
