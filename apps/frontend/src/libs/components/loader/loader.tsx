@@ -5,7 +5,7 @@ import { cn } from "~/libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type LoaderContainer = "fullscreen" | "inline";
-type LoaderSize = "large" | "medium" | "small";
+type LoaderSize = "base" | "large" | "medium" | "small";
 type LoaderTheme = "accent" | "brand" | "muted";
 
 type Properties = {
@@ -16,7 +16,7 @@ type Properties = {
 
 const Loader = ({
 	container = "fullscreen",
-	size = "large",
+	size = "base",
 	theme = "brand",
 }: Properties): JSX.Element => {
 	return (

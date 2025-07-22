@@ -48,7 +48,24 @@ const App: React.FC = () => {
 				</li>
 			</ul>
 			<p>Current path: {pathname}</p>
-
+			<button
+				style={{
+					alignItems: "center",
+					backgroundColor: "#C6E7F9",
+					border: "2px solid #33322E",
+					borderRadius: "999px",
+					cursor: "pointer",
+					display: "flex",
+					fontSize: "18px",
+					fontWeight: "normal",
+					gap: "12px",
+					padding: "8px 16px",
+					width: "max-content",
+				}}
+			>
+				<Loader container="inline" />
+				<span>Button with loader</span>
+			</button>
 			<div>
 				<RouterOutlet />
 			</div>
