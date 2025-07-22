@@ -22,6 +22,8 @@ import { UsersApiPath } from "./libs/enums/enums.js";
  *          email:
  *            type: string
  *            format: email
+ *          name:
+ *            type: string
  */
 class UserController extends BaseController {
 	private userService: UserService;

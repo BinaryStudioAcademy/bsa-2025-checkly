@@ -9,17 +9,17 @@ type Constructor = {
 };
 
 class AuthenticationError extends HTTPError {
-    public status: ValueOf<typeof HTTPCode>;
+	public status: ValueOf<typeof HTTPCode>;
 
-    public constructor({cause, message, status}: Constructor) {
-        super({
-            cause, 
-            message,
-            status
-        });
+	public constructor({ cause, message, status }: Constructor) {
+		super({
+			cause,
+			message,
+			status,
+		});
 
-        this.status = status;
-    }
+		this.status = status;
+	}
 }
 
 export { AuthenticationError };

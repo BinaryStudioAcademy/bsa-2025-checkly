@@ -20,7 +20,7 @@ const userSignUp = z
 				message: UserValidationMessage.EMAIL_WRONG,
 			}),
 		name: z.string().trim().min(UserValidationRule.NAME_MINIMUM_LENGTH, {
-			message: UserValidationMessage.NAME_REQUIRE,
+			message: UserValidationMessage.FIELD_REQUIRED,
 		}),
 		password: z.string().trim(),
 	})
