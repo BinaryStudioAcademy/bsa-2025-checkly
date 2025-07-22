@@ -88,6 +88,10 @@ jobs:
             packages/**/build
           key: ci-${{ hashFiles('**/package-lock.json') }}
 
+      - name: Build Shared
+        run: |
+          npm run build:shared
+
       - name: Code Building
         run: |
           npm run build

@@ -177,7 +177,7 @@ const typescriptConfig = {
 
 /** @type {Config} */
 const jsdocConfig = {
-	files: ["eslint.config.js", "lint-staged.config.js"],
+	files: ["eslint.config.js", "lint-staged.config.js", "prettier.config.js"],
 	plugins: {
 		jsdoc,
 	},
