@@ -1,5 +1,9 @@
 import { type JSX } from "react";
 
+import { cn } from "~/libs/helpers/helpers.js";
+
+import styles from "./styles.module.css";
+
 type LoaderContainer = "fullscreen" | "inline";
 type LoaderSize = "large" | "medium" | "small";
 type LoaderTheme = "accent" | "brand" | "muted";
@@ -16,9 +20,9 @@ const Loader = ({
 	theme = "brand",
 }: Properties): JSX.Element => {
 	return (
-		<div className={`loader loader-${container}`}>
+		<div className={cn(styles["loader"], styles[container])}>
 			<div
-				className={`loader-spinner loader-${theme} loader-${size}`}
+				className={cn(styles["spinner"], styles[theme], styles[size])}
 				role="status"
 			>
 				<span className="visually-hidden">Loading in progress...</span>
