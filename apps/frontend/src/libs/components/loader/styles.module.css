@@ -8,6 +8,9 @@
 	align-items: center;
 	justify-content: center;
 	height: 100vh;
+}
+
+.backdrop {
 	background-color: #e0e0e09f;
 }
 
