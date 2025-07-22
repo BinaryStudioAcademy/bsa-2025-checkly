@@ -1,4 +1,4 @@
-import { pbkdf2, randomBytes } from "node:crypto";
+import { pbkdf2, randomBytes, timingSafeEqual } from "node:crypto";
 import { promisify } from "node:util";
 
 import { type Encrypt } from "./encrypt.js";
@@ -9,7 +9,7 @@ const pbkdf2Async = promisify(pbkdf2);
 class BaseEncrypt implements Encrypt {
 	private readonly algorithm = "sha256";
 
-	private readonly iterations = 10_000;
+	private readonly iterations = 100_000;
 
 	private readonly keyLength = 32;
 
@@ -19,27 +19,30 @@ class BaseEncrypt implements Encrypt {
 		salt: string,
 	): Promise<boolean> {
 		const computedHash = await this.generateHash(value, salt);
+		const storedHashBuffer = Buffer.from(storedHash, "hex");
 
-		return storedHash === computedHash;
+		if (computedHash.length !== storedHashBuffer.length) {
+			return false;
+		}
+
+		return timingSafeEqual(computedHash, storedHashBuffer);
 	}
 
 	public async encrypt(value: string): Promise<{ hash: string; salt: string }> {
 		const salt = this.generateSalt();
-		const hash = await this.generateHash(value, salt);
+		const hashBuffer = await this.generateHash(value, salt);
 
-		return { hash, salt };
+		return { hash: hashBuffer.toString("hex"), salt };
 	}
 
-	private async generateHash(value: string, salt: string): Promise<string> {
-		const derivedKey = await pbkdf2Async(
+	private async generateHash(value: string, salt: string): Promise<Buffer> {
+		return await pbkdf2Async(
 			value,
 			salt,
 			this.iterations,
 			this.keyLength,
 			this.algorithm,
 		);
-
-		return derivedKey.toString("hex");
 	}
 
 	private generateSalt(size: number = DEFAULT_SALT_SIZE): string {
