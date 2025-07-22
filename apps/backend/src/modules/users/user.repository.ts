@@ -38,6 +38,12 @@ class UserRepository implements Repository {
 		return users.map((user) => UserEntity.initialize(user));
 	}
 
+	public async findById(id: number): Promise<null | UserEntity> {
+		const user = await this.userModel.query().findById(id).execute();
+
+		return user ? UserEntity.initialize(user) : null;
+	}
+
 	public update(): ReturnType<Repository["update"]> {
 		return Promise.resolve(null);
 	}

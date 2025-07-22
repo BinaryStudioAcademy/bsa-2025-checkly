@@ -35,6 +35,53 @@ class AuthController extends BaseController {
 				body: userSignUpValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.getAuthenticatedUser(
+					options as APIHandlerOptions<{
+						params: { id: string };
+					}>,
+				),
+			method: "GET",
+			path: AuthApiPath.PROFILE,
+		});
+	}
+
+	/**
+	 * @swagger
+	 * /auth/profile/{id}:
+	 *    get:
+	 *      description: Get authenticated user by ID
+	 *      parameters:
+	 *        - in: path
+	 *          name: id
+	 *          required: true
+	 *          schema:
+	 *            type: integer
+	 *            minimum: 1
+	 *          description: User ID
+	 *      responses:
+	 *        200:
+	 *          description: Successful operation
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                $ref: "#/components/schemas/User"
+	 *        404:
+	 *          description: User not found
+	 */
+	private async getAuthenticatedUser(
+		options: APIHandlerOptions<{
+			params: { id: string };
+		}>,
+	): Promise<APIHandlerResponse> {
+		const userId = Number(options.params.id);
+
+		return {
+			payload: await this.authService.getAuthenticatedUser(userId),
+			status: HTTPCode.OK,
+		};
 	}
 
 	/**
