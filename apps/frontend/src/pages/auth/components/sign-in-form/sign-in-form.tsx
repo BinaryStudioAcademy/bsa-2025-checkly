@@ -8,6 +8,7 @@ import { AppRoute } from "~/libs/enums/enums.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 
 import { DEFAULT_SIGN_UP_PAYLOAD } from "../sign-up-form/libs/constants.js";
+import styles from "./style.module.css";
 
 type Properties = {
 	onSubmit: (payload: UserSignInRequestDto) => void;
@@ -28,18 +29,20 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 	return (
 		<>
-			<div>
-				<header>
+			<div className={styles["wrapper"]}>
+				<header className={styles["header"]}>
 					<img alt="logo" src={logo} />
-					<h2>Logo</h2>
+					<h2 className={styles["header__title"]}>Logo</h2>
 				</header>
-				<h1>Sign In</h1>
-				<p>
+				<h1 className={styles["title"]}>Sign In</h1>
+				<p className={styles["redirect-text"]}>
 					No account? Go to&nbsp;
-					<Link to={AppRoute.SIGN_UP}>Create an account</Link>
+					<Link className={styles["redirect-text__link"]} to={AppRoute.SIGN_UP}>
+						Create an account
+					</Link>
 				</p>
-				<form onSubmit={handleFormSubmit}>
-					<p>
+				<form className={styles["form"]} onSubmit={handleFormSubmit}>
+					<p className={styles["form__input"]}>
 						<Input
 							control={control}
 							errors={errors}
@@ -49,7 +52,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							type="text"
 						/>
 					</p>
-					<p>
+					<p className={styles["form__input"]}>
 						<Input
 							control={control}
 							errors={errors}
