@@ -25,7 +25,10 @@ const App: React.FC = () => {
 		}
 	}, [isRoot, dispatch]);
 
-	if (dataStatus === DataStatus.PENDING) {
+	const isLoading =
+		dataStatus === DataStatus.PENDING || dataStatus === DataStatus.IDLE;
+
+	if (isLoading) {
 		return <Loader />;
 	}
 
