@@ -12,6 +12,7 @@ import {
 } from "~/modules/users/users.js";
 
 import { type AuthService } from "./auth.service.js";
+import { generateJWT } from "./jwt-auth/auth.jwt.js";
 import { AuthApiPath } from "./libs/enums/enums.js";
 
 class AuthController extends BaseController {
@@ -72,8 +73,15 @@ class AuthController extends BaseController {
 			body: UserSignUpRequestDto;
 		}>,
 	): Promise<APIHandlerResponse> {
+		const user = await this.authService.signUp(options.body);
+
+		const token = await generateJWT(user.id.toString());
+
 		return {
-			payload: await this.authService.signUp(options.body),
+			payload: {
+				token,
+				user,
+			},
 			status: HTTPCode.CREATED,
 		};
 	}
