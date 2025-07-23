@@ -55,10 +55,6 @@ class UserService implements Service {
 		return await this.userRepository.findByField("email", email);
 	}
 
-	public async findByName(name: string): Promise<null | UserEntity> {
-		return await this.userRepository.findByField("name", name);
-	}
-
 	public update(): ReturnType<Service["update"]> {
 		return Promise.resolve(null);
 	}

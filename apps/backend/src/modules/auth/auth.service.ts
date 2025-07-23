@@ -19,16 +19,7 @@ class AuthService {
 	public async signUp(
 		userRequestDto: UserSignUpRequestDto,
 	): Promise<UserSignUpResponseDto> {
-		const { email, name } = userRequestDto;
-
-		const existingUserByName = await this.userService.findByName(name);
-
-		if (existingUserByName) {
-			throw new AuthorizationError({
-				message: UserValidationMessage.NAME_ALREADY_EXISTS,
-				status: HTTPCode.BAD_REQUEST,
-			});
-		}
+		const { email } = userRequestDto;
 
 		const existingUserByEmail = await this.userService.findByEmail(email);
 
