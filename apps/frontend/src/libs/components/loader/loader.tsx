@@ -1,6 +1,6 @@
 import { type JSX } from "react";
 
-import { cn } from "~/libs/helpers/helpers.js";
+import { getClassNames } from "~/libs/helpers/helpers.js";
 
 import styles from "./styles.module.css";
 
@@ -21,12 +21,16 @@ const Loader: React.FC<Properties> = ({
 	size = "large",
 	theme = "brand",
 }: Properties): JSX.Element => {
-	const containerClasses = cn(
+	const containerClasses = getClassNames(
 		styles["loader"],
 		styles[container],
 		backdrop && styles["backdrop"],
 	);
-	const spinnerClasses = cn(styles["spinner"], styles[size], styles[theme]);
+	const spinnerClasses = getClassNames(
+		styles["spinner"],
+		styles[size],
+		styles[theme],
+	);
 
 	return (
 		<div className={containerClasses}>
