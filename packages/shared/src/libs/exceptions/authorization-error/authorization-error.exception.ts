@@ -1,9 +1,11 @@
-import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
+import { ErrorMessage } from "../../enums/enums.js";
+import { HTTPCode } from "../../modules/http/http.js";
+import { HTTPError } from "../http-error/http-error.exception.js";
 
 class AuthorizationError extends HTTPError {
 	public constructor({
 		cause,
-		message = "Authorization failed",
+		message = ErrorMessage.AUTHENTICATION_FAILED,
 	}: {
 		cause?: unknown;
 		message?: string;

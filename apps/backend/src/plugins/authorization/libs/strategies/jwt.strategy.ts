@@ -1,10 +1,9 @@
 import { type FastifyRequest } from "fastify";
 import { type JWTPayload, jwtVerify } from "jose";
+import { AuthorizationError, ErrorMessage } from "shared";
 
-import { config } from "~/libs/modules/config/config.js";
-import { type UserEntity } from "~/modules/users/user.entity.js";
-
-import { AuthorizationError } from "../../exceptions/exceptions.js";
+import { config } from "../../../../libs/modules/config/config.js";
+import { type UserEntity } from "../../../../modules/users/user.entity.js";
 
 const verifyJwt = async (request: FastifyRequest): Promise<UserEntity> => {
 	try {
@@ -12,7 +11,7 @@ const verifyJwt = async (request: FastifyRequest): Promise<UserEntity> => {
 
 		if (!authorization?.startsWith("Bearer ")) {
 			throw new AuthorizationError({
-				message: "Authorization header is missing or invalid.",
+				message: ErrorMessage.AUTHORIZATION_HEADER_MISSING,
 			});
 		}
 
@@ -27,7 +26,7 @@ const verifyJwt = async (request: FastifyRequest): Promise<UserEntity> => {
 
 		if (!user) {
 			throw new AuthorizationError({
-				message: "User not found.",
+				message: ErrorMessage.USER_NOT_FOUND,
 			});
 		}
 
@@ -35,7 +34,7 @@ const verifyJwt = async (request: FastifyRequest): Promise<UserEntity> => {
 	} catch (error) {
 		throw new AuthorizationError({
 			cause: error,
-			message: "Authentication failed.",
+			message: ErrorMessage.AUTHENTICATION_FAILED,
 		});
 	}
 };
