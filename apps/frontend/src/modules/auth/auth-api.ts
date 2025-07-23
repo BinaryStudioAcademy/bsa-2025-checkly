@@ -10,8 +10,6 @@ import {
 
 import { AuthApiPath } from "./libs/enums/enums.js";
 
-const TEMPORARY_USER_ID = 1;
-
 type Constructor = {
 	baseUrl: string;
 	http: HTTP;
@@ -33,22 +31,9 @@ class AuthApi extends BaseHTTPApi {
 			throw new Error("No authentication token found");
 		}
 
-		// For now, use hardcoded ID until JWT middleware is implemented
-
-		// When JWT middleware is ready, will change to:
-		// const response = await this.load(
-		//   this.getFullEndpoint("/profile", {}), // No ID parameter
-		//   {
-		// 		contentType: ContentType.JSON,
-		// 		hasAuth: true,
-		// 		method: "GET"
-		//   }
-		// );
-
+		// Endpoint /me gets current authenticated user
 		const response = await this.load(
-			this.getFullEndpoint(AuthApiPath.PROFILE, {
-				id: String(TEMPORARY_USER_ID),
-			}),
+			this.getFullEndpoint(AuthApiPath.PROFILE, {}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,
