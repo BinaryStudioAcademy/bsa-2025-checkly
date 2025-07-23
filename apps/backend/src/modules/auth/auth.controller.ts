@@ -1,3 +1,5 @@
+import { ErrorMessage, HTTPError } from "shared";
+
 import { APIPath } from "~/libs/enums/enums.js";
 import {
 	type APIHandlerOptions,
@@ -37,49 +39,48 @@ class AuthController extends BaseController {
 		});
 
 		this.addRoute({
-			handler: (options) =>
-				this.getAuthenticatedUser(
-					options as APIHandlerOptions<{
-						params: { id: string };
-					}>,
-				),
+			handler: (options) => this.getAuthenticatedUser(options),
 			method: "GET",
-			path: AuthApiPath.PROFILE,
+			path: AuthApiPath.ME,
 		});
 	}
 
 	/**
 	 * @swagger
-	 * /auth/profile/{id}:
+	 * /auth/me:
 	 *    get:
-	 *      description: Get authenticated user by ID
-	 *      parameters:
-	 *        - in: path
-	 *          name: id
-	 *          required: true
-	 *          schema:
-	 *            type: integer
-	 *            minimum: 1
-	 *          description: User ID
+	 *      summary: Get authenticated user profile
+	 *      description: Returns the profile information of the currently authenticated user
+	 *      security:
+	 *        - bearerAuth: []
 	 *      responses:
 	 *        200:
-	 *          description: Successful operation
+	 *          description: Successfully retrieved user profile
+	 *        401:
+	 *          description: Unauthorized - Invalid or missing authentication token
 	 *          content:
 	 *            application/json:
 	 *              schema:
-	 *                $ref: "#/components/schemas/User"
-	 *        404:
-	 *          description: User not found
+	 *                type: object
+	 *                properties:
+	 *                  message:
+	 *                    type: string
+	 *                    example: "Unauthorized"
 	 */
 	private async getAuthenticatedUser(
-		options: APIHandlerOptions<{
-			params: { id: string };
-		}>,
+		options: APIHandlerOptions,
 	): Promise<APIHandlerResponse> {
-		const userId = Number(options.params.id);
+		const { user } = options;
+
+		if (!user) {
+			throw new HTTPError({
+				message: ErrorMessage.UNAUTHORIZED,
+				status: HTTPCode.UNAUTHORIZED,
+			});
+		}
 
 		return {
-			payload: await this.authService.getAuthenticatedUser(userId),
+			payload: await this.authService.getAuthenticatedUser(user.id),
 			status: HTTPCode.OK,
 		};
 	}

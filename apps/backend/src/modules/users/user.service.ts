@@ -3,8 +3,8 @@ import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 
 import {
+	type UserGetAllItemResponseDto,
 	type UserGetAllResponseDto,
-	type UserProfileResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 } from "./libs/types/types.js";
@@ -47,7 +47,7 @@ class UserService implements Service {
 		};
 	}
 
-	public async findById(id: number): Promise<null | UserProfileResponseDto> {
+	public async findById(id: number): Promise<null | UserGetAllItemResponseDto> {
 		const item = await this.userRepository.findById(id);
 
 		return item ? item.toObject() : null;

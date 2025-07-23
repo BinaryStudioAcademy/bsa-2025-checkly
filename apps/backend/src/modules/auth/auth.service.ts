@@ -1,6 +1,6 @@
-import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
+import { type UserGetAllItemResponseDto } from "shared";
+
 import {
-	type UserProfileResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 } from "~/modules/users/libs/types/types.js";
@@ -15,17 +15,8 @@ class AuthService {
 
 	public async getAuthenticatedUser(
 		userId: number,
-	): Promise<UserProfileResponseDto> {
-		const user = await this.userService.findById(userId);
-
-		if (!user) {
-			throw new HTTPError({
-				message: "User not found",
-				status: HTTPCode.NOT_FOUND,
-			});
-		}
-
-		return user;
+	): Promise<null | UserGetAllItemResponseDto> {
+		return await this.userService.findById(userId);
 	}
 
 	public signUp(
