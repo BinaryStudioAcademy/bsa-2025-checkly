@@ -59,7 +59,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							label="Password"
 							name="password"
 							placeholder="Enter your password"
-							type="text"
+							type="password"
 						/>
 					</p>
 					<Button label="Sign In" type="submit" />
