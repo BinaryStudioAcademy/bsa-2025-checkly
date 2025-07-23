@@ -7,7 +7,7 @@ import {
 } from "~/modules/users/libs/types/types.js";
 import { type UserService } from "~/modules/users/user.service.js";
 
-import { AuthError } from "./libs/exceptions/exceptions.js";
+import { AuthorizationError } from "./libs/exceptions/exceptions.js";
 
 class AuthService {
 	private userService: UserService;
@@ -24,7 +24,7 @@ class AuthService {
 		const existingUserByName = await this.userService.findByName(name);
 
 		if (existingUserByName) {
-			throw new AuthError({
+			throw new AuthorizationError({
 				message: UserValidationMessage.NAME_ALREADY_EXISTS,
 				status: HTTPCode.BAD_REQUEST,
 			});
@@ -33,7 +33,7 @@ class AuthService {
 		const existingUserByEmail = await this.userService.findByEmail(email);
 
 		if (existingUserByEmail) {
-			throw new AuthError({
+			throw new AuthorizationError({
 				message: UserValidationMessage.EMAIL_ALREADY_EXISTS,
 				status: HTTPCode.BAD_REQUEST,
 			});
