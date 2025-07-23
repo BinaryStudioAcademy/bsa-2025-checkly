@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { userSignUpValidationSchema } from "shared";
+import { userSignInValidationSchema } from "shared";
 import { type UserSignInRequestDto } from "shared/src/modules/users/libs/types/types.js";
 
 import logo from "~/assets/img/logo-placeholder.svg";
@@ -7,7 +7,7 @@ import { Button, Input } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 
-import { DEFAULT_SIGN_UP_PAYLOAD } from "../sign-up-form/libs/constants.js";
+import { DEFAULT_SIGN_IN_PAYLOAD } from "../sign-up-form/libs/constants.js";
 import styles from "./style.module.css";
 
 type Properties = {
@@ -16,8 +16,8 @@ type Properties = {
 
 const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const { control, errors, handleSubmit } = useAppForm<UserSignInRequestDto>({
-		defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
-		validationSchema: userSignUpValidationSchema,
+		defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
+		validationSchema: userSignInValidationSchema,
 	});
 
 	const handleFormSubmit = useCallback(
