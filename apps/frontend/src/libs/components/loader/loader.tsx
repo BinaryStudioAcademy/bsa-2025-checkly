@@ -15,7 +15,7 @@ type Properties = {
 	theme?: LoaderTheme;
 };
 
-const Loader = ({
+const Loader: React.FC<Properties> = ({
 	container = "fullscreen",
 	backdrop = container === "fullscreen",
 	size = "large",
