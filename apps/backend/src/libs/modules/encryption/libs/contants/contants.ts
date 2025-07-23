@@ -1,0 +1,3 @@
+const DEFAULT_KEY_LENGTH = 32;
+
+export { DEFAULT_KEY_LENGTH };

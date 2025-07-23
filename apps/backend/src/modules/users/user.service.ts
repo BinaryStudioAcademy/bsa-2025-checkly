@@ -1,4 +1,4 @@
-import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
+import { type Encryption } from "~/libs/modules/encryption/encryption.js";
 import { type Service } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
@@ -10,18 +10,18 @@ import {
 } from "./libs/types/types.js";
 
 class UserService implements Service {
-	private encrypt: Encrypt;
+	private encryption: Encryption;
 	private userRepository: UserRepository;
 
-	public constructor(userRepository: UserRepository, encrypt: Encrypt) {
+	public constructor(userRepository: UserRepository, encryption: Encryption) {
 		this.userRepository = userRepository;
-		this.encrypt = encrypt;
+		this.encryption = encryption;
 	}
 
 	public async create(
 		payload: UserSignUpRequestDto,
 	): Promise<UserSignUpResponseDto> {
-		const { hash, salt } = await this.encrypt.encrypt(payload.password);
+		const { hash, salt } = await this.encryption.encrypt(payload.password);
 
 		const item = await this.userRepository.create(
 			UserEntity.initializeNew({
