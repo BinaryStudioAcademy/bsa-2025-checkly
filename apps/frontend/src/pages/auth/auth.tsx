@@ -8,10 +8,12 @@ import {
 	useLocation,
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
+import { BaseTokenStorage } from "~/modules/auth/token-storage/token-storage.service.js";
 import { type UserSignUpRequestDto } from "~/modules/users/users.js";
 
-import { storeToken } from "./auth-token.helper.js";
 import { SignInForm, SignUpForm } from "./components/components.js";
+
+const tokenStorage = new BaseTokenStorage();
 
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -35,7 +37,7 @@ const Auth: React.FC = () => {
 				const { token } = resultAction.payload;
 
 				if (token) {
-					storeToken(token);
+					tokenStorage.store(token);
 				}
 			}
 		},
