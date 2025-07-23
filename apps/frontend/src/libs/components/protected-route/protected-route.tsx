@@ -1,12 +1,20 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
-import { StorageKey } from "~/libs/modules/storage/storage.js";
+import { DataStatus } from "~/libs/enums/enums.js";
+import { useAppSelector } from "~/libs/hooks/hooks.js";
 
 const ProtectedRoute: React.FC = () => {
-	const isAuthorized = !!localStorage.getItem(StorageKey.TOKEN);
+	const { dataStatus, user } = useAppSelector(({ auth }) => ({
+		dataStatus: auth.dataStatus,
+		user: auth.user,
+	}));
 
-	return isAuthorized ? <Outlet /> : <Navigate replace to={AppRoute.SIGN_IN} />;
+	return dataStatus === DataStatus.FULFILLED && user ? (
+		<Outlet />
+	) : (
+		<Navigate replace to={AppRoute.SIGN_IN} />
+	);
 };
 
 export { ProtectedRoute };
