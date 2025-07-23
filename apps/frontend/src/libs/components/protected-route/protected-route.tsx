@@ -10,11 +10,9 @@ const ProtectedRoute: React.FC = () => {
 		user: auth.user,
 	}));
 
-	return dataStatus === DataStatus.FULFILLED && user ? (
-		<Outlet />
-	) : (
-		<Navigate replace to={AppRoute.SIGN_IN} />
-	);
+	const isAuthorized = dataStatus === DataStatus.FULFILLED && user;
+
+	return isAuthorized ? <Outlet /> : <Navigate replace to={AppRoute.SIGN_IN} />;
 };
 
 export { ProtectedRoute };
