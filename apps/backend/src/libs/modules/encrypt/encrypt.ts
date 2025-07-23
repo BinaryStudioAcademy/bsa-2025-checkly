@@ -1,6 +1,6 @@
 import { BaseEncrypt } from "./base-encrypt.module.js";
 
-const encrypt = new BaseEncrypt();
+const compare = new BaseEncrypt();
 
-export { encrypt };
+export { compare };
 export { type Encrypt } from "./libs/types/types.js";

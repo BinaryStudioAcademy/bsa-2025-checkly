@@ -1,3 +1,4 @@
+import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { AuthenticationError } from "~/libs/modules/http/libs/exceptions/exceptions.js";
 import {
@@ -9,16 +10,18 @@ import {
 import { type UserService } from "~/modules/users/user.service.js";
 
 class AuthService {
+	private encrypt: Encrypt;
 	private userService: UserService;
 
-	public constructor(userService: UserService) {
+	public constructor(userService: UserService, encrypt: Encrypt) {
 		this.userService = userService;
+		this.encrypt = encrypt;
 	}
 
 	public async signIn(
 		userRequestDto: UserSignInRequestDto,
 	): Promise<UserSignInResponseDto> {
-		const { email } = userRequestDto;
+		const { email, password } = userRequestDto;
 
 		const user = await this.userService.findByEmail(email);
 
@@ -26,6 +29,21 @@ class AuthService {
 			throw new AuthenticationError({
 				message: "User not found",
 				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { passwordHash, passwordSalt } = user.getPasswordData();
+
+		const isPasswordValid = await this.encrypt.compare(
+			password,
+			passwordHash,
+			passwordSalt,
+		);
+
+		if (!isPasswordValid) {
+			throw new AuthenticationError({
+				message: "Invalid password",
+				status: HTTPCode.UNAUTHORIZED,
 			});
 		}
 
