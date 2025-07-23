@@ -18,7 +18,7 @@ Accepts POST request to `/auth/login` with body:
 - Required fields: `email`, `password`
 
 - Email must be in valid format.
-  1. **Local part** (before `@`): 1–35 **latin** characters, special characters allowed, must not start or end with a dot (`.`), cannot have repeated dots (`..`)
+  1. **Local part** (before `@`): 1–35 **latin** characters, special characters allowed (```! # $ % & ' * + - / = ? ^ _ ` { | } ~ ```), must not start or end with a dot (`.`), cannot have repeated dots (`..`)
   2. **Domain part** (after `@`): 1-35 **latin** characters, hyphens (`-`) and dots (`.`) are allowed, but not as first or last characters.
 
 - Password must have **at least 8 characters** and **maximum of 32 characters**, at least one lowercase and one uppercase and one digit.
