@@ -18,7 +18,6 @@ const App: React.FC = () => {
 		users: users.users,
 	}));
 
-	// Initialize authentication from localStorage token
 	useAuthInitialization();
 
 	const isRoot = pathname === AppRoute.ROOT;
