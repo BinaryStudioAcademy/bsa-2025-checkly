@@ -21,13 +21,12 @@ const Loader = ({
 	size = "large",
 	theme = "brand",
 }: Properties): JSX.Element => {
-	const containerClasses = cn(styles["loader"], styles[container]);
-	const spinnerClasses = cn(
-		styles["spinner"],
-		styles[size],
-		styles[theme],
+	const containerClasses = cn(
+		styles["loader"],
+		styles[container],
 		backdrop && styles["backdrop"],
 	);
+	const spinnerClasses = cn(styles["spinner"], styles[size], styles[theme]);
 
 	return (
 		<div className={containerClasses}>
