@@ -25,8 +25,8 @@ class AuthService {
 
 		if (existingUserByName) {
 			throw new AuthError({
-				message: UserValidationMessage.NAME_TAKEN,
-				status: HTTPCode.CONFLICT,
+				message: UserValidationMessage.NAME_ALREADY_EXISTS,
+				status: HTTPCode.BAD_REQUEST,
 			});
 		}
 
@@ -34,8 +34,8 @@ class AuthService {
 
 		if (existingUserByEmail) {
 			throw new AuthError({
-				message: UserValidationMessage.EMAIL_TAKEN,
-				status: HTTPCode.CONFLICT,
+				message: UserValidationMessage.EMAIL_ALREADY_EXISTS,
+				status: HTTPCode.BAD_REQUEST,
 			});
 		}
 
