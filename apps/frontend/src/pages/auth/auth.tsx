@@ -10,6 +10,7 @@ import {
 import { actions as authActions } from "~/modules/auth/auth.js";
 import { type UserSignUpRequestDto } from "~/modules/users/users.js";
 
+import { storeToken } from "./auth-token.helper.js";
 import { SignInForm, SignUpForm } from "./components/components.js";
 
 const Auth: React.FC = () => {
@@ -24,10 +25,28 @@ const Auth: React.FC = () => {
 	}, []);
 
 	const handleSignUpSubmit = useCallback(
-		(payload: UserSignUpRequestDto): void => {
-			void dispatch(authActions.signUp(payload));
+		async (payload: UserSignUpRequestDto): Promise<void> => {
+			const resultAction = await dispatch(authActions.signUp(payload));
+
+			const isSignUpFulfilled =
+				authActions.signUp.fulfilled.match(resultAction);
+
+			if (isSignUpFulfilled) {
+				const { token } = resultAction.payload;
+
+				if (token) {
+					storeToken(token);
+				}
+			}
 		},
 		[dispatch],
+	);
+
+	const handleSignUpFormSubmit = useCallback(
+		(payload: UserSignUpRequestDto): void => {
+			void handleSignUpSubmit(payload);
+		},
+		[handleSignUpSubmit],
 	);
 
 	const getScreen = (screen: string): JSX.Element => {
@@ -37,7 +56,7 @@ const Auth: React.FC = () => {
 			}
 
 			case AppRoute.SIGN_UP: {
-				return <SignUpForm onSubmit={handleSignUpSubmit} />;
+				return <SignUpForm onSubmit={handleSignUpFormSubmit} />;
 			}
 		}
 

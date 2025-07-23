@@ -1,5 +1,5 @@
 const storeToken = (token: string): void => {
-    localStorage.setItem("token", token);
+	localStorage.setItem("token", token);
 };
 
 const getToken = (): null | string => {
@@ -10,4 +10,4 @@ const clearToken = (): void => {
 	localStorage.removeItem("token");
 };
 
-export {clearToken, getToken, storeToken}
+export { clearToken, getToken, storeToken };

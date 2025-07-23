@@ -12,7 +12,7 @@ import {
 } from "~/modules/users/users.js";
 
 import { type AuthService } from "./auth.service.js";
-import { generateJWT } from "./jwt-auth/auth.jwt.js";
+import { JWTService } from "./jwt-auth/jwt.service.js";
 import { AuthApiPath } from "./libs/enums/enums.js";
 
 /**
@@ -47,6 +47,7 @@ import { AuthApiPath } from "./libs/enums/enums.js";
  */
 class AuthController extends BaseController {
 	private authService: AuthService;
+	private jwtService = new JWTService();
 
 	public constructor(logger: Logger, authService: AuthService) {
 		super(logger, APIPath.AUTH);
@@ -67,6 +68,63 @@ class AuthController extends BaseController {
 			},
 		});
 	}
+
+	/**
+	 * @swagger
+	 * /auth/sign-in:
+	 *    post:
+	 *      description: Sign in user into the system
+	 *      requestBody:
+	 *        description: User auth data
+	 *        required: true
+	 *        content:
+	 *          application/json:
+	 *            schema:
+	 *              type: object
+	 *              properties:
+	 *                email:
+	 *                  type: string
+	 *                  format: email
+	 *                password:
+	 *                  type: string
+	 *      responses:
+	 *        201:
+	 *          description: Successful operation
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                properties:
+	 *                  message:
+	 *                    type: object
+	 *                    $ref: "#/components/schemas/User"
+	 *        401:
+	 *          description: Unauthorized
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                properties:
+	 *                  message:
+	 *                    type: string
+	 *                    description: The error message
+	 *                  status:
+	 *                    type: number
+	 *                    description: The HTTP status code
+	 *        404:
+	 *          description: Not found
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                properties:
+	 *                  message:
+	 *                    type: string
+	 *                    description: The error message
+	 *                  status:
+	 *                    type: number
+	 *                    description: The HTTP status code
+	 */
 
 	/**
 	 * @swagger
@@ -102,10 +160,11 @@ class AuthController extends BaseController {
 	 *                 status:
 	 *                   type: integer
 	 *                   example: 409
-	 *                 message:
+	 *                 message
 	 *                   type: string
 	 *                   example: Email is already taken
 	 */
+
 	private async signUp(
 		options: APIHandlerOptions<{
 			body: UserSignUpRequestDto;
@@ -113,11 +172,10 @@ class AuthController extends BaseController {
 	): Promise<APIHandlerResponse> {
 		const user = await this.authService.signUp(options.body);
 
-		const token = await generateJWT(user.id.toString());
+		user.token = await this.jwtService.generateToken(user.id.toString());
 
 		return {
 			payload: {
-				token,
 				user,
 			},
 			status: HTTPCode.CREATED,
