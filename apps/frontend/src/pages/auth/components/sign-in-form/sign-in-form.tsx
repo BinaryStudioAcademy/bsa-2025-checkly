@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { userSignInValidationSchema } from "shared";
 import { type UserSignInRequestDto } from "shared/src/modules/users/libs/types/types.js";
 
@@ -65,6 +66,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					<Button label="Sign In" type="submit" />
 				</form>
 			</div>
+			<ToastContainer />
 		</>
 	);
 };
