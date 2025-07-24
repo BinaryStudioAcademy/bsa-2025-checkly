@@ -4,6 +4,8 @@ import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { DataStatus } from "~/libs/enums/enums.js";
 import { useAppSelector } from "~/libs/hooks/hooks.js";
 
+import { Loader } from "../components.js";
+
 const ProtectedRoute: React.FC = () => {
 	const { dataStatus, user } = useAppSelector(({ auth }) => ({
 		dataStatus: auth.dataStatus,
@@ -12,7 +14,17 @@ const ProtectedRoute: React.FC = () => {
 
 	const isAuthorized = dataStatus === DataStatus.FULFILLED && user;
 
-	return isAuthorized ? <Outlet /> : <Navigate replace to={AppRoute.SIGN_IN} />;
+	if (isAuthorized) {
+		return <Outlet />;
+	}
+
+	const isLoading = dataStatus === DataStatus.PENDING;
+
+	if (isLoading) {
+		return <Loader />;
+	}
+
+	return <Navigate replace to={AppRoute.SIGN_IN} />;
 };
 
 export { ProtectedRoute };
