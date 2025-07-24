@@ -1,3 +1,5 @@
+import { type UserGetAllItemResponseDto } from "shared";
+
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type ServerApplicationRouteParameters } from "~/libs/modules/server-application/server-application.js";
 
@@ -7,6 +9,12 @@ import {
 	type Controller,
 	type ControllerRouteParameters,
 } from "./libs/types/types.js";
+
+type CustomFastifyRequest = Parameters<
+	ServerApplicationRouteParameters["handler"]
+>[0] & {
+	user?: UserGetAllItemResponseDto;
+};
 
 class BaseController implements Controller {
 	public routes: ServerApplicationRouteParameters[];
@@ -45,15 +53,14 @@ class BaseController implements Controller {
 		return await reply.status(status).send(payload);
 	}
 
-	private mapRequest(
-		request: Parameters<ServerApplicationRouteParameters["handler"]>[0],
-	): APIHandlerOptions {
-		const { body, params, query } = request;
+	private mapRequest(request: CustomFastifyRequest): APIHandlerOptions {
+		const { body, params, query, user } = request;
 
 		return {
 			body,
 			params,
 			query,
+			user,
 		};
 	}
 }

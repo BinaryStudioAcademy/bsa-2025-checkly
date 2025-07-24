@@ -6,7 +6,7 @@ type APIHandlerOptions<
 	body: T["body"];
 	params: T["params"];
 	query: T["query"];
-	user?: UserGetAllItemResponseDto;
+	user?: undefined | UserGetAllItemResponseDto;
 };
 
 type DefaultApiHandlerOptions = {
