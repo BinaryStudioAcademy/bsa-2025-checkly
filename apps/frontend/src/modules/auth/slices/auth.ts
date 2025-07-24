@@ -4,7 +4,7 @@ import { actions } from "./auth.slice.js";
 const allActions = {
 	...actions,
 	signIn,
-	signUp
+	signUp,
 };
 
 export { allActions as actions };

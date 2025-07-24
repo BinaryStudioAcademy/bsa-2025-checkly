@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { userSignInValidationSchema } from "shared";
 import { type UserSignInRequestDto } from "shared/src/modules/users/libs/types/types.js";
 

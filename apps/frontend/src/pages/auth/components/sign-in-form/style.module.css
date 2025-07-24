@@ -1,60 +1,60 @@
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 592px;
-    height: 100%;
-    padding: 57px 106px 91px;
-    margin: 0 auto;
-    font-family: Nunito, 'Courier New', Courier, monospace;
-    background-color: #ffffff;
-    border-radius: 30px;
+	display: flex;
+	flex-direction: column;
+	width: 592px;
+	height: 100%;
+	padding: 57px 106px 91px;
+	margin: 0 auto;
+	font-family: Nunito, "Courier New", Courier, monospace;
+	background-color: #ffffff;
+	border-radius: 30px;
 }
 
 .header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 24px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 24px;
 }
 
 .header__title {
-    margin: 0 0 0 14px;
-    font-size: 16px;
-    font-weight: 800;
-    text-transform: uppercase;
+	margin: 0 0 0 14px;
+	font-size: 16px;
+	font-weight: 800;
+	text-transform: uppercase;
 }
 
 .title {
-    margin: 0 0 40px;
-    font-family: Onest, 'Courier New', Courier, monospace;
-    font-size: 42px;
-    font-weight: 600;
+	margin: 0 0 40px;
+	font-family: Onest, "Courier New", Courier, monospace;
+	font-size: 42px;
+	font-weight: 600;
 }
 
 .redirect-text {
-    margin: 0 0 28px;
-    font-size: 16px;
-    font-weight: 700;
+	margin: 0 0 28px;
+	font-size: 16px;
+	font-weight: 700;
 }
 
 .redirect-text__link,
 .redirect-text__link:visited {
-    color: #000000;
-    text-decoration: none;
+	color: #000000;
+	text-decoration: none;
 }
 
 .redirect-text__link:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .form__input {
-    margin: 0 0 29px;
+	margin: 0 0 29px;
 }
 
 .form__input:last-of-type {
-    margin: 0 0 35px;
+	margin: 0 0 35px;
 }
