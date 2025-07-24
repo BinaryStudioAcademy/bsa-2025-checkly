@@ -1,3 +1,4 @@
+import { ErrorMessage } from "~/libs/enums/enums.js";
 import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { AuthenticationError } from "~/libs/modules/http/libs/exceptions/exceptions.js";
@@ -27,7 +28,7 @@ class AuthService {
 
 		if (!user) {
 			throw new AuthenticationError({
-				message: "User not found",
+				message: ErrorMessage.AUTH.USER_NOT_FOUND,
 				status: HTTPCode.NOT_FOUND,
 			});
 		}
@@ -42,7 +43,7 @@ class AuthService {
 
 		if (!isPasswordValid) {
 			throw new AuthenticationError({
-				message: "Invalid password",
+				message: ErrorMessage.AUTH.INVALID_PASSWORD,
 				status: HTTPCode.UNAUTHORIZED,
 			});
 		}

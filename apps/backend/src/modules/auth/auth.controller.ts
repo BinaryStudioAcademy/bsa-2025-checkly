@@ -90,7 +90,7 @@ class AuthController extends BaseController {
 	 *                type: object
 	 *                properties:
 	 *                  message:
-	 *                    type: string
+	 *                    type: object
 	 *                    description: The error message
 	 *                  status:
 	 *                    type: number
@@ -103,7 +103,7 @@ class AuthController extends BaseController {
 	 *                type: object
 	 *                properties:
 	 *                  message:
-	 *                    type: string
+	 *                    type: object
 	 *                    description: The error message
 	 *                  status:
 	 *                    type: number
