@@ -16,7 +16,6 @@ const userSignUp = z
 	.object<UserSignUpRequestValidationDto>({
 		email: z
 			.string()
-			.trim()
 			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
 				message: UserValidationMessage.FIELD_REQUIRED,
 			})
@@ -25,7 +24,6 @@ const userSignUp = z
 			}),
 		name: z
 			.string()
-			.trim()
 			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
 				message: UserValidationMessage.FIELD_REQUIRED,
 			})
@@ -34,7 +32,6 @@ const userSignUp = z
 			}),
 		password: z
 			.string()
-			.trim()
 			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
 				message: UserValidationMessage.FIELD_REQUIRED,
 			})
