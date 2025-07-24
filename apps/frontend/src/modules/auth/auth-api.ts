@@ -31,7 +31,6 @@ class AuthApi extends BaseHTTPApi {
 			throw new Error("No authentication token found");
 		}
 
-		// Endpoint /me gets current authenticated user
 		const response = await this.load(
 			this.getFullEndpoint(AuthApiPath.PROFILE, {}),
 			{

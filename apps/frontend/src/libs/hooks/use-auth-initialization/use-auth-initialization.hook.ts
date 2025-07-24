@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
-import { storage } from "~/libs/modules/storage/storage.js";
+import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 
 /**
@@ -18,7 +18,7 @@ const useAuthInitialization = (): void => {
 				return;
 			}
 
-			const token = await storage.get("token");
+			const token = await storage.get(StorageKey.TOKEN);
 
 			if (token) {
 				void dispatch(authActions.getCurrentUser());
