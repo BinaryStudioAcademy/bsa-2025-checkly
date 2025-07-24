@@ -13,7 +13,7 @@ type EnvironmentSchema = {
 		POOL_MAX: number;
 		POOL_MIN: number;
 	};
-	ENCRYPTION: {
+	ENCRYPTOR: {
 		SALT_SIZE: number;
 	};
 };

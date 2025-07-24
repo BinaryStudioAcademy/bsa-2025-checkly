@@ -1,20 +1,26 @@
 import { randomBytes, scrypt, timingSafeEqual } from "node:crypto";
 import { promisify } from "node:util";
 
-import { type Config } from "~/libs/modules/config/config.js";
-
-import { type Encryption } from "./encryption.js";
+import { type Encryptor } from "./encryptor.js";
 import { DEFAULT_KEY_LENGTH } from "./libs/contants/contants.js";
 
 const scryptAsync = promisify(scrypt);
 
-class BaseEncryption implements Encryption {
-	private readonly config: Config;
-	private readonly keyLength: number;
+type Constructor = {
+	keyLength?: number;
+	saltSize: number;
+};
 
-	public constructor(config: Config, keyLength = DEFAULT_KEY_LENGTH) {
-		this.config = config;
+class BaseEncryptor implements Encryptor {
+	private readonly keyLength: number;
+	private readonly saltSize: number;
+
+	public constructor({
+		keyLength = DEFAULT_KEY_LENGTH,
+		saltSize,
+	}: Constructor) {
 		this.keyLength = keyLength;
+		this.saltSize = saltSize;
 	}
 
 	public async compare(
@@ -44,8 +50,8 @@ class BaseEncryption implements Encryption {
 	}
 
 	private generateSalt(): string {
-		return randomBytes(this.config.ENV.ENCRYPTION.SALT_SIZE).toString("hex");
+		return randomBytes(this.saltSize).toString("hex");
 	}
 }
 
-export { BaseEncryption };
+export { BaseEncryptor };
