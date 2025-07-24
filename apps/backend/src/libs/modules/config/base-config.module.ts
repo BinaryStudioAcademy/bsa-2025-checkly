@@ -58,6 +58,14 @@ class BaseConfig implements Config {
 					format: Number,
 				},
 			},
+			ENCRYPTOR: {
+				SALT_SIZE: {
+					default: null,
+					doc: "Encryptor salt size",
+					env: "SALT_SIZE",
+					format: Number,
+				},
+			},
 		});
 	}
 

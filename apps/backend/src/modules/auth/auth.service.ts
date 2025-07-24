@@ -1,5 +1,5 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
-import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
+import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { AuthenticationError } from "~/libs/modules/http/libs/exceptions/exceptions.js";
 import {
@@ -11,12 +11,12 @@ import {
 import { type UserService } from "~/modules/users/user.service.js";
 
 class AuthService {
-	private encrypt: Encrypt;
+	private encryptor: Encryptor;
 	private userService: UserService;
 
-	public constructor(userService: UserService, encrypt: Encrypt) {
+	public constructor(userService: UserService, encryptor: Encryptor) {
 		this.userService = userService;
-		this.encrypt = encrypt;
+		this.encryptor = encryptor;
 	}
 
 	public async signIn(
@@ -35,7 +35,7 @@ class AuthService {
 
 		const { passwordHash, passwordSalt } = user.getPasswordData();
 
-		const isPasswordValid = await this.encrypt.compare(
+		const isPasswordValid = await this.encryptor.decrypt(
 			password,
 			passwordHash,
 			passwordSalt,

@@ -1,3 +1,0 @@
-const DEFAULT_SALT_SIZE = 32;
-
-export { DEFAULT_SALT_SIZE };
