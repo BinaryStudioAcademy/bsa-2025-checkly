@@ -1,129 +1,130 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
+import {
+	blueStars,
+	carImage,
+	orangeImage,
+	yellowStars,
+} from "~/assets/img/sign-up/sign-up.img.js";
 import { Button, Input } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import { type SignUpFormValidationSchema, userSignUpValidationSchemaExtended } from "~/modules/users/libs/validation-schemas/sign-up.validation-schema-extended.js";
 import {
-    type UserSignUpRequestDto,
-    userSignUpValidationSchema,
+    type UserSignUpRequestDto
 } from "~/modules/users/users.js";
 
 import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
 import css from "./sign-up-form.module.css";
 
 type Properties = {
-    onSubmit: (payload: UserSignUpRequestDto) => void;
+	onSubmit: (payload: UserSignUpRequestDto) => void;
 };
 
-const SignUpForm: React.FC<Properties> = ({
-    onSubmit,
-}: Properties) => {
-    const navigate = useNavigate();
+const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
-    const { control, errors, handleSubmit, setError } = useAppForm<
-        UserSignUpRequestDto & { confirmPassword: string }
+const { control, errors, handleSubmit } = useAppForm<
+        SignUpFormValidationSchema
     >({
         defaultValues: { ...DEFAULT_SIGN_UP_PAYLOAD, confirmPassword: "" },
-        validationSchema: userSignUpValidationSchema,
+        validationSchema: userSignUpValidationSchemaExtended,
     });
+	const handleFormSubmit = useCallback(
+		(event_: React.BaseSyntheticEvent): void => {
+			void handleSubmit((data) => {
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				const { confirmPassword, ...payloadToSend } = data;
+				onSubmit(payloadToSend as UserSignUpRequestDto);
+			})(event_);
+		},
+		[handleSubmit, onSubmit],
+	);
 
-    const handleFormSubmit = useCallback(
-        (event_: React.BaseSyntheticEvent): void => {
-            void handleSubmit((data) => {
-                if (data.password !== data.confirmPassword) {
-                    if (setError) {
-                        setError("confirmPassword", {
-                            message: "Passwords don`t match each other!",
-                            type: "manual",
-                        });
-                    }
+	return (
+    <div className={css["container"]}>
+        <section className={css["sign-up-card"]}>
+            <header className={css["logo-container"]}>
+                <div className={css["logo-circle"]} />
+                <h2 className={css["logo-text"]}>Logo</h2>
+            </header>
 
-                    return;
-                }
+            <div className={css["form-content"]}>
+                <h1 className={css["title"]}>Create an account</h1>
+                <p className={css["redirect-text"]}>
+                    Already have an account? Go to{" "}
+                    <Link
+                        className={css["redirect-link"]}
+                        to={AppRoute.SIGN_IN}
+                    >
+                        Sign In
+                    </Link>
+                </p>
+                <form className={css["form"]} onSubmit={handleFormSubmit}>
+                    <Input
+                        control={control}
+                        errors={errors}
+                        label="Name"
+                        name="name"
+                        placeholder="name"
+                        required
+                        type="text"
+                    />
 
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                const { confirmPassword, ...payloadToSend } = data;
-                onSubmit(payloadToSend as UserSignUpRequestDto);
-            })(event_);
-        },
-        [handleSubmit, onSubmit, setError],
-    );
+                    <Input
+                        control={control}
+                        errors={errors}
+                        label="Email"
+                        name="email"
+                        placeholder="email"
+                        required
+                        type="text"
+                    />
 
-    const handleSignInClick = useCallback(() => {
-        const result = navigate(AppRoute.SIGN_IN);
+                    <Input
+                        control={control}
+                        errors={errors}
+                        label="Password"
+                        name="password"
+                        placeholder="********"
+                        required
+                        type="password"
+                    />
 
-        if (result instanceof Promise) {
-            result.catch(() => {});
-        }
-    }, [navigate]);
-
-    return (
-        <div className={css["container"]}>
-            <div className={css["signUpCard"]}>
-                <div className={css["logoContainer"]}>
-                    <div className={css["logoCircle"]} />
-                    <span className={css["logoText"]}>Logo</span>
-                </div>
-
-                <div className={css["formContent"]}>
-                    <h3 className={css["title"]}>Create an account</h3>
-                    <p className={css["signInText"]}>
-                        Already have an account? Go to{" "}
-                        <button
-                            className={css["signInButton"]}
-                            onClick={handleSignInClick}
-                            type="button"
-                        >
-                            Sign In
-                        </button>
-                    </p>
-                    <form className={css["form"]} onSubmit={handleFormSubmit}>
-                        <div className={css["inputGroup"]}>
-                            <Input
-                                control={control}
-                                errors={errors}
-                                label="Name"
-                                name="name"
-                                placeholder="name"
-                                type="text"
-                            />
-                        </div>
-                        <div className={css["inputGroup"]}>
-                            <Input
-                                control={control}
-                                errors={errors}
-                                label="Email"
-                                name="email"
-                                placeholder="name"
-                                type="text"
-                            />
-                        </div>
-                        <div className={css["inputGroup"]}>
-                            <Input
-                                control={control}
-                                errors={errors}
-                                label="Password"
-                                name="password"
-                                placeholder="********"
-                                type="password"
-                            />
-                        </div>
-                        <div className={css["inputGroup"]}>
-                            <Input
-                                control={control}
-                                errors={errors}
-                                label="Confirm password"
-                                name="confirmPassword"
-                                placeholder="********"
-                                type="password"
-                            />
-                        </div>
-                        <Button label="CREATE AN ACCOUNT" type="submit" />
-                    </form>
-                </div>
+                    <Input
+                        control={control}
+                        errors={errors}
+                        label="Confirm password"
+                        name="confirmPassword"
+                        placeholder="********"
+                        required
+                        type="password"
+                    />
+                    <Button label="Create an account" type="submit" />
+                </form>
             </div>
-        </div>
-    );
+            					<img
+						alt="blue stars"
+						className={`${css["image-position"] as string} ${css["blue-stars"] as string}`}
+						src={blueStars}
+					/>
+					<img
+						alt="yellow stars"
+						className={`${css["image-position"] as string} ${css["yellow-stars"] as string}`}
+						src={yellowStars}
+					/>
+					<img
+						alt="orange"
+						className={`${css["image-position"] as string} ${css["orange-image"] as string}`}
+						src={orangeImage}
+					/>
+					<img
+						alt="car"
+						className={`${css["image-position"] as string} ${css["car-image"] as string}`}
+						src={carImage}
+					/>
+        </section>
+    </div>
+);
 };
 
 export { SignUpForm };
