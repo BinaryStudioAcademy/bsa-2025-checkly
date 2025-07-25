@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { type SignUpFormValidationSchema, userSignUpValidationSchemaExtended } from "shared";
 
 import {
 	blueStars,
@@ -10,7 +9,11 @@ import {
 import { Button, Input } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
-import { type UserSignUpRequestDto } from "~/modules/users/users.js";
+import {
+	type SignUpFormValidationSchema,
+	type UserSignUpRequestDto,
+	userSignUpValidationSchemaExtended,
+} from "~/modules/users/users.js";
 
 import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
 import css from "./sign-up-form.module.css";

@@ -15,7 +15,7 @@ type Properties<T extends FieldValues> = {
 	name: FieldPath<T>;
 	placeholder?: string;
 	required?: boolean;
-	type?: "email" | "password" | "text" ;
+	type?: "email" | "password" | "text";
 };
 
 const Input = <T extends FieldValues>({
@@ -35,7 +35,13 @@ const Input = <T extends FieldValues>({
 	return (
 		<label>
 			<span>{label}</span>
-			<input {...field} name={name} placeholder={placeholder} required={required} type={type} />
+			<input
+				{...field}
+				name={name}
+				placeholder={placeholder}
+				required={required}
+				type={type}
+			/>
 			{hasError && <span>{error as string}</span>}
 		</label>
 	);
