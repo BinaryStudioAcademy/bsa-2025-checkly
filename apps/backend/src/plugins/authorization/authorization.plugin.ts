@@ -1,4 +1,5 @@
 import fp from "fastify-plugin";
+import micromatch from "micromatch";
 
 import { type UserEntity } from "../../modules/users/user.entity.js";
 import { type UserService } from "../../modules/users/user.service.js";
@@ -29,7 +30,8 @@ const authorization = fp<AuthPluginOptions>(
 
 		fastify.addHook("onRequest", async (request, reply) => {
 			const routeUrl = request.routeOptions.url ?? "";
-			const isWhiteRoute = whiteRoutes.includes(routeUrl);
+
+			const isWhiteRoute = micromatch.isMatch(routeUrl, whiteRoutes);
 
 			if (isWhiteRoute) {
 				return;
