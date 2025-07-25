@@ -7,6 +7,8 @@ import {
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
+	type UserSignInRequestDto,
+	userSignInValidationSchema,
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
 } from "~/modules/users/users.js";
@@ -56,6 +58,20 @@ class AuthController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
+				this.signIn(
+					options as APIHandlerOptions<{
+						body: UserSignInRequestDto;
+					}>,
+				),
+			method: "POST",
+			path: AuthApiPath.SIGN_IN,
+			validation: {
+				body: userSignInValidationSchema,
+			},
+		});
+
+		this.addRoute({
+			handler: (options) =>
 				this.signUp(
 					options as APIHandlerOptions<{
 						body: UserSignUpRequestDto;
@@ -96,7 +112,7 @@ class AuthController extends BaseController {
 	 *                type: object
 	 *                properties:
 	 *                  message:
-	 *                    type: object
+	 *                    type: string
 	 *                    $ref: "#/components/schemas/User"
 	 *        401:
 	 *          description: Unauthorized
@@ -125,6 +141,16 @@ class AuthController extends BaseController {
 	 *                    type: number
 	 *                    description: The HTTP status code
 	 */
+	private async signIn(
+		options: APIHandlerOptions<{
+			body: UserSignInRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.authService.signIn(options.body),
+			status: HTTPCode.OK,
+		};
+	}
 
 	/**
 	 * @swagger
