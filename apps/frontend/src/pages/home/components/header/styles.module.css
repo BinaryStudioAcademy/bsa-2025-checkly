@@ -1,0 +1,11 @@
+.header {
+	padding-block: var(--gutter);
+	background-color: #ffbdf2;
+	border-end-start-radius: var(--base-radius);
+	border-end-end-radius: var(--base-radius);
+}
+
+.header__logo {
+	font-weight: bold;
+	text-transform: uppercase;
+}
