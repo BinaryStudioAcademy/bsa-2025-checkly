@@ -40,7 +40,7 @@ class UserService implements Service {
 		return Promise.resolve(true);
 	}
 
-	public find(): ReturnType<Service["find"]> {
+	public find(): Promise<null | UserEntity> {
 		return Promise.resolve(null);
 	}
 
