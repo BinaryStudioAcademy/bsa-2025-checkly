@@ -1,10 +1,13 @@
 import { type UserGetAllItemResponseDto } from "shared";
-
+import { HTTPCode } from "~/libs/modules/http/http.js";
 import {
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 } from "~/modules/users/libs/types/types.js";
 import { type UserService } from "~/modules/users/user.service.js";
+
+import { UserValidationMessage } from "./libs/enums/enums.js";
+import { AuthorizationError } from "./libs/exceptions/exceptions.js";
 
 class AuthService {
 	private userService: UserService;
@@ -19,10 +22,21 @@ class AuthService {
 		return await this.userService.findById(userId);
 	}
 
-	public signUp(
+	public async signUp(
 		userRequestDto: UserSignUpRequestDto,
 	): Promise<UserSignUpResponseDto> {
-		return this.userService.create(userRequestDto);
+		const { email } = userRequestDto;
+
+		const existingUserByEmail = await this.userService.findByEmail(email);
+
+		if (existingUserByEmail) {
+			throw new AuthorizationError({
+				message: UserValidationMessage.EMAIL_ALREADY_EXISTS,
+				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
+		return await this.userService.create(userRequestDto);
 	}
 }
 

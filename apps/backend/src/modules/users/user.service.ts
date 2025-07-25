@@ -1,3 +1,4 @@
+import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
 import { type Service } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
@@ -10,21 +11,25 @@ import {
 } from "./libs/types/types.js";
 
 class UserService implements Service {
+	private encryptor: Encryptor;
 	private userRepository: UserRepository;
 
-	public constructor(userRepository: UserRepository) {
+	public constructor(userRepository: UserRepository, encryptor: Encryptor) {
 		this.userRepository = userRepository;
+		this.encryptor = encryptor;
 	}
 
 	public async create(
 		payload: UserSignUpRequestDto,
 	): Promise<UserSignUpResponseDto> {
+		const { hash, salt } = await this.encryptor.encrypt(payload.password);
+
 		const item = await this.userRepository.create(
 			UserEntity.initializeNew({
 				email: payload.email,
 				name: payload.name,
-				passwordHash: "HASH", // TODO
-				passwordSalt: "SALT", // TODO
+				passwordHash: hash,
+				passwordSalt: salt,
 			}),
 		);
 
@@ -51,6 +56,10 @@ class UserService implements Service {
 		const item = await this.userRepository.findById(id);
 
 		return item ? item.toObject() : null;
+  }
+  
+	public async findByEmail(email: string): Promise<null | UserEntity> {
+		return await this.userRepository.findByField("email", email);
 	}
 
 	public update(): ReturnType<Service["update"]> {

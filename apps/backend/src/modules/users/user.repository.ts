@@ -9,12 +9,13 @@ class UserRepository implements Repository {
 	}
 
 	public async create(entity: UserEntity): Promise<UserEntity> {
-		const { email, passwordHash, passwordSalt } = entity.toNewObject();
+		const { email, name, passwordHash, passwordSalt } = entity.toNewObject();
 
 		const user = await this.userModel
 			.query()
 			.insert({
 				email,
+				name,
 				passwordHash,
 				passwordSalt,
 			})
@@ -40,6 +41,13 @@ class UserRepository implements Repository {
 
 	public async findById(id: number): Promise<null | UserEntity> {
 		const user = await this.userModel.query().findById(id).execute();
+  }
+
+	public async findByField(
+		field: "email",
+		value: number | string,
+	): Promise<null | UserEntity> {
+		const user = await this.userModel.query().where(field, value).first();
 
 		return user ? UserEntity.initialize(user) : null;
 	}
