@@ -22,6 +22,12 @@ class AuthService {
 		this.encryptor = encryptor;
 	}
 
+	public async getAuthenticatedUser(
+		userId: number,
+	): Promise<null | UserGetAllItemResponseDto> {
+		return await this.userService.findById(userId);
+	}
+
 	public async signIn(
 		userRequestDto: UserSignInRequestDto,
 	): Promise<UserSignInResponseDto> {
@@ -52,12 +58,6 @@ class AuthService {
 		}
 
 		return user.toObject();
-	}
-
-	public async getAuthenticatedUser(
-		userId: number,
-	): Promise<null | UserGetAllItemResponseDto> {
-		return await this.userService.findById(userId);
 	}
 
 	public async signUp(
