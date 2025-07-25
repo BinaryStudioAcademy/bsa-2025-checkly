@@ -5,12 +5,12 @@ import styles from "./styles.module.css";
 
 const Header = (): JSX.Element => {
 	return (
-		<div className={styles["header"]}>
-			<header className="header wrapper repel">
+		<header className={styles["header"]}>
+			<div className="wrapper repel">
 				<span className={styles["header__logo"]}>Logo</span>
 				<Nav />
-			</header>
-		</div>
+			</div>
+		</header>
 	);
 };
 
