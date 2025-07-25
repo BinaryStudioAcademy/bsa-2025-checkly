@@ -47,6 +47,15 @@ class UserRepository implements Repository {
 		}
 
 		return UserEntity.initialize(user);
+  }
+
+	public async findByField(
+		field: "email",
+		value: number | string,
+	): Promise<null | UserEntity> {
+		const user = await this.userModel.query().where(field, value).first();
+
+		return user ? UserEntity.initialize(user) : null;
 	}
 
 	public update(): ReturnType<Repository["update"]> {
