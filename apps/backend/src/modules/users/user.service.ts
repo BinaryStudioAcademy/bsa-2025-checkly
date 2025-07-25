@@ -1,8 +1,3 @@
-import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
-import { type Service } from "~/libs/types/types.js";
-import { UserEntity } from "~/modules/users/user.entity.js";
-import { type UserRepository } from "~/modules/users/user.repository.js";
-
 import {
 	type UserGetAllItemResponseDto,
 	type UserGetAllResponseDto,
@@ -10,6 +5,7 @@ import {
 	type UserSignUpResponseDto,
 } from "shared";
 
+import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
 import { type Service } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
@@ -56,14 +52,14 @@ class UserService implements Service {
 		};
 	}
 
+	public async findByEmail(email: string): Promise<null | UserEntity> {
+		return await this.userRepository.findByField("email", email);
+	}
 
 	public async findById(id: number): Promise<null | UserGetAllItemResponseDto> {
 		const item = await this.userRepository.findById(id);
 
 		return item ? item.toObject() : null;
-
-	public async findByEmail(email: string): Promise<null | UserEntity> {
-		return await this.userRepository.findByField("email", email);
 	}
 
 	public update(): ReturnType<Service["update"]> {
