@@ -64,6 +64,12 @@ class BaseConfig implements Config {
 					doc: "Secret key for JWT",
 					env: "JWT_SECRET_KEY",
 					format: String,
+			ENCRYPTOR: {
+				SALT_SIZE: {
+					default: null,
+					doc: "Salt size for encryption",
+					env: "SALT_SIZE",
+					format: Number,
 				},
 			},
 		});

@@ -1,5 +1,5 @@
 import { ErrorMessage } from "../../enums/enums.js";
-import { HTTPCode } from "../../modules/http/http.js";
+import { type HTTPCode } from "../../modules/http/http.js";
 import { type ValueOf } from "../../types/types.js";
 import { HTTPError } from "../http-error/http-error.exception.js";
 
@@ -15,6 +15,7 @@ class AuthorizationError extends HTTPError {
 		message = ErrorMessage.AUTHENTICATION_FAILED,
 		status = HTTPCode.UNAUTHORIZED,
 	}: Constructor = {}) {
+
 		super({
 			cause,
 			message,

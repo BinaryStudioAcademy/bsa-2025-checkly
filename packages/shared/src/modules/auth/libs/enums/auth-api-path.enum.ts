@@ -1,6 +1,7 @@
 const AuthApiPath = {
 	ROOT: "/",
-	SIGN_UP: "/sign-up",
+	SIGN_IN: "/login",
+	SIGN_UP: "/register",
 } as const;
 
 export { AuthApiPath };
