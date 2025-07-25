@@ -14,6 +14,36 @@ import {
 import { type AuthService } from "./auth.service.js";
 import { AuthApiPath } from "./libs/enums/enums.js";
 
+/**
+ * @swagger
+ * tags:
+ *   - name: auth
+ *     description: Endpoints related to authentication
+ *
+ * components:
+ *   schemas:
+ *     UserSignUpRequestDto:
+ *       type: object
+ *       required:
+ *         - email
+ *         - name
+ *         - password
+ *       properties:
+ *         email:
+ *           type: string
+ *           format: email
+ *           example: user@example.com
+ *           description: User's unique email address
+ *         name:
+ *           type: string
+ *           example: New User
+ *           description: Full name of the user
+ *         password:
+ *           type: string
+ *           format: password
+ *           example: String123
+ *           description: User's account password
+ */
 class AuthController extends BaseController {
 	private authService: AuthService;
 
@@ -40,32 +70,40 @@ class AuthController extends BaseController {
 	/**
 	 * @swagger
 	 * /auth/sign-up:
-	 *    post:
-	 *      description: Sign up user into the system
-	 *      requestBody:
-	 *        description: User auth data
-	 *        required: true
-	 *        content:
-	 *          application/json:
-	 *            schema:
-	 *              type: object
-	 *              properties:
-	 *                email:
-	 *                  type: string
-	 *                  format: email
-	 *                password:
-	 *                  type: string
-	 *      responses:
-	 *        201:
-	 *          description: Successful operation
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                type: object
-	 *                properties:
-	 *                  message:
-	 *                    type: object
-	 *                    $ref: "#/components/schemas/User"
+	 *   post:
+	 *     tags:
+	 *       - auth
+	 *     summary: Sign up a new user
+	 *     requestBody:
+	 *       description: User credentials
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             $ref: '#/components/schemas/UserSignUpRequestDto'
+	 *     responses:
+	 *       201:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 message:
+	 *                   $ref: "#/components/schemas/User"
+	 *       400:
+	 *         description: Bad request - Email already in use
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 status:
+	 *                   type: integer
+	 *                   example: 400
+	 *                 message:
+	 *                   type: string
+	 *                   example: Email already in use
 	 */
 	private async signUp(
 		options: APIHandlerOptions<{
