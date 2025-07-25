@@ -15,6 +15,7 @@ const userSignIn = z
 	.object<UserSignInRequestValidationDto>({
 		email: z
 			.string()
+			.trim()
 			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
 				message: UserValidationMessage.FIELD_REQUIRED,
 			})
@@ -23,7 +24,8 @@ const userSignIn = z
 			}),
 		password: z
 			.string()
-			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
+			.trim()
+			.min(UserValidationRule.PASSWORD_MIN_LENGTH, {
 				message: UserValidationMessage.FIELD_REQUIRED,
 			})
 			.regex(UserValidationRegexRule.PASSWORD_VALID_CHARS_MIN_MAX, {
