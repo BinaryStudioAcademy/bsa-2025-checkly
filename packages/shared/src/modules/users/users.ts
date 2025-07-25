@@ -9,7 +9,7 @@ export {
 } from "./libs/types/types.js";
 export {
 	type SignUpFormValidationSchema,
+	userSignIn as userSignInValidationSchema,
 	userSignUp as userSignUpValidationSchema,
 	userSignUpExtended as userSignUpValidationSchemaExtended,
 } from "./libs/validation-schemas/validation-schemas.js";
-export { userSignIn as userSignInValidationSchema } from "./libs/validation-schemas/validation-schemas.js";

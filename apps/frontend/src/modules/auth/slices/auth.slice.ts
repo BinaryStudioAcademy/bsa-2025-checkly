@@ -1,10 +1,14 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { type UserSignUpResponseDto } from "shared";
 
 import { DataStatus } from "~/libs/enums/enums.js";
+import { showErrorToast } from "~/libs/helpers/helpers.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
-import { signUp } from "./actions.js";
+import {
+	type UserSignInResponseDto,
+	type UserSignUpResponseDto,
+} from "../libs/types/types.js";
+import { signIn, signUp } from "./actions.js";
 
 interface BackendErrorResponse {
 	message: string;
@@ -14,7 +18,7 @@ interface BackendErrorResponse {
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
 	error: BackendErrorResponse | null;
-	user: null | UserSignUpResponseDto;
+	user: null | UserSignInResponseDto | UserSignUpResponseDto;
 };
 
 const initialState: State = {
@@ -59,6 +63,18 @@ const { actions, name, reducer } = createSlice({
 					status: 500,
 				};
 			}
+		});
+
+		builder.addCase(signIn.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(signIn.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.user = action.payload;
+		});
+		builder.addCase(signIn.rejected, (state, action) => {
+			state.dataStatus = DataStatus.REJECTED;
+			showErrorToast(action.error.message as string);
 		});
 	},
 	initialState,
