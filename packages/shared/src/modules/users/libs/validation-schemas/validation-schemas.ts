@@ -1,3 +1,4 @@
+export { userSignIn } from "./user-sign-in.validation-schema.js";
 export {
 	type SignUpFormValidationSchema,
 	userSignUpExtended,
