@@ -1,0 +1,7 @@
+:root {
+	--wrapper-max-width: 1200px;
+	--size-text-max-width: 900px;
+	--gutter: 18px;
+	--base-radius: 16px;
+	--flow-space: 16px;
+}
