@@ -1,0 +1,25 @@
+section {
+	padding-block: 64px;
+}
+
+.hero__section {
+	background-color: #f1f1f1;
+}
+
+.hero__content {
+	text-align: center;
+}
+
+.hero__title {
+	max-width: var(--size-text-max-width);
+	margin-inline: auto;
+	font-size: 60px;
+}
+
+.hero__subtitle {
+	font-size: 24px;
+}
+
+.another__section {
+	background-color: #76acec;
+}
