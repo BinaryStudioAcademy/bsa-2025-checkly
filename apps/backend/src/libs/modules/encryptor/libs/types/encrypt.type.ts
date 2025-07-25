@@ -1,6 +1,8 @@
+type EncryptedData = { hash: string; salt: string };
+
 type Encryptor = {
-	decrypt(value: string, storedHash: string, salt: string): Promise<boolean>;
-	encrypt(value: string): Promise<{ hash: string; salt: string }>;
+	compare(value: string, storedHash: string, salt: string): Promise<boolean>;
+	encrypt(value: string): Promise<EncryptedData>;
 };
 
-export { type Encryptor };
+export { type EncryptedData, type Encryptor };

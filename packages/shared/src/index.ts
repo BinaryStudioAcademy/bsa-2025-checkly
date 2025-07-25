@@ -2,11 +2,10 @@ export {
 	APIPath,
 	AppEnvironment,
 	ContentType,
-	ErrorMessage,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
 export {
-	AuthenticationError,
+	AuthorizationError,
 	HTTPError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
@@ -38,5 +37,5 @@ export {
 	userSignInValidationSchema,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
-	userSignUpValidationSchema,
 } from "./modules/users/users.js";
+export { UserValidationMessage } from "./modules/users/users.js";

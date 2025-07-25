@@ -39,14 +39,11 @@ class UserRepository implements Repository {
 		return users.map((user) => UserEntity.initialize(user));
 	}
 
-	public async findByEmail(email: string): Promise<null | UserEntity> {
-		const user = await this.userModel.query().findOne({ email }).execute();
-
-		return user ? UserEntity.initialize(user) : null;
-	}
-
-	public async findById(id: number): Promise<null | UserEntity> {
-		const user = await this.userModel.query().findById(id).execute();
+	public async findByField(
+		field: "email",
+		value: number | string,
+	): Promise<null | UserEntity> {
+		const user = await this.userModel.query().where(field, value).first();
 
 		return user ? UserEntity.initialize(user) : null;
 	}

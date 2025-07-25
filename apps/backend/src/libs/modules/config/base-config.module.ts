@@ -61,7 +61,7 @@ class BaseConfig implements Config {
 			ENCRYPTOR: {
 				SALT_SIZE: {
 					default: null,
-					doc: "Encryptor salt size",
+					doc: "Salt size for encryption",
 					env: "SALT_SIZE",
 					format: Number,
 				},

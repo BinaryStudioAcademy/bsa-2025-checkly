@@ -1,10 +1,18 @@
 import { randomBytes, scrypt, timingSafeEqual } from "node:crypto";
 import { promisify } from "node:util";
 
-import { type Encryptor } from "./encryptor.js";
-import { DEFAULT_KEY_LENGTH } from "./libs/constants/constants.js";
+import { type EncryptedData, type Encryptor } from "./encryptor.js";
+import {
+	DEFAULT_KEY_LENGTH,
+	ENCODING_HEX,
+} from "./libs/constants/constants.js";
 
 const scryptAsync = promisify(scrypt);
+
+type Constructor = {
+	keyLength?: number;
+	saltSize: number;
+};
 
 class BaseEncryptor implements Encryptor {
 	private readonly keyLength: number;
@@ -13,21 +21,18 @@ class BaseEncryptor implements Encryptor {
 	public constructor({
 		keyLength = DEFAULT_KEY_LENGTH,
 		saltSize,
-	}: {
-		keyLength?: number;
-		saltSize: number;
-	}) {
+	}: Constructor) {
 		this.saltSize = saltSize;
 		this.keyLength = keyLength;
 	}
 
-	public async decrypt(
+	public async compare(
 		value: string,
 		storedHash: string,
 		salt: string,
 	): Promise<boolean> {
 		const computedHash = await this.generateHash(value, salt);
-		const storedHashBuffer = Buffer.from(storedHash, "hex");
+		const storedHashBuffer = Buffer.from(storedHash, ENCODING_HEX);
 
 		if (computedHash.length !== storedHashBuffer.length) {
 			return false;
@@ -36,11 +41,11 @@ class BaseEncryptor implements Encryptor {
 		return timingSafeEqual(computedHash, storedHashBuffer);
 	}
 
-	public async encrypt(value: string): Promise<{ hash: string; salt: string }> {
+	public async encrypt(value: string): Promise<EncryptedData> {
 		const salt = this.generateSalt();
 		const hashBuffer = await this.generateHash(value, salt);
 
-		return { hash: hashBuffer.toString("hex"), salt };
+		return { hash: hashBuffer.toString(ENCODING_HEX), salt };
 	}
 
 	private async generateHash(value: string, salt: string): Promise<Buffer> {
@@ -48,7 +53,7 @@ class BaseEncryptor implements Encryptor {
 	}
 
 	private generateSalt(): string {
-		return randomBytes(this.saltSize).toString("hex");
+		return randomBytes(this.saltSize).toString(ENCODING_HEX);
 	}
 }
 
