@@ -1,5 +1,1 @@
-export {
-	type UserGetAllResponseDto,
-	type UserSignUpRequestDto,
-	type UserSignUpResponseDto,
-} from "shared";
+export { type UserSignUpRequestDto, type UserSignUpResponseDto } from "shared";

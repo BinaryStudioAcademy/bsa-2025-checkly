@@ -34,7 +34,7 @@ const verifyJwt = async (
 			});
 		}
 
-		return user.toObject();
+		return user;
 	} catch (error) {
 		throw new AuthorizationError({
 			cause: error,

@@ -1,12 +1,13 @@
-import { type Service } from "~/libs/types/types.js";
-import { UserEntity } from "~/modules/users/user.entity.js";
-import { type UserRepository } from "~/modules/users/user.repository.js";
-
 import {
+	type UserGetAllItemResponseDto,
 	type UserGetAllResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
-} from "./libs/types/types.js";
+} from "shared";
+
+import { type Service } from "~/libs/types/types.js";
+import { UserEntity } from "~/modules/users/user.entity.js";
+import { type UserRepository } from "~/modules/users/user.repository.js";
 
 class UserService implements Service {
 	private userRepository: UserRepository;
@@ -46,8 +47,10 @@ class UserService implements Service {
 		};
 	}
 
-	public async findById(id: number): Promise<null | UserEntity> {
-		return await this.userRepository.findById(id);
+	public async findById(id: number): Promise<null | UserGetAllItemResponseDto> {
+		const item = await this.userRepository.findById(id);
+
+		return item ? item.toObject() : null;
 	}
 
 	public update(): ReturnType<Service["update"]> {
