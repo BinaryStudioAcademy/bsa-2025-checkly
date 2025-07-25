@@ -37,5 +37,6 @@ export {
 	userSignInValidationSchema,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	userSignUpValidationSchema,
 } from "./modules/users/users.js";
 export { UserValidationMessage } from "./modules/users/users.js";

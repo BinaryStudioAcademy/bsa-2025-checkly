@@ -7,7 +7,4 @@ const encryptor = new BaseEncryptor({
 });
 
 export { encryptor };
-export {
-	type EncryptedData,
-	type Encryptor,
-} from "./libs/types/encrypt.type.js";
+export { type EncryptedData, type Encryptor } from "./libs/types/types.js";

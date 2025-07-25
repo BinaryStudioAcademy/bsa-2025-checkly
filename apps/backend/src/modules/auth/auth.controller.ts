@@ -9,6 +9,8 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
+	type UserSignUpRequestDto,
+	userSignUpValidationSchema,
 } from "~/modules/users/users.js";
 
 import { type AuthService } from "./auth.service.js";
@@ -33,6 +35,20 @@ class AuthController extends BaseController {
 			path: AuthApiPath.SIGN_IN,
 			validation: {
 				body: userSignInValidationSchema,
+			},
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.signUp(
+					options as APIHandlerOptions<{
+						body: UserSignUpRequestDto;
+					}>,
+				),
+			method: "POST",
+			path: AuthApiPath.SIGN_UP,
+			validation: {
+				body: userSignUpValidationSchema,
 			},
 		});
 	}
@@ -101,6 +117,55 @@ class AuthController extends BaseController {
 		return {
 			payload: await this.authService.signIn(options.body),
 			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /auth/sign-up:
+	 *   post:
+	 *     tags:
+	 *       - auth
+	 *     summary: Sign up a new user
+	 *     requestBody:
+	 *       description: User credentials
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             $ref: '#/components/schemas/UserSignUpRequestDto'
+	 *     responses:
+	 *       201:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 message:
+	 *                   $ref: "#/components/schemas/User"
+	 *       400:
+	 *         description: Bad request - Email already in use
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 status:
+	 *                   type: integer
+	 *                   example: 400
+	 *                 message:
+	 *                   type: string
+	 *                   example: Email already in use
+	 */
+	private async signUp(
+		options: APIHandlerOptions<{
+			body: UserSignUpRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.authService.signUp(options.body),
+			status: HTTPCode.CREATED,
 		};
 	}
 }
