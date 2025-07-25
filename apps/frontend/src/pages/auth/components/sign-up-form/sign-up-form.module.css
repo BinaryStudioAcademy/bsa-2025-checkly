@@ -5,7 +5,7 @@
 	justify-content: center;
 	min-height: 100vh;
 	overflow: hidden;
-    font-family: Arial, sans-serif;
+	font-family: Arial, sans-serif;
 	background-color: #fbd767;
 	background-image:
 		linear-gradient(#eaeba9 1.4px, transparent 1.4px),
@@ -20,7 +20,7 @@
 	width: 100%;
 	max-width: 592px;
 	padding: 63px 100px 112px;
-    text-align: center;
+	text-align: center;
 	background-color: #ffffff;
 	background-image:
 		linear-gradient(#eaeba9 1.4px, transparent 1.4px),
