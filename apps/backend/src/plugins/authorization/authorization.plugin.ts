@@ -5,6 +5,8 @@ import { type UserEntity } from "../../modules/users/user.entity.js";
 import { type UserService } from "../../modules/users/user.service.js";
 import { verifyJwt } from "./libs/strategies/jwt.strategy.js";
 
+type UserAuthResponse = ReturnType<UserEntity["toObject"]>;
+
 declare module "fastify" {
 	interface FastifyInstance {
 		authenticate: (request: FastifyRequest) => Promise<void>;
@@ -12,7 +14,7 @@ declare module "fastify" {
 	}
 
 	interface FastifyRequest {
-		user: UserEntity;
+		user: UserAuthResponse;
 	}
 }
 

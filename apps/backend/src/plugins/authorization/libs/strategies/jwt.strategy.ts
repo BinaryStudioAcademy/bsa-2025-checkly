@@ -5,7 +5,11 @@ import { AuthorizationError, ErrorMessage } from "shared";
 import { config } from "../../../../libs/modules/config/config.js";
 import { type UserEntity } from "../../../../modules/users/user.entity.js";
 
-const verifyJwt = async (request: FastifyRequest): Promise<UserEntity> => {
+type UserAuthResponse = ReturnType<UserEntity["toObject"]>;
+
+const verifyJwt = async (
+	request: FastifyRequest,
+): Promise<UserAuthResponse> => {
 	try {
 		const { authorization } = request.headers;
 
@@ -30,7 +34,7 @@ const verifyJwt = async (request: FastifyRequest): Promise<UserEntity> => {
 			});
 		}
 
-		return user;
+		return user.toObject();
 	} catch (error) {
 		throw new AuthorizationError({
 			cause: error,
