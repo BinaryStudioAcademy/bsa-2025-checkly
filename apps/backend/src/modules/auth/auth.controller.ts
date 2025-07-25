@@ -33,16 +33,16 @@ import { AuthApiPath } from "./libs/enums/enums.js";
  *         email:
  *           type: string
  *           format: email
- *           example: johndoe@example.com
+ *           example: user@example.com
  *           description: User's unique email address
  *         name:
  *           type: string
- *           example: John Doe
+ *           example: New User
  *           description: Full name of the user
  *         password:
  *           type: string
  *           format: password
- *           example: StrongPassword123!
+ *           example: String123
  *           description: User's account password
  */
 class AuthController extends BaseController {
@@ -150,8 +150,8 @@ class AuthController extends BaseController {
 	 *               properties:
 	 *                 message:
 	 *                   $ref: "#/components/schemas/User"
-	 *       409:
-	 *         description: Conflict - Email or username already exists
+	 *       400:
+	 *         description: Bad request - Email already in use
 	 *         content:
 	 *           application/json:
 	 *             schema:
@@ -159,10 +159,10 @@ class AuthController extends BaseController {
 	 *               properties:
 	 *                 status:
 	 *                   type: integer
-	 *                   example: 409
-	 *                 message
+	 *                   example: 400
+	 *                 message:
 	 *                   type: string
-	 *                   example: Email is already taken
+	 *                   example: Email already in use
 	 */
 
 	private async signUp(

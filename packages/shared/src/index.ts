@@ -5,7 +5,7 @@ export {
 	ServerErrorType,
 } from "./libs/enums/enums.js";
 export {
-	AuthError,
+	AuthorizationError,
 	HTTPError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
@@ -39,3 +39,4 @@ export {
 	type UserSignUpResponseDto,
 	userSignUpValidationSchema,
 } from "./modules/users/users.js";
+export { UserValidationMessage } from "./modules/users/users.js";

@@ -1,1 +1,1 @@
-export { AuthError } from "shared";
+export { AuthorizationError } from "shared";
