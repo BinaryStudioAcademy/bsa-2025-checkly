@@ -52,14 +52,14 @@ class UserService implements Service {
 		};
 	}
 
+	public async findByEmail(email: string): Promise<null | UserEntity> {
+		return await this.userRepository.findByField("email", email);
+	}
+
 	public async findById(id: number): Promise<null | UserGetAllItemResponseDto> {
 		const item = await this.userRepository.findById(id);
 
 		return item ? item.toObject() : null;
-  }
-  
-	public async findByEmail(email: string): Promise<null | UserEntity> {
-		return await this.userRepository.findByField("email", email);
 	}
 
 	public update(): ReturnType<Service["update"]> {
