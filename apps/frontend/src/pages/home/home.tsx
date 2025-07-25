@@ -16,6 +16,7 @@ const Home = (): JSX.Element => {
 							styles["hero__content"],
 							"wrapper flow-loose",
 						)}
+						data-section-variant="light"
 					>
 						<div className="flow-tight">
 							<h2 className={styles["hero__title"]}>
@@ -30,9 +31,24 @@ const Home = (): JSX.Element => {
 						<button className={styles["hero__button-start"]}>Start</button>
 					</div>
 				</section>
-				<section className={styles["another__section"]}>
+				<section data-section-variant="brand">
 					<div className="wrapper">
-						<h2>Another section</h2>
+						<h2>How it works</h2>
+					</div>
+				</section>
+				<section data-section-variant="light">
+					<div className="wrapper">
+						<h2>Categories</h2>
+					</div>
+				</section>
+				<section data-section-variant="dark">
+					<div className="wrapper">
+						<h2>Sample visual layouts</h2>
+					</div>
+				</section>
+				<section data-section-variant="light">
+					<div className="wrapper">
+						<h2>Testimonials</h2>
 					</div>
 				</section>
 			</main>
