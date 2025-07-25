@@ -16,27 +16,21 @@ const userSignIn = z
 		email: z
 			.string()
 			.trim()
-			.min(UserValidationRule.EMAIL_MINIMUM_LENGTH, {
-				message: UserValidationMessage.EMAIL_REQUIRE,
+			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
+				message: UserValidationMessage.FIELD_REQUIRED,
 			})
-			.email({
-				message: UserValidationMessage.EMAIL_WRONG,
+			.regex(UserValidationRegexRule.EMAIL_VALID_CHARS_MIN_MAX, {
+				message: UserValidationMessage.EMAIL_INVALID,
 			}),
 		password: z
 			.string()
 			.trim()
-			.min(UserValidationRule.PASSWORD_MINIMUM_LENGTH, {
+			.min(UserValidationRule.PASSWORD_MIN_LENGTH, {
 				message: UserValidationMessage.FIELD_REQUIRED,
 			})
-			.regex(UserValidationRegexRule.PASSWORD_VALID_CHARS, {
-				message: UserValidationMessage.PASSWORD_INVALID_CHARACTERS,
-			})
-			.regex(
-				UserValidationRegexRule.PASSWORD_CONTAINS_LETTER_NUMBER_AND_LENGTH,
-				{
-					message: UserValidationMessage.PASSWORD_REQUIRES_LETTER_AND_NUMBER,
-				},
-			),
+			.regex(UserValidationRegexRule.PASSWORD_VALID_CHARS_MIN_MAX, {
+				message: UserValidationMessage.PASSWORD_INVALID,
+			}),
 	})
 	.required();
 
