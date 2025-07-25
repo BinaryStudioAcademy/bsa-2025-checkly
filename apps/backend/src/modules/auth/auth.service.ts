@@ -49,9 +49,7 @@ class AuthService {
 			});
 		}
 
-		return {
-			...user.toObject(),
-		};
+		return user.toObject();
 	}
 
 	public async signUp(
