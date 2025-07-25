@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { type UserSignInResponseDto, type UserSignUpResponseDto } from "shared";
 
 import { DataStatus } from "~/libs/enums/enums.js";
 import { showErrorToast } from "~/libs/helpers/helpers.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
+import {
+	type UserSignInResponseDto,
+	type UserSignUpResponseDto,
+} from "../libs/types/types.js";
 import { signIn, signUp } from "./actions.js";
 
 type State = {

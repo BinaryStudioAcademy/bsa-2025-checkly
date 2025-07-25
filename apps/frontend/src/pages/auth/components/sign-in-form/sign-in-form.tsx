@@ -1,7 +1,4 @@
 import { Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import { userSignInValidationSchema } from "shared";
-import { type UserSignInRequestDto } from "shared/src/modules/users/libs/types/types.js";
 
 import {
 	blueStars,
@@ -13,7 +10,12 @@ import {
 } from "~/assets/img/sign-in/sign-in.img.js";
 import { Button, Input } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
+import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import {
+	type UserSignInRequestDto,
+	userSignInValidationSchema,
+} from "~/modules/users/users.js";
 
 import { DEFAULT_SIGN_IN_PAYLOAD } from "../sign-up-form/libs/constants.js";
 import styles from "./style.module.css";
@@ -23,6 +25,23 @@ type Properties = {
 };
 
 const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
+	const blueStarsClasses = getClassNames(
+		styles["floating-image"],
+		styles["blue-stars"],
+	);
+	const yellowStarsClasses = getClassNames(
+		styles["floating-image"],
+		styles["yellow-stars"],
+	);
+	const twinklesClasses = getClassNames(
+		styles["floating-image"],
+		styles["twinkles"],
+	);
+	const laptopClasses = getClassNames(
+		styles["floating-image"],
+		styles["laptop"],
+	);
+	const cupClasses = getClassNames(styles["floating-image"], styles["cup"]);
 	const { control, errors, handleSubmit } = useAppForm<UserSignInRequestDto>({
 		defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
 		validationSchema: userSignInValidationSchema,
@@ -78,32 +97,23 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					</form>
 					<img
 						alt="floating-image"
-						className={`${styles["floating-image"] as string} ${styles["blue-stars"] as string}`}
+						className={blueStarsClasses}
 						src={blueStars}
 					/>
 					<img
 						alt="floating-image"
-						className={`${styles["floating-image"] as string} ${styles["yellow-stars"] as string}`}
+						className={yellowStarsClasses}
 						src={yellowStars}
 					/>
 					<img
 						alt="floating-image"
-						className={`${styles["floating-image"] as string} ${styles["twinkles"] as string}`}
+						className={twinklesClasses}
 						src={twinkles}
 					/>
-					<img
-						alt="floating-image"
-						className={`${styles["floating-image"] as string} ${styles["laptop"] as string}`}
-						src={laptop}
-					/>
-					<img
-						alt="floating-image"
-						className={`${styles["floating-image"] as string} ${styles["cup"] as string}`}
-						src={cup}
-					/>
+					<img alt="floating-image" className={laptopClasses} src={laptop} />
+					<img alt="floating-image" className={cupClasses} src={cup} />
 				</section>
 			</div>
-			<ToastContainer />
 		</>
 	);
 };
