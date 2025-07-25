@@ -1,11 +1,12 @@
 import { type JSX } from "react";
-import { NavLink } from "react-router-dom";
+
+import { Link } from "~/libs/components/components.js";
 
 const Nav = (): JSX.Element => {
 	return (
 		<nav className="cluster">
-			<NavLink to="/start-quiz">Start quiz</NavLink>
-			<NavLink to="/sign-in">Sign in</NavLink>
+			<Link to="/">Start quiz</Link>
+			<Link to="/sign-in">Sign in</Link>
 		</nav>
 	);
 };
