@@ -2,7 +2,10 @@ import { randomBytes, scrypt, timingSafeEqual } from "node:crypto";
 import { promisify } from "node:util";
 
 import { type EncryptedData, type Encryptor } from "./encryptor.js";
-import { DEFAULT_KEY_LENGTH, ENCODING_HEX } from "./libs/contants/contants.js";
+import {
+	DEFAULT_KEY_LENGTH,
+	ENCODING_HEX,
+} from "./libs/constants/constants.js";
 
 const scryptAsync = promisify(scrypt);
 
