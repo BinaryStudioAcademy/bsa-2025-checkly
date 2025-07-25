@@ -22,8 +22,8 @@ class BaseEncryptor implements Encryptor {
 		keyLength = DEFAULT_KEY_LENGTH,
 		saltSize,
 	}: Constructor) {
-		this.saltSize = saltSize;
 		this.keyLength = keyLength;
+		this.saltSize = saltSize;
 	}
 
 	public async compare(

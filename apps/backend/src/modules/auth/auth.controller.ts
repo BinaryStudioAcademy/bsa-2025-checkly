@@ -16,6 +16,36 @@ import {
 import { type AuthService } from "./auth.service.js";
 import { AuthApiPath } from "./libs/enums/enums.js";
 
+/**
+ * @swagger
+ * tags:
+ *   - name: auth
+ *     description: Endpoints related to authentication
+ *
+ * components:
+ *   schemas:
+ *     UserSignUpRequestDto:
+ *       type: object
+ *       required:
+ *         - email
+ *         - name
+ *         - password
+ *       properties:
+ *         email:
+ *           type: string
+ *           format: email
+ *           example: user@example.com
+ *           description: User's unique email address
+ *         name:
+ *           type: string
+ *           example: New User
+ *           description: Full name of the user
+ *         password:
+ *           type: string
+ *           format: password
+ *           example: String123
+ *           description: User's account password
+ */
 class AuthController extends BaseController {
 	private authService: AuthService;
 
