@@ -1,6 +1,10 @@
 import { z } from "zod";
 
-import { UserValidationMessage, UserValidationRule } from "../enums/enums.js";
+import {
+	UserValidationMessage,
+	UserValidationRegexRule,
+	UserValidationRule,
+} from "../enums/enums.js";
 
 type UserSignInRequestValidationDto = {
 	email: z.ZodString;
@@ -11,14 +15,20 @@ const userSignIn = z
 	.object<UserSignInRequestValidationDto>({
 		email: z
 			.string()
-			.trim()
-			.min(UserValidationRule.EMAIL_MINIMUM_LENGTH, {
-				message: UserValidationMessage.EMAIL_REQUIRE,
+			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
+				message: UserValidationMessage.FIELD_REQUIRED,
 			})
-			.email({
-				message: UserValidationMessage.EMAIL_WRONG,
+			.regex(UserValidationRegexRule.EMAIL_VALID_CHARS_MIN_MAX, {
+				message: UserValidationMessage.EMAIL_INVALID,
 			}),
-		password: z.string().trim(),
+		password: z
+			.string()
+			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
+				message: UserValidationMessage.FIELD_REQUIRED,
+			})
+			.regex(UserValidationRegexRule.PASSWORD_VALID_CHARS_MIN_MAX, {
+				message: UserValidationMessage.PASSWORD_INVALID,
+			}),
 	})
 	.required();
 

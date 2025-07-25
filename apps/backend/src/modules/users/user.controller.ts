@@ -11,17 +11,19 @@ import { UsersApiPath } from "./libs/enums/enums.js";
 
 /*** @swagger
  * components:
- *    schemas:
- *      User:
- *        type: object
- *        properties:
- *          id:
- *            type: number
- *            format: number
- *            minimum: 1
- *          email:
- *            type: string
- *            format: email
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: number
+ *           format: number
+ *           minimum: 1
+ *         email:
+ *           type: string
+ *           format: email
+ *         name:
+ *           type: string
  */
 class UserController extends BaseController {
 	private userService: UserService;

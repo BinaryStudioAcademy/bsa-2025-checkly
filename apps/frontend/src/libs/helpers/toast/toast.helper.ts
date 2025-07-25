@@ -1,6 +1,6 @@
 import { type Id, toast, Zoom } from "react-toastify";
 
-import { ToastOptions } from "~/libs/enums/toast-options.enum.js";
+import { ToastOptions } from "~/libs/enums/enums.js";
 
 const showErrorToast = (message: string): Id =>
 	toast.error(message, {
