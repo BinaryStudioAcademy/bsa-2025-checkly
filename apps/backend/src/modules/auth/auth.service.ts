@@ -49,7 +49,7 @@ class AuthService {
 			});
 		}
 
-		return user.toObject();
+		return { ...user.toObject(), token: "" };
 	}
 
 	public async signUp(

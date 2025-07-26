@@ -8,12 +8,15 @@ import {
 	useLocation,
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
+import { BaseTokenStorage } from "~/modules/auth/token-storage/token-storage.service.js";
 import {
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
 } from "~/modules/users/users.js";
 
 import { SignInForm, SignUpForm } from "./components/components.js";
+
+const tokenStorage = new BaseTokenStorage();
 
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -30,10 +33,28 @@ const Auth: React.FC = () => {
 	);
 
 	const handleSignUpSubmit = useCallback(
-		(payload: UserSignUpRequestDto): void => {
-			void dispatch(authActions.signUp(payload));
+		async (payload: UserSignUpRequestDto): Promise<void> => {
+			const resultAction = await dispatch(authActions.signUp(payload));
+
+			const isSignUpFulfilled =
+				authActions.signUp.fulfilled.match(resultAction);
+
+			if (isSignUpFulfilled) {
+				const { token } = resultAction.payload;
+
+				if (token) {
+					tokenStorage.store(token);
+				}
+			}
 		},
 		[dispatch],
+	);
+
+	const handleSignUpFormSubmit = useCallback(
+		(payload: UserSignUpRequestDto): void => {
+			void handleSignUpSubmit(payload);
+		},
+		[handleSignUpSubmit],
 	);
 
 	const getScreen = (screen: string): JSX.Element => {
@@ -43,7 +64,7 @@ const Auth: React.FC = () => {
 			}
 
 			case AppRoute.SIGN_UP: {
-				return <SignUpForm onSubmit={handleSignUpSubmit} />;
+				return <SignUpForm onSubmit={handleSignUpFormSubmit} />;
 			}
 		}
 
