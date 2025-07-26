@@ -4,14 +4,14 @@
 	right: 0;
 	left: 0;
 	z-index: 999;
-	background-color: #ffbdf2;
-	border-end-start-radius: 15px;
-	border-end-end-radius: 15px;
+	background-color: var(--color-card-pink);
+	border-end-start-radius: var(--base-radius);
+	border-end-end-radius: var(--base-radius);
 }
 
 .container {
 	width: 100%;
-	max-width: 1200px;
+	max-width: var(--wrapper-max-width);
 	margin: 0 auto;
 }
 
@@ -34,22 +34,22 @@
 	font-family: Onest, Arial, sans-serif;
 	font-size: 28px;
 	font-weight: 600;
-	color: #33322e;
+	color: var(--color-text);
 }
 
 .links-wrapper {
 	display: flex;
-	gap: 10px;
+	gap: var(--gutter);
 	justify-content: space-around;
 }
 
 .link {
-	gap: 10px;
+	gap: var(--gutter);
 	padding: 5px 50px;
 	font-family: Nunito, Arial, sans-serif;
 	font-size: 12px;
 	font-weight: 800;
-	color: #33322e;
+	color: var(--color-text);
 	text-transform: uppercase;
 	text-decoration: none;
 	background-color: transparent;

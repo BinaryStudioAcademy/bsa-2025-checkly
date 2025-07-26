@@ -18,8 +18,8 @@ const StartingPage: React.FC = () => (
 	>
 		<div className={styles["container"]}>
 			<div className={styles["text-wrapper"]}>
-				<h1>Create a personal development plan in 2 minutes</h1>
-				<h4>
+				<h1 className="h1">Create a personal development plan in 2 minutes</h1>
+				<h4 className="h4">
 					AI-powered checklist generator for your goals — from fitness to
 					creativity
 				</h4>

@@ -17,24 +17,20 @@
 .container {
 	position: relative;
 	width: 100%;
-	max-width: 1200px;
+	max-width: var(--wrapper-max-width);
 	padding: 50px 0;
 	margin: 0 auto;
 }
 
 .starting-page h1 {
-	max-width: 1100px;
+	max-width: var(--size-text-max-width);
 	margin: 0 auto 20px;
-	font-size: 75px;
-	font-weight: 600;
 	text-align: center;
 }
 
 .starting-page h4 {
-	max-width: 1100px;
+	max-width: var(--size-text-max-width);
 	margin: 0 auto 50px;
-	font-size: 24px;
-	font-weight: 700;
 }
 
 .starting-page .link {
@@ -44,7 +40,7 @@
 	font-family: Nunito, Arial, sans-serif;
 	font-size: 16px;
 	font-weight: 800;
-	color: #33322e;
+	color: var(--color-text);
 	text-transform: uppercase;
 	text-decoration: none;
 	background-color: transparent;
