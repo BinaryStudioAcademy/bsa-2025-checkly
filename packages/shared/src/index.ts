@@ -2,6 +2,7 @@ export {
 	APIPath,
 	AppEnvironment,
 	ContentType,
+	ErrorMessage,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
 export {
@@ -31,6 +32,7 @@ export { AuthApiPath } from "./modules/auth/auth.js";
 export {
 	type UserGetAllItemResponseDto,
 	type UserGetAllResponseDto,
+	type UserProfileResponseDto,
 	UsersApiPath,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,

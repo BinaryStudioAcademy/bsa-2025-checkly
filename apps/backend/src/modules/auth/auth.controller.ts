@@ -81,6 +81,41 @@ class AuthController extends BaseController {
 				body: userSignUpValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) => this.getAuthenticatedUser(options),
+			method: "GET",
+			path: AuthApiPath.ME,
+		});
+	}
+
+	/**
+	 * @swagger
+	 * /auth/me:
+	 *    get:
+	 *      summary: Get authenticated user profile
+	 *      description: Returns the profile information of the currently authenticated user
+	 *      security:
+	 *        - bearerAuth: []
+	 *      responses:
+	 *        200:
+	 *          description: Successfully retrieved user profile
+	 *        401:
+	 *          description: Unauthorized - Invalid or missing authentication token
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                properties:
+	 *                  message:
+	 *                    type: string
+	 *                    example: "Unauthorized"
+	 */
+	private getAuthenticatedUser(options: APIHandlerOptions): APIHandlerResponse {
+		return {
+			payload: options.user,
+			status: HTTPCode.OK,
+		};
 	}
 
 	/**
