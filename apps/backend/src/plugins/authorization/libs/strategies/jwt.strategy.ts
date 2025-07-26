@@ -1,15 +1,18 @@
 import { type FastifyRequest } from "fastify";
 import { type JWTPayload, jwtVerify } from "jose";
-import { AuthorizationError, ErrorMessage } from "shared";
+import {
+	AuthorizationError,
+	ErrorMessage,
+	type UserSignUpResponseDto,
+} from "shared";
 
-import { config } from "../../../../libs/modules/config/config.js";
-import { type UserEntity } from "../../../../modules/users/user.entity.js";
-
-type UserAuthResponse = ReturnType<UserEntity["toObject"]>;
+import { config } from "~/libs/modules/config/config.js";
+import { type UserService } from "~/modules/users/user.service.js";
 
 const verifyJwt = async (
 	request: FastifyRequest,
-): Promise<UserAuthResponse> => {
+	userService: UserService,
+): Promise<UserSignUpResponseDto> => {
 	try {
 		const { authorization } = request.headers;
 
@@ -20,12 +23,13 @@ const verifyJwt = async (
 		}
 
 		const token = authorization.replace("Bearer ", "");
+
+		// TODO: once #35 is merged, must use created token module here to decode the token
 		const { payload } = await jwtVerify<JWTPayload & { id: number }>(
 			token,
 			new TextEncoder().encode(config.ENV.JWT.SECRET_KEY),
 		);
 
-		const { userService } = request.server;
 		const user = await userService.findById(payload.id);
 
 		if (!user) {

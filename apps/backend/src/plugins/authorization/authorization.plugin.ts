@@ -1,20 +1,19 @@
+import { type FastifyReply, type FastifyRequest } from "fastify";
 import fp from "fastify-plugin";
 import micromatch from "micromatch";
+import { type UserSignUpResponseDto } from "shared";
 
-import { type UserEntity } from "../../modules/users/user.entity.js";
-import { type UserService } from "../../modules/users/user.service.js";
+import { type UserService } from "~/modules/users/user.service.js";
+
 import { verifyJwt } from "./libs/strategies/jwt.strategy.js";
-
-type UserAuthResponse = ReturnType<UserEntity["toObject"]>;
 
 declare module "fastify" {
 	interface FastifyInstance {
 		authenticate: (request: FastifyRequest) => Promise<void>;
-		userService: UserService;
 	}
 
 	interface FastifyRequest {
-		user: UserAuthResponse;
+		user: UserSignUpResponseDto;
 	}
 }
 
@@ -25,26 +24,26 @@ type AuthPluginOptions = {
 
 const authorization = fp<AuthPluginOptions>(
 	(fastify, { userService, whiteRoutes }, done) => {
-		fastify.decorate("userService", userService);
-		fastify.decorate("authenticate", async function (request) {
-			request.user = await verifyJwt(request);
+		fastify.decorate("authenticate", async function (request: FastifyRequest) {
+			request.user = await verifyJwt(request, userService);
 		});
 
-		fastify.addHook("onRequest", async (request, reply) => {
-			const routeUrl = request.routeOptions.url ?? "";
+		fastify.addHook(
+			"preHandler",
+			async (request: FastifyRequest, reply: FastifyReply) => {
+				void reply;
 
-			const isWhiteRoute = micromatch.isMatch(routeUrl, whiteRoutes);
+				const routeUrl = request.routeOptions.url || request.url;
 
-			if (isWhiteRoute) {
-				return;
-			}
+				const isWhiteRoute = micromatch.isMatch(routeUrl, whiteRoutes);
 
-			try {
-				await fastify.authenticate(request);
-			} catch (error) {
-				await reply.send(error as Error);
-			}
-		});
+				if (isWhiteRoute) {
+					return;
+				}
+
+				await request.server.authenticate(request);
+			},
+		);
 
 		done();
 	},

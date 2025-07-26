@@ -61,6 +61,7 @@ class AuthController extends BaseController {
 						body: UserSignInRequestDto;
 					}>,
 				),
+			isPublic: true,
 			method: "POST",
 			path: AuthApiPath.SIGN_IN,
 			validation: {

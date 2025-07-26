@@ -146,6 +146,12 @@ class BaseServerApplication implements ServerApplication {
 		this.addRoutes(routers);
 	}
 
+	private getWhiteRoutes(): string[] {
+		return this.apis.flatMap((api) =>
+			api.routes.filter((route) => route.isPublic).map((route) => route.path),
+		);
+	}
+
 	private initErrorHandler(): void {
 		this.app.setErrorHandler(
 			(error: FastifyError | ValidationError, _request, reply) => {
@@ -196,9 +202,7 @@ class BaseServerApplication implements ServerApplication {
 	private async initPlugins(): Promise<void> {
 		await this.app.register(authorizationPlugin, {
 			userService,
-			whiteRoutes: this.apis.flatMap((api) =>
-				api.routes.filter((route) => route.isPublic).map((route) => route.path),
-			),
+			whiteRoutes: this.getWhiteRoutes(),
 		});
 	}
 
