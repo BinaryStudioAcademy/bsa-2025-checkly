@@ -20,7 +20,8 @@ export {
 	type UserSignUpResponseDto,
 } from "./libs/types/types.js";
 export {
+	type SignUpFormValidationSchema,
 	userSignInValidationSchema,
-	userSignUpValidationSchema,
+	userSignUpValidationSchemaExtended,
 } from "./libs/validation-schemas/validation-schemas.js";
 export { actions, reducer } from "./slices/users.js";
