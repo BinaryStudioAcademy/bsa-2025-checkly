@@ -1,8 +1,11 @@
+import { AuthErrorMessage, HTTPMethodEnum } from "shared";
+
 import { APIPath, ContentType } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
-import { type Storage } from "~/libs/modules/storage/storage.js";
+import { type Storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import {
+	type UserGetAllItemResponseDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
@@ -18,8 +21,30 @@ type Constructor = {
 };
 
 class AuthApi extends BaseHTTPApi {
+	private authStorage: Storage;
+
 	public constructor({ baseUrl, http, storage }: Constructor) {
 		super({ baseUrl, http, path: APIPath.AUTH, storage });
+		this.authStorage = storage;
+	}
+
+	public async getCurrentUser(): Promise<UserGetAllItemResponseDto> {
+		const token = await this.authStorage.get(StorageKey.TOKEN);
+
+		if (!token) {
+			throw new Error(AuthErrorMessage.NO_TOKEN);
+		}
+
+		const response = await this.load(
+			this.getFullEndpoint(AuthApiPath.PROFILE, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: HTTPMethodEnum.GET,
+			},
+		);
+
+		return await response.json<UserGetAllItemResponseDto>();
 	}
 
 	public async signIn(
@@ -30,7 +55,7 @@ class AuthApi extends BaseHTTPApi {
 			{
 				contentType: ContentType.JSON,
 				hasAuth: false,
-				method: "POST",
+				method: HTTPMethodEnum.POST,
 				payload: JSON.stringify(payload),
 			},
 		);
@@ -46,7 +71,7 @@ class AuthApi extends BaseHTTPApi {
 			{
 				contentType: ContentType.JSON,
 				hasAuth: false,
-				method: "POST",
+				method: HTTPMethodEnum.POST,
 				payload: JSON.stringify(payload),
 			},
 		);
