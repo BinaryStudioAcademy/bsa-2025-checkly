@@ -1,6 +1,6 @@
 .header {
 	padding-block: var(--gutter);
-	background-color: #ffbdf2;
+	background-color: var(--color-card-pink);
 	border-end-start-radius: var(--base-radius);
 	border-end-end-radius: var(--base-radius);
 }
