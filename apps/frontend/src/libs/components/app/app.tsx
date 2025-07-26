@@ -1,5 +1,6 @@
-import reactLogo from "~/assets/img/react.svg";
-import { Link, Loader, RouterOutlet } from "~/libs/components/components.js";
+import { ToastContainer } from "react-toastify";
+
+import { Loader, RouterOutlet } from "~/libs/components/components.js";
 import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
@@ -26,7 +27,8 @@ const App: React.FC = () => {
 	}, [isRoot, dispatch]);
 
 	const isLoading =
-		dataStatus === DataStatus.PENDING || dataStatus === DataStatus.IDLE;
+		dataStatus === DataStatus.PENDING ||
+		(isRoot && dataStatus === DataStatus.IDLE);
 
 	if (isLoading) {
 		return <Loader />;
@@ -34,24 +36,7 @@ const App: React.FC = () => {
 
 	return (
 		<>
-			<img alt="logo" className="App-logo" src={reactLogo} width="30" />
-
-			<ul className="App-navigation-list">
-				<li>
-					<Link to={AppRoute.ROOT}>Root</Link>
-				</li>
-				<li>
-					<Link to={AppRoute.SIGN_IN}>Sign in</Link>
-				</li>
-				<li>
-					<Link to={AppRoute.SIGN_UP}>Sign up</Link>
-				</li>
-			</ul>
-			<p>Current path: {pathname}</p>
-
-			<div>
-				<RouterOutlet />
-			</div>
+			<RouterOutlet />
 			{isRoot && (
 				<>
 					<h2>Users:</h2>
@@ -63,6 +48,7 @@ const App: React.FC = () => {
 					</ul>
 				</>
 			)}
+			<ToastContainer />
 		</>
 	);
 };
