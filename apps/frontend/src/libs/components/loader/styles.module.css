@@ -3,15 +3,18 @@
 }
 
 .fullscreen {
+	position: fixed;
+	inset: 0;
 	z-index: 9999;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 100vh;
+	height: 100%;
+	min-height: 100vh;
 }
 
 .backdrop {
-	background-color: #e0e0e09f;
+	background-color: var(--color-bg-dark);
 }
 
 .inline {
@@ -21,37 +24,42 @@
 }
 
 .small {
-	--loader-base-size: 12px;
+	--loader-base-size: 16px;
 }
 
 .medium {
-	--loader-base-size: 20px;
+	--loader-base-size: 24px;
 }
 
 .large {
-	--loader-base-size: 32px;
+	--loader-base-size: 48px;
 }
 
 .brand {
-	color: #75a5be;
+	color: var(--color-brand-primary);
 }
 
 .muted {
-	color: #c0d49e;
+	color: var(--color-brand-muted);
 }
 
 .accent {
-	color: #ff7171;
+	color: var(--color-brand-accent);
 }
 
 .spinner {
 	display: inline-block;
 	width: var(--loader-base-size);
 	height: var(--loader-base-size);
-	border: 3px solid currentcolor;
+	border: 5px solid currentcolor;
 	border-right-color: transparent;
 	border-radius: 50%;
 	animation: spin 0.5s linear infinite;
+}
+
+.small.spinner,
+.base.spinner {
+	border-width: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {

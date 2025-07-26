@@ -1,5 +1,3 @@
-import { type JSX } from "react";
-
 import { getClassNames } from "~/libs/helpers/helpers.js";
 
 import styles from "./styles.module.css";
@@ -20,7 +18,7 @@ const Loader: React.FC<Properties> = ({
 	backdrop = container === "fullscreen",
 	size = "large",
 	theme = "brand",
-}: Properties): JSX.Element => {
+}: Properties) => {
 	const containerClasses = getClassNames(
 		styles["loader"],
 		styles[container],
