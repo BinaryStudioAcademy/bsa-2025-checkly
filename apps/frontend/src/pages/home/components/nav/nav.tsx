@@ -1,8 +1,8 @@
-import { type JSX } from "react";
+import React from "react";
 
 import { Link } from "~/libs/components/components.js";
 
-const Nav = (): JSX.Element => {
+const Nav: React.FC = () => {
 	return (
 		<nav className="cluster">
 			<Link to="/">Start quiz</Link>

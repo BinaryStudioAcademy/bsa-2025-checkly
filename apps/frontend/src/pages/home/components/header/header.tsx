@@ -1,9 +1,9 @@
-import { type JSX } from "react";
+import React from "react";
 
 import { Nav } from "../components.js";
 import styles from "./styles.module.css";
 
-const Header = (): JSX.Element => {
+const Header: React.FC = () => {
 	return (
 		<header className={styles["header"]}>
 			<div className="wrapper repel">

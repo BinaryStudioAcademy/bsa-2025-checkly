@@ -1,11 +1,11 @@
-import { type JSX } from "react";
+import React from "react";
 
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import { Header } from "./components/components.js";
 import styles from "./styles.module.css";
 
-const Home = (): JSX.Element => {
+const Home: React.FC = () => {
 	return (
 		<>
 			<Header />
