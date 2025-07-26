@@ -1,5 +1,3 @@
-import { type UserGetAllItemResponseDto } from "shared";
-
 import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import {
@@ -20,12 +18,6 @@ class AuthService {
 	public constructor(userService: UserService, encryptor: Encryptor) {
 		this.userService = userService;
 		this.encryptor = encryptor;
-	}
-
-	public async getAuthenticatedUser(
-		userId: number,
-	): Promise<null | UserGetAllItemResponseDto> {
-		return await this.userService.findById(userId);
 	}
 
 	public async signIn(

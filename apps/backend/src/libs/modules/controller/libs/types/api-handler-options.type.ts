@@ -1,4 +1,4 @@
-import { type UserGetAllItemResponseDto } from "shared";
+import { type UserGetAllItemResponseDto } from "~/libs/types/types.js";
 
 type APIHandlerOptions<
 	T extends DefaultApiHandlerOptions = DefaultApiHandlerOptions,

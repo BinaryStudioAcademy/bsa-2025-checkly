@@ -4,6 +4,7 @@ export { type Service } from "./service.type.js";
 export {
 	type ServerCommonErrorResponse,
 	type ServerValidationErrorResponse,
+	type UserGetAllItemResponseDto,
 	type ValidationSchema,
 	type ValueOf,
 } from "shared";

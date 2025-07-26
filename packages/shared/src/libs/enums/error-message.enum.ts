@@ -1,5 +1,5 @@
 const ErrorMessage = {
-	UNAUTHORIZED: "Unauthorized access",
+	UNAUTHORIZED_ACCESS: "Unauthorized access",
 } as const;
 
 export { ErrorMessage };

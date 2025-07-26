@@ -1,5 +1,3 @@
-import { ErrorMessage, HTTPError } from "shared";
-
 import { APIPath } from "~/libs/enums/enums.js";
 import {
 	type APIHandlerOptions,
@@ -113,20 +111,9 @@ class AuthController extends BaseController {
 	 *                    type: string
 	 *                    example: "Unauthorized"
 	 */
-	private async getAuthenticatedUser(
-		options: APIHandlerOptions,
-	): Promise<APIHandlerResponse> {
-		const { user } = options;
-
-		if (!user) {
-			throw new HTTPError({
-				message: ErrorMessage.UNAUTHORIZED,
-				status: HTTPCode.UNAUTHORIZED,
-			});
-		}
-
+	private getAuthenticatedUser(options: APIHandlerOptions): APIHandlerResponse {
 		return {
-			payload: await this.authService.getAuthenticatedUser(user.id),
+			payload: options.user,
 			status: HTTPCode.OK,
 		};
 	}
