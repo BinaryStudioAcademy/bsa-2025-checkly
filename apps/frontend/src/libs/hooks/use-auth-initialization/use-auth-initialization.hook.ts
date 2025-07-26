@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
@@ -12,21 +12,21 @@ const useAuthInitialization = (): void => {
 	const dispatch = useAppDispatch();
 	const { user } = useAppSelector((state) => state.auth);
 
-	useEffect(() => {
-		const initializeAuth = async (): Promise<void> => {
-			if (user) {
-				return;
-			}
+	const initializeAuth = useCallback(async (): Promise<void> => {
+		if (user) {
+			return;
+		}
 
-			const token = await storage.get(StorageKey.TOKEN);
+		const token = await storage.get(StorageKey.TOKEN);
 
-			if (token) {
-				void dispatch(authActions.getCurrentUser());
-			}
-		};
-
-		void initializeAuth();
+		if (token) {
+			void dispatch(authActions.getCurrentUser());
+		}
 	}, [dispatch, user]);
+
+	useEffect(() => {
+		void initializeAuth();
+	}, [initializeAuth]);
 };
 
 export { useAuthInitialization };

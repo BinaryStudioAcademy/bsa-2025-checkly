@@ -1,3 +1,5 @@
+import { AuthErrorMessage, HTTPMethodEnum } from "shared";
+
 import { APIPath, ContentType } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
@@ -30,7 +32,7 @@ class AuthApi extends BaseHTTPApi {
 		const token = await this.authStorage.get(StorageKey.TOKEN);
 
 		if (!token) {
-			throw new Error("No authentication token found");
+			throw new Error(AuthErrorMessage.NO_TOKEN);
 		}
 
 		const response = await this.load(
@@ -38,7 +40,7 @@ class AuthApi extends BaseHTTPApi {
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,
-				method: "GET",
+				method: HTTPMethodEnum.GET,
 			},
 		);
 
@@ -53,7 +55,7 @@ class AuthApi extends BaseHTTPApi {
 			{
 				contentType: ContentType.JSON,
 				hasAuth: false,
-				method: "POST",
+				method: HTTPMethodEnum.POST,
 				payload: JSON.stringify(payload),
 			},
 		);
@@ -69,7 +71,7 @@ class AuthApi extends BaseHTTPApi {
 			{
 				contentType: ContentType.JSON,
 				hasAuth: false,
-				method: "POST",
+				method: HTTPMethodEnum.POST,
 				payload: JSON.stringify(payload),
 			},
 		);
