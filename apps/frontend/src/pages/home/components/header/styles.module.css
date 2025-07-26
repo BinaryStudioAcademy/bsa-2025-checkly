@@ -1,11 +1,52 @@
 .header {
-	padding-block: var(--gutter);
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 999;
 	background-color: var(--color-card-pink);
 	border-end-start-radius: var(--base-radius);
 	border-end-end-radius: var(--base-radius);
 }
 
-.header__logo {
-	font-weight: bold;
+.container {
+	width: 100%;
+	max-width: var(--wrapper-max-width);
+	margin: 0 auto;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding: 15px;
+}
+
+.logo {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.logo p {
+	margin: 0;
+	font-family: Onest, Arial, sans-serif;
+	font-size: 28px;
+	font-weight: 600;
+	color: var(--color-text);
+}
+
+.links-wrapper a {
+	gap: var(--gutter);
+	padding: 5px 50px;
+	font-family: Nunito, Arial, sans-serif;
+	font-size: 12px;
+	font-weight: 800;
+	color: var(--color-text);
 	text-transform: uppercase;
+	text-decoration: none;
+	background-color: transparent;
+	border: 2px solid;
+	border-radius: 30px;
 }
