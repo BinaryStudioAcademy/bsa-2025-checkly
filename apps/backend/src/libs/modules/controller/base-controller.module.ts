@@ -1,7 +1,6 @@
-import { type UserGetAllItemResponseDto } from "shared";
-
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type ServerApplicationRouteParameters } from "~/libs/modules/server-application/server-application.js";
+import { type UserGetAllItemResponseDto } from "~/libs/types/types.js";
 
 import {
 	type APIHandler,
@@ -10,11 +9,13 @@ import {
 	type ControllerRouteParameters,
 } from "./libs/types/types.js";
 
-type CustomFastifyRequest = Parameters<
-	ServerApplicationRouteParameters["handler"]
->[0] & {
+// TODO: This will be removed once the authorization plugin is merged into the main branch.
+type CustomFastifyRequest = FastifyRequest & {
 	user?: UserGetAllItemResponseDto;
 };
+type FastifyRequest = Parameters<RouteHandler>[ParameterIndex];
+type ParameterIndex = 0;
+type RouteHandler = ServerApplicationRouteParameters["handler"];
 
 class BaseController implements Controller {
 	public routes: ServerApplicationRouteParameters[];
