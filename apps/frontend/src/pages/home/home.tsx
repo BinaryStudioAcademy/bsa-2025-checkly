@@ -1,5 +1,3 @@
-import React from "react";
-
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import { Header } from "./components/components.js";

@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Link } from "~/libs/components/components.js";
 
 const Nav: React.FC = () => {
