@@ -37,13 +37,7 @@
 	color: var(--color-text);
 }
 
-.links-wrapper {
-	display: flex;
-	gap: var(--gutter);
-	justify-content: space-around;
-}
-
-.link {
+.links-wrapper a {
 	gap: var(--gutter);
 	padding: 5px 50px;
 	font-family: Nunito, Arial, sans-serif;
