@@ -45,6 +45,10 @@ video {
 	max-width: 100%;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 body,
 h1,
 h2,
@@ -64,9 +68,9 @@ body {
 	min-width: 320px;
 	min-height: 100vh;
 	margin: 0;
-	font-family: Arial, sans-serif;
-	font-size: 14px;
-	line-height: 1.5;
+	font-family: var(--font-primary);
+	font-size: var(--text-body);
+	line-height: var(--leading);
 	color: var(--color-text);
 }
 
@@ -76,12 +80,76 @@ body {
 	flex-direction: column;
 }
 
+:is(h1, h2, h3, h4) {
+	font-family: var(--font-family-secondary);
+	line-height: var(--leading-fine);
+	text-wrap: balance;
+}
+
+h1 {
+	font-size: var(--text-size-heading-1);
+}
+
+h2 {
+	font-size: var(--text-size-heading-2);
+}
+
+h3 {
+	font-size: var(--text-size-heading-3);
+}
+
+h4 {
+	font-size: var(--text-size-heading-4);
+}
+
+h5,
+h6 {
+	font-size: var(--text-size-heading-5);
+}
+
 h1,
 h2,
 h3,
-h4,
-button,
+h4 {
+	text-wrap: balance;
+}
+
+img,
+picture {
+	display: block;
+	max-width: 100%;
+}
+
 input,
-label {
-	line-height: 1.1;
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+:focus {
+	outline: none;
+}
+
+:focus-visible {
+	outline: var(--stroke);
+	outline-offset: 0.15lh;
+	background-color: var(--focus-bg, transparent);
+}
+
+:target {
+	scroll-margin-block: 5lh;
+}
+
+::selection {
+	background: var(--color-selection-bg);
+}
+
+:where(input, button, textarea, select) {
+	font-family: inherit;
+	font-size: inherit;
+}
+
+img:not([alt]) {
+	filter: blur(4px);
 }
