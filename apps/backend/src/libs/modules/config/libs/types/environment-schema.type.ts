@@ -16,6 +16,9 @@ type EnvironmentSchema = {
 	ENCRYPTOR: {
 		SALT_SIZE: number;
 	};
+	JWT: {
+		SECRET_KEY: string;
+	};
 };
 
 export { type EnvironmentSchema };
