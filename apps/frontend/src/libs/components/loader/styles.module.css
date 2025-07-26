@@ -14,7 +14,7 @@
 }
 
 .backdrop {
-	background-color: #33322e;
+	background-color: var(--color-bg-dark);
 }
 
 .inline {
@@ -36,15 +36,15 @@
 }
 
 .brand {
-	color: #75a5be;
+	color: var(--color-brand-primary);
 }
 
 .muted {
-	color: #dcf3b6;
+	color: var(--color-brand-muted);
 }
 
 .accent {
-	color: #ff7171;
+	color: var(--color-brand-accent);
 }
 
 .spinner {
