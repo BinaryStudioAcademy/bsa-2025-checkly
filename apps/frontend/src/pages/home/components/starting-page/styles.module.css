@@ -8,13 +8,13 @@
 
 .net-background {
 	margin: 0;
-	background-image: 
+	background-image:
 		linear-gradient(to right, #D7D7D7 1px, transparent 1px),
 		linear-gradient(to bottom, #D7D7D7 1px, transparent 1px);
 	background-size: 10px 10px;
 }
 
-.container { 
+.container {
 	position: relative;
 	width: 100%;
 	max-width: 1200px;
@@ -44,7 +44,7 @@
 	font-family: Nunito, Arial, sans-serif;
 	font-size: 16px;
 	font-weight: 800;
-	color: #33322E; 
+	color: #33322E;
 	text-transform: uppercase;
 	text-decoration: none;
 	background-color: transparent;
