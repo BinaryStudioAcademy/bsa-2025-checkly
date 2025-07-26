@@ -1,10 +1,10 @@
 .header {
 	position: fixed;
-	top:0;
+	top: 0;
 	right: 0;
 	left: 0;
 	z-index: 999;
-	background-color: #FFBDF2;
+	background-color: #ffbdf2;
 	border-end-start-radius: 15px;
 	border-end-end-radius: 15px;
 }
@@ -34,7 +34,7 @@
 	font-family: Onest, Arial, sans-serif;
 	font-size: 28px;
 	font-weight: 600;
-	color: #33322E;
+	color: #33322e;
 }
 
 .links-wrapper {
@@ -49,7 +49,7 @@
 	font-family: Nunito, Arial, sans-serif;
 	font-size: 12px;
 	font-weight: 800;
-	color: #33322E;
+	color: #33322e;
 	text-transform: uppercase;
 	text-decoration: none;
 	background-color: transparent;
