@@ -1,16 +1,21 @@
 :root {
-	--gutter: 16px;
-	--space-gutter-xs: calc(var(--gutter) * 0.5);
-	--space-gutter-s: calc(var(--gutter) * 0.75);
-	--space-gutter-m: calc(var(--gutter) * 1);
-	--space-gutter-l: calc(var(--gutter) * 2);
-	--space-gutter-xl: calc(var(--gutter) * 3);
-	--base-radius: 16px;
-	--radius-s: calc(var(--base-radius) * 0.5);
-	--radius-m: calc(var(--base-radius) * 1);
-	--radius-l: calc(var(--base-radius) * 1.75);
-	--radius-xl: calc(var(--base-radius) * 2.25);
+	--gutter: var(--space-xs);
+	--space-gutter-3xs: var(--space-3xs);
+	--space-gutter-2xs: var(--space-2xs);
+	--space-gutter-xs: var(--space-xs);
+	--space-gutter-s: var(--space-s);
+	--space-gutter-m: var(--space-m);
+	--space-gutter-l: var(--space-l);
+	--space-gutter-xl: var(--space-xl);
+	--space-gutter-2xl: var(--space-2xl);
+	--space-gutter-3xl: var(--space-3xl);
+	--space-gutter-m-3xl: var(--space-m-3xl);
+	--base-radius: var(--space-xs);
+	--radius-s: var(--space-2xs);
+	--radius-m: var(--space-s);
+	--radius-l: var(--space-m);
+	--radius-xl: var(--space-l);
 	--radius-full: 99999px;
-	--flow-space: 16px;
-	--stroke: 3px solid var(--color-text-secondary);
+	--flow-space: var(--space-xs);
+	--stroke: 3px solid var(--color-card-peach);
 }
