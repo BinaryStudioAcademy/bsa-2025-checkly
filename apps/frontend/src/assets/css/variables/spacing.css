@@ -1,0 +1,16 @@
+:root {
+	--gutter: 16px;
+	--space-gutter-xs: calc(var(--gutter) * 0.5);
+	--space-gutter-s: calc(var(--gutter) * 0.75);
+	--space-gutter-m: calc(var(--gutter) * 1);
+	--space-gutter-l: calc(var(--gutter) * 2);
+	--space-gutter-xl: calc(var(--gutter) * 3);
+	--base-radius: 16px;
+	--radius-s: calc(var(--base-radius) * 0.5);
+	--radius-m: calc(var(--base-radius) * 1);
+	--radius-l: calc(var(--base-radius) * 1.5);
+	--radius-xl: calc(var(--base-radius) * 2);
+	--radius-full: 99999px;
+	--flow-space: 16px;
+	--stroke: 3px solid var(--color-text-secondary);
+}
