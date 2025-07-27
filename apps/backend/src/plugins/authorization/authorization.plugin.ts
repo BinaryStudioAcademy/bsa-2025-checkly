@@ -27,6 +27,10 @@ type AuthPluginOptions = {
 	whiteRoutes: string[];
 };
 
+const AuthStrategy = "Bearer ";
+
+type JWTPayloadWithId = JWTPayload & { id: number };
+
 const extractUserFromRequest = async (
 	request: FastifyRequest,
 	userService: UserService,
@@ -34,16 +38,15 @@ const extractUserFromRequest = async (
 	try {
 		const { authorization } = request.headers;
 
-		if (!authorization?.startsWith("Bearer ")) {
+		if (!authorization?.startsWith(AuthStrategy)) {
 			throw new AuthorizationError({
 				message: ErrorMessage.AUTHORIZATION_HEADER_MISSING,
 			});
 		}
 
-		const token = authorization.replace("Bearer ", "");
+		const token = authorization.replace(AuthStrategy, "");
 
-		// TODO: once #35 is merged, must use created token module here to decode the token
-		const { payload } = await jwtVerify<JWTPayload & { id: number }>(
+		const { payload } = await jwtVerify<JWTPayloadWithId>(
 			token,
 			new TextEncoder().encode(config.ENV.JWT.SECRET_KEY),
 		);
