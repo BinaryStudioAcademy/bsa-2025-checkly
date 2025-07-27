@@ -70,6 +70,7 @@ body {
 	margin: 0;
 	font-family: var(--font-primary);
 	font-size: var(--text-body);
+	font-weight: var(--font-weight-body);
 	line-height: var(--leading);
 	color: var(--color-text);
 }
@@ -81,30 +82,42 @@ body {
 }
 
 :is(h1, h2, h3, h4) {
+	text-wrap: balance;
+}
+
+:is(h1, h2, h3) {
 	font-family: var(--font-family-secondary);
 	line-height: var(--leading-fine);
-	text-wrap: balance;
+}
+
+:is(h4, h5) {
+	font-family: var(--font-family-primary);
 }
 
 h1 {
 	font-size: var(--text-size-heading-1);
+	font-weight: var(--font-weight-heading-semi-bold);
 }
 
 h2 {
 	font-size: var(--text-size-heading-2);
+	font-weight: var(--font-weight-heading-semi-bold);
 }
 
 h3 {
 	font-size: var(--text-size-heading-3);
+	font-weight: var(--font-weight-heading);
 }
 
 h4 {
 	font-size: var(--text-size-heading-4);
+	font-weight: var(--font-weight-heading);
 }
 
 h5,
 h6 {
 	font-size: var(--text-size-heading-5);
+	font-weight: var(--font-weight-heading);
 }
 
 h1,
@@ -133,7 +146,7 @@ select {
 
 :focus-visible {
 	outline: var(--stroke);
-	outline-offset: 0.15lh;
+	outline-offset: 2px;
 	background-color: var(--focus-bg, transparent);
 }
 

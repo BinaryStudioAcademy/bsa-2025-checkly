@@ -66,9 +66,11 @@
 	--radius-xl: calc(var(--base-radius) * 2);
 	--radius-full: 99999px;
 	--flow-space: 16px;
-	--font-weight-body: var(--font-weight-regular);
+	--font-weight-body: var(--font-weight-bold);
+	--font-weight-body-small: var(--font-weight-semi-bold);
 	--font-weight-heading: var(--font-weight-bold);
+	--font-weight-heading-semi-bold: var(--font-weight-semi-bold);
 	--font-weight-caption: var(--font-weight-medium);
 	--font-weight-button: var(--font-weight-semi-bold);
-	--stroke: 2px solid var(--color-text-secondary);
+	--stroke: 3px solid var(--color-text-secondary);
 }
