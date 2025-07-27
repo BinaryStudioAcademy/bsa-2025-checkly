@@ -8,8 +8,8 @@
 	--base-radius: 16px;
 	--radius-s: calc(var(--base-radius) * 0.5);
 	--radius-m: calc(var(--base-radius) * 1);
-	--radius-l: calc(var(--base-radius) * 1.5);
-	--radius-xl: calc(var(--base-radius) * 2);
+	--radius-l: calc(var(--base-radius) * 1.75);
+	--radius-xl: calc(var(--base-radius) * 2.25);
 	--radius-full: 99999px;
 	--flow-space: 16px;
 	--stroke: 3px solid var(--color-text-secondary);
