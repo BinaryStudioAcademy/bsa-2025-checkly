@@ -32,10 +32,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
 			void handleSubmit((data) => {
-				const payloadToSend = { ...data };
-				delete (payloadToSend as Partial<SignUpFormValidationSchema>)
-					.confirmPassword;
-				onSubmit(payloadToSend as UserSignUpRequestDto);
+				onSubmit(data as UserSignUpRequestDto);
 			})(event_);
 		},
 		[handleSubmit, onSubmit],
