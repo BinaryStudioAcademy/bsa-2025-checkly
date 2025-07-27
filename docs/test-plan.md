@@ -1,4 +1,6 @@
-**Test Plan for Checkly v1**
+# **Test Plan for Checkly v1**
+
+(For the Google Docs version click [here](https://docs.google.com/document/d/1MYORyHZhrjjsREmHH2ZdBtcJ5Z4y1xErK_5LWinhtXk/edit?tab=t.0#heading=h.7nfb4coidbfa))
 
 ### **1\. Test Plan ID**
 
@@ -36,36 +38,7 @@ Excluded:
 | Quiz Flow            | High         | Must work seamlessly to generate correct checklist |
 | Loader Component     | Low          | Only visual polish; not a blocker                  |
 
-### **5\. Test Parameters & Examples**
-
-| **Feature**  | **Sample Input**       | **Expected Result**                           | **Notes**               |
-| ------------ | ---------------------- | --------------------------------------------- | ----------------------- |
-| Signup       | “abc123” password      | Show “Password must be at least 8 characters” | Error validation        |
-| Token Expiry | Use expired JWT        | Return 401 Unauthorized                       | API-level test          |
-| Quiz         | Skip required question | Show inline error                             | Client-side validation  |
-| Checklist    | AI returns tasks       | Tasks shown in UI in correct order            | UI mapping/testing      |
-| Export       | Generate PDF           | PDF is downloaded with selected design        | Format must match theme |
-
-### **6\. Error Handling Cases**
-
-| **Scenario**              | **Expected Behavior**                        |
-| ------------------------- | -------------------------------------------- |
-| Invalid login credentials | Show error: "Email or password is incorrect" |
-| Weak password             | Block submission + show validation           |
-| 500 API failure           | Show fallback error message in UI            |
-| Quiz skipped or broken    | Prevent next step until complete             |
-
-### **7\. API Response Schemas**
-
-####
-
-_To be added once devs provide the Swagger API endpoints_
-
-###
-
-###
-
-### **8\. Test Approach**
+### **5\. Test Approach**
 
 #### **🖥️ Frontend**
 
@@ -89,7 +62,7 @@ _To be added once devs provide the Swagger API endpoints_
 
 - Schema validation using helper functions (e.g., Zod, JSON schema)
 
-### **9\. Automation Scope**
+### **6\. Automation Scope**
 
 ###
 
@@ -100,7 +73,7 @@ _To be added once devs provide the Swagger API endpoints_
 | Frontend UI        | ❌            | Manual only in v1     |
 | PDF Output         | ❌            | Manual visual testing |
 
-### **10\. Features Planned (v1)**
+### **7\. Features Planned (v1)**
 
 - Signup (email/password)
 
@@ -116,11 +89,11 @@ _To be added once devs provide the Swagger API endpoints_
 
 ###
 
-### **11\. Features Implemented**
+### **8\. Features Implemented**
 
 _(As of writing: none implemented yet. This section will be updated sprint by sprint.)_
 
-### **12\. Timeline and Demo Milestones**
+### **9\. Timeline and Demo Milestones**
 
 | **Item**       | **Status** | **Date**   |
 | -------------- | ---------- | ---------- |
@@ -129,7 +102,7 @@ _(As of writing: none implemented yet. This section will be updated sprint by sp
 | Feature Freeze | \-         | 29/08/2025 |
 | MVP Deadline   | \-         | 30/08/2025 |
 
-### **13\. Team availability hours**
+### **10\. Team availability hours**
 
 | **Name**   | **Role** | **Schedule**            |
 | ---------- | -------- | ----------------------- |
