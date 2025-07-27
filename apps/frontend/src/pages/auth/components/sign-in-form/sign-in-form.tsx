@@ -55,9 +55,12 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	);
 
 	return (
-		<div className={getClassNames(styles["wrapper"], "grid-pattern")}>
+		<div className={getClassNames(styles["container"], "grid-pattern")}>
 			<section
-				className={getClassNames(styles["sign-in"], "grid-pattern flow-loose")}
+				className={getClassNames(
+					styles["sign-in"],
+					"wrapper grid-pattern flow-loose",
+				)}
 			>
 				<header className="cluster">
 					<img alt="checkly logo" src={logo} />
@@ -76,7 +79,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					</p>
 				</div>
 				<form
-					className={getClassNames(styles["form"], "flow-loose")}
+					className={getClassNames(styles["form"], "cluster flow")}
 					onSubmit={handleFormSubmit}
 				>
 					<Input
