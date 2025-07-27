@@ -12,6 +12,7 @@ const userApi = new UserApi({
 
 export { userApi };
 export {
+	type SignUpFormValidationSchema,
 	type UserGetAllItemResponseDto,
 	type UserGetAllResponseDto,
 	type UserSignInRequestDto,
@@ -20,7 +21,6 @@ export {
 	type UserSignUpResponseDto,
 } from "./libs/types/types.js";
 export {
-	type SignUpFormValidationSchema,
 	userSignInValidationSchema,
 	userSignUpValidationSchemaExtended,
 } from "./libs/validation-schemas/validation-schemas.js";

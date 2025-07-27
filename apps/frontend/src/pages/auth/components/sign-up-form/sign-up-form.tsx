@@ -8,6 +8,7 @@ import {
 } from "~/assets/img/sign-up/sign-up.img.js";
 import { Button, Input } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
+import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type SignUpFormValidationSchema,
@@ -39,6 +40,16 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		},
 		[handleSubmit, onSubmit],
 	);
+	const blueStarsClasses = getClassNames(
+		css["image-position"],
+		css["blue-stars"],
+	);
+	const yellowStarsClasses = getClassNames(
+		css["image-position"],
+		css["yellow-stars"],
+	);
+	const orangeClasses = getClassNames(css["image-position"], css["orange"]);
+	const carClasses = getClassNames(css["image-position"], css["car"]);
 
 	return (
 		<div className={css["container"]}>
@@ -99,26 +110,14 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						<Button label="Create an account" type="submit" />
 					</form>
 				</div>
-				<img
-					alt="blue stars"
-					className={`${css["image-position"] as string} ${css["blue-stars"] as string}`}
-					src={blueStars}
-				/>
+				<img alt="blue stars" className={blueStarsClasses} src={blueStars} />
 				<img
 					alt="yellow stars"
-					className={`${css["image-position"] as string} ${css["yellow-stars"] as string}`}
+					className={yellowStarsClasses}
 					src={yellowStars}
 				/>
-				<img
-					alt="orange"
-					className={`${css["image-position"] as string} ${css["orange-image"] as string}`}
-					src={orangeImage}
-				/>
-				<img
-					alt="car"
-					className={`${css["image-position"] as string} ${css["car-image"] as string}`}
-					src={carImage}
-				/>
+				<img alt="orange" className={orangeClasses} src={orangeImage} />
+				<img alt="car" className={carClasses} src={carImage} />
 			</section>
 		</div>
 	);
