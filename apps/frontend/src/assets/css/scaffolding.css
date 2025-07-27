@@ -45,6 +45,19 @@ video {
 	max-width: 100%;
 }
 
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+	margin-block: 0;
+}
+
 body {
 	display: flex;
 	flex-direction: column;
@@ -54,10 +67,21 @@ body {
 	font-family: Arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.5;
+	color: var(--color-text);
 }
 
 #root {
 	display: flex;
 	flex-grow: 1;
 	flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+	line-height: 1.1;
 }
