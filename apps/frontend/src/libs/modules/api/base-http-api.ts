@@ -28,7 +28,7 @@ class BaseHTTPApi implements HTTPApi {
 	private http: HTTP;
 
 	private path: string;
-	
+
 	private storage: Storage;
 
 	public constructor({ baseUrl, http, path, storage }: Constructor) {
