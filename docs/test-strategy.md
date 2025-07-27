@@ -226,6 +226,7 @@ All artifacts should be published on the Project’s GitHub board
 ![Test flowchart](./images/test-flowchart.svg)
 
 ```mermaid
+
 flowchart TB
   node1("To test") --> node2("In testing")
   node2 --> node3{"Passed?"}
@@ -234,6 +235,7 @@ flowchart TB
   node4 -- No --> node5("Todo")
   node4 -- Yes --> node7("Done")
   node7 --> node8("Create bug report")
+
 ```
 
 ## Testing tools for the Project
