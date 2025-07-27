@@ -17,7 +17,7 @@ import {
 } from "~/modules/users/users.js";
 
 import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
-import css from "./sign-up-form.module.css";
+import styles from "./sign-up-form.module.css";
 
 type Properties = {
 	onSubmit: (payload: UserSignUpRequestDto) => void;
@@ -41,33 +41,36 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		[handleSubmit, onSubmit],
 	);
 	const blueStarsClasses = getClassNames(
-		css["image-position"],
-		css["blue-stars"],
+		styles["image-position"],
+		styles["blue-stars"],
 	);
 	const yellowStarsClasses = getClassNames(
-		css["image-position"],
-		css["yellow-stars"],
+		styles["image-position"],
+		styles["yellow-stars"],
 	);
-	const orangeClasses = getClassNames(css["image-position"], css["orange"]);
-	const carClasses = getClassNames(css["image-position"], css["car"]);
+	const orangeClasses = getClassNames(
+		styles["image-position"],
+		styles["orange"],
+	);
+	const carClasses = getClassNames(styles["image-position"], styles["car"]);
 
 	return (
-		<div className={css["container"]}>
-			<section className={css["sign-up-card"]}>
-				<header className={css["logo-container"]}>
-					<div className={css["logo-circle"]} />
-					<h2 className={css["logo-text"]}>Logo</h2>
+		<div className={styles["container"]}>
+			<section className={styles["sign-up-card"]}>
+				<header className={styles["logo-container"]}>
+					<div className={styles["logo-circle"]} />
+					<h2 className={styles["logo-text"]}>Logo</h2>
 				</header>
 
-				<div className={css["form-content"]}>
-					<h1 className={css["title"]}>Create an account</h1>
-					<p className={css["redirect-text"]}>
+				<div className={styles["form-content"]}>
+					<h1 className={styles["title"]}>Create an account</h1>
+					<p className={styles["redirect-text"]}>
 						Already have an account? Go to{" "}
-						<Link className={css["redirect-link"]} to={AppRoute.SIGN_IN}>
+						<Link className={styles["redirect-link"]} to={AppRoute.SIGN_IN}>
 							Sign In
 						</Link>
 					</p>
-					<form className={css["form"]} onSubmit={handleFormSubmit}>
+					<form className={styles["form"]} onSubmit={handleFormSubmit}>
 						<Input
 							control={control}
 							errors={errors}
