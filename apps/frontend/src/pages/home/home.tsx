@@ -8,7 +8,7 @@ const Home: React.FC = () => {
 		<>
 			<Header />
 			<main>
-				<section className={styles["hero__section"]}>
+				<section className={styles["hero__section"]} data-section-variant>
 					<div
 						className={getClassNames(
 							styles["hero__content"],
