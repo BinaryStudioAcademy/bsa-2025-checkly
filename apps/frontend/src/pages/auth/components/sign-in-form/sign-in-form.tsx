@@ -56,8 +56,8 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 	return (
 		<>
-			<div className={styles["wrapper"]}>
-				<section className={styles["sign-in"]}>
+			<div className={getClassNames(styles["wrapper"], "grid-pattern")}>
+				<section className={getClassNames(styles["sign-in"], "grid-pattern")}>
 					<header className={styles["header"]}>
 						<img alt="logo" src={logo} />
 						<h2 className={styles["header__title"]}>Logo</h2>
