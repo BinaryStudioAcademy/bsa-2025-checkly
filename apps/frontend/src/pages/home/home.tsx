@@ -8,7 +8,10 @@ const Home: React.FC = () => {
 		<>
 			<Header />
 			<main>
-				<section className={styles["hero__section"]} data-section-variant>
+				<section
+					className={getClassNames(styles["hero__section"], "grid-pattern")}
+					data-section-variant
+				>
 					<div
 						className={getClassNames(
 							styles["hero__content"],
@@ -28,7 +31,7 @@ const Home: React.FC = () => {
 						<button className={styles["hero__button-start"]}>Start</button>
 					</div>
 				</section>
-				<section data-section-variant="brand">
+				<section className="grid-pattern" data-section-variant="brand">
 					<div className="wrapper">
 						<h2>How it works</h2>
 					</div>
@@ -38,7 +41,7 @@ const Home: React.FC = () => {
 						<h2>Categories</h2>
 					</div>
 				</section>
-				<section data-section-variant="dark">
+				<section className="grid-pattern" data-section-variant="dark">
 					<div className="wrapper">
 						<h2>Sample visual layouts</h2>
 					</div>
