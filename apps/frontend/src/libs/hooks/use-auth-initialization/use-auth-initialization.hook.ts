@@ -3,10 +3,6 @@ import { useCallback, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 
-/**
- * Initializes authentication from localStorage token on app startup
- * Fetches current user if token exists and user is not already loaded
- */
 const useAuthInitialization = (): void => {
 	const dispatch = useAppDispatch();
 	const { user } = useAppSelector((state) => state.auth);
