@@ -10,20 +10,13 @@ import {
 } from "../libs/types/types.js";
 import { signIn, signUp } from "./actions.js";
 
-interface BackendErrorResponse {
-	message: string;
-	status: number;
-}
-
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
-	error: BackendErrorResponse | null;
 	user: null | UserSignInResponseDto | UserSignUpResponseDto;
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
-	error: null,
 	user: null,
 };
 
@@ -31,38 +24,18 @@ const { actions, name, reducer } = createSlice({
 	extraReducers(builder) {
 		builder.addCase(signUp.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
-			state.error = null;
 		});
 		builder.addCase(
 			signUp.fulfilled,
 			(state, action: PayloadAction<UserSignUpResponseDto>) => {
 				state.dataStatus = DataStatus.FULFILLED;
 				state.user = action.payload;
-				state.error = null;
 			},
 		);
 		builder.addCase(signUp.rejected, (state, action) => {
 			state.dataStatus = DataStatus.REJECTED;
 			state.user = null;
-
-			if (
-				action.payload &&
-				typeof action.payload === "object" &&
-				"message" in action.payload &&
-				"status" in action.payload
-			) {
-				state.error = action.payload as BackendErrorResponse;
-			} else if (action.error.message) {
-				state.error = {
-					message: action.error.message,
-					status: 500,
-				};
-			} else {
-				state.error = {
-					message: "Unknown error! Try again later.",
-					status: 500,
-				};
-			}
+			showErrorToast(action.error.message as string);
 		});
 
 		builder.addCase(signIn.pending, (state) => {
@@ -79,11 +52,7 @@ const { actions, name, reducer } = createSlice({
 	},
 	initialState,
 	name: "auth",
-	reducers: {
-		clearError(state) {
-			state.error = null;
-		},
-	},
+	reducers: {},
 });
 
 export { actions, name, reducer };
