@@ -23,13 +23,13 @@ type Constructor = {
 };
 
 class BaseHTTPApi implements HTTPApi {
+	protected storage: Storage;
+
 	private baseUrl: string;
 
 	private http: HTTP;
 
 	private path: string;
-
-	private storage: Storage;
 
 	public constructor({ baseUrl, http, path, storage }: Constructor) {
 		this.baseUrl = baseUrl;

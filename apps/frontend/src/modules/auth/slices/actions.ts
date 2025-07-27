@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
 	type UserGetAllItemResponseDto,
@@ -32,13 +33,19 @@ const signUp = createAsyncThunk<
 });
 
 const getCurrentUser = createAsyncThunk<
-	UserGetAllItemResponseDto,
+	null | UserGetAllItemResponseDto,
 	undefined,
 	AsyncThunkConfig
->(`${sliceName}/get-current-user`, (_, { extra }) => {
-	const { authApi } = extra;
+>(`${sliceName}/get-current-user`, async (_, { extra }) => {
+	const { authApi, storage } = extra;
 
-	return authApi.getCurrentUser();
+	const token = await storage.get(StorageKey.TOKEN);
+
+	if (!token) {
+		return null;
+	}
+
+	return await authApi.getCurrentUser();
 });
 
 export { getCurrentUser, signIn, signUp };

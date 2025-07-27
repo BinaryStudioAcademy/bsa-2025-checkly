@@ -1,9 +1,7 @@
-import { AuthErrorMessage, HTTPMethodEnum } from "shared";
-
-import { APIPath, ContentType } from "~/libs/enums/enums.js";
+import { APIPath, ContentType, HTTPMethodEnum } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
-import { type Storage, StorageKey } from "~/libs/modules/storage/storage.js";
+import { type Storage } from "~/libs/modules/storage/storage.js";
 import {
 	type UserGetAllItemResponseDto,
 	type UserSignInRequestDto,
@@ -21,20 +19,11 @@ type Constructor = {
 };
 
 class AuthApi extends BaseHTTPApi {
-	private authStorage: Storage;
-
 	public constructor({ baseUrl, http, storage }: Constructor) {
 		super({ baseUrl, http, path: APIPath.AUTH, storage });
-		this.authStorage = storage;
 	}
 
 	public async getCurrentUser(): Promise<UserGetAllItemResponseDto> {
-		const token = await this.authStorage.get(StorageKey.TOKEN);
-
-		if (!token) {
-			throw new Error(AuthErrorMessage.NO_TOKEN);
-		}
-
 		const response = await this.load(
 			this.getFullEndpoint(AuthApiPath.PROFILE, {}),
 			{
