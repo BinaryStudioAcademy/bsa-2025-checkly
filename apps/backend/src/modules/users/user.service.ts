@@ -1,14 +1,14 @@
+import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
+import { type Service } from "~/libs/types/types.js";
+import { UserEntity } from "~/modules/users/user.entity.js";
+import { type UserRepository } from "~/modules/users/user.repository.js";
+
 import {
 	type UserGetAllItemResponseDto,
 	type UserGetAllResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
-} from "shared";
-
-import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
-import { type Service } from "~/libs/types/types.js";
-import { UserEntity } from "~/modules/users/user.entity.js";
-import { type UserRepository } from "~/modules/users/user.repository.js";
+} from "./libs/types/types.js";
 
 class UserService implements Service {
 	private encryptor: Encryptor;
