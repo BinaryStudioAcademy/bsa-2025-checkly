@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 import {
 	cat,
 	greenFlower,
@@ -7,28 +5,22 @@ import {
 	yellowStars,
 	yellowTwinkles,
 } from "~/assets/img/home/starting-page/home-starting-page.img.js";
+import { Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import styles from "./styles.module.css";
 
 const StartingPage: React.FC = () => (
-	<section
-		className={getClassNames(styles["net-background"], styles["starting-page"])}
-	>
-		<div className={styles["container"]}>
+	<section className={getClassNames(styles["starting-page"], "mesh")}>
+		<div className={getClassNames(styles["container"], "wrapper flow-loose")}>
 			<div className={styles["text-wrapper"]}>
 				<h1 className="h1">Create a personal development plan in 2 minutes</h1>
 				<h4 className="h4">
 					AI-powered checklist generator for your goals — from fitness to
 					creativity
 				</h4>
-				<Link
-					className={getClassNames(styles["link"], styles["link_quiz"])}
-					to={AppRoute.ROOT}
-				>
-					Start
-				</Link>
+				<Link to={AppRoute.ROOT}>Start</Link>
 			</div>
 			<div className={styles["icons-wrapper"]}>
 				<img
