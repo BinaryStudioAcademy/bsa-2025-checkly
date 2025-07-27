@@ -6,13 +6,17 @@
 
 ## Acceptance Criteria:
 
-### 0. All Components
+### All Components
 
 - The homepage and all of its components must be fully responsive, adapting its layouts fluidly to different screen sizes while maintaing adequate spacing.
 - Images must scale without distortion or overflow.
 
+### 1. Wrapper
 
-### 1. Header
+- A wrapper component should serve as the structural layout for the homepage.
+- It is responsible for rendering all homepage sections in order (Header, Hero, How It Works, etc.).
+
+### 2. Header
 
 - Displays platform logo on the top-left.
 - Displays two buttons on the top-right:
@@ -22,21 +26,21 @@
 - (Optional) Language switcher is available if implemented.
 - The header should be responsive and adapt to different screen sizes.
 
-### 2. Hero Section
+### 3. Hero Section
 
 - Title is displayed: `Create a personal development plan in 2 minutes`.
 - Subtitle is displayed: `AI-powered checklist generator for your goals — from fitness to creativity`.
 - CTA Button labeled `Start` is centered below the subtitle.
 - Clicking `Start` triggers the quiz.
 
-### 3. How It Works
+### 4. How It Works
 
 - Section displays 3 steps visually with arrow transitions:
   1. **Take the quiz**
   2. **Get your plan**
   3. **Download PDF or customize it**
 
-### 4. Categories Section
+### 5. Categories Section
 
 - Section is titled `Categories`.
 - Displays 6 clickable category :
@@ -52,7 +56,7 @@
 - On click:
   - Starts quiz with category pre-selected.
 
-### 5. Visual Layout Previews
+### 6. Visual Layout Previews
 
 - Section is titled `Sample visual layouts`.
 - Displays sample layout cards:
@@ -64,7 +68,7 @@
 - Each card is a screenshot of a generated PDF layout.
 - Each card has a label with the template/layout name.
 
-### 6. Testimonials Section
+### 7. Testimonials Section
 
 - Section is titled `Testimonials`.
 - Displays user quotes cards with:
@@ -72,7 +76,7 @@
   - Avatar
   - Name (e.g. Roy, Emma, Joan)
 
-### 7. Footer
+### 8. Footer
 
 - Displays:
   - Platform logo (bottom-left)
