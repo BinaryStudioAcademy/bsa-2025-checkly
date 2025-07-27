@@ -55,15 +55,17 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	);
 
 	return (
-		<>
-			<div className={getClassNames(styles["wrapper"], "grid-pattern")}>
-				<section className={getClassNames(styles["sign-in"], "grid-pattern")}>
-					<header className={styles["header"]}>
-						<img alt="logo" src={logo} />
-						<h2 className={styles["header__title"]}>Logo</h2>
-					</header>
+		<div className={getClassNames(styles["wrapper"], "grid-pattern")}>
+			<section
+				className={getClassNames(styles["sign-in"], "grid-pattern flow-loose")}
+			>
+				<header className="cluster">
+					<img alt="checkly logo" src={logo} />
+					<h3>Logo</h3>
+				</header>
+				<div className="flow">
 					<h1 className={styles["title"]}>Sign In</h1>
-					<p className={styles["redirect-text"]}>
+					<p>
 						No account? Go to&nbsp;
 						<Link
 							className={styles["redirect-text__link"]}
@@ -72,49 +74,44 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							Create an account
 						</Link>
 					</p>
-					<form className={styles["form"]} onSubmit={handleFormSubmit}>
-						<p className={styles["form__input"]}>
-							<Input
-								control={control}
-								errors={errors}
-								label="Email"
-								name="email"
-								placeholder="Enter your email"
-								type="email"
-							/>
-						</p>
-						<p className={styles["form__input"]}>
-							<Input
-								control={control}
-								errors={errors}
-								label="Password"
-								name="password"
-								placeholder="Enter your password"
-								type="password"
-							/>
-						</p>
-						<Button label="Sign In" type="submit" />
-					</form>
-					<img
-						alt="floating-image"
-						className={blueStarsClasses}
-						src={blueStars}
+				</div>
+				<form
+					className={getClassNames(styles["form"], "flow-loose")}
+					onSubmit={handleFormSubmit}
+				>
+					<Input
+						control={control}
+						errors={errors}
+						label="Email"
+						name="email"
+						placeholder="Enter your email"
+						type="email"
 					/>
-					<img
-						alt="floating-image"
-						className={yellowStarsClasses}
-						src={yellowStars}
+					<Input
+						control={control}
+						errors={errors}
+						label="Password"
+						name="password"
+						placeholder="Enter your password"
+						type="password"
 					/>
-					<img
-						alt="floating-image"
-						className={twinklesClasses}
-						src={twinkles}
-					/>
-					<img alt="floating-image" className={laptopClasses} src={laptop} />
-					<img alt="floating-image" className={cupClasses} src={cup} />
-				</section>
-			</div>
-		</>
+					<Button label="Sign In" type="submit" />
+				</form>
+				<img
+					alt="floating-image"
+					className={blueStarsClasses}
+					src={blueStars}
+				/>
+				<img
+					alt="floating-image"
+					className={yellowStarsClasses}
+					src={yellowStars}
+				/>
+				<img alt="floating-image" className={twinklesClasses} src={twinkles} />
+				<img alt="floating-image" className={laptopClasses} src={laptop} />
+				<img alt="floating-image" className={cupClasses} src={cup} />
+			</section>
+		</div>
 	);
 };
 
