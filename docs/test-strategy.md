@@ -224,14 +224,17 @@ All artifacts should be published on the Project’s GitHub board
 ## Defect Life Cycle
 
 ![Test flowchart](./images/test-flowchart.svg)
+
+```mermaid
 flowchart TB
-node1(To test) --> node2(In testing)
-node2(In testing) --> node3{Passed?}
-node3{Passed?} -- No --> node4{Minor bug?}
-node3{Passed?} -- Yes --> node6(Done)
-node4{Minor bug?} -- No --> node5(Todo)
-node4{Minor bug?} -- Yes --> node7(Done)
-node7(Done) --> node8(Create bug report)
+  node1("To test") --> node2("In testing")
+  node2 --> node3{"Passed?"}
+  node3 -- No --> node4{"Minor bug?"}
+  node3 -- Yes --> node6("Done")
+  node4 -- No --> node5("Todo")
+  node4 -- Yes --> node7("Done")
+  node7 --> node8("Create bug report")
+```
 
 ## Testing tools for the Project
 
