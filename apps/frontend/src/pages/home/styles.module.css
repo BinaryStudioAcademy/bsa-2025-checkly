@@ -1,9 +1,5 @@
-section {
+section[data-section-variant] {
 	padding-block: 64px;
-}
-
-section[data-section-variant="light"] {
-	background-color: var(--color-bg);
 }
 
 section[data-section-variant="dark"] {
