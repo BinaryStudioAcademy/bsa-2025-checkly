@@ -16,6 +16,11 @@ type EnvironmentSchema = {
 	ENCRYPTOR: {
 		SALT_SIZE: number;
 	};
+	TOKEN: {
+		ENCRYPTION: string;
+		EXPIRATION: string;
+		SECRET: string;
+	};
 };
 
 export { type EnvironmentSchema };
