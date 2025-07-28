@@ -18,7 +18,7 @@ import {
 } from "~/modules/users/users.js";
 
 import { DEFAULT_SIGN_IN_PAYLOAD } from "../sign-up-form/libs/constants.js";
-import styles from "./style.module.css";
+import styles from "./styles.module.css";
 
 type Properties = {
 	onSubmit: (payload: UserSignInRequestDto) => void;
