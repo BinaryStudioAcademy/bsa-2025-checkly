@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
 import {
-	blueStars,
 	cup,
 	laptop,
 	logo,
+	pinkStars,
 	twinkles,
 	yellowStars,
 } from "~/assets/img/sign-in/sign-in.img.js";
@@ -25,9 +25,9 @@ type Properties = {
 };
 
 const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
-	const blueStarsClasses = getClassNames(
+	const pinkStarsClasses = getClassNames(
 		styles["floating-image"],
-		styles["blue-stars"],
+		styles["pink-stars"],
 	);
 	const yellowStarsClasses = getClassNames(
 		styles["floating-image"],
@@ -40,6 +40,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const laptopClasses = getClassNames(
 		styles["floating-image"],
 		styles["laptop"],
+		"show-desktop-up",
 	);
 	const cupClasses = getClassNames(styles["floating-image"], styles["cup"]);
 	const { control, errors, handleSubmit } = useAppForm<UserSignInRequestDto>({
@@ -102,8 +103,8 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				</form>
 				<img
 					alt="floating-image"
-					className={blueStarsClasses}
-					src={blueStars}
+					className={pinkStarsClasses}
+					src={pinkStars}
 				/>
 				<img
 					alt="floating-image"

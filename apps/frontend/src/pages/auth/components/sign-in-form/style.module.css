@@ -4,7 +4,7 @@
 	justify-content: center;
 	width: 100%;
 	height: 100vh;
-	overflow-x: hidden;
+	overflow: hidden;
 	background-color: var(--color-card-yellow);
 }
 
@@ -13,7 +13,7 @@
 	z-index: 200;
 	width: 100%;
 	max-width: 590px;
-	padding-block: var(--space-gutter-xl);
+	padding-block: var(--space-gutter-xl) var(--space-gutter-3xl);
 	padding-inline: var(--space-gutter-m-3xl);
 	margin-inline: var(--space-gutter-s);
 	font-family: var(--font-family-primary);
@@ -38,16 +38,15 @@
 
 .floating-image {
 	position: absolute;
-	z-index: 10;
 }
 
-.blue-stars {
+.pink-stars {
 	top: 75%;
 	left: 85%;
 }
 
 .yellow-stars {
-	top: -9%;
+	top: -30%;
 	left: -42%;
 }
 
@@ -58,10 +57,12 @@
 
 .laptop {
 	top: 40%;
-	left: -47%;
+	left: -65%;
 }
 
 .cup {
-	top: -32%;
-	left: 55%;
+	top: clamp(-80px, -8vw, -40px);
+	right: 5%;
+	display: inline-block;
+	width: clamp(120px, 10vw, 140px);
 }
