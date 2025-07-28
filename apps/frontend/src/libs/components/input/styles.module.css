@@ -1,13 +1,36 @@
 .input-wrapper {
-	--gutter: 8px;
+	--gutter: var(--space-gutter-2xs);
 
-	font-size: 16px;
-}
-
-.input-label {
-	color: red;
+	position: relative;
+	min-width: 100%;
+	font-weight: var(--font-weight-body-small);
 }
 
 .input-field {
 	padding: 8px 16px;
+	border: 2px solid var(--color-bg-dark);
+	border-radius: var(--radius-s);
+}
+
+.input-field::placeholder {
+	font-weight: var(--font-weight-body-small);
+	opacity: 0.75;
+}
+
+.input-field:focus {
+	outline: 3px solid var(--color-brand-muted);
+	outline-offset: 0;
+}
+
+.input-wrapper:has(.input-field__error) .input-field {
+	border-color: var(--color-brand-accent);
+}
+
+.input-field__error {
+	position: absolute;
+	top: 110%;
+	left: 0%;
+	font-size: var(--text-caption);
+	color: var(--color-brand-accent);
+	white-space: nowrap;
 }

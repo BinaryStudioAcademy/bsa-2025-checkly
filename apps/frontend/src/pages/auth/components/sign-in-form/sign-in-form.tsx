@@ -80,7 +80,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					</p>
 				</div>
 				<form
-					className={getClassNames(styles["form"], "cluster flow")}
+					className={getClassNames(styles["form"], "cluster flow-loose")}
 					onSubmit={handleFormSubmit}
 				>
 					<Input
