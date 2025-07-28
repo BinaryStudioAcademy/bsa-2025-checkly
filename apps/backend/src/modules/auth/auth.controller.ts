@@ -223,6 +223,7 @@ class AuthController extends BaseController {
 	 *                   type: string
 	 *                   example: Email already in use
 	 */
+
 	private async signUp(
 		options: APIHandlerOptions<{
 			body: UserSignUpRequestDto;
