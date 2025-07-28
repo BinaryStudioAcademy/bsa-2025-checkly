@@ -12,7 +12,7 @@ const Home: React.FC = () => {
 						<h2>How it works</h2>
 					</div>
 				</section>
-				<section data-section-variant="light">
+				<section data-section-variant>
 					<div className="wrapper">
 						<h2>Categories</h2>
 					</div>
@@ -22,7 +22,7 @@ const Home: React.FC = () => {
 						<h2>Sample visual layouts</h2>
 					</div>
 				</section>
-				<section data-section-variant="light">
+				<section data-section-variant>
 					<div className="wrapper">
 						<h2>Testimonials</h2>
 					</div>
