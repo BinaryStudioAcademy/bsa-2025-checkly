@@ -6,7 +6,10 @@ import {
 	type FieldValues,
 } from "react-hook-form";
 
+import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useFormController } from "~/libs/hooks/hooks.js";
+
+import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
@@ -33,10 +36,11 @@ const Input = <T extends FieldValues>({
 	const hasError = Boolean(error);
 
 	return (
-		<label>
-			<span>{label}</span>
+		<label className={getClassNames(styles["input-wrapper"], "cluster")}>
+			<span className={styles["input-label"]}>{label}</span>
 			<input
 				{...field}
+				className={styles["input-field"]}
 				name={name}
 				placeholder={placeholder}
 				required={required}
