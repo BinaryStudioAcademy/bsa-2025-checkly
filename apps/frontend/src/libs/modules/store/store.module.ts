@@ -10,12 +10,12 @@ import { type Config } from "~/libs/modules/config/config.js";
 import { authApi, reducer as authReducer } from "~/modules/auth/auth.js";
 import { userApi, reducer as usersReducer } from "~/modules/users/users.js";
 
-import { toastNotifier } from "../toast-notifier/toast-notifier.js";
+import { notifications } from "../notifications/notifications.js";
 import { listenerMiddleware } from "./listener-middleware/listener-middleware.js";
 
 type ExtraArguments = {
 	authApi: typeof authApi;
-	toastNotifier: typeof toastNotifier;
+	notifications: typeof notifications;
 	userApi: typeof userApi;
 };
 
@@ -36,7 +36,7 @@ class Store {
 	public get extraArguments(): ExtraArguments {
 		return {
 			authApi,
-			toastNotifier,
+			notifications,
 			userApi,
 		};
 	}

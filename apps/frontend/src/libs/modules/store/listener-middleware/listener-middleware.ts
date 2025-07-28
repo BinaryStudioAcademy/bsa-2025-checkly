@@ -1,7 +1,7 @@
 import { createListenerMiddleware, isRejected } from "@reduxjs/toolkit";
 
 import { ErrorMessage } from "~/libs/enums/error-messages.enum.js";
-import { toastNotifier } from "~/libs/modules/toast-notifier/toast-notifier.js";
+import { notifications } from "~/libs/modules/notifications/notifications.js";
 
 const listenerMiddleware = createListenerMiddleware();
 
@@ -10,9 +10,9 @@ listenerMiddleware.startListening({
 		const { message } = action.error;
 
 		if (message?.trim()) {
-			toastNotifier.error(action.error.message as string);
+			notifications.error(action.error.message as string);
 		} else {
-			toastNotifier.error(ErrorMessage.DEFAULT_ERROR_MESSAGE);
+			notifications.error(ErrorMessage.DEFAULT_ERROR_MESSAGE);
 		}
 	},
 	matcher: isRejected,

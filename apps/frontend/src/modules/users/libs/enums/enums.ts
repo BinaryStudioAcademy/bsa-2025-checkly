@@ -1,2 +1,2 @@
-export { UserToastMessages } from "./toast-message.enum.js";
+export { UserNotificationMessages } from "./notification-messages.enum.js";
 export { UsersApiPath } from "shared";
