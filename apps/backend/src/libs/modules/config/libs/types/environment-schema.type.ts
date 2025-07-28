@@ -16,8 +16,10 @@ type EnvironmentSchema = {
 	ENCRYPTOR: {
 		SALT_SIZE: number;
 	};
-	JWT: {
-		SECRET_KEY: string;
+	TOKEN: {
+		ENCRYPTION: string;
+		EXPIRATION: string;
+		SECRET: string;
 	};
 };
 
