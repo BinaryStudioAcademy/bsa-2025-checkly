@@ -13,8 +13,8 @@
 	z-index: 200;
 	width: 100%;
 	max-width: 590px;
-	padding: var(--space-gutter-m-3xl);
-	padding-block-start: var(--space-gutter-xl);
+	padding-block: var(--space-gutter-xl);
+	padding-inline: var(--space-gutter-m-3xl);
 	margin-inline: var(--space-gutter-s);
 	font-family: var(--font-family-primary);
 	background-color: var(--color-bg-white);
