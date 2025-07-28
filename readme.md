@@ -22,24 +22,90 @@ The app helps users achieve their life goals—whether in development, career, h
 
 ## 4. Database Schema
 
-TODO: add database schema
-
-## 5. Architecture
-
 ```mermaid
 
 erDiagram
-    users {
-        int id PK
-        dateTime created_at
-        dateTime updated_at
-        varchar email
-        varchar name
-        text password_hash
-        text password_salt
-    }
+  users ||--o{ plan : "plan"
+  users {
+    int id PK
+    dateTime created_at
+    dateTime updated_at
+    varchar email
+    varchar name
+    text password_hash
+    text password_salt
+  }
+
+  intensity ||--o{ plan : "plan"
+  intensity o|--|| level_type : "enum:level_type"
+  intensity {
+    int id PK
+    level_type level
+    int min_tasks_per_day
+    int max_tasks_per_day
+  }
+
+  level_type {
+    low low
+    medium medium
+    high high
+  }
+
+  duration ||--o{ plan : "plan"
+  duration {
+    int id PK
+    int number_of_days
+    dateTime created_at
+  }
+
+  plan ||--|{ plan_day : "plan_day"
+  plan ||--o| plan : "plan"
+  plan {
+    int id PK
+    varchar title
+    int user_id FK
+    int duration_id FK
+    int intensity_id FK
+    int parent_plan_id FK
+    boolean is_active
+    dateTime created_at
+  }
+
+  plan_day ||--|{ task : "plan_day"
+  plan_day {
+    int id PK
+    int day_number
+    boolean is_regenerated
+    int plan_id FK
+  }
+
+  task ||--o| task : "task"
+  task o|--|| execution_time_type : "enum:execution_time_type"
+  task {
+    int id PK
+    varchar title
+    text description
+    int order
+    int plan_day_id FK
+    boolean is_custom
+    int parent_task_id
+    boolean is_completed
+    execution_time_type execution_time
+    dateTime updated_at
+    dateTime completed_at
+  }
+
+  execution_time_type {
+    morning morning
+    afternoon afternoon
+    evening evening
+  }
 
 ```
+
+## 5. Architecture
+
+TODO: add architecture
 
 ### 5.1 Global
 
