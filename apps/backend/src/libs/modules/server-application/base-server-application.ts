@@ -11,6 +11,7 @@ import { type Config } from "~/libs/modules/config/config.js";
 import { type Database } from "~/libs/modules/database/database.js";
 import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
+import { initErrorMapperMiddleware } from "~/libs/modules/middleware/error-mapper.middleware.js";
 import {
 	type ServerCommonErrorResponse,
 	type ServerValidationErrorResponse,
@@ -83,6 +84,8 @@ class BaseServerApplication implements ServerApplication {
 		await this.initServe();
 
 		await this.initMiddlewares();
+
+		this.initErrorMapperMiddleware();
 
 		this.initValidationCompiler();
 
@@ -189,6 +192,10 @@ class BaseServerApplication implements ServerApplication {
 				return reply.status(HTTPCode.INTERNAL_SERVER_ERROR).send(response);
 			},
 		);
+	}
+
+	private initErrorMapperMiddleware(): void {
+		this.app.addHook("onRequest", initErrorMapperMiddleware());
 	}
 
 	private async initServe(): Promise<void> {
