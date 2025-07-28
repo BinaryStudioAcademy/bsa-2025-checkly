@@ -32,7 +32,7 @@ class BaseToken {
 			issuedAt: new Date(
 				(payload.iat ?? DEFAULT_TIMESTAMP_SECONDS) * SECONDS_TO_MILLISECONDS,
 			).toISOString(),
-			userId: Number(payload.sub),
+			userId: Number(payload["userId"]),
 		};
 	}
 
