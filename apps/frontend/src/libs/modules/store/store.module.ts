@@ -11,11 +11,14 @@ import { authApi, reducer as authReducer } from "~/modules/auth/auth.js";
 import { userApi, reducer as usersReducer } from "~/modules/users/users.js";
 
 import { notifications } from "../notifications/notifications.js";
+import { type BaseStorage } from "../storage/base-storage.module.js";
+import { storage } from "../storage/storage.js";
 import { listenerMiddleware } from "./listener-middleware/listener-middleware.js";
 
 type ExtraArguments = {
 	authApi: typeof authApi;
 	notifications: typeof notifications;
+	storage: BaseStorage;
 	userApi: typeof userApi;
 };
 
@@ -37,6 +40,7 @@ class Store {
 		return {
 			authApi,
 			notifications,
+			storage,
 			userApi,
 		};
 	}
