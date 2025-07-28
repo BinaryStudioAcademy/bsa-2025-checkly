@@ -1,7 +1,7 @@
 type JwtPayload = {
-	exp: number;
-	iat: number;
-	sub: string;
+	expirationTime: string;
+	issuedAt: number;
+	userId: number;
 };
 
 export { type JwtPayload };

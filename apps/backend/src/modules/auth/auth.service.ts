@@ -1,5 +1,6 @@
 import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
+import { tokenModule } from "~/libs/modules/token/token.js";
 import {
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -22,7 +23,7 @@ class AuthService {
 
 	public async signIn(
 		userRequestDto: UserSignInRequestDto,
-	): Promise<UserSignInResponseDto> {
+	): Promise<{ token: string; user: UserSignInResponseDto }> {
 		const { email, password } = userRequestDto;
 
 		const user = await this.userService.findByEmail(email);
@@ -49,12 +50,14 @@ class AuthService {
 			});
 		}
 
-		return { ...user.toObject(), token: "" };
+		const token = await tokenModule.generateToken(user.toObject().id);
+
+		return { token, user: user.toObject() };
 	}
 
 	public async signUp(
 		userRequestDto: UserSignUpRequestDto,
-	): Promise<UserSignUpResponseDto> {
+	): Promise<{ token: string; user: UserSignUpResponseDto }> {
 		const { email } = userRequestDto;
 
 		const existingUserByEmail = await this.userService.findByEmail(email);
@@ -66,7 +69,11 @@ class AuthService {
 			});
 		}
 
-		return await this.userService.create(userRequestDto);
+		const user = await this.userService.create(userRequestDto);
+
+		const token = await tokenModule.generateToken(user.id);
+
+		return { token, user };
 	}
 }
 

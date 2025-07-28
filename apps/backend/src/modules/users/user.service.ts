@@ -32,7 +32,7 @@ class UserService implements Service {
 			}),
 		);
 
-		return { ...item.toObject(), token: "" };
+		return item.toObject();
 	}
 
 	public delete(): ReturnType<Service["delete"]> {

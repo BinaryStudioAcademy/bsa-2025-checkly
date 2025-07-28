@@ -1,7 +1,6 @@
 import { type KnipConfig } from "knip";
 
 const config: KnipConfig = {
-	ignore: ["apps/frontend/src/pages/auth/auth-token.helper.ts"],
 	ignoreDependencies: ["dotenv"],
 	prettier: ["./prettier.config.js"],
 	stylelint: ["./stylelint.config.js"],
