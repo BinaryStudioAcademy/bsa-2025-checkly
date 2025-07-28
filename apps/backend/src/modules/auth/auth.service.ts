@@ -1,6 +1,6 @@
 import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
-import { tokenModule } from "~/libs/modules/token/token.js";
+import { token } from "~/libs/modules/token/token.js";
 import {
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -23,7 +23,7 @@ class AuthService {
 
 	public async signIn(
 		userRequestDto: UserSignInRequestDto,
-	): Promise<{ token: string; user: UserSignInResponseDto }> {
+	): Promise<UserSignInResponseDto> {
 		const { email, password } = userRequestDto;
 
 		const user = await this.userService.findByEmail(email);
@@ -50,14 +50,15 @@ class AuthService {
 			});
 		}
 
-		const token = await tokenModule.generateToken(user.toObject().id);
+		const userDto = user.toObject();
+		const newToken = await token.generateToken(userDto.id);
 
-		return { token, user: user.toObject() };
+		return { token: newToken, user: userDto };
 	}
 
 	public async signUp(
 		userRequestDto: UserSignUpRequestDto,
-	): Promise<{ token: string; user: UserSignUpResponseDto }> {
+	): Promise<UserSignUpResponseDto> {
 		const { email } = userRequestDto;
 
 		const existingUserByEmail = await this.userService.findByEmail(email);
@@ -69,11 +70,10 @@ class AuthService {
 			});
 		}
 
-		const user = await this.userService.create(userRequestDto);
+		const userDto = await this.userService.create(userRequestDto);
+		const newToken = await token.generateToken(userDto.id);
 
-		const token = await tokenModule.generateToken(user.id);
-
-		return { token, user };
+		return { token: newToken, user: userDto };
 	}
 }
 

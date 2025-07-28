@@ -24,7 +24,7 @@ class AuthApi extends BaseHTTPApi {
 
 	public async signIn(
 		payload: UserSignInRequestDto,
-	): Promise<{ token: string; user: UserSignInResponseDto }> {
+	): Promise<UserSignInResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(AuthApiPath.SIGN_IN, {}),
 			{
@@ -35,15 +35,12 @@ class AuthApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<{
-			token: string;
-			user: UserSignInResponseDto;
-		}>();
+		return await response.json<UserSignInResponseDto>();
 	}
 
 	public async signUp(
 		payload: UserSignUpRequestDto,
-	): Promise<{ token: string; user: UserSignUpResponseDto }> {
+	): Promise<UserSignUpResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(AuthApiPath.SIGN_UP, {}),
 			{
@@ -54,10 +51,7 @@ class AuthApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<{
-			token: string;
-			user: UserSignUpResponseDto;
-		}>();
+		return await response.json<UserSignUpResponseDto>();
 	}
 }
 

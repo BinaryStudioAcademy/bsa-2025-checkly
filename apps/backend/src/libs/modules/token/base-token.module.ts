@@ -1,6 +1,6 @@
 import { jwtVerify, SignJWT } from "jose";
 
-import { type JwtPayload } from "../../../libs/types/types.js";
+import { type JwtPayload } from "~/libs/types/types.js";
 
 type Constructor = {
 	duration: string;
@@ -8,7 +8,10 @@ type Constructor = {
 	secret: Uint8Array;
 };
 
-class BaseTokenModule {
+const SECONDS_TO_MILLISECONDS = 1000;
+const DEFAULT_TIMESTAMP_SECONDS = 0;
+
+class BaseToken {
 	private readonly duration: string;
 	private readonly encryption: string;
 	private readonly secret: Uint8Array;
@@ -19,20 +22,27 @@ class BaseTokenModule {
 		this.secret = secret;
 	}
 
+	async decodeToken(token: string): Promise<JwtPayload> {
+		const { payload } = await jwtVerify(token, this.secret);
+
+		return {
+			expirationTime: new Date(
+				(payload.exp ?? DEFAULT_TIMESTAMP_SECONDS) * SECONDS_TO_MILLISECONDS,
+			).toISOString(),
+			issuedAt: new Date(
+				(payload.iat ?? DEFAULT_TIMESTAMP_SECONDS) * SECONDS_TO_MILLISECONDS,
+			).toISOString(),
+			userId: Number(payload.sub),
+		};
+	}
+
 	async generateToken(userId: number): Promise<string> {
-		return await new SignJWT({})
+		return await new SignJWT({ userId })
 			.setProtectedHeader({ alg: this.encryption })
-			.setSubject(userId.toString())
 			.setIssuedAt()
 			.setExpirationTime(this.duration)
 			.sign(this.secret);
 	}
-
-	async verifyToken(token: string): Promise<JwtPayload> {
-		const { payload } = await jwtVerify(token, this.secret);
-
-		return payload as JwtPayload;
-	}
 }
 
-export { BaseTokenModule };
+export { BaseToken };

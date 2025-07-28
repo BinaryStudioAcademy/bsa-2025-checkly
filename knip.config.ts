@@ -1,7 +1,6 @@
 import { type KnipConfig } from "knip";
 
 const config: KnipConfig = {
-	ignoreDependencies: ["dotenv"],
 	prettier: ["./prettier.config.js"],
 	stylelint: ["./stylelint.config.js"],
 	workspaces: {

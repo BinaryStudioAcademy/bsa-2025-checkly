@@ -1,1 +1,1 @@
-export { type UserSignInResponseDto, type UserSignUpResponseDto } from "shared";
+export { type UserDto } from "shared";

@@ -1,37 +1,39 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
+	type UserDto,
 	type UserSignInRequestDto,
-	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
-	type UserSignUpResponseDto,
 } from "~/modules/users/users.js";
 
 import { name as sliceName } from "./auth.slice.js";
 
 const signIn = createAsyncThunk<
-	{ token: string; user: UserSignInResponseDto },
+	UserDto,
 	UserSignInRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/sign-in`, async (registerPayload, { extra }) => {
 	const { authApi, storage } = extra;
-	const responce = await authApi.signIn(registerPayload);
-	await storage.set("token", responce.token);
 
-	return responce;
+	const { token, user } = await authApi.signIn(registerPayload);
+	await storage.set(StorageKey.TOKEN, token);
+
+	return user;
 });
 
 const signUp = createAsyncThunk<
-	{ token: string; user: UserSignUpResponseDto },
+	UserDto,
 	UserSignUpRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/sign-up`, async (registerPayload, { extra }) => {
 	const { authApi, storage } = extra;
-	const responce = await authApi.signUp(registerPayload);
-	await storage.set("token", responce.token);
 
-	return responce;
+	const { token, user } = await authApi.signUp(registerPayload);
+	await storage.set(StorageKey.TOKEN, token);
+
+	return user;
 });
 
 export { signIn, signUp };

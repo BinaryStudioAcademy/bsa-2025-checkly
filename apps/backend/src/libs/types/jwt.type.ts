@@ -1,6 +1,6 @@
 type JwtPayload = {
 	expirationTime: string;
-	issuedAt: number;
+	issuedAt: string;
 	userId: number;
 };
 
