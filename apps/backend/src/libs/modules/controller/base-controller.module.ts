@@ -11,7 +11,7 @@ import {
 
 // TODO: This will be removed once the authorization plugin is merged into the main branch.
 type CustomFastifyRequest = FastifyRequest & {
-	user?: UserGetAllItemResponseDto;
+	user: UserGetAllItemResponseDto;
 };
 type FastifyRequest = Parameters<RouteHandler>[ParameterIndex];
 type ParameterIndex = 0;
@@ -48,7 +48,7 @@ class BaseController implements Controller {
 	): Promise<void> {
 		this.logger.info(`${request.method.toUpperCase()} on ${request.url}`);
 
-		const handlerOptions = this.mapRequest(request);
+		const handlerOptions = this.mapRequest(request as CustomFastifyRequest);
 		const { payload, status } = await handler(handlerOptions);
 
 		return await reply.status(status).send(payload);

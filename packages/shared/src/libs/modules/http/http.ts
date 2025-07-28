@@ -1,4 +1,8 @@
-export { HTTPCode, HTTPHeader } from "./libs/enums/enums.js";
+export {
+	HTTPCode,
+	HTTPHeader,
+	HTTPMethod as HTTPRequestMethod,
+} from "./libs/enums/enums.js";
 export {
 	type HTTP,
 	type HTTPMethod,

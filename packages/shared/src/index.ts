@@ -18,6 +18,7 @@ export {
 	HTTPHeader,
 	type HTTPMethod,
 	type HTTPOptions,
+	HTTPRequestMethod,
 } from "./libs/modules/http/http.js";
 export { type Storage } from "./libs/modules/storage/storage.js";
 export {
