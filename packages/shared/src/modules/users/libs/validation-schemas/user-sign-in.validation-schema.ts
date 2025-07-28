@@ -25,7 +25,7 @@ const userSignIn = z
 		password: z
 			.string()
 			.trim()
-			.min(UserValidationRule.PASSWORD_MIN_LENGTH, {
+			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
 				message: UserValidationMessage.FIELD_REQUIRED,
 			})
 			.regex(UserValidationRegexRule.PASSWORD_VALID_CHARS_MIN_MAX, {
