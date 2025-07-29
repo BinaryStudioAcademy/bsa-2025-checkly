@@ -1,6 +1,5 @@
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type ServerApplicationRouteParameters } from "~/libs/modules/server-application/server-application.js";
-import { type UserDto } from "~/libs/types/types.js";
 
 import {
 	type APIHandler,
@@ -8,14 +7,6 @@ import {
 	type Controller,
 	type ControllerRouteParameters,
 } from "./libs/types/types.js";
-
-// TODO: This will be removed once the authorization plugin is merged into the main branch.
-type CustomFastifyRequest = FastifyRequest & {
-	user: UserDto;
-};
-type FastifyRequest = Parameters<RouteHandler>[ParameterIndex];
-type ParameterIndex = 0;
-type RouteHandler = ServerApplicationRouteParameters["handler"];
 
 class BaseController implements Controller {
 	public routes: ServerApplicationRouteParameters[];
@@ -48,13 +39,15 @@ class BaseController implements Controller {
 	): Promise<void> {
 		this.logger.info(`${request.method.toUpperCase()} on ${request.url}`);
 
-		const handlerOptions = this.mapRequest(request as CustomFastifyRequest);
+		const handlerOptions = this.mapRequest(request);
 		const { payload, status } = await handler(handlerOptions);
 
 		return await reply.status(status).send(payload);
 	}
 
-	private mapRequest(request: CustomFastifyRequest): APIHandlerOptions {
+	private mapRequest(
+		request: Parameters<ServerApplicationRouteParameters["handler"]>[0],
+	): APIHandlerOptions {
 		const { body, params, query, user } = request;
 
 		return {
