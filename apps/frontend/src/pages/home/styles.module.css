@@ -19,9 +19,4 @@ section[data-section-variant="brand"] {
 .hero__title {
 	max-width: var(--size-text-max-width);
 	margin-inline: auto;
-	font-size: 60px;
-}
-
-.hero__subtitle {
-	font-size: 24px;
 }

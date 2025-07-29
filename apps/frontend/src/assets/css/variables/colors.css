@@ -17,13 +17,10 @@
 	--color-card-purple: #d9b8ff;
 	--color-card-blue: #80caff;
 	--color-card-cyan: #75d7f0;
+	--color-grid-line-cream: #e9eba880;
 	--color-text: var(--color-text-primary);
 	--color-text-muted: var(--color-text-secondary);
 	--color-bg: var(--color-bg-light);
 	--color-surface: var(--color-bg-white);
-	--wrapper-max-width: 1200px;
-	--size-text-max-width: 900px;
-	--gutter: 18px;
-	--base-radius: 16px;
-	--flow-space: 16px;
+	--color-selection-bg: var(--color-card-yellow);
 }

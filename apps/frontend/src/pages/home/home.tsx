@@ -16,14 +16,14 @@ const Home: React.FC = () => {
 						)}
 					>
 						<div className="flow-tight">
-							<h2 className={styles["hero__title"]}>
+							<h1 className={styles["hero__title"]}>
 								Create a personal
 								<br /> development plan in 2 minutes
-							</h2>
-							<p className={styles["hero__subtitle"]}>
+							</h1>
+							<h4 className={styles["hero__subtitle"]}>
 								AI-powered checklist generator for your goals — from fitness to
 								creativity
-							</p>
+							</h4>
 						</div>
 						<button className={styles["hero__button-start"]}>Start</button>
 					</div>

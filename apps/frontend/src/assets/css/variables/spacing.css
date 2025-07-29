@@ -1,0 +1,21 @@
+:root {
+	--gutter: var(--space-xs);
+	--space-gutter-3xs: var(--space-3xs);
+	--space-gutter-2xs: var(--space-2xs);
+	--space-gutter-xs: var(--space-xs);
+	--space-gutter-s: var(--space-s);
+	--space-gutter-m: var(--space-m);
+	--space-gutter-l: var(--space-l);
+	--space-gutter-xl: var(--space-xl);
+	--space-gutter-2xl: var(--space-2xl);
+	--space-gutter-3xl: var(--space-3xl);
+	--space-gutter-m-3xl: var(--space-m-3xl);
+	--base-radius: var(--space-xs);
+	--radius-s: var(--space-2xs);
+	--radius-m: var(--space-s);
+	--radius-l: var(--space-m);
+	--radius-xl: var(--space-l);
+	--radius-full: 99999px;
+	--flow-space: var(--space-xs);
+	--stroke: 3px solid var(--color-card-peach);
+}
