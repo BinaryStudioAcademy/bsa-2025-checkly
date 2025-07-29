@@ -1,4 +1,4 @@
-.starting-page {
+.hero {
 	display: flex;
 	align-items: center;
 	min-height: 100vh;
@@ -14,7 +14,7 @@
 	width: 100%;
 }
 
-.starting-page a {
+.hero a {
 	display: inline-block;
 	padding: var(--space-2xs) var(--space-l-xl);
 	margin: 50px 0;

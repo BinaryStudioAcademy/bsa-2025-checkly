@@ -1,7 +1,7 @@
 import { Link } from "~/libs/components/components.js";
+import { Logo } from "~/libs/components/logo/logo.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 
-import { Logo } from "../../../../libs/components/logo/logo.js";
 import styles from "./styles.module.css";
 
 const Header: React.FC = () => {

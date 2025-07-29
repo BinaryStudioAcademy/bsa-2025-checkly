@@ -1,4 +1,4 @@
-import { Header, StartingPage } from "./components/components.js";
+import { Header, Hero } from "./components/components.js";
 import styles from "./styles.module.css";
 
 const Home: React.FC = () => {
@@ -6,7 +6,7 @@ const Home: React.FC = () => {
 		<>
 			<Header />
 			<main>
-				<StartingPage />
+				<Hero />
 				<section className={styles["brand"]} data-section-variant>
 					<div className="wrapper">
 						<h2>How it works</h2>

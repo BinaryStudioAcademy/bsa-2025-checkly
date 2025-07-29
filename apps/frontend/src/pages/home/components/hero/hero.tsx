@@ -11,8 +11,8 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import styles from "./styles.module.css";
 
-const StartingPage: React.FC = () => (
-	<section className={getClassNames(styles["starting-page"], "grid-pattern")}>
+const Hero: React.FC = () => (
+	<section className={getClassNames(styles["hero"], "grid-pattern")}>
 		<div className={getClassNames(styles["container"], "wrapper flow-loose")}>
 			<div className={styles["text-wrapper"]}>
 				<h1>Create a personal development plan in 2 minutes</h1>
@@ -65,4 +65,4 @@ const StartingPage: React.FC = () => (
 	</section>
 );
 
-export { StartingPage };
+export { Hero };

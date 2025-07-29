@@ -1,2 +1,2 @@
 export { Header } from "./header/header.js";
-export { StartingPage } from "./starting-page/starting-page.js";
+export { Hero } from "./hero/hero.js";
