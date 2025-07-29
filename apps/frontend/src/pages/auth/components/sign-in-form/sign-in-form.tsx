@@ -90,24 +90,22 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					className={getClassNames(styles["form"], "cluster")}
 					onSubmit={handleFormSubmit}
 				>
-					<div className="flow-loose">
-						<Input
-							control={control}
-							errors={errors}
-							label="Email"
-							name="email"
-							placeholder="Enter your email"
-							type="email"
-						/>
-						<Input
-							control={control}
-							errors={errors}
-							label="Password"
-							name="password"
-							placeholder="Enter your password"
-							type="password"
-						/>
-					</div>
+					<Input
+						control={control}
+						errors={errors}
+						label="Email"
+						name="email"
+						placeholder="Enter your email"
+						type="email"
+					/>
+					<Input
+						control={control}
+						errors={errors}
+						label="Password"
+						name="password"
+						placeholder="Enter your password"
+						type="password"
+					/>
 					<Button label="Sign In" type="submit" />
 				</form>
 				<img alt="" aria-hidden className={pinkStarsClasses} src={pinkStars} />
