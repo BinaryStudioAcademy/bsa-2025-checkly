@@ -1,6 +1,6 @@
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type ServerApplicationRouteParameters } from "~/libs/modules/server-application/server-application.js";
-import { type UserGetAllItemResponseDto } from "~/libs/types/types.js";
+import { type UserDto } from "~/libs/types/types.js";
 
 import {
 	type APIHandler,
@@ -11,7 +11,7 @@ import {
 
 // TODO: This will be removed once the authorization plugin is merged into the main branch.
 type CustomFastifyRequest = FastifyRequest & {
-	user: UserGetAllItemResponseDto;
+	user: UserDto;
 };
 type FastifyRequest = Parameters<RouteHandler>[ParameterIndex];
 type ParameterIndex = 0;

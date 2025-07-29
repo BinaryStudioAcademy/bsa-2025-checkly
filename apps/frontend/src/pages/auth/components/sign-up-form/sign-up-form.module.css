@@ -1,5 +1,5 @@
 .container {
-	position: relative;
+	/* position: relative; */
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -31,27 +31,28 @@
 
 .image-position {
 	position: absolute;
-	z-index: 10;
 }
 
 .blue-stars {
-	right: 35px;
-	bottom: 109.5px;
+	bottom: 5%;
+	left: 85%;
 }
 
 .yellow-stars {
-	top: 35.5px;
-	left: -248px;
+	top: 0%;
+	left: -42%;
 }
 
 .orange-image {
-	top: 92.5px;
-	left: -112px;
+	top: 10%;
+	left: -10%;
+	height: 100px;
 }
 
 .car-image {
-	right: -175px;
-	bottom: -24px;
+	right: -20%;
+	bottom: 2%;
+	height: 120px;
 }
 
 .logo-container {

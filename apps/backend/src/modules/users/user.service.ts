@@ -5,7 +5,6 @@ import { type UserRepository } from "~/modules/users/user.repository.js";
 
 import {
 	type UserDto,
-	type UserGetAllItemResponseDto,
 	type UserGetAllResponseDto,
 	type UserSignUpRequestDto,
 } from "./libs/types/types.js";
@@ -54,7 +53,7 @@ class UserService implements Service {
 		return await this.userRepository.findByField("email", email);
 	}
 
-	public async findById(id: number): Promise<null | UserGetAllItemResponseDto> {
+	public async findById(id: number): Promise<null | UserDto> {
 		const item = await this.userRepository.findById(id);
 
 		return item ? item.toObject() : null;

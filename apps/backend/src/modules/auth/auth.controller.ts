@@ -61,6 +61,7 @@ class AuthController extends BaseController {
 						body: UserSignInRequestDto;
 					}>,
 				),
+			isPublic: true,
 			method: HTTPRequestMethod.POST,
 			path: AuthApiPath.SIGN_IN,
 			validation: {
@@ -75,6 +76,7 @@ class AuthController extends BaseController {
 						body: UserSignUpRequestDto;
 					}>,
 				),
+			isPublic: true,
 			method: HTTPRequestMethod.POST,
 			path: AuthApiPath.SIGN_UP,
 			validation: {

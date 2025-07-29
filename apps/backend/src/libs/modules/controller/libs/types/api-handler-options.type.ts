@@ -1,4 +1,4 @@
-import { type UserGetAllItemResponseDto } from "~/libs/types/types.js";
+import { type UserDto } from "~/libs/types/types.js";
 
 type APIHandlerOptions<
 	T extends DefaultApiHandlerOptions = DefaultApiHandlerOptions,
@@ -6,7 +6,7 @@ type APIHandlerOptions<
 	body: T["body"];
 	params: T["params"];
 	query: T["query"];
-	user?: UserGetAllItemResponseDto;
+	user?: UserDto;
 };
 
 type DefaultApiHandlerOptions = {
