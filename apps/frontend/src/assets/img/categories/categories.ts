@@ -1,0 +1,7 @@
+export { default as blueStars } from "./blueStars.svg";
+export { default as creativity } from "./creativity.png";
+export { default as hobby } from "./hobby.png";
+export { default as money } from "./money.png";
+export { default as personalDev } from "./personal-dev.png";
+export { default as spirituality } from "./spirituality.png";
+export { default as sport } from "./sport.png";

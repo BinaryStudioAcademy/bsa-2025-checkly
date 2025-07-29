@@ -1,6 +1,6 @@
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
-import { Header } from "./components/components.js";
+import { Categories, Header } from "./components/components.js";
 import styles from "./styles.module.css";
 
 const Home: React.FC = () => {
@@ -33,11 +33,7 @@ const Home: React.FC = () => {
 						<h2>How it works</h2>
 					</div>
 				</section>
-				<section data-section-variant>
-					<div className="wrapper">
-						<h2>Categories</h2>
-					</div>
-				</section>
+				<Categories />
 				<section data-section-variant="dark">
 					<div className="wrapper">
 						<h2>Sample visual layouts</h2>
