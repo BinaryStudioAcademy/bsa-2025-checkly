@@ -1,16 +1,22 @@
 .grid-pattern {
-	--grid-color: var(--color-grid-line-cream);
+	--grid-color: var(--color-text-secondary, #f6f5fa);
+	--grid-opacity: 1;
 	--grid-size: 8px;
 	--grid-line: 1.4px;
+	--color: color-mix(
+		in srgb,
+		var(--grid-color) calc(var(--grid-opacity) * 100%),
+		transparent
+	);
 
 	background-image:
 		linear-gradient(
-			var(--grid-color) var(--grid-line),
+			var(--color) var(--grid-line),
 			transparent var(--grid-line)
 		),
 		linear-gradient(
 			90deg,
-			var(--grid-color) var(--grid-line),
+			var(--color) var(--grid-line),
 			transparent var(--grid-line)
 		);
 	background-size: var(--grid-size) var(--grid-size);
