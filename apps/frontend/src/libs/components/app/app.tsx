@@ -8,6 +8,7 @@ import {
 	useEffect,
 	useLocation,
 } from "~/libs/hooks/hooks.js";
+import { useAuthInitialization } from "~/libs/hooks/use-auth-initialization/use-auth-initialization.hook.js";
 import { actions as userActions } from "~/modules/users/users.js";
 
 const App: React.FC = () => {
@@ -17,6 +18,8 @@ const App: React.FC = () => {
 		dataStatus: users.dataStatus,
 		users: users.users,
 	}));
+
+	useAuthInitialization();
 
 	const isRoot = pathname === AppRoute.ROOT;
 
