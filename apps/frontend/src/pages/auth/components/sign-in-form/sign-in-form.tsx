@@ -63,23 +63,30 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					"wrapper grid-pattern flow-loose",
 				)}
 			>
-				<header className="cluster">
-					<img alt="checkly logo" src={logo} />
-					<span>Logo</span>
-				</header>
-				<div className="flow">
-					<h1 className={styles["title"]}>Sign In</h1>
-					<p>
-						No account? Go to&nbsp;
-						<Link
-							className={styles["redirect-text__link"]}
-							to={AppRoute.SIGN_UP}
-						>
-							Create an account
-						</Link>
-					</p>
+				<div className="flow-loose">
+					<div className="cluster">
+						<img alt="Binary Checkly web-application logo" src={logo} />
+						<span>Logo</span>
+					</div>
+
+					<header className="flow">
+						<h1 className={styles["title"]} id="sign-in-title">
+							Sign In
+						</h1>
+						<p>
+							No account? Go to&nbsp;
+							<Link
+								aria-label="Go to create account page"
+								className={styles["redirect-text__link"]}
+								to={AppRoute.SIGN_UP}
+							>
+								Create an account
+							</Link>
+						</p>
+					</header>
 				</div>
 				<form
+					aria-labelledby="sign-in-title"
 					className={getClassNames(styles["form"], "cluster flow")}
 					onSubmit={handleFormSubmit}
 				>
