@@ -2,19 +2,21 @@
 	--gutter: var(--space-gutter-2xs);
 
 	position: relative;
-	min-width: 100%;
+	width: 100%;
+	font-size: var(--text-body);
 	font-weight: var(--font-weight-body-small);
 }
 
 .input-field {
-	padding: 8px 16px;
+	width: 100%;
+	padding: var(--space-gutter-xs) var(--space-gutter-s);
 	border: 2px solid var(--color-bg-dark);
 	border-radius: var(--radius-s);
 }
 
 .input-field::placeholder {
 	font-weight: var(--font-weight-body-small);
-	opacity: 0.75;
+	opacity: 0.85;
 }
 
 .input-field:focus {
@@ -22,14 +24,11 @@
 	outline-offset: 0;
 }
 
-.input-wrapper:has(.input-field__error) .input-field {
+.input-field--error {
 	border-color: var(--color-brand-accent);
 }
 
 .input-field__error {
-	position: absolute;
-	top: 110%;
-	left: 0%;
 	font-size: var(--text-caption);
 	color: var(--color-brand-accent);
 	white-space: nowrap;

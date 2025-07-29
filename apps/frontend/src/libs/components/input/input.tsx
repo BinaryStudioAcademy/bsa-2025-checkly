@@ -1,4 +1,4 @@
-import { type JSX } from "react";
+import { type JSX, useId } from "react";
 import {
 	type Control,
 	type FieldErrors,
@@ -30,24 +30,37 @@ const Input = <T extends FieldValues>({
 	required,
 	type = "text",
 }: Properties<T>): JSX.Element => {
+	const inputId = useId();
 	const { field } = useFormController({ control, name });
-
 	const error = errors[name]?.message;
 	const hasError = Boolean(error);
+	const inputWrapperClass = getClassNames(
+		getClassNames(styles["input-wrapper"], "cluster"),
+	);
+	const inputFieldClass = getClassNames(
+		styles["input-field"],
+		hasError && styles["input-field--error"],
+	);
 
 	return (
-		<label className={getClassNames(styles["input-wrapper"], "cluster")}>
-			<span className={styles["input-label"]}>{label}</span>
+		<div className={inputWrapperClass}>
+			<label className={styles["input-label"]} htmlFor={inputId}>
+				{label}
+			</label>
 			<input
 				{...field}
-				className={styles["input-field"]}
+				aria-invalid={hasError}
+				className={inputFieldClass}
+				id={inputId}
 				name={name}
 				placeholder={placeholder}
 				required={required}
 				type={type}
 			/>
-			{hasError && <span>{error as string}</span>}
-		</label>
+			{hasError && (
+				<p className={styles["input-field__error"]}>{error as string}</p>
+			)}
+		</div>
 	);
 };
 
