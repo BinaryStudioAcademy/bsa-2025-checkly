@@ -1,0 +1,38 @@
+:root {
+	--font-family-primary:
+		"Nunito", "Segoe UI", "Roboto", "Helvetica Neue", -apple-system, sans-serif;
+	--font-family-secondary:
+		"Onest", "Segoe UI", system-ui, -apple-system, sans-serif;
+	--font-weight-thin: 100;
+	--font-weight-extra-light: 200;
+	--font-weight-light: 300;
+	--font-weight-regular: 400;
+	--font-weight-medium: 500;
+	--font-weight-semi-bold: 600;
+	--font-weight-bold: 700;
+	--font-weight-extra-bold: 800;
+	--font-weight-black: 900;
+	--leading: 1.5;
+	--leading-fine: 1.1;
+	--leading-loose: 1.7;
+	--kerning: normal;
+	--kerning-tight: -0.04ch;
+	--kerning-loose: 0.1ch;
+	--kerning-uppercase: 0.04ch;
+	--text-body: var(--step-minus-2);
+	--text-body-small: var(--step-minus-3);
+	--text-size-heading-1: var(--step-8);
+	--text-size-heading-2: var(--step-6);
+	--text-size-heading-3: var(--step-2);
+	--text-size-heading-4: var(--step-1);
+	--text-size-heading-5: var(--step-0);
+	--text-button: var(--step-minus-2);
+	--text-button-small: var(--step-minus-4);
+	--text-caption: var(--step-minus-4);
+	--font-weight-body: var(--font-weight-bold);
+	--font-weight-body-small: var(--font-weight-semi-bold);
+	--font-weight-heading: var(--font-weight-bold);
+	--font-weight-heading-semi-bold: var(--font-weight-semi-bold);
+	--font-weight-caption: var(--font-weight-medium);
+	--font-weight-button: var(--font-weight-semi-bold);
+}

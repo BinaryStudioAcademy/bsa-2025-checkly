@@ -30,6 +30,7 @@ export {
 export { AuthApiPath } from "./modules/auth/auth.js";
 export {
 	type SignUpFormValidationSchema,
+	type UserDto,
 	type UserGetAllItemResponseDto,
 	type UserGetAllResponseDto,
 	UsersApiPath,

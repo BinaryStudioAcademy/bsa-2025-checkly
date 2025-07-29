@@ -7,7 +7,7 @@ const Home: React.FC = () => {
 			<Header />
 			<main>
 				<StartingPage />
-				<section className={styles["brand"]}>
+				<section className={styles["brand"]} data-section-variant>
 					<div className="wrapper">
 						<h2>How it works</h2>
 					</div>
