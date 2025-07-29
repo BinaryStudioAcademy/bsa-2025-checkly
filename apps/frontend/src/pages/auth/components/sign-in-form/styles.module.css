@@ -12,6 +12,7 @@
 
 .sign-in {
 	--grid-color: var(--color-grid-line-cream);
+	--grid-opacity: 0.8;
 
 	position: relative;
 	z-index: 200;
