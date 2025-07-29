@@ -1,4 +1,4 @@
-import { type JSX, useId } from "react";
+import { type JSX, useCallback, useId, useState } from "react";
 import {
 	type Control,
 	type FieldErrors,
@@ -6,6 +6,7 @@ import {
 	type FieldValues,
 } from "react-hook-form";
 
+import { EyeClosedIcon, EyeOpenIcon } from "~/assets/img/icons/icons.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useFormController } from "~/libs/hooks/hooks.js";
 
@@ -30,33 +31,61 @@ const Input = <T extends FieldValues>({
 	required,
 	type = "text",
 }: Properties<T>): JSX.Element => {
+	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const inputId = useId();
 	const { field } = useFormController({ control, name });
 	const error = errors[name]?.message;
 	const hasError = Boolean(error);
-	const inputWrapperClass = getClassNames(
-		getClassNames(styles["input-wrapper"], "cluster"),
+	const isPasswordField = type === "password";
+	const inputType = isPasswordField && showPassword ? "text" : type;
+
+	const togglePasswordVisibility = useCallback(() => {
+		setShowPassword((previous) => !previous);
+	}, []);
+
+	const inputContainerClass = getClassNames(
+		styles["input-container"],
+		"cluster",
 	);
 	const inputFieldClass = getClassNames(
 		styles["input-field"],
 		hasError && styles["input-field--error"],
+		isPasswordField && styles["input-field--password"],
+	);
+
+	const displayPasswordIcon = showPassword ? (
+		<EyeOpenIcon />
+	) : (
+		<EyeClosedIcon />
 	);
 
 	return (
-		<div className={inputWrapperClass}>
+		<div className={inputContainerClass}>
 			<label className={styles["input-label"]} htmlFor={inputId}>
 				{label}
 			</label>
-			<input
-				{...field}
-				aria-invalid={hasError}
-				className={inputFieldClass}
-				id={inputId}
-				name={name}
-				placeholder={placeholder}
-				required={required}
-				type={type}
-			/>
+			<div className={styles["input-wrapper"]}>
+				<input
+					{...field}
+					aria-invalid={hasError}
+					className={inputFieldClass}
+					id={inputId}
+					name={name}
+					placeholder={placeholder}
+					required={required}
+					type={inputType}
+				/>
+				{isPasswordField && (
+					<button
+						aria-label={showPassword ? "Hide password" : "Show password"}
+						className={styles["password-toggle-button"]}
+						onClick={togglePasswordVisibility}
+						type="button"
+					>
+						{displayPasswordIcon}
+					</button>
+				)}
+			</div>
 			{hasError && (
 				<p className={styles["input-field__error"]}>{error as string}</p>
 			)}

@@ -1,4 +1,4 @@
-.input-wrapper {
+.input-container {
 	--gutter: var(--space-gutter-2xs);
 
 	position: relative;
@@ -31,5 +31,19 @@
 .input-field__error {
 	font-size: var(--text-caption);
 	color: var(--color-brand-accent);
-	white-space: nowrap;
+}
+
+.input-wrapper {
+	position: relative;
+}
+
+.input-field--password {
+	padding-right: var(--space-gutter-xl);
+}
+
+.password-toggle-button {
+	position: absolute;
+	top: 50%;
+	right: var(--space-gutter-xs);
+	transform: translateY(-50%);
 }
