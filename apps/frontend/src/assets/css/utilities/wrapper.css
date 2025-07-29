@@ -1,12 +1,12 @@
 .wrapper {
 	max-width: var(--wrapper-max-width, 1064px);
-	padding-right: var(--gutter);
-	padding-left: var(--gutter);
+	padding-right: var(--space-gutter-m);
+	padding-left: var(--space-gutter-m);
 	margin-inline: auto;
 }
 
 .wrapper[data-wrapper-type="inner"] {
 	min-width: 100%;
-	padding-block: var(--gutter-wrapper-inner-block, var(--gutter));
-	padding-inline: var(--gutter-wrapper-inner-inline, var(--gutter));
+	padding-block: var(--gutter-wrapper-inner-block, var(--space-gutter-m));
+	padding-inline: var(--gutter-wrapper-inner-inline, var(--space-gutter-m));
 }

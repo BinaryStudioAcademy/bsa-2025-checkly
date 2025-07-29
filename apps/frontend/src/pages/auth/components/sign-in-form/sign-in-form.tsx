@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
 import {
-	blueStars,
 	cup,
 	laptop,
 	logo,
+	pinkStars,
 	twinkles,
 	yellowStars,
 } from "~/assets/img/sign-in/sign-in.img.js";
@@ -18,16 +18,16 @@ import {
 } from "~/modules/users/users.js";
 
 import { DEFAULT_SIGN_IN_PAYLOAD } from "../sign-up-form/libs/constants.js";
-import styles from "./style.module.css";
+import styles from "./styles.module.css";
 
 type Properties = {
 	onSubmit: (payload: UserSignInRequestDto) => void;
 };
 
 const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
-	const blueStarsClasses = getClassNames(
+	const pinkStarsClasses = getClassNames(
 		styles["floating-image"],
-		styles["blue-stars"],
+		styles["pink-stars"],
 	);
 	const yellowStarsClasses = getClassNames(
 		styles["floating-image"],
@@ -40,6 +40,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const laptopClasses = getClassNames(
 		styles["floating-image"],
 		styles["laptop"],
+		"show-desktop-up",
 	);
 	const cupClasses = getClassNames(styles["floating-image"], styles["cup"]);
 	const { control, errors, handleSubmit } = useAppForm<UserSignInRequestDto>({
@@ -55,15 +56,20 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	);
 
 	return (
-		<>
-			<div className={styles["wrapper"]}>
-				<section className={styles["sign-in"]}>
-					<header className={styles["header"]}>
-						<img alt="logo" src={logo} />
-						<h2 className={styles["header__title"]}>Logo</h2>
-					</header>
+		<div className={getClassNames(styles["container"], "grid-pattern")}>
+			<main
+				className={getClassNames(
+					styles["sign-in"],
+					"wrapper grid-pattern flow-loose",
+				)}
+			>
+				<header className="cluster">
+					<img alt="checkly logo" src={logo} />
+					<span>Logo</span>
+				</header>
+				<div className="flow">
 					<h1 className={styles["title"]}>Sign In</h1>
-					<p className={styles["redirect-text"]}>
+					<p>
 						No account? Go to&nbsp;
 						<Link
 							className={styles["redirect-text__link"]}
@@ -72,49 +78,41 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							Create an account
 						</Link>
 					</p>
-					<form className={styles["form"]} onSubmit={handleFormSubmit}>
-						<p className={styles["form__input"]}>
-							<Input
-								control={control}
-								errors={errors}
-								label="Email"
-								name="email"
-								placeholder="Enter your email"
-								type="email"
-							/>
-						</p>
-						<p className={styles["form__input"]}>
-							<Input
-								control={control}
-								errors={errors}
-								label="Password"
-								name="password"
-								placeholder="Enter your password"
-								type="password"
-							/>
-						</p>
-						<Button label="Sign In" type="submit" />
-					</form>
-					<img
-						alt="floating-image"
-						className={blueStarsClasses}
-						src={blueStars}
+				</div>
+				<form
+					className={getClassNames(styles["form"], "cluster flow")}
+					onSubmit={handleFormSubmit}
+				>
+					<Input
+						control={control}
+						errors={errors}
+						label="Email"
+						name="email"
+						placeholder="Enter your email"
+						type="email"
 					/>
-					<img
-						alt="floating-image"
-						className={yellowStarsClasses}
-						src={yellowStars}
+					<Input
+						control={control}
+						errors={errors}
+						label="Password"
+						name="password"
+						placeholder="Enter your password"
+						type="password"
 					/>
-					<img
-						alt="floating-image"
-						className={twinklesClasses}
-						src={twinkles}
-					/>
-					<img alt="floating-image" className={laptopClasses} src={laptop} />
-					<img alt="floating-image" className={cupClasses} src={cup} />
-				</section>
-			</div>
-		</>
+					<Button label="Sign In" type="submit" />
+				</form>
+				<img alt="" aria-hidden className={pinkStarsClasses} src={pinkStars} />
+				<img
+					alt=""
+					aria-hidden
+					className={yellowStarsClasses}
+					src={yellowStars}
+				/>
+				<img alt="" aria-hidden className={twinklesClasses} src={twinkles} />
+				<img alt="" aria-hidden className={laptopClasses} src={laptop} />
+				<img alt="" aria-hidden className={cupClasses} src={cup} />
+			</main>
+		</div>
 	);
 };
 
