@@ -5,6 +5,6 @@ export {
 	APIPath,
 	AppEnvironment,
 	ContentType,
-	HTTPMethodEnum,
+	HTTPRequestMethod,
 	ServerErrorType,
 } from "shared";
