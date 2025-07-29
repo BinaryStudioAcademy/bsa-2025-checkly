@@ -4,7 +4,7 @@ import {
 	type APIHandlerResponse,
 	BaseController,
 } from "~/libs/modules/controller/controller.js";
-import { HTTPCode } from "~/libs/modules/http/http.js";
+import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
 	type UserSignInRequestDto,
@@ -62,7 +62,7 @@ class AuthController extends BaseController {
 					}>,
 				),
 			isPublic: true,
-			method: "POST",
+			method: HTTPRequestMethod.POST,
 			path: AuthApiPath.SIGN_IN,
 			validation: {
 				body: userSignInValidationSchema,
@@ -77,12 +77,47 @@ class AuthController extends BaseController {
 					}>,
 				),
 			isPublic: true,
-			method: "POST",
+			method: HTTPRequestMethod.POST,
 			path: AuthApiPath.SIGN_UP,
 			validation: {
 				body: userSignUpValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) => this.getAuthenticatedUser(options),
+			method: HTTPRequestMethod.GET,
+			path: AuthApiPath.ME,
+		});
+	}
+
+	/**
+	 * @swagger
+	 * /auth/me:
+	 *    get:
+	 *      summary: Get authenticated user profile
+	 *      description: Returns the profile information of the currently authenticated user
+	 *      security:
+	 *        - bearerAuth: []
+	 *      responses:
+	 *        200:
+	 *          description: Successfully retrieved user profile
+	 *        401:
+	 *          description: Unauthorized - Invalid or missing authentication token
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                properties:
+	 *                  message:
+	 *                    type: string
+	 *                    example: "Unauthorized"
+	 */
+	private getAuthenticatedUser(options: APIHandlerOptions): APIHandlerResponse {
+		return {
+			payload: options.user,
+			status: HTTPCode.OK,
+		};
 	}
 
 	/**
