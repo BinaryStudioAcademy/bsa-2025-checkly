@@ -57,7 +57,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 	return (
 		<div className={getClassNames(styles["container"], "grid-pattern")}>
-			<section
+			<main
 				className={getClassNames(
 					styles["sign-in"],
 					"wrapper grid-pattern flow-loose",
@@ -65,7 +65,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 			>
 				<header className="cluster">
 					<img alt="checkly logo" src={logo} />
-					<h3>Logo</h3>
+					<span>Logo</span>
 				</header>
 				<div className="flow">
 					<h1 className={styles["title"]}>Sign In</h1>
@@ -101,20 +101,17 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					/>
 					<Button label="Sign In" type="submit" />
 				</form>
+				<img alt="" aria-hidden className={pinkStarsClasses} src={pinkStars} />
 				<img
-					alt="floating-image"
-					className={pinkStarsClasses}
-					src={pinkStars}
-				/>
-				<img
-					alt="floating-image"
+					alt=""
+					aria-hidden
 					className={yellowStarsClasses}
 					src={yellowStars}
 				/>
-				<img alt="floating-image" className={twinklesClasses} src={twinkles} />
-				<img alt="floating-image" className={laptopClasses} src={laptop} />
-				<img alt="floating-image" className={cupClasses} src={cup} />
-			</section>
+				<img alt="" aria-hidden className={twinklesClasses} src={twinkles} />
+				<img alt="" aria-hidden className={laptopClasses} src={laptop} />
+				<img alt="" aria-hidden className={cupClasses} src={cup} />
+			</main>
 		</div>
 	);
 };
