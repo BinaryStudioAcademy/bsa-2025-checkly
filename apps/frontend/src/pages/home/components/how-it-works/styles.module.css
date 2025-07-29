@@ -68,9 +68,9 @@
 }
 
 .croissantImage {
-	position: absolute;
-	bottom: calc(var(--space-2xl) * -1.6);
-	left: calc(var(--space-3xl) * 3.5);
+	position: sticky;
+	bottom: calc(var(--space-2xl) * 1.5);
+	left: calc(var(--space-3xl) * 4);
 	z-index: 3;
 	width: clamp(var(--space-3xl), 15vw, calc(var(--space-3xl) * 2.5));
 	height: clamp(var(--space-3xl), 15vw, calc(var(--space-3xl) * 2.5));
@@ -84,11 +84,11 @@
 
 .laptopImage {
 	position: absolute;
-	right: calc(var(--space-2xl) * 1.75);
-	bottom: calc(var(--space-3xl) * 1.5);
+	right: calc(var(--space-2xl) * 2.5);
+	bottom: calc(var(--space-3xl) * 3.5);
 	z-index: 3;
-	width: clamp(var(--space-2xl), 13vw, calc(var(--space-3xl) * 2.2));
-	height: clamp(var(--space-2xl), 13vw, calc(var(--space-3xl) * 2.2));
+	width: clamp(var(--space-2xl), 11vw, calc(var(--space-3xl) * 1.8));
+	height: clamp(var(--space-2xl), 11vw, calc(var(--space-3xl) * 1.8));
 }
 
 .laptopImage img {
@@ -134,8 +134,9 @@
 	}
 
 	.croissantImage {
-		bottom: calc(var(--space-2xl) * -1.4);
-		left: calc(var(--space-2xl) * 2);
+		position: sticky;
+		bottom: calc(var(--space-2xl) * 1.5);
+		left: calc(var(--space-2xl) * 2.5);
 		width: clamp(
 			calc(var(--space-3xl) * 1.8),
 			14vw,
@@ -150,7 +151,7 @@
 
 	.laptopImage {
 		right: var(--space-s);
-		bottom: calc(var(--space-3xl) * 1.5);
+		bottom: calc(var(--space-3xl) * 3.25);
 		width: clamp(var(--space-2xl), 10vw, calc(var(--space-2xl) * 2.6));
 		height: clamp(var(--space-2xl), 10vw, calc(var(--space-2xl) * 2.6));
 	}
