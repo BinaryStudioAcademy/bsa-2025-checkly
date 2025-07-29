@@ -4,7 +4,10 @@ import styles from "./styles.module.css";
 
 const HowItWorks: React.FC = () => {
 	return (
-		<section className={getClassNames("grid-pattern", styles["section"])} data-section-variant="brand">
+		<section
+			className={getClassNames("grid-pattern", styles["section"])}
+			data-section-variant="brand"
+		>
 			<div className={styles["wrapper"]}>
 				<div className={styles["container"]}>
 					<h2 className={styles["title"]}>How it works</h2>
