@@ -1,5 +1,1 @@
-export {
-	AuthorizationError,
-	ErrorMessage,
-	type UserSignUpResponseDto,
-} from "shared";
+export { AuthorizationError, ErrorMessage, type UserDto } from "shared";

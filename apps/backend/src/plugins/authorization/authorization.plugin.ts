@@ -1,15 +1,14 @@
 import { type FastifyRequest } from "fastify";
 import fp from "fastify-plugin";
-import { type JWTPayload, jwtVerify } from "jose";
 import micromatch from "micromatch";
 
-import { config } from "~/libs/modules/config/config.js";
+import { token } from "~/libs/modules/token/token.js";
 import { type UserService } from "~/modules/users/user.service.js";
 
 import {
 	AuthorizationError,
 	ErrorMessage,
-	type UserSignUpResponseDto,
+	type UserDto,
 } from "./libs/types/types.js";
 
 declare module "fastify" {
@@ -18,7 +17,7 @@ declare module "fastify" {
 	}
 
 	interface FastifyRequest {
-		user: UserSignUpResponseDto;
+		user: UserDto;
 	}
 }
 
@@ -29,12 +28,14 @@ type AuthPluginOptions = {
 
 const AuthStrategy = "Bearer ";
 
-type JWTPayloadWithId = JWTPayload & { id: number };
+type UserEntity = {
+	toObject: () => UserDto;
+};
 
 const extractUserFromRequest = async (
 	request: FastifyRequest,
 	userService: UserService,
-): Promise<UserSignUpResponseDto> => {
+): Promise<UserDto> => {
 	try {
 		const { authorization } = request.headers;
 
@@ -44,14 +45,13 @@ const extractUserFromRequest = async (
 			});
 		}
 
-		const token = authorization.replace(AuthStrategy, "");
+		const tokenValue = authorization.replace(AuthStrategy, "");
 
-		const { payload } = await jwtVerify<JWTPayloadWithId>(
-			token,
-			new TextEncoder().encode(config.ENV.JWT.SECRET_KEY),
-		);
+		const payload = (await token.decodeToken(tokenValue)) as { userId: number };
 
-		const user = await userService.findById(payload.id);
+		const user = (await userService.findById(
+			payload.userId,
+		)) as null | UserEntity;
 
 		if (!user) {
 			throw new AuthorizationError({
@@ -59,10 +59,16 @@ const extractUserFromRequest = async (
 			});
 		}
 
-		return user;
+		return user.toObject();
 	} catch (error) {
+		if (error instanceof Error) {
+			throw new AuthorizationError({
+				cause: error,
+				message: ErrorMessage.AUTHENTICATION_FAILED,
+			});
+		}
+
 		throw new AuthorizationError({
-			cause: error,
 			message: ErrorMessage.AUTHENTICATION_FAILED,
 		});
 	}
