@@ -1,6 +1,7 @@
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import { Header } from "./components/components.js";
+import { HowItWorks } from "./components/how-it-works/how-it-works.js";
 import styles from "./styles.module.css";
 
 const Home: React.FC = () => {
@@ -31,11 +32,7 @@ const Home: React.FC = () => {
 						<button className={styles["hero__button-start"]}>Start</button>
 					</div>
 				</section>
-				<section className="grid-pattern" data-section-variant="brand">
-					<div className="wrapper">
-						<h2>How it works</h2>
-					</div>
-				</section>
+				<HowItWorks />
 				<section data-section-variant>
 					<div className="wrapper">
 						<h2>Categories</h2>
