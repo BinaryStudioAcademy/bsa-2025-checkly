@@ -28,10 +28,6 @@ type AuthPluginOptions = {
 
 const AuthStrategy = "Bearer ";
 
-type UserEntity = {
-	toObject: () => UserDto;
-};
-
 const extractUserFromRequest = async (
 	request: FastifyRequest,
 	userService: UserService,
@@ -49,9 +45,7 @@ const extractUserFromRequest = async (
 
 		const payload = (await token.decodeToken(tokenValue)) as { userId: number };
 
-		const user = (await userService.findById(
-			payload.userId,
-		)) as null | UserEntity;
+		const user = await userService.findById(payload.userId);
 
 		if (!user) {
 			throw new AuthorizationError({
@@ -59,7 +53,7 @@ const extractUserFromRequest = async (
 			});
 		}
 
-		return user.toObject();
+		return user;
 	} catch (error) {
 		if (error instanceof Error) {
 			throw new AuthorizationError({

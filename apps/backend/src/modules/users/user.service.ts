@@ -5,7 +5,6 @@ import { type UserRepository } from "~/modules/users/user.repository.js";
 
 import {
 	type UserDto,
-	type UserGetAllItemResponseDto,
 	type UserGetAllResponseDto,
 	type UserSignUpRequestDto,
 } from "./libs/types/types.js";
