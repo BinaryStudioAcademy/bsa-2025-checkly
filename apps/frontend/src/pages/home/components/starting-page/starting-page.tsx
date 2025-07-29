@@ -4,7 +4,7 @@ import {
 	pinkStars,
 	yellowStars,
 	yellowTwinkles,
-} from "~/assets/img/home/starting-page/home-starting-page.img.js";
+} from "~/assets/img/home/home.img.js";
 import { Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
@@ -15,8 +15,8 @@ const StartingPage: React.FC = () => (
 	<section className={getClassNames(styles["starting-page"], "grid-pattern")}>
 		<div className={getClassNames(styles["container"], "wrapper flow-loose")}>
 			<div className={styles["text-wrapper"]}>
-				<h1 className="h1">Create a personal development plan in 2 minutes</h1>
-				<h4 className="h4">
+				<h1>Create a personal development plan in 2 minutes</h1>
+				<h4>
 					AI-powered checklist generator for your goals — from fitness to
 					creativity
 				</h4>
@@ -24,7 +24,7 @@ const StartingPage: React.FC = () => (
 			</div>
 			<div className={styles["icons-wrapper"]}>
 				<img
-					alt="floating-image"
+					alt=""
 					className={getClassNames(
 						styles["floating-image"],
 						styles["green-flower"],
@@ -32,7 +32,7 @@ const StartingPage: React.FC = () => (
 					src={greenFlower}
 				/>
 				<img
-					alt="floating-image"
+					alt=""
 					className={getClassNames(
 						styles["floating-image"],
 						styles["yellow-twinkles"],
@@ -40,7 +40,7 @@ const StartingPage: React.FC = () => (
 					src={yellowTwinkles}
 				/>
 				<img
-					alt="floating-image"
+					alt=""
 					className={getClassNames(
 						styles["floating-image"],
 						styles["yellow-stars"],
@@ -48,7 +48,7 @@ const StartingPage: React.FC = () => (
 					src={yellowStars}
 				/>
 				<img
-					alt="floating-image"
+					alt=""
 					className={getClassNames(
 						styles["floating-image"],
 						styles["pink-stars"],
@@ -56,7 +56,7 @@ const StartingPage: React.FC = () => (
 					src={pinkStars}
 				/>
 				<img
-					alt="floating-image"
+					alt=""
 					className={getClassNames(styles["floating-image"], styles["cat"])}
 					src={cat}
 				/>

@@ -8,25 +8,24 @@
 	background-color: var(--color-card-pink);
 	border-end-start-radius: var(--base-radius);
 	border-end-end-radius: var(--base-radius);
+
+	--repel-wrap: nowrap;
 }
 
-.header p {
-	font-family: Onest, Arial, sans-serif;
-	font-size: 28px;
-	font-weight: 600;
-	color: var(--color-text);
+.header h1 {
+	font-size: var(--text-size-heading-3);
 }
 
 .header a {
 	gap: var(--gutter);
-	padding: 5px 50px;
-	font-family: Nunito, Arial, sans-serif;
-	font-size: 12px;
-	font-weight: 800;
+	padding: var(--space-3xs) var(--space-m);
+	font-family: var(--font-family-primary);
+	font-size: var(--text-button-small);
+	font-weight: var(--font-weight-extra-bold);
 	color: var(--color-text);
 	text-transform: uppercase;
 	text-decoration: none;
 	background-color: transparent;
 	border: 2px solid;
-	border-radius: 30px;
+	border-radius: var(--radius-l);
 }
