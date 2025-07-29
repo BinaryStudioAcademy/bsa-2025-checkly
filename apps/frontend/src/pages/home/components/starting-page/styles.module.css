@@ -74,21 +74,21 @@
 	width: clamp(90px, 10vw, 130px);
 }
 
-@media (width < 1024px) {
+@media (width <= 1024px) {
 	.green-flower {
 		bottom: 78%;
 		left: 18%;
 	}
 }
 
-@media (width < 768px) {
+@media (width <= 768px) {
 	.green-flower {
 		bottom: 84%;
 		left: 16%;
 	}
 }
 
-@media (width < 500px) {
+@media (width <= 500px) {
 	.cat,
 	.yellow-twinkles,
 	.green-flower {

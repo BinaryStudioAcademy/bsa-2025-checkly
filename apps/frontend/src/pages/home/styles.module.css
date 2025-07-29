@@ -3,6 +3,9 @@ section[data-section-variant] {
 }
 
 section[data-section-variant="dark"] {
+	--grid-color: var(--color-text-primary);
+	--grid-opacity: 0.4;
+
 	color: var(--color-bg);
 	background-color: var(--color-bg-dark);
 }

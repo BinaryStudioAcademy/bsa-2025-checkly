@@ -17,7 +17,7 @@ const Home: React.FC = () => {
 						<h2>Categories</h2>
 					</div>
 				</section>
-				<section data-section-variant="dark">
+				<section className="grid-pattern" data-section-variant="dark">
 					<div className="wrapper">
 						<h2>Sample visual layouts</h2>
 					</div>

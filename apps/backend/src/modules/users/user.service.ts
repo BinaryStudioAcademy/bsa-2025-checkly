@@ -53,6 +53,12 @@ class UserService implements Service {
 		return await this.userRepository.findByField("email", email);
 	}
 
+	public async findById(id: number): Promise<null | UserDto> {
+		const item = await this.userRepository.findById(id);
+
+		return item ? item.toObject() : null;
+	}
+
 	public update(): ReturnType<Service["update"]> {
 		return Promise.resolve(null);
 	}
