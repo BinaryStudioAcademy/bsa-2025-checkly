@@ -1,5 +1,5 @@
 const AuthApiPath = {
-	PROFILE: "/me",
+	ME: "/me",
 	ROOT: "/",
 	SIGN_IN: "/login",
 	SIGN_UP: "/register",
