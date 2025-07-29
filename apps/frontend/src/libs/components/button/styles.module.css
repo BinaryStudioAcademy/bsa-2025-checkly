@@ -1,0 +1,89 @@
+.button {
+	--button-padding-block: var(--space-gutter-xs);
+	--button-padding-inline: var(--space-gutter-s);
+	--button-bg-color: var(--color-brand-primary);
+	--button-text-color: var(--color-bg-dark);
+	--button-border-color: var(--color-bg-dark);
+	--button-font-size: var(--text-button);
+
+	padding: var(--button-padding-block) var(--button-padding-inline);
+	font-size: var(--button-font-size);
+	font-weight: var(--font-weight-button);
+	color: var(--button-text-color);
+	text-transform: uppercase;
+	background-color: var(--button-bg-color);
+	border: 2px solid var(--button-border-color);
+	border-radius: var(--radius-full);
+}
+
+.button-small {
+	--button-font-size: var(--text-button-small);
+}
+
+.button-cluster {
+	--cluster-direction: row;
+	--gutter: var(--space-gutter-xs);
+	--cluster-vertical-alignment: center;
+	--cluster-horizontal-alignment: center;
+}
+
+.button:disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
+.button:not(:disabled):hover {
+	--button-bg-color: var(--color-bg-dark);
+	--button-text-color: var(--color-bg);
+}
+
+.button-primary {
+	--button-bg-color: var(--color-brand-primary);
+	--button-border-color: var(--color-bg-dark);
+
+	position: relative;
+}
+
+.button-primary::after {
+	position: absolute;
+	top: -6px;
+	right: -6px;
+	width: 16px;
+	height: 16px;
+	content: "";
+	border: 2px solid var(--color-bg-dark);
+	border-bottom: none;
+	border-left: none;
+	border-radius: 0 var(--radius-full) 0 0;
+}
+
+.button-secondary {
+	--button-bg-color: transparent;
+	--button-border-color: var(--color-bg-dark);
+}
+
+.button-secondary:not(:disabled):hover {
+	--button-bg-color: var(--color-brand-primary);
+	--button-text-color: var(--color-bg-dark);
+}
+
+.button-transparent {
+	--button-bg-color: transparent;
+	--button-border-color: transparent;
+}
+
+.button-transparent:not(:disabled):hover {
+	--button-bg-color: var(--color-brand-primary);
+	--button-text-color: var(--color-bg-dark);
+}
+
+.button-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.button-icon svg {
+	width: 1.5lh;
+	height: 1.5lh;
+}
