@@ -1,0 +1,11 @@
+.footer {
+	padding-block: var(--space-5);
+	color: var(--color-white);
+	background-color: var(--color-blue-100);
+}
+
+.wrapper {
+	max-width: var(--layout-container-width);
+	padding-inline: var(--space-4);
+	margin-inline: auto;
+}
