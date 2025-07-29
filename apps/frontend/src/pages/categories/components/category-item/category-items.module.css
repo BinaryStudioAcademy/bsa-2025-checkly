@@ -1,0 +1,142 @@
+.category-box {
+	position: relative;
+	text-align: center;
+	border: 1.75px solid var(--color-bg-dark);
+	border-radius: 8px;
+}
+
+.category-button {
+	width: 100%;
+	height: 100%;
+	padding-top: 62.5%;
+}
+
+.category-title {
+	font-size: 20px;
+	color: var(--color-bg-dark);
+}
+
+.category-title::first-letter {
+	text-transform: capitalize;
+}
+
+.image-position {
+	position: absolute;
+}
+
+.personal-dev-image {
+	right: 53px;
+	bottom: 89px;
+}
+
+.personal-dev-landing-image {
+	right: 37.5px;
+	bottom: 67.7px;
+}
+
+.spirituality-image {
+	right: 28px;
+	bottom: 100px;
+}
+
+.spirituality-landing-image {
+	right: 24.23px;
+	bottom: 73.8px;
+}
+
+.sport-image {
+	right: 33px;
+	bottom: 104px;
+}
+
+.sport-landing-image {
+	right: 29px;
+	bottom: 77px;
+}
+
+.money-image {
+	right: 24px;
+	bottom: 103px;
+}
+
+.money-landing-image {
+	right: 13.75px;
+	bottom: 85.4px;
+}
+
+.creativity-image {
+	right: 36.6px;
+	bottom: 78px;
+}
+
+.creativity-landing-image {
+	right: 18.33px;
+	bottom: 58px;
+}
+
+.hobby-image {
+	right: 33.5px;
+	bottom: 88px;
+}
+
+.hobby-landing-image {
+	right: 28.8px;
+	bottom: 49px;
+}
+
+.checkbox-icon {
+	position: absolute;
+	top: 10%;
+	right: 10.5%;
+	width: 11%;
+	height: 10%;
+}
+
+.category-box:nth-of-type(1) {
+	background-color: var(--color-card-peach);
+}
+
+.category-box:nth-of-type(2) {
+	background-color: var(--color-card-purple);
+}
+
+.category-box:nth-of-type(3) {
+	background-color: var(--color-card-orange);
+}
+
+.category-box:nth-of-type(4) {
+	background-color: var(--color-card-gray);
+}
+
+.category-box:nth-of-type(5) {
+	background-color: var(--color-card-pink);
+}
+
+.category-box:nth-of-type(6) {
+	background-color: var(--color-card-cyan);
+}
+
+.category-item-animation {
+	transform-origin: top right;
+	transition: transform 0.1s ease-in-out;
+}
+
+.category-item-animation:hover,
+.category-item-animation:focus {
+	z-index: 2;
+	animation: rotation 0.8s ease;
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	50% {
+		transform: rotate(-10deg);
+	}
+
+	100% {
+		transform: rotate(0deg);
+	}
+}
