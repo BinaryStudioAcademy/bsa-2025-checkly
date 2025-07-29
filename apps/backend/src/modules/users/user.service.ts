@@ -4,9 +4,9 @@ import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 
 import {
+	type UserDto,
 	type UserGetAllResponseDto,
 	type UserSignUpRequestDto,
-	type UserSignUpResponseDto,
 } from "./libs/types/types.js";
 
 class UserService implements Service {
@@ -18,9 +18,7 @@ class UserService implements Service {
 		this.encryptor = encryptor;
 	}
 
-	public async create(
-		payload: UserSignUpRequestDto,
-	): Promise<UserSignUpResponseDto> {
+	public async create(payload: UserSignUpRequestDto): Promise<UserDto> {
 		const { hash, salt } = await this.encryptor.encrypt(payload.password);
 
 		const item = await this.userRepository.create(
@@ -53,6 +51,12 @@ class UserService implements Service {
 
 	public async findByEmail(email: string): Promise<null | UserEntity> {
 		return await this.userRepository.findByField("email", email);
+	}
+
+	public async findById(id: number): Promise<null | UserDto> {
+		const item = await this.userRepository.findById(id);
+
+		return item ? item.toObject() : null;
 	}
 
 	public update(): ReturnType<Service["update"]> {

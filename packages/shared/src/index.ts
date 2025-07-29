@@ -2,6 +2,8 @@ export {
 	APIPath,
 	AppEnvironment,
 	ContentType,
+	ErrorMessage,
+	HTTPMethodEnum,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
 export {
@@ -30,6 +32,7 @@ export {
 export { AuthApiPath } from "./modules/auth/auth.js";
 export {
 	type SignUpFormValidationSchema,
+	type UserDto,
 	type UserGetAllItemResponseDto,
 	type UserGetAllResponseDto,
 	UsersApiPath,

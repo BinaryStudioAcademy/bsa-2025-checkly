@@ -1,8 +1,9 @@
-import { APIPath, ContentType } from "~/libs/enums/enums.js";
+import { APIPath, ContentType, HTTPMethodEnum } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
 import {
+	type UserGetAllItemResponseDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
@@ -22,6 +23,19 @@ class AuthApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.AUTH, storage });
 	}
 
+	public async getCurrentUser(): Promise<UserGetAllItemResponseDto> {
+		const response = await this.load(
+			this.getFullEndpoint(AuthApiPath.PROFILE, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: HTTPMethodEnum.GET,
+			},
+		);
+
+		return await response.json<UserGetAllItemResponseDto>();
+	}
+
 	public async signIn(
 		payload: UserSignInRequestDto,
 	): Promise<UserSignInResponseDto> {
@@ -30,7 +44,7 @@ class AuthApi extends BaseHTTPApi {
 			{
 				contentType: ContentType.JSON,
 				hasAuth: false,
-				method: "POST",
+				method: HTTPMethodEnum.POST,
 				payload: JSON.stringify(payload),
 			},
 		);
@@ -46,7 +60,7 @@ class AuthApi extends BaseHTTPApi {
 			{
 				contentType: ContentType.JSON,
 				hasAuth: false,
-				method: "POST",
+				method: HTTPMethodEnum.POST,
 				payload: JSON.stringify(payload),
 			},
 		);

@@ -3,7 +3,6 @@ import React, { type JSX } from "react";
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
-	useAppSelector,
 	useCallback,
 	useLocation,
 } from "~/libs/hooks/hooks.js";
@@ -17,9 +16,6 @@ import { SignInForm, SignUpForm } from "./components/components.js";
 
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { dataStatus } = useAppSelector(({ auth }) => ({
-		dataStatus: auth.dataStatus,
-	}));
 	const { pathname } = useLocation();
 
 	const handleSignInSubmit = useCallback(
@@ -50,12 +46,7 @@ const Auth: React.FC = () => {
 		return <></>;
 	};
 
-	return (
-		<>
-			state: {dataStatus}
-			{getScreen(pathname)}
-		</>
-	);
+	return getScreen(pathname);
 };
 
 export { Auth };
