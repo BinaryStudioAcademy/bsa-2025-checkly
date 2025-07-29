@@ -1,4 +1,6 @@
 .container {
+	--grid-color: var(--color-grid-line-cream);
+
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -9,6 +11,9 @@
 }
 
 .sign-in {
+	--grid-color: var(--color-grid-line-cream);
+	--grid-opacity: 0.8;
+
 	position: relative;
 	z-index: 200;
 	width: 100%;

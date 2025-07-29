@@ -3,12 +3,22 @@ section[data-section-variant] {
 }
 
 section[data-section-variant="dark"] {
+	--grid-color: var(--color-text-primary);
+	--grid-opacity: 0.4;
+
 	color: var(--color-bg);
 	background-color: var(--color-bg-dark);
 }
 
 section[data-section-variant="brand"] {
+	--grid-color: var(--color-brand-primary);
+	--grid-opacity: 0.5;
+
 	background-color: var(--color-card-blue);
+}
+
+.hero__section {
+	--grid-color: var(--color-card-gray);
 }
 
 .hero__content {
