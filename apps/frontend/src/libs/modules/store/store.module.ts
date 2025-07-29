@@ -11,9 +11,11 @@ import { storage } from "~/libs/modules/storage/storage.js";
 import { authApi, reducer as authReducer } from "~/modules/auth/auth.js";
 import { userApi, reducer as usersReducer } from "~/modules/users/users.js";
 
+import { type BaseStorage } from "../storage/base-storage.module.js";
+
 type ExtraArguments = {
 	authApi: typeof authApi;
-	storage: typeof storage;
+	storage: BaseStorage;
 	userApi: typeof userApi;
 };
 

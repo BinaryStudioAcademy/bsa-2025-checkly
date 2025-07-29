@@ -1,0 +1,115 @@
+.container {
+	/* position: relative; */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	overflow: hidden;
+	font-family: Arial, sans-serif;
+	background-color: #fbd767;
+	background-image:
+		linear-gradient(#eaeba9 1.4px, transparent 1.4px),
+		linear-gradient(90deg, #eaeba9 1.4px, transparent 1.4px);
+	background-size: 8px 8px;
+}
+
+.sign-up-card {
+	position: relative;
+	z-index: 1;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 592px;
+	padding: 63px 100px 112px;
+	text-align: center;
+	background-color: #ffffff;
+	background-image:
+		linear-gradient(#eaeba9 1.4px, transparent 1.4px),
+		linear-gradient(90deg, #eaeba9 1.4px, transparent 1.4px);
+	background-size: 8px 8px;
+	border-radius: 20px;
+}
+
+.image-position {
+	position: absolute;
+}
+
+.blue-stars {
+	bottom: 5%;
+	left: 85%;
+}
+
+.yellow-stars {
+	top: 0%;
+	left: -42%;
+}
+
+.orange-image {
+	top: 10%;
+	left: -10%;
+	height: 100px;
+}
+
+.car-image {
+	right: -20%;
+	bottom: 2%;
+	height: 120px;
+}
+
+.logo-container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin-bottom: 24px;
+}
+
+.logo-circle {
+	width: 30px;
+	height: 30px;
+	margin-right: 14px;
+	background-color: #fbd767;
+	border-radius: 50%;
+}
+
+.logo-text {
+	font-family: Nunito, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: 800;
+	text-transform: uppercase;
+}
+
+.form-content {
+	text-align: start;
+}
+
+.title {
+	margin-bottom: 40px;
+	font-family: Onest, Arial, Helvetica, sans-serif;
+	font-size: 40px;
+	font-weight: 600;
+	line-height: 1.09;
+}
+
+.redirect-text {
+	margin-bottom: 24px;
+	font-family: Nunito, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: 700;
+	text-indent: 11px;
+}
+
+.redirect-link {
+	color: #33322e;
+	text-decoration: underline;
+}
+
+.redirect-text__link,
+.redirect-text__link:visited {
+	text-decoration: none;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 29px;
+	text-align: left;
+}

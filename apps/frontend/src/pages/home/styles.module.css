@@ -1,18 +1,24 @@
-section {
+section[data-section-variant] {
 	padding-block: 64px;
 }
 
-section[data-section-variant="light"] {
-	background-color: var(--color-bg);
-}
-
 section[data-section-variant="dark"] {
+	--grid-color: var(--color-text-primary);
+	--grid-opacity: 0.4;
+
 	color: var(--color-bg);
 	background-color: var(--color-bg-dark);
 }
 
 section[data-section-variant="brand"] {
+	--grid-color: var(--color-brand-primary);
+	--grid-opacity: 0.5;
+
 	background-color: var(--color-card-blue);
+}
+
+.hero__section {
+	--grid-color: var(--color-card-gray);
 }
 
 .hero__content {
@@ -23,9 +29,4 @@ section[data-section-variant="brand"] {
 .hero__title {
 	max-width: var(--size-text-max-width);
 	margin-inline: auto;
-	font-size: 60px;
-}
-
-.hero__subtitle {
-	font-size: 24px;
 }

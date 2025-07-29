@@ -8,43 +8,45 @@ const Home: React.FC = () => {
 		<>
 			<Header />
 			<main>
-				<section className={styles["hero__section"]}>
+				<section
+					className={getClassNames(styles["hero__section"], "grid-pattern")}
+					data-section-variant
+				>
 					<div
 						className={getClassNames(
 							styles["hero__content"],
 							"wrapper flow-loose",
 						)}
-						data-section-variant="light"
 					>
 						<div className="flow-tight">
-							<h2 className={styles["hero__title"]}>
+							<h1 className={styles["hero__title"]}>
 								Create a personal
 								<br /> development plan in 2 minutes
-							</h2>
-							<p className={styles["hero__subtitle"]}>
+							</h1>
+							<h4 className={styles["hero__subtitle"]}>
 								AI-powered checklist generator for your goals — from fitness to
 								creativity
-							</p>
+							</h4>
 						</div>
 						<button className={styles["hero__button-start"]}>Start</button>
 					</div>
 				</section>
-				<section data-section-variant="brand">
+				<section className="grid-pattern" data-section-variant="brand">
 					<div className="wrapper">
 						<h2>How it works</h2>
 					</div>
 				</section>
-				<section data-section-variant="light">
+				<section data-section-variant>
 					<div className="wrapper">
 						<h2>Categories</h2>
 					</div>
 				</section>
-				<section data-section-variant="dark">
+				<section className="grid-pattern" data-section-variant="dark">
 					<div className="wrapper">
 						<h2>Sample visual layouts</h2>
 					</div>
 				</section>
-				<section data-section-variant="light">
+				<section data-section-variant>
 					<div className="wrapper">
 						<h2>Testimonials</h2>
 					</div>

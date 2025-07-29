@@ -61,6 +61,7 @@ class AuthController extends BaseController {
 						body: UserSignInRequestDto;
 					}>,
 				),
+			isPublic: true,
 			method: "POST",
 			path: AuthApiPath.SIGN_IN,
 			validation: {
@@ -75,6 +76,7 @@ class AuthController extends BaseController {
 						body: UserSignUpRequestDto;
 					}>,
 				),
+			isPublic: true,
 			method: "POST",
 			path: AuthApiPath.SIGN_UP,
 			validation: {
@@ -188,6 +190,7 @@ class AuthController extends BaseController {
 	 *                   type: string
 	 *                   example: Email already in use
 	 */
+
 	private async signUp(
 		options: APIHandlerOptions<{
 			body: UserSignUpRequestDto;
