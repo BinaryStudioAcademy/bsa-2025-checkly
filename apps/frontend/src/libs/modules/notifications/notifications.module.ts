@@ -1,21 +1,10 @@
-import { toast, type ToastOptions, Zoom } from "react-toastify";
+import { toast, type ToastOptions } from "react-toastify";
 
-import { NotificationOptionValues } from "./libs/enums/notification-option-values.enum.js";
+import { DefaultNotificationOptions } from "./libs/enums/notification-default-options.enum.js";
 
 class Notifications {
-	private static defaultNotificationOptions: Readonly<ToastOptions> = {
-		autoClose: NotificationOptionValues.AUTO_CLOSE_TIME,
-		closeOnClick: false,
-		draggable: true,
-		hideProgressBar: true,
-		pauseOnHover: true,
-		position: "top-center",
-		theme: "colored",
-		transition: Zoom,
-	};
-
 	private static setOptions(overrides?: Partial<ToastOptions>): ToastOptions {
-		return { ...this.defaultNotificationOptions, ...overrides } as ToastOptions;
+		return { ...DefaultNotificationOptions, ...overrides } as ToastOptions;
 	}
 
 	public error(
