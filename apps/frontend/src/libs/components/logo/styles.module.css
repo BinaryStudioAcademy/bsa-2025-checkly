@@ -1,0 +1,8 @@
+.container {
+	--cluster-wrap: nowrap;
+	--gutter: 0;
+}
+
+.container img {
+	width: clamp(15px, 2vw, 25px);
+}
