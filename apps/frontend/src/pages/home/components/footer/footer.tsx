@@ -2,10 +2,9 @@ import {
 	FbIcon,
 	IgIcon,
 	Logo,
-	YtIcon,
-} from "~/assets/img/footer/footer.img.js";
-import { Link } from "~/libs/components/components.js";
-
+	YtIcon
+} from "../../../../assets/img/footer/index.js"; 
+import { Link } from "../../../../libs/components/components.js";
 import styles from "./styles.module.css";
 
 const Footer: React.FC = () => {
@@ -13,7 +12,7 @@ const Footer: React.FC = () => {
 		<footer className={styles["footer"]}>
 			<div className={styles["logo-wrapper"]}>
 				<Link to="/">
-					<Logo className={styles["logo"]} />
+					<Logo />
 				</Link>
 			</div>
 
@@ -24,14 +23,16 @@ const Footer: React.FC = () => {
 			</nav>
 
 			<nav className={styles["social-links"]}>
-				<Link to="/">
-					<IgIcon className={styles["social-icon"]} />
+				<Link aria-label="Instagram" to="/">
+					<IgIcon />
 				</Link>
-				<Link to="/">
-					<FbIcon className={styles["social-icon"]} />
+				<br />
+				<Link aria-label="Facebook" to="/">
+					<FbIcon />
 				</Link>
-				<Link to="/">
-					<YtIcon className={styles["social-icon"]} />
+				<br />
+				<Link aria-label="YouTube" to="/">
+					<YtIcon />
 				</Link>
 			</nav>
 		</footer>
