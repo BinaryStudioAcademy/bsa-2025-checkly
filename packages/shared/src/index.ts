@@ -29,6 +29,30 @@ export {
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
 export {
+	planDayCreateValidationSchema,
+	type PlanDayGetAllResponseDto,
+	type PlanDayRequestDto,
+	type PlanDayResponseDto,
+	PlanDaysApiPath,
+} from "./modules/plan-days/plan-days.js";
+export {
+	planCreateValidationSchema,
+	type PlanDayDto,
+	type PlanDaysTaskDto,
+	type PlanGetAllResponseDto,
+	type PlanRequestDto,
+	type PlanResponseDto,
+	PlansApiPath,
+} from "./modules/plans/plans.js";
+export {
+	ExecutionTimeType,
+	taskCreateValidationSchema,
+	type TaskGetAllResponseDto,
+	type TaskRequestDto,
+	type TaskResponseDto,
+	TasksApiPath,
+} from "./modules/tasks/tasks.js";
+export {
 	type UserGetAllItemResponseDto,
 	type UserGetAllResponseDto,
 	UsersApiPath,
