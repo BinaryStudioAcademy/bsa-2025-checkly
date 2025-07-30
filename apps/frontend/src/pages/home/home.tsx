@@ -1,36 +1,11 @@
-import { getClassNames } from "~/libs/helpers/get-class-names.js";
-
-import { Header, HowItWorks } from "./components/components.js";
-import styles from "./styles.module.css";
+import { Header, Hero, HowItWorks } from "./components/components.js";
 
 const Home: React.FC = () => {
 	return (
 		<>
 			<Header />
 			<main>
-				<section
-					className={getClassNames(styles["hero__section"], "grid-pattern")}
-					data-section-variant
-				>
-					<div
-						className={getClassNames(
-							styles["hero__content"],
-							"wrapper flow-loose",
-						)}
-					>
-						<div className="flow-tight">
-							<h1 className={styles["hero__title"]}>
-								Create a personal
-								<br /> development plan in 2 minutes
-							</h1>
-							<h4 className={styles["hero__subtitle"]}>
-								AI-powered checklist generator for your goals — from fitness to
-								creativity
-							</h4>
-						</div>
-						<button className={styles["hero__button-start"]}>Start</button>
-					</div>
-				</section>
+				<Hero />
 				<HowItWorks />
 				<section data-section-variant>
 					<div className="wrapper">
