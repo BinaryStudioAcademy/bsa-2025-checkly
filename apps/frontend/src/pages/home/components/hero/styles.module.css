@@ -9,6 +9,10 @@
 	--grid-line: 1px;
 }
 
+.hero-subtitle {
+	font-size: var(--text-size-heading-4);
+}
+
 .container {
 	position: relative;
 	width: 100%;
