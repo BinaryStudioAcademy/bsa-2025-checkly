@@ -1,7 +1,6 @@
 export {
 	type SignUpFormValidationSchema,
 	type UserDto,
-	type UserGetAllItemResponseDto,
 	type UserGetAllResponseDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,

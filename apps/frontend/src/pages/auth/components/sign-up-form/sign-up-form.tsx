@@ -47,9 +47,12 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	);
 	const orangeClasses = getClassNames(
 		styles["image-position"],
-		styles["orange"],
+		styles["orange-image"],
 	);
-	const carClasses = getClassNames(styles["image-position"], styles["car"]);
+	const carClasses = getClassNames(
+		styles["image-position"],
+		styles["car-image"],
+	);
 
 	return (
 		<div className={styles["container"]}>

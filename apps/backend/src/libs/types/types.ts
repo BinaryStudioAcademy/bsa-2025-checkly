@@ -6,6 +6,7 @@ export {
 	type EnumValue,
 	type ServerCommonErrorResponse,
 	type ServerValidationErrorResponse,
+	type UserDto,
 	type ValidationSchema,
 	type ValueOf,
 } from "shared";
