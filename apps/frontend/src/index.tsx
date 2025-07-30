@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import "~/assets/css/styles.css";
 import {
 	App,
+	ProtectedRoute,
 	RouterProvider,
 	StoreProvider,
 } from "~/libs/components/components.js";
@@ -30,6 +31,16 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 							{
 								element: <Auth />,
 								path: AppRoute.SIGN_UP,
+							},
+							{
+								children: [
+									{
+										element: "Dashboard",
+										path: "",
+									},
+								],
+								element: <ProtectedRoute />,
+								path: AppRoute.DASHBOARD,
 							},
 						],
 						element: <App />,
