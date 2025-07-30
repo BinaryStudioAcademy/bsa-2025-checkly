@@ -11,8 +11,8 @@
 }
 
 .header a {
-	--button-padding-block: var(--space-gutter-3xs);
-	--button-padding-inline: var(--space-gutter-l);
+	--button-padding-block: var(--space-3xs);
+	--button-padding-inline: var(--space-l);
 
 	text-decoration: none;
 }

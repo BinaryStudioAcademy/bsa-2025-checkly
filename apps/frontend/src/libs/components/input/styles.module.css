@@ -1,5 +1,5 @@
 .input-container {
-	--gutter: var(--space-gutter-2xs);
+	--gutter: var(--space-2xs);
 
 	position: relative;
 	width: 100%;
@@ -9,7 +9,7 @@
 
 .input-field {
 	width: 100%;
-	padding: var(--space-gutter-xs) var(--space-gutter-s);
+	padding: var(--space-xs) var(--space-s);
 	border: 2px solid var(--color-bg-dark);
 	border-radius: var(--radius-s);
 }
@@ -39,12 +39,12 @@
 }
 
 .input-field--password {
-	padding-right: var(--space-gutter-xl);
+	padding-right: var(--space-xl);
 }
 
 .password-toggle-button {
 	position: absolute;
 	top: 50%;
-	right: var(--space-gutter-xs);
+	right: var(--space-xs);
 	transform: translateY(-50%);
 }

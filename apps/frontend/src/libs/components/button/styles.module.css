@@ -1,6 +1,6 @@
 .button {
-	--button-padding-block: var(--space-gutter-xs);
-	--button-padding-inline: var(--space-gutter-s);
+	--button-padding-block: var(--space-xs);
+	--button-padding-inline: var(--space-s);
 	--button-bg-color: var(--color-brand-primary);
 	--button-text-color: var(--color-bg-dark);
 	--button-border-color: var(--color-bg-dark);
@@ -22,7 +22,7 @@
 
 .button-cluster {
 	--cluster-direction: row;
-	--gutter: var(--space-gutter-xs);
+	--gutter: var(--space-xs);
 	--cluster-vertical-alignment: center;
 	--cluster-horizontal-alignment: center;
 }
@@ -48,8 +48,8 @@
 	position: absolute;
 	top: -11px;
 	right: -11px;
-	width: var(--space-gutter-l);
-	height: var(--space-gutter-l);
+	width: var(--space-l);
+	height: var(--space-l);
 	content: "";
 	border: 2px solid var(--color-bg-dark);
 	border-bottom: none;
@@ -58,8 +58,8 @@
 }
 
 .button-secondary {
-	--button-padding-block: var(--space-gutter-2xs);
-	--button-padding-inline: var(--space-gutter-m);
+	--button-padding-block: var(--space-2xs);
+	--button-padding-inline: var(--space-m);
 	--button-bg-color: transparent;
 	--button-border-color: var(--color-bg-dark);
 }

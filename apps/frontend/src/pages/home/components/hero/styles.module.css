@@ -27,7 +27,7 @@
 }
 
 .text-wrapper {
-	--flow-space: var(--space-gutter-xl);
+	--flow-space: var(--space-xl);
 
 	position: relative;
 	z-index: 3;
