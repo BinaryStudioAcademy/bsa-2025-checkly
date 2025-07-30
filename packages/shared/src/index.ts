@@ -32,6 +32,8 @@ export {
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
 export {
+	type SignUpFormValidationSchema,
+	type UserDto,
 	type UserGetAllItemResponseDto,
 	type UserGetAllResponseDto,
 	UsersApiPath,
@@ -41,6 +43,7 @@ export {
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 	userSignUpValidationSchema,
+	userSignUpValidationSchemaExtended,
 	UserValidationMessage,
 	UserValidationRule,
 } from "./modules/users/users.js";

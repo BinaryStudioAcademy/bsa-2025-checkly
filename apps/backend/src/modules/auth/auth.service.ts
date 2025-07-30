@@ -1,5 +1,6 @@
 import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
+import { token } from "~/libs/modules/token/token.js";
 import {
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -49,7 +50,10 @@ class AuthService {
 			});
 		}
 
-		return user.toObject();
+		const userDto = user.toObject();
+		const newToken = await token.generateToken(userDto.id);
+
+		return { token: newToken, user: userDto };
 	}
 
 	public async signUp(
@@ -66,7 +70,10 @@ class AuthService {
 			});
 		}
 
-		return await this.userService.create(userRequestDto);
+		const userDto = await this.userService.create(userRequestDto);
+		const newToken = await token.generateToken(userDto.id);
+
+		return { token: newToken, user: userDto };
 	}
 }
 

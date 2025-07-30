@@ -80,7 +80,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 								label="Email"
 								name="email"
 								placeholder="Enter your email"
-								type="text"
+								type="email"
 							/>
 						</p>
 						<p className={styles["form__input"]}>
