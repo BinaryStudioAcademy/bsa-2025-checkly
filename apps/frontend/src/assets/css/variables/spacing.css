@@ -7,5 +7,5 @@
 	--radius-xl: var(--space-l);
 	--radius-full: 99999px;
 	--flow-space: var(--space-xs);
-	--stroke: 3px solid var(--stroke-color, var(--color-card-peach));
+	--stroke: 3px solid var(--stroke-color, var(--color-bg-dark));
 }
