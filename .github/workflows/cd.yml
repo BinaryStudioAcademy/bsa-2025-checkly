@@ -31,7 +31,7 @@ jobs:
 
       - name: Release
         id: release
-        uses: google-github-actions/release-please-action@v4
+        uses: googleapis/release-please-action@v4
         with:
           manifest-file: .release-please-manifest.json
           config-file: release-please-config.json
@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: development
-      url: http://сheckly.eu-north-1.elasticbeanstalk.com/
+      url: http://checkly.eu-north-1.elasticbeanstalk.com/
 
     steps:
       - name: Code Checkout
