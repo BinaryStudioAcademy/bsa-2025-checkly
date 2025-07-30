@@ -36,36 +36,14 @@ erDiagram
     text password_salt
   }
 
-  intensity ||--o{ plan : "plan"
-  intensity o|--|| level_type : "enum:level_type"
-  intensity {
-    int id PK
-    level_type level
-    int min_tasks_per_day
-    int max_tasks_per_day
-  }
-
-  level_type {
-    low low
-    medium medium
-    high high
-  }
-
-  duration ||--o{ plan : "plan"
-  duration {
-    int id PK
-    int number_of_days
-    dateTime created_at
-  }
-
   plan ||--|{ plan_day : "plan_day"
   plan ||--o| plan : "plan"
   plan {
     int id PK
     varchar title
     int user_id FK
-    int duration_id FK
-    int intensity_id FK
+    varchar duration
+    varchar intensity
     int parent_plan_id FK
     boolean is_active
     dateTime created_at
