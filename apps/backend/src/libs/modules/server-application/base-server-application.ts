@@ -211,8 +211,8 @@ class BaseServerApplication implements ServerApplication {
 
 	private initErrorMapperMiddleware(): void {
 		this.app.addHook(FastifyHook.ON_REQUEST, initErrorMapperMiddleware());
-  }
-  
+	}
+
 	private async initPlugins(): Promise<void> {
 		await this.app.register(authorizationPlugin, {
 			userService,
