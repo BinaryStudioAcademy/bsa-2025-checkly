@@ -82,7 +82,7 @@ const Input = <T extends FieldValues>({
 						onClick={togglePasswordVisibility}
 						type="button"
 					>
-						{displayPasswordIcon}
+						<span aria-hidden="true">{displayPasswordIcon}</span>
 					</button>
 				)}
 			</div>

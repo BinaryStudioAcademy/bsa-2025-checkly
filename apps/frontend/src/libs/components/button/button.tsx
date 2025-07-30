@@ -29,7 +29,11 @@ const Button: React.FC<Properties> = ({
 
 	return (
 		<button className={buttonClasses} disabled={disabled} type={type}>
-			{icon && <span className={styles["button-icon"]}>{icon}</span>}
+			{icon && (
+				<span aria-hidden="true" className={styles["button-icon"]}>
+					{icon}
+				</span>
+			)}
 			<span>{label}</span>
 		</button>
 	);
