@@ -59,11 +59,11 @@
 		"stylelint-config-recess-order": "7.1.0",
 		"stylelint-config-standard": "38.0.0",
 		"tsc-alias": "1.8.16",
-		"typescript": "5.8.3"
+		"typescript": "5.8.3",
+		"vite-plugin-svgr": "4.3.0"
 	},
 	"simple-git-hooks": {
 		"pre-commit": "npm run lint:type && npm run git:hook:precommit",
 		"commit-msg": "npm run git:hook:commit"
-	},
-	"dependencies": {}
+	}
 }

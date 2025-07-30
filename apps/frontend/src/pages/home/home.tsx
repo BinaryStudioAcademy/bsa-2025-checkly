@@ -1,6 +1,6 @@
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
-import { Header } from "./components/components.js";
+import { Footer, Header } from "./components/components.js";
 import styles from "./styles.module.css";
 
 const Home: React.FC = () => {
@@ -52,6 +52,7 @@ const Home: React.FC = () => {
 					</div>
 				</section>
 			</main>
+			<Footer />
 		</>
 	);
 };
