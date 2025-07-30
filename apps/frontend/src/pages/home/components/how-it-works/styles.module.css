@@ -105,7 +105,8 @@
 
 .arrowImage {
 	width: clamp(var(--space-xl), 8vw, calc(var(--space-2xl) * 1.6));
-	transform: translateY(calc(var(--space-s) * -2)) translateX(calc(var(--space-s) * 0.5));
+	transform: translateY(calc(var(--space-s) * -2))
+		translateX(calc(var(--space-s) * 0.5));
 }
 
 .decorativeStars {
@@ -133,7 +134,11 @@
 	}
 
 	.arrowImage {
-		width: clamp(calc(var(--space-2xl) * 1.5), 12vw, calc(var(--space-3xl) * 1.8));
+		width: clamp(
+			calc(var(--space-2xl) * 1.5),
+			12vw,
+			calc(var(--space-3xl) * 1.8)
+		);
 	}
 
 	.stepNumber {
@@ -200,7 +205,11 @@
 	}
 
 	.arrowImage {
-		width: clamp(calc(var(--space-2xl) * 1.2), 10vw, calc(var(--space-3xl) * 1.5));
+		width: clamp(
+			calc(var(--space-2xl) * 1.2),
+			10vw,
+			calc(var(--space-3xl) * 1.5)
+		);
 		transform: translateY(0);
 	}
 
