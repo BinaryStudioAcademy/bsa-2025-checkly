@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.0.0...v1.0.1) (2025-07-30)
+
+
+### Bug Fixes
+
+* update delivery config cy-0 ([0468405](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0468405365a963c58f40b3ced7bcf193983a3558))
+
 ## 1.0.0 (2025-07-30)
 
 
