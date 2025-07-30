@@ -4,14 +4,14 @@ import { createRoot } from "react-dom/client";
 import "~/assets/css/styles.css";
 import {
 	App,
+	ProtectedRoute,
 	RouterProvider,
 	StoreProvider,
 } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { store } from "~/libs/modules/store/store.js";
-import { Auth } from "~/pages/auth/auth.jsx";
 
-import { Home } from "./pages/pages.js";
+import { Auth, Home } from "./pages/pages.js";
 
 createRoot(document.querySelector("#root") as HTMLElement).render(
 	<StrictMode>
@@ -31,6 +31,16 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 							{
 								element: <Auth />,
 								path: AppRoute.SIGN_UP,
+							},
+							{
+								children: [
+									{
+										element: "Dashboard",
+										path: "",
+									},
+								],
+								element: <ProtectedRoute />,
+								path: AppRoute.DASHBOARD,
 							},
 						],
 						element: <App />,

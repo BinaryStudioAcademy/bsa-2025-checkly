@@ -1,0 +1,11 @@
+:root {
+	--gutter: var(--space-xs);
+	--base-radius: var(--space-xs);
+	--radius-s: var(--space-2xs);
+	--radius-m: var(--space-s);
+	--radius-l: var(--space-m);
+	--radius-xl: var(--space-l);
+	--radius-full: 99999px;
+	--flow-space: var(--space-xs);
+	--stroke: 3px solid var(--color-card-peach);
+}
