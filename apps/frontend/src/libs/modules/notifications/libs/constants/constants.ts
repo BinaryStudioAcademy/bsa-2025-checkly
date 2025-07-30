@@ -1,9 +1,9 @@
 import { type ToastOptions, Zoom } from "react-toastify";
 
-import { NotificationOptionValues } from "./notification-option-values.enum.js";
+const AUTO_CLOSE_TIME = 3000;
 
 const DefaultNotificationOptions: Readonly<ToastOptions> = {
-	autoClose: NotificationOptionValues.AUTO_CLOSE_TIME,
+	autoClose: AUTO_CLOSE_TIME,
 	closeOnClick: false,
 	draggable: true,
 	hideProgressBar: true,

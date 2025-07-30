@@ -1,6 +1,6 @@
 import { toast, type ToastOptions } from "react-toastify";
 
-import { DefaultNotificationOptions } from "./libs/enums/notification-default-options.enum.js";
+import { DefaultNotificationOptions } from "./libs/constants/constants.js";
 
 class Notifications {
 	private static setOptions(overrides?: Partial<ToastOptions>): ToastOptions {
