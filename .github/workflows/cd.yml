@@ -2,7 +2,7 @@ name: Continuous Delivery
 
 env:
   AWS_REGION: eu-north-1
-  EBS_APPLICATION_NAME: сheckly
+  EBS_APPLICATION_NAME: checkly
   EBS_ENVIRONMENT_NAME: development
 
 on:
