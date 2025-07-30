@@ -67,7 +67,7 @@
 }
 
 .cup {
-	top: clamp(-80px, -8vw, -40px);
+	top: clamp(-80px, 8vw, -100px);
 	right: 5%;
 	display: inline-block;
 	width: clamp(120px, 10vw, 140px);

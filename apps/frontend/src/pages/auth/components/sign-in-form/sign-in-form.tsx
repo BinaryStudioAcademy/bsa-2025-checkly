@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import {
 	cup,
 	laptop,
-	logo,
 	pinkStars,
 	twinkles,
 	yellowStars,
 } from "~/assets/img/sign-in/sign-in.img.js";
 import { Button, Input } from "~/libs/components/components.js";
+import { Logo } from "~/libs/components/logo/logo.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
@@ -64,11 +64,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				)}
 			>
 				<div className="flow-loose">
-					<div className="cluster">
-						<img alt="Binary Checkly web-application logo" src={logo} />
-						<span>Logo</span>
-					</div>
-
+					<Logo />
 					<header className="flow">
 						<h1 className={styles["title"]} id="sign-in-title">
 							Sign In
