@@ -9,10 +9,11 @@ const loadAll = createAsyncThunk<
 	UserGetAllResponseDto,
 	undefined,
 	AsyncThunkConfig
->(`${sliceName}/load-all`, (_, { extra }) => {
+>(`${sliceName}/load-all`, async (_, { extra }) => {
 	const { userApi } = extra;
+	const result = await userApi.getAll();
 
-	return userApi.getAll();
+	return result;
 });
 
 export { loadAll };
