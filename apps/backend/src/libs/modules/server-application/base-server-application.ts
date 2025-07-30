@@ -147,9 +147,15 @@ class BaseServerApplication implements ServerApplication {
 	}
 
 	private getWhiteRoutes(): string[] {
-		return this.apis.flatMap((api) =>
+		const publicApiRoutes = this.apis.flatMap((api) =>
 			api.routes.filter((route) => route.isPublic).map((route) => route.path),
 		);
+
+		const documentationRoutes = this.apis.map(
+			(api) => `/${api.version}/documentation/**`,
+		);
+
+		return [...publicApiRoutes, ...documentationRoutes];
 	}
 
 	private initErrorHandler(): void {
