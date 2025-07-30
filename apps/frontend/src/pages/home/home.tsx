@@ -1,4 +1,4 @@
-import { Header, Hero } from "./components/components.js";
+import { Header, Hero, VisualLayouts } from "./components/components.js";
 import styles from "./styles.module.css";
 
 const Home: React.FC = () => {
@@ -17,11 +17,7 @@ const Home: React.FC = () => {
 						<h2>Categories</h2>
 					</div>
 				</section>
-				<section className="grid-pattern" data-section-variant="dark">
-					<div className="wrapper">
-						<h2>Sample visual layouts</h2>
-					</div>
-				</section>
+				<VisualLayouts />
 				<section data-section-variant>
 					<div className="wrapper">
 						<h2>Testimonials</h2>
