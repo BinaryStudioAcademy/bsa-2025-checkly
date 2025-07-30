@@ -7,13 +7,9 @@ const listenerMiddleware = createListenerMiddleware();
 
 listenerMiddleware.startListening({
 	effect: (action) => {
-		const { message } = action.error;
-
-		if (message?.trim()) {
-			notifications.error(action.error.message as string);
-		} else {
-			notifications.error(ErrorMessage.DEFAULT_ERROR_MESSAGE);
-		}
+		notifications.error(
+			action.error.message?.trim() || ErrorMessage.DEFAULT_ERROR_MESSAGE,
+		);
 	},
 	matcher: isRejected,
 });
