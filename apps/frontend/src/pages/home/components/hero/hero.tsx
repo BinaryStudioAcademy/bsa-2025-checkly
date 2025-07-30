@@ -14,13 +14,17 @@ import styles from "./styles.module.css";
 const Hero: React.FC = () => (
 	<section className={getClassNames(styles["hero"], "grid-pattern")}>
 		<div className={getClassNames(styles["container"], "wrapper flow-loose")}>
-			<div className={styles["text-wrapper"]}>
-				<h1>Create a personal development plan in 2 minutes</h1>
-				<h4>
-					AI-powered checklist generator for your goals — from fitness to
-					creativity
-				</h4>
-				<Link to={AppRoute.ROOT}>Start</Link>
+			<div className={getClassNames(styles["text-wrapper"], "flow")}>
+				<div className="flow-loose">
+					<h1>Create a personal development plan in 2 minutes</h1>
+					<h4>
+						AI-powered checklist generator for your goals — from fitness to
+						creativity
+					</h4>
+				</div>
+				<Link asButton to={AppRoute.ROOT}>
+					Start
+				</Link>
 			</div>
 			<div className={styles["icons-wrapper"]}>
 				<img
