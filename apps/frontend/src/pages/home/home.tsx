@@ -1,3 +1,4 @@
+import { Link } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import { Header } from "./components/components.js";
@@ -28,7 +29,9 @@ const Home: React.FC = () => {
 								creativity
 							</h4>
 						</div>
-						<button className={styles["hero__button-start"]}>Start</button>
+						<Link to="/test-page">
+							<button className={styles["hero__button-start"]}>Start</button>
+						</Link>
 					</div>
 				</section>
 				<section className="grid-pattern" data-section-variant="brand">
