@@ -3,20 +3,28 @@ import { FiLogOut } from "react-icons/fi";
 import { MdDashboard } from "react-icons/md";
 
 import { Link } from "~/libs/components/components.js";
+import { getClassNames } from "~/libs/helpers/helpers.js";
 
 import styles from "./styles.module.css";
 
-interface UserMenuProperties {
+type UserMenuProperties = {
 	isOpen: boolean;
-}
+};
 
 const UserMenu: React.FC<UserMenuProperties> = ({ isOpen }) => {
-	const menuDropdownClass = isOpen
-		? `${String(styles["menu-dropdown"])} ${String(styles["menu-dropdown--open"])}`
-		: String(styles["menu-dropdown"]);
-	const dashboardClass = `${String(styles["menu-item"])} ${String(styles["menu-item--dashboard"])}`;
-	const logoutClass = `${String(styles["menu-item"])} ${String(styles["menu-item--logout"])}`;
-	const menuIconClass = String(styles["menu-icon"]);
+	const menuDropdownClass = getClassNames(
+		styles["menu-dropdown"],
+		isOpen && styles["menu-dropdown--open"],
+	);
+	const dashboardClass = getClassNames(
+		styles["menu-item"],
+		styles["menu-item--dashboard"],
+	);
+	const logoutClass = getClassNames(
+		styles["menu-item"],
+		styles["menu-item--logout"],
+	);
+	const menuIconClass = styles["menu-icon"];
 
 	return (
 		<nav aria-label="User menu" className={menuDropdownClass}>

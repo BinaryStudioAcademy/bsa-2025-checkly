@@ -6,6 +6,7 @@ import {
 	profileDefault,
 } from "~/assets/img/header/header.img.js";
 import { Link } from "~/libs/components/components.js";
+import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppSelector, useDropdownMenu } from "~/libs/hooks/hooks.js";
 
 import styles from "./styles.module.css";
@@ -16,8 +17,7 @@ const AppHeader: React.FC = () => {
 	const menuReference = useRef<HTMLDivElement>(null);
 	const user = useAppSelector((state) => state.auth.user);
 
-	const displayName =
-		user && typeof user.name === "string" && user.name ? user.name : "Usuario";
+	const displayName = useMemo(() => user?.name ?? "User", [user]);
 
 	const handleMenuToggle = useCallback((): void => {
 		setIsMenuOpen((previous) => !previous);
@@ -33,11 +33,14 @@ const AppHeader: React.FC = () => {
 		onClose: handleMenuClose,
 	});
 
-	const arrowClassName = useMemo(() => {
-		const base = styles["arrow-svg"] ?? "";
-
-		return isMenuOpen ? `${base} ${styles["arrow-svg--rotated"] ?? ""}` : base;
-	}, [isMenuOpen]);
+	const arrowClassName = useMemo(
+		() =>
+			getClassNames(
+				styles["arrow-svg"],
+				isMenuOpen && styles["arrow-svg--rotated"],
+			),
+		[isMenuOpen],
+	);
 
 	return (
 		<header className={styles["app-header"]}>
