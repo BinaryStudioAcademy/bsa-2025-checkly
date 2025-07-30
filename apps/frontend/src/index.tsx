@@ -36,11 +36,11 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 								children: [
 									{
 										element: "Dashboard",
-										path: AppRoute.DASHBOARD,
+										path: "",
 									},
 								],
 								element: <ProtectedRoute />,
-								path: AppRoute.ROOT,
+								path: AppRoute.DASHBOARD,
 							},
 						],
 						element: <App />,
