@@ -46,13 +46,22 @@ const VisualLayouts: React.FC = () => {
 						src={pinkStars}
 					/>
 				</div>
-				<div className={getClassNames(styles["layout-list"])}>
+				<div
+					aria-label="Available layout options"
+					className={getClassNames(styles["layout-list"])}
+					role="list"
+				>
 					{layoutExamples.map((example) => (
 						<div
+							aria-label={`Visual layout option: ${example.title}`}
 							className={getClassNames(styles["layout-card"])}
 							key={example.id}
+							role="listitem"
 						>
-							<img alt={example.title} src={example.img} />
+							<img
+								alt={`Preview of the ${example.title} layout`}
+								src={example.img}
+							/>
 							<h5>{example.title}</h5>
 						</div>
 					))}

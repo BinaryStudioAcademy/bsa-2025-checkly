@@ -20,12 +20,11 @@
 	padding: 10px;
 	color: black;
 	text-align: center;
-    cursor: pointer;
+	cursor: pointer;
 	background: white;
 	border-radius: 8px;
 	transition: transform 0.2s ease;
 }
-
 
 .layout-card h5 {
 	margin: 15px 0;
