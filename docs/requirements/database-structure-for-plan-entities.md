@@ -53,128 +53,7 @@ The system tracks:
 - **History of checklists** should be saved.
 - **History of plans**, so a user can return to and update previous plans.
 
-# Physical Data Model for MVP
-
-```
-CREATE TYPE execution_time_type AS ENUM ('morning', 'afternoon', 'evening');
-CREATE TYPE level_type AS ENUM ('low', 'medium', 'high');
-
-CREATE TABLE duration (
-  id SERIAL PRIMARY KEY,
-  number_of_days INT NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL
-)
-
-CREATE TABLE intensity (
-  id SERIAL PRIMARY KEY,
-  level_type level NOT NULL,
-  min_tasks_per_day INT CHECK (min_tasks_per_day > 0) NOT NULL,
-  max_tasks_per_day INT CHECK (max_tasks_per_day >= min_tasks_per_day) NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL
-);
-
-CREATE TABLE plan (
-  id SERIAL PRIMARY KEY,
-  title VARCHAR(100) NOT NULL,
-  user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  duration_id INT NOT NULL REFERENCES duration(id) ON DELETE RESTRICT,
-  intensity_id INT NOT NULL REFERENCES intensity(id) ON DELETE RESTRICT,
-  parent_plan_id INT REFERENCES plan(id) ON DELETE SET NULL,
-  is_active BOOLEAN DEFAULT TRUE NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL,
-);
-
-CREATE TABLE plan_day (
-  id SERIAL PRIMARY KEY,
-  day_number INT CHECK (day_number > 0) NOT NULL,
-  is_regenerated BOOLEAN DEFAULT FALSE NOT NULL,
-  plan_id INT NOT NULL REFERENCES plan(id) ON DELETE CASCADE
-);
-
-CREATE TABLE task (
-  id SERIAL PRIMARY KEY,
-  title VARCHAR(200) NOT NULL,
-  description TEXT NOT NULL,
-  order INT CHECK (order > 0) NOT NULL,
-  plan_day_id INT NOT NULL REFERENCES plan_day(id) ON DELETE CASCADE,
-  is_completed BOOLEAN DEFAULT FALSE NOT NULL,
-  is_custom BOOLEAN DEFAULT FALSE NOT NULL,
-  parent_task_id INT REFERENCES task(id) ON DELETE SET NULL,
-  execution_time_type execution_time NOT NULL DEFAULT 'morning',
-  updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL,
-  completed_at TIMESTAMPTZ DEFAULT NULL
-);
-```
-
-# Physical Data Model extension for future
-
-```
-CREATE TYPE level_type AS ENUM ('low', 'medium', 'high');
-
-CREATE TABLE intensity (
-  id SERIAL PRIMARY KEY,
-  level_type level NOT NULL,
-  min_tasks_per_day INT CHECK (min_tasks_per_day > 0) NOT NULL,
-  max_tasks_per_day INT CHECK (max_tasks_per_day >= min_tasks_per_day) NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL
-);
-
-CREATE TABLE language (
-  code VARCHAR(5) PRIMARY KEY,
-  name VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE task (
-  tip TEXT
-);
-
-CREATE TABLE task_translation (
-  id SERIAL PRIMARY KEY,
-  task_id INT NOT NULL REFERENCES task(id) ON DELETE CASCADE,
-  language_code VARCHAR(5) REFERENCES language(code) NOT NULL,
-  title VARCHAR(200) NOT NULL,
-  description TEXT NOT NULL,
-  tip TEXT,
-  UNIQUE (task_id, language_code)
-);
-
-CREATE TABLE plan (
-  progress INT NOT NULL DEFAULT  CHECK (progress BETWEEN 0 AND 100);
-);
-
-CREATE TABLE plan_day (
-  progress INT NOT NULL DEFAULT  CHECK (progress BETWEEN 0 AND 100);
-);
-```
-
-#  1. Table: intensity
-Description: stores the intensity levels associated with tasks, defining how many tasks should be done daily based on difficulty.
-
-| Column              | Type                | Description                                                       | Constraints                                     | Default            |
-| ------------------- | ------------------- | ----------------------------------------------------------------- | ----------------------------------------------- | ------------------ |
-| `id`                | SERIAL PRIMARY KEY  | Unique identifier for the intensity record                        | PK                                              | Auto-increment     |
-| `level_type`        | ENUM (`level_type`) | Intensity level category                                          | Not null, values: `'low'`, `'medium'`, `'high'` | None               |
-| `min_tasks_per_day` | INT                 | Minimum number of tasks assigned per day for this intensity level | Not null, > 0                                   | None               |
-| `max_tasks_per_day` | INT                 | Maximum number of tasks assigned per day for this intensity level | Not null, >= `min_tasks_per_day`                | None               |
-| `created_at`        | TIMESTAMPTZ         | Timestamp when the intensity record was created                   | Not null                                        | CURRENT\_TIMESTAMP |
-
-# Constraints Explanation:
-- min_tasks_per_day must be greater than 0.
-- max_tasks_per_day must be equal or greater than min_tasks_per_day.
-
-#  2. Table: duration
-Description: defines plan durations in days linked to a specific intensity level.
-
-| Column           | Type               | Description                                           | Constraints                                        | Default            |
-| ---------------- | ------------------ | ----------------------------------------------------- | -------------------------------------------------- | ------------------ |
-| `id`             | SERIAL PRIMARY KEY | Unique identifier for the duration                    | PK                                                 | Auto-increment     |
-| `number_of_days` | INT                | Length of the plan in days                            | Not null, > 0                                      | None               |
-| `created_at`     | TIMESTAMPTZ        | Timestamp when the duration record was created        | Not null                                           | CURRENT\_TIMESTAMP |
-
-# Constraints Explanation:
-- number_of_days must be positive.
-
-# 3. Table: plan
+# 1. Table: plan
 
 Description: represents a plan created by a user, with a certain duration and intensity.
 
@@ -183,8 +62,8 @@ Description: represents a plan created by a user, with a certain duration and in
 | `id`             | SERIAL PRIMARY KEY | Unique identifier for the plan                           | PK                                                | Auto-increment    |
 | `title`          | VARCHAR(100)       | Title                                                    | Not null                                          | None              |
 | `user_id`        | INT                | Reference to the user who owns the plan                  | Not null, FK → `users(id)`, ON DELETE CASCADE     | None              |
-| `duration_id`    | INT                | Reference to the duration of the plan                    | Not null, FK → `duration(id)`, ON DELETE RESTRICT | None              |
-| `intensity_id`    | INT                | Reference to the intensity of the plan                    | Not null, FK → `intensity(id)`, ON DELETE RESTRICT | None              |
+| `duration`    | VARCHAR(100)                | The duration of the plan                    | Not null | None              |
+| `intensity`    | VARCHAR(100)                | The intensity of the plan                    | Not null | None              |
 | `parent_plan_id` | INT                | Optional reference to the plan this was regenerated from | FK → `plan(id)`, ON DELETE SET NULL               | NULL              |
 | `is_active`      | BOOLEAN            | Whether the plan is currently active                     | Not null                                          | TRUE              |
 | `created_at`     | TIMESTAMPTZ        | Timestamp when the plan was created                      | Not null                                          | CURRENT_TIMESTAMP |
@@ -194,11 +73,9 @@ Description: represents a plan created by a user, with a certain duration and in
 # Constraints Explanation:
 
 - when the user is deleted, all their plans are deleted (ON DELETE CASCADE).
-- duration referenced by the plan cannot be deleted if in use (ON DELETE RESTRICT).
-- intensity referenced by the plan cannot be deleted if in use (ON DELETE RESTRICT).
 - parent_plan_id is nullable and set to NULL if the referenced plan is deleted.
 
-# 4. Table: plan_day
+# 2. Table: plan_day
 
 Description: represents individual days within a plan.
 
@@ -213,7 +90,7 @@ Description: represents individual days within a plan.
 
 - deleting a plan deletes its plan days (ON DELETE CASCADE)
 
-# 5. Table: task
+# 3. Table: task
 
 Description: represents a task assigned to a particular day within a plan.
 | Column           | Type                         | Description                                                  | Constraints                                             | Default            |
@@ -221,7 +98,7 @@ Description: represents a task assigned to a particular day within a plan.
 | `id`             | SERIAL PRIMARY KEY           | Unique task identifier                                       | PK                                                      | Auto-increment     |
 | `title`          | VARCHAR(200)                 | Task title                                                   | **NOT NULL**                                            | None               |
 | `description`    | TEXT                         | Optional detailed description                                | Nullable                                                | NULL               |
-| `order`          | INT                          | Order of task execution within the day                       | **NOT NULL**, must be `>= 0`                            | None               |
+| `order`          | INT                          | Order of task execution within the day                       | **NOT NULL**, must be `> 0`                            | None               |
 | `plan_day_id`    | INT                          | Reference to the plan day this task belongs to               | **NOT NULL**, FK → `plan_day(id)` **ON DELETE CASCADE** | None               |
 | `is_completed`   | BOOLEAN                      | Whether the task is completed                                | **NOT NULL**                                            | FALSE              |
 | `execution_time` | execution\_time\_type (ENUM) | Execution time category (`morning`, `afternoon`, `evening`)  | **NOT NULL**                                            | 'morning'               |
@@ -236,7 +113,7 @@ Description: represents a task assigned to a particular day within a plan.
 - if the referenced execution time is deleted, the execution_time_id in task is set to NULL.
 - parent_task_id is nullable and set to NULL if the referenced task is deleted.
 
-# 6. Table: task_translation
+# 4. Table: task_translation
 
 Description: stores translations of tasks for multiple languages. Each task can have a title, description, and tip in different languages.
 
@@ -254,8 +131,6 @@ Description: stores translations of tasks for multiple languages. Each task can 
 | Parent Table     | Child Table | Foreign Key         | Cascade Behavior   | Description                              |
 | ---------------- | ----------- | ------------------- | ------------------ | ---------------------------------------- |
 | `users`          | `plan`      | `user_id`           | ON DELETE CASCADE  | Delete plans if user is deleted          |
-| `duration`       | `plan`      | `duration_id`         | ON DELETE RESTRICT | Cannot delete duration if referenced       |
-| `intensity`       | `plan`      | `intensity_id`         | ON DELETE RESTRICT | Cannot delete intensity if referenced       |
 | `plan`           | `plan_day`  | `plan_id`           | ON DELETE CASCADE  | Delete plan_days if plan is deleted      |
 | `plan_day`       | `task`      | `plan_day_id`       | ON DELETE CASCADE  | Delete tasks if plan_day is deleted      |
 | `plan`           | `plan`      | `parent_plan_id`    | ON DELETE SET NULL | Set to NULL if source plan deleted       |
