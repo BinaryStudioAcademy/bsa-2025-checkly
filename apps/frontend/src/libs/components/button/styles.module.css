@@ -46,10 +46,10 @@
 
 .button-primary::after {
 	position: absolute;
-	top: -6px;
-	right: -6px;
-	width: 16px;
-	height: 16px;
+	top: -11px;
+	right: -11px;
+	width: var(--space-gutter-l);
+	height: var(--space-gutter-l);
 	content: "";
 	border: 2px solid var(--color-bg-dark);
 	border-bottom: none;
@@ -58,6 +58,8 @@
 }
 
 .button-secondary {
+	--button-padding-block: var(--space-gutter-2xs);
+	--button-padding-inline: var(--space-gutter-m);
 	--button-bg-color: transparent;
 	--button-border-color: var(--color-bg-dark);
 }
