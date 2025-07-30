@@ -1,7 +1,6 @@
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
-import { Header } from "./components/components.js";
-import { HowItWorks } from "./components/how-it-works/how-it-works.js";
+import { Header, HowItWorks } from "./components/components.js";
 import styles from "./styles.module.css";
 
 const Home: React.FC = () => {
