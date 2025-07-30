@@ -39,7 +39,7 @@
 .form {
 	--cluster-direction: column;
 	--cluster-vertical-alignment: stretch;
-	--gutter: var(--space-m);
+	--gutter: var(--space-xl);
 }
 
 .floating-image {
