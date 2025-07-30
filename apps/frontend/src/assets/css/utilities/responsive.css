@@ -1,0 +1,31 @@
+@media (width >= 768px) {
+	.hide-tablet-up {
+		display: none;
+	}
+}
+
+@media (width >= 1024px) {
+	.hide-desktop-up {
+		display: none;
+	}
+}
+
+.show-tablet-up {
+	display: none;
+}
+
+@media (width >= 768px) {
+	.show-tablet-up {
+		display: block;
+	}
+}
+
+.show-desktop-up {
+	display: none;
+}
+
+@media (width >= 1024px) {
+	.show-desktop-up {
+		display: block;
+	}
+}

@@ -16,6 +16,8 @@ import {
 	type ServerValidationErrorResponse,
 	type ValidationSchema,
 } from "~/libs/types/types.js";
+import { userService } from "~/modules/users/users.js";
+import { authorization as authorizationPlugin } from "~/plugins/authorization/authorization.js";
 
 import {
 	type ServerApplication,
@@ -81,7 +83,7 @@ class BaseServerApplication implements ServerApplication {
 		this.logger.info("Application initialization…");
 
 		await this.initServe();
-
+		await this.initPlugins();
 		await this.initMiddlewares();
 
 		this.initValidationCompiler();
@@ -144,6 +146,18 @@ class BaseServerApplication implements ServerApplication {
 		this.addRoutes(routers);
 	}
 
+	private getWhiteRoutes(): string[] {
+		const publicApiRoutes = this.apis.flatMap((api) =>
+			api.routes.filter((route) => route.isPublic).map((route) => route.path),
+		);
+
+		const documentationRoutes = this.apis.map(
+			(api) => `/${api.version}/documentation/**`,
+		);
+
+		return [...publicApiRoutes, ...documentationRoutes];
+	}
+
 	private initErrorHandler(): void {
 		this.app.setErrorHandler(
 			(error: FastifyError | ValidationError, _request, reply) => {
@@ -189,6 +203,13 @@ class BaseServerApplication implements ServerApplication {
 				return reply.status(HTTPCode.INTERNAL_SERVER_ERROR).send(response);
 			},
 		);
+	}
+
+	private async initPlugins(): Promise<void> {
+		await this.app.register(authorizationPlugin, {
+			userService,
+			whiteRoutes: this.getWhiteRoutes(),
+		});
 	}
 
 	private async initServe(): Promise<void> {

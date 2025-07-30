@@ -139,7 +139,12 @@ const perfectionistConfig = {
 
 /** @type {Config} */
 const typescriptConfig = {
-	ignores: ["eslint.config.js", "lint-staged.config.js", "stylelint.config.js", "prettier.config.js"],
+	ignores: [
+		"eslint.config.js",
+		"lint-staged.config.js",
+		"stylelint.config.js",
+		"prettier.config.js",
+	],
 	languageOptions: {
 		parser: /** @type {ParserModule} */ (tsParser),
 		parserOptions: {
