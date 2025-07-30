@@ -1,31 +1,18 @@
 .header {
+	--repel-wrap: nowrap;
+
 	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
 	z-index: 999;
+	width: 100%;
 	padding: var(--gutter);
 	background-color: var(--color-card-pink);
 	border-end-start-radius: var(--base-radius);
 	border-end-end-radius: var(--base-radius);
-
-	--repel-wrap: nowrap;
-}
-
-.header h1 {
-	font-size: var(--text-size-heading-3);
 }
 
 .header a {
-	gap: var(--gutter);
-	padding: var(--space-3xs) var(--space-m);
-	font-family: var(--font-family-primary);
-	font-size: var(--text-button-small);
-	font-weight: var(--font-weight-extra-bold);
-	color: var(--color-text);
-	text-transform: uppercase;
+	--button-padding-block: var(--space-gutter-3xs);
+	--button-padding-inline: var(--space-gutter-l);
+
 	text-decoration: none;
-	background-color: transparent;
-	border: 2px solid;
-	border-radius: var(--radius-l);
 }
