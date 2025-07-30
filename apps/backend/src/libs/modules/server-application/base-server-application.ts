@@ -4,6 +4,7 @@ import swaggerUi from "@fastify/swagger-ui";
 import Fastify, { type FastifyError, type FastifyInstance } from "fastify";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { FastifyHook } from "shared";
 
 import { ServerErrorType } from "~/libs/enums/enums.js";
 import { type ValidationError } from "~/libs/exceptions/exceptions.js";
@@ -195,7 +196,7 @@ class BaseServerApplication implements ServerApplication {
 	}
 
 	private initErrorMapperMiddleware(): void {
-		this.app.addHook("onRequest", initErrorMapperMiddleware());
+		this.app.addHook(FastifyHook.ON_REQUEST, initErrorMapperMiddleware());
 	}
 
 	private async initServe(): Promise<void> {

@@ -1,14 +1,12 @@
 import { type FastifyReply, type FastifyRequest } from "fastify";
+import { ErrorConstants, UserValidationRule } from "shared";
+import { type ServerErrorDetail } from "shared";
 
 import { ServerErrorType } from "~/libs/enums/enums.js";
-
-const MIN_DETAILS_LENGTH = 1;
-const DEFAULT_ERROR_MESSAGE = "An error occurred";
-const MIN_ERROR_STATUS_CODE = 400;
-const FIRST_DETAIL_INDEX = 0;
+import { type EnumValue } from "~/libs/types/types.js";
 
 type ErrorPayload = {
-	details?: Array<{ message: string; path: (number | string)[] }>;
+	details?: ServerErrorDetail[];
 	errorType?: string;
 	message?: string;
 };
@@ -23,6 +21,8 @@ type FastifyPayload =
 	| undefined
 	| unknown[];
 
+type ServerErrorTypeValue = EnumValue<typeof ServerErrorType>;
+
 function initErrorMapperMiddleware() {
 	return async (
 		request: FastifyRequest,
@@ -32,33 +32,32 @@ function initErrorMapperMiddleware() {
 
 		reply.send = (payload: FastifyPayload): FastifyReply => {
 			if (
-				reply.statusCode >= MIN_ERROR_STATUS_CODE &&
-				payload &&
+				reply.statusCode >= ErrorConstants.MIN_ERROR_STATUS_CODE &&
 				typeof payload === "object"
 			) {
 				const errorPayload = payload as ErrorPayload;
 
-				let errorType: string = ServerErrorType.COMMON;
-				let message: string = errorPayload.message || DEFAULT_ERROR_MESSAGE;
+				const { details } = errorPayload;
+				const hasDetails =
+					details !== undefined &&
+					Array.isArray(details) &&
+					details.length >= UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH;
 
-				if (
-					errorPayload.details &&
-					Array.isArray(errorPayload.details) &&
-					errorPayload.details.length >= MIN_DETAILS_LENGTH
-				) {
-					errorType = ServerErrorType.VALIDATION;
-					message =
-						errorPayload.details[FIRST_DETAIL_INDEX]?.message ||
-						errorPayload.message ||
-						DEFAULT_ERROR_MESSAGE;
-				}
+				const errorType: ServerErrorTypeValue = hasDetails
+					? ServerErrorType.VALIDATION
+					: ServerErrorType.COMMON;
 
-				const standardizedError = {
+				const message: string =
+					(hasDetails
+						? details[ErrorConstants.FIRST_DETAIL_INDEX]?.message
+						: errorPayload.message) ?? ErrorConstants.DEFAULT_ERROR_MESSAGE;
+
+				const GeneralError = {
 					errorType,
 					message,
 				};
 
-				return originalSend(standardizedError);
+				return originalSend(GeneralError);
 			}
 
 			return originalSend(payload);
