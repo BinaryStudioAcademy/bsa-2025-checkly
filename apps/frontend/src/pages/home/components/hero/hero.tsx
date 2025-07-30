@@ -60,7 +60,7 @@ const Hero: React.FC = () => {
 							creativity
 						</p>
 					</div>
-					<Link asButton to={AppRoute.ROOT}>
+					<Link asButtonVariant="primary" to={AppRoute.ROOT}>
 						Start
 					</Link>
 				</div>

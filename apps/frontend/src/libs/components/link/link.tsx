@@ -6,20 +6,20 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
 type Properties = {
-	asButton?: boolean;
+	asButtonVariant?: "" | "primary" | "secondary";
 	children: React.ReactNode;
 	to: ValueOf<typeof AppRoute>;
 };
 
 const Link: React.FC<Properties> = ({
-	asButton = false,
+	asButtonVariant = "",
 	children,
 	to,
 }: Properties) => {
-	const linkClasses = asButton
+	const linkClasses = asButtonVariant
 		? getClassNames(
 				buttonStyles["button"],
-				buttonStyles["button-secondary"],
+				buttonStyles[`button-${asButtonVariant}`],
 				buttonStyles["button-small"],
 				buttonStyles["button-cluster"],
 				"cluster",
@@ -28,7 +28,7 @@ const Link: React.FC<Properties> = ({
 
 	return (
 		<NavLink className={linkClasses} to={to}>
-			{asButton ? children : <span>{children}</span>}
+			{asButtonVariant ? children : <span>{children}</span>}
 		</NavLink>
 	);
 };

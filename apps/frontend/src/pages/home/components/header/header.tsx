@@ -10,10 +10,10 @@ const Header: React.FC = () => {
 			<div className="wrapper repel">
 				<Logo />
 				<nav className="cluster">
-					<Link asButton to={AppRoute.ROOT}>
+					<Link asButtonVariant="secondary" to={AppRoute.ROOT}>
 						Start quiz
 					</Link>
-					<Link asButton to={AppRoute.SIGN_IN}>
+					<Link asButtonVariant="secondary" to={AppRoute.SIGN_IN}>
 						Sign in
 					</Link>
 				</nav>
