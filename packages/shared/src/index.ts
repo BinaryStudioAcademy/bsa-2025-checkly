@@ -55,7 +55,6 @@ export {
 	TasksApiPath,
 } from "./modules/tasks/tasks.js";
 export {
-	type UserGetAllItemResponseDto,
 	type SignUpFormValidationSchema,
 	type UserDto,
 	type UserGetAllResponseDto,
