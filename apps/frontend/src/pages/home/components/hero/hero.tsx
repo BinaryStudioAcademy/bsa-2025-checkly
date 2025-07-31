@@ -9,7 +9,10 @@ const Hero: React.FC = () => {
 	const renderDecorativeImages = (): React.ReactNode =>
 		decorativeImagesList.map((image) => (
 			<DecorativeImage
-				className={getClassNames(styles["floating-image"], image.className)}
+				className={getClassNames(
+					styles["floating-image"],
+					styles[image.className],
+				)}
 				key={image.id}
 				src={image.src}
 			/>
