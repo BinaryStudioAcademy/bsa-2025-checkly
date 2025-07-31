@@ -1,4 +1,6 @@
-import { Header, Hero } from "./components/components.js";
+import { getClassNames } from "~/libs/helpers/helpers.js";
+
+import { FeedbacksSection, Header, Hero } from "./components/components.js";
 import styles from "./styles.module.css";
 
 const Home: React.FC = () => {
@@ -22,9 +24,11 @@ const Home: React.FC = () => {
 						<h2>Sample visual layouts</h2>
 					</div>
 				</section>
-				<section data-section-variant>
+				<section
+					className={getClassNames("grid-pattern", styles["light-background"])}
+				>
 					<div className="wrapper">
-						<h2>Testimonials</h2>
+						<FeedbacksSection />
 					</div>
 				</section>
 			</main>

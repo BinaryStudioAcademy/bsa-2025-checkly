@@ -1,3 +1,24 @@
+main {
+	height: 100vh;
+	overflow-y: auto;
+	scroll-snap-type: y mandatory;
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE/Edge */
+}
+
+main::-webkit-scrollbar {
+	display: none; /* Chrome, Safari */
+}
+
+section {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	min-height: 100vh;
+	scroll-snap-align: start;
+}
+
 section[data-section-variant] {
 	padding-block: 64px;
 }
@@ -12,4 +33,9 @@ section[data-section-variant="dark"] {
 
 .brand {
 	background-color: var(--color-card-blue);
+}
+
+.light-background {
+	--grid-color: var(--color-light-grey);
+	--grid-line: 1px;
 }
