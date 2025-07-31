@@ -20,7 +20,7 @@
 }
 
 .input-field:focus {
-	outline: 3px solid var(--color-brand-muted);
+	outline: 4px solid var(--color-brand-muted);
 	outline-offset: 0;
 }
 
