@@ -64,16 +64,12 @@ Description: represents a plan created by a user, with a certain duration and in
 | `user_id`        | INT                | Reference to the user who owns the plan                  | Not null, FK → `users(id)`, ON DELETE CASCADE     | None              |
 | `duration`    | VARCHAR(100)                | The duration of the plan                    | Not null | None              |
 | `intensity`    | VARCHAR(100)                | The intensity of the plan                    | Not null | None              |
-| `parent_plan_id` | INT                | Optional reference to the plan this was regenerated from | FK → `plan(id)`, ON DELETE SET NULL               | NULL              |
-| `is_active`      | BOOLEAN            | Whether the plan is currently active                     | Not null                                          | TRUE              |
 | `created_at`     | TIMESTAMPTZ        | Timestamp when the plan was created                      | Not null                                          | CURRENT_TIMESTAMP |
-| `number_of_days`     | INT        | Number of days in the plan                      | Not null                                          | None |
-| `duration`     | INT        | Number of days in the plan                      | Not null                                          | None |
+| `updated_at`     | TIMESTAMPTZ                  | Timestamp of last update                                     | **NOT NULL**                                            | CURRENT\_TIMESTAMP |
 
 # Constraints Explanation:
 
 - when the user is deleted, all their plans are deleted (ON DELETE CASCADE).
-- parent_plan_id is nullable and set to NULL if the referenced plan is deleted.
 
 # 2. Table: plan_day
 
@@ -83,8 +79,9 @@ Description: represents individual days within a plan.
 | ---------------- | ------------------ | ----------------------------------------------------- | -------------------------------------------- | -------------- |
 | `id`             | SERIAL PRIMARY KEY | Unique identifier for the plan day                    | PK                                           | Auto-increment |
 | `day_number`     | INT                | Day number within the plan (e.g., 1 for first day)    | Not null, > 0                                | None           |
-| `is_regenerated` | BOOLEAN            | Whether this day was regenerated from a previous plan | Not null                                     | FALSE          |
 | `plan_id`        | INT                | Reference to the parent plan                          | Not null, FK → `plan(id)`, ON DELETE CASCADE | None           |
+| `created_at`     | TIMESTAMPTZ        | Timestamp when the plan was created                      | Not null                                          | CURRENT_TIMESTAMP |
+| `updated_at`     | TIMESTAMPTZ                  | Timestamp of last update                                     | **NOT NULL**                                            | CURRENT\_TIMESTAMP |
 
 # Constraints Explanation:
 
@@ -102,29 +99,14 @@ Description: represents a task assigned to a particular day within a plan.
 | `plan_day_id`    | INT                          | Reference to the plan day this task belongs to               | **NOT NULL**, FK → `plan_day(id)` **ON DELETE CASCADE** | None               |
 | `is_completed`   | BOOLEAN                      | Whether the task is completed                                | **NOT NULL**                                            | FALSE              |
 | `execution_time` | execution\_time\_type (ENUM) | Execution time category (`morning`, `afternoon`, `evening`)  | **NOT NULL**                                            | 'morning'               |
+| `created_at`     | TIMESTAMPTZ        | Timestamp when the plan was created                      | Not null                                          | CURRENT_TIMESTAMP |
 | `updated_at`     | TIMESTAMPTZ                  | Timestamp of last update                                     | **NOT NULL**                                            | CURRENT\_TIMESTAMP |
 | `completed_at`   | TIMESTAMPTZ                  | Timestamp when the task was completed                        | Nullable                                                | NULL               |
-| `is_custom`      | BOOLEAN                      | Whether task is created by user (`TRUE`) or system (`FALSE`) | **NOT NULL**                                            | FALSE              |
-| `parent_task_id` | INT                          | Optional reference to the task this was regenerated from     | Nullable, FK → `task(id)` **ON DELETE SET NULL**        | NULL               |
 
 # Constraints Explanation:
 
 - deleting a plan day deletes all its tasks (ON DELETE CASCADE).
 - if the referenced execution time is deleted, the execution_time_id in task is set to NULL.
-- parent_task_id is nullable and set to NULL if the referenced task is deleted.
-
-# 4. Table: task_translation
-
-Description: stores translations of tasks for multiple languages. Each task can have a title, description, and tip in different languages.
-
-| Column          | Type         | Description                                             | Constraints                                         | Default        |
-| --------------- | ------------ | ------------------------------------------------------- | --------------------------------------------------- | -------------- |
-| `id`            | SERIAL       | Unique identifier for each translation record           | PK                                                  | Auto-increment |
-| `task_id`       | INT          | Reference to the original task being translated         | **NOT NULL**, FK → `task(id)` **ON DELETE CASCADE** | None           |
-| `language_code` | VARCHAR(5)   | ISO language code for the translation (e.g. `en`, `es`) | **NOT NULL**, FK → `language(code)`                 | None           |
-| `title`         | VARCHAR(200) | Translated task title                                   | **NOT NULL**                                        | None           |
-| `description`   | TEXT         | Translated description for the task                     | Nullable                                            | NULL           |
-| `tip`           | TEXT         | Optional translated tip or hint for the task            | Nullable                                            | NULL           |
 
 # Relationships
 
@@ -133,17 +115,12 @@ Description: stores translations of tasks for multiple languages. Each task can 
 | `users`          | `plan`      | `user_id`           | ON DELETE CASCADE  | Delete plans if user is deleted          |
 | `plan`           | `plan_day`  | `plan_id`           | ON DELETE CASCADE  | Delete plan_days if plan is deleted      |
 | `plan_day`       | `task`      | `plan_day_id`       | ON DELETE CASCADE  | Delete tasks if plan_day is deleted      |
-| `plan`           | `plan`      | `parent_plan_id`    | ON DELETE SET NULL | Set to NULL if source plan deleted       |
-| `task`           | `task`      | `parent_task_id`    | ON DELETE SET NULL | Set to NULL if source plan deleted       |
 
 # Default Values
 
 | Column           | Default Value     | Meaning                                                       |
 | ---------------- | ----------------- | ------------------------------------------------------------- |
 | `created_at`     | CURRENT_TIMESTAMP | Automatically stores record creation time                     |
-| `is_active`      | TRUE              | By default, plans are active upon creation                    |
-| `is_regenerated` | FALSE             | Plan days are considered original by default                  |
 | `is_completed`   | FALSE             | Tasks start as incomplete                                     |
 | `updated_at`     | CURRENT_TIMESTAMP | Initially sets update timestamp; should be updated on changes |
 | `completed_at`   | NULL              | Task completion time is null until marked completed           |
-| `is_custom`      | FALSE             | By default task is generated                                  |

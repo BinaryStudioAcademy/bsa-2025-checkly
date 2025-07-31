@@ -37,27 +37,25 @@ erDiagram
   }
 
   plan ||--|{ plan_day : "plan_day"
-  plan ||--o| plan : "plan"
   plan {
     int id PK
     varchar title
     int user_id FK
     varchar duration
     varchar intensity
-    int parent_plan_id FK
-    boolean is_active
     dateTime created_at
+    dateTime updated_at
   }
 
   plan_day ||--|{ task : "plan_day"
   plan_day {
     int id PK
     int day_number
-    boolean is_regenerated
     int plan_id FK
+    dateTime created_at
+    dateTime updated_at
   }
 
-  task ||--o| task : "task"
   task o|--|| execution_time_type : "enum:execution_time_type"
   task {
     int id PK
@@ -65,10 +63,9 @@ erDiagram
     text description
     int order
     int plan_day_id FK
-    boolean is_custom
-    int parent_task_id
     boolean is_completed
     execution_time_type execution_time
+    dateTime created_at
     dateTime updated_at
     dateTime completed_at
   }
