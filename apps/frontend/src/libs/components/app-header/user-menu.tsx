@@ -7,11 +7,11 @@ import { getClassNames } from "~/libs/helpers/helpers.js";
 
 import styles from "./styles.module.css";
 
-type UserMenuProperties = {
+type Properties = {
 	isOpen: boolean;
 };
 
-const UserMenu: React.FC<UserMenuProperties> = ({ isOpen }) => {
+const UserMenu: React.FC<Properties> = ({ isOpen }) => {
 	const menuDropdownClass = getClassNames(
 		styles["menu-dropdown"],
 		isOpen && styles["menu-dropdown--open"],
@@ -34,7 +34,8 @@ const UserMenu: React.FC<UserMenuProperties> = ({ isOpen }) => {
 						<button
 							aria-label="Dashboard"
 							className={dashboardClass}
-							tabIndex={-1}
+							role="menuitem"
+							tabIndex={0}
 							type="button"
 						>
 							<MdDashboard className={menuIconClass} />
@@ -47,7 +48,8 @@ const UserMenu: React.FC<UserMenuProperties> = ({ isOpen }) => {
 						<button
 							aria-label="Log out"
 							className={logoutClass}
-							tabIndex={-1}
+							role="menuitem"
+							tabIndex={0}
 							type="button"
 						>
 							<FiLogOut className={menuIconClass} />

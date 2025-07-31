@@ -20,7 +20,7 @@ const Hero: React.FC = () => (
 					AI-powered checklist generator for your goals — from fitness to
 					creativity
 				</h4>
-				<Link to={AppRoute.ROOT}>Start</Link>
+				<Link to={AppRoute.TEST_PAGE}>Start</Link>
 			</div>
 			<div className={styles["icons-wrapper"]}>
 				<img

@@ -1,23 +1,28 @@
 import { useEffect } from "react";
 
-type UseDropdownMenuProperties = {
+const Key = {
+	ARROW_DOWN: "ArrowDown",
+	ARROW_UP: "ArrowUp",
+	ESCAPE: "Escape",
+};
+
+const Step = {
+	DOWN: 1,
+	UP: -1,
+	ZERO_INDEX: 0,
+};
+
+type Properties = {
 	isMenuOpen: boolean;
 	menuReference: React.RefObject<HTMLDivElement | null>;
 	onClose: () => void;
 };
 
-const KEY_ESCAPE = "Escape";
-const KEY_ARROW_DOWN = "ArrowDown";
-const KEY_ARROW_UP = "ArrowUp";
-const STEP_UP = -1;
-const ZERO_INDEX = 0;
-const STEP_DOWN = 1;
-
 function useDropdownMenu({
 	isMenuOpen,
 	menuReference,
 	onClose,
-}: UseDropdownMenuProperties): void {
+}: Properties): void {
 	const handleClickOutside = (event: MouseEvent): void => {
 		if (
 			menuReference.current &&
@@ -28,24 +33,24 @@ function useDropdownMenu({
 	};
 
 	const handleKeyDown = (event: KeyboardEvent): void => {
-		if (event.key === KEY_ESCAPE) {
+		if (event.key === Key.ESCAPE) {
 			onClose();
 		}
 
-		if (event.key === KEY_ARROW_DOWN || event.key === KEY_ARROW_UP) {
+		if (event.key === Key.ARROW_DOWN || event.key === Key.ARROW_UP) {
 			const items = [
 				...(menuReference.current?.querySelectorAll(
 					"button[role='menuitem']",
 				) || []),
 			];
 
-			if (items.length === ZERO_INDEX) {
+			if (items.length === Step.ZERO_INDEX) {
 				return;
 			}
 
 			const { activeElement } = document;
 			let index = items.indexOf(activeElement as Element);
-			const step = event.key === KEY_ARROW_DOWN ? STEP_DOWN : STEP_UP;
+			const step = event.key === Key.ARROW_DOWN ? Step.DOWN : Step.UP;
 			index = (index + step + items.length) % items.length;
 			(items[index] as HTMLElement).focus();
 			event.preventDefault();
