@@ -7,7 +7,7 @@ type FeedBackProperties = {
 	avatar: string;
 	name: string;
 	text: string;
-}
+};
 
 const FeedbackCard: FC<FeedBackProperties> = ({ avatar, name, text }) => {
 	return (
