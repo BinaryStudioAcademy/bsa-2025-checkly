@@ -4,9 +4,8 @@ import swaggerUi from "@fastify/swagger-ui";
 import Fastify, { type FastifyError, type FastifyInstance } from "fastify";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { FastifyHook } from "shared";
 
-import { ServerErrorType } from "~/libs/enums/enums.js";
+import { FastifyHook, ServerErrorType } from "~/libs/enums/enums.js";
 import { type ValidationError } from "~/libs/exceptions/exceptions.js";
 import { type Config } from "~/libs/modules/config/config.js";
 import { type Database } from "~/libs/modules/database/database.js";

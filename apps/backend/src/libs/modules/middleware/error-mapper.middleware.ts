@@ -1,9 +1,14 @@
-import { type FastifyReply, type FastifyRequest } from "fastify";
-import { ErrorConstants, UserValidationRule } from "shared";
-import { type ServerErrorDetail } from "shared";
-
-import { ServerErrorType } from "~/libs/enums/enums.js";
-import { type EnumValue } from "~/libs/types/types.js";
+import {
+	ErrorConstants,
+	ServerErrorType,
+	UserValidationRule,
+} from "~/libs/enums/enums.js";
+import {
+	type EnumValue,
+	type FastifyReply,
+	type FastifyRequest,
+	type ServerErrorDetail,
+} from "~/libs/types/types.js";
 
 type ErrorPayload = {
 	details?: ServerErrorDetail[];
@@ -39,7 +44,6 @@ function initErrorMapperMiddleware() {
 
 				const { details } = errorPayload;
 				const hasDetails =
-					details !== undefined &&
 					Array.isArray(details) &&
 					details.length >= UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH;
 
