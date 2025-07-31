@@ -122,7 +122,7 @@ class AuthController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /auth/sign-in:
+	 * /auth/login:
 	 *    post:
 	 *      description: Sign in user into the system
 	 *      requestBody:
