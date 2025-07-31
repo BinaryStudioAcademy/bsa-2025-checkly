@@ -1,50 +1,16 @@
-import {
-	cat,
-	greenFlower,
-	pinkStars,
-	yellowStars,
-	yellowTwinkles,
-} from "~/assets/img/home/home.img.js";
 import { DecorativeImage, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
+import { decorativeImagesList } from "./libs/constants.js";
 import styles from "./styles.module.css";
-
-const decorativeImages = [
-	{
-		className: styles["green-flower"],
-		key: "green-flower",
-		src: greenFlower,
-	},
-	{
-		className: styles["yellow-twinkles"],
-		key: "yellow-twinkles",
-		src: yellowTwinkles,
-	},
-	{
-		className: styles["yellow-stars"],
-		key: "yellow-stars",
-		src: yellowStars,
-	},
-	{
-		className: styles["pink-stars"],
-		key: "pink-stars",
-		src: pinkStars,
-	},
-	{
-		className: styles["cat"],
-		key: "cat",
-		src: cat,
-	},
-];
 
 const Hero: React.FC = () => {
 	const renderDecorativeImages = (): React.ReactNode =>
-		decorativeImages.map((image) => (
+		decorativeImagesList.map((image) => (
 			<DecorativeImage
 				className={getClassNames(styles["floating-image"], image.className)}
-				key={image.key}
+				key={image.id}
 				src={image.src}
 			/>
 		));
