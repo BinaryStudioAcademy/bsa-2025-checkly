@@ -3,12 +3,16 @@ import { Link } from "react-router-dom";
 import {
 	cup,
 	laptop,
-	logo,
 	pinkStars,
 	twinkles,
 	yellowStars,
 } from "~/assets/img/sign-in/sign-in.img.js";
-import { Button, Input } from "~/libs/components/components.js";
+import {
+	Button,
+	DecorativeImage,
+	Input,
+} from "~/libs/components/components.js";
+import { Logo } from "~/libs/components/logo/logo.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
@@ -32,6 +36,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const yellowStarsClasses = getClassNames(
 		styles["floating-image"],
 		styles["yellow-stars"],
+		"show-desktop-up",
 	);
 	const twinklesClasses = getClassNames(
 		styles["floating-image"],
@@ -63,55 +68,55 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					"wrapper grid-pattern flow-loose",
 				)}
 			>
-				<header className="cluster">
-					<img alt="checkly logo" src={logo} />
-					<span>Logo</span>
-				</header>
-				<div className="flow">
-					<h1 className={styles["title"]}>Sign In</h1>
-					<p>
-						No account? Go to&nbsp;
-						<Link
-							className={styles["redirect-text__link"]}
-							to={AppRoute.SIGN_UP}
-						>
-							Create an account
-						</Link>
-					</p>
+				<div className="flow-loose">
+					<Logo />
+					<header className="flow">
+						<h1 className={styles["title"]} id="sign-in-title">
+							Sign In
+						</h1>
+						<p>
+							No account? Go to&nbsp;
+							<Link
+								aria-label="Go to create account page"
+								className={styles["redirect-text__link"]}
+								to={AppRoute.SIGN_UP}
+							>
+								Create an account
+							</Link>
+						</p>
+					</header>
 				</div>
 				<form
-					className={getClassNames(styles["form"], "cluster flow")}
+					aria-labelledby="sign-in-title"
+					className={getClassNames(styles["form"], "cluster")}
 					onSubmit={handleFormSubmit}
 				>
-					<Input
-						control={control}
-						errors={errors}
-						label="Email"
-						name="email"
-						placeholder="Enter your email"
-						type="email"
-					/>
-					<Input
-						control={control}
-						errors={errors}
-						label="Password"
-						name="password"
-						placeholder="Enter your password"
-						type="password"
-					/>
+					<div className="flow-loose">
+						<Input
+							control={control}
+							errors={errors}
+							label="Email"
+							name="email"
+							placeholder="Enter your email"
+							type="email"
+						/>
+						<Input
+							control={control}
+							errors={errors}
+							label="Password"
+							name="password"
+							placeholder="Enter your password"
+							type="password"
+						/>
+					</div>
 					<Button label="Sign In" type="submit" />
 				</form>
-				<img alt="" aria-hidden className={pinkStarsClasses} src={pinkStars} />
-				<img
-					alt=""
-					aria-hidden
-					className={yellowStarsClasses}
-					src={yellowStars}
-				/>
-				<img alt="" aria-hidden className={twinklesClasses} src={twinkles} />
-				<img alt="" aria-hidden className={laptopClasses} src={laptop} />
-				<img alt="" aria-hidden className={cupClasses} src={cup} />
+				<DecorativeImage className={pinkStarsClasses} src={pinkStars} />
+				<DecorativeImage className={cupClasses} src={cup} />
 			</main>
+			<DecorativeImage className={yellowStarsClasses} src={yellowStars} />
+			<DecorativeImage className={twinklesClasses} src={twinkles} />
+			<DecorativeImage className={laptopClasses} src={laptop} />
 		</div>
 	);
 };

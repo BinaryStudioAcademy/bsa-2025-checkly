@@ -1,6 +1,10 @@
 .container {
 	--cluster-wrap: nowrap;
 	--gutter: 0;
+
+	width: max-content;
+	font-size: var(--text-size-heading-3);
+	text-decoration: none;
 }
 
 .container img {
