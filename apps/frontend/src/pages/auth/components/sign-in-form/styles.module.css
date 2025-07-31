@@ -18,9 +18,9 @@
 	z-index: 200;
 	width: 100%;
 	max-width: 590px;
-	padding-block: var(--space-gutter-xl) var(--space-gutter-3xl);
-	padding-inline: var(--space-gutter-m-3xl);
-	margin-inline: var(--space-gutter-s);
+	padding-block: var(--space-xl) var(--space-3xl);
+	padding-inline: var(--space-m-3xl);
+	margin-inline: var(--space-s);
 	font-family: var(--font-family-primary);
 	background-color: var(--color-bg-white);
 	border-radius: var(--radius-l);

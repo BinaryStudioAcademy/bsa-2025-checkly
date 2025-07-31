@@ -3,7 +3,6 @@ export {
 	AppEnvironment,
 	ContentType,
 	ErrorMessage,
-	HTTPMethodEnum,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
 export {
@@ -19,6 +18,7 @@ export {
 	HTTPHeader,
 	type HTTPMethod,
 	type HTTPOptions,
+	HTTPRequestMethod,
 } from "./libs/modules/http/http.js";
 export { type Storage } from "./libs/modules/storage/storage.js";
 export {
@@ -33,8 +33,8 @@ export { AuthApiPath } from "./modules/auth/auth.js";
 export {
 	type SignUpFormValidationSchema,
 	type UserDto,
-	type UserGetAllItemResponseDto,
 	type UserGetAllResponseDto,
+	type UserProfileResponseDto,
 	UsersApiPath,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
