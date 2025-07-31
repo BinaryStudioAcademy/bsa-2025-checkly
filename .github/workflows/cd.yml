@@ -1,9 +1,9 @@
 name: Continuous Delivery
 
 env:
-  AWS_REGION: eu-central-1
-  EBS_APPLICATION_NAME: сheckly
-  EBS_ENVIRONMENT_NAME: development
+  AWS_REGION: eu-north-1
+  EBS_APPLICATION_NAME: checkly
+  EBS_ENVIRONMENT_NAME: checkly-environment
 
 on:
   push:
@@ -31,7 +31,7 @@ jobs:
 
       - name: Release
         id: release
-        uses: google-github-actions/release-please-action@v4
+        uses: googleapis/release-please-action@v4
         with:
           manifest-file: .release-please-manifest.json
           config-file: release-please-config.json
@@ -41,8 +41,8 @@ jobs:
     if: ${{ needs.release.outputs.release_created }}
     runs-on: ubuntu-latest
     environment:
-      name: development
-      url: http://сheckly.eu-central-1.elasticbeanstalk.com/
+      name: checkly-environment
+      url: http://checkly.eu-north-1.elasticbeanstalk.com/
 
     steps:
       - name: Code Checkout

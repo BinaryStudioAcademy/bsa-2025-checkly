@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums.js";
-import { showErrorToast } from "~/libs/helpers/helpers.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type UserDto } from "~/modules/users/users.js";
 
@@ -26,10 +25,9 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.FULFILLED;
 			state.user = action.payload;
 		});
-		builder.addCase(signUp.rejected, (state, action) => {
+		builder.addCase(signUp.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 			state.user = null;
-			showErrorToast(action.error.message as string);
 		});
 		builder.addCase(getCurrentUser.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
@@ -50,9 +48,9 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.FULFILLED;
 			state.user = action.payload;
 		});
-		builder.addCase(signIn.rejected, (state, action) => {
+		builder.addCase(signIn.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
-			showErrorToast(action.error.message as string);
+			state.user = null;
 		});
 	},
 	initialState,
