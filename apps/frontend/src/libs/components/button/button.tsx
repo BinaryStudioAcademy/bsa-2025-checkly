@@ -1,5 +1,5 @@
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { type ButtonVariant } from "~/libs/types/button.type.js";
+import { type ButtonVariant } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
 
