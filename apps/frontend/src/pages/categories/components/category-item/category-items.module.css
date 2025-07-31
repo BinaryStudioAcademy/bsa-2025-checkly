@@ -1,7 +1,7 @@
 .category-box {
 	position: relative;
 	text-align: center;
-	border: 1.75px solid var(--color-bg-dark);
+	border: 2px solid var(--color-bg-dark);
 	border-radius: 8px;
 }
 
@@ -9,79 +9,43 @@
 	width: 100%;
 	height: 100%;
 	padding-top: 62.5%;
+	cursor: pointer;
+	background-color: transparent;
+	border: none;
 }
 
-.category-title {
+.category-title-landing {
 	font-size: 20px;
+	line-height: 0.94;
 	color: var(--color-bg-dark);
 }
 
-.category-title::first-letter {
+.category-title {
+	font-size: 24px;
+	font-weight: var(--font-weight-bold);
+	line-height: 0.94;
+	color: var(--color-bg-dark);
+}
+
+.category-title::first-letter,
+.category-title-landing::first-letter {
 	text-transform: capitalize;
 }
 
-.image-position {
+.categories-image {
 	position: absolute;
+	width: 143px;
+	height: 132px;
 }
 
-.personal-dev-image {
-	right: 53px;
-	bottom: 89px;
+.landing-image-position {
+	right: 35px;
+	bottom: 75px;
 }
 
-.personal-dev-landing-image {
-	right: 37.5px;
-	bottom: 67.7px;
-}
-
-.spirituality-image {
-	right: 28px;
-	bottom: 100px;
-}
-
-.spirituality-landing-image {
-	right: 24.23px;
-	bottom: 73.8px;
-}
-
-.sport-image {
-	right: 33px;
-	bottom: 104px;
-}
-
-.sport-landing-image {
-	right: 29px;
-	bottom: 77px;
-}
-
-.money-image {
-	right: 24px;
-	bottom: 103px;
-}
-
-.money-landing-image {
-	right: 13.75px;
-	bottom: 85.4px;
-}
-
-.creativity-image {
-	right: 36.6px;
-	bottom: 78px;
-}
-
-.creativity-landing-image {
-	right: 18.33px;
-	bottom: 58px;
-}
-
-.hobby-image {
-	right: 33.5px;
-	bottom: 88px;
-}
-
-.hobby-landing-image {
-	right: 28.8px;
-	bottom: 49px;
+.image-position {
+	right: 48px;
+	bottom: 90px;
 }
 
 .checkbox-icon {
@@ -118,13 +82,18 @@
 
 .category-item-animation {
 	transform-origin: top right;
-	transition: transform 0.1s ease-in-out;
+	transition: box-shadow 0.3s ease-in-out;
 }
 
 .category-item-animation:hover,
 .category-item-animation:focus {
 	z-index: 2;
-	animation: rotation 0.8s ease;
+	box-shadow: 0 0 0 8px var(--color-brand-muted);
+}
+
+.category-item-animation:hover .categories-image,
+.category-item-animation:focus .categories-image {
+	animation: rotation 0.8s ease forwards;
 }
 
 @keyframes rotation {
@@ -132,11 +101,7 @@
 		transform: rotate(0deg);
 	}
 
-	50% {
-		transform: rotate(-10deg);
-	}
-
 	100% {
-		transform: rotate(0deg);
+		transform: rotate(-21deg);
 	}
 }

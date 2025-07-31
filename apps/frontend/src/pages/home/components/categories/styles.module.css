@@ -5,12 +5,16 @@ section[data-section-variant].categories {
 
 .title {
 	margin-bottom: 101px;
+	font-size: var(--text-size-heading-2);
+	line-height: var(--leading-fine);
 	text-align: center;
 }
 
 .category-list {
-	gap: 22.5px;
+	gap: var(--space-gutter-s);
 	justify-content: center;
+	padding: 0;
+	list-style: none;
 }
 
 .image-position {
@@ -32,4 +36,21 @@ section[data-section-variant].categories {
 	z-index: -1;
 	width: 126px;
 	height: 118px;
+}
+
+@media (width <= 575px) {
+	.title {
+		margin-bottom: 51px;
+		font-size: var(--text-size-heading-1);
+	}
+
+	.category-list {
+		gap: var(--space-gutter-l);
+	}
+}
+
+@media (768px <= width <= 1440px) {
+	.title {
+		margin-bottom: 81px;
+	}
 }
