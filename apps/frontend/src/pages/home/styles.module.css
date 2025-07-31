@@ -10,23 +10,6 @@ section[data-section-variant="dark"] {
 	background-color: var(--color-bg-dark);
 }
 
-section[data-section-variant="brand"] {
-	--grid-color: var(--color-brand-primary);
-	--grid-opacity: 0.5;
-
+.brand {
 	background-color: var(--color-card-blue);
-}
-
-.hero__section {
-	--grid-color: var(--color-card-gray);
-}
-
-.hero__content {
-	color: var(--color-bg-dark);
-	text-align: center;
-}
-
-.hero__title {
-	max-width: var(--size-text-max-width);
-	margin-inline: auto;
 }
