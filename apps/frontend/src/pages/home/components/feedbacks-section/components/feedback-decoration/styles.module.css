@@ -1,8 +1,8 @@
 .decorStarsTop {
 	position: absolute;
 	top: clamp(16px, 5vw, 40px);
-  left: 15%;
-  z-index: 1;
+	left: 15%;
+	z-index: 1;
 	width: clamp(60px, 10vw, 100%);
 }
 
