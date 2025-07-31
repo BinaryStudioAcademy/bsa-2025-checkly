@@ -11,7 +11,7 @@ section[data-section-variant].categories {
 }
 
 .category-list {
-	gap: var(--space-gutter-s);
+	gap: var(--space-s);
 	justify-content: center;
 	padding: 0;
 	list-style: none;
@@ -45,7 +45,11 @@ section[data-section-variant].categories {
 	}
 
 	.category-list {
-		gap: var(--space-gutter-l);
+		gap: var(--space-l);
+	}
+
+	section[data-section-variant].categories {
+		padding-bottom: 80px;
 	}
 }
 

@@ -1,5 +1,5 @@
 const AppRoute = {
-	CATEGORIES: "/categories",
+	CATEGORIES: "categories",
 	DASHBOARD: "/dashboard",
 	ROOT: "/",
 	SIGN_IN: "/sign-in",
