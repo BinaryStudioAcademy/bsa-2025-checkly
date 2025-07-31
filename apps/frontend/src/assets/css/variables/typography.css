@@ -34,5 +34,5 @@
 	--font-weight-heading: var(--font-weight-bold);
 	--font-weight-heading-semi-bold: var(--font-weight-semi-bold);
 	--font-weight-caption: var(--font-weight-medium);
-	--font-weight-button: var(--font-weight-semi-bold);
+	--font-weight-button: var(--font-weight-extra-bold);
 }
