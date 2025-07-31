@@ -53,11 +53,7 @@ const Input = <T extends FieldValues>({
 		isPasswordField && styles["input-field--password"],
 	);
 
-	const displayPasswordIcon = showPassword ? (
-		<EyeOpenIcon />
-	) : (
-		<EyeClosedIcon />
-	);
+	const passwordIcon = showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />;
 
 	return (
 		<div className={inputContainerClass}>
@@ -82,7 +78,7 @@ const Input = <T extends FieldValues>({
 						onClick={togglePasswordVisibility}
 						type="button"
 					>
-						<span aria-hidden="true">{displayPasswordIcon}</span>
+						<span aria-hidden="true">{passwordIcon}</span>
 					</button>
 				)}
 			</div>
