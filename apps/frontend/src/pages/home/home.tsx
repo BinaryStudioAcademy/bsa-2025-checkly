@@ -1,5 +1,4 @@
 import { Footer, Header, Hero, HowItWorks } from "./components/components.js";
-import styles from "./styles.module.css";
 
 const Home: React.FC = () => {
 	return (
