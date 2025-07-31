@@ -6,14 +6,8 @@ import {
 	UserValidationRule,
 } from "../enums/enums.js";
 
-type UserSignUpRequestValidationDto = {
-	email: z.ZodString;
-	name: z.ZodString;
-	password: z.ZodString;
-};
-
 const userSignUp = z
-	.object<UserSignUpRequestValidationDto>({
+	.object({
 		email: z
 			.string()
 			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
@@ -27,8 +21,20 @@ const userSignUp = z
 			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
 				message: UserValidationMessage.FIELD_REQUIRED,
 			})
-			.regex(UserValidationRegexRule.NAME_VALID_CHARS_MIN_MAX, {
-				message: UserValidationMessage.NAME_INVALID,
+			.min(UserValidationRule.NAME_MIN_LENGTH, {
+				message: UserValidationMessage.NAME_LENGTH,
+			})
+			.max(UserValidationRule.NAME_MAX_LENGTH, {
+				message: UserValidationMessage.NAME_LENGTH,
+			})
+			.refine(
+				(value) => UserValidationRegexRule.NAME_VALID_SURROUNDING.test(value),
+				{
+					message: UserValidationMessage.NAME_SURROUNDING_RULE,
+				},
+			)
+			.refine((value) => UserValidationRegexRule.NAME_VALID_CHARS.test(value), {
+				message: UserValidationMessage.NAME_ONLY_ALLOWED_CHARS,
 			}),
 		password: z
 			.string()
