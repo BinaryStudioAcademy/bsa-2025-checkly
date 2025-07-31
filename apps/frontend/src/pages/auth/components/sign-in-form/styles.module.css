@@ -1,6 +1,7 @@
 .container {
 	--grid-color: var(--color-grid-line-cream);
 
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -53,8 +54,8 @@
 }
 
 .yellow-stars {
-	top: -30%;
-	left: -42%;
+	top: 10%;
+	left: 15%;
 }
 
 .twinkles {
@@ -64,7 +65,8 @@
 
 .laptop {
 	top: 40%;
-	left: -65%;
+	left: clamp(0%, 12vw, 20%);
+	height: clamp(50px, 15vw, 200px);
 }
 
 .cup {

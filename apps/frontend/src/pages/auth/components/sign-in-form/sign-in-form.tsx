@@ -32,6 +32,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const yellowStarsClasses = getClassNames(
 		styles["floating-image"],
 		styles["yellow-stars"],
+		"show-desktop-up",
 	);
 	const twinklesClasses = getClassNames(
 		styles["floating-image"],
@@ -107,16 +108,16 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					<Button label="Sign In" type="submit" />
 				</form>
 				<img alt="" aria-hidden className={pinkStarsClasses} src={pinkStars} />
-				<img
-					alt=""
-					aria-hidden
-					className={yellowStarsClasses}
-					src={yellowStars}
-				/>
-				<img alt="" aria-hidden className={twinklesClasses} src={twinkles} />
-				<img alt="" aria-hidden className={laptopClasses} src={laptop} />
 				<img alt="" aria-hidden className={cupClasses} src={cup} />
 			</main>
+			<img
+				alt=""
+				aria-hidden
+				className={yellowStarsClasses}
+				src={yellowStars}
+			/>
+			<img alt="" aria-hidden className={twinklesClasses} src={twinkles} />
+			<img alt="" aria-hidden className={laptopClasses} src={laptop} />
 		</div>
 	);
 };
