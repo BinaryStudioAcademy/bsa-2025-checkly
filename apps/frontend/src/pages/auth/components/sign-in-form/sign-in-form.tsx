@@ -7,7 +7,11 @@ import {
 	twinkles,
 	yellowStars,
 } from "~/assets/img/sign-in/sign-in.img.js";
-import { Button, Input } from "~/libs/components/components.js";
+import {
+	Button,
+	DecorativeImage,
+	Input,
+} from "~/libs/components/components.js";
 import { Logo } from "~/libs/components/logo/logo.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
@@ -107,17 +111,12 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					</div>
 					<Button label="Sign In" type="submit" />
 				</form>
-				<img alt="" aria-hidden className={pinkStarsClasses} src={pinkStars} />
-				<img alt="" aria-hidden className={cupClasses} src={cup} />
+				<DecorativeImage className={pinkStarsClasses} src={pinkStars} />
+				<DecorativeImage className={cupClasses} src={cup} />
 			</main>
-			<img
-				alt=""
-				aria-hidden
-				className={yellowStarsClasses}
-				src={yellowStars}
-			/>
-			<img alt="" aria-hidden className={twinklesClasses} src={twinkles} />
-			<img alt="" aria-hidden className={laptopClasses} src={laptop} />
+			<DecorativeImage className={yellowStarsClasses} src={yellowStars} />
+			<DecorativeImage className={twinklesClasses} src={twinkles} />
+			<DecorativeImage className={laptopClasses} src={laptop} />
 		</div>
 	);
 };
