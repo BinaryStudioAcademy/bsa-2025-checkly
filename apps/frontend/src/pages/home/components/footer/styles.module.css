@@ -52,7 +52,7 @@
 	fill: var(--color-card-yellow);
 }
 
-@media (width >=  510px) and (width <= 768px) {
+@media (width >= 510px) and (width <= 768px) {
 	.footer {
 		--cluster-wrap: wrap;
 		--cluster-horizontal-alignment: space-between;
