@@ -16,16 +16,6 @@ type ErrorPayload = {
 	message?: string;
 };
 
-type FastifyPayload =
-	| boolean
-	| ErrorPayload
-	| null
-	| number
-	| Record<string, unknown>
-	| string
-	| undefined
-	| unknown[];
-
 type ServerErrorTypeValue = EnumValue<typeof ServerErrorType>;
 
 function initErrorMapperMiddleware() {
@@ -35,7 +25,7 @@ function initErrorMapperMiddleware() {
 	): Promise<void> => {
 		const originalSend = reply.send.bind(reply);
 
-		reply.send = (payload: FastifyPayload): FastifyReply => {
+		reply.send = (payload: unknown): FastifyReply => {
 			if (
 				reply.statusCode >= ErrorConstants.MIN_ERROR_STATUS_CODE &&
 				typeof payload === "object"
