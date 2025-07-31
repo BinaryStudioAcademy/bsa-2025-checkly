@@ -6,6 +6,7 @@ type Properties = {
 	disabled?: boolean;
 	icon?: React.ReactNode;
 	label: string;
+	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 	size?: "large" | "small";
 	type?: "button" | "submit";
 	variant?: "primary" | "secondary" | "transparent";
@@ -15,6 +16,7 @@ const Button: React.FC<Properties> = ({
 	disabled = false,
 	icon,
 	label,
+	onClick,
 	size = "large",
 	type = "button",
 	variant = "primary",
@@ -28,7 +30,12 @@ const Button: React.FC<Properties> = ({
 	);
 
 	return (
-		<button className={buttonClasses} disabled={disabled} type={type}>
+		<button
+			className={buttonClasses}
+			disabled={disabled}
+			onClick={onClick}
+			type={type}
+		>
 			{icon && (
 				<span aria-hidden="true" className={styles["button-icon"]}>
 					{icon}
