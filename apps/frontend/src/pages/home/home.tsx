@@ -1,6 +1,4 @@
-import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { Footer, Header, Hero } from "./components/components.js";
-
 import styles from "./styles.module.css";
 
 const Home: React.FC = () => {
