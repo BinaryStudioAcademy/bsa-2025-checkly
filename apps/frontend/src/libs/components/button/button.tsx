@@ -1,4 +1,5 @@
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { type ButtonVariant } from "~/libs/types/button.type.js";
 
 import styles from "./styles.module.css";
 
@@ -9,7 +10,7 @@ type Properties = {
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 	size?: "large" | "small";
 	type?: "button" | "submit";
-	variant?: "primary" | "secondary" | "transparent";
+	variant?: ButtonVariant;
 };
 
 const Button: React.FC<Properties> = ({
