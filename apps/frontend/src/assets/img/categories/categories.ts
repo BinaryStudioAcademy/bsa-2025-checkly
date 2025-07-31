@@ -1,3 +1,6 @@
+export { default as twinkles } from "../sign-in/twinkles.png";
+export { default as yellowStars } from "../sign-in/yellow-stars.png";
+export { default as blueArrow } from "./blue-arrow.svg";
 export { default as blueStars } from "./blueStars.svg";
 export { default as creativity } from "./creativity.png";
 export { default as hobby } from "./hobby.png";

@@ -27,17 +27,18 @@ const CategoryItemComponent: React.FC<Properties> = ({
 
 	const size = isLandingPage ? "175px" : "200px";
 
-	const imageClassKey = isLandingPage
-		? `${category.id}-landing-image`
-		: `${category.id}-image`;
+	const categoryTitle = isLandingPage
+		? styles["category-title-landing"]
+		: styles["category-title"];
 
-	const imageClasses = getClassNames(
-		styles["image-position"],
-		styles[imageClassKey],
-	);
+	const imageClassKey = isLandingPage
+		? styles["landing-image-position"]
+		: styles["image-position"];
+
+	const imageClasses = getClassNames(styles["categories-image"], imageClassKey);
 	const categoryItemClasses = getClassNames(
 		styles["category-box"],
-		styles[isLandingPage ? "category-item-animation" : ""],
+		styles["category-item-animation"],
 	);
 
 	return (
@@ -49,7 +50,7 @@ const CategoryItemComponent: React.FC<Properties> = ({
 				type="button"
 			>
 				<img
-					alt="checkbox icon"
+					alt="check-box icon"
 					className={styles["checkbox-icon"]}
 					src={isCurrentlySelected ? checkedIcon : unCheckedIcon}
 				/>
@@ -58,7 +59,7 @@ const CategoryItemComponent: React.FC<Properties> = ({
 					className={imageClasses}
 					src={category.image}
 				/>
-				<h2 className={styles["category-title"]}>{category.name}</h2>
+				<h2 className={categoryTitle}>{category.name}</h2>
 			</button>
 		</li>
 	);
