@@ -15,7 +15,7 @@ const DecorativeImage: React.FC<Properties> = ({
 		alt=""
 		aria-hidden="true"
 		className={getClassNames(styles["decorative-image"], className)}
-		draggable={false}
+		draggable="false"
 		loading="lazy"
 		src={src}
 	/>
