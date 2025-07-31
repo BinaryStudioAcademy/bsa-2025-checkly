@@ -3,13 +3,13 @@ import { type FC } from "react";
 import { UserAvatar } from "../user-avatar/user-avatar.js";
 import styles from "./styles.module.css";
 
-interface Properties {
+type FeedBackProperties = {
 	avatar: string;
 	name: string;
 	text: string;
 }
 
-const FeedbackCard: FC<Properties> = ({ avatar, name, text }) => {
+const FeedbackCard: FC<FeedBackProperties> = ({ avatar, name, text }) => {
 	return (
 		<div className={styles["card"]}>
 			<p className={styles["text"]}>{text}</p>
