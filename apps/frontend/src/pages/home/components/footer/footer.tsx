@@ -11,8 +11,8 @@ const Footer: React.FC = () => {
 		>
 			<div className={getClassNames("cluster", styles["logo-wrapper"])}>
 				<Link to="/">
-					<Logo />
-					<span>LOGO</span>
+					<Logo aria-hidden="true" />
+					LOGO
 				</Link>
 			</div>
 
@@ -24,13 +24,13 @@ const Footer: React.FC = () => {
 
 			<nav className={getClassNames("cluster", styles["social-links"])}>
 				<Link aria-label="Instagram" to="/">
-					<IgIcon />
+					<IgIcon aria-hidden="true" />
 				</Link>
 				<Link aria-label="Facebook" to="/">
-					<FbIcon />
+					<FbIcon aria-hidden="true" />
 				</Link>
 				<Link aria-label="YouTube" to="/">
-					<YtIcon />
+					<YtIcon aria-hidden="true" />
 				</Link>
 			</nav>
 		</footer>
