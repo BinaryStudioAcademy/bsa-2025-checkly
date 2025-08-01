@@ -1,0 +1,50 @@
+.input-container {
+	--gutter: var(--space-2xs);
+
+	position: relative;
+	width: 100%;
+	font-size: var(--text-body);
+	font-weight: var(--font-weight-body-small);
+}
+
+.input-field {
+	width: 100%;
+	padding: var(--space-xs) var(--space-s);
+	border: 2px solid var(--color-bg-dark);
+	border-radius: var(--radius-s);
+}
+
+.input-field::placeholder {
+	font-weight: var(--font-weight-body-small);
+	opacity: 0.85;
+}
+
+.input-field:focus {
+	outline: 4px solid var(--color-brand-muted);
+	outline-offset: 0;
+}
+
+.input-field--error {
+	border-color: var(--color-brand-accent);
+}
+
+.input-field__error {
+	font-size: var(--text-caption);
+	color: var(--color-brand-accent);
+}
+
+.input-wrapper {
+	position: relative;
+	width: 100%;
+}
+
+.input-field--password {
+	padding-right: var(--space-xl);
+}
+
+.password-toggle-button {
+	position: absolute;
+	top: 50%;
+	right: var(--space-xs);
+	transform: translateY(-50%);
+}
