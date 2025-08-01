@@ -6,6 +6,8 @@ import styles from "./styles.module.css";
 type Properties = {
 	disabled?: boolean;
 	icon?: React.ReactNode;
+	iconOnlySize?: "large" | "medium" | "small";
+	isIconOnly?: boolean;
 	label: string;
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 	size?: "large" | "small";
@@ -16,6 +18,8 @@ type Properties = {
 const Button: React.FC<Properties> = ({
 	disabled = false,
 	icon,
+	iconOnlySize = "large",
+	isIconOnly = false,
 	label,
 	onClick,
 	size = "large",
@@ -27,11 +31,14 @@ const Button: React.FC<Properties> = ({
 		styles[`button-${variant}`],
 		styles[`button-${size}`],
 		styles["button-cluster"],
+		isIconOnly && styles["button-icon-only"],
+		isIconOnly && styles[`button-icon-only-${iconOnlySize}`],
 		"cluster",
 	);
 
 	return (
 		<button
+			aria-label={isIconOnly ? label : undefined}
 			className={buttonClasses}
 			disabled={disabled}
 			onClick={onClick}
@@ -42,7 +49,7 @@ const Button: React.FC<Properties> = ({
 					{icon}
 				</span>
 			)}
-			<span>{label}</span>
+			{!isIconOnly && <span>{label}</span>}
 		</button>
 	);
 };
