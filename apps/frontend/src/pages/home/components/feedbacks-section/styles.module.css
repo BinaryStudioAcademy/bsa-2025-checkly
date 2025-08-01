@@ -33,7 +33,7 @@
 	position: relative;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 24px;
+	gap: var(--step-2);
 	justify-content: center;
 	width: 100%;
 }

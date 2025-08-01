@@ -8,10 +8,17 @@
 
 .orangeDecor {
 	position: absolute;
-	top: clamp(16px, 5vw, 40px);
-	left: 60%;
+	top: clamp(1rem, 5vw, 2.5rem);
+	left: 65%;
 	z-index: 1;
-	width: clamp(60px, 20vw, 100%);
+	width: clamp(2rem, 8vw + 1rem, 8rem);
+	height: clamp(2rem, 8vw + 1rem, 8rem);
+	transform: scale(1);
+	transition: transform 0.3s ease;
+}
+
+.orangeDecor:hover {
+	transform: scale(1.1);
 }
 
 .dogImage {
@@ -36,16 +43,10 @@
 
 @media (width <= 1024px) {
 	.dogImage {
-		width: 200px;
-	}
-
-	.orangeDecor {
-		top: 50px;
-		left: 63%;
+		width: clamp(150px, 15vw, 200px);
 	}
 
 	.decorStarsTop {
-		top: 50px;
 		left: 10%;
 	}
 }

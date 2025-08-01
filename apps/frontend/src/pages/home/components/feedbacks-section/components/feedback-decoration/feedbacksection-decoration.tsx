@@ -9,7 +9,7 @@ const FeedbackSectionDecoration: FC = () => {
 				<img alt="" src="src/assets/img/home/yellow-stars_2x.svg" />
 			</div>
 			<div className={styles["orangeDecor"]}>
-				<img alt="" src="src/assets/img/home/orange.png" />
+				<img alt="" src="src/assets/img/sign-up/orange.png" />
 			</div>
 			<div className={styles["dogImage"]}>
 				<div className={styles["pinkStars"]}>
