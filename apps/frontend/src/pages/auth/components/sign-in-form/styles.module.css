@@ -1,12 +1,14 @@
 .container {
 	--grid-color: var(--color-grid-line-cream);
 
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	height: 100vh;
-	overflow: hidden;
+	min-height: 100vh;
+	padding-block: var(--space-3xl);
+	overflow-x: hidden;
 	background-color: var(--color-card-yellow);
 }
 
@@ -39,6 +41,7 @@
 .form {
 	--cluster-direction: column;
 	--cluster-vertical-alignment: stretch;
+	--gutter: var(--space-xl);
 }
 
 .floating-image {
@@ -51,8 +54,8 @@
 }
 
 .yellow-stars {
-	top: -30%;
-	left: -42%;
+	top: 10%;
+	left: 15%;
 }
 
 .twinkles {
@@ -62,11 +65,12 @@
 
 .laptop {
 	top: 40%;
-	left: -65%;
+	left: clamp(0%, 12vw, 20%);
+	height: clamp(50px, 15vw, 200px);
 }
 
 .cup {
-	top: clamp(-80px, -8vw, -40px);
+	top: clamp(-80px, 8vw, -100px);
 	right: 5%;
 	display: inline-block;
 	width: clamp(120px, 10vw, 140px);

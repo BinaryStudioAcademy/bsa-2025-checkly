@@ -45,7 +45,7 @@ class AuthService {
 
 		if (!isPasswordValid) {
 			throw new AuthorizationError({
-				message: UserValidationMessage.PASSWORD_INVALID,
+				message: UserValidationMessage.WRONG_PASSWORD,
 				status: HTTPCode.UNAUTHORIZED,
 			});
 		}
