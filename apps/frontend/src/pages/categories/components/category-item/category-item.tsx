@@ -49,11 +49,14 @@ const CategoryItemComponent: React.FC<Properties> = ({
 				onClick={handleButtonClick}
 				type="button"
 			>
-				<img
-					alt="check-box icon"
-					className={styles["checkbox-icon"]}
-					src={isCurrentlySelected ? checkedIcon : unCheckedIcon}
-				/>
+				{!isLandingPage && (
+					<img
+						alt="check-box icon"
+						className={styles["checkbox-icon"]}
+						src={isCurrentlySelected ? checkedIcon : unCheckedIcon}
+					/>
+				)}
+
 				<img
 					alt={category.name}
 					className={imageClasses}

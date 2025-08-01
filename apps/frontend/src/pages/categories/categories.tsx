@@ -6,7 +6,7 @@ import {
 	twinkles,
 	yellowStars,
 } from "~/assets/img/categories/categories.js";
-import { Button } from "~/libs/components/components.js";
+import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { CategoryItem } from "~/pages/categories/components/category-item/category-item.js";
@@ -15,7 +15,9 @@ import { categories } from "~/pages/categories/libs/constants.js";
 import styles from "./styles.module.css";
 
 const CategoriesPage: React.FC = () => {
-	const [activeCategory, setActiveCategory] = useState<null | string>(null);
+	const [activeCategory, setActiveCategory] = useState<null | string>(
+		"creativity",
+	);
 
 	const handleCategoryClick = useCallback(
 		(category: string) => {
@@ -67,16 +69,12 @@ const CategoriesPage: React.FC = () => {
 							/>
 						))}
 					</ul>
-					<Button label="Create an account" type="button" />
+					<Button disabled={!activeCategory} label="next" type="button" />
 				</div>
-				<img alt="twinkles" className={twinklesClasses} src={twinkles} />
-				<img alt="blue-arrow" className={blueArrowClasses} src={blueArrow} />
-				<img
-					alt="yellow stars"
-					className={yellowStarsClasses}
-					src={yellowStars}
-				/>
-				<img alt="blue stars" className={blueStarsClasses} src={blueStars} />
+				<DecorativeImage className={twinklesClasses} src={twinkles} />
+				<DecorativeImage className={blueArrowClasses} src={blueArrow} />
+				<DecorativeImage className={yellowStarsClasses} src={yellowStars} />
+				<DecorativeImage className={blueStarsClasses} src={blueStars} />
 			</div>
 		</section>
 	);
