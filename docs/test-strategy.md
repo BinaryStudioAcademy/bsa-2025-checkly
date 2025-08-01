@@ -240,7 +240,7 @@ _→ What should have happened instead?_
 
 ## ✅ Example
 
-You can find examples of completed reports in the Tickets marked as **Bug** in te [project's board](https://github.com/orgs/BinaryStudioAcademy/projects/33/views/1?filterQuery=type%3ABug).
+You can find examples of completed reports in the Tickets marked as **Bug** in the [project's board](https://github.com/orgs/BinaryStudioAcademy/projects/33/views/1?filterQuery=type%3ABug).
 
 ---
 
