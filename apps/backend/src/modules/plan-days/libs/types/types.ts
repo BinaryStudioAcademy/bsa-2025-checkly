@@ -1,5 +1,5 @@
 export {
+	type PlanDayCreateRequestDto,
 	type PlanDayGetAllResponseDto,
-	type PlanDayRequestDto,
 	type PlanDayResponseDto,
 } from "shared";

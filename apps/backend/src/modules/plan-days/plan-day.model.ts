@@ -35,8 +35,6 @@ class PlanDayModel extends AbstractModel {
 
 	public dayNumber!: number;
 
-	public isRegenerated!: boolean;
-
 	public planId!: number;
 }
 

@@ -1,1 +1,4 @@
-export { planCreate } from "./plan-create.validation-schema.js";
+export {
+	planCreate,
+	type PlanCreateRequestDto,
+} from "./plan-create.validation-schema.js";

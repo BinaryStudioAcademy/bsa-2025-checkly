@@ -10,5 +10,5 @@ const taskService = new TaskService(taskRepository);
 const taskController = new TaskController(logger, taskService);
 
 export { taskController };
-export { type TaskRequestDto } from "./libs/types/types.js";
+export { type TaskCreateRequestDto } from "./libs/types/types.js";
 export { taskCreateValidationSchema } from "./libs/validation-schemas/validation-schemas.js";

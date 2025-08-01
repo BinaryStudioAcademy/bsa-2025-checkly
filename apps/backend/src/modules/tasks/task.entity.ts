@@ -13,11 +13,7 @@ class TaskEntity implements Entity {
 
 	private isCompleted: boolean;
 
-	private isCustom: boolean;
-
 	private order: number;
-
-	private parentTaskId: null | number;
 
 	private planDayId: number;
 
@@ -29,9 +25,7 @@ class TaskEntity implements Entity {
 		executionTimeType,
 		id,
 		isCompleted,
-		isCustom,
 		order,
-		parentTaskId,
 		planDayId,
 		title,
 	}: {
@@ -40,9 +34,7 @@ class TaskEntity implements Entity {
 		executionTimeType: ValueOf<typeof ExecutionTimeType>;
 		id: null | number;
 		isCompleted: boolean;
-		isCustom: boolean;
 		order: number;
-		parentTaskId: null | number;
 		planDayId: number;
 		title: string;
 	}) {
@@ -52,8 +44,6 @@ class TaskEntity implements Entity {
 		this.order = order;
 		this.planDayId = planDayId;
 		this.isCompleted = isCompleted;
-		this.isCustom = isCustom;
-		this.parentTaskId = parentTaskId;
 		this.executionTimeType = executionTimeType;
 		this.completedAt = completedAt;
 	}
@@ -64,9 +54,7 @@ class TaskEntity implements Entity {
 		executionTimeType,
 		id,
 		isCompleted,
-		isCustom,
 		order,
-		parentTaskId,
 		planDayId,
 		title,
 	}: {
@@ -75,9 +63,7 @@ class TaskEntity implements Entity {
 		executionTimeType: ValueOf<typeof ExecutionTimeType>;
 		id: number;
 		isCompleted: boolean;
-		isCustom: boolean;
 		order: number;
-		parentTaskId: null | number;
 		planDayId: number;
 		title: string;
 	}): TaskEntity {
@@ -87,9 +73,7 @@ class TaskEntity implements Entity {
 			executionTimeType,
 			id,
 			isCompleted,
-			isCustom,
 			order,
-			parentTaskId,
 			planDayId,
 			title,
 		});
@@ -100,9 +84,7 @@ class TaskEntity implements Entity {
 		description,
 		executionTimeType,
 		isCompleted,
-		isCustom,
 		order,
-		parentTaskId,
 		planDayId,
 		title,
 	}: {
@@ -110,9 +92,7 @@ class TaskEntity implements Entity {
 		description: string;
 		executionTimeType?: ValueOf<typeof ExecutionTimeType>;
 		isCompleted?: boolean;
-		isCustom?: boolean;
 		order: number;
-		parentTaskId?: null | number;
 		planDayId: number;
 		title: string;
 	}): TaskEntity {
@@ -122,9 +102,7 @@ class TaskEntity implements Entity {
 			executionTimeType: executionTimeType ?? ExecutionTimeType.MORNING,
 			id: null,
 			isCompleted: isCompleted ?? false,
-			isCustom: isCustom ?? false,
 			order,
-			parentTaskId: parentTaskId ?? null,
 			planDayId,
 			title,
 		});
@@ -134,9 +112,7 @@ class TaskEntity implements Entity {
 		description: string;
 		executionTimeType: ValueOf<typeof ExecutionTimeType>;
 		isCompleted: boolean;
-		isCustom: boolean;
 		order: number;
-		parentTaskId: null | number;
 		planDayId: number;
 		title: string;
 	} {
@@ -144,9 +120,7 @@ class TaskEntity implements Entity {
 			description: this.description,
 			executionTimeType: this.executionTimeType,
 			isCompleted: this.isCompleted,
-			isCustom: this.isCustom,
 			order: this.order,
-			parentTaskId: this.parentTaskId,
 			planDayId: this.planDayId,
 			title: this.title,
 		};
@@ -158,9 +132,7 @@ class TaskEntity implements Entity {
 		executionTimeType: ValueOf<typeof ExecutionTimeType>;
 		id: number;
 		isCompleted: boolean;
-		isCustom: boolean;
 		order: number;
-		parentTaskId: null | number;
 		planDayId: number;
 		title: string;
 	} {
@@ -170,9 +142,7 @@ class TaskEntity implements Entity {
 			executionTimeType: this.executionTimeType,
 			id: this.id as number,
 			isCompleted: this.isCompleted,
-			isCustom: this.isCustom,
 			order: this.order,
-			parentTaskId: this.parentTaskId,
 			planDayId: this.planDayId,
 			title: this.title,
 		};

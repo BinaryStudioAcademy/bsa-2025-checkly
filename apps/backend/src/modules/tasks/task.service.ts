@@ -3,8 +3,8 @@ import { TaskEntity } from "~/modules/tasks/task.entity.js";
 import { type TaskRepository } from "~/modules/tasks/task.repository.js";
 
 import {
+	type TaskCreateRequestDto,
 	type TaskGetAllResponseDto,
-	type TaskRequestDto,
 	type TaskResponseDto,
 } from "./libs/types/types.js";
 
@@ -15,7 +15,7 @@ class TaskService implements Service {
 		this.taskRepository = taskRepository;
 	}
 
-	public async create(payload: TaskRequestDto): Promise<TaskResponseDto> {
+	public async create(payload: TaskCreateRequestDto): Promise<TaskResponseDto> {
 		const item = await this.taskRepository.create(
 			TaskEntity.initializeNew(payload),
 		);

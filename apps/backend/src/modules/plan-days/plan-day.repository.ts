@@ -9,13 +9,12 @@ class PlanDayRepository implements Repository {
 	}
 
 	public async create(entity: PlanDayEntity): Promise<PlanDayEntity> {
-		const { dayNumber, isRegenerated, planId } = entity.toNewObject();
+		const { dayNumber, planId } = entity.toNewObject();
 
 		const planDays = await this.planDayModel
 			.query()
 			.insert({
 				dayNumber,
-				isRegenerated,
 				planId,
 			})
 			.returning("*")

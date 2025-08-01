@@ -1,9 +1,7 @@
 type PlanResponseDto = {
-	duration: string;
+	duration: number;
 	id: number;
 	intensity: string;
-	isActive: boolean;
-	parentPlanId: null | number;
 	title: string;
 	userId: number;
 };

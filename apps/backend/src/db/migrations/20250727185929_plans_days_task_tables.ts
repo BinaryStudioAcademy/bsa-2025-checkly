@@ -12,8 +12,6 @@ const PlanColumnName = {
 	DURATION: "duration",
 	ID: "id",
 	INTENSITY: "intensity",
-	IS_ACTIVE: "is_active",
-	PARENT_PLAN_ID: "parent_plan_id",
 	TITLE: "title",
 	UPDATED_AT: "updated_at",
 	USER_ID: "user_id",
@@ -22,7 +20,6 @@ const PlanColumnName = {
 const PlanDayColumnName = {
 	DAY_NUMBER: "day_number",
 	ID: "id",
-	IS_REGENERATED: "is_regenerated",
 	PLAN_ID: "plan_id",
 } as const;
 
@@ -32,9 +29,7 @@ const TaskColumnName = {
 	EXECUTION_TIME_TYPE: "execution_time_type",
 	ID: "id",
 	IS_COMPLETED: "is_completed",
-	IS_CUSTOM: "is_custom",
 	ORDER: "order",
-	PARENT_TASK_ID: "parent_task_id",
 	PLAN_DAY_ID: "plan_day_id",
 	TITLE: "title",
 	UPDATED_AT: "updated_at",
@@ -51,7 +46,6 @@ const ENUM_TYPE_NAME = {
 const EXECUTION_TYPE = ["morning", "afternoon", "evening"];
 
 const COLUMN_LENGTH = {
-	DURATION: 50,
 	INTENSITY: 50,
 	TASK_TITLE: 200,
 	TITLE: 100,
@@ -75,16 +69,10 @@ async function up(knex: Knex): Promise<void> {
 			.references(UserColumnName.ID)
 			.inTable(TABLE_NAMES.USERS)
 			.onDelete("CASCADE");
-		table.string(PlanColumnName.DURATION, COLUMN_LENGTH.DURATION).notNullable();
+		table.integer(PlanColumnName.DURATION).notNullable().checkPositive();
 		table
 			.string(PlanColumnName.INTENSITY, COLUMN_LENGTH.INTENSITY)
 			.notNullable();
-		table
-			.integer(PlanColumnName.PARENT_PLAN_ID)
-			.references(PlanColumnName.ID)
-			.inTable(TABLE_NAMES.PLAN)
-			.onDelete("SET NULL");
-		table.boolean(PlanColumnName.IS_ACTIVE).notNullable().defaultTo(true);
 		table
 			.timestamp(PlanColumnName.CREATED_AT, { useTz: true })
 			.notNullable()
@@ -98,10 +86,6 @@ async function up(knex: Knex): Promise<void> {
 	await knex.schema.createTable(TABLE_NAMES.PLAN_DAY, (table) => {
 		table.increments(PlanDayColumnName.ID).primary();
 		table.integer(PlanDayColumnName.DAY_NUMBER).notNullable().checkPositive();
-		table
-			.boolean(PlanDayColumnName.IS_REGENERATED)
-			.notNullable()
-			.defaultTo(false);
 		table
 			.integer(PlanDayColumnName.PLAN_ID)
 			.notNullable()
@@ -130,12 +114,6 @@ async function up(knex: Knex): Promise<void> {
 			.inTable(TABLE_NAMES.PLAN_DAY)
 			.onDelete("CASCADE");
 		table.boolean(TaskColumnName.IS_COMPLETED).notNullable().defaultTo(false);
-		table.boolean(TaskColumnName.IS_CUSTOM).notNullable().defaultTo(false);
-		table
-			.integer(TaskColumnName.PARENT_TASK_ID)
-			.references(TaskColumnName.ID)
-			.inTable(TABLE_NAMES.TASK)
-			.onDelete("SET NULL");
 		table
 			.enu(TaskColumnName.EXECUTION_TIME_TYPE, EXECUTION_TYPE, {
 				enumName: ENUM_TYPE_NAME.EXECUTION_TIME,

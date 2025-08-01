@@ -8,8 +8,8 @@ import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type PlanService } from "~/modules/plans/plan.service.js";
 import {
+	type PlanCreateRequestDto,
 	planCreateValidationSchema,
-	type PlanRequestDto,
 } from "~/modules/plans/plans.js";
 
 import { PlansApiPath } from "./libs/enums/enums.js";
@@ -34,11 +34,6 @@ import { PlansApiPath } from "./libs/enums/enums.js";
  *           type: number
  *         isCompleted:
  *           type: boolean
- *         isCustom:
- *           type: boolean
- *         parentTaskId:
- *           type: number
- *           nullable: true
  *         executionTimeType:
  *           type: string
  *         completedAt:
@@ -52,8 +47,6 @@ import { PlansApiPath } from "./libs/enums/enums.js";
  *           type: number
  *         dayNumber:
  *           type: number
- *         isRegenerated:
- *           type: boolean
  *         tasks:
  *           type: array
  *           items:
@@ -67,16 +60,11 @@ import { PlansApiPath } from "./libs/enums/enums.js";
  *         title:
  *           type: string
  *         duration:
- *           type: string
+ *           type: number
  *         intensity:
  *           type: string
- *         isActive:
- *           type: boolean
  *         userId:
  *           type: number
- *         parentPlanId:
- *           type: number
- *           nullable: true
  *
  *     PlanDaysTaskDto:
  *       allOf:
@@ -101,12 +89,9 @@ import { PlansApiPath } from "./libs/enums/enums.js";
  *         userId:
  *           type: number
  *         duration:
- *           type: string
+ *           type: number
  *         intensity:
  *           type: string
- *         parentPlanId:
- *           type: number
- *           nullable: true
  *
  *     PlanResponseDto:
  *       type: object
@@ -118,21 +103,14 @@ import { PlansApiPath } from "./libs/enums/enums.js";
  *           type: string
  *           example: "Weight Loss Plan"
  *         duration:
- *           type: string
- *           example: "4 weeks"
+ *           type: number
+ *           example: 5
  *         intensity:
  *           type: string
  *           example: "high"
- *         isActive:
- *           type: boolean
- *           example: true
  *         userId:
  *           type: number
  *           example: 1
- *         parentPlanId:
- *           type: number
- *           nullable: true
- *           example: null
  */
 class PlanController extends BaseController {
 	private planService: PlanService;
@@ -153,7 +131,7 @@ class PlanController extends BaseController {
 			handler: (options) =>
 				this.create(
 					options as APIHandlerOptions<{
-						body: PlanRequestDto;
+						body: PlanCreateRequestDto;
 					}>,
 				),
 			method: "POST",
@@ -171,6 +149,8 @@ class PlanController extends BaseController {
 	 *     tags:
 	 *       - plans
 	 *     summary: Create a new plan
+	 *     security:
+	 *       - bearerAuth: []
 	 *     requestBody:
 	 *       required: true
 	 *       content:
@@ -184,9 +164,19 @@ class PlanController extends BaseController {
 	 *           application/json:
 	 *             schema:
 	 *               $ref: '#/components/schemas/PlanResponseDto'
+	 *       401:
+	 *         description: Unauthorized - Invalid or missing authentication token
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 message:
+	 *                   type: string
+	 *                   example: "Unauthorized"
 	 */
 	private async create(
-		options: APIHandlerOptions<{ body: PlanRequestDto }>,
+		options: APIHandlerOptions<{ body: PlanCreateRequestDto }>,
 	): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.planService.create(options.body),
@@ -201,6 +191,8 @@ class PlanController extends BaseController {
 	 *     tags:
 	 *       - plans
 	 *     summary: Get plan by ID
+	 *     security:
+	 *       - bearerAuth: []
 	 *     parameters:
 	 *       - in: path
 	 *         name: id
@@ -215,6 +207,16 @@ class PlanController extends BaseController {
 	 *           application/json:
 	 *             schema:
 	 *               $ref: '#/components/schemas/PlanDaysTaskDto'
+	 *       401:
+	 *         description: Unauthorized - Invalid or missing authentication token
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 message:
+	 *                   type: string
+	 *                   example: "Unauthorized"
 	 */
 	private async findById(
 		options: APIHandlerOptions<{ params: { id: number } }>,

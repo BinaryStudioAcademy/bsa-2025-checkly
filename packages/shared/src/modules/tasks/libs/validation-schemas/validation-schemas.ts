@@ -1,1 +1,4 @@
-export { taskCreate } from "./task-create.validation-schema.js";
+export {
+	taskCreate,
+	type TaskCreateRequestDto,
+} from "./task-create.validation-schema.js";

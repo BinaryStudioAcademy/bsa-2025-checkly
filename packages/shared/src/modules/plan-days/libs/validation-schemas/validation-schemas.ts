@@ -1,1 +1,4 @@
-export { planDayCreate } from "./plan-day-create.validation-schema.js";
+export {
+	planDayCreate,
+	type PlanDayCreateRequestDto,
+} from "./plan-day-create.validation-schema.js";

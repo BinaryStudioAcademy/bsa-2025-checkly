@@ -3,8 +3,8 @@ import { PlanDayEntity } from "~/modules/plan-days/plan-day.entity.js";
 import { type PlanDayRepository } from "~/modules/plan-days/plan-day.repository.js";
 
 import {
+	type PlanDayCreateRequestDto,
 	type PlanDayGetAllResponseDto,
-	type PlanDayRequestDto,
 	type PlanDayResponseDto,
 } from "./libs/types/types.js";
 
@@ -15,7 +15,9 @@ class PlanDayService implements Service {
 		this.planDayRepository = planRepository;
 	}
 
-	public async create(payload: PlanDayRequestDto): Promise<PlanDayResponseDto> {
+	public async create(
+		payload: PlanDayCreateRequestDto,
+	): Promise<PlanDayResponseDto> {
 		const item = await this.planDayRepository.create(
 			PlanDayEntity.initializeNew(payload),
 		);

@@ -8,8 +8,8 @@ import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type PlanDayService } from "~/modules/plan-days/plan-day.service.js";
 import {
+	type PlanDayCreateRequestDto,
 	planDayCreateValidationSchema,
-	type PlanDayRequestDto,
 } from "~/modules/plan-days/plan-days.js";
 
 import { PlanDaysApiPath } from "./libs/enums/enums.js";
@@ -33,7 +33,7 @@ class PlanDayController extends BaseController {
 			handler: (options) =>
 				this.create(
 					options as APIHandlerOptions<{
-						body: PlanDayRequestDto;
+						body: PlanDayCreateRequestDto;
 					}>,
 				),
 			method: "POST",
@@ -45,7 +45,7 @@ class PlanDayController extends BaseController {
 	}
 
 	private async create(
-		options: APIHandlerOptions<{ body: PlanDayRequestDto }>,
+		options: APIHandlerOptions<{ body: PlanDayCreateRequestDto }>,
 	): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.planDayService.create(options.body),

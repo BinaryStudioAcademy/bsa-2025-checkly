@@ -14,18 +14,16 @@ const taskCreate = z.object({
 			message: TaskValidationMessage.FIELD_REQUIRED,
 		}),
 	executionTimeType: z
-		.enum(Object.values(ExecutionTimeType) as [string, ...string[]])
+		.nativeEnum(ExecutionTimeType)
 		.optional()
 		.default("morning"),
 	isCompleted: z.boolean().optional().default(false),
-	isCustom: z.boolean().optional().default(false),
 	order: z
 		.number({
 			required_error: TaskValidationMessage.FIELD_REQUIRED,
 		})
 		.int()
 		.positive(),
-	parentTaskId: z.number().nullable().optional(),
 	planDayId: z
 		.number({
 			required_error: TaskValidationMessage.FIELD_REQUIRED,
@@ -37,4 +35,6 @@ const taskCreate = z.object({
 	}),
 });
 
-export { taskCreate };
+type TaskCreateRequestDto = z.infer<typeof taskCreate>;
+
+export { taskCreate, type TaskCreateRequestDto };

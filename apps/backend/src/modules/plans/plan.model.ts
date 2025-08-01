@@ -25,13 +25,9 @@ class PlanModel extends AbstractModel {
 		return DatabaseTableName.PLANS;
 	}
 
-	public duration!: string;
+	public duration!: number;
 
 	public intensity!: string;
-
-	public isActive!: boolean;
-
-	public parentPlanId!: null | number;
 
 	public title!: string;
 

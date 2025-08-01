@@ -8,8 +8,8 @@ import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type TaskService } from "~/modules/tasks/task.service.js";
 import {
+	type TaskCreateRequestDto,
 	taskCreateValidationSchema,
-	type TaskRequestDto,
 } from "~/modules/tasks/tasks.js";
 
 import { TasksApiPath } from "./libs/enums/enums.js";
@@ -33,7 +33,7 @@ class TaskController extends BaseController {
 			handler: (options) =>
 				this.create(
 					options as APIHandlerOptions<{
-						body: TaskRequestDto;
+						body: TaskCreateRequestDto;
 					}>,
 				),
 			method: "POST",
@@ -45,7 +45,7 @@ class TaskController extends BaseController {
 	}
 
 	private async create(
-		options: APIHandlerOptions<{ body: TaskRequestDto }>,
+		options: APIHandlerOptions<{ body: TaskCreateRequestDto }>,
 	): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.taskService.create(options.body),

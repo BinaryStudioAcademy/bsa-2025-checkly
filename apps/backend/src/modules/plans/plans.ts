@@ -11,8 +11,8 @@ const planController = new PlanController(logger, planService);
 
 export { planController };
 export {
+	type PlanCreateRequestDto,
 	type PlanDayDto,
 	type PlanDaysTaskDto,
-	type PlanRequestDto,
 } from "./libs/types/types.js";
 export { planCreateValidationSchema } from "./libs/validation-schemas/validation-schemas.js";

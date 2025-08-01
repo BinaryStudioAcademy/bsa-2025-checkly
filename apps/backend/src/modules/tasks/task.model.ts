@@ -18,11 +18,7 @@ class TaskModel extends AbstractModel {
 
 	public isCompleted!: boolean;
 
-	public isCustom!: boolean;
-
 	public order!: number;
-
-	public parentTaskId!: null | number;
 
 	public planDayId!: number;
 

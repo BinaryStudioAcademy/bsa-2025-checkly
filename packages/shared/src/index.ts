@@ -31,26 +31,26 @@ export {
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
 export {
+	type PlanDayCreateRequestDto,
 	planDayCreateValidationSchema,
 	type PlanDayGetAllResponseDto,
-	type PlanDayRequestDto,
 	type PlanDayResponseDto,
 	PlanDaysApiPath,
 } from "./modules/plan-days/plan-days.js";
 export {
+	type PlanCreateRequestDto,
 	planCreateValidationSchema,
 	type PlanDayDto,
 	type PlanDaysTaskDto,
 	type PlanGetAllResponseDto,
-	type PlanRequestDto,
 	type PlanResponseDto,
 	PlansApiPath,
 } from "./modules/plans/plans.js";
 export {
 	ExecutionTimeType,
+	type TaskCreateRequestDto,
 	taskCreateValidationSchema,
 	type TaskGetAllResponseDto,
-	type TaskRequestDto,
 	type TaskResponseDto,
 	TasksApiPath,
 } from "./modules/tasks/tasks.js";

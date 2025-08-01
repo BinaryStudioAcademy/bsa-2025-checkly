@@ -1,7 +1,6 @@
 type PlanDayDto = {
 	dayNumber: number;
 	id: number;
-	isRegenerated: boolean;
 	tasks: TaskDto[];
 };
 
@@ -10,11 +9,9 @@ type PlanDaysTaskDto = PlanDto & {
 };
 
 type PlanDto = {
-	duration: string;
+	duration: number;
 	id: number;
 	intensity: string;
-	isActive: boolean;
-	parentPlanId: null | number;
 	title: string;
 	userId: number;
 };
@@ -25,9 +22,7 @@ type TaskDto = {
 	executionTimeType: string;
 	id: number;
 	isCompleted: boolean;
-	isCustom: boolean;
 	order: number;
-	parentTaskId: null | number;
 	title: string;
 };
 

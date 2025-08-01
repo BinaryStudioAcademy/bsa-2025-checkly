@@ -9,16 +9,13 @@ class PlanRepository implements Repository {
 	}
 
 	public async create(entity: PlanEntity): Promise<PlanEntity> {
-		const { duration, intensity, isActive, parentPlanId, title, userId } =
-			entity.toNewObject();
+		const { duration, intensity, title, userId } = entity.toNewObject();
 
 		const plan = await this.planModel
 			.query()
 			.insert({
 				duration,
 				intensity,
-				isActive,
-				parentPlanId,
 				title,
 				userId,
 			})

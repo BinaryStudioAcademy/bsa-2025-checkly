@@ -9,24 +9,15 @@ class TaskRepository implements Repository {
 	}
 
 	public async create(entity: TaskEntity): Promise<TaskEntity> {
-		const {
-			description,
-			executionTimeType,
-			isCustom,
-			order,
-			parentTaskId,
-			planDayId,
-			title,
-		} = entity.toNewObject();
+		const { description, executionTimeType, order, planDayId, title } =
+			entity.toNewObject();
 
 		const task = await this.taskModel
 			.query()
 			.insert({
 				description,
 				executionTimeType,
-				isCustom,
 				order,
-				parentTaskId,
 				planDayId,
 				title,
 			})
