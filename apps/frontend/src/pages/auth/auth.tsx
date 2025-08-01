@@ -22,8 +22,10 @@ const Auth: React.FC = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		// eslint-disable-next-line @typescript-eslint/no-misused-promises
-		navigation.setNavigate(navigate);
+		navigation.setNavigate((path) => {
+			// eslint-disable-next-line sonarjs/void-use
+			void navigate(path);
+		});
 	}, [navigate]);
 
 	const handleSignInSubmit = useCallback(
