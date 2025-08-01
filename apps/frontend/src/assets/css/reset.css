@@ -17,7 +17,12 @@
 
 html {
 	text-size-adjust: none;
-	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		scroll-behavior: smooth;
+	}
 }
 
 html,
