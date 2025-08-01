@@ -45,8 +45,7 @@
 	--button-border-color: var(--color-bg-dark);
 }
 
-.button:not(.button-small)::after,
-.button:not(.button-transparent)::after {
+.button:not(.button-small, .button-transparent)::after {
 	position: absolute;
 	top: -11px;
 	right: -11px;
