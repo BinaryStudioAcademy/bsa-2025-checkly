@@ -1,15 +1,17 @@
-class Navigation {
-	private navigate: ((path: string) => void) | null = null;
+import { type NavigateFunction } from "react-router-dom";
 
-	public navigateTo(path: string): void {
+class Navigation {
+	private navigate: NavigateFunction | null = null;
+
+	public async navigateTo(path: string): Promise<void> {
 		if (!this.navigate) {
 			return;
 		}
 
-		this.navigate(path);
+		await this.navigate(path);
 	}
 
-	public setNavigate(navigateFunction: (path: string) => void): void {
+	public setNavigate(navigateFunction: NavigateFunction): void {
 		this.navigate = navigateFunction;
 	}
 }

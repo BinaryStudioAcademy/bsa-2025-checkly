@@ -23,8 +23,8 @@ listenerMiddleware.startListening({
 });
 
 listenerMiddleware.startListening({
-	effect: () => {
-		navigation.navigateTo(AppRoute.ROOT);
+	async effect() {
+		await navigation.navigateTo(AppRoute.ROOT);
 	},
 	matcher: isAnyOf(signIn.fulfilled, signUp.fulfilled),
 });
