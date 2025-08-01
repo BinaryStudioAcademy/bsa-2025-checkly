@@ -6,6 +6,7 @@
 	--button-border-color: var(--color-bg-dark);
 	--button-font-size: var(--text-button);
 
+	position: relative;
 	padding: var(--button-padding-block) var(--button-padding-inline);
 	font-size: var(--button-font-size);
 	font-weight: var(--font-weight-button);
@@ -42,11 +43,10 @@
 .button-primary {
 	--button-bg-color: var(--color-brand-primary);
 	--button-border-color: var(--color-bg-dark);
-
-	position: relative;
 }
 
-.button-primary:not(.button-small)::after {
+.button:not(.button-small)::after,
+.button:not(.button-transparent)::after {
 	position: absolute;
 	top: -11px;
 	right: -11px;
