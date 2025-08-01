@@ -62,7 +62,7 @@ Description: represents a plan created by a user, with a certain duration and in
 | `id`             | SERIAL PRIMARY KEY | Unique identifier for the plan                           | PK                                                | Auto-increment    |
 | `title`          | VARCHAR(100)       | Title                                                    | Not null                                          | None              |
 | `user_id`        | INT                | Reference to the user who owns the plan                  | Not null, FK → `users(id)`, ON DELETE CASCADE     | None              |
-| `duration`    | VARCHAR(100)                | The duration of the plan                    | Not null | None              |
+| `duration`    | INT               | The duration of the plan                    | Not null, > 0 | None              |
 | `intensity`    | VARCHAR(100)                | The intensity of the plan                    | Not null | None              |
 | `created_at`     | TIMESTAMPTZ        | Timestamp when the plan was created                      | Not null                                          | CURRENT_TIMESTAMP |
 | `updated_at`     | TIMESTAMPTZ                  | Timestamp of last update                                     | **NOT NULL**                                            | CURRENT\_TIMESTAMP |

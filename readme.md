@@ -41,7 +41,7 @@ erDiagram
     int id PK
     varchar title
     int user_id FK
-    varchar duration
+    int duration
     varchar intensity
     dateTime created_at
     dateTime updated_at
