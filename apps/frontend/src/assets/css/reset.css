@@ -18,7 +18,6 @@
 html {
 	text-size-adjust: none;
 	scroll-behavior: smooth;
-	scrollbar-gutter: stable;
 }
 
 html,
