@@ -1,4 +1,0 @@
-export { default as blueStars } from "~/assets/img/sign-in/pink-stars.png";
-export { default as yellowStars } from "~/assets/img/sign-in/yellow-stars.png";
-export { default as carImage } from "~/assets/img/sign-up/car.png";
-export { default as orangeImage } from "~/assets/img/sign-up/orange.png";

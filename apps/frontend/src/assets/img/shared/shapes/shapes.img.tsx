@@ -1,0 +1,10 @@
+export { default as Arrow } from "./arrow.svg";
+export { default as FlowerGreen } from "./flower-green.svg";
+export { default as FlowerPink } from "./flower-pink.svg";
+export { default as LogoPlaceholder } from "./logo-placeholder.svg";
+export { default as StarsPink01 } from "./stars-pink-1.svg";
+export { default as StarsPink02 } from "./stars-pink-2.svg";
+export { default as StarsYellow01 } from "./stars-yellow-1.svg";
+export { default as StarsYellow02 } from "./stars-yellow-2.svg";
+export { default as StarsYellow03 } from "./stars-yellow-3.svg";
+export { default as TwinklesYellow } from "./twinkles-yellow.svg";

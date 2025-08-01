@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 
 import {
-	blueStars,
-	carImage,
-	orangeImage,
-	yellowStars,
-} from "~/assets/img/sign-up/sign-up.img.js";
+	Car,
+	OrangeWhole,
+} from "~/assets/img/shared/illustrations/illustrations.img.js";
+import {
+	StarsPink01,
+	StarsYellow02,
+} from "~/assets/img/shared/shapes/shapes.img.js";
 import { Button, Input } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
@@ -113,14 +115,14 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						<Button label="Create an account" type="submit" />
 					</form>
 				</div>
-				<img alt="blue stars" className={blueStarsClasses} src={blueStars} />
+				<img alt="blue stars" className={blueStarsClasses} src={StarsPink01} />
 				<img
 					alt="yellow stars"
 					className={yellowStarsClasses}
-					src={yellowStars}
+					src={StarsYellow02}
 				/>
-				<img alt="orange" className={orangeClasses} src={orangeImage} />
-				<img alt="car" className={carClasses} src={carImage} />
+				<img alt="orange" className={orangeClasses} src={OrangeWhole} />
+				<img alt="car" className={carClasses} src={Car} />
 			</section>
 		</div>
 	);
