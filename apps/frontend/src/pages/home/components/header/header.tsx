@@ -9,10 +9,14 @@ const Header: React.FC = () => {
 		<header className={styles["header"]}>
 			<div className="wrapper repel">
 				<Logo />
-				<div className="cluster">
-					<Link to={AppRoute.ROOT}>Start quiz</Link>
-					<Link to={AppRoute.SIGN_IN}>Sign in</Link>
-				</div>
+				<nav className="cluster">
+					<Link asButtonVariant="secondary" to={AppRoute.ROOT}>
+						Start quiz
+					</Link>
+					<Link asButtonVariant="secondary" to={AppRoute.SIGN_IN}>
+						Sign in
+					</Link>
+				</nav>
 			</div>
 		</header>
 	);

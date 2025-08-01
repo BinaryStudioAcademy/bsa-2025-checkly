@@ -68,3 +68,20 @@ h6 {
 ::selection {
 	background: var(--color-selection-bg);
 }
+
+:is(button) {
+	text-decoration: none;
+	cursor: pointer;
+	background-color: transparent;
+	border: none;
+}
+
+svg[class~="icon"] {
+	width: auto;
+	max-width: 1lh;
+	height: 1lh;
+}
+
+svg {
+	flex-shrink: 0;
+}

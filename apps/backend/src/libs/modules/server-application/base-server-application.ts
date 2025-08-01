@@ -5,12 +5,13 @@ import Fastify, { type FastifyError, type FastifyInstance } from "fastify";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { ServerErrorType } from "~/libs/enums/enums.js";
+import { FastifyHook, ServerErrorType } from "~/libs/enums/enums.js";
 import { type ValidationError } from "~/libs/exceptions/exceptions.js";
 import { type Config } from "~/libs/modules/config/config.js";
 import { type Database } from "~/libs/modules/database/database.js";
 import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
+import { initErrorMapperMiddleware } from "~/libs/modules/middleware/error-mapper.middleware.js";
 import {
 	type ServerCommonErrorResponse,
 	type ServerValidationErrorResponse,
@@ -85,6 +86,8 @@ class BaseServerApplication implements ServerApplication {
 		await this.initServe();
 		await this.initPlugins();
 		await this.initMiddlewares();
+
+		this.initErrorMapperMiddleware();
 
 		this.initValidationCompiler();
 
@@ -203,6 +206,10 @@ class BaseServerApplication implements ServerApplication {
 				return reply.status(HTTPCode.INTERNAL_SERVER_ERROR).send(response);
 			},
 		);
+	}
+
+	private initErrorMapperMiddleware(): void {
+		this.app.addHook(FastifyHook.ON_REQUEST, initErrorMapperMiddleware());
 	}
 
 	private async initPlugins(): Promise<void> {

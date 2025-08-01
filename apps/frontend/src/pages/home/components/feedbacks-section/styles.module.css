@@ -40,7 +40,7 @@
 
 .grid > * {
 	flex: 0 0 360px;
-	height: 240px;
+	height: clamp(180px, 12vw + 120px, 240px);
 	padding: 24px;
 	background-color: var(--color-bg-white);
 	border-radius: 16px;
@@ -59,7 +59,7 @@
 @media (width <= 768px) {
 	.grid > * {
 		flex: 0 0 360px;
-		height: 180px;
+		height: clamp(180px, 12vw + 100px, 200px);
 	}
 
 	.wrapper {

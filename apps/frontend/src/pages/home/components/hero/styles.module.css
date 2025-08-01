@@ -9,28 +9,26 @@
 	--grid-line: 1px;
 }
 
+.hero-subtitle {
+	font-size: var(--text-size-heading-4);
+}
+
 .container {
 	position: relative;
 	width: 100%;
 }
 
 .hero a {
+	--button-font-size: var(--text-button);
+
 	display: inline-block;
 	padding: var(--space-2xs) var(--space-l-xl);
-	margin: 50px 0;
-	margin-bottom: 20px;
-	font-family: var(--font-family-primary);
-	font-size: var(--text-button);
-	font-weight: var(--font-weight-extra-bold);
-	color: var(--color-text);
-	text-transform: uppercase;
 	text-decoration: none;
-	background-color: transparent;
-	border: 2px solid;
-	border-radius: var(--radius-l);
 }
 
 .text-wrapper {
+	--flow-space: var(--space-xl);
+
 	position: relative;
 	z-index: 3;
 }
