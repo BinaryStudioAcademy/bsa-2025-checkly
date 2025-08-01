@@ -1,11 +1,11 @@
 .card {
 	display: flex;
 	flex-direction: column;
-	padding: 24px;
+	padding: var(--space-m);
 	cursor: pointer;
-	background: #ffffff;
-	border: 2px solid #000000;
-	border-radius: 8px;
+	background: var(--color-bg-white);
+	border: 2px solid var(--color-bg-dark);
+	border-radius: var(--radius-m);
 	transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

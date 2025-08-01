@@ -41,9 +41,8 @@
 .grid > * {
 	flex: 0 0 360px;
 	height: clamp(180px, 12vw + 120px, 240px);
-	padding: 24px;
+	padding: var(--space-m);
 	background-color: var(--color-bg-white);
-	border-radius: 16px;
 }
 
 @media (width <= 1024px) {

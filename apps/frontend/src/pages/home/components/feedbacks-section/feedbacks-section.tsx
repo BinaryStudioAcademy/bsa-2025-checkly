@@ -14,7 +14,6 @@ const FeedbacksSection: FC = () => {
 				"grid-pattern",
 				styles["landing-section"],
 				styles["light-background"],
-				// styles["feedbacks-section"],
 			)}
 		>
 			<div className="wrapper">
