@@ -1,5 +1,6 @@
-import { FbIcon, IgIcon, Logo, YtIcon } from "~/assets/img/footer/index.js";
+import { FbIcon, IgIcon, YtIcon } from "~/assets/img/footer/index.js";
 import { Link } from "~/libs/components/components.js";
+import { Logo } from "~/libs/components/logo/logo.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import styles from "./styles.module.css";
@@ -10,10 +11,7 @@ const Footer: React.FC = () => {
 			className={getClassNames("cluster", styles["footer"], "grid-pattern")}
 		>
 			<div className={getClassNames("cluster", styles["logo-wrapper"])}>
-				<Link to="/">
-					<Logo aria-hidden="true" />
-					LOGO
-				</Link>
+				<Logo />
 			</div>
 
 			<nav className={getClassNames("cluster", styles["nav-links"])}>
