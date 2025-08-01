@@ -6,7 +6,11 @@ import {
 	orangeImage,
 	yellowStars,
 } from "~/assets/img/sign-up/sign-up.img.js";
-import { Button, Input } from "~/libs/components/components.js";
+import {
+	Button,
+	DecorativeImage,
+	Input,
+} from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
@@ -96,7 +100,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							errors={errors}
 							label="Password"
 							name="password"
-							placeholder="********"
+							placeholder="Enter your password"
 							required
 							type="password"
 						/>
@@ -106,21 +110,17 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							errors={errors}
 							label="Confirm password"
 							name="confirmPassword"
-							placeholder="********"
+							placeholder="Enter your password"
 							required
 							type="password"
 						/>
 						<Button label="Create an account" type="submit" />
 					</form>
 				</div>
-				<img alt="blue stars" className={blueStarsClasses} src={blueStars} />
-				<img
-					alt="yellow stars"
-					className={yellowStarsClasses}
-					src={yellowStars}
-				/>
-				<img alt="orange" className={orangeClasses} src={orangeImage} />
-				<img alt="car" className={carClasses} src={carImage} />
+				<DecorativeImage className={blueStarsClasses} src={blueStars} />
+				<DecorativeImage className={yellowStarsClasses} src={yellowStars} />
+				<DecorativeImage className={orangeClasses} src={orangeImage} />
+				<DecorativeImage className={carClasses} src={carImage} />
 			</section>
 		</div>
 	);
