@@ -16,7 +16,7 @@
 
 .dogImage {
 	position: absolute;
-	top: 70%;
+	top: 60%;
 	right: -2vw;
 	z-index: 2;
 }
@@ -36,7 +36,6 @@
 
 @media (width <= 1024px) {
 	.dogImage {
-		bottom: -3%;
 		width: 200px;
 	}
 

@@ -9,17 +9,28 @@ import styles from "./styles.module.css";
 
 const FeedbacksSection: FC = () => {
 	return (
-		<div className={getClassNames(styles["wrapper"])}>
-			<FeedbackSectionDecoration />
-			<div className={styles["container"]}>
-				<h2 className={styles["title"]}>Testimonials</h2>
-				<div className={styles["grid"]}>
-					{FEEDBACKS.map((item) => (
-						<FeedbackCard key={item.id} {...item} />
-					))}
+		<section
+			className={getClassNames(
+				"grid-pattern",
+				styles["landing-section"],
+				styles["light-background"],
+				// styles["feedbacks-section"],
+			)}
+		>
+			<div className="wrapper">
+				<div className={getClassNames(styles["wrapper"])}>
+					<FeedbackSectionDecoration />
+					<div className={styles["container"]}>
+						<h2 className={styles["title"]}>Testimonials</h2>
+						<div className={styles["grid"]}>
+							{FEEDBACKS.map((item) => (
+								<FeedbackCard key={item.id} {...item} />
+							))}
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	);
 };
 

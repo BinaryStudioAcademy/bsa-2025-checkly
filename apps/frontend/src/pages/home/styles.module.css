@@ -1,22 +1,3 @@
-.landing-page {
-	min-height: 100vh;
-	overflow-y: auto;
-	scrollbar-width: none; /* Firefox */
-	-ms-overflow-style: none; /* IE/Edge */
-}
-
-.landing-page::-webkit-scrollbar {
-	display: none; /* Chrome, Safari */
-}
-
-.landing-section {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 100vh;
-	scroll-snap-align: start;
-}
-
 section[data-section-variant] {
 	padding-block: 64px;
 }
@@ -31,9 +12,4 @@ section[data-section-variant="dark"] {
 
 .brand {
 	background-color: var(--color-card-blue);
-}
-
-.light-background {
-	--grid-color: var(--color-light-grey);
-	--grid-line: 1px;
 }
