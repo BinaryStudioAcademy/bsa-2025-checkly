@@ -1,5 +1,4 @@
-import { Header, Hero } from "./components/components.js";
-import styles from "./styles.module.css";
+import { Header, Hero, HowItWorks } from "./components/components.js";
 
 const Home: React.FC = () => {
 	return (
@@ -7,11 +6,7 @@ const Home: React.FC = () => {
 			<Header />
 			<main>
 				<Hero />
-				<section className={styles["brand"]} data-section-variant>
-					<div className="wrapper">
-						<h2>How it works</h2>
-					</div>
-				</section>
+				<HowItWorks />
 				<section data-section-variant>
 					<div className="wrapper">
 						<h2>Categories</h2>
