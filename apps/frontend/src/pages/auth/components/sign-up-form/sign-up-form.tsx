@@ -6,7 +6,12 @@ import {
 	orangeImage,
 	yellowStars,
 } from "~/assets/img/sign-up/sign-up.img.js";
-import { Button, Input } from "~/libs/components/components.js";
+import {
+	Button,
+	DecorativeImage,
+	Input,
+} from "~/libs/components/components.js";
+import { Logo } from "~/libs/components/logo/logo.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
@@ -16,7 +21,10 @@ import {
 	userSignUpValidationSchemaExtended,
 } from "~/modules/users/users.js";
 
-import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
+import {
+	COMMON_AUTH_PLACEHOLDER,
+	DEFAULT_SIGN_UP_PAYLOAD,
+} from "./libs/constants.js";
 import styles from "./sign-up-form.module.css";
 
 type Properties = {
@@ -55,73 +63,81 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	);
 
 	return (
-		<div className={styles["container"]}>
-			<section className={styles["sign-up-card"]}>
+		<div className={getClassNames("grid-pattern", styles["container"])}>
+			<div className={getClassNames("grid-pattern", styles["sign-up-card"])}>
 				<header className={styles["logo-container"]}>
-					<div className={styles["logo-circle"]} />
-					<h2 className={styles["logo-text"]}>Logo</h2>
+					<Logo />
 				</header>
 
-				<div className={styles["form-content"]}>
+				<main className={styles["form-content"]}>
 					<h1 className={styles["title"]}>Create an account</h1>
 					<p className={styles["redirect-text"]}>
 						Already have an account? Go to{" "}
-						<Link className={styles["redirect-link"]} to={AppRoute.SIGN_IN}>
+						<Link
+							aria-label="Go to sign in page"
+							className={styles["redirect-link"]}
+							to={AppRoute.SIGN_IN}
+						>
 							Sign In
 						</Link>
 					</p>
-					<form className={styles["form"]} onSubmit={handleFormSubmit}>
-						<Input
-							control={control}
-							errors={errors}
-							label="Name"
-							name="name"
-							placeholder="name"
-							required
-							type="text"
-						/>
-
-						<Input
-							control={control}
-							errors={errors}
-							label="Email"
-							name="email"
-							placeholder="email"
-							required
-							type="text"
-						/>
-
-						<Input
-							control={control}
-							errors={errors}
-							label="Password"
-							name="password"
-							placeholder="********"
-							required
-							type="password"
-						/>
-
-						<Input
-							control={control}
-							errors={errors}
-							label="Confirm password"
-							name="confirmPassword"
-							placeholder="********"
-							required
-							type="password"
-						/>
+					<form
+						aria-labelledby="sign-in-title"
+						className={styles["form"]}
+						onSubmit={handleFormSubmit}
+					>
+						<div className="flow-loose">
+							<Input
+								control={control}
+								errors={errors}
+								label="Name"
+								name="name"
+								placeholder="Enter your name"
+								required
+								type="text"
+							/>
+						</div>
+						<div className="flow-loose">
+							<Input
+								control={control}
+								errors={errors}
+								label="Email"
+								name="email"
+								placeholder={COMMON_AUTH_PLACEHOLDER.email}
+								required
+								type="text"
+							/>
+						</div>
+						<div className="flow-loose">
+							<Input
+								control={control}
+								errors={errors}
+								label="Password"
+								name="password"
+								placeholder={COMMON_AUTH_PLACEHOLDER.password}
+								required
+								type="password"
+							/>
+						</div>
+						<div className="flow-loose">
+							<Input
+								control={control}
+								errors={errors}
+								label="Confirm password"
+								name="confirmPassword"
+								placeholder={COMMON_AUTH_PLACEHOLDER.password}
+								required
+								type="password"
+							/>
+						</div>
 						<Button label="Create an account" type="submit" />
 					</form>
-				</div>
-				<img alt="blue stars" className={blueStarsClasses} src={blueStars} />
-				<img
-					alt="yellow stars"
-					className={yellowStarsClasses}
-					src={yellowStars}
-				/>
-				<img alt="orange" className={orangeClasses} src={orangeImage} />
-				<img alt="car" className={carClasses} src={carImage} />
-			</section>
+				</main>
+				<DecorativeImage className={blueStarsClasses} src={blueStars} />
+				<DecorativeImage className={yellowStarsClasses} src={yellowStars} />
+				<DecorativeImage className={orangeClasses} src={orangeImage} />
+				<DecorativeImage className={carClasses} src={carImage} />
+			</div>
 		</div>
 	);
 };
