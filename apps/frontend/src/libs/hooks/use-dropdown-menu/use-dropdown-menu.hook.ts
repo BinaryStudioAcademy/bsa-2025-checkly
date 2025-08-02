@@ -28,7 +28,7 @@ function getNextIndex({
 	step: number;
 }): number {
 	let index = items.indexOf(activeElement as Element);
-	
+
 	return (index + step + items.length) % items.length;
 }
 
