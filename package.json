@@ -9,16 +9,18 @@
 	],
 	"engines": {
 		"node": "22.x.x",
-		"npm": "11.x.x"
+		"npm": "10.x.x"
 	},
 	"scripts": {
+		"prestart": "npm install --include=dev && npm run build",
+		"start": "cd apps/build/backend && npm run start",
 		"_prettier": "prettier \"**/*.{js,ts,tsx,json,md,css,html}\"",
 		"git:hook:precommit": "lint-staged --cwd .",
 		"git:hook:commit": "npx @commitlint/cli --edit",
 		"build:shared": "npm run build -w shared",
 		"build:frontend": "npm run build -w frontend",
 		"build:backend": "npm run build -w backend",
-		"build": "npm run build --workspaces",
+		"build": "npm run build:shared && npm run build:backend && npm run build:frontend && sh ./prepare-build.sh",
 		"lint:editor": "editorconfig-checker",
 		"lint:fs": "ls-lint",
 		"lint:type": "npx tsc --noEmit",
