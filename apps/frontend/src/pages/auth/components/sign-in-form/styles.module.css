@@ -54,17 +54,17 @@
 }
 
 .yellow-stars {
-	top: 10%;
-	left: 15%;
+	top: var(--space-3xl);
+	left: var(--space-3xl);
 }
 
 .twinkles {
-	top: 57%;
-	left: 130%;
+	top: calc(var(--space-3xl) * 4);
+	right: calc(var(--space-3xl) * 1.75);
 }
 
 .laptop {
-	top: 40%;
+	top: calc(var(--space-3xl) * 4);
 	left: clamp(0%, 12vw, 20%);
 	height: clamp(50px, 15vw, 200px);
 }

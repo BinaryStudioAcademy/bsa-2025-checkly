@@ -3,16 +3,16 @@ import { NavLink } from "react-router-dom";
 import buttonStyles from "~/libs/components/button/styles.module.css";
 import { type AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { type ValueOf } from "~/libs/types/types.js";
+import { type ButtonVariant, type ValueOf } from "~/libs/types/types.js";
 
 type Properties = {
-	asButtonVariant?: "" | "primary" | "secondary";
+	asButtonVariant?: ButtonVariant;
 	children: React.ReactNode;
 	to: ValueOf<typeof AppRoute>;
 };
 
 const Link: React.FC<Properties> = ({
-	asButtonVariant = "",
+	asButtonVariant,
 	children,
 	to,
 }: Properties) => {
