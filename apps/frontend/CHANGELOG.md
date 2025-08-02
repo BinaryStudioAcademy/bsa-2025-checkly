@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.1.1...frontend-v1.1.2) (2025-08-02)
+
+
+### Bug Fixes
+
+* fix mistake cy-0 ([2d5d3d4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2d5d3d41340ce6e1dcee5cdbb82420e3b35e79e5))
+* fix mistake cy-0 ([8dba5e2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8dba5e2519bf69e2d21196179f5bac1819bf6544))
+
 ## [1.1.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.1.0...frontend-v1.1.1) (2025-08-02)
 
 
