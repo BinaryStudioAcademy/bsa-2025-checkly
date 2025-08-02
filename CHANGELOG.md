@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.1.0...v1.1.1) (2025-08-02)
+
+
+### Bug Fixes
+
+* change env name cy-0 ([66a0150](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/66a015052d64d6164219bd6763f5feb62bd6b623))
+* change env name cy-0 ([622827a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/622827a470bdcf591f1ff8932d8a8f95a39f4247))
+
 ## [1.1.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.0.1...v1.1.0) (2025-08-02)
 
 
