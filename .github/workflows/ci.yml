@@ -24,8 +24,8 @@ jobs:
         with:
           node-version-file: .nvmrc
 
-      - name: Upgrade npm to v11
-        run: npm install -g npm@11
+      - name: Upgrade npm to v10
+        run: npm install -g npm@10
 
       - name: Cache Dependencies
         id: cache
