@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.0.0...shared-v1.0.1) (2025-08-02)
+
+
+### Bug Fixes
+
+* extend name field validation error messages in sign-up validation schema cy-71 ([3dce762](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3dce762c3b01e0b2de2e3601d64e4a7fcece9fcd))
+* fix-sign-in-backend cy-69 ([858de71](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/858de716436ed5485726aa2c06ab32bb6f4809b3))
+
 ## 1.0.0 (2025-07-30)
 
 
