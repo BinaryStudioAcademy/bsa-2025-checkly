@@ -1,6 +1,6 @@
+import { type ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
 
-import { RouterOutlet } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
@@ -10,7 +10,11 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { actions as userActions } from "~/modules/users/users.js";
 
-const App: React.FC = () => {
+type Properties = {
+	children: ReactNode;
+};
+
+const App: React.FC<Properties> = ({ children }: Properties) => {
 	const { pathname } = useLocation();
 	const dispatch = useAppDispatch();
 	useAppSelector(({ users }) => ({
@@ -28,7 +32,7 @@ const App: React.FC = () => {
 
 	return (
 		<>
-			<RouterOutlet />
+			{children}
 			<ToastContainer />
 		</>
 	);
