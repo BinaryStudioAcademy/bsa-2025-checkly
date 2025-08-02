@@ -1,6 +1,10 @@
-import { Model } from "objection";
+import { type ColumnNameMappers, Model, snakeCaseMappers } from "objection";
 
 class Abstract extends Model {
+	static get columnNameMappers(): ColumnNameMappers {
+		return snakeCaseMappers();
+	}
+
 	public createdAt!: string;
 
 	public id!: number;
