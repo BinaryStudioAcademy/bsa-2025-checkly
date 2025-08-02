@@ -1,3 +1,4 @@
+export { AppHeader } from "./app-header/app-header.js";
 export { App } from "./app/app.js";
 export { Button } from "./button/button.js";
 export { DecorativeImage } from "./decorative-image/decorative-image.js";
