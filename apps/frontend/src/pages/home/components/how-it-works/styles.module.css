@@ -1,11 +1,11 @@
 .section {
-	position: relative;
-	padding-block: calc(var(--space-2xl-3xl) * 1.5);
-	overflow: hidden;
-	background-color: var(--color-brand-primary);
-
 	--grid-color: var(--color-light-grey);
-	--grid-line: 1px;
+	--grid-opacity: 0.4;
+
+	position: relative;
+	padding-block: var(--space-3xl);
+	overflow: hidden;
+	background-color: var(--color-card-darkblue);
 }
 
 .container {
@@ -15,10 +15,7 @@
 
 .title {
 	margin-block-end: var(--space-2xl);
-	font-family: var(--font-family-secondary);
-	font-size: var(--step-6);
-	font-weight: var(--font-weight-semi-bold);
-	color: var(--color-text-primary);
+	font-size: var(--text-size-heading-2);
 	text-align: center;
 }
 
@@ -27,11 +24,12 @@
 	display: flex;
 	flex-flow: row nowrap;
 	gap: var(--space-l);
-	align-items: center;
+	align-items: flex-start;
 	justify-content: flex-start;
 	width: 80vw;
 	max-width: 90vw;
-	padding: var(--space-s) var(--space-3xl) var(--space-m) var(--space-xs);
+	padding-block: var(--space-m);
+	padding-inline: var(--space-m) var(--space-3xl);
 	margin-inline: auto;
 	background: var(--color-bg-white);
 	border: var(--space-3xs) solid var(--color-text-primary);
@@ -56,31 +54,24 @@
 }
 
 .stepNumber {
-	margin-block-end: var(--space-s);
 	font-family: var(--font-family-secondary);
-	font-size: var(--step-8);
+	font-size: var(--text-size-heading-1);
 	font-weight: var(--font-weight-semi-bold);
 	line-height: 1;
 	color: var(--color-text-primary);
 }
 
 .stepTitle {
-	margin-block-end: var(--space-m);
-	font-family: var(--font-family-secondary);
-	font-size: var(--step-1);
-	font-weight: var(--font-weight-bold);
-	line-height: 1.2;
-	color: var(--color-text-primary);
-	white-space: nowrap;
+	font-size: var(--text-size-heading-4);
 }
 
 .croissantImage {
 	position: absolute;
-	bottom: -45%;
+	bottom: -30%;
 	left: 22%;
 	z-index: 3;
 	width: clamp(200px, 20vw, 250px);
-	height: clamp(200px, 20vw, 250px);
+	height: clamp(150px, 20vw, 200px);
 }
 
 .croissantImage img {
@@ -120,6 +111,10 @@
 	width: clamp(120px, 12vw, 180px);
 }
 
+.arrow {
+	align-self: center;
+}
+
 @media (width <= 1024px) {
 	.stepsContainer {
 		gap: var(--space-s);
@@ -139,14 +134,6 @@
 			12vw,
 			calc(var(--space-3xl) * 1.8)
 		);
-	}
-
-	.stepNumber {
-		font-size: var(--step-7);
-	}
-
-	.stepTitle {
-		font-size: var(--step-1);
 	}
 
 	.croissantImage {
@@ -177,6 +164,7 @@
 	.stepsContainer {
 		flex-direction: column;
 		gap: var(--space-l);
+		align-items: center;
 		max-width: clamp(
 			calc(var(--space-3xl) * 5),
 			80vw,
@@ -188,20 +176,6 @@
 	.arrow {
 		margin-block: var(--space-s);
 		transform: rotate(90deg);
-	}
-
-	.title {
-		margin-block-end: var(--space-xl);
-		font-size: var(--step-6);
-	}
-
-	.stepNumber {
-		font-size: var(--step-8);
-	}
-
-	.stepTitle {
-		font-size: var(--step-4);
-		white-space: normal;
 	}
 
 	.arrowImage {
@@ -222,11 +196,6 @@
 }
 
 @media (width <= 320px) {
-	.title {
-		margin-block-end: var(--space-l);
-		font-size: var(--step-5);
-	}
-
 	.decorativeStars,
 	.croissantImage,
 	.laptopImage,
