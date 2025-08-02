@@ -1,4 +1,10 @@
-import { Footer, Header, Hero, HowItWorks } from "./components/components.js";
+import {
+	FeedbacksSection,
+	Footer,
+	Header,
+	Hero,
+	HowItWorks,
+} from "./components/components.js";
 
 const Home: React.FC = () => {
 	return (
@@ -17,11 +23,7 @@ const Home: React.FC = () => {
 						<h2>Sample visual layouts</h2>
 					</div>
 				</section>
-				<section data-section-variant>
-					<div className="wrapper">
-						<h2>Testimonials</h2>
-					</div>
-				</section>
+				<FeedbacksSection />
 			</main>
 			<Footer />
 		</>
