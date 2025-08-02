@@ -1,5 +1,60 @@
 # Changelog
 
+## [1.1.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.0.0...frontend-v1.1.0) (2025-08-02)
+
+
+### Features
+
+* * change displayPasswordIcon to passwordIcon cy-14 ([71b8f22](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/71b8f220de8683b6007fb75e1a6d609824e61f64))
+* * fix button ::after feature cy-109 ([e143441](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e1434410956593ea10fc8d3d0545c40a5e58a411))
+* * replace decorative assets list to a separate constant file cy-14 ([5816246](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5816246674cc71cbf7962d6ab9c02a92a6eb4a50))
+* * update button styles cy-14 ([09e47fa](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/09e47fa489ac6ec9f90961a9ce8c61dac399104e))
+* * update button-variant type file name cy-109 ([9e5c337](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9e5c337d3304d74bc707ca8f3fe5cd073f428d6c))
+* * update decorative-image to add draggable=false cy-14 ([5182c93](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5182c93e4e857a5adbbf4778915de566c25c68ae))
+* * update dragable to false string cy-14 ([fba8c35](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/fba8c35f0e1d246dbd2c9c004bb1af3a51172fae))
+* * update grid-pattern to change grid-line default cy-107 ([e9c2937](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e9c2937730d3155cf6bd93f25e070ddef4a47135))
+* * update hero setion cy-14 ([c614b63](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c614b63079d186b4adc4de345e0994e4752a014b))
+* * update how-it-works section cy-14 ([9f6f342](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9f6f3423bfb8d5211f6e0ad0bab6ba0b9929f4c5))
+* * update input outline width cy-14 ([859e0e5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/859e0e5e63c774ff6fbafe233264d183a1d1adc7))
+* * update renderDecorativeImages in hero cy-14 ([9365a12](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9365a12f4b07b4583422b7b7cf0ebc19463a2d3b))
+* * update scroll-behavior cy-88 ([293f235](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/293f2357a8f970ec6dcdb38a43c8decd8e225363))
+* * update sign-in styles cy-109 ([5763d7a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5763d7aab1c9f6a50573c221e84d10f63e1d91fc))
+* * update sign-in styles cy-14 ([245a40d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/245a40d31474299b762bcaeff2f92701f85d8502))
+* + add button-variant type cy-109 ([04963e3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/04963e3351b4b2b31948a32bf38b9d131f586bbb))
+* + add decorative image component to sign-in page cy-14 ([fff59ee](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/fff59ee43f3c3f63735219ba34d710ea31bf742d))
+* + add decorative-image component to sign-up page cy-107 ([7cae68b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7cae68bbd7343cf6afd8e56066606001aca6a790))
+* + add scrollbar-gutter css utility cy-88 ([fc93648](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/fc93648985eb7b99a711aa7e40eb4c352694e52c))
+* + update button to icon-only option cy-109 ([eabd128](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eabd1286030971e346a1e4b4eba798fc37ffcfb2))
+* Add Footer Component cy-22 ([336e5a3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/336e5a3dc07a0f19b06822ddf460b4d2d95fcfd6))
+* add input and button components cy-14 ([62ac64d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/62ac64d5ef334e29040ac894a0fd65377f6af033))
+* create initial version of the footer cy-22 ([251f1fc](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/251f1fc897866fd676ffb10de3c063665579e936))
+* imlpemented how it works section cy-18 ([12254a0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/12254a073290fca5b5821c19d5dac7a330ef385e))
+
+
+### Bug Fixes
+
+* - remove scrollbar-gutter property cy-88 ([60a7b4e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/60a7b4e4afbfbecf3c4ba1f3e2fe00d00bc2d965))
+* + add onclick prop to button component cy-109 ([831b4d0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/831b4d0bc72e33c350d825b3a29837413c1884c5))
+* adapting the logo link to the new logo component cy-22 ([41d3996](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/41d39966c36a30b9c8472aad92dbddcec323853f))
+* add button onclick cy-109 ([ced2f0e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ced2f0e5976c453bd1313d7c3e8b27571c1f0db8))
+* changing logo path to shared images cy-22 ([14fab91](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/14fab916af91d5ae28b85639ed299ec4f19fa84d))
+* deploy config cy-0 ([71f9df2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/71f9df22549eacab9d0927970cd5542530d78053))
+* deployment config cy-0 ([9fad171](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9fad1715b2180a66b510e3f3c2f44de15f3baf0d))
+* dragged images cy-107 ([2bad2a4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2bad2a4b79ed3713fab752817cf86c590fe989b3))
+* excluding unused logo export cy-22 ([54e12fe](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/54e12fee0226b14a7753c5098bc0aee345e4ceed))
+* fix typo  cy-0 ([d1ed788](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d1ed7889b34c6afc1aa69233178067c5499c5ffa))
+* **frontend:** remove unused styles import in home page cy-22 ([b2fd81c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b2fd81c3bd480d5c1493ee844d3227e9f75f280d))
+* resolve lint and formatting errors cy-22 ([638d541](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/638d541e114e6e00aa1002236d8b0a45f2c2b286))
+* resolve vite type conflicts by moving svgr plugin to frontend cy-22 ([b35b210](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b35b210faa92c04446fee4b17944678637dad783))
+* scrollbar gutter cy-88 ([400fd31](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/400fd31d17189109af543136e82203c1bc0ce083))
+* trigger release  cy-0 ([ac03a3a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ac03a3a56e4999fc45e6d705518ff68143c4ac16))
+* trigger release cy-0 ([8878b36](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8878b36bff2439693dd71e68e8405ec5332089a2))
+* trigger release cy-0 ([61b3725](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/61b372534a7ac189c866d562385442d4fd6e1b16))
+* trigger release cy-0 ([ec367ac](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ec367acb9844da74ae6edd32588562aae707dc95))
+* trigger release cy-0 ([a06e7a1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a06e7a1a1cd6c6b324faf3f59ac0a78017c821d6))
+* trigger release cy-0 ([deab24e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/deab24eebacdb84bb0e3fcb3c282e345e5196a25))
+* trigger release cy-0 ([462fc70](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/462fc70d155e2d17d86392e96cdb5a656a4cf3d3))
+
 ## 1.0.0 (2025-07-30)
 
 
