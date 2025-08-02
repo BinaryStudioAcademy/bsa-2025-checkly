@@ -1,3 +1,13 @@
+.section {
+	--grid-color: var(--color-text-primary);
+	--grid-opacity: 0.4;
+	
+	padding-block: 64px;
+	color: var(--color-bg);
+	background-color: var(--color-bg-dark);
+}
+
+
 .layout-header {
 	position: relative;
 	display: inline-block;
