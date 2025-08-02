@@ -9,7 +9,7 @@
 	],
 	"engines": {
 		"node": "22.x.x",
-		"npm": "10.9.2"
+		"npm": "10.x.x"
 	},
 	"scripts": {
 		"prestart": "npm install --include=dev && npm run build",
