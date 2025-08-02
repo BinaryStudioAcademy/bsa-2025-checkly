@@ -1,105 +1,56 @@
 .container {
-	/* position: relative; */
+	--grid-color: var(--color-grid-line-cream);
+
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 100%;
 	min-height: 100vh;
-	overflow: hidden;
-	font-family: Arial, sans-serif;
-	background-color: #fbd767;
-	background-image:
-		linear-gradient(#eaeba9 1.4px, transparent 1.4px),
-		linear-gradient(90deg, #eaeba9 1.4px, transparent 1.4px);
-	background-size: 8px 8px;
+	padding-block: var(--space-l);
+	padding-inline: var(--space-m-3xl);
+	overflow-x: clip;
+	background-color: var(--color-card-yellow);
 }
 
 .sign-up-card {
+	--grid-color: var(--color-grid-line-cream);
+	--grid-opacity: 0.8;
+
 	position: relative;
 	z-index: 1;
-	box-sizing: border-box;
-	width: 100%;
 	max-width: 592px;
-	padding: 63px 100px 112px;
+	padding-inline: var(--space-m-3xl);
+	padding-top: var(--space-l-xl);
+	padding-bottom: var(--space-2xl-3xl);
 	text-align: center;
-	background-color: #ffffff;
-	background-image:
-		linear-gradient(#eaeba9 1.4px, transparent 1.4px),
-		linear-gradient(90deg, #eaeba9 1.4px, transparent 1.4px);
-	background-size: 8px 8px;
-	border-radius: 20px;
+	background-color: var(--color-bg-white);
+	border-radius: var(--radius-l);
 }
 
 .image-position {
 	position: absolute;
 }
 
-.blue-stars {
-	bottom: 5%;
-	left: 85%;
-}
-
-.yellow-stars {
-	top: 0%;
-	left: -42%;
-}
-
-.orange-image {
-	top: 10%;
-	left: -10%;
-	height: 100px;
-}
-
-.car-image {
-	right: -20%;
-	bottom: 2%;
-	height: 120px;
-}
-
-.logo-container {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	margin-bottom: 24px;
-}
-
-.logo-circle {
-	width: 30px;
-	height: 30px;
-	margin-right: 14px;
-	background-color: #fbd767;
-	border-radius: 50%;
-}
-
-.logo-text {
-	font-family: Nunito, Arial, Helvetica, sans-serif;
-	font-size: 16px;
-	font-weight: 800;
-	text-transform: uppercase;
-}
-
 .form-content {
 	text-align: start;
 }
 
+.logo-container {
+	margin-bottom: var(--space-m);
+}
+
 .title {
-	margin-bottom: 40px;
-	font-family: Onest, Arial, Helvetica, sans-serif;
-	font-size: 40px;
-	font-weight: 600;
+	margin-bottom: var(--space-l-xl);
+	font-size: var(--text-size-heading-2);
 	line-height: 1.09;
 }
 
 .redirect-text {
-	margin-bottom: 24px;
-	font-family: Nunito, Arial, Helvetica, sans-serif;
-	font-size: 16px;
-	font-weight: 700;
+	margin-bottom: var(--space-m);
+	font-size: var(--step-minus-2);
+	color: var(--color-text-primary);
 	text-indent: 11px;
-}
-
-.redirect-link {
-	color: #33322e;
-	text-decoration: underline;
+	text-decoration-color: var(--color-bg-dark);
 }
 
 .redirect-text__link,
@@ -110,6 +61,46 @@
 .form {
 	display: flex;
 	flex-direction: column;
-	gap: 29px;
+	gap: var(--space-s-m);
 	text-align: left;
+}
+
+.blue-stars {
+	bottom: 0;
+	left: 85%;
+}
+
+.yellow-stars {
+	top: 0%;
+	left: -42%;
+}
+
+.orange-image {
+	top: -2%;
+	left: 70%;
+	height: 80px;
+}
+
+.car-image {
+	right: 40%;
+	bottom: -13%;
+	height: 110px;
+}
+
+@media (width >= 600px) {
+	.orange-image {
+		top: 10%;
+		left: -10%;
+		height: 100px;
+	}
+
+	.car-image {
+		right: -105px;
+		bottom: -30px;
+		height: 120px;
+	}
+
+	.blue-stars {
+		bottom: 5%;
+	}
 }
