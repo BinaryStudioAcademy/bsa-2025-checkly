@@ -1,4 +1,4 @@
-import { Header, Hero, HowItWorks } from "./components/components.js";
+import { Footer, Header, Hero, HowItWorks } from "./components/components.js";
 
 const Home: React.FC = () => {
 	return (
@@ -23,6 +23,7 @@ const Home: React.FC = () => {
 					</div>
 				</section>
 			</main>
+			<Footer />
 		</>
 	);
 };

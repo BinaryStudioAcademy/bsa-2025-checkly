@@ -1,12 +1,12 @@
 .hero {
+	--grid-color: var(--color-light-grey);
+	--grid-opacity: 0.4;
+
 	display: flex;
 	align-items: center;
 	min-height: 100vh;
 	padding: 100px 0 0;
 	text-align: center;
-
-	--grid-color: var(--color-light-grey);
-	--grid-line: 1px;
 }
 
 .hero-subtitle {
@@ -44,11 +44,11 @@
 .green-flower {
 	bottom: 77%;
 	left: 20%;
-	width: clamp(50px, 13vw, 140px);
+	width: clamp(100px, 13vw, 140px);
 }
 
 .yellow-twinkles {
-	bottom: 1%;
+	bottom: -5%;
 	left: 1%;
 	z-index: 2;
 	width: clamp(90px, 10vw, 130px);
@@ -67,8 +67,9 @@
 }
 
 .cat {
-	bottom: 14%;
+	bottom: 4%;
 	left: 1%;
+	z-index: 10;
 	width: clamp(90px, 10vw, 130px);
 }
 
@@ -82,14 +83,13 @@
 @media (width <= 768px) {
 	.green-flower {
 		bottom: 84%;
-		left: 16%;
+		left: 12%;
 	}
 }
 
 @media (width <= 500px) {
 	.cat,
-	.yellow-twinkles,
-	.green-flower {
+	.yellow-twinkles {
 		visibility: hidden;
 	}
 }

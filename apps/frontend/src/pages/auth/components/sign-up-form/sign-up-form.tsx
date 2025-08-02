@@ -133,11 +133,11 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						<Button label="Create an account" type="submit" />
 					</form>
 				</main>
-				<DecorativeImage className={blueStarsClasses} src={blueStars} />
-				<DecorativeImage className={yellowStarsClasses} src={yellowStars} />
-				<DecorativeImage className={orangeClasses} src={orangeImage} />
-				<DecorativeImage className={carClasses} src={carImage} />
 			</div>
+			<DecorativeImage className={blueStarsClasses} src={blueStars} />
+			<DecorativeImage className={yellowStarsClasses} src={yellowStars} />
+			<DecorativeImage className={orangeClasses} src={orangeImage} />
+			<DecorativeImage className={carClasses} src={carImage} />
 		</div>
 	);
 };

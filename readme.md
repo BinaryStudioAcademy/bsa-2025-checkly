@@ -22,24 +22,65 @@ The app helps users achieve their life goals—whether in development, career, h
 
 ## 4. Database Schema
 
-TODO: add database schema
-
-## 5. Architecture
-
 ```mermaid
 
 erDiagram
-    users {
-        int id PK
-        dateTime created_at
-        dateTime updated_at
-        varchar email
-        varchar name
-        text password_hash
-        text password_salt
-    }
+  users ||--o{ plan : "plan"
+  users {
+    int id PK
+    dateTime created_at
+    dateTime updated_at
+    varchar email
+    varchar name
+    text password_hash
+    text password_salt
+  }
+
+  plan ||--|{ plan_day : "plan_day"
+  plan {
+    int id PK
+    varchar title
+    int user_id FK
+    int duration
+    varchar intensity
+    dateTime created_at
+    dateTime updated_at
+  }
+
+  plan_day ||--|{ task : "plan_day"
+  plan_day {
+    int id PK
+    int day_number
+    int plan_id FK
+    dateTime created_at
+    dateTime updated_at
+  }
+
+  task o|--|| execution_time_type : "enum:execution_time_type"
+  task {
+    int id PK
+    varchar title
+    text description
+    int order
+    int plan_day_id FK
+    boolean is_completed
+    execution_time_type execution_time
+    dateTime created_at
+    dateTime updated_at
+    dateTime completed_at
+  }
+
+  execution_time_type {
+    morning morning
+    afternoon afternoon
+    evening evening
+  }
 
 ```
+
+## 5. Architecture
+
+TODO: add architecture
 
 ### 5.1 Global
 

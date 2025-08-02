@@ -44,6 +44,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const twinklesClasses = getClassNames(
 		styles["floating-image"],
 		styles["twinkles"],
+		"show-desktop-up",
 	);
 	const laptopClasses = getClassNames(
 		styles["floating-image"],
@@ -101,6 +102,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							label="Email"
 							name="email"
 							placeholder={COMMON_AUTH_PLACEHOLDER.email}
+							required
 							type="email"
 						/>
 						<Input
@@ -109,6 +111,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							label="Password"
 							name="password"
 							placeholder={COMMON_AUTH_PLACEHOLDER.password}
+							required
 							type="password"
 						/>
 					</div>
