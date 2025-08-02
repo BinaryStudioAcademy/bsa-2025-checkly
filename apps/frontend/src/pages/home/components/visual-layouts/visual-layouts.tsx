@@ -10,7 +10,11 @@ import styles from "./styles.module.css";
 const VisualLayouts: React.FC = () => {
 	return (
 		<section
-			className={getClassNames("grid-pattern", styles["layout-examples"], styles["section"])}
+			className={getClassNames(
+				"grid-pattern",
+				styles["layout-examples"],
+				styles["section"],
+			)}
 			data-section-variant="dark"
 		>
 			<div className={getClassNames("wrapper", styles["layout-wrapper"])}>

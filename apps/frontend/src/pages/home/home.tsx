@@ -1,4 +1,10 @@
-import { Footer, Header, Hero, HowItWorks, VisualLayouts } from "./components/components.js";
+import {
+	Footer,
+	Header,
+	Hero,
+	HowItWorks,
+	VisualLayouts,
+} from "./components/components.js";
 
 const Home: React.FC = () => {
 	return (
