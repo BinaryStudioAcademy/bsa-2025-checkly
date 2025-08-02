@@ -2,7 +2,7 @@
 	--grid-color: var(--color-text-secondary, #f6f5fa);
 	--grid-opacity: 1;
 	--grid-size: 8px;
-	--grid-line: 1.4px;
+	--grid-line: 1px;
 	--color: color-mix(
 		in srgb,
 		var(--grid-color) calc(var(--grid-opacity) * 100%),
