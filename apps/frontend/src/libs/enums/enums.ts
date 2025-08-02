@@ -1,5 +1,6 @@
 export { AppRoute } from "./app-route.enum.js";
 export { DataStatus } from "./data-status.enum.js";
+export { RouteAccess } from "./route-access.js";
 export {
 	APIPath,
 	AppEnvironment,
