@@ -1,5 +1,6 @@
 import {
 	FeedbacksSection,
+	Footer,
 	Header,
 	Hero,
 	HowItWorks,
@@ -24,6 +25,7 @@ const Home: React.FC = () => {
 				</section>
 				<FeedbacksSection />
 			</main>
+			<Footer />
 		</>
 	);
 };
