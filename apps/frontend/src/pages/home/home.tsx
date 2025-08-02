@@ -1,4 +1,9 @@
-import { Header, Hero, HowItWorks } from "./components/components.js";
+import {
+	Categories,
+	Header,
+	Hero,
+	HowItWorks,
+} from "./components/components.js";
 
 const Home: React.FC = () => {
 	return (
@@ -7,12 +12,8 @@ const Home: React.FC = () => {
 			<main>
 				<Hero />
 				<HowItWorks />
-				<section data-section-variant>
-					<div className="wrapper">
-						<h2>Categories</h2>
-					</div>
-				</section>
-				<section className="grid-pattern" data-section-variant="dark">
+				<Categories />
+				<section data-section-variant="dark">
 					<div className="wrapper">
 						<h2>Sample visual layouts</h2>
 					</div>
