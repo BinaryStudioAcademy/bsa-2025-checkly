@@ -39,20 +39,20 @@
 }
 
 .yellow-stars {
-	top: 0%;
+	top: 5%;
 	left: -42%;
 }
 
 .orange-image {
 	top: 10%;
-	left: -10%;
-	height: 100px;
+	left: -20%;
+	height: 200px;
 }
 
 .car-image {
 	right: -20%;
 	bottom: 2%;
-	height: 120px;
+	height: 200px;
 }
 
 .logo-container {
