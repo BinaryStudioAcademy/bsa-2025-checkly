@@ -6,7 +6,6 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import styles from "./styles.module.css";
 
 const NotFound: React.FC = () => {
-
 	const yellowStarsClasses = getClassNames(
 		styles["image-position"],
 		styles["yellow-stars"],
@@ -40,7 +39,10 @@ const NotFound: React.FC = () => {
 					</Link>
 				</div>
 				<DecorativeImage className={yellowStarsClasses} src={yellowStars} />
-				<DecorativeImage className={yellowTwinklesClasses} src={yellowTwinkles} />
+				<DecorativeImage
+					className={yellowTwinklesClasses}
+					src={yellowTwinkles}
+				/>
 			</main>
 		</>
 	);
