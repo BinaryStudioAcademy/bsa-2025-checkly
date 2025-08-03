@@ -3,7 +3,7 @@ name: Continuous Delivery
 env:
   AWS_REGION: eu-north-1
   EBS_APPLICATION_NAME: checkly
-  EBS_ENVIRONMENT_NAME: checkly-environment
+  EBS_ENVIRONMENT_NAME: checkly-env
 
 on:
   push:
@@ -41,7 +41,7 @@ jobs:
     if: ${{ needs.release.outputs.release_created }}
     runs-on: ubuntu-latest
     environment:
-      name: checkly-environment
+      name: checkly-env
       url: http://checkly.eu-north-1.elasticbeanstalk.com/
 
     steps:

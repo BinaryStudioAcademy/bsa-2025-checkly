@@ -1,24 +1,22 @@
 .decorStarsTop {
 	position: absolute;
-	top: clamp(16px, 5vw, 40px);
+	top: clamp(1rem, 5vw, 2.5rem);
 	left: 15%;
 	z-index: 1;
-	width: clamp(60px, 10vw, 100%);
-}
-
-.orangeDecor {
-	position: absolute;
-	top: clamp(1rem, 5vw, 2.5rem);
-	left: 65%;
-	z-index: 1;
-	width: clamp(2rem, 8vw + 1rem, 8rem);
-	height: clamp(2rem, 8vw + 1rem, 8rem);
+	width: clamp(3.75rem, 10vw + 1rem, 12rem);
 	transform: scale(1);
 	transition: transform 0.3s ease;
 }
 
-.orangeDecor:hover {
-	transform: scale(1.1);
+.orangeDecor {
+	position: absolute;
+	top: clamp(0.5rem, 1vw + 0.25rem, 0.75rem);
+	left: 63%;
+	z-index: 1;
+	width: clamp(7.5rem, 5vw + 6rem, 24rem);
+	height: clamp(7.5rem, 5vw + 6rem, 24rem);
+	transform: scale(1);
+	transition: transform 0.3s ease;
 }
 
 .dogImage {
