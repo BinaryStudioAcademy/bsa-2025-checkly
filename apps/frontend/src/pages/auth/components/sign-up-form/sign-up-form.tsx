@@ -88,56 +88,54 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				</div>
 				<form
 					aria-labelledby="sign-up-title"
-					className={styles["form"]}
+					className={getClassNames(styles["form"], "cluster")}
 					onSubmit={handleFormSubmit}
 				>
-					<div className="cluster">
-						<div className="flow-loose">
-							<Input
-								control={control}
-								errors={errors}
-								label="Name"
-								name="name"
-								placeholder={AUTH_PLACEHOLDERS.name}
-								required
-								type="text"
-							/>
-						</div>
-						<div className="flow-loose">
-							<Input
-								control={control}
-								errors={errors}
-								label="Email"
-								name="email"
-								placeholder={AUTH_PLACEHOLDERS.email}
-								required
-								type="text"
-							/>
-						</div>
-						<div className="flow-loose">
-							<Input
-								control={control}
-								errors={errors}
-								label="Password"
-								name="password"
-								placeholder={AUTH_PLACEHOLDERS.password}
-								required
-								type="password"
-							/>
-						</div>
-						<div className="flow-loose">
-							<Input
-								control={control}
-								errors={errors}
-								label="Confirm password"
-								name="confirmPassword"
-								placeholder={AUTH_PLACEHOLDERS.password}
-								required
-								type="password"
-							/>
-						</div>
-						<Button label="Create an account" type="submit" />
+					<div className="flow-loose">
+						<Input
+							control={control}
+							errors={errors}
+							label="Name"
+							name="name"
+							placeholder={AUTH_PLACEHOLDERS.name}
+							required
+							type="text"
+						/>
 					</div>
+					<div className="flow-loose">
+						<Input
+							control={control}
+							errors={errors}
+							label="Email"
+							name="email"
+							placeholder={AUTH_PLACEHOLDERS.email}
+							required
+							type="text"
+						/>
+					</div>
+					<div className="flow-loose">
+						<Input
+							control={control}
+							errors={errors}
+							label="Password"
+							name="password"
+							placeholder={AUTH_PLACEHOLDERS.password}
+							required
+							type="password"
+						/>
+					</div>
+					<div className="flow-loose">
+						<Input
+							control={control}
+							errors={errors}
+							label="Confirm password"
+							name="confirmPassword"
+							placeholder={AUTH_PLACEHOLDERS.password}
+							required
+							type="password"
+						/>
+					</div>
+					<Button label="Create an account" type="submit" />
 				</form>
 				<DecorativeImage className={orangeClasses} src={orangeImage} />
 				<DecorativeImage className={carClasses} src={carImage} />
