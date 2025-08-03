@@ -1,7 +1,7 @@
 import {
-	pinkStars,
-	yellowStars,
-} from "~/assets/img/visual-layouts/visual-layouts.img.js";
+	StarsPink02,
+	StarsYellow03,
+} from "~/assets/img/shared/shapes/shapes.img.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import { layoutExamples } from "./layout-examples.data.js";
@@ -27,14 +27,14 @@ const VisualLayouts: React.FC = () => {
 							alt=""
 							aria-hidden
 							className={getClassNames(styles["yellow-stars"])}
-							src={yellowStars}
+							src={StarsYellow03}
 						/>
 					</h2>
 					<img
 						alt=""
 						aria-hidden
 						className={getClassNames(styles["pink-stars"])}
-						src={pinkStars}
+						src={StarsPink02}
 					/>
 				</div>
 				<div
