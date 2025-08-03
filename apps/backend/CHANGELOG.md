@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.0.0...backend-v1.0.1) (2025-08-02)
+
+
+### Bug Fixes
+
+* deploy config cy-0 ([71f9df2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/71f9df22549eacab9d0927970cd5542530d78053))
+* deployment config cy-0 ([9fad171](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9fad1715b2180a66b510e3f3c2f44de15f3baf0d))
+* fix-sign-in-backend cy-69 ([858de71](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/858de716436ed5485726aa2c06ab32bb6f4809b3))
+* moved enums, types to backend imports cy-69 ([3a2af9a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3a2af9aae89158d8583562d914ce9d1cad34e34e))
+* redundant type defenition cy-69 ([00b73fd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/00b73fd0163f25c576ce18fc55c78237eb01a409))
+
 ## 1.0.0 (2025-07-30)
 
 
