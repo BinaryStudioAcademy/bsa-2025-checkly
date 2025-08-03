@@ -1,11 +1,13 @@
 import {
 	createListenerMiddleware,
 	isAnyOf,
+	isFulfilled,
 	isRejected,
 } from "@reduxjs/toolkit";
 
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { ErrorMessage } from "~/libs/enums/error-messages.enum.js";
+import { SuccessMessage } from "~/libs/enums/success-messages.enum.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { signIn, signUp } from "~/modules/auth/slices/actions.js";
 
@@ -27,6 +29,13 @@ listenerMiddleware.startListening({
 		await navigation.navigateTo(AppRoute.ROOT);
 	},
 	matcher: isAnyOf(signIn.fulfilled, signUp.fulfilled),
+});
+
+listenerMiddleware.startListening({
+	effect: () => {
+		notifications.success(SuccessMessage.SIGN_UP);
+	},
+	matcher: isFulfilled(signUp),
 });
 
 export { listenerMiddleware };
