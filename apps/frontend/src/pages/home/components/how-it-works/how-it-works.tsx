@@ -1,3 +1,8 @@
+import {
+	Croissant,
+	Laptop,
+} from "~/assets/img/shared/illustrations/illustrations.img.js";
+import { Arrow, StarsYellow02 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { DecorativeImage } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
@@ -22,7 +27,7 @@ const HowItWorks: React.FC = () => {
 						<div className={styles["arrow"]}>
 							<DecorativeImage
 								className={getClassNames(styles["arrowImage"])}
-								src="/src/assets/img/home/how-it-works/arrow.svg"
+								src={Arrow}
 							/>
 						</div>
 						<div className={stepBlockClasses}>
@@ -32,7 +37,7 @@ const HowItWorks: React.FC = () => {
 						<div className={styles["arrow"]}>
 							<DecorativeImage
 								className={getClassNames(styles["arrowImage"])}
-								src="/src/assets/img/home/how-it-works/arrow.svg"
+								src={Arrow}
 							/>
 						</div>
 						<div className={stepBlockClasses}>
@@ -43,15 +48,15 @@ const HowItWorks: React.FC = () => {
 						</div>
 					</div>
 					<div className={styles["croissantImage"]}>
-						<DecorativeImage src="/src/assets/img/home/how-it-works/croissant.svg" />
+						<DecorativeImage src={Croissant} />
 					</div>
 					<div className={styles["laptopImage"]}>
-						<DecorativeImage src="/src/assets/img/home/how-it-works/laptop.svg" />
+						<DecorativeImage src={Laptop} />
 					</div>
 					<div className={styles["decorativeStars"]}>
 						<DecorativeImage
 							className={getClassNames(styles["starsImage"])}
-							src="/src/assets/img/home/how-it-works/yellow_stars.svg"
+							src={StarsYellow02}
 						/>
 					</div>
 				</div>
