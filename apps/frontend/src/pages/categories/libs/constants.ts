@@ -1,33 +1,33 @@
 import {
-	creativity,
-	hobby,
-	money,
-	personalDev,
-	spirituality,
-	sport,
-} from "~/assets/img/categories/categories.js";
+	Athlete,
+	Camera,
+	Flowers,
+	Money,
+	RollerSkate,
+	TeddyBear,
+} from "~/assets/img/shared/illustrations/categories/categories.img.js";
 
 import { type CategoryData } from "./types/category-data.js";
 
 const categories: CategoryData[] = [
 	{
 		id: "personal-dev",
-		image: personalDev,
+		image: TeddyBear,
 		name: "personal development",
 	},
 	{
 		id: "spirituality",
-		image: spirituality,
+		image: Flowers,
 		name: "spirituality",
 	},
-	{ id: "sport", image: sport, name: "sport" },
-	{ id: "money", image: money, name: "money" },
+	{ id: "sport", image: Athlete, name: "sport" },
+	{ id: "money", image: Money, name: "money" },
 	{
 		id: "creativity",
-		image: creativity,
+		image: Camera,
 		name: "creativity",
 	},
-	{ id: "hobby", image: hobby, name: "hobby" },
+	{ id: "hobby", image: RollerSkate, name: "hobby" },
 ];
 
 export { categories };

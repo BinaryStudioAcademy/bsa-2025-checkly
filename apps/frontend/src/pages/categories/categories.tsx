@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 import {
-	blueArrow,
-	blueStars,
-	twinkles,
-	yellowStars,
-} from "~/assets/img/categories/categories.js";
+	Arrow,
+	StarsPink02,
+	StarsYellow03,
+	TwinklesYellow,
+} from "~/assets/img/shared/shapes/shapes.img.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
@@ -71,10 +71,10 @@ const CategoriesPage: React.FC = () => {
 					</ul>
 					<Button disabled={!activeCategory} label="next" type="button" />
 				</div>
-				<DecorativeImage className={twinklesClasses} src={twinkles} />
-				<DecorativeImage className={blueArrowClasses} src={blueArrow} />
-				<DecorativeImage className={yellowStarsClasses} src={yellowStars} />
-				<DecorativeImage className={blueStarsClasses} src={blueStars} />
+				<DecorativeImage className={twinklesClasses} src={TwinklesYellow} />
+				<DecorativeImage className={blueArrowClasses} src={Arrow} />
+				<DecorativeImage className={yellowStarsClasses} src={StarsYellow03} />
+				<DecorativeImage className={blueStarsClasses} src={StarsPink02} />
 			</div>
 		</section>
 	);
