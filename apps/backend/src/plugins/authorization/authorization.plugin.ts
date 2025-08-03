@@ -68,17 +68,8 @@ const extractUserFromRequest = async (
 };
 
 const checkIsWhiteRoute = (url: string, whiteRoutes: string[]): boolean => {
-	const regex = /^\/api\/v\d+(\/.+)$/;
-	const match = regex.exec(url);
-	const [, route] = match ?? [];
-
-	if (!route) {
-		return true;
-	}
-
-	const ROUTE_WITH_QUERY_INDEX = 0;
-
-	const routeWithoutQuery = route.split("?")[ROUTE_WITH_QUERY_INDEX] as string;
+	const URL_WITHOUT_QUERY_INDEX = 0;
+	const routeWithoutQuery = url.split("?")[URL_WITHOUT_QUERY_INDEX] as string;
 
 	return whiteRoutes.includes(routeWithoutQuery);
 };
