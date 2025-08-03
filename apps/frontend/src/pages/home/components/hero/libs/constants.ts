@@ -1,10 +1,10 @@
+import { Cat } from "~/assets/img/shared/illustrations/illustrations.img.js";
 import {
-	cat,
-	greenFlower,
-	pinkStars,
-	yellowStars,
-	yellowTwinkles,
-} from "~/assets/img/home/home.img.js";
+	FlowerGreen,
+	StarsPink01,
+	StarsYellow01,
+	TwinklesYellow,
+} from "~/assets/img/shared/shapes/shapes.img.js";
 
 type DecorativeImageItem = {
 	className: string;
@@ -16,27 +16,27 @@ const decorativeImagesList: DecorativeImageItem[] = [
 	{
 		className: "green-flower",
 		id: 1,
-		src: greenFlower,
+		src: FlowerGreen,
 	},
 	{
 		className: "yellow-twinkles",
 		id: 2,
-		src: yellowTwinkles,
+		src: TwinklesYellow,
 	},
 	{
 		className: "yellow-stars",
 		id: 3,
-		src: yellowStars,
+		src: StarsYellow01,
 	},
 	{
 		className: "pink-stars",
 		id: 4,
-		src: pinkStars,
+		src: StarsPink01,
 	},
 	{
 		className: "cat",
 		id: 5,
-		src: cat,
+		src: Cat,
 	},
 ];
 

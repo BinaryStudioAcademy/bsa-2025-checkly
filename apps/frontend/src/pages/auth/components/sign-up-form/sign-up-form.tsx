@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 
 import {
-	blueStars,
-	carImage,
-	orangeImage,
-	yellowStars,
-} from "~/assets/img/sign-up/sign-up.img.js";
+	Car,
+	OrangeWhole,
+} from "~/assets/img/shared/illustrations/illustrations.img.js";
+import {
+	StarsPink01,
+	StarsYellow02,
+} from "~/assets/img/shared/shapes/shapes.img.js";
 import {
 	Button,
 	DecorativeImage,
@@ -137,11 +139,11 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					</div>
 					<Button label="Create an account" type="submit" />
 				</form>
-				<DecorativeImage className={orangeClasses} src={orangeImage} />
-				<DecorativeImage className={carClasses} src={carImage} />
-				<DecorativeImage className={blueStarsClasses} src={blueStars} />
+				<DecorativeImage className={orangeClasses} src={OrangeWhole} />
+				<DecorativeImage className={carClasses} src={Car} />
+				<DecorativeImage className={blueStarsClasses} src={StarsPink01} />
 			</main>
-			<DecorativeImage className={yellowStarsClasses} src={yellowStars} />
+			<DecorativeImage className={yellowStarsClasses} src={StarsYellow02} />
 		</div>
 	);
 };
