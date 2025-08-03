@@ -17,8 +17,12 @@
 
 html {
 	text-size-adjust: none;
-	scroll-behavior: smooth;
-	scrollbar-gutter: stable;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		scroll-behavior: smooth;
+	}
 }
 
 html,

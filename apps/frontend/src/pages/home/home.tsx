@@ -1,5 +1,6 @@
 import {
 	Categories,
+	Footer,
 	Header,
 	Hero,
 	HowItWorks,
@@ -24,6 +25,7 @@ const Home: React.FC = () => {
 					</div>
 				</section>
 			</main>
+			<Footer />
 		</>
 	);
 };

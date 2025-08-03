@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 
 import {
-	cup,
-	laptop,
-	pinkStars,
-	twinkles,
-	yellowStars,
-} from "~/assets/img/sign-in/sign-in.img.js";
+	CupGreen,
+	Laptop,
+} from "~/assets/img/shared/illustrations/illustrations.img.js";
+import {
+	StarsPink01,
+	StarsYellow02,
+	TwinklesYellow,
+} from "~/assets/img/shared/shapes/shapes.img.js";
 import {
 	Button,
 	DecorativeImage,
@@ -41,6 +43,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const twinklesClasses = getClassNames(
 		styles["floating-image"],
 		styles["twinkles"],
+		"show-desktop-up",
 	);
 	const laptopClasses = getClassNames(
 		styles["floating-image"],
@@ -98,6 +101,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							label="Email"
 							name="email"
 							placeholder="Enter your email"
+							required
 							type="email"
 						/>
 						<Input
@@ -106,17 +110,18 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							label="Password"
 							name="password"
 							placeholder="Enter your password"
+							required
 							type="password"
 						/>
 					</div>
 					<Button label="Sign In" type="submit" />
 				</form>
-				<DecorativeImage className={pinkStarsClasses} src={pinkStars} />
-				<DecorativeImage className={cupClasses} src={cup} />
+				<DecorativeImage className={pinkStarsClasses} src={StarsPink01} />
+				<DecorativeImage className={cupClasses} src={CupGreen} />
 			</main>
-			<DecorativeImage className={yellowStarsClasses} src={yellowStars} />
-			<DecorativeImage className={twinklesClasses} src={twinkles} />
-			<DecorativeImage className={laptopClasses} src={laptop} />
+			<DecorativeImage className={yellowStarsClasses} src={StarsYellow02} />
+			<DecorativeImage className={twinklesClasses} src={TwinklesYellow} />
+			<DecorativeImage className={laptopClasses} src={Laptop} />
 		</div>
 	);
 };
