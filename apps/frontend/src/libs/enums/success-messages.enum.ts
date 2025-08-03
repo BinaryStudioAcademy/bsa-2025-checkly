@@ -1,5 +1,5 @@
 const SuccessMessage = {
-	SIGN_UP: "Something went wrong",
+	SIGN_UP: "Registration successful!",
 } as const;
 
 export { SuccessMessage };
