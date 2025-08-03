@@ -4,6 +4,7 @@ import {
 	Header,
 	Hero,
 	HowItWorks,
+	VisualLayouts,
 } from "./components/components.js";
 
 const Home: React.FC = () => {
@@ -18,12 +19,8 @@ const Home: React.FC = () => {
 						<h2>Categories</h2>
 					</div>
 				</section>
-				<section className="grid-pattern" data-section-variant="dark">
-					<div className="wrapper">
-						<h2>Sample visual layouts</h2>
-					</div>
-				</section>
-				<FeedbacksSection />
+				<VisualLayouts />
+        <FeedbacksSection />
 			</main>
 			<Footer />
 		</>
