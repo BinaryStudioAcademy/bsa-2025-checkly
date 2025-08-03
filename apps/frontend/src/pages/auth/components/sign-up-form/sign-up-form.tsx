@@ -21,10 +21,8 @@ import {
 	userSignUpValidationSchemaExtended,
 } from "~/modules/users/users.js";
 
-import {
-	COMMON_AUTH_PLACEHOLDER,
-	DEFAULT_SIGN_UP_PAYLOAD,
-} from "./libs/constants.js";
+import { AUTH_PLACEHOLDERS } from "../../libs/constants.js";
+import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
 import styles from "./sign-up-form.module.css";
 
 type Properties = {
@@ -63,36 +61,44 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	);
 
 	return (
-		<div className={getClassNames("grid-pattern", styles["container"])}>
-			<div className={getClassNames("grid-pattern", styles["sign-up-card"])}>
-				<header className={styles["logo-container"]}>
+		<div className={getClassNames(styles["container"], "grid-pattern")}>
+			<main
+				className={getClassNames(
+					styles["sign-in"],
+					"wrapper grid-pattern flow-loose",
+				)}
+			>
+				<div className="flow-loose">
 					<Logo />
-				</header>
-
-				<main className={styles["form-content"]}>
-					<h1 className={styles["title"]}>Create an account</h1>
-					<p className={styles["redirect-text"]}>
-						Already have an account? Go to{" "}
-						<Link
-							aria-label="Go to sign in page"
-							className={styles["redirect-link"]}
-							to={AppRoute.SIGN_IN}
-						>
-							Sign In
-						</Link>
-					</p>
-					<form
-						aria-labelledby="sign-in-title"
-						className={styles["form"]}
-						onSubmit={handleFormSubmit}
-					>
+					<header className="flow">
+						<h1 className={styles["title"]} id="sign-in-title">
+							Create an account
+						</h1>
+						<p className={styles["redirect-text"]}>
+							Already have an account? Go to{" "}
+							<Link
+								aria-label="Go to carate account page"
+								className={styles["redirect-link"]}
+								to={AppRoute.SIGN_IN}
+							>
+								Sign In
+							</Link>
+						</p>
+					</header>
+				</div>
+				<form
+					aria-labelledby="sign-up-title"
+					className={styles["form"]}
+					onSubmit={handleFormSubmit}
+				>
+					<div className="cluster">
 						<div className="flow-loose">
 							<Input
 								control={control}
 								errors={errors}
 								label="Name"
 								name="name"
-								placeholder="Enter your name"
+								placeholder={AUTH_PLACEHOLDERS.name}
 								required
 								type="text"
 							/>
@@ -103,7 +109,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 								errors={errors}
 								label="Email"
 								name="email"
-								placeholder={COMMON_AUTH_PLACEHOLDER.email}
+								placeholder={AUTH_PLACEHOLDERS.email}
 								required
 								type="text"
 							/>
@@ -114,7 +120,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 								errors={errors}
 								label="Password"
 								name="password"
-								placeholder={COMMON_AUTH_PLACEHOLDER.password}
+								placeholder={AUTH_PLACEHOLDERS.password}
 								required
 								type="password"
 							/>
@@ -125,19 +131,19 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 								errors={errors}
 								label="Confirm password"
 								name="confirmPassword"
-								placeholder={COMMON_AUTH_PLACEHOLDER.password}
+								placeholder={AUTH_PLACEHOLDERS.password}
 								required
 								type="password"
 							/>
 						</div>
 						<Button label="Create an account" type="submit" />
-					</form>
-				</main>
-			</div>
-			<DecorativeImage className={blueStarsClasses} src={blueStars} />
+					</div>
+				</form>
+				<DecorativeImage className={orangeClasses} src={orangeImage} />
+				<DecorativeImage className={carClasses} src={carImage} />
+				<DecorativeImage className={blueStarsClasses} src={blueStars} />
+			</main>
 			<DecorativeImage className={yellowStarsClasses} src={yellowStars} />
-			<DecorativeImage className={orangeClasses} src={orangeImage} />
-			<DecorativeImage className={carClasses} src={carImage} />
 		</div>
 	);
 };

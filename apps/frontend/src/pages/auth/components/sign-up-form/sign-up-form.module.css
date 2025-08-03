@@ -1,68 +1,51 @@
 .container {
 	--grid-color: var(--color-grid-line-cream);
 
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 100%;
 	min-height: 100vh;
-	padding-block: var(--space-l);
-	padding-inline: var(--space-m-3xl);
+	padding-block: var(--space-m);
 	overflow-x: clip;
 	background-color: var(--color-card-yellow);
 }
 
-.sign-up-card {
+.sign-in {
 	--grid-color: var(--color-grid-line-cream);
 	--grid-opacity: 0.8;
 
 	position: relative;
-	z-index: 1;
-	max-width: 592px;
+	z-index: 200;
+	width: 100%;
+	max-width: 590px;
+	padding-block: var(--space-xl) var(--space-3xl);
 	padding-inline: var(--space-m-3xl);
-	padding-top: var(--space-l-xl);
-	padding-bottom: var(--space-2xl-3xl);
-	text-align: center;
+	margin-inline: var(--space-s);
+	font-family: var(--font-family-primary);
 	background-color: var(--color-bg-white);
 	border-radius: var(--radius-l);
 }
 
-.image-position {
-	position: absolute;
-}
-
-.form-content {
-	text-align: start;
-}
-
-.logo-container {
-	margin-bottom: var(--space-m);
-}
-
 .title {
-	margin-bottom: var(--space-l-xl);
 	font-size: var(--text-size-heading-2);
-	line-height: 1.09;
-}
-
-.redirect-text {
-	margin-bottom: var(--space-m);
-	font-size: var(--step-minus-2);
-	color: var(--color-text-primary);
-	text-indent: 11px;
-	text-decoration-color: var(--color-bg-dark);
 }
 
 .redirect-text__link,
 .redirect-text__link:visited {
-	text-decoration: none;
+	color: var(--color-text-primary);
+	text-decoration-color: var(--color-bg-dark);
 }
 
 .form {
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-s-m);
-	text-align: left;
+	--cluster-direction: column;
+	--cluster-vertical-alignment: stretch;
+	--gutter: var(--space-s-m);
+}
+
+.image-position {
+	position: absolute;
 }
 
 .blue-stars {
@@ -71,8 +54,8 @@
 }
 
 .yellow-stars {
-	top: 0%;
-	left: -42%;
+	top: 0;
+	left: 5px;
 }
 
 .orange-image {
@@ -82,12 +65,17 @@
 }
 
 .car-image {
-	right: 40%;
-	bottom: -13%;
-	height: 110px;
+	right: 60%;
+	bottom: -15px;
+	z-index: 3;
+	height: 80px;
 }
 
 @media (width >= 600px) {
+	.container {
+		padding-block: 0;
+	}
+
 	.orange-image {
 		top: 10%;
 		left: -10%;
@@ -100,7 +88,19 @@
 		height: 120px;
 	}
 
+	.yellow-stars {
+		top: 14%;
+		left: 5px;
+	}
+
 	.blue-stars {
 		bottom: 5%;
+	}
+}
+
+@media (width >= 1024px) {
+	.yellow-stars {
+		top: 14%;
+		left: 12%;
 	}
 }
