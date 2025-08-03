@@ -1,12 +1,12 @@
 {
 	"name": "shared",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"type": "module",
 	"main": "build/index.js",
 	"types": "src/index.ts",
 	"engines": {
 		"node": "22.x.x",
-		"npm": "11.x.x"
+		"npm": "10.x.x"
 	},
 	"scripts": {
 		"lint:type": "npx tsc --noEmit",
