@@ -20,7 +20,7 @@
 		"build:shared": "npm run build -w shared",
 		"build:frontend": "npm run build -w frontend",
 		"build:backend": "npm run build -w backend",
-		"build": "npm run build:shared && npm run build:backend && npm run build:frontend && npm run migrate -w backend && sh ./prepare-build.sh",
+		"build": "npm run build:shared && npm run build:backend && npm run build:frontend && sh ./prepare-build.sh",
 		"lint:editor": "editorconfig-checker",
 		"lint:fs": "ls-lint",
 		"lint:type": "npx tsc --noEmit",
