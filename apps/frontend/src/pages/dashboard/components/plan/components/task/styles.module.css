@@ -1,0 +1,141 @@
+.content__tasks-item {
+	display: flex;
+	flex-direction: row;
+	gap: var(--gutter);
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	padding: 0;
+	padding: var(--gutter);
+	margin: 0;
+	border: 2px solid black;
+	border-radius: var(--radius-m);
+}
+
+.content__tasks-item h3 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 7%;
+	padding: calc(1.5 * var(--gutter));
+	font-size: 48px;
+}
+
+.content__tasks-item p {
+	font-size: var(--text-body-small);
+}
+
+.color-1 {
+	background-color: var(--color-card-orange);
+}
+
+.color-2 {
+	background-color: var(--color-card-pink);
+}
+
+.color-3 {
+	background-color: var(--color-card-yellow);
+}
+
+.color-4 {
+	background-color: var(--color-card-blue);
+}
+
+.color-5 {
+	background-color: var(--color-card-mint);
+}
+
+.item-actions {
+	display: flex;
+	flex-shrink: 0;
+	flex-direction: row;
+	gap: var(--space-3xs);
+	align-items: flex-start;
+	height: 100%;
+	margin-left: auto;
+	white-space: nowrap;
+}
+
+.item-actions > *,
+.item-actions button {
+	height: 23px;
+}
+
+.item-actions__time {
+	display: flex;
+	gap: var(--space-3xs);
+	align-items: center;
+	padding: 0 var(--gutter);
+	background: #ffffff80;
+	border-radius: var(--radius-full);
+}
+
+.item-actions_buttons-wrapper {
+	display: flex;
+	gap: var(--space-3xs);
+	justify-content: center;
+}
+
+.item-actions_button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	padding: calc(var(--space-3xs) * 1.5);
+	background: white;
+	border-radius: var(--radius-full);
+}
+
+@media (width <= 1024px) {
+	.item-actions {
+		flex-direction: column;
+		gap: var(--space-2xs);
+		margin-top: auto;
+	}
+
+	.item-actions__time {
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+	}
+
+	.item-actions_buttons-wrapper {
+		gap: var(--space-2xs);
+		width: 100%;
+	}
+}
+
+@media (width <= 500px) {
+	.content__tasks-item {
+		flex-wrap: wrap;
+	}
+
+	.content__tasks-item h3 {
+		width: 10%;
+	}
+
+	.item-actions {
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		height: auto;
+		margin: auto;
+	}
+
+	.description-wrapper {
+		width: 80%;
+	}
+
+	.item-actions__time {
+		width: auto;
+	}
+
+	.day {
+		padding: var(--space-2xs) var(--space-s);
+	}
+
+	.item-actions_buttons-wrapper {
+		width: auto;
+	}
+}
