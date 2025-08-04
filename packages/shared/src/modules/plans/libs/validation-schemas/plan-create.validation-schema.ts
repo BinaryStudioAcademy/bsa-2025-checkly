@@ -14,10 +14,19 @@ const planCreate = z.object({
 		.trim()
 		.min(PlanValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
 			message: PlanValidationMessage.FIELD_REQUIRED,
+		})
+		.max(PlanValidationRule.INTENSITY_MAX_LENGTH, {
+			message: PlanValidationMessage.INTENSITY_LENGTH,
 		}),
-	title: z.string().trim().min(PlanValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
-		message: PlanValidationMessage.FIELD_REQUIRED,
-	}),
+	title: z
+		.string()
+		.trim()
+		.min(PlanValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
+			message: PlanValidationMessage.FIELD_REQUIRED,
+		})
+		.max(PlanValidationRule.TITLE_MAX_LENGTH, {
+			message: PlanValidationMessage.TITLE_LENGTH,
+		}),
 	userId: z.number({
 		required_error: PlanValidationMessage.FIELD_REQUIRED,
 	}),

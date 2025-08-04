@@ -31,9 +31,15 @@ const taskCreate = z.object({
 		})
 		.int()
 		.positive(),
-	title: z.string().trim().min(TaskValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
-		message: TaskValidationMessage.FIELD_REQUIRED,
-	}),
+	title: z
+		.string()
+		.trim()
+		.min(TaskValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
+			message: TaskValidationMessage.FIELD_REQUIRED,
+		})
+		.max(TaskValidationRule.TITLE_MAX_LENGTH, {
+			message: TaskValidationMessage.TITLE_LENGTH,
+		}),
 });
 
 type TaskCreateRequestDto = z.infer<typeof taskCreate>;
