@@ -50,6 +50,11 @@ export {
 	PlansApiPath,
 } from "./modules/plans/plans.js";
 export {
+	QUESTION_TYPE,
+	type QuestionType,
+	QuizzApiPath,
+} from "./modules/quiz/quiz.js";
+export {
 	ExecutionTimeType,
 	type TaskCreateRequestDto,
 	taskCreateValidationSchema,
