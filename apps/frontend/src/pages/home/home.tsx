@@ -1,9 +1,11 @@
 import {
 	Categories,
+	FeedbacksSection,
 	Footer,
 	Header,
 	Hero,
 	HowItWorks,
+	VisualLayouts,
 } from "./components/components.js";
 
 const Home: React.FC = () => {
@@ -24,6 +26,8 @@ const Home: React.FC = () => {
 						<h2>Testimonials</h2>
 					</div>
 				</section>
+				<VisualLayouts />
+				<FeedbacksSection />
 			</main>
 			<Footer />
 		</>
