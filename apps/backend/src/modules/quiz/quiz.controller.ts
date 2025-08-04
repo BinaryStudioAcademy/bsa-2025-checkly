@@ -21,7 +21,7 @@ class QuizContoller extends BaseController {
 			handler: () => this.getAllQuestionsWithOptions(),
 			isPublic: true,
 			method: HTTPMethod.GET,
-			path: QuizzApiPath.QUESTIONS,
+			path: QuizzApiPath.ROOT,
 		});
 	}
 
