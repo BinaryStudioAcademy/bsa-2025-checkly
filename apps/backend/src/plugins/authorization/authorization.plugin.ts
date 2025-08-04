@@ -69,10 +69,9 @@ const extractUserFromRequest = async (
 
 const checkIsWhiteRoute = (url: string, whiteRoutes: string[]): boolean => {
 	const regex = /^\/api\/v\d+(\/.+)$/;
-	const match = regex.exec(url);
-	const [, route] = match ?? [];
+	const isAPIRoute = regex.test(url);
 
-	if (!route) {
+	if (!isAPIRoute) {
 		return true;
 	}
 
