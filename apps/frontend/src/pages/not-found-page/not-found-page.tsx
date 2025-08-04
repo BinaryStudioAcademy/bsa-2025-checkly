@@ -5,17 +5,17 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import styles from "./styles.module.css";
 
+const yellowStarsClasses = getClassNames(
+	styles["image-position"],
+	styles["yellow-stars"],
+);
+
+const yellowTwinklesClasses = getClassNames(
+	styles["image-position"],
+	styles["yellow-twinkles"],
+);
+
 const NotFound: React.FC = () => {
-	const yellowStarsClasses = getClassNames(
-		styles["image-position"],
-		styles["yellow-stars"],
-	);
-
-	const yellowTwinklesClasses = getClassNames(
-		styles["image-position"],
-		styles["yellow-twinkles"],
-	);
-
 	return (
 		<>
 			<main
@@ -38,7 +38,10 @@ const NotFound: React.FC = () => {
 						<Button label="Back to Home" size="large" variant="primary" />
 					</Link>
 				</div>
-				<DecorativeImage className={yellowStarsClasses} src={yellowStars} />
+				<DecorativeImage
+					className={yellowStarsClasses}
+					src={yellowStars}
+				/>
 				<DecorativeImage
 					className={yellowTwinklesClasses}
 					src={yellowTwinkles}
