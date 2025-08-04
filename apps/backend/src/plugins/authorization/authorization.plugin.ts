@@ -75,9 +75,9 @@ const checkIsWhiteRoute = (url: string, whiteRoutes: string[]): boolean => {
 		return true;
 	}
 
-	const [routeWithoutQuery] = url.split("?") as [string];
+	const [routeWithoutQuery] = url.split("?");
 
-	return whiteRoutes.includes(routeWithoutQuery);
+	return whiteRoutes.includes(routeWithoutQuery as string);
 };
 
 const authorization = fp<AuthPluginOptions>(
