@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.1.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.0.1...backend-v1.1.0) (2025-08-04)
+
+
+### Features
+
+* * update routeWithQuery type cy-132 ([ba050a3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ba050a3385167bea32f0a46b03b7587e6bcffdba))
+* add design examples component cy-20 ([c5a226c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c5a226cb88a2a867407aa59c2793ea45b67ed233))
+
+
+### Bug Fixes
+
+* - remove redundant variable declaration cy-132 ([4bdf93b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/4bdf93b685e0b0f8e902237d4ec797591e963e52))
+* * update checkIsWhiteRoute function cy-132 ([2bfb4e5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2bfb4e530a5dc1f6722cac41255a319d96e7aa3a))
+* * update checkIsWhiteRoute function cy-132 ([152d5c3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/152d5c35e2bcec912e6f18226690d7e18a9ebd0c))
+* * update checkIsWhiteRoute to replace match with test cy-132 ([c2954c2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c2954c21d693415645383150550c13baad1cdc32))
+* update checkIsWhiteRoute function cy-132 ([834337c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/834337c6aa410131f8c4d6b35532016c6efb4e09))
+
+## [1.0.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.0.0...backend-v1.0.1) (2025-08-02)
+
+
+### Bug Fixes
+
+* deploy config cy-0 ([71f9df2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/71f9df22549eacab9d0927970cd5542530d78053))
+* deployment config cy-0 ([9fad171](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9fad1715b2180a66b510e3f3c2f44de15f3baf0d))
+* fix-sign-in-backend cy-69 ([858de71](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/858de716436ed5485726aa2c06ab32bb6f4809b3))
+* moved enums, types to backend imports cy-69 ([3a2af9a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3a2af9aae89158d8583562d914ce9d1cad34e34e))
+* redundant type defenition cy-69 ([00b73fd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/00b73fd0163f25c576ce18fc55c78237eb01a409))
+
 ## 1.0.0 (2025-07-30)
 
 
