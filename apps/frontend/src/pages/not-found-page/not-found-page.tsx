@@ -1,5 +1,5 @@
 import { yellowStars, yellowTwinkles } from "~/assets/img/shared/shared.img.js";
-import { Button, DecorativeImage, Link } from "~/libs/components/components.js";
+import { DecorativeImage, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
@@ -26,7 +26,7 @@ const NotFound: React.FC = () => {
 				)}
 			>
 				<div
-					className={getClassNames(styles["card"], "cluster", "grid-pattern")}
+					className={getClassNames("cluster", "grid-pattern", styles["card"])}
 				>
 					<h1 className={styles["title"]}>404</h1>
 					<h2 className={styles["subtitle"]}>Page Not Found</h2>
@@ -34,8 +34,12 @@ const NotFound: React.FC = () => {
 						Oops! We couldn&apos;t find the page you are looking for. <br />
 						But don&apos;t worry — there&apos;s plenty more to explore!
 					</p>
-					<Link to={AppRoute.ROOT}>
-						<Button label="Back to Home" size="large" variant="primary" />
+					<Link
+						asButtonSize="large"
+						asButtonVariant="primary"
+						to={AppRoute.ROOT}
+					>
+						Back to Home
 					</Link>
 				</div>
 				<DecorativeImage className={yellowStarsClasses} src={yellowStars} />

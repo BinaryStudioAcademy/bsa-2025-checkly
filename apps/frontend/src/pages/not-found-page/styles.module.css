@@ -23,7 +23,7 @@
 }
 
 .title {
-	font-size: 5rem;
+	font-size: calc(var(--text-size-heading-1) * 2);
 	color: var(--color-brand-accent);
 }
 
@@ -38,6 +38,10 @@
 	font-size: var(--text-size-heading-4);
 	line-height: 2;
 	color: var(--color-text-primary);
+}
+
+.card a {
+	text-decoration: none;
 }
 
 .image-position {

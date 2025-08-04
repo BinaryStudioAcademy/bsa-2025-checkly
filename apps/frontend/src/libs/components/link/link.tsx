@@ -6,12 +6,14 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { type ButtonVariant, type ValueOf } from "~/libs/types/types.js";
 
 type Properties = {
+	asButtonSize?: "large" | "small";
 	asButtonVariant?: ButtonVariant;
 	children: React.ReactNode;
 	to: ValueOf<typeof AppRoute>;
 };
 
 const Link: React.FC<Properties> = ({
+	asButtonSize = "small",
 	asButtonVariant,
 	children,
 	to,
@@ -20,7 +22,7 @@ const Link: React.FC<Properties> = ({
 		? getClassNames(
 				buttonStyles["button"],
 				buttonStyles[`button-${asButtonVariant}`],
-				buttonStyles["button-small"],
+				buttonStyles[`button-${asButtonSize}`],
 				buttonStyles["button-cluster"],
 				"cluster",
 			)
