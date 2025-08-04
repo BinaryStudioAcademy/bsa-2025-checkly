@@ -1,13 +1,13 @@
 import { type Entity, type ValueOf } from "~/libs/types/types.js";
 
-import { ExecutionTimeType } from "./libs/enums/enums.js";
+import { type ExecutionTimeType } from "./libs/enums/enums.js";
 
 class TaskEntity implements Entity {
 	private completedAt: null | string;
 
 	private description: string;
 
-	private executionTimeType: ValueOf<typeof ExecutionTimeType>;
+	private executionTimeType: null | ValueOf<typeof ExecutionTimeType>;
 
 	private id: null | number;
 
@@ -31,7 +31,7 @@ class TaskEntity implements Entity {
 	}: {
 		completedAt: null | string;
 		description: string;
-		executionTimeType: ValueOf<typeof ExecutionTimeType>;
+		executionTimeType: null | ValueOf<typeof ExecutionTimeType>;
 		id: null | number;
 		isCompleted: boolean;
 		order: number;
@@ -60,7 +60,7 @@ class TaskEntity implements Entity {
 	}: {
 		completedAt: null | string;
 		description: string;
-		executionTimeType: ValueOf<typeof ExecutionTimeType>;
+		executionTimeType: null | ValueOf<typeof ExecutionTimeType>;
 		id: number;
 		isCompleted: boolean;
 		order: number;
@@ -90,7 +90,7 @@ class TaskEntity implements Entity {
 	}: {
 		completedAt?: null | string;
 		description: string;
-		executionTimeType?: ValueOf<typeof ExecutionTimeType>;
+		executionTimeType?: null | ValueOf<typeof ExecutionTimeType>;
 		isCompleted?: boolean;
 		order: number;
 		planDayId: number;
@@ -99,7 +99,7 @@ class TaskEntity implements Entity {
 		return new TaskEntity({
 			completedAt: completedAt ?? null,
 			description,
-			executionTimeType: executionTimeType ?? ExecutionTimeType.MORNING,
+			executionTimeType: executionTimeType ?? null,
 			id: null,
 			isCompleted: isCompleted ?? false,
 			order,
@@ -110,7 +110,7 @@ class TaskEntity implements Entity {
 
 	public toNewObject(): {
 		description: string;
-		executionTimeType: ValueOf<typeof ExecutionTimeType>;
+		executionTimeType: null | ValueOf<typeof ExecutionTimeType>;
 		isCompleted: boolean;
 		order: number;
 		planDayId: number;
@@ -129,7 +129,7 @@ class TaskEntity implements Entity {
 	public toObject(): {
 		completedAt: null | string;
 		description: string;
-		executionTimeType: ValueOf<typeof ExecutionTimeType>;
+		executionTimeType: null | ValueOf<typeof ExecutionTimeType>;
 		id: number;
 		isCompleted: boolean;
 		order: number;

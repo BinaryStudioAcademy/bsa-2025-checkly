@@ -3,8 +3,9 @@ import {
 	type APIHandlerOptions,
 	type APIHandlerResponse,
 	BaseController,
+	type IdParameter,
 } from "~/libs/modules/controller/controller.js";
-import { HTTPCode } from "~/libs/modules/http/http.js";
+import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type PlanService } from "~/modules/plans/plan.service.js";
 import {
@@ -122,8 +123,8 @@ class PlanController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.findById(options as APIHandlerOptions<{ params: { id: number } }>),
-			method: "GET",
+				this.findById(options as APIHandlerOptions<{ params: IdParameter }>),
+			method: HTTPRequestMethod.GET,
 			path: PlansApiPath.PLAN,
 		});
 
@@ -134,7 +135,7 @@ class PlanController extends BaseController {
 						body: PlanCreateRequestDto;
 					}>,
 				),
-			method: "POST",
+			method: HTTPRequestMethod.POST,
 			path: PlansApiPath.PLAN_CREATE,
 			validation: {
 				body: planCreateValidationSchema,
@@ -219,7 +220,7 @@ class PlanController extends BaseController {
 	 *                   example: "Unauthorized"
 	 */
 	private async findById(
-		options: APIHandlerOptions<{ params: { id: number } }>,
+		options: APIHandlerOptions<{ params: IdParameter }>,
 	): Promise<APIHandlerResponse> {
 		const { id } = options.params;
 

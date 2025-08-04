@@ -114,13 +114,10 @@ async function up(knex: Knex): Promise<void> {
 			.inTable(TABLE_NAMES.PLAN_DAY)
 			.onDelete("CASCADE");
 		table.boolean(TaskColumnName.IS_COMPLETED).notNullable().defaultTo(false);
-		table
-			.enu(TaskColumnName.EXECUTION_TIME_TYPE, EXECUTION_TYPE, {
-				enumName: ENUM_TYPE_NAME.EXECUTION_TIME,
-				useNative: true,
-			})
-			.notNullable()
-			.defaultTo("morning");
+		table.enu(TaskColumnName.EXECUTION_TIME_TYPE, EXECUTION_TYPE, {
+			enumName: ENUM_TYPE_NAME.EXECUTION_TIME,
+			useNative: true,
+		});
 		table
 			.timestamp(PlanColumnName.CREATED_AT, { useTz: true })
 			.notNullable()
@@ -129,7 +126,7 @@ async function up(knex: Knex): Promise<void> {
 			.dateTime(PlanColumnName.UPDATED_AT)
 			.notNullable()
 			.defaultTo(knex.fn.now());
-		table.timestamp(TaskColumnName.COMPLETED_AT, { useTz: true }).nullable();
+		table.timestamp(TaskColumnName.COMPLETED_AT, { useTz: true });
 	});
 }
 

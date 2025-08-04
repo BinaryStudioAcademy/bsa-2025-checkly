@@ -3,8 +3,9 @@ import {
 	type APIHandlerOptions,
 	type APIHandlerResponse,
 	BaseController,
+	type IdParameter,
 } from "~/libs/modules/controller/controller.js";
-import { HTTPCode } from "~/libs/modules/http/http.js";
+import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type TaskService } from "~/modules/tasks/task.service.js";
 import {
@@ -24,8 +25,8 @@ class TaskController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.findById(options as APIHandlerOptions<{ params: { id: number } }>),
-			method: "GET",
+				this.findById(options as APIHandlerOptions<{ params: IdParameter }>),
+			method: HTTPRequestMethod.GET,
 			path: TasksApiPath.TASK,
 		});
 
@@ -36,7 +37,7 @@ class TaskController extends BaseController {
 						body: TaskCreateRequestDto;
 					}>,
 				),
-			method: "POST",
+			method: HTTPRequestMethod.POST,
 			path: TasksApiPath.TASK_CREATE,
 			validation: {
 				body: taskCreateValidationSchema,
@@ -54,7 +55,7 @@ class TaskController extends BaseController {
 	}
 
 	private async findById(
-		options: APIHandlerOptions<{ params: { id: number } }>,
+		options: APIHandlerOptions<{ params: IdParameter }>,
 	): Promise<APIHandlerResponse> {
 		const { id } = options.params;
 

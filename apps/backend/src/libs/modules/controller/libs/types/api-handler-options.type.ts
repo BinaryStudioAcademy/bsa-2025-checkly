@@ -15,4 +15,8 @@ type DefaultApiHandlerOptions = {
 	query?: unknown;
 };
 
-export { type APIHandlerOptions };
+type IdParameter = {
+	id: number;
+};
+
+export { type APIHandlerOptions, type IdParameter };

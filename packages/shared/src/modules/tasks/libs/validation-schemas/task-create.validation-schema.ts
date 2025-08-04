@@ -15,8 +15,9 @@ const taskCreate = z.object({
 		}),
 	executionTimeType: z
 		.nativeEnum(ExecutionTimeType)
+		.nullable()
 		.optional()
-		.default("morning"),
+		.default(null),
 	isCompleted: z.boolean().optional().default(false),
 	order: z
 		.number({

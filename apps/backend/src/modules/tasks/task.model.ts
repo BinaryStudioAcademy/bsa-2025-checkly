@@ -14,7 +14,7 @@ class TaskModel extends AbstractModel {
 
 	public description!: string;
 
-	public executionTimeType!: ValueOf<typeof ExecutionTimeType>;
+	public executionTimeType!: null | ValueOf<typeof ExecutionTimeType>;
 
 	public isCompleted!: boolean;
 
