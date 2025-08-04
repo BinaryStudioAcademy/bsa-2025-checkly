@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.5.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.4.0...v1.5.0) (2025-08-04)
+
+
+### Features
+
+* not found page (404) implementation cy-74 ([64aa7cf](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/64aa7cf1a8f11561418949f654fef41924af842b))
+
+
+### Bug Fixes
+
+* "Authentication failed" appearing on homepage cy-108 ([0e65636](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0e65636a2a0f0719979ddfd6dd0d191261c45ced))
+
 ## [1.4.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.3.1...v1.4.0) (2025-08-04)
 
 
