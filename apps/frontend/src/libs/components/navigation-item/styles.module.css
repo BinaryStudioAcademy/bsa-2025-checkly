@@ -39,6 +39,13 @@ svg {
 	color: var(--color-icon-grey);
 }
 
+.active svg {
+	color: var(--color-text-secondary);
+	background-color: var(--color-brand-primary);
+	border-radius: 50%;
+	box-shadow: 0 0 0 var(--space-xs) var(--color-brand-primary);
+}
+
 .menu-item:hover > svg {
 	transform: scale(1.1);
 }
@@ -89,4 +96,11 @@ svg {
 
 .menu-item--side-panel:hover > svg {
 	transform: scale(1);
+}
+
+.active button {
+	color: var(--color-text);
+	text-decoration-line: underline;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 6px;
 }

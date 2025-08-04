@@ -1,4 +1,5 @@
-import { type ReactNode } from "react";
+import { type ReactNode, useRef } from "react";
+import { useLocation } from "react-router-dom";
 
 import { type AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
@@ -29,8 +30,16 @@ const NavigationItem: React.FC<Properties> = ({
 		styles[`menu-item--${buttonType}`],
 	);
 
+	const { pathname } = useLocation();
+
+	const navReference = useRef<HTMLLIElement>(null);
+
+	const isActive = pathname === navigateTo && buttonType === "side-panel";
+
+	const liClassNames = getClassNames(className, isActive && styles["active"]);
+
 	return (
-		<li className={className}>
+		<li className={liClassNames} ref={navReference}>
 			<Link to={navigateTo}>
 				<button
 					aria-label={buttonText}
