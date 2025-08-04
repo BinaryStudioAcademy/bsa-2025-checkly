@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.5.0...v1.5.1) (2025-08-04)
+
+
+### Bug Fixes
+
+* remove migration script call cy-0 ([46f3729](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/46f37292aacffcd96ec3464c4b1fcb83a819c5a8))
+
 ## [1.5.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.4.0...v1.5.0) (2025-08-04)
 
 
