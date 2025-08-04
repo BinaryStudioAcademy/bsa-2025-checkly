@@ -75,8 +75,7 @@ const checkIsWhiteRoute = (url: string, whiteRoutes: string[]): boolean => {
 		return true;
 	}
 
-	const URL_WITHOUT_QUERY_INDEX = 0;
-	const routeWithoutQuery = url.split("?")[URL_WITHOUT_QUERY_INDEX] as string;
+	const [routeWithoutQuery] = url.split("?") as [string];
 
 	return whiteRoutes.includes(routeWithoutQuery);
 };
