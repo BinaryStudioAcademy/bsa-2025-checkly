@@ -11,6 +11,7 @@ import {
 import { AppRoute } from "~/libs/enums/enums.js";
 import { store } from "~/libs/modules/store/store.js";
 
+import { Wrapper } from "./pages/dashboard-wrapper-mock/components/wrapper.js";
 import { Auth, Home } from "./pages/pages.js";
 
 createRoot(document.querySelector("#root") as HTMLElement).render(
@@ -35,12 +36,16 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 							{
 								children: [
 									{
-										element: "Dashboard",
-										path: "",
+										element: <Wrapper />,
+										path: AppRoute.DASHBOARD,
+									},
+									{
+										element: <Wrapper />,
+										path: AppRoute.PLAN,
 									},
 								],
 								element: <ProtectedRoute />,
-								path: AppRoute.DASHBOARD,
+								path: AppRoute.ROOT,
 							},
 						],
 						element: <App />,
