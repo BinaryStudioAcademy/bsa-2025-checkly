@@ -38,10 +38,7 @@ const NotFound: React.FC = () => {
 						<Button label="Back to Home" size="large" variant="primary" />
 					</Link>
 				</div>
-				<DecorativeImage
-					className={yellowStarsClasses}
-					src={yellowStars}
-				/>
+				<DecorativeImage className={yellowStarsClasses} src={yellowStars} />
 				<DecorativeImage
 					className={yellowTwinklesClasses}
 					src={yellowTwinkles}
