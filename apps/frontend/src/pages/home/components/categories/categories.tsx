@@ -17,11 +17,7 @@ const Categories: React.FC = () => {
 
 	const handleCategoryClick = useCallback(
 		(category: string) => {
-			if (activeCategory === category) {
-				setActiveCategory(null);
-			} else {
-				setActiveCategory(category);
-			}
+			setActiveCategory(activeCategory === category ? null : category);
 		},
 		[activeCategory],
 	);
