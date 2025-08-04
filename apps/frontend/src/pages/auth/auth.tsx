@@ -1,4 +1,5 @@
-import React, { type JSX } from "react";
+import React, { type JSX, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
@@ -6,6 +7,7 @@ import {
 	useCallback,
 	useLocation,
 } from "~/libs/hooks/hooks.js";
+import { navigation } from "~/libs/modules/navigation/navigation.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import {
 	type UserSignInRequestDto,
@@ -17,6 +19,11 @@ import { SignInForm, SignUpForm } from "./components/components.js";
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { pathname } = useLocation();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		navigation.setNavigate(navigate);
+	}, [navigate]);
 
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {

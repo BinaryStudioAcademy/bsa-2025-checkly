@@ -12,7 +12,7 @@ import { AppRoute } from "~/libs/enums/enums.js";
 import { store } from "~/libs/modules/store/store.js";
 
 import { NotFound } from "./pages/not-found-page/not-found-page.js";
-import { Auth, Home } from "./pages/pages.js";
+import { Auth, Home, TestPage } from "./pages/pages.js";
 
 createRoot(document.querySelector("#root") as HTMLElement).render(
 	<StrictMode>
@@ -24,6 +24,10 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 							{
 								element: <Home />,
 								path: AppRoute.ROOT,
+							},
+							{
+								element: <TestPage />,
+								path: AppRoute.TEST_PAGE,
 							},
 							{
 								element: <Auth />,
