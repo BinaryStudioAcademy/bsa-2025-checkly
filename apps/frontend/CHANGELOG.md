@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.2.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.1.2...frontend-v1.2.0) (2025-08-04)
+
+
+### Features
+
+* add common assets, fix old assets imports cy-83 ([2ffcb0b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2ffcb0b4801208c48d3cc9c376de8708cce02136))
+* add design examples component cy-20 ([c5a226c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c5a226cb88a2a867407aa59c2793ea45b67ed233))
+* add feedbacks page cy-21 ([eb7f93c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eb7f93cc2b70478d241be17509386016a40f62b3))
+* add header component cy-57 ([219d9c6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/219d9c6088924edc8d96dee7a262b8df5280e1e9))
+* **frontend:** added message on success cy-72 ([076d816](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/076d816b40cb0f497ec009b8996fa90e24fdab26))
+* No redirection or success message after success cy-72 ([bb539b8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bb539b8f75db2319ac18e09fcbb4fc0b6d5c2868))
+
+
+### Bug Fixes
+
+* fixed sign up responsiceness + placeholders cy-112 ([00939be](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/00939be2a6d7fc450e492864ee1d6501a456f601))
+* **frontend:** changed success message cy-72 ([ef327fe](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ef327fe7257e62a7bc0296550421fc19fe7876b3))
+* **frontend:** fixed images format and  added clipped images  cy-112 ([34115eb](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/34115ebeb9b63499e6099c625178ffc735082c2d))
+* **frontend:** fixed mark up cy-112 ([3a2a147](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3a2a14727b9bb02a57cfa1b2b2f4031f87b472a0))
+* **frontend:** fixed use of constants and styling cy-112 ([f526955](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f526955048851f7acb6359965aac5f8fb00c2033))
+* linting issue cy-83 ([b110bc5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b110bc5d9ea2789854acd3a6aae91476b08ee06f))
+* new files styles cy-83 ([878889d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/878889dec225ed3ec504a0f43aa3accb8e839ebd))
+
 ## [1.1.2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.1.1...frontend-v1.1.2) (2025-08-02)
 
 
