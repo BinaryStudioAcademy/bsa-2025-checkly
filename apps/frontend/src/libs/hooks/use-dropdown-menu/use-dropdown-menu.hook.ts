@@ -18,6 +18,20 @@ type Properties = {
 	onClose: () => void;
 };
 
+function getNextIndex({
+	activeElement,
+	items,
+	step,
+}: {
+	activeElement: Element | null;
+	items: Element[];
+	step: number;
+}): number {
+	let index = items.indexOf(activeElement as Element);
+
+	return (index + step + items.length) % items.length;
+}
+
 function useDropdownMenu({
 	isMenuOpen,
 	menuReference,
@@ -49,9 +63,8 @@ function useDropdownMenu({
 			}
 
 			const { activeElement } = document;
-			let index = items.indexOf(activeElement as Element);
 			const step = event.key === Key.ARROW_DOWN ? Step.DOWN : Step.UP;
-			index = (index + step + items.length) % items.length;
+			const index = getNextIndex({ activeElement, items, step });
 			(items[index] as HTMLElement).focus();
 			event.preventDefault();
 		}

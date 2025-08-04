@@ -12,12 +12,14 @@ import { useAppSelector, useDropdownMenu } from "~/libs/hooks/hooks.js";
 import styles from "./styles.module.css";
 import { UserMenu } from "./user-menu.js";
 
+const DEFAULT_USER_NAME = "User";
+
 const AppHeader: React.FC = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 	const menuReference = useRef<HTMLDivElement>(null);
 	const user = useAppSelector((state) => state.auth.user);
 
-	const displayName = useMemo(() => user?.name ?? "User", [user]);
+	const displayName = useMemo(() => user?.name ?? DEFAULT_USER_NAME, [user]);
 
 	const handleMenuToggle = useCallback((): void => {
 		setIsMenuOpen((previous) => !previous);

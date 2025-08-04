@@ -1,20 +1,27 @@
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { type ButtonVariant } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
 
 type Properties = {
 	disabled?: boolean;
 	icon?: React.ReactNode;
+	iconOnlySize?: "large" | "medium" | "small";
+	isIconOnly?: boolean;
 	label: string;
+	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 	size?: "large" | "small";
 	type?: "button" | "submit";
-	variant?: "primary" | "secondary" | "transparent";
+	variant?: ButtonVariant;
 };
 
 const Button: React.FC<Properties> = ({
 	disabled = false,
 	icon,
+	iconOnlySize = "large",
+	isIconOnly = false,
 	label,
+	onClick,
 	size = "large",
 	type = "button",
 	variant = "primary",
@@ -24,17 +31,25 @@ const Button: React.FC<Properties> = ({
 		styles[`button-${variant}`],
 		styles[`button-${size}`],
 		styles["button-cluster"],
+		isIconOnly && styles["button-icon-only"],
+		isIconOnly && styles[`button-icon-only-${iconOnlySize}`],
 		"cluster",
 	);
 
 	return (
-		<button className={buttonClasses} disabled={disabled} type={type}>
+		<button
+			aria-label={isIconOnly ? label : undefined}
+			className={buttonClasses}
+			disabled={disabled}
+			onClick={onClick}
+			type={type}
+		>
 			{icon && (
 				<span aria-hidden="true" className={styles["button-icon"]}>
 					{icon}
 				</span>
 			)}
-			<span>{label}</span>
+			{!isIconOnly && <span>{label}</span>}
 		</button>
 	);
 };

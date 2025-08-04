@@ -1,6 +1,13 @@
 import { type KnipConfig } from "knip";
 
 const config: KnipConfig = {
+	ignore: [
+		"apps/frontend/src/assets/img/shared/avatars/avatars.img.tsx",
+		"apps/frontend/src/assets/img/shared/illustrations/categories/categories.img.tsx",
+		"apps/frontend/src/assets/img/shared/illustrations/layouts/layouts.img.tsx",
+		"apps/frontend/src/assets/img/shared/illustrations/illustrations.img.tsx",
+		"apps/frontend/src/assets/img/shared/shapes/shapes.img.tsx",
+	],
 	prettier: ["./prettier.config.js"],
 	stylelint: ["./stylelint.config.js"],
 	workspaces: {
