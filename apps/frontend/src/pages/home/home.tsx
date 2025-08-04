@@ -20,7 +20,7 @@ const Home: React.FC = () => {
 					</div>
 				</section>
 				<VisualLayouts />
-        <FeedbacksSection />
+				<FeedbacksSection />
 			</main>
 			<Footer />
 		</>
