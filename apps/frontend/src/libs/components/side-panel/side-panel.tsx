@@ -8,6 +8,11 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { NavigationItem } from "../navigation-item/navigation-item.js";
 import styles from "./styles.module.css";
 
+const INDEXES = {
+	first: 0,
+	second: 1,
+} as const;
+
 const SidePanel: React.FC = () => {
 	const asideClasses = getClassNames(styles["aside"], "show-desktop-up");
 
@@ -15,25 +20,22 @@ const SidePanel: React.FC = () => {
 
 	const navReference = useRef<HTMLUListElement>(null);
 
-	const childrenOrder = {
-		first: 0,
-		second: 1,
-	};
-
 	useEffect(() => {
 		const getActiveItem = (path: string): HTMLUListElement => {
 			let element: HTMLUListElement | null = null;
 
 			switch (path) {
 				case AppRoute.DASHBOARD: {
-					element = navReference.current?.children[childrenOrder.first]
-						?.children[childrenOrder.first] as HTMLUListElement;
+					element = navReference.current?.children[INDEXES.first]?.children[
+						INDEXES.first
+					] as HTMLUListElement;
 					break;
 				}
 
 				case AppRoute.PLAN: {
-					element = navReference.current?.children[childrenOrder.second]
-						?.children[childrenOrder.first] as HTMLUListElement;
+					element = navReference.current?.children[INDEXES.second]?.children[
+						INDEXES.first
+					] as HTMLUListElement;
 					break;
 				}
 			}
@@ -44,7 +46,7 @@ const SidePanel: React.FC = () => {
 		const element = getActiveItem(pathname);
 
 		element.classList.add(styles["active"] as string);
-	}, [childrenOrder.first, childrenOrder.second, pathname]);
+	}, [pathname]);
 
 	return (
 		<>
