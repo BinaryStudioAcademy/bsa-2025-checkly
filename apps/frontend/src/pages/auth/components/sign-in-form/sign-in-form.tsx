@@ -23,6 +23,7 @@ import {
 	userSignInValidationSchema,
 } from "~/modules/users/users.js";
 
+import { AUTH_PLACEHOLDERS } from "../../libs/constants.js";
 import { DEFAULT_SIGN_IN_PAYLOAD } from "../sign-up-form/libs/constants.js";
 import styles from "./styles.module.css";
 
@@ -100,7 +101,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							errors={errors}
 							label="Email"
 							name="email"
-							placeholder="Enter your email"
+							placeholder={AUTH_PLACEHOLDERS.email}
 							required
 							type="email"
 						/>
@@ -109,7 +110,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							errors={errors}
 							label="Password"
 							name="password"
-							placeholder="Enter your password"
+							placeholder={AUTH_PLACEHOLDERS.password}
 							required
 							type="password"
 						/>
