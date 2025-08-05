@@ -1,10 +1,13 @@
 import { Link } from "~/libs/components/components.js";
 import { Logo } from "~/libs/components/logo/logo.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
+import { useAppSelector } from "~/libs/hooks/hooks.js";
 
 import styles from "./styles.module.css";
 
 const Header: React.FC = () => {
+	const { user } = useAppSelector(({ auth }) => auth);
+
 	return (
 		<header className={styles["header"]}>
 			<div className="wrapper repel">
@@ -13,9 +16,15 @@ const Header: React.FC = () => {
 					<Link asButtonVariant="secondary" to={AppRoute.ROOT}>
 						Start quiz
 					</Link>
-					<Link asButtonVariant="secondary" to={AppRoute.SIGN_IN}>
-						Sign in
-					</Link>
+					{user ? (
+						<Link asButtonVariant="secondary" to={AppRoute.DASHBOARD}>
+							Profile
+						</Link>
+					) : (
+						<Link asButtonVariant="secondary" to={AppRoute.SIGN_IN}>
+							Sign in
+						</Link>
+					)}
 				</nav>
 			</div>
 		</header>
