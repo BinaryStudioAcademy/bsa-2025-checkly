@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-import { download, save } from "~/assets/img/dashboard/dashboard.img.js";
+import { Download, Save } from "~/assets/img/icons/icons.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { ONE, ZERO } from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
@@ -55,7 +55,7 @@ const Plan: React.FC = () => {
 						return <Task indexItem={index + ONE} item={item} key={index} />;
 					})}
 					<Button
-						icon={<DecorativeImage src={download} />}
+						icon={<DecorativeImage src={Download} />}
 						iconOnlySize="medium"
 						label="Download PDF"
 						size="large"
@@ -63,7 +63,7 @@ const Plan: React.FC = () => {
 						variant="primary"
 					/>
 					<Button
-						icon={<DecorativeImage src={save} />}
+						icon={<DecorativeImage src={Save} />}
 						iconOnlySize="medium"
 						label="Save to profile"
 						size="large"

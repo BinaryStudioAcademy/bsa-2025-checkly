@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 
-import { arrow, x } from "~/assets/img/dashboard/dashboard.img.js";
+import { Remove } from "~/assets/img/icons/icons.js";
+import { Arrow } from "~/assets/img/shared/shapes/shapes.img.js";
 import { ONE } from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 
@@ -41,10 +42,10 @@ const Day: React.FC<Properties> = ({
 				Day {indexDay + ONE}
 			</button>
 			{selectedDay === indexDay ? (
-				<img alt="" className={styles["selectedDay-icon"]} src={arrow} />
+				<img alt="" className={styles["selectedDay-icon"]} src={Arrow} />
 			) : (
 				<button>
-					<img alt="" className={styles["remove-button"]} src={x} />
+					<img alt="" className={styles["remove-button"]} src={Remove} />
 				</button>
 			)}
 		</div>

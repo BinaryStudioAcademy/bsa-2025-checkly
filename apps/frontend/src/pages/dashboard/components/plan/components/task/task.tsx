@@ -1,9 +1,4 @@
-import {
-	task_edit,
-	task_time,
-	task_update,
-	x,
-} from "~/assets/img/dashboard/dashboard.img.js";
+import { Edit, Reload, Remove, Timer } from "~/assets/img/icons/icons.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 
 import styles from "./styles.module.css";
@@ -32,18 +27,18 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 			</div>
 			<div className={styles["item-actions"]}>
 				<div className={styles["item-actions__time"]}>
-					<img alt="" src={task_time} />
+					<img alt="" src={Timer} />
 					<span>morning</span>
 				</div>
 				<div className={styles["item-actions_buttons-wrapper"]}>
 					<button className={styles["item-actions_button"]}>
-						<img alt="" src={task_edit} />
+						<img alt="" src={Edit} />
 					</button>
 					<button className={styles["item-actions_button"]}>
-						<img alt="" src={task_update} />
+						<img alt="" src={Reload} />
 					</button>
 					<button className={styles["item-actions_button"]}>
-						<img alt="" src={x} />
+						<img alt="" src={Remove} />
 					</button>
 				</div>
 			</div>
