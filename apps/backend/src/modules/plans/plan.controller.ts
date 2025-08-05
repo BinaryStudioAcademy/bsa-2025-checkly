@@ -3,7 +3,7 @@ import {
 	type APIBodyOptions,
 	type APIHandlerResponse,
 	BaseController,
-	type IdParamsOption,
+	type IdParametersOption,
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
@@ -122,7 +122,7 @@ class PlanController extends BaseController {
 		this.planService = planService;
 
 		this.addRoute({
-			handler: (options) => this.findById(options as IdParamsOption),
+			handler: (options) => this.findById(options as IdParametersOption),
 			method: HTTPRequestMethod.GET,
 			path: PlansApiPath.PLAN,
 		});
@@ -214,7 +214,9 @@ class PlanController extends BaseController {
 	 *                   type: string
 	 *                   example: "Unauthorized"
 	 */
-	private async findById(options: IdParamsOption): Promise<APIHandlerResponse> {
+	private async findById(
+		options: IdParametersOption,
+	): Promise<APIHandlerResponse> {
 		const { id } = options.params;
 
 		return {

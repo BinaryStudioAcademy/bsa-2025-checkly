@@ -20,10 +20,7 @@ type DefaultApiHandlerOptions = {
 type IdParameter = {
 	id: number;
 };
+
 type IdParametersOption = APIHandlerOptions<{ params: IdParameter }>;
 
-export {
-	type APIBodyOptions,
-	type APIHandlerOptions,
-	type IdParametersOption as IdParamsOption,
-};
+export { type APIBodyOptions, type APIHandlerOptions, type IdParametersOption };

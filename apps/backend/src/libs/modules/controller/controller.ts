@@ -3,5 +3,5 @@ export {
 	type APIBodyOptions,
 	type APIHandlerOptions,
 	type APIHandlerResponse,
-	type IdParamsOption,
+	type IdParametersOption,
 } from "./libs/types/types.js";

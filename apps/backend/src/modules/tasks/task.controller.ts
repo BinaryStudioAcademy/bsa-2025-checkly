@@ -3,7 +3,7 @@ import {
 	type APIBodyOptions,
 	type APIHandlerResponse,
 	BaseController,
-	type IdParamsOption,
+	type IdParametersOption,
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
@@ -15,6 +15,72 @@ import {
 
 import { TasksApiPath } from "./libs/enums/enums.js";
 
+/**
+ * @swagger
+ * tags:
+ *   - name: tasks
+ *     description: Endpoints related to tasks
+ *
+ * components:
+ *   schemas:
+ *     TaskRequestDto:
+ *       type: object
+ *       required:
+ *         - title
+ *         - description
+ *         - order
+ *         - planDayId
+ *       properties:
+ *         title:
+ *           type: string
+ *           example: "Warm-up"
+ *         description:
+ *           type: string
+ *           example: "10-minute stretching routine"
+ *         executionTimeType:
+ *           type: string
+ *           nullable: true
+ *           example: "morning"
+ *         isCompleted:
+ *           type: boolean
+ *           example: false
+ *         order:
+ *           type: number
+ *           example: 1
+ *         planDayId:
+ *           type: number
+ *           example: 5
+ *
+ *     TaskResponseDto:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: number
+ *           example: 10
+ *         title:
+ *           type: string
+ *           example: "Warm-up"
+ *         description:
+ *           type: string
+ *           example: "10-minute stretching routine"
+ *         executionTimeType:
+ *           type: string
+ *           nullable: true
+ *           example: "morning"
+ *         isCompleted:
+ *           type: boolean
+ *           example: false
+ *         order:
+ *           type: number
+ *           example: 1
+ *         planDayId:
+ *           type: number
+ *           example: 5
+ *         completedAt:
+ *           type: string
+ *           nullable: true
+ *           example: null
+ */
 class TaskController extends BaseController {
 	private taskService: TaskService;
 
@@ -24,7 +90,7 @@ class TaskController extends BaseController {
 		this.taskService = taskService;
 
 		this.addRoute({
-			handler: (options) => this.findById(options as IdParamsOption),
+			handler: (options) => this.findById(options as IdParametersOption),
 			method: HTTPRequestMethod.GET,
 			path: TasksApiPath.TASK,
 		});
@@ -40,6 +106,39 @@ class TaskController extends BaseController {
 		});
 	}
 
+	/**
+	 * @swagger
+	 * /tasks/create:
+	 *   post:
+	 *     tags:
+	 *       - tasks
+	 *     summary: Create a new task
+	 *     security:
+	 *       - bearerAuth: []
+	 *     requestBody:
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             $ref: '#/components/schemas/TaskRequestDto'
+	 *     responses:
+	 *       200:
+	 *         description: Task created successfully
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/TaskResponseDto'
+	 *       401:
+	 *         description: Unauthorized - Invalid or missing authentication token
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 message:
+	 *                   type: string
+	 *                   example: "Unauthorized"
+	 */
 	private async create(
 		options: APIBodyOptions<TaskCreateRequestDto>,
 	): Promise<APIHandlerResponse> {
@@ -49,7 +148,43 @@ class TaskController extends BaseController {
 		};
 	}
 
-	private async findById(options: IdParamsOption): Promise<APIHandlerResponse> {
+	/**
+	 * @swagger
+	 * /tasks/{id}:
+	 *   get:
+	 *     tags:
+	 *       - tasks
+	 *     summary: Get task by ID
+	 *     security:
+	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - in: path
+	 *         name: id
+	 *         schema:
+	 *           type: number
+	 *         required: true
+	 *         description: ID of the task
+	 *     responses:
+	 *       200:
+	 *         description: Task retrieved successfully
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/TaskResponseDto'
+	 *       401:
+	 *         description: Unauthorized - Invalid or missing authentication token
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 message:
+	 *                   type: string
+	 *                   example: "Unauthorized"
+	 */
+	private async findById(
+		options: IdParametersOption,
+	): Promise<APIHandlerResponse> {
 		const { id } = options.params;
 
 		return {

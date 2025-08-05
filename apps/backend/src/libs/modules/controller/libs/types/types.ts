@@ -1,7 +1,7 @@
 export {
 	type APIBodyOptions,
 	type APIHandlerOptions,
-	type IdParamsOption,
+	type IdParametersOption,
 } from "./api-handler-options.type.js";
 export { type APIHandlerResponse } from "./api-handler-response.type.js";
 export { type APIHandler } from "./api-handler.type.js";
