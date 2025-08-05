@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 
-import { type QuizQuestionsResponseDto, type QuizSubmission } from "../libs/types/types.js";
+import { type QuizAnswersRequestDto, type QuizQuestionsResponseDto } from "../libs/types/types.js";
 import { name as sliceName } from "./quiz.slice.js";
 
 const fetchQuestions = createAsyncThunk<
@@ -17,7 +17,7 @@ const fetchQuestions = createAsyncThunk<
 
 const submitQuiz = createAsyncThunk<
 	null,
-	QuizSubmission,
+	QuizAnswersRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/submit-quiz`, async (submission, { extra }) => {
 	const { quizApi } = extra;

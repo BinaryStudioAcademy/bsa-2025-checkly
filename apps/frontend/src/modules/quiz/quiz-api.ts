@@ -3,7 +3,7 @@ import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
 
-import { type QuizQuestionsResponseDto, type QuizSubmission } from "./libs/types/types.js";
+import { type QuizAnswersRequestDto, type QuizQuestionsResponseDto } from "./libs/types/types.js";
 
 type Constructor = {
 	baseUrl: string;
@@ -29,7 +29,7 @@ class QuizApi extends BaseHTTPApi {
 		return await response.json<QuizQuestionsResponseDto>();
 	}
 
-	public async submitQuiz(payload: QuizSubmission): Promise<void> {
+	public async submitQuiz(payload: QuizAnswersRequestDto): Promise<void> {
 		await this.load(this.getFullEndpoint({}), {
 			contentType: ContentType.JSON,
 			hasAuth: true,

@@ -1,10 +1,10 @@
-import { type EnumValue, type QuestionDto, type QuizCategory } from "shared";
+import { type QuestionDto } from "shared";
 
-import { type QuizAnswer } from "~/modules/quiz/quiz.js";
+import { type QuizAnswer, type QuizCategoryValue } from "~/modules/quiz/quiz.js";
 
 interface CheckboxQuestionProperties {
-	currentAnswer?: string[];
-	onAnswer: (answer: string[]) => void;
+	currentAnswer?: (number | string)[];
+	onAnswer: (answer: (number | string)[]) => void;
 	question: QuestionDto;
 }
 
@@ -23,9 +23,9 @@ interface QuestionNavigationProperties {
 }
 
 interface QuestionPageProperties {
-	currentAnswer?: QuizAnswer | undefined;
-	onAnswer: (answer: Array<number | string>) => void;
-	question?: QuestionDto | undefined;
+	currentAnswer?: QuizAnswer;
+	onAnswer: (answer: QuizAnswer) => void;
+	question?: QuestionDto;
 }
 
 interface QuizCategoryCardProperties extends QuizCategoryProperties {
@@ -33,15 +33,15 @@ interface QuizCategoryCardProperties extends QuizCategoryProperties {
 }
 
 interface QuizCategoryProperties {
-	category: EnumValue<typeof QuizCategory>;
+	category: QuizCategoryValue;
 	color: string;
 	icon: string;
 	selected: boolean;
 }
 
 interface RadioQuestionProperties {
-	currentAnswer?: string;
-	onAnswer: (answer: string) => void;
+	currentAnswer?: number | string;
+	onAnswer: (answer: number | string) => void;
 	question: QuestionDto;
 }
 

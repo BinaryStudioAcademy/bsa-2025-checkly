@@ -14,8 +14,7 @@ export { quizApi };
 export { formatCategoryTitle } from "./libs/helpers/format-category-title.js";
 export {
 	type QuizAnswer,
-	QuizCategory,
-	type QuizQuestionsResponseDto,
-	type QuizSubmission,
+	type QuizAnswersRequestDto,
+	type QuizCategoryValue,
 } from "./libs/types/types.js";
 export { actions, reducer } from "./slices/quiz.js";
