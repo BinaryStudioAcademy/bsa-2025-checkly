@@ -16,10 +16,7 @@ const ProtectedRoute: React.FC = () => {
 	const handle = matches.at(LAST_INDEX)?.handle as RouteHandle;
 	const { access } = handle;
 
-	const { dataStatus, user } = useAppSelector(({ auth }) => ({
-		dataStatus: auth.dataStatus,
-		user: auth.user,
-	}));
+	const { dataStatus, user } = useAppSelector(({ auth }) => auth);
 
 	const isLoading =
 		dataStatus === DataStatus.PENDING || dataStatus === DataStatus.IDLE;
