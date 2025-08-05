@@ -1,5 +1,7 @@
 .category-box {
 	position: relative;
+	width: 175px;
+	height: 175px;
 	text-align: center;
 	border: 2px solid var(--color-bg-dark);
 	border-radius: var(--radius-s);
@@ -34,18 +36,10 @@
 
 .categories-image {
 	position: absolute;
-	width: 143px;
-	height: 132px;
-}
-
-.landing-image-position {
 	right: 35px;
 	bottom: 75px;
-}
-
-.image-position {
-	right: 48px;
-	bottom: 90px;
+	width: 143px;
+	height: 132px;
 }
 
 .checkbox-icon {

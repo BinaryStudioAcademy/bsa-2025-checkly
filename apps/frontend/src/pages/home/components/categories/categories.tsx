@@ -7,8 +7,8 @@ import {
 import { DecorativeImage } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
-import { CategoryItem } from "~/pages/categories/components/category-item/category-item.js";
-import { categories } from "~/pages/categories/libs/constants.js";
+import { CategoryItem } from "~/pages/home/components/categories/category-item/category-item.js";
+import { categories } from "~/pages/home/components/categories/libs/constants.js";
 
 import styles from "./styles.module.css";
 
@@ -44,7 +44,6 @@ const Categories: React.FC = () => {
 						<CategoryItem
 							activeCategoryId={activeCategory}
 							category={category}
-							isLandingPage
 							key={category.id}
 							onCategoryClick={handleCategoryClick}
 						/>
