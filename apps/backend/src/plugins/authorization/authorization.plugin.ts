@@ -1,6 +1,5 @@
 import { type FastifyRequest } from "fastify";
 import fp from "fastify-plugin";
-import micromatch from "micromatch";
 
 import { token } from "~/libs/modules/token/token.js";
 import { type UserService } from "~/modules/users/user.service.js";
@@ -68,6 +67,19 @@ const extractUserFromRequest = async (
 	}
 };
 
+const checkIsWhiteRoute = (url: string, whiteRoutes: string[]): boolean => {
+	const regex = /^\/api\/v\d+(\/.+)$/;
+	const isAPIRoute = regex.test(url);
+
+	if (!isAPIRoute) {
+		return true;
+	}
+
+	const [routeWithoutQuery] = url.split("?");
+
+	return whiteRoutes.includes(routeWithoutQuery as string);
+};
+
 const authorization = fp<AuthPluginOptions>(
 	(fastify, { userService, whiteRoutes }, done) => {
 		fastify.decorate("authenticate", async function (request: FastifyRequest) {
@@ -77,7 +89,7 @@ const authorization = fp<AuthPluginOptions>(
 		fastify.addHook("preHandler", async (request: FastifyRequest) => {
 			const routeUrl = request.routeOptions.url || request.url;
 
-			const isWhiteRoute = micromatch.isMatch(routeUrl, whiteRoutes);
+			const isWhiteRoute = checkIsWhiteRoute(routeUrl, whiteRoutes);
 
 			if (isWhiteRoute) {
 				return;

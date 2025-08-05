@@ -1,0 +1,15 @@
+export { default as Book } from "./book.svg";
+export { default as Car } from "./car-image.png";
+export { default as Cat } from "./cat.svg";
+export { default as Croissant } from "./croissant.svg";
+export { default as CupCoffee } from "./cup-coffee.svg";
+export { default as CupGreen } from "./cup-green.svg";
+export { default as Dog } from "./dog.svg";
+export { default as Drink } from "./drink.svg";
+export { default as Greens } from "./greens.svg";
+export { default as Headphones } from "./headphones.svg";
+export { default as IceCream } from "./ice-cream.svg";
+export { default as Laptop } from "./laptop.svg";
+export { default as OrangeWhole } from "./orange-image.png";
+export { default as OrangeSliced } from "./orange-sliced.svg";
+export { default as Phone } from "./phone.svg";

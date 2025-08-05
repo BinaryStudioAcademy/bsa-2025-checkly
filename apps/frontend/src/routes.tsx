@@ -1,7 +1,8 @@
 import { type RouteObject } from "react-router-dom";
 
 import { AppRoute, RouteAccess } from "./libs/enums/enums.js";
-import { Auth, Home } from "./pages/pages.js";
+import { NotFound } from "./pages/not-found-page/not-found-page.js";
+import { Auth, Home, TestPage } from "./pages/pages.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
 
@@ -14,6 +15,11 @@ const routes: CustomRouteObject[] = [
 		element: <Home />,
 		handle: { access: RouteAccess.ALL },
 		path: "",
+	},
+	{
+		element: <TestPage />,
+		handle: { access: RouteAccess.AUTHENTICATED },
+		path: AppRoute.TEST_PAGE,
 	},
 	{
 		element: <Auth />,
@@ -38,8 +44,8 @@ const routes: CustomRouteObject[] = [
 		path: AppRoute.DASHBOARD,
 	},
 	{
-		element: "Page was not Found",
-		handle: { access: RouteAccess.ALL },
+		element: <NotFound />,
+		handle: { access: RouteAccess.AUTHENTICATED },
 		path: "*",
 	},
 ];
