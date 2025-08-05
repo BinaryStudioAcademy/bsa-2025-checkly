@@ -3,15 +3,21 @@ import { NavLink } from "react-router-dom";
 import buttonStyles from "~/libs/components/button/styles.module.css";
 import { type AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { type ButtonVariant, type ValueOf } from "~/libs/types/types.js";
+import {
+	type ButtonSize,
+	type ButtonVariant,
+	type ValueOf,
+} from "~/libs/types/types.js";
 
 type Properties = {
+	asButtonSize?: ButtonSize;
 	asButtonVariant?: ButtonVariant;
 	children: React.ReactNode;
 	to: ValueOf<typeof AppRoute>;
 };
 
 const Link: React.FC<Properties> = ({
+	asButtonSize = "small",
 	asButtonVariant,
 	children,
 	to,
@@ -20,7 +26,7 @@ const Link: React.FC<Properties> = ({
 		? getClassNames(
 				buttonStyles["button"],
 				buttonStyles[`button-${asButtonVariant}`],
-				buttonStyles["button-small"],
+				buttonStyles[`button-${asButtonSize}`],
 				buttonStyles["button-cluster"],
 				"cluster",
 			)

@@ -120,9 +120,9 @@ The team that will work on the project:
 
 21/07/2025 - project starts.
 
-29/08/2025 - release.
+30/08/2025 - release.
 
-All works must be completed before 29/08/2025.
+All works must be completed before 27/08/2025.
 
 ## Communications approach
 
@@ -174,14 +174,84 @@ The following types of testing will be used:
 
 ## Using templates
 
-**Bug Report Template:**
+### **Bug Report Pattern:**
 
 1. Description
-2. Steps to Reproduce
-3. Environment (Browser + Version)
-4. Expected Result
-5. Actual Result
+2. Device
+3. Environment
+   - Device
+   - OS
+   - Browser/Tool + Version
+   - Branch
+   - Date
+
+4. Actual Result
+5. Expected Result
 6. Comment/Screenshot \[Optional\]
+
+### Purpose
+
+This Template is used by the QA team to:
+
+- Document bugs in a clear, consistent format.
+- Track testing context and environment for each issue.
+- Share reproducible steps with the development team.
+- Suggest expected results to help with fixes.
+
+---
+
+### Template
+
+To create a new bug report, please copy the following template and fill it out with your findings:
+
+```
+# [Clear and descriptive bug title]
+
+## Description
+_→ What is the bug, and why is it a problem?_
+
+## Steps to Reproduce
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
+4. [Observe the issue]
+
+## Environment
+- **Device:** [Desktop / Mobile / etc.]
+- **OS:** [Windows, macOS, etc.]
+- **Browser/Tool:** [e.g., Chrome v..., Postman, etc.]
+- **Branch:** [`main`, `staging`, etc.]
+- **Date:** [YYYY-MM-DD]
+
+## Actual Result
+_→ What actually happened?_
+
+## Expected Result
+_→ What should have happened instead?_
+
+## Test Evidence
+- ✅ [What worked correctly]
+- ❌ [What didn’t work]
+- 📸 [Screenshot or log, if applicable]
+
+```
+
+---
+
+## ✅ Example
+
+You can find examples of completed reports in the Tickets marked as **Bug** in the [project's board](https://github.com/orgs/BinaryStudioAcademy/projects/33/views/1?filterQuery=type%3ABug).
+
+---
+
+## Tips for Writing Good Reports
+
+- Be specific: Include exact inputs, error messages, or screenshots.
+- Be concise: Avoid unnecessary context or repetition.
+- Be constructive: Suggest the correct behavior in the Expected Result section.
+- Be respectful: The goal is to help improve the product, not to assign blame.
+
+---
 
 **User Story template:**
 
@@ -196,8 +266,10 @@ _\*Acceptance criteria will be defined per feature. In cases where they’re mis
 
 # Test Environment
 
-- **Setup required for the test environment:**
-- Only Local for early stage. Check the project’s development template on GitHub: [_Readme.md_](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/blob/main/readme.md)
+**Setup required for the test environment:**
+
+- Local for early stage. Check the project’s development template on GitHub: [_Readme.md_](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/blob/main/readme.md)
+- Staging (TBD)
 
 \[Browser; Display resolution; Display orientation; Localization of the project\]
 

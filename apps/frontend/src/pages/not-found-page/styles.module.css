@@ -1,0 +1,65 @@
+.container {
+	--cluster-direction: column;
+	--cluster-horizontal-alignment: center;
+	--grid-color: var(--color-grid-line-cream);
+
+	width: 100%;
+	min-height: 100vh;
+	padding: var(--space-m);
+	overflow-x: hidden;
+	background-color: var(--color-card-yellow);
+}
+
+.card {
+	--grid-color: var(--color-grid-line-cream);
+
+	max-width: 590px;
+	padding-block: var(--space-xl) var(--space-3xl);
+	padding-inline: var(--space-xl);
+	margin-inline: var(--space-s);
+	font-family: var(--font-family-primary);
+	background-color: var(--color-bg-white);
+	border-radius: var(--radius-l);
+}
+
+.title {
+	font-size: calc(var(--text-size-heading-1) * 2);
+	color: var(--color-brand-accent);
+}
+
+.subtitle {
+	margin: 20px 0 10px;
+	font-size: var(--text-size-heading-2);
+	color: var(--color-text-primary);
+}
+
+.description {
+	margin-bottom: var(--space-xl);
+	font-size: var(--text-size-heading-4);
+	line-height: 2;
+	color: var(--color-text-primary);
+}
+
+.card a {
+	text-decoration: none;
+}
+
+.image-position {
+	position: absolute;
+	z-index: 10;
+	pointer-events: none;
+}
+
+.yellow-stars {
+	top: 10px;
+	left: 10%;
+	width: 120px;
+	height: 120px;
+}
+
+.yellow-twinkles {
+	right: 20%;
+	bottom: 5%;
+	width: 90px;
+	height: 90px;
+}

@@ -11,7 +11,7 @@ import {
 import { AppRoute } from "~/libs/enums/enums.js";
 import { store } from "~/libs/modules/store/store.js";
 
-import { Auth, Dashboard, Home, TestPage } from "./pages/pages.js";
+import { Auth, Dashboard, Home, NotFound, TestPage } from "./pages/pages.js";
 
 createRoot(document.querySelector("#root") as HTMLElement).render(
 	<StrictMode>
@@ -45,6 +45,10 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 								],
 								element: <ProtectedRoute />,
 								path: AppRoute.DASHBOARD,
+							},
+							{
+								element: <NotFound />,
+								path: "*",
 							},
 						],
 						element: <App />,
