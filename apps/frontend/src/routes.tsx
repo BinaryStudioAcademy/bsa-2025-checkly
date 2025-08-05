@@ -18,7 +18,7 @@ const routes: CustomRouteObject[] = [
 	},
 	{
 		element: <TestPage />,
-		handle: { access: RouteAccess.AUTHENTICATED },
+		handle: { access: RouteAccess.ALL },
 		path: AppRoute.TEST_PAGE,
 	},
 	{
@@ -45,8 +45,8 @@ const routes: CustomRouteObject[] = [
 	},
 	{
 		element: <NotFound />,
-		handle: { access: RouteAccess.AUTHENTICATED },
-		path: "*",
+		handle: { access: RouteAccess.ALL },
+		path: AppRoute.NOT_FOUND,
 	},
 ];
 
