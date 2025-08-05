@@ -84,9 +84,9 @@ const AppHeader: React.FC = () => {
 					onClick={handleMenuToggle}
 					type="button"
 				>
-					<div />
-					<div />
-					<div />
+					<div className={styles["burger-menu__line"]} />
+					<div className={styles["burger-menu__line"]} />
+					<div className={styles["burger-menu__line"]} />
 				</button>
 				{isMenuOpen && <UserMenu isOpen />}
 			</div>
