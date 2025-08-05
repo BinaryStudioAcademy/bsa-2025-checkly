@@ -16,16 +16,6 @@ const Home: React.FC = () => {
 				<Hero />
 				<HowItWorks />
 				<Categories />
-				<section data-section-variant="dark">
-					<div className="wrapper">
-						<h2>Sample visual layouts</h2>
-					</div>
-				</section>
-				<section data-section-variant>
-					<div className="wrapper">
-						<h2>Testimonials</h2>
-					</div>
-				</section>
 				<VisualLayouts />
 				<FeedbacksSection />
 			</main>
