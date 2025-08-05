@@ -1,4 +1,4 @@
-const QUESTION_TYPE = {
+const QuizQuestionType = {
 	MULTIPLE_CHOICE: "multiple_choice",
 	MULTIPLE_CHOICE_WITH_TEXT_INPUT: "multiple_choice_with_text_input",
 	SINGLE_CHOICE: "single_choice",
@@ -6,4 +6,4 @@ const QUESTION_TYPE = {
 	TEXT_INPUT: "text_input",
 } as const;
 
-export { QUESTION_TYPE };
+export { QuizQuestionType };

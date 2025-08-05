@@ -1,5 +1,5 @@
-import { type QUESTION_TYPE } from "../enums/enums.js";
+import { type QuizQuestionType } from "../enums/enums.js";
 
-type QuestionType = (typeof QUESTION_TYPE)[keyof typeof QUESTION_TYPE];
+type QuestionType = (typeof QuizQuestionType)[keyof typeof QuizQuestionType];
 
 export { type QuestionType };
