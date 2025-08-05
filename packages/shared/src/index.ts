@@ -55,6 +55,7 @@ export {
 	type QuizAnswersRequestDto,
 	type QuizAnswersResponseDto,
 	QuizAnswersValidationSchema,
+	type QuizQuestionsResponseDto,
 	QuizQuestionType,
 	QuizzApiPath,
 } from "./modules/quiz/quiz.js";
