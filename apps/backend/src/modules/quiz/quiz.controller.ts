@@ -1,7 +1,14 @@
-import { APIPath, HTTPCode, QuizzApiPath } from "shared";
-import { HTTPMethod } from "shared/src/libs/modules/http/libs/enums/http-method.enum.js";
+import {
+	APIPath,
+	HTTPCode,
+	HTTPRequestMethod,
+	type QuizAnswersRequestDto,
+	QuizAnswersValidationSchema,
+	QuizzApiPath,
+} from "shared";
 
 import {
+	type APIHandlerOptions,
 	type APIHandlerResponse,
 	BaseController,
 } from "~/libs/modules/controller/controller.js";
@@ -9,7 +16,7 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 
 import { type QuizService } from "./quiz.service.js";
 
-class QuizContoller extends BaseController {
+class QuizController extends BaseController {
 	private quizService: QuizService;
 
 	public constructor(logger: Logger, quizService: QuizService) {
@@ -18,19 +25,45 @@ class QuizContoller extends BaseController {
 		this.quizService = quizService;
 
 		this.addRoute({
-			handler: () => this.getAllQuestionsWithOptions(),
+			handler: () => this.findAllQuestions(),
 			isPublic: true,
-			method: HTTPMethod.GET,
+			method: HTTPRequestMethod.GET,
 			path: QuizzApiPath.ROOT,
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.submitAnswers(
+					options as APIHandlerOptions<{
+						body: QuizAnswersRequestDto;
+					}>,
+				),
+			isPublic: true,
+			method: HTTPRequestMethod.POST,
+			path: QuizzApiPath.ROOT,
+			validation: {
+				body: QuizAnswersValidationSchema,
+			},
 		});
 	}
 
-	private async getAllQuestionsWithOptions(): Promise<APIHandlerResponse> {
+	private async findAllQuestions(): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.quizService.findAllQuestions(),
 			status: HTTPCode.OK,
 		};
 	}
+
+	private async submitAnswers(
+		options: APIHandlerOptions<{
+			body: QuizAnswersRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.quizService.submitAnswers(options.body),
+			status: HTTPCode.CREATED,
+		};
+	}
 }
 
-export { QuizContoller };
+export { QuizController };
