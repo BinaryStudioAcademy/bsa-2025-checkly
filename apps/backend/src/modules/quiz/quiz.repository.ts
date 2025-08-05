@@ -19,16 +19,14 @@ class QuizRepository {
 			.withGraphFetched(OPTIONS);
 
 		return data.map((question) => {
+			const options = question.options.map((option) =>
+				QuestionOptionEntity.initialize(option),
+			);
+
 			return QuestionEntity.initialize({
 				id: question.id,
 				isOptional: question.isOptional,
-				options: question.options.map((option) =>
-					QuestionOptionEntity.initialize({
-						id: option.id,
-						order: option.order,
-						text: option.text,
-					}),
-				),
+				options,
 				order: question.order,
 				text: question.text,
 				type: question.type,
