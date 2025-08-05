@@ -1,5 +1,4 @@
-import { type QuestionType } from "shared";
-import { type QuestionDto } from "shared/src/modules/quiz/libs/types/question.dto.js";
+import { type QuestionDto, type QuestionType } from "shared";
 
 import { type Entity } from "~/libs/types/entity.type.js";
 

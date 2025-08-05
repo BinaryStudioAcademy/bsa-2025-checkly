@@ -1,5 +1,5 @@
 import { type Knex } from "knex";
-import { QUESTION_TYPE } from "shared";
+import { QuizQuestionType } from "shared";
 
 const TABLE_NAME = "questions";
 
@@ -23,7 +23,7 @@ async function up(knex: Knex): Promise<void> {
 		table.string(COLUMN_NAME.TEXT).notNullable();
 		table.integer(COLUMN_NAME.ORDER).unique().notNullable();
 		table.boolean(COLUMN_NAME.IS_OPTIONAL).notNullable().defaultTo(false);
-		table.enum(COLUMN_NAME.TYPE, Object.values(QUESTION_TYPE)).notNullable();
+		table.enum(COLUMN_NAME.TYPE, Object.values(QuizQuestionType)).notNullable();
 		table
 			.dateTime(COLUMN_NAME.CREATED_AT)
 			.notNullable()

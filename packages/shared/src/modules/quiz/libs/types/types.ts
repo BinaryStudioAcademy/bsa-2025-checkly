@@ -1,2 +1,5 @@
+export { type QuestionDto } from "./question.dto.js";
 export { type QuestionType } from "./quiz-question.type.js";
 export { type QuizQuestionsResponseDto } from "./quiz-questions-response-dto.type.js";
+export { type QuizAnswersRequestDto } from "./quiz-submit-answers-request-dto.type.js";
+export { type QuizAnswersResponseDto } from "./quiz-submit-answers-response-dto.type.js";
