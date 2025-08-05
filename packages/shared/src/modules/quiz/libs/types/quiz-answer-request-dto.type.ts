@@ -1,8 +1,6 @@
-import { type QuestionDto } from "./question.dto.js";
-
 type QuizAnswer = {
 	isSkipped: boolean;
-	question: QuestionDto;
+	question: string;
 	questionId: number;
 	selectedOptions: (number | string)[];
 	userInput: string;
