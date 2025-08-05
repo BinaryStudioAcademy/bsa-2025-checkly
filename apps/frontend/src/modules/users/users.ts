@@ -14,7 +14,6 @@ export { userApi };
 export {
 	type SignUpFormValidationSchema,
 	type UserDto,
-	type UserGetAllResponseDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
@@ -24,4 +23,3 @@ export {
 	userSignInValidationSchema,
 	userSignUpValidationSchemaExtended,
 } from "./libs/validation-schemas/validation-schemas.js";
-export { actions, reducer } from "./slices/users.js";
