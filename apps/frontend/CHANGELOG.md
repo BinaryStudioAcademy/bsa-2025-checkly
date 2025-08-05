@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.3.0...frontend-v1.3.1) (2025-08-05)
+
+
+### Bug Fixes
+
+* card edges clipping on hover cy-143 ([df15ba9](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/df15ba9852969f22a3bbb1e04e6a4027edfa33a6))
+* card edges clipping on hover cy-143 ([ced7788](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ced7788cf14a19f75e565bb820aee2b430fd374d))
+
 ## [1.3.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.2.0...frontend-v1.3.0) (2025-08-04)
 
 
