@@ -1,3 +1,4 @@
+export { Categories } from "./categories/categories.js";
 export { FeedbacksSection } from "./feedbacks-section/feedbacks-section.js";
 export { Footer } from "./footer/footer.js";
 export { Header } from "./header/header.js";

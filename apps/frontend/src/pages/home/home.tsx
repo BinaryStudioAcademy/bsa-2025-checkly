@@ -1,4 +1,5 @@
 import {
+	Categories,
 	FeedbacksSection,
 	Footer,
 	Header,
@@ -14,9 +15,15 @@ const Home: React.FC = () => {
 			<main>
 				<Hero />
 				<HowItWorks />
+				<Categories />
+				<section data-section-variant="dark">
+					<div className="wrapper">
+						<h2>Sample visual layouts</h2>
+					</div>
+				</section>
 				<section data-section-variant>
 					<div className="wrapper">
-						<h2>Categories</h2>
+						<h2>Testimonials</h2>
 					</div>
 				</section>
 				<VisualLayouts />
