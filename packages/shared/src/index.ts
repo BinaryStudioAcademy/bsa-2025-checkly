@@ -5,6 +5,7 @@ export {
 	ErrorConstants,
 	ErrorMessage,
 	FastifyHook,
+	QuizCategory,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
 export {
@@ -33,6 +34,12 @@ export {
 	type ValueOf,
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
+export {
+	type QuestionDto,
+	type QuestionType,
+	QuizApiPath,
+	type QuizQuestionsResponseDto,
+} from "./modules/quiz/quiz.js";
 export {
 	type SignUpFormValidationSchema,
 	type UserDto,

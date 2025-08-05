@@ -11,7 +11,7 @@ import {
 import { AppRoute } from "~/libs/enums/enums.js";
 import { store } from "~/libs/modules/store/store.js";
 
-import { Auth, Home } from "./pages/pages.js";
+import { Auth, Home, QuestionFlow, Quiz } from "./pages/pages.js";
 
 createRoot(document.querySelector("#root") as HTMLElement).render(
 	<StrictMode>
@@ -41,6 +41,14 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 								],
 								element: <ProtectedRoute />,
 								path: AppRoute.DASHBOARD,
+							},
+							{
+								element: <Quiz />,
+								path: AppRoute.QUIZ,
+							},
+							{
+								element: <QuestionFlow />,
+								path: AppRoute.QUIZ_QUESTIONS,
 							},
 						],
 						element: <App />,
