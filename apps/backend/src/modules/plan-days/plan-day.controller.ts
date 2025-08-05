@@ -1,9 +1,9 @@
 import { APIPath } from "~/libs/enums/enums.js";
 import {
-	type APIHandlerOptions,
+	type APIBodyOptions,
 	type APIHandlerResponse,
 	BaseController,
-	type IdParameter,
+	type IdParamsOption,
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
@@ -24,19 +24,14 @@ class PlanDayController extends BaseController {
 		this.planDayService = planDayService;
 
 		this.addRoute({
-			handler: (options) =>
-				this.findById(options as APIHandlerOptions<{ params: IdParameter }>),
+			handler: (options) => this.findById(options as IdParamsOption),
 			method: HTTPRequestMethod.GET,
 			path: PlanDaysApiPath.PLAN_DAY,
 		});
 
 		this.addRoute({
 			handler: (options) =>
-				this.create(
-					options as APIHandlerOptions<{
-						body: PlanDayCreateRequestDto;
-					}>,
-				),
+				this.create(options as APIBodyOptions<PlanDayCreateRequestDto>),
 			method: HTTPRequestMethod.POST,
 			path: PlanDaysApiPath.PLAN_DAY_CREATE,
 			validation: {
@@ -46,7 +41,7 @@ class PlanDayController extends BaseController {
 	}
 
 	private async create(
-		options: APIHandlerOptions<{ body: PlanDayCreateRequestDto }>,
+		options: APIBodyOptions<PlanDayCreateRequestDto>,
 	): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.planDayService.create(options.body),
@@ -54,9 +49,7 @@ class PlanDayController extends BaseController {
 		};
 	}
 
-	private async findById(
-		options: APIHandlerOptions<{ params: IdParameter }>,
-	): Promise<APIHandlerResponse> {
+	private async findById(options: IdParamsOption): Promise<APIHandlerResponse> {
 		const { id } = options.params;
 
 		return {
