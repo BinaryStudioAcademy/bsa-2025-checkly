@@ -9,22 +9,11 @@ class QuizService {
 		this.quizRepository = quizRepository;
 	}
 
-	public async findAllQuestionOptions(): Promise<QuizQuestionsResponseDto> {
-		const data = await this.quizRepository.findAllQuestionOptions();
+	public async findAllQuestions(): Promise<QuizQuestionsResponseDto> {
+		const data = await this.quizRepository.findAllQuestionsWithOptions();
 
 		return {
-			items: data.map(({ options, question }) => ({
-				id: question.id,
-				isOptional: question.isOptional,
-				options: options.map((o) => ({
-					id: o.id,
-					order: o.order,
-					text: o.text,
-				})),
-				order: question.order,
-				text: question.text,
-				type: question.type,
-			})),
+			items: data.map((question) => question.toObject()),
 		};
 	}
 }
