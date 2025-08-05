@@ -3,14 +3,14 @@ import {
 	DatabaseTableName,
 } from "~/libs/modules/database/database.js";
 
-class QuestionOptionsModel extends AbstractModel {
+class QuestionOptionModel extends AbstractModel {
 	public static override get tableName(): string {
 		return DatabaseTableName.QUESTION_OPTIONS;
 	}
+
 	public order!: number;
 	public questionId!: number;
-
 	public text!: string;
 }
 
-export { QuestionOptionsModel };
+export { QuestionOptionModel };
