@@ -11,6 +11,7 @@ import {
 import { AppRoute } from "~/libs/enums/enums.js";
 import { store } from "~/libs/modules/store/store.js";
 
+import { NotFound } from "./pages/not-found-page/not-found-page.js";
 import { Auth, Home, TestPage } from "./pages/pages.js";
 
 createRoot(document.querySelector("#root") as HTMLElement).render(
@@ -45,6 +46,10 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 								],
 								element: <ProtectedRoute />,
 								path: AppRoute.DASHBOARD,
+							},
+							{
+								element: <NotFound />,
+								path: "*",
 							},
 						],
 						element: <App />,
