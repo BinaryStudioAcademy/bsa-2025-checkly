@@ -1,37 +1,39 @@
 import {
-	type QuestionModel,
-	type QuestionOptionsModel,
-} from "./libs/models/models.js";
+	QuestionEntity,
+	QuestionOptionEntity,
+} from "./libs/entities/entities.js";
+import { OPTIONS } from "./libs/enums/enums.js";
+import { type QuestionModel } from "./libs/models/models.js";
 
 class QuizRepository {
 	private questionModel: typeof QuestionModel;
-	private questionOptionsModel: typeof QuestionOptionsModel;
 
-	public constructor(
-		quetionModel: typeof QuestionModel,
-		questionOptionsModel: typeof QuestionOptionsModel,
-	) {
+	public constructor(quetionModel: typeof QuestionModel) {
 		this.questionModel = quetionModel;
-		this.questionOptionsModel = questionOptionsModel;
 	}
 
-	public async findAllQuestionOptions(): Promise<
-		{ options: QuestionOptionsModel[]; question: QuestionModel }[]
-	> {
-		const questions = await this.questionModel.query().orderBy("order");
+	public async findAllQuestionsWithOptions(): Promise<QuestionEntity[]> {
+		const data = await this.questionModel
+			.query()
+			.orderBy("order")
+			.withGraphFetched(OPTIONS);
 
-		const questionsWithOptions = await Promise.all(
-			questions.map(async (question) => {
-				const options = await this.questionOptionsModel
-					.query()
-					.where("questionId", question.id)
-					.orderBy("order");
-
-				return { options, question };
-			}),
-		);
-
-		return questionsWithOptions;
+		return data.map((question) => {
+			return QuestionEntity.initialize({
+				id: question.id,
+				isOptional: question.isOptional,
+				options: question.options.map((option) =>
+					QuestionOptionEntity.initialize({
+						id: option.id,
+						order: option.order,
+						text: option.text,
+					}),
+				),
+				order: question.order,
+				text: question.text,
+				type: question.type,
+			});
+		});
 	}
 }
 
