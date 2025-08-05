@@ -24,7 +24,7 @@ async function seed(knex: Knex): Promise<void> {
 		},
 	]);
 
-	await knex("question_options").insert([
+	await knex(DatabaseTableName.QUESTION_OPTIONS).insert([
 		{ order: 1, question_id: 1, text: "💪 Health & Fitness" },
 		{ order: 2, question_id: 1, text: "🧠 Personal Growth" },
 		{ order: 3, question_id: 1, text: "💸 Money & Finances" },
