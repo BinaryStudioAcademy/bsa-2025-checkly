@@ -8,8 +8,8 @@ import { type QuestionModel } from "./libs/models/models.js";
 class QuizRepository {
 	private questionModel: typeof QuestionModel;
 
-	public constructor(quetionModel: typeof QuestionModel) {
-		this.questionModel = quetionModel;
+	public constructor(questionModel: typeof QuestionModel) {
+		this.questionModel = questionModel;
 	}
 
 	public async findAllQuestionsWithOptions(): Promise<QuestionEntity[]> {
