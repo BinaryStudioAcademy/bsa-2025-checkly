@@ -27,7 +27,7 @@ class QuizContoller extends BaseController {
 
 	private async getAllQuestionsWithOptions(): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.quizService.findAllQuestionOptions(),
+			payload: await this.quizService.findAllQuestions(),
 			status: HTTPCode.OK,
 		};
 	}
