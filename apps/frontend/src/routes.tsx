@@ -25,14 +25,14 @@ const routes: CustomRouteObject[] = [
 		handle: { access: RouteAccess.NOT_AUTHENTICATED },
 		path: AppRoute.SIGN_UP,
 	},
-    {
+	{
 		element: <QuestionFlow />,
-		handle: { access: RouteAccess.NOT_AUTHENTICATED },
+		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.QUIZ_QUESTIONS,
 	},
 	{
 		element: <Quiz />,
-		handle: { access: RouteAccess.NOT_AUTHENTICATED },
+		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.QUIZ,
 	},
 ];
