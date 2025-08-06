@@ -1,52 +1,12 @@
-.container {
-	--grid-color: var(--color-grid-line-cream);
-
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	min-height: 100vh;
+.sign-up-container {
 	padding-block: var(--space-m);
 	overflow-x: clip;
-	background-color: var(--color-card-yellow);
 }
 
-.sign-in {
-	--grid-color: var(--color-grid-line-cream);
-	--grid-opacity: 0.8;
-
-	position: relative;
-	z-index: 200;
-	width: 100%;
-	max-width: 590px;
+.sign-up {
 	padding-block: var(--space-xl) var(--space-4xl);
 	padding-inline: var(--space-m-3xl);
-	margin: 12px;
-	margin-inline: var(--space-s);
-	font-family: var(--font-family-primary);
-	background-color: var(--color-bg-white);
-	border-radius: var(--radius-l);
-}
-
-.sign-up-button {
-	margin-top: 11px;
-}
-
-.title {
-	font-size: var(--text-size-heading-2);
-}
-
-.redirect-text__link,
-.redirect-text__link:visited {
-	color: var(--color-text-primary);
-	text-decoration-color: var(--color-bg-dark);
-}
-
-.form {
-	--cluster-direction: column;
-	--cluster-vertical-alignment: stretch;
-	--gutter: var(--space-s-m);
+	margin: var(--space-xs);
 }
 
 .image-position {
