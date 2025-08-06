@@ -7,6 +7,7 @@ export {
 	PROGRESS_CONSTANTS,
 	QUIZ_CONSTANTS,
 } from "./quiz-constants.enum.js";
+export { RouteAccess } from "./route-access.js";
 export {
 	APIPath,
 	AppEnvironment,

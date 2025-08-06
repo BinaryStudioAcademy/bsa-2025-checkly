@@ -1,0 +1,32 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	padding: var(--space-m);
+	cursor: pointer;
+	background: var(--color-bg-white);
+	border: 2px solid var(--color-bg-dark);
+	border-radius: var(--radius-m);
+	transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+	transform: translateY(-8px);
+}
+
+.text {
+	display: -webkit-box;
+	flex-grow: 1;
+	max-height: clamp(300px, 10vh, 350px);
+	margin: 0 0 24px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 5;
+	line-clamp: 5;
+	-webkit-box-orient: vertical;
+}
+
+.footer {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+}
