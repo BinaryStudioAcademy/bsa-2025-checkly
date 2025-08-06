@@ -30,11 +30,11 @@ const routes: CustomRouteObject[] = [
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.QUIZ_QUESTIONS,
 	},
-	{
+    {
 		element: <Quiz />,
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.QUIZ,
-	},
+    },
 ];
 
 export { type RouteHandle, routes };
