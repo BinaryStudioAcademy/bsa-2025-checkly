@@ -53,7 +53,6 @@ export {
 	type QuestionDto,
 	type QuestionType,
 	type QuizAnswersRequestDto,
-	type QuizAnswersResponseDto,
 	QuizAnswersValidationSchema,
 	type QuizCategoryType,
 	QuizQuestionFormat,
