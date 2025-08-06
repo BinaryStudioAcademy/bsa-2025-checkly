@@ -1,12 +1,29 @@
 import { type QuestionDto } from "shared";
 
-import { type QuizAnswer, type QuizCategoryValue } from "~/modules/quiz/quiz.js";
+import {
+	type QuizAnswer,
+	type QuizCategoryValue,
+} from "~/modules/quiz/quiz.js";
 
 interface CheckboxQuestionProperties {
-	currentAnswer?: (number | string)[];
-	onAnswer: (answer: (number | string)[]) => void;
+	currentAnswer?: MultipleAnswers;
+	onAnswer: (answer: MultipleAnswers) => void;
 	question: QuestionDto;
 }
+
+interface MixedQuestionProperties {
+	currentAnswer?: {
+		selectedOptions: MultipleAnswers;
+		userInput: string;
+	};
+	onAnswer: (answer: {
+		selectedOptions: MultipleAnswers;
+		userInput: string;
+	}) => void;
+	question: QuestionDto;
+}
+
+type MultipleAnswers = (number | string)[];
 
 interface ProgressBarProperties {
 	currentQuestion: number;
@@ -16,6 +33,7 @@ interface ProgressBarProperties {
 interface QuestionNavigationProperties {
 	currentQuestion: number;
 	isNextDisabled: boolean;
+	isQuestionRequired: boolean;
 	onBack: () => void;
 	onNext: () => void;
 	onSkip: () => void;
@@ -25,7 +43,8 @@ interface QuestionNavigationProperties {
 interface QuestionPageProperties {
 	currentAnswer?: QuizAnswer;
 	onAnswer: (answer: QuizAnswer) => void;
-	question?: QuestionDto;
+	question: QuestionDto;
+	questionNumber?: number;
 }
 
 interface QuizCategoryCardProperties extends QuizCategoryProperties {
@@ -40,19 +59,12 @@ interface QuizCategoryProperties {
 }
 
 interface RadioQuestionProperties {
-	currentAnswer?: number | string;
-	onAnswer: (answer: number | string) => void;
+	currentAnswer?: SingleAnswer;
+	onAnswer: (answer: SingleAnswer) => void;
 	question: QuestionDto;
 }
 
-interface TextareaQuestionProperties {
-	currentAnswer?: string;
-	onAnswer: (answer: string) => void;
-	question: QuestionDto & {
-		description?: string;
-		placeholder?: string;
-	};
-}
+type SingleAnswer = number | string;
 
 interface TextQuestionProperties {
 	currentAnswer?: string;
@@ -62,12 +74,14 @@ interface TextQuestionProperties {
 
 export {
 	type CheckboxQuestionProperties,
+	type MixedQuestionProperties,
+	type MultipleAnswers,
 	type ProgressBarProperties,
 	type QuestionNavigationProperties,
 	type QuestionPageProperties,
 	type QuizCategoryCardProperties,
 	type QuizCategoryProperties,
 	type RadioQuestionProperties,
-	type TextareaQuestionProperties,
+	type SingleAnswer,
 	type TextQuestionProperties,
 };
