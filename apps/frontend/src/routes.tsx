@@ -1,7 +1,12 @@
 import { type RouteObject } from "react-router-dom";
 
 import { AppRoute, RouteAccess } from "./libs/enums/enums.js";
-import { Auth, Home, QuestionFlow, Quiz } from "./pages/pages.js";
+import {
+	Dashboard,
+	Plan,
+	Wrapper,
+} from "./pages/dashboard-wrapper-mock/components/components.js";
+import { Auth, Home, NotFound, QuestionFlow, Quiz } from "./pages/pages.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
 
@@ -30,11 +35,33 @@ const routes: CustomRouteObject[] = [
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.QUIZ_QUESTIONS,
 	},
-    {
+	{
 		element: <Quiz />,
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.QUIZ,
-    },
+	},
+	{
+		children: [
+			{
+				element: <Dashboard />,
+				handle: { access: RouteAccess.AUTHENTICATED },
+				path: AppRoute.DASHBOARD,
+			},
+			{
+				element: <Plan />,
+				handle: { access: RouteAccess.AUTHENTICATED },
+				path: AppRoute.PLAN,
+			},
+		],
+		element: <Wrapper />,
+		handle: { access: RouteAccess.AUTHENTICATED },
+		path: AppRoute.ROOT,
+	},
+	{
+		element: <NotFound />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.NOT_FOUND,
+	},
 ];
 
 export { type RouteHandle, routes };

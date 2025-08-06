@@ -95,7 +95,7 @@
 	background-color: var(--color-bg-white);
 
 	--grid-color: var(--color-text-secondary, var(--color-bg-light));
-	--grid-opacity: 0.2;
+	--grid-opacity: 0.6;
 	--grid-size: 8px;
 	--grid-line: 1px;
 	--color: color-mix(
@@ -115,7 +115,7 @@
 			transparent var(--grid-line)
 		);
 	background-position: calc((var(--space-xl) + var(--space-2xl)) * -1)
-		calc((var(--space-xl) + var(--space-2xl) + 6px) * -1);
+		calc((var(--space-xl) + var(--space-2xl) + 17px) * -1);
 	background-size: var(--grid-size) var(--grid-size);
 	border: 2px solid var(--color-bg-dark);
 	border-radius: var(--radius-l);

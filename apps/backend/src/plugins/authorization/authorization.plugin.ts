@@ -69,18 +69,15 @@ const extractUserFromRequest = async (
 
 const checkIsWhiteRoute = (url: string, whiteRoutes: string[]): boolean => {
 	const regex = /^\/api\/v\d+(\/.+)$/;
-	const match = regex.exec(url);
-	const [, route] = match ?? [];
+	const isAPIRoute = regex.test(url);
 
-	if (!route) {
+	if (!isAPIRoute) {
 		return true;
 	}
 
-	const ROUTE_WITH_QUERY_INDEX = 0;
+	const [routeWithoutQuery] = url.split("?");
 
-	const routeWithoutQuery = route.split("?")[ROUTE_WITH_QUERY_INDEX] as string;
-
-	return whiteRoutes.includes(routeWithoutQuery);
+	return whiteRoutes.includes(routeWithoutQuery as string);
 };
 
 const authorization = fp<AuthPluginOptions>(
