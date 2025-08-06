@@ -1,11 +1,11 @@
 import {
-	camera,
-	flowers,
-	money,
-	rollerskates,
-	shirtlessBodybuilder,
-	teddyBear,
-} from "~/assets/img/shared/shared.img.js";
+	Athlete,
+	Camera,
+	Flowers,
+	Money,
+	RollerSkate,
+	TeddyBear,
+} from "~/assets/img/shared/illustrations/categories/categories.img.js";
 import { type QuizCategoryProperties } from "~/libs/types/types.js";
 import { QuizCategory } from "~/modules/quiz/libs/enums/enums.js";
 
@@ -13,37 +13,37 @@ const QUIZ_CATEGORIES: readonly QuizCategoryProperties[] = [
 	{
 		category: QuizCategory.PERSONAL_DEVELOPMENT,
 		color: "card-peach",
-		icon: teddyBear,
+		icon: TeddyBear,
 		selected: false,
 	},
 	{
 		category: QuizCategory.SPIRITUALITY,
 		color: "card-purple",
-		icon: flowers,
+		icon: Flowers,
 		selected: false,
 	},
 	{
 		category: QuizCategory.SPORT,
 		color: "card-yellow",
-		icon: shirtlessBodybuilder,
+		icon: Athlete,
 		selected: false,
 	},
 	{
 		category: QuizCategory.MONEY,
 		color: "card-gray",
-		icon: money,
+		icon: Money,
 		selected: false,
 	},
 	{
 		category: QuizCategory.CREATIVITY,
 		color: "card-pink",
-		icon: camera,
+		icon: Camera,
 		selected: false,
 	},
 	{
 		category: QuizCategory.HOBBY,
 		color: "card-cyan",
-		icon: rollerskates,
+		icon: RollerSkate,
 		selected: false,
 	},
 ] as const;
