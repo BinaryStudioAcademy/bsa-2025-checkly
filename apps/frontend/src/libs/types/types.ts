@@ -14,7 +14,6 @@ export {
 	type TextQuestionProperties,
 } from "./quiz-components-properties.type.js";
 export {
-	type QuestionDto,
 	type ServerErrorDetail,
 	type ServerErrorResponse,
 	type ValidationSchema,
