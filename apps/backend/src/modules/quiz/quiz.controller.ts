@@ -34,7 +34,7 @@ class QuizController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.submitAnswers(
+				this.handleAnswers(
 					options as APIHandlerOptions<{
 						body: QuizAnswersRequestDto;
 					}>,
@@ -55,13 +55,13 @@ class QuizController extends BaseController {
 		};
 	}
 
-	private submitAnswers(
+	private handleAnswers(
 		options: APIHandlerOptions<{
 			body: QuizAnswersRequestDto;
 		}>,
 	): APIHandlerResponse {
 		return {
-			payload: this.quizService.submitAnswers(options.body),
+			payload: this.quizService.handleAnswers(options.body),
 			status: HTTPCode.OK,
 		};
 	}
