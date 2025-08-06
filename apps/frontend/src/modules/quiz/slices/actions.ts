@@ -2,7 +2,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 
-import { type QuizAnswersRequestDto, type QuizQuestionsResponseDto } from "../libs/types/types.js";
+import {
+	type QuizAnswersRequestDto,
+	type QuizQuestionsResponseDto,
+} from "../libs/types/types.js";
 import { name as sliceName } from "./quiz.slice.js";
 
 const fetchQuestions = createAsyncThunk<
@@ -16,15 +19,15 @@ const fetchQuestions = createAsyncThunk<
 });
 
 const submitQuiz = createAsyncThunk<
-	null,
+	{ success: boolean },
 	QuizAnswersRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/submit-quiz`, async (submission, { extra }) => {
 	const { quizApi } = extra;
 
-	await quizApi.submitQuiz(submission);
+	const result = await quizApi.submitQuiz(submission);
 
-	return null;
+	return { success: result };
 });
 
-export { fetchQuestions, submitQuiz }; 
+export { fetchQuestions, submitQuiz };

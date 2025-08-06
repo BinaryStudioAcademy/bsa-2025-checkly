@@ -8,4 +8,4 @@ const allActions = {
 };
 
 export { allActions as actions };
-export { reducer } from "./quiz.slice.js"; 
+export { reducer } from "./quiz.slice.js";

@@ -1,7 +1,9 @@
-import { type EnumValue, QuizCategory } from "~/modules/quiz/libs/enums/enums.js";
+import { QuizCategory } from "shared";
 
-const formatCategoryTitle = (category: EnumValue<typeof QuizCategory>): string => {
-	const titleMap: Record<EnumValue<typeof QuizCategory>, string> = {
+import { type QuizCategoryValue } from "~/modules/quiz/quiz.js";
+
+const formatCategoryTitle = (category: QuizCategoryValue): string => {
+	const titleMap: Record<QuizCategoryValue, string> = {
 		[QuizCategory.CREATIVITY]: "Creativity",
 		[QuizCategory.HOBBY]: "Hobby",
 		[QuizCategory.MONEY]: "Money",
@@ -13,4 +15,4 @@ const formatCategoryTitle = (category: EnumValue<typeof QuizCategory>): string =
 	return titleMap[category];
 };
 
-export { formatCategoryTitle }; 
+export { formatCategoryTitle };
