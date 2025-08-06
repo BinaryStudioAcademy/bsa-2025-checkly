@@ -1,7 +1,8 @@
 import { useCallback } from "react";
 
-import { Remove } from "~/assets/img/icons/icons.js";
-import { Arrow } from "~/assets/img/shared/shapes/shapes.img.js";
+import { Regenerate } from "~/assets/img/icons/icons.js";
+import { ArrowBold } from "~/assets/img/shared/shapes/shapes.img.js";
+import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { ONE } from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 
@@ -32,21 +33,24 @@ const Day: React.FC<Properties> = ({
 
 	return (
 		<div className={styles["content__days-item"]} key={indexDay}>
-			<button
+			<Button
 				className={getClassNames(
 					styles["content__days__day"],
 					indexDay === selectedDay ? styles["content__days__active-day"] : "",
 				)}
+				label={`Day ${String(indexDay + ONE)}`}
 				onClick={handleDay}
-			>
-				Day {indexDay + ONE}
-			</button>
+				variant="transparent"
+			/>
 			{selectedDay === indexDay ? (
-				<img alt="" className={styles["selectedDay-icon"]} src={Arrow} />
+				<img alt="" className={styles["selectedDay-icon"]} src={ArrowBold} />
 			) : (
-				<button>
-					<img alt="" className={styles["remove-button"]} src={Remove} />
-				</button>
+				<Button
+					className={getClassNames(styles["regenerate-button"])}
+					icon={<DecorativeImage src={Regenerate} />}
+					isIconOnly
+					label=""
+				/>
 			)}
 		</div>
 	);

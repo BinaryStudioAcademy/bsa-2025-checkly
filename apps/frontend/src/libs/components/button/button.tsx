@@ -4,6 +4,7 @@ import { type ButtonVariant } from "~/libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	className?: string;
 	disabled?: boolean;
 	icon?: React.ReactNode;
 	iconOnlySize?: "large" | "medium" | "small";
@@ -16,6 +17,7 @@ type Properties = {
 };
 
 const Button: React.FC<Properties> = ({
+	className = "",
 	disabled = false,
 	icon,
 	iconOnlySize = "large",
@@ -34,6 +36,7 @@ const Button: React.FC<Properties> = ({
 		isIconOnly && styles["button-icon-only"],
 		isIconOnly && styles[`button-icon-only-${iconOnlySize}`],
 		"cluster",
+		className,
 	);
 
 	return (

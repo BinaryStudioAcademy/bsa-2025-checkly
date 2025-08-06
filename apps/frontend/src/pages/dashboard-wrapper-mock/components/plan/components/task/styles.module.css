@@ -58,7 +58,7 @@
 
 .item-actions > *,
 .item-actions button {
-	height: 23px;
+	height: 24px;
 }
 
 .item-actions__time {
@@ -77,11 +77,8 @@
 }
 
 .item-actions_button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 24px;
-	height: 24px;
+	max-width: 24px;
+	max-height: 24px;
 	padding: calc(var(--space-3xs) * 1.5);
 	background: white;
 	border-radius: var(--radius-full);

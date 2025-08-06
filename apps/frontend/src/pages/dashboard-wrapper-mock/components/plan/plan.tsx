@@ -20,10 +20,13 @@ const Plan: React.FC = () => {
 	return (
 		<div className={styles["plan"]}>
 			<div className={styles["nav"]}>
-				<p>My Plan</p>
-				<button className={styles["select-day"]} onClick={toggleSelect}>
-					Day {selectedDay + ONE}
-				</button>
+				<p>Here’s your plan!</p>
+				<Button
+					className={getClassNames(styles["select-day"])}
+					label={`Day ${String(selectedDay + ONE)}`}
+					onClick={toggleSelect}
+					variant="transparent"
+				/>
 			</div>
 			<div className={styles["content"]}>
 				<div

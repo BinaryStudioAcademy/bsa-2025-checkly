@@ -1,4 +1,5 @@
-import { Edit, Reload, Remove, Timer } from "~/assets/img/icons/icons.js";
+import { Edit, Regenerate, Remove, Timer } from "~/assets/img/icons/icons.js";
+import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 
 import styles from "./styles.module.css";
@@ -31,15 +32,24 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 					<span>morning</span>
 				</div>
 				<div className={styles["item-actions_buttons-wrapper"]}>
-					<button className={styles["item-actions_button"]}>
-						<img alt="" src={Edit} />
-					</button>
-					<button className={styles["item-actions_button"]}>
-						<img alt="" src={Reload} />
-					</button>
-					<button className={styles["item-actions_button"]}>
-						<img alt="" src={Remove} />
-					</button>
+					<Button
+						className={getClassNames(styles["item-actions_button"])}
+						icon={<DecorativeImage src={Edit} />}
+						isIconOnly
+						label=""
+					/>
+					<Button
+						className={getClassNames(styles["item-actions_button"])}
+						icon={<DecorativeImage src={Regenerate} />}
+						isIconOnly
+						label=""
+					/>
+					<Button
+						className={getClassNames(styles["item-actions_button"])}
+						icon={<DecorativeImage src={Remove} />}
+						isIconOnly
+						label=""
+					/>
 				</div>
 			</div>
 		</div>

@@ -1,7 +1,7 @@
 .content__days-item {
 	display: flex;
 	flex-direction: row;
-	gap: 5px;
+	gap: var(--space-3xs);
 	align-items: center;
 	justify-content: space-between;
 	padding-left: var(--space-l);
@@ -9,12 +9,8 @@
 
 .content__days__day {
 	padding: var(--space-2xs) var(--space-m);
-	margin: 0;
-	font-size: var(--text-body);
-	font-weight: var(--font-weight-body);
-	text-wrap: nowrap;
+	text-transform: none;
 	border: 2px solid black;
-	border-radius: var(--radius-m);
 }
 
 .content__days__active-day {
@@ -22,16 +18,16 @@
 }
 
 .selectedDay-icon {
-	width: 35px;
+	width: clamp(20px, 3vw, 35px);
 }
 
-.remove-button {
+.regenerate-button {
 	visibility: hidden;
-	width: 25px;
-	padding: var(--space-2xs);
+	width: clamp(15px, 2vw, 20px);
+	padding: var(--space-3xs);
 }
 
-.content__days-item:hover .remove-button {
+.content__days-item:hover .regenerate-button {
 	visibility: visible;
 	cursor: pointer;
 }
@@ -39,22 +35,19 @@
 @media (width <= 768px) {
 	.content__days-item {
 		flex-direction: row;
-		justify-content: flex-start;
-		width: calc(100% / 3 - var(--gutter));
 		padding: 0;
-		padding-left: var(--space-l);
+	}
+
+	.content__days__day {
+		padding: var(--space-2xs) var(--space-s);
+		font-size: var(--text-body-small)
 	}
 
 	.selectedDay-icon {
-		width: 20px;
-		padding: var(--space-2xs) 0;
 		transform: rotate(90deg);
 	}
 
-	.remove-button {
+	.regenerate-button {
 		visibility: visible;
-		width: 7px;
-		min-width: 7px;
-		padding: 0;
 	}
 }

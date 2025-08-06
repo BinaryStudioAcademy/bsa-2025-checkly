@@ -19,8 +19,11 @@
 
 .select-day {
 	display: none;
+	padding: var(--space-2xs) var(--space-m);
 	font-size: var(--text-body);
 	font-weight: var(--font-weight-body);
+	text-transform: none;
+	border: 2px solid black;
 }
 
 .content {
