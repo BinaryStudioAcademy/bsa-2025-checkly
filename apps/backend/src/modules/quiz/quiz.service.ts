@@ -21,7 +21,7 @@ class QuizService {
 		};
 	}
 
-	public submitAnswers(payload: QuizAnswersRequestDto): unknown {
+	public handleAnswers(payload: QuizAnswersRequestDto): unknown {
 		const prompt = createPrompt(payload);
 
 		return {
