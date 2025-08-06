@@ -4,6 +4,7 @@ import {
 	type QuizQuestionsResponseDto,
 } from "shared";
 
+import { createPrompt } from "./libs/utilities/utilities.js";
 import { type QuizRepository } from "./quiz.repository.js";
 
 class QuizService {
@@ -21,12 +22,11 @@ class QuizService {
 		};
 	}
 
-	public submitAnswers(body: QuizAnswersRequestDto): QuizAnswersResponseDto {
-		// TODO: Prepare prompt based on received answers
-		// For now just returning the response with the answers back to the client
+	public submitAnswers(payload: QuizAnswersRequestDto): QuizAnswersResponseDto {
+		const prompt = createPrompt(payload);
 
 		return {
-			response: body,
+			response: prompt,
 		};
 	}
 }
