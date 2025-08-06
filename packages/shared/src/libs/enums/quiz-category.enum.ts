@@ -7,4 +7,4 @@ const QuizCategory = {
 	SPORT: "sport",
 } as const;
 
-export { QuizCategory }; 
+export { QuizCategory };

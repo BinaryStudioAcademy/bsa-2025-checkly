@@ -37,6 +37,7 @@ export { AuthApiPath } from "./modules/auth/auth.js";
 export {
 	type QuestionDto,
 	type QuestionType,
+	type QuizAnswer,
 	type QuizAnswersRequestDto,
 	type QuizAnswersResponseDto,
 	QuizAnswersValidationSchema,

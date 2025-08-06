@@ -1,7 +1,8 @@
-export {QuizApiPath, QuizQuestionFormat } from "./libs/enums/enums.js";
+export { QuizApiPath, QuizQuestionFormat } from "./libs/enums/enums.js";
 export {
 	type QuestionDto,
 	type QuestionType,
+	type QuizAnswer,
 	type QuizAnswersRequestDto,
 	type QuizAnswersResponseDto,
 	type QuizCategoryType,
