@@ -20,11 +20,13 @@
 	--color-card-blue: #80caff;
 	--color-card-cyan: #75d7f0;
 	--color-light-grey: #d7d7d7;
-	--color-silver-grey: #b0b0b2;
+	--color-border-grey: #b0b0b2;
+	--color-icon-grey: #e0e0e0;
 	--color-grid-line-cream: #e9eba880;
 	--color-text: var(--color-text-primary);
 	--color-text-muted: var(--color-text-secondary);
 	--color-bg: var(--color-bg-light);
+	--color-bg-black: var(--color-text-primary);
 	--color-surface: var(--color-bg-white);
 	--color-selection-bg: var(--color-card-yellow);
 }

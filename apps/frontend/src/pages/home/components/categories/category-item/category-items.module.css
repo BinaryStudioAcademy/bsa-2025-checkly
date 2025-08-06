@@ -1,0 +1,113 @@
+.category-box {
+	position: relative;
+	width: 175px;
+	height: 175px;
+	text-align: center;
+	border: 2px solid var(--color-bg-dark);
+	border-radius: var(--radius-s);
+}
+
+.category-button {
+	width: 100%;
+	height: 100%;
+	padding-top: 62.5%;
+	cursor: pointer;
+	background-color: transparent;
+	border: none;
+}
+
+.category-title-landing {
+	font-size: var(--text-size-heading-5);
+	line-height: 0.94;
+	color: var(--color-bg-dark);
+}
+
+.category-title {
+	font-size: 24px;
+	font-weight: var(--font-weight-bold);
+	line-height: 0.94;
+	color: var(--color-bg-dark);
+}
+
+.category-title::first-letter,
+.category-title-landing::first-letter {
+	text-transform: capitalize;
+}
+
+.categories-image {
+	position: absolute;
+	right: 35px;
+	bottom: 75px;
+	width: 143px;
+	height: 132px;
+}
+
+.checkbox-icon {
+	position: absolute;
+	top: 10%;
+	right: 10.5%;
+	width: 11%;
+	height: 10%;
+}
+
+.category-box:nth-of-type(1) {
+	background-color: var(--color-card-peach);
+}
+
+.category-box:nth-of-type(2) {
+	background-color: var(--color-card-purple);
+}
+
+.category-box:nth-of-type(3) {
+	background-color: var(--color-card-orange);
+}
+
+.category-box:nth-of-type(4) {
+	background-color: var(--color-card-gray);
+}
+
+.category-box:nth-of-type(5) {
+	background-color: var(--color-card-pink);
+}
+
+.category-box:nth-of-type(6) {
+	background-color: var(--color-card-cyan);
+}
+
+.category-item-animation {
+	transform-origin: top right;
+	transition: box-shadow 0.3s ease-in-out;
+}
+
+.category-item-animation:hover,
+.category-item-animation:focus {
+	z-index: 2;
+	box-shadow: 0 0 0 8px var(--color-brand-muted);
+}
+
+.category-item-animation:hover .categories-image,
+.category-item-animation:focus .categories-image {
+	animation: rotation 0.8s ease forwards;
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(-21deg);
+	}
+}
+
+@media (width <= 900px) {
+	.category-title-landing {
+		font-size: var(--text-size-heading-3);
+	}
+}
+
+@media (width <= 575px) {
+	.category-title-landing {
+		font-size: var(--text-size-heading-2);
+	}
+}

@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.4.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.3.1...frontend-v1.4.0) (2025-08-06)
+
+
+### Features
+
+* Add "Categories" page cy-19 ([2be8cca](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2be8ccaaeee151a51e1d62d418dcdb65dbfd4f78))
+* Side panel cy-58 ([b5211e7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b5211e7a2e951b1a497e320b0a769ad1273ead32))
+
+
+### Bug Fixes
+
+* add class to burger-menu divs cy-58 ([bf3bb33](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bf3bb33ad6190285c66ce82c4e0c226cc38a521d))
+* allow feedback grid items to shrink cy-149 ([a809eab](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a809eab6617c7333c3d69e84fe396dfb9baf1a60))
+* block margin overlaps with screen border in small resolution cy-149 ([ced862b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ced862b6491aa6978a03401c6f08ad747b8eab54))
+* change routing for Wrapper component cy-58 ([19f3a66](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/19f3a66041c9b524a5034f8e133149a8991ec6a1))
+* **frontend:** removed  placeholder text of already implemented sections  cy-156 ([7ef90c0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7ef90c092d75b77bb7cfbc70257a56257f2d3d9e))
+* remove active class from side-panel styles cy-58 ([3d20038](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3d20038a302f0405eef3d256dd8f542a61ef10a8))
+* removed  placeholder text from home comp cy-156 ([eb9066b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eb9066b10b86d9b13d57bf18f735b42c9684e19b))
+
+## [1.3.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.3.0...frontend-v1.3.1) (2025-08-05)
+
+
+### Bug Fixes
+
+* card edges clipping on hover cy-143 ([df15ba9](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/df15ba9852969f22a3bbb1e04e6a4027edfa33a6))
+* card edges clipping on hover cy-143 ([ced7788](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ced7788cf14a19f75e565bb820aee2b430fd374d))
+
 ## [1.3.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.2.0...frontend-v1.3.0) (2025-08-04)
 
 

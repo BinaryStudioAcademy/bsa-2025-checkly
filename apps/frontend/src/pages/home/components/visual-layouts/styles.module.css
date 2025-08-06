@@ -18,7 +18,7 @@
 .layout-list {
 	display: flex;
 	gap: clamp(15px, 2.1vw, 25px);
-	padding-bottom: 7vw;
+	padding: 10px 10px 7vw;
 	overflow: auto hidden;
 	scrollbar-width: none;
 }
