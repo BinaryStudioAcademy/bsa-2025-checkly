@@ -1,8 +1,12 @@
 import { type RouteObject } from "react-router-dom";
 
 import { AppRoute, RouteAccess } from "./libs/enums/enums.js";
-import { NotFound } from "./pages/not-found-page/not-found-page.js";
-import { Auth, Home, TestPage } from "./pages/pages.js";
+import {
+	Dashboard,
+	Plan,
+	Wrapper,
+} from "./pages/dashboard-wrapper-mock/components/components.js";
+import { Auth, Home, NotFound } from "./pages/pages.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
 
@@ -13,13 +17,8 @@ interface RouteHandle {
 const routes: CustomRouteObject[] = [
 	{
 		element: <Home />,
-		handle: { access: RouteAccess.ALL },
+		handle: { access: RouteAccess.PUBLIC },
 		path: "",
-	},
-	{
-		element: <TestPage />,
-		handle: { access: RouteAccess.ALL },
-		path: AppRoute.TEST_PAGE,
 	},
 	{
 		element: <Auth />,
@@ -34,18 +33,23 @@ const routes: CustomRouteObject[] = [
 	{
 		children: [
 			{
-				element: "Dashboard",
+				element: <Dashboard />,
 				handle: { access: RouteAccess.AUTHENTICATED },
-				path: "",
+				path: AppRoute.DASHBOARD,
+			},
+			{
+				element: <Plan />,
+				handle: { access: RouteAccess.AUTHENTICATED },
+				path: AppRoute.PLAN,
 			},
 		],
-		element: "Dashboard",
+		element: <Wrapper />,
 		handle: { access: RouteAccess.AUTHENTICATED },
-		path: AppRoute.DASHBOARD,
+		path: AppRoute.ROOT,
 	},
 	{
 		element: <NotFound />,
-		handle: { access: RouteAccess.ALL },
+		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.NOT_FOUND,
 	},
 ];

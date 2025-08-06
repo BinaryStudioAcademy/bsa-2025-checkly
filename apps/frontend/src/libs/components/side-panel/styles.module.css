@@ -1,0 +1,31 @@
+.aside {
+	font-family: var(--font-family-primary);
+	font-size: var(--step-minus-1);
+	color: var(--color-text);
+	border-right: 1px solid var(--color-border-grey);
+}
+
+.navigation {
+	display: flex;
+	flex-direction: column;
+	padding: var(--space-m) var(--space-l) 0;
+}
+
+.navigation:last-child {
+	margin-bottom: 0;
+}
+
+.navigation a {
+	text-decoration: none;
+}
+
+.navigation a > span {
+	display: flex;
+	margin-bottom: var(--space-l);
+	color: var(--color-icon-grey);
+}
+
+.navigation__menu {
+	padding-inline-start: 0;
+	list-style: none;
+}

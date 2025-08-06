@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.1.0...backend-v1.1.1) (2025-08-06)
+
+
+### Bug Fixes
+
+* fixed db connection ssl config cy-0 ([b1f5803](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b1f5803e33281536d51f9599ef7b92d2bfc3f4e4))
+* fixed db connection ssl config cy-0 ([077402b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/077402bb890fee03566e643cfa683c5ced8fce14))
+
 ## [1.1.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.0.1...backend-v1.1.0) (2025-08-04)
 
 
