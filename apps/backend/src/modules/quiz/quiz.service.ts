@@ -1,6 +1,5 @@
 import {
 	type QuizAnswersRequestDto,
-	type QuizAnswersResponseDto,
 	type QuizQuestionsResponseDto,
 } from "shared";
 
@@ -22,11 +21,47 @@ class QuizService {
 		};
 	}
 
-	public submitAnswers(payload: QuizAnswersRequestDto): QuizAnswersResponseDto {
+	public submitAnswers(payload: QuizAnswersRequestDto): unknown {
 		const prompt = createPrompt(payload);
 
 		return {
-			response: prompt,
+			response: {
+				"days": [
+					{
+						"dayNumber": 3,
+						"id": 1,
+						"tasks": [],
+					},
+					{
+						"dayNumber": 3,
+						"id": 2,
+						"tasks": [],
+					},
+					{
+						"dayNumber": 3,
+						"id": 3,
+						"tasks": [
+							{
+								"completedAt": null,
+								"description": "Test description",
+								"executionTimeType": null,
+								"id": 2,
+								"isCompleted": false,
+								"order": 1,
+								"title": "do 1",
+							},
+						],
+					},
+				],
+				"duration": 2,
+				"id": 1,
+				"intensity": "2",
+				"meta": {
+					prompt,
+				},
+				"title": "Test title",
+				"userId": 2,
+			},
 		};
 	}
 }

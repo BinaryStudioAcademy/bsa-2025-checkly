@@ -3,7 +3,6 @@ export {
 	type QuestionDto,
 	type QuestionType,
 	type QuizAnswersRequestDto,
-	type QuizAnswersResponseDto,
 	type QuizCategoryType,
 	type QuizQuestionsResponseDto,
 } from "./libs/types/types.js";
