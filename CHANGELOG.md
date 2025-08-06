@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.7.0...v1.8.0) (2025-08-06)
+
+
+### Features
+
+* Add "Categories" page cy-19 ([2be8cca](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2be8ccaaeee151a51e1d62d418dcdb65dbfd4f78))
+* Side panel cy-58 ([b5211e7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b5211e7a2e951b1a497e320b0a769ad1273ead32))
+
+
+### Bug Fixes
+
+* add class to burger-menu divs cy-58 ([bf3bb33](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bf3bb33ad6190285c66ce82c4e0c226cc38a521d))
+* allow feedback grid items to shrink cy-149 ([a809eab](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a809eab6617c7333c3d69e84fe396dfb9baf1a60))
+* block margin overlaps with screen border in small resolution cy-149 ([ced862b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ced862b6491aa6978a03401c6f08ad747b8eab54))
+* change routing for Wrapper component cy-58 ([19f3a66](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/19f3a66041c9b524a5034f8e133149a8991ec6a1))
+* fixed db connection ssl config cy-0 ([b1f5803](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b1f5803e33281536d51f9599ef7b92d2bfc3f4e4))
+* fixed db connection ssl config cy-0 ([077402b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/077402bb890fee03566e643cfa683c5ced8fce14))
+* **frontend:** removed  placeholder text of already implemented sections  cy-156 ([7ef90c0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7ef90c092d75b77bb7cfbc70257a56257f2d3d9e))
+* remove active class from side-panel styles cy-58 ([3d20038](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3d20038a302f0405eef3d256dd8f542a61ef10a8))
+* removed  placeholder text from home comp cy-156 ([eb9066b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eb9066b10b86d9b13d57bf18f735b42c9684e19b))
+
 ## [1.7.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.6.0...v1.7.0) (2025-08-05)
 
 
