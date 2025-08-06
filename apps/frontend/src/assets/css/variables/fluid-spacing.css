@@ -10,6 +10,7 @@
 	--space-xl: clamp(36px, 30.5455px + 1.7045vw, 51px);
 	--space-2xl: clamp(48px, 40.7273px + 2.2727vw, 68px);
 	--space-3xl: clamp(72px, 61.0909px + 3.4091vw, 102px);
+	--space-4xl: clamp(96px, 81.8182px + 4.5455vw, 136px);
 	--space-3xs-2xs: clamp(3px, 0.8182px + 0.6818vw, 9px);
 	--space-2xs-xs: clamp(6px, 3.4545px + 0.7955vw, 13px);
 	--space-xs-s: clamp(9px, 6.0909px + 0.9091vw, 17px);

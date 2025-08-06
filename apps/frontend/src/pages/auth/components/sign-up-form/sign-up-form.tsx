@@ -137,7 +137,11 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							type="password"
 						/>
 					</div>
-					<Button label="Create an account" type="submit" />
+					<Button
+						className={styles["sign-up-button"]}
+						label="Create an account"
+						type="submit"
+					/>
 				</form>
 				<DecorativeImage className={orangeClasses} src={OrangeWhole} />
 				<DecorativeImage className={carClasses} src={Car} />

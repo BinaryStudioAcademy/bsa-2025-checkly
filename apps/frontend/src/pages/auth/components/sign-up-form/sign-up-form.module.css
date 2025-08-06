@@ -20,12 +20,17 @@
 	z-index: 200;
 	width: 100%;
 	max-width: 590px;
-	padding-block: var(--space-xl) var(--space-3xl);
+	padding-block: var(--space-xl) var(--space-4xl);
 	padding-inline: var(--space-m-3xl);
+	margin: 12px;
 	margin-inline: var(--space-s);
 	font-family: var(--font-family-primary);
 	background-color: var(--color-bg-white);
 	border-radius: var(--radius-l);
+}
+
+.sign-up-button {
+	margin-top: 11px;
 }
 
 .title {
@@ -79,12 +84,13 @@
 	.orange-image {
 		top: 10%;
 		left: -10%;
-		height: 100px;
+		height: 130px;
+		height: clamp(100px, 15vw, 130px)
 	}
 
 	.car-image {
 		right: -105px;
-		bottom: -30px;
+		bottom: 25px;
 		height: 120px;
 	}
 
@@ -94,7 +100,8 @@
 	}
 
 	.blue-stars {
-		bottom: 5%;
+		bottom: 10%;
+		height: clamp(5px, 7vw, 59px);
 	}
 }
 
