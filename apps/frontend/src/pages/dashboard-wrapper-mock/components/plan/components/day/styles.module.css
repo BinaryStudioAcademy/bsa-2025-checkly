@@ -40,7 +40,7 @@
 
 	.content__days__day {
 		padding: var(--space-2xs) var(--space-s);
-		font-size: var(--text-body-small)
+		font-size: var(--text-body-small);
 	}
 
 	.selectedDay-icon {

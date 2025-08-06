@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.8.0...v1.9.0) (2025-08-06)
+
+
+### Features
+
+* * fix button in hero component cy-158 ([4c50238](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/4c5023886010b7bb0c87d160bad8cac2c61c522f))
+* * update button styles cy-158 ([87c4386](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/87c4386c797b8d9a6fbb77a18c1442154df2cfb7))
+* * update input styles cy-158 ([5960c2b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5960c2b500d5aa1645ee1ef918f602d31e98c9d7))
+* + add border radius to focus visible cy-158 ([b95847e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b95847ec77143b57687c93c71aee249fcadf28eb))
+* button and input animations cy-158 ([2491896](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2491896d91f734bb5c81a7dee861b9ca7d8a5de6))
+
+
+### Bug Fixes
+
+* authenticated user access control cy-110 ([447b371](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/447b37133205e083a654568aca026c394308945d))
+* change hardcoded image paths with module import pattern cy-161 ([eea33b3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eea33b327df0bf2225cf652ac3f82a82266431e9))
+* change hardcoded image paths with module import pattern cy-161 ([a19d25e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a19d25eb98d0f9d05daba9198c002967c081f722))
+* update button state in header cy-153 ([c52cda3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c52cda3976ea9bbcb4ca612d3c74550ea58ed171))
+
 ## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.7.0...v1.8.0) (2025-08-06)
 
 

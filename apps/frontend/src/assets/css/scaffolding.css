@@ -63,6 +63,7 @@ h6 {
 :focus-visible {
 	outline: var(--stroke);
 	outline-offset: 2px;
+	border-radius: var(--radius-xs);
 }
 
 ::selection {
