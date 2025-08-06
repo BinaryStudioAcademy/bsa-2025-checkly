@@ -1,6 +1,4 @@
-import { QuizCategory } from "shared";
-
-import { 
+import {
 	camera,
 	flowers,
 	money,
@@ -9,6 +7,7 @@ import {
 	teddyBear,
 } from "~/assets/img/shared/shared.img.js";
 import { type QuizCategoryProperties } from "~/libs/types/types.js";
+import { QuizCategory } from "~/modules/quiz/libs/enums/enums.js";
 
 const QUIZ_CATEGORIES: readonly QuizCategoryProperties[] = [
 	{
@@ -49,4 +48,4 @@ const QUIZ_CATEGORIES: readonly QuizCategoryProperties[] = [
 	},
 ] as const;
 
-export { QUIZ_CATEGORIES }; 
+export { QUIZ_CATEGORIES };

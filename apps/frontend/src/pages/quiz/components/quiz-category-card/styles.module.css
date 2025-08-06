@@ -116,22 +116,22 @@
 		padding: var(--space-s);
 		padding-top: calc(var(--space-s) + 25px);
 	}
-	
+
 	.quiz-category-card-image {
 		top: -20px;
 		width: 100px;
 		height: 100px;
 	}
-	
+
 	.quiz-category-card-icon {
 		width: 80px;
 		height: 80px;
 	}
-	
+
 	.quiz-category-card-title {
 		font-size: var(--text-size-heading-5);
 	}
-	
+
 	.quiz-category-card-input,
 	.quiz-category-card-tick {
 		width: 18px;
@@ -146,22 +146,22 @@
 		padding: var(--space-xs);
 		padding-top: calc(var(--space-xs) + 20px);
 	}
-	
+
 	.quiz-category-card-image {
 		top: -15px;
 		width: 80px;
 		height: 80px;
 	}
-	
+
 	.quiz-category-card-icon {
 		width: 65px;
 		height: 65px;
 	}
-	
+
 	.quiz-category-card-title {
 		font-size: var(--text-size-body-small);
 	}
-	
+
 	.quiz-category-card-input,
 	.quiz-category-card-tick {
 		width: 16px;
@@ -176,22 +176,22 @@
 		padding: var(--space-2xs);
 		padding-top: calc(var(--space-2xs) + 20px);
 	}
-	
+
 	.quiz-category-card-image {
 		top: -15px;
 		width: 70px;
 		height: 70px;
 	}
-	
+
 	.quiz-category-card-icon {
 		width: 60px;
 		height: 60px;
 	}
-	
+
 	.quiz-category-card-title {
 		font-size: var(--text-size-caption);
 	}
-	
+
 	.quiz-category-card-input,
 	.quiz-category-card-tick {
 		width: 16px;

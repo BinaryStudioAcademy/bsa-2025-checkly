@@ -1,0 +1,37 @@
+.text-question {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-m);
+	width: 100%;
+}
+
+.label {
+	font-size: var(--text-size-heading-3);
+	font-weight: var(--font-weight-bold);
+	color: var(--color-text-primary);
+}
+
+.text-input {
+	width: 100%;
+	padding: var(--space-l);
+	font-family: inherit;
+	font-size: var(--text-size-body);
+	background-color: var(--color-white);
+	border: 1px solid var(--color-border-light);
+	border-radius: var(--radius-m);
+	transition: all 0.2s ease;
+}
+
+.text-input:focus {
+	outline: none;
+	border-color: var(--color-brand-primary);
+	box-shadow: 0 0 0 2px rgb(var(--color-brand-primary-rgb) / 10%);
+}
+
+.text-input:hover {
+	border-color: var(--color-border);
+}
+
+.text-input::placeholder {
+	color: var(--color-text-tertiary);
+}

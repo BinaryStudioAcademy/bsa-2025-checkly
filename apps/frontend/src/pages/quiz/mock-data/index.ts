@@ -1,1 +1,1 @@
-export { QUIZ_CATEGORIES } from "./quiz-categories.js"; 
+export { QUIZ_CATEGORIES } from "./quiz-categories.js";

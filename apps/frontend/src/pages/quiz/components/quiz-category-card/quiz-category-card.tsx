@@ -18,39 +18,47 @@ const QuizCategoryCard: React.FC<QuizCategoryCardProperties> = ({
 		onSelect();
 	}, [onSelect]);
 
-	const handleKeyDown = useCallback((event: React.KeyboardEvent): void => {
-		if (event.key === "Enter" || event.key === " ") {
-			event.preventDefault();
-			onSelect();
-		}
-	}, [onSelect]);
+	const handleKeyDown = useCallback(
+		(event: React.KeyboardEvent): void => {
+			if (event.key === "Enter" || event.key === " ") {
+				event.preventDefault();
+				onSelect();
+			}
+		},
+		[onSelect],
+	);
 
 	return (
-		<div 
+		<div
 			aria-label={`Select ${formatCategoryTitle(category)} category`}
 			aria-pressed={selected}
 			className={getClassNames(
 				"flow",
 				styles["quiz-category-card"],
 				styles[`quiz-category-card-${color}`],
-				selected && styles["quiz-category-card-selected"]
+				selected && styles["quiz-category-card-selected"],
 			)}
 			onClick={onSelect}
 			onKeyDown={handleKeyDown}
 			role="button"
-			tabIndex={0}	
+			tabIndex={0}
 		>
 			<div className={styles["quiz-category-card-image"]}>
-				<DecorativeImage className={styles["quiz-category-card-icon"] || ""} src={icon} />
+				<DecorativeImage
+					className={styles["quiz-category-card-icon"] || ""}
+					src={icon}
+				/>
 			</div>
-			<h2 className={styles["quiz-category-card-title"]}>{formatCategoryTitle(category)}</h2>
-			<input 
+			<h2 className={styles["quiz-category-card-title"]}>
+				{formatCategoryTitle(category)}
+			</h2>
+			<input
 				checked={selected}
 				className={styles["quiz-category-card-input"]}
 				id={`quiz-category-${category}`}
 				name="quiz-category"
 				onChange={handleChange}
-				type="radio" 
+				type="radio"
 				value={category}
 			/>
 			{selected && (
