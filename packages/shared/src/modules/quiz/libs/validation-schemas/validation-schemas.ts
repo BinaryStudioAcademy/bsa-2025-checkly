@@ -1,1 +1,1 @@
-export { quizAnswers } from "./quiz-submit-answers.validation-schema.js";
+export { QuizAnswersSchema } from "./quiz-submit-answers.validation-schema.js";

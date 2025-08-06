@@ -1,28 +1,23 @@
 import { type QuestionOptionDto } from "shared/src/modules/quiz/libs/types/question-option.dto.js";
 
-import { type Entity } from "~/libs/types/entity.type.js";
+type QuestionOptionProperties = {
+	id: number;
+	order: number;
+	text: string;
+};
 
-class QuestionOptionEntity implements Entity {
+class QuestionOptionEntity {
 	constructor(
-		private id: number,
-		private order: number,
-		private text: string,
+		private readonly id: number,
+		private readonly order: number,
+		private readonly text: string,
 	) {}
-
 	public static initialize({
 		id,
 		order,
 		text,
-	}: {
-		id: number;
-		order: number;
-		text: string;
-	}): QuestionOptionEntity {
+	}: QuestionOptionProperties): QuestionOptionEntity {
 		return new QuestionOptionEntity(id, order, text);
-	}
-
-	toNewObject(): QuestionOptionDto {
-		return this.toObject();
 	}
 
 	toObject(): QuestionOptionDto {

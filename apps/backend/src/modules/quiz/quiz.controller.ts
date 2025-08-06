@@ -17,9 +17,10 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type QuizService } from "./quiz.service.js";
 
 class QuizController extends BaseController {
-	private quizService: QuizService;
-
-	public constructor(logger: Logger, quizService: QuizService) {
+	public constructor(
+		logger: Logger,
+		private readonly quizService: QuizService,
+	) {
 		super(logger, APIPath.QUIZ);
 
 		this.quizService = quizService;
@@ -54,14 +55,14 @@ class QuizController extends BaseController {
 		};
 	}
 
-	private async submitAnswers(
+	private submitAnswers(
 		options: APIHandlerOptions<{
 			body: QuizAnswersRequestDto;
 		}>,
-	): Promise<APIHandlerResponse> {
+	): APIHandlerResponse {
 		return {
-			payload: await this.quizService.submitAnswers(options.body),
-			status: HTTPCode.CREATED,
+			payload: this.quizService.submitAnswers(options.body),
+			status: HTTPCode.OK,
 		};
 	}
 }
