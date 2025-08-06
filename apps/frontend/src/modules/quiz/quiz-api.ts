@@ -22,7 +22,7 @@ class QuizApi extends BaseHTTPApi {
 	public async getQuestions(): Promise<QuizQuestionsResponseDto> {
 		const response = await this.load(this.getFullEndpoint({}), {
 			contentType: ContentType.JSON,
-			hasAuth: true,
+			hasAuth: false,
 			method: HTTPRequestMethod.GET,
 		});
 
@@ -32,7 +32,7 @@ class QuizApi extends BaseHTTPApi {
 	public async submitQuiz(payload: QuizAnswersRequestDto): Promise<boolean> {
 		const response = await this.load(this.getFullEndpoint({}), {
 			contentType: ContentType.JSON,
-			hasAuth: true,
+			hasAuth: false,
 			method: HTTPRequestMethod.POST,
 			payload: JSON.stringify(payload),
 		});
