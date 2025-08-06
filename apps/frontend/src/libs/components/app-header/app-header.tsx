@@ -44,6 +44,15 @@ const AppHeader: React.FC = () => {
 		[isMenuOpen],
 	);
 
+	const burgerMenuClassName = useMemo(
+		() =>
+			getClassNames(
+				styles["burger-menu"],
+				isMenuOpen && styles["burger-menu--opened"],
+			),
+		[isMenuOpen],
+	);
+
 	return (
 		<header className={styles["app-header"]}>
 			<div className={styles["logo-section"]}>
@@ -69,6 +78,16 @@ const AppHeader: React.FC = () => {
 						<img alt="Open menu" className={arrowClassName} src={arrowDown} />
 					</button>
 				</div>
+				<button
+					aria-label="Open user menu"
+					className={burgerMenuClassName}
+					onClick={handleMenuToggle}
+					type="button"
+				>
+					<div className={styles["burger-menu__line"]} />
+					<div className={styles["burger-menu__line"]} />
+					<div className={styles["burger-menu__line"]} />
+				</button>
 				{isMenuOpen && <UserMenu isOpen />}
 			</div>
 		</header>

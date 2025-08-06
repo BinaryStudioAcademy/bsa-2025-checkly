@@ -1,0 +1,106 @@
+.menu-item {
+	position: relative;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 0.75rem 1.5rem;
+	font-family: Nunito, Arial, Helvetica, sans-serif;
+	font-size: 1rem;
+	color: var(--color-text-primary);
+	text-align: left;
+	cursor: pointer;
+	background: var(--color-bg-white);
+	border: none;
+	border-radius: 0.5rem;
+	opacity: 0;
+	transform: translateY(0);
+	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-item:hover {
+	box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+	transform: translateY(-1px);
+}
+
+svg {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin-right: 8px;
+	font-size: 20px;
+	vertical-align: middle;
+	transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-item--side-panel > svg {
+	width: 24px;
+	height: 24px;
+	margin-right: var(--space-m);
+	color: var(--color-icon-grey);
+}
+
+.active svg {
+	color: var(--color-text-secondary);
+	background-color: var(--color-brand-primary);
+	border-radius: 50%;
+	box-shadow: 0 0 0 var(--space-xs) var(--color-brand-primary);
+}
+
+.menu-item:hover > svg {
+	transform: scale(1.1);
+}
+
+.menu-item--user-menu:hover {
+	color: var(--color-bg-dark);
+	background: var(--color-card-mint);
+}
+
+.menu-item--user-menu:focus-visible {
+	z-index: 2;
+	color: var(--color-bg-dark);
+	outline: none;
+	background: var(--color-card-mint);
+	box-shadow:
+		0 0 0 2px #0095ff,
+		0 4px 12px rgb(0 0 0 / 10%);
+}
+
+.menu-item--logout:hover {
+	color: var(--color-bg-dark);
+	background: var(--color-brand-accent);
+}
+
+.menu-item--logout:focus-visible {
+	z-index: 2;
+	color: var(--color-bg-dark);
+	outline: none;
+	background: var(--color-brand-accent);
+	box-shadow:
+		0 0 0 2px #0095ff,
+		0 4px 12px rgb(0 0 0 / 10%);
+}
+
+.menu-item--side-panel {
+	padding: 0;
+	font-size: var(--step-minus-1);
+	font-weight: var(--font-weight-bold);
+	line-height: 1.25;
+	opacity: 1;
+}
+
+.menu-item--side-panel:hover {
+	color: var(--color-text-secondary);
+	box-shadow: none;
+	transform: translateY(0);
+}
+
+.menu-item--side-panel:hover > svg {
+	transform: scale(1);
+}
+
+.active button {
+	color: var(--color-text);
+	text-decoration-line: underline;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 6px;
+}
