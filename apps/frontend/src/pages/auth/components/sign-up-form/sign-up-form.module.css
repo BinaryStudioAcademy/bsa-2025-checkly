@@ -85,7 +85,7 @@
 		top: 10%;
 		left: -10%;
 		height: 130px;
-		height: clamp(100px, 15vw, 130px)
+		height: clamp(100px, 15vw, 130px);
 	}
 
 	.car-image {
