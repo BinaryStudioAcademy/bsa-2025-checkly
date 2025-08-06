@@ -1,4 +1,7 @@
+import { DecorativeImage } from "~/libs/components/decorative-image/decorative-image.js";
 import { QUIZ_CONSTANTS, QuizQuestionFormat } from "~/libs/enums/enums.js";
+import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { getQuestionIcons } from "~/libs/helpers/helpers.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type MultipleAnswers,
@@ -148,6 +151,26 @@ const QuestionPage: React.FC<QuestionPageProperties> = ({
 
 	return (
 		<div className={styles["question-page"]}>
+			{questionNumber && (
+				<div
+					className={getClassNames(styles["question-icons"], "show-tablet-up")}
+				>
+					{getQuestionIcons(questionNumber).map((iconData, index) => {
+						const questionIconClass = styles["question-icon"] ?? "";
+						const positionClass = styles[`icon-${iconData.position}`] ?? "";
+						const className = `${questionIconClass} ${positionClass}`;
+
+						return (
+							<DecorativeImage
+								className={className}
+								key={index}
+								src={iconData.icon}
+							/>
+						);
+					})}
+				</div>
+			)}
+
 			<div className={styles["question-content"]}>
 				<div className={styles["question-header"]}>
 					{questionNumber && (
