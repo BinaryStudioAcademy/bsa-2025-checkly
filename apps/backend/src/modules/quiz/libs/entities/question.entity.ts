@@ -1,10 +1,17 @@
 import { type QuestionDto, type QuestionType } from "shared";
 
-import { type Entity } from "~/libs/types/entity.type.js";
-
 import { type QuestionOptionEntity } from "./question-option.entity.js";
 
-class QuestionEntity implements Entity {
+type QuestionProperties = {
+	id: number;
+	isOptional: boolean;
+	options: QuestionOptionEntity[];
+	order: number;
+	text: string;
+	type: QuestionType;
+};
+
+class QuestionEntity {
 	private id: number;
 	private isOptional: boolean;
 	private options: QuestionOptionEntity[];
@@ -19,14 +26,7 @@ class QuestionEntity implements Entity {
 		order,
 		text,
 		type,
-	}: {
-		id: number;
-		isOptional: boolean;
-		options: QuestionOptionEntity[];
-		order: number;
-		text: string;
-		type: QuestionType;
-	}) {
+	}: QuestionProperties) {
 		this.id = id;
 		this.isOptional = isOptional;
 		this.order = order;
@@ -42,14 +42,7 @@ class QuestionEntity implements Entity {
 		order,
 		text,
 		type,
-	}: {
-		id: number;
-		isOptional: boolean;
-		options: QuestionOptionEntity[];
-		order: number;
-		text: string;
-		type: QuestionType;
-	}): QuestionEntity {
+	}: QuestionProperties): QuestionEntity {
 		return new QuestionEntity({
 			id,
 			isOptional,
@@ -58,10 +51,6 @@ class QuestionEntity implements Entity {
 			text,
 			type,
 		});
-	}
-
-	toNewObject(): unknown {
-		throw new Error("Method not implemented.");
 	}
 
 	toObject(): QuestionDto {

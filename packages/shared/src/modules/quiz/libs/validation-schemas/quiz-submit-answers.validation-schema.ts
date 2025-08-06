@@ -1,14 +1,11 @@
+import { sanitizeTextInput } from "shared";
 import z from "zod";
 
-import { QuizValidationMessage } from "../enums/enums.js";
+import { QuizCategory, QuizValidationMessage } from "../enums/enums.js";
 
-const sanitizeTextInput = (input: string): string =>
-	input
-		.trim()
-		.replaceAll(/[<>'"&]/g, "")
-		.replaceAll(/\s+/g, " ");
+const ZERO_ARRAY_LENGTH = 0;
 
-const quizAnswers = z.object({
+const QuizAnswersSchema = z.object({
 	answers: z.array(
 		z
 			.object({
@@ -30,15 +27,15 @@ const quizAnswers = z.object({
 					return true;
 				}
 
-				const ZERO = 0;
-				const hasAnySelectedOptions = selectedOptions.length > ZERO;
+				const hasAnySelectedOptions =
+					selectedOptions.length > ZERO_ARRAY_LENGTH;
 				const hasUserInput = Boolean(userInput);
 
 				return hasAnySelectedOptions || hasUserInput;
 			}, QuizValidationMessage.NON_SKIPPED_QUESTION),
 	),
-	category: z.string(),
+	category: z.nativeEnum(QuizCategory),
 	notes: z.string().trim().optional().default(""),
 });
 
-export { quizAnswers };
+export { QuizAnswersSchema };

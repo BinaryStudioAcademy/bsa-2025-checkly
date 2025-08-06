@@ -1,5 +1,5 @@
 import { type Knex } from "knex";
-import { QuizQuestionType } from "shared";
+import { QuizQuestionFormat } from "shared";
 
 import { DatabaseTableName } from "~/libs/modules/database/database.js";
 
@@ -13,14 +13,14 @@ async function seed(knex: Knex): Promise<void> {
 			is_optional: false,
 			order: 1,
 			text: "What's your current goal or focus area?",
-			type: QuizQuestionType.MULTIPLE_CHOICE_WITH_TEXT_INPUT,
+			type: QuizQuestionFormat.MULTIPLE_CHOICE_WITH_TEXT_INPUT,
 		},
 		{
 			id: 2,
 			is_optional: false,
 			order: 2,
 			text: "How much time can you realistically dedicate per day?",
-			type: QuizQuestionType.SINGLE_CHOICE,
+			type: QuizQuestionFormat.SINGLE_CHOICE,
 		},
 	]);
 

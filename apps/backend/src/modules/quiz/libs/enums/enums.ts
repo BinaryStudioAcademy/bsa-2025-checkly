@@ -1,1 +1,1 @@
-export { OPTIONS } from "./relation-mappings.enum.js";
+export { OPTIONS } from "./relation-keys.enum.js";

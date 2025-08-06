@@ -14,20 +14,16 @@ class QuizService {
 	}
 
 	public async findAllQuestions(): Promise<QuizQuestionsResponseDto> {
-		const data = await this.quizRepository.findAllQuestionsWithOptions();
+		const questions = await this.quizRepository.findAllQuestionsWithOptions();
 
 		return {
-			items: data.map((question) => question.toObject()),
+			items: questions.map((question) => question.toObject()),
 		};
 	}
 
-	public async submitAnswers(
-		body: QuizAnswersRequestDto,
-	): Promise<QuizAnswersResponseDto> {
-		const ANSWERS_PROCESSING_TIME = 0;
-		await new Promise((resolve) =>
-			setTimeout(resolve, ANSWERS_PROCESSING_TIME),
-		);
+	public submitAnswers(body: QuizAnswersRequestDto): QuizAnswersResponseDto {
+		// TODO: Prepare prompt based on received answers
+		// For now just returning the response with the answers back to the client
 
 		return {
 			response: body,

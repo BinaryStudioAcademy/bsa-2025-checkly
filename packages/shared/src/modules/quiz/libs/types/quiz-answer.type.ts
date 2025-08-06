@@ -1,7 +1,7 @@
 type QuizAnswer = {
 	isSkipped: boolean;
-	question: string;
 	questionId: number;
+	questionText: string;
 	selectedOptions: (number | string)[];
 	userInput: string;
 };
