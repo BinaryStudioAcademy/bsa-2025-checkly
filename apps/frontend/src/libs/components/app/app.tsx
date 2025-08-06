@@ -1,11 +1,14 @@
+import React from "react";
 import { ToastContainer } from "react-toastify";
 
-import { RouterOutlet } from "~/libs/components/components.js";
+type Properties = {
+	children: React.ReactNode;
+};
 
-const App: React.FC = () => {
+const App: React.FC<Properties> = ({ children }: Properties) => {
 	return (
 		<>
-			<RouterOutlet />
+			{children}
 			<ToastContainer />
 		</>
 	);
