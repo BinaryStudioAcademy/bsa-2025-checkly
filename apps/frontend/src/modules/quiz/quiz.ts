@@ -11,8 +11,5 @@ const quizApi = new QuizApi({
 });
 
 export { quizApi };
-export {
-	type QuizAnswer,
-	type QuizCategoryValue,
-} from "./libs/types/types.js";
+export { type QuizAnswer, type QuizCategoryValue } from "./libs/types/types.js";
 export { actions, reducer } from "./slices/quiz.js";
