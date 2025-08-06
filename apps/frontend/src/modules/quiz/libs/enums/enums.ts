@@ -1,1 +1,1 @@
-export { type EnumValue, QuizApiPath, QuizCategory } from "shared";
+export { QuizCategory } from "shared";

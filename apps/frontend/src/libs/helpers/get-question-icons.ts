@@ -49,7 +49,7 @@ const getQuestionIcons = (questionNumber: number): IconPosition[] => {
 	if (!iconSet) {
 		const fallbackSet = QUESTION_ICON_SETS[QUIZ_CONSTANTS.FIRST_ANSWER_INDEX];
 
-		return [...fallbackSet]
+		return [...fallbackSet];
 	}
 
 	return [...iconSet];

@@ -4,24 +4,12 @@ import { logoIcon } from "~/assets/img/shared/shared.img.js";
 import { sanitizeTextInput } from "~/libs/helpers/helpers.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import {
+	type MixedQuestionProperties,
 	type MultipleAnswers,
-	type QuestionDto,
 	type SingleAnswer,
 } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
-
-interface MixedQuestionProperties {
-	currentAnswer?: {
-		selectedOptions: MultipleAnswers;
-		userInput: string;
-	};
-	onAnswer: (answer: {
-		selectedOptions: MultipleAnswers;
-		userInput: string;
-	}) => void;
-	question: QuestionDto;
-}
 
 const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 	currentAnswer,
