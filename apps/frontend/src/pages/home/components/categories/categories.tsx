@@ -26,7 +26,7 @@ const Categories: React.FC = () => {
 
 	return (
 		<section className={getClassNames("grid-pattern", styles["categories"])}>
-			<div className="wrapper flow">
+			<div className={getClassNames("wrapper flow", styles["container"])}>
 				<h2 className={styles["title"]}>Categories</h2>
 				<div>
 					<ul className="cluster" data-list>
