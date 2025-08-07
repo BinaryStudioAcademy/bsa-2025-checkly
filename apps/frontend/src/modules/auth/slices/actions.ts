@@ -8,7 +8,10 @@ import {
 	type UserSignUpRequestDto,
 } from "~/modules/users/users.js";
 
-import { name as sliceName } from "./auth.slice.js";
+import {
+	actions as authSliceActions,
+	name as sliceName,
+} from "./auth.slice.js";
 
 const signIn = createAsyncThunk<
 	UserDto,
@@ -52,4 +55,15 @@ const getCurrentUser = createAsyncThunk<
 	return await authApi.getCurrentUser();
 });
 
-export { getCurrentUser, signIn, signUp };
+const logout = createAsyncThunk<null, undefined, AsyncThunkConfig>(
+	`${sliceName}/logout`,
+	async (_, { dispatch, extra }) => {
+		const { storage } = extra;
+		await storage.drop(StorageKey.TOKEN);
+		dispatch(authSliceActions.resetAuthState());
+
+		return null;
+	},
+);
+
+export { getCurrentUser, logout, signIn, signUp };
