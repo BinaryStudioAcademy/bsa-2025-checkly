@@ -9,14 +9,11 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import styles from "./styles.module.css";
 
 const HowItWorks: React.FC = () => {
-	const stepBlockClasses = getClassNames(styles["step"], "flow");
+	const stepBlockClasses = getClassNames(styles["step"], "");
 
 	return (
-		<section
-			className={getClassNames("grid-pattern", styles["section"])}
-			data-section-variant="brand"
-		>
-			<div className={getClassNames("wrapper", styles["container"])}>
+		<section className={getClassNames("grid-pattern", styles["section"])}>
+			<div className={getClassNames("wrapper flow", styles["container"])}>
 				<h2 className={styles["title"]}>How it works</h2>
 				<div className={styles["stepsContainer"]}>
 					<div className={stepBlockClasses}>
@@ -44,13 +41,17 @@ const HowItWorks: React.FC = () => {
 						<p className={styles["stepTitle"]}>Download PDF or customize it</p>
 					</div>
 				</div>
-				<div className={styles["croissantImage"]}>
+				<div
+					className={getClassNames(styles["croissantImage"], "show-desktop-up")}
+				>
 					<DecorativeImage src={Croissant} />
 				</div>
-				<div className={styles["laptopImage"]}>
+				<div className={getClassNames(styles["laptopImage"], "show-tablet-up")}>
 					<DecorativeImage src={Laptop} />
 				</div>
-				<div className={styles["decorativeStars"]}>
+				<div
+					className={getClassNames(styles["decorativeStars"], "show-tablet-up")}
+				>
 					<DecorativeImage
 						className={getClassNames(styles["starsImage"])}
 						src={StarsYellow02}
