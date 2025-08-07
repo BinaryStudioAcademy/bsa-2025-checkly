@@ -1,0 +1,53 @@
+.content__days-item {
+	display: flex;
+	flex-direction: row;
+	gap: var(--space-3xs);
+	align-items: center;
+	justify-content: space-between;
+	padding-left: var(--space-l);
+}
+
+.content__days__day {
+	padding: var(--space-2xs) var(--space-m);
+	text-transform: none;
+	border: 2px solid black;
+}
+
+.content__days__active-day {
+	background-color: var(--color-brand-primary);
+}
+
+.selectedDay-icon {
+	width: clamp(20px, 3vw, 35px);
+}
+
+.regenerate-button {
+	visibility: hidden;
+	width: clamp(15px, 2vw, 20px);
+	padding: var(--space-3xs);
+}
+
+.content__days-item:hover .regenerate-button {
+	visibility: visible;
+	cursor: pointer;
+}
+
+@media (width <= 768px) {
+	.content__days-item {
+		flex-direction: row;
+		padding: 0;
+	}
+
+	.content__days__day {
+		padding: var(--space-2xs) var(--space-s);
+		font-size: var(--text-body-small);
+	}
+
+	.selectedDay-icon {
+		transform: rotate(90deg);
+	}
+
+	.regenerate-button {
+		visibility: visible;
+	}
+}
