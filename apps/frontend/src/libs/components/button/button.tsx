@@ -17,7 +17,7 @@ type Properties = {
 };
 
 const Button: React.FC<Properties> = ({
-	className,
+	className = "",
 	disabled = false,
 	icon,
 	iconOnlySize = "large",
