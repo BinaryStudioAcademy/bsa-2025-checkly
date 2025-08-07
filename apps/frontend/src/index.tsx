@@ -12,11 +12,7 @@ import { AppRoute } from "~/libs/enums/enums.js";
 import { enableMocking } from "~/libs/modules/api/mocks/mocks.js";
 import { store } from "~/libs/modules/store/store.js";
 
-import { Dashboard } from "./pages/dashboard-wrapper-mock/components/dashboard.js";
-import { Plan } from "./pages/dashboard-wrapper-mock/components/plan.js";
-import { Wrapper } from "./pages/dashboard-wrapper-mock/components/wrapper.js";
-import { NotFound } from "./pages/not-found-page/not-found-page.js";
-import { Auth, Home } from "./pages/pages.js";
+import { routes } from "./routes.js";
 
 const Root = (): JSX.Element => {
 	useEffect(() => {
