@@ -1,6 +1,7 @@
 const AppRoute = {
 	DASHBOARD: "/dashboard",
 	NOT_FOUND: "*",
+	PLAN_STYLE_OVERVIEW: "/plan-style-overview",
 	ROOT: "/",
 	SIGN_IN: "/sign-in",
 	SIGN_UP: "/sign-up",
