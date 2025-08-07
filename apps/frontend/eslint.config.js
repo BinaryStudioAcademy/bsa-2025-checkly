@@ -10,7 +10,7 @@ let Config;
 
 /** @type {Config} */
 const ignoresConfig = {
-	ignores: ["build"],
+	ignores: ["build", "public/mockServiceWorker.js", "src/modules/*/mocks/**"],
 };
 
 /** @type {Config} */
