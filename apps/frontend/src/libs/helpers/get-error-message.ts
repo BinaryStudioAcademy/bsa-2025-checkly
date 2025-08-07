@@ -1,4 +1,4 @@
-    import { type SerializedError } from "@reduxjs/toolkit";
+import { type SerializedError } from "@reduxjs/toolkit";
 
 import { ErrorMessage } from "~/libs/enums/error-messages.enum.js";
 
