@@ -17,4 +17,3 @@ const MESSAGES = {
 } as const;
 
 export { MESSAGES };
-

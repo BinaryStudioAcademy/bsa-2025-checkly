@@ -1,11 +1,7 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
 
-import {
-	arrowDown,
-	logo,
-	profileDefault,
-} from "~/assets/img/header/header.img.js";
-import { Link } from "~/libs/components/components.js";
+import { arrowDown, profileDefault } from "~/assets/img/header/header.img.js";
+import { Logo } from "~/libs/components/logo/logo.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppSelector, useDropdownMenu } from "~/libs/hooks/hooks.js";
 
@@ -56,9 +52,7 @@ const AppHeader: React.FC = () => {
 	return (
 		<header className={styles["app-header"]}>
 			<div className={styles["logo-section"]}>
-				<Link to="/">
-					<img alt="Checkly logo" className={styles["logo-svg"]} src={logo} />
-				</Link>
+				<Logo />
 			</div>
 
 			<div className={styles["user-section"]} ref={menuReference}>
