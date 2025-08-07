@@ -26,8 +26,6 @@
 	gap: var(--space-l);
 	align-items: flex-start;
 	justify-content: flex-start;
-	width: 80vw;
-	max-width: 90vw;
 	padding-block: var(--space-m);
 	padding-inline: var(--space-m) var(--space-3xl);
 	margin-inline: auto;
@@ -81,7 +79,7 @@
 
 .laptopImage {
 	position: absolute;
-	right: 8%;
+	right: 0;
 	bottom: 35%;
 	z-index: 3;
 	width: clamp(140px, 15vw, 200px);
