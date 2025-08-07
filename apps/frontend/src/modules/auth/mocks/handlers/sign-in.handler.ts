@@ -7,7 +7,7 @@ type LoginRequestBody = {
 };
 
 const mockUser: LoginRequestBody = {
-	name: "admin",
+	name: "admiin",
 	email: "admin@gmail.com",
 	password: "paS1sword",
 };
