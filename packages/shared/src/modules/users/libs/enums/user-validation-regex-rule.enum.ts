@@ -1,8 +1,14 @@
 import { UserValidationRule } from "./user-validation-rule.enum.js";
 
 const UserValidationRegexRule = {
+	DOMAIN_REGEX: new RegExp(
+		`^(?=.{${String(UserValidationRule.EMAIL_DOMAIN_MIN_LENGTH)},${String(UserValidationRule.EMAIL_DOMAIN_MAX_LENGTH)}}$)(?![-.])[\\dA-Za-z]+(?:-[\\dA-Za-z]+)*(?:\\.[\\dA-Za-z]+(?:-[\\dA-Za-z]+)*)+(?<![-.])$`,
+	),
 	EMAIL_VALID_CHARS_MIN_MAX: new RegExp(
 		`^(?!\\.)((?!\\.{2})[\\w!#$%&'*+=?^\`{|}~./-]){${String(UserValidationRule.EMAIL_LOCAL_MIN_LENGTH)},${String(UserValidationRule.EMAIL_LOCAL_MAX_LENGTH)}}(?<!\\.)@(?![-.])(?=.{${String(UserValidationRule.EMAIL_DOMAIN_MIN_LENGTH)},${String(UserValidationRule.EMAIL_DOMAIN_MAX_LENGTH)}}$)[\\dA-Za-z]+(?:-[\\dA-Za-z]+)*(?:\\.[\\dA-Za-z]+(?:-[\\dA-Za-z]+)*)+(?<![-.])$`,
+	),
+	LOCAL_REGEX: new RegExp(
+		`^(?!\\.)((?!\\.{2})[\\w!#$%&'*+=?^_{|}~./-]){${String(UserValidationRule.EMAIL_LOCAL_MIN_LENGTH)},${String(UserValidationRule.EMAIL_LOCAL_MAX_LENGTH)}}(?<!\\.)$`,
 	),
 	NAME_VALID_CHARS: /^[A-Za-z\s-]+$/,
 	NAME_VALID_SURROUNDING: /^(?![\s-]).*(?<![\s-])$/,

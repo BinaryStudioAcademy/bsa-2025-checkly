@@ -103,7 +103,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							name="email"
 							placeholder={AUTH_PLACEHOLDERS.email}
 							required
-							type="text"
+							type="email"
 						/>
 						<Input
 							control={control}
