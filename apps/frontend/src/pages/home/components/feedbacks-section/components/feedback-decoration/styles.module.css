@@ -3,27 +3,25 @@
 	top: clamp(1rem, 5vw, 2.5rem);
 	left: 15%;
 	z-index: 1;
-	width: clamp(3.75rem, 10vw + 1rem, 12rem);
-	transform: scale(1);
-	transition: transform 0.3s ease;
+	width: clamp(3.75rem, 10vw, 8rem);
 }
 
 .orangeDecor {
 	position: absolute;
-	top: clamp(0.5rem, 1vw + 0.25rem, 0.75rem);
-	left: 63%;
+	top: 8%;
+	left: 65%;
 	z-index: 1;
-	width: clamp(7.5rem, 5vw + 6rem, 24rem);
-	height: clamp(7.5rem, 5vw + 6rem, 24rem);
-	transform: scale(1);
-	transition: transform 0.3s ease;
+	width: var(--space-2xl);
+	height: auto;
 }
 
 .dogImage {
 	position: absolute;
-	top: 60%;
-	right: -2vw;
+	right: 5vw;
+	bottom: 5%;
 	z-index: 2;
+	width: 7rem;
+	height: auto;
 }
 
 .dogImageInner {
@@ -36,21 +34,12 @@
 	bottom: 100px;
 	left: -20px;
 	z-index: 3;
-	width: 80px;
+	width: 50px;
 }
 
-@media (width <= 1024px) {
+@media (width >= 1024px) {
 	.dogImage {
-		width: clamp(150px, 15vw, 200px);
-	}
-
-	.decorStarsTop {
-		left: 10%;
-	}
-}
-
-@media (width <= 768px) {
-	.dogImage {
-		display: none;
+		right: 0;
+		width: 5rem;
 	}
 }
