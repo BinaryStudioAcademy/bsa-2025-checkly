@@ -31,6 +31,11 @@ const routes: CustomRouteObject[] = [
 		path: AppRoute.SIGN_UP,
 	},
 	{
+		element: <PlanStyleOverview />,
+		handle: { access: RouteAccess.AUTHENTICATED },
+		path: AppRoute.PLAN_STYLE_OVERVIEW,
+	},
+	{
 		children: [
 			{
 				element: <Dashboard />,
@@ -41,11 +46,6 @@ const routes: CustomRouteObject[] = [
 				element: <Plan />,
 				handle: { access: RouteAccess.AUTHENTICATED },
 				path: AppRoute.PLAN,
-			},
-			{
-				element: <PlanStyleOverview />,
-				handle: { access: RouteAccess.AUTHENTICATED },
-				path: AppRoute.PLAN_STYLE_OVERVIEW,
 			},
 		],
 		element: <Wrapper />,

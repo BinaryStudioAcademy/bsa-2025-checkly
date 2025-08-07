@@ -43,7 +43,7 @@ const PlanStyleOverview: React.FC = () => {
 	}, [selectedCategory]);
 
 	const handleGoBack = useCallback(() => {
-		const result = navigate(AppRoute.ROOT);
+		const result = navigate(AppRoute.PLAN);
 
 		if (result instanceof Promise) {
 			result.catch(() => {
