@@ -1,6 +1,6 @@
 import React, { memo, useCallback } from "react";
 
-import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { getClassNames } from "~/libs/helpers/helpers.js";
 
 import { type CategoryData } from "../libs/types/category-data.js";
 import styles from "./styles.module.css";
