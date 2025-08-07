@@ -6,8 +6,8 @@ import {
 } from "@reduxjs/toolkit";
 
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
-import { ErrorMessage } from "~/libs/enums/error-messages.enum.js";
 import { SuccessMessage } from "~/libs/enums/success-messages.enum.js";
+import { getErrorMessage } from "~/libs/helpers/get-error-message.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { signIn, signUp } from "~/modules/auth/slices/actions.js";
 
@@ -17,9 +17,7 @@ const listenerMiddleware = createListenerMiddleware();
 
 listenerMiddleware.startListening({
 	effect: (action) => {
-		notifications.error(
-			action.error.message?.trim() || ErrorMessage.DEFAULT_ERROR_MESSAGE,
-		);
+		notifications.error(getErrorMessage(action));
 	},
 	matcher: isRejected,
 });
