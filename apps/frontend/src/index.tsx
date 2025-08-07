@@ -11,8 +11,7 @@ import {
 import { AppRoute } from "~/libs/enums/enums.js";
 import { store } from "~/libs/modules/store/store.js";
 
-import { NotFound } from "./pages/not-found-page/not-found-page.js";
-import { Auth, Home, PlanStyleOverview, TestPage } from "./pages/pages.js";
+import { routes } from "./routes.js";
 
 createRoot(document.querySelector("#root") as HTMLElement).render(
 	<StrictMode>
@@ -20,43 +19,12 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 			<RouterProvider
 				routes={[
 					{
-						children: [
-							{
-								element: <Home />,
-								path: AppRoute.ROOT,
-							},
-							{
-								element: <TestPage />,
-								path: AppRoute.TEST_PAGE,
-							},
-							{
-								element: <Auth />,
-								path: AppRoute.SIGN_IN,
-							},
-							{
-								element: <Auth />,
-								path: AppRoute.SIGN_UP,
-							},
-							{
-								children: [
-									{
-										element: "Dashboard",
-										path: "",
-									},
-								],
-								element: <ProtectedRoute />,
-								path: AppRoute.DASHBOARD,
-							},
-							{
-								element: <PlanStyleOverview />,
-								path: AppRoute.PLAN_STYLE_OVERVIEW,
-							},
-							{
-								element: <NotFound />,
-								path: "*",
-							},
-						],
-						element: <App />,
+						children: routes,
+						element: (
+							<App>
+								<ProtectedRoute />
+							</App>
+						),
 						path: AppRoute.ROOT,
 					},
 				]}

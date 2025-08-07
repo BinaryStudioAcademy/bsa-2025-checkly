@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 
-import {
-	StarsPink01,
-	TwinklesYellow,
-} from "~/assets/img/shared/shapes/shapes.img.js";
+import { TwinklesYellow } from "~/assets/img/shared/shapes/shapes.img.js";
 import { DecorativeImage } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
@@ -22,10 +19,6 @@ const Categories: React.FC = () => {
 		[activeCategory],
 	);
 
-	const blueStarsClasses = getClassNames(
-		styles["image-position"],
-		styles["blue-stars"],
-	);
 	const twinklesClasses = getClassNames(
 		styles["image-position"],
 		styles["yellow-stars"],
@@ -51,7 +44,6 @@ const Categories: React.FC = () => {
 				</ul>
 			</div>
 			<DecorativeImage className={twinklesClasses} src={TwinklesYellow} />
-			<DecorativeImage className={blueStarsClasses} src={StarsPink01} />
 		</section>
 	);
 };

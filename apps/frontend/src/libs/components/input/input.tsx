@@ -57,9 +57,7 @@ const Input = <T extends FieldValues>({
 
 	return (
 		<div className={inputContainerClass}>
-			<label className={styles["input-label"]} htmlFor={inputId}>
-				{label}
-			</label>
+			<label htmlFor={inputId}>{label}</label>
 			<div className={styles["input-wrapper"]}>
 				<input
 					{...field}

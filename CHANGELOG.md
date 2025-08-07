@@ -1,5 +1,45 @@
 # Changelog
 
+## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.8.0...v1.9.0) (2025-08-06)
+
+
+### Features
+
+* * fix button in hero component cy-158 ([4c50238](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/4c5023886010b7bb0c87d160bad8cac2c61c522f))
+* * update button styles cy-158 ([87c4386](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/87c4386c797b8d9a6fbb77a18c1442154df2cfb7))
+* * update input styles cy-158 ([5960c2b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5960c2b500d5aa1645ee1ef918f602d31e98c9d7))
+* + add border radius to focus visible cy-158 ([b95847e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b95847ec77143b57687c93c71aee249fcadf28eb))
+* button and input animations cy-158 ([2491896](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2491896d91f734bb5c81a7dee861b9ca7d8a5de6))
+
+
+### Bug Fixes
+
+* authenticated user access control cy-110 ([447b371](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/447b37133205e083a654568aca026c394308945d))
+* change hardcoded image paths with module import pattern cy-161 ([eea33b3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eea33b327df0bf2225cf652ac3f82a82266431e9))
+* change hardcoded image paths with module import pattern cy-161 ([a19d25e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a19d25eb98d0f9d05daba9198c002967c081f722))
+* update button state in header cy-153 ([c52cda3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c52cda3976ea9bbcb4ca612d3c74550ea58ed171))
+
+## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.7.0...v1.8.0) (2025-08-06)
+
+
+### Features
+
+* Add "Categories" page cy-19 ([2be8cca](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2be8ccaaeee151a51e1d62d418dcdb65dbfd4f78))
+* Side panel cy-58 ([b5211e7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b5211e7a2e951b1a497e320b0a769ad1273ead32))
+
+
+### Bug Fixes
+
+* add class to burger-menu divs cy-58 ([bf3bb33](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bf3bb33ad6190285c66ce82c4e0c226cc38a521d))
+* allow feedback grid items to shrink cy-149 ([a809eab](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a809eab6617c7333c3d69e84fe396dfb9baf1a60))
+* block margin overlaps with screen border in small resolution cy-149 ([ced862b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ced862b6491aa6978a03401c6f08ad747b8eab54))
+* change routing for Wrapper component cy-58 ([19f3a66](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/19f3a66041c9b524a5034f8e133149a8991ec6a1))
+* fixed db connection ssl config cy-0 ([b1f5803](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b1f5803e33281536d51f9599ef7b92d2bfc3f4e4))
+* fixed db connection ssl config cy-0 ([077402b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/077402bb890fee03566e643cfa683c5ced8fce14))
+* **frontend:** removed  placeholder text of already implemented sections  cy-156 ([7ef90c0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7ef90c092d75b77bb7cfbc70257a56257f2d3d9e))
+* remove active class from side-panel styles cy-58 ([3d20038](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3d20038a302f0405eef3d256dd8f542a61ef10a8))
+* removed  placeholder text from home comp cy-156 ([eb9066b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eb9066b10b86d9b13d57bf18f735b42c9684e19b))
+
 ## [1.7.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.6.0...v1.7.0) (2025-08-05)
 
 
