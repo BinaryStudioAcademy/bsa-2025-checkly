@@ -25,10 +25,10 @@
 	flex: 0 0 auto;
 	width: clamp(150px, 16vw, 205px);
 	padding: 10px;
-	color: black;
+	color: var(--color-text-primary);
 	text-align: center;
 	cursor: pointer;
-	background: white;
+	background: var(--color-bg-white);
 	border-radius: var(--radius-s);
 	transition: transform 0.2s ease;
 }
