@@ -29,45 +29,12 @@ const Root = (): JSX.Element => {
 				<RouterProvider
 					routes={[
 						{
-							children: [
-								{
-									element: <Home />,
-									path: AppRoute.ROOT,
-								},
-								{
-									element: <Auth />,
-									path: AppRoute.SIGN_IN,
-								},
-								{
-									element: <Auth />,
-									path: AppRoute.SIGN_UP,
-								},
-								{
-									children: [
-										{
-											children: [
-												{
-													element: <Plan />,
-													path: AppRoute.PLAN,
-												},
-												{
-													element: <Dashboard />,
-													path: AppRoute.DASHBOARD,
-												},
-											],
-											element: <Wrapper />,
-											path: AppRoute.ROOT,
-										},
-									],
-									element: <ProtectedRoute />,
-									path: AppRoute.ROOT,
-								},
-								{
-									element: <NotFound />,
-									path: "*",
-								},
-							],
-							element: <App />,
+							children: routes,
+							element: (
+								<App>
+									<ProtectedRoute />
+								</App>
+							),
 							path: AppRoute.ROOT,
 						},
 					]}
