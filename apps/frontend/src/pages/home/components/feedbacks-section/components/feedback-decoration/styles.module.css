@@ -9,7 +9,7 @@
 .orangeDecor {
 	position: absolute;
 	top: 8%;
-	left: 65%;
+	left: 70%;
 	z-index: 1;
 	width: var(--space-2xl);
 	height: auto;
