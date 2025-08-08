@@ -13,7 +13,7 @@ type ButtonType = "logout" | "side-panel" | "user-menu";
 type Properties = {
 	buttonText: string;
 	buttonType: ButtonType;
-	className?: string;
+	className?: string | undefined;
 	icon: ReactNode;
 	navigateTo: ValueOf<typeof AppRoute>;
 };

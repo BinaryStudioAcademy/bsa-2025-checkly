@@ -1,5 +1,5 @@
 import React from "react";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogOut, FiUser } from "react-icons/fi";
 import { MdDashboard } from "react-icons/md";
 
 import { Plan } from "~/assets/img/side-panel/side-panel.img.js";
@@ -22,6 +22,13 @@ const UserMenu: React.FC<Properties> = ({ isOpen }) => {
 	return (
 		<nav aria-label="User menu" className={menuDropdownClass}>
 			<ul>
+				<NavigationItem
+					buttonText="Profile"
+					buttonType="user-menu"
+					className={styles["menu-user-profile"]}
+					icon={<FiUser />}
+					navigateTo={AppRoute.PROFILE}
+				/>
 				<NavigationItem
 					buttonText="Dashboard"
 					buttonType="user-menu"
