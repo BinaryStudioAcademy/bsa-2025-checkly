@@ -89,6 +89,6 @@
 		flex-flow: row nowrap;
 		width: 100vw;
 		height: auto;
-		overflow-x: scroll;
+		overflow-x: auto;
 	}
 }
