@@ -1,0 +1,31 @@
+.mainContent {
+	flex: 1;
+	min-width: 0;
+	padding: 24px;
+	overflow-x: auto;
+	transition: padding 0.3s ease-in-out;
+}
+
+.light-background {
+	--grid-color: var(--color-light-grey);
+	--grid-line: 1px;
+}
+
+.contentGrid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 24px;
+	transition: gap 0.3s ease-in-out;
+}
+
+@media (width <= 1024px) {
+	.contentGrid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (width <= 768px) {
+	.mainContent {
+		padding: 16px;
+	}
+}

@@ -1,0 +1,36 @@
+.container {
+	padding: var(--space-s) var(--space-l);
+	background-color: var(--color-bg-light);
+	border: 2px solid var(--color-card-gray);
+	border-radius: var(--base-radius);
+	transition: all 0.3s ease-in-out;
+}
+
+.title {
+	margin-bottom: 16px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #1f2937;
+	transition: font-size 0.3s ease-in-out;
+}
+
+.planCard {
+	padding: var(--space-l);
+	overflow: hidden;
+	transition: all 0.3s ease-in-out;
+}
+
+.planImage {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.actionButton {
+	display: block;
+	margin: 0 auto;
+}
+
+.actionButton::after {
+	display: none;
+}
