@@ -14,7 +14,7 @@ const Greeting: FC = () => {
 			<h2 className={styles["greeting"]}>Hey {user?.name} 👋</h2>
 			<Button
 				className={styles["button"]}
-				// disabled
+				disabled
 				icon={<CreateDoc className={styles["largeIcon"]} />}
 				label="Create New Plan"
 				size="large"
