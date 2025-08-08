@@ -31,7 +31,7 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	height: 64px;
+	height: var(--app-header-height);
 	padding: 0 2rem;
 	background: var(--color-bg-white);
 	border-bottom: 3px solid var(--color-card-gray);
@@ -40,6 +40,7 @@
 }
 
 .logo-section {
+	z-index: 2;
 	display: flex;
 	gap: 1rem;
 	align-items: center;
@@ -62,6 +63,25 @@
 	font-weight: 700;
 	color: var(--color-text-primary);
 	letter-spacing: 0.05em;
+}
+
+.vertical-divider {
+	position: absolute;
+	top: 0;
+	left: 1px;
+	z-index: 1;
+	display: none;
+	width: var(--sidebar-width);
+	height: 100%;
+	pointer-events: none;
+	background-color: var(--color-bg-sidebar);
+	border-right: var(--sidebar-border-width) solid var(--color-card-gray);
+}
+
+@media (width >= 1024px) {
+	.vertical-divider {
+		display: block;
+	}
 }
 
 .user-section {

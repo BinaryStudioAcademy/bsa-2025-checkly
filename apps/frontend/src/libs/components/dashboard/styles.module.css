@@ -1,0 +1,19 @@
+.mainContent {
+	flex: 1;
+	min-width: 0;
+	padding: var(--space-l);
+	overflow-x: auto;
+	transition: padding 0.3s ease-in-out;
+}
+
+.light-background {
+	--grid-color: var(--color-light-grey);
+	--grid-line: 1px;
+}
+
+.contentGrid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--space-l);
+	transition: gap 0.3s ease-in-out;
+}
