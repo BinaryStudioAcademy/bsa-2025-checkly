@@ -2,6 +2,7 @@ import {
 	StarsPink02,
 	StarsYellow03,
 } from "~/assets/img/shared/shapes/shapes.img.js";
+import { DecorativeImage } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import { layoutExamples } from "./layout-examples.data.js";
@@ -15,47 +16,40 @@ const VisualLayouts: React.FC = () => {
 				styles["layout-examples"],
 				styles["section"],
 			)}
-			data-section-variant="dark"
 		>
-			<div className={getClassNames("wrapper", styles["layout-wrapper"])}>
-				<div className={getClassNames(styles["header-container"])}>
-					<h2 className={getClassNames(styles["layout-header"])}>
-						<span className={getClassNames(styles["header-text"])}>
-							Sample visual layouts
-						</span>
-						<img
-							alt=""
-							aria-hidden
+			<div className={getClassNames("wrapper flow", styles["layout-wrapper"])}>
+				<div className={styles["header-container"]}>
+					<h2 className={styles["layout-header"]}>
+						<span className={styles["header-text"]}>Sample visual layouts</span>
+						<DecorativeImage
 							className={getClassNames(styles["yellow-stars"])}
 							src={StarsYellow03}
 						/>
 					</h2>
-					<img
-						alt=""
-						aria-hidden
+					<DecorativeImage
 						className={getClassNames(styles["pink-stars"])}
 						src={StarsPink02}
 					/>
 				</div>
-				<div
-					aria-label="Available layout options"
-					className={getClassNames(styles["layout-list"])}
-					role="list"
-				>
-					{layoutExamples.map((example) => (
-						<div
-							aria-label={`Visual layout option: ${example.title}`}
-							className={getClassNames(styles["layout-card"])}
-							key={example.id}
-							role="listitem"
-						>
-							<img
-								alt={`Preview of the ${example.title} layout`}
-								src={example.img}
-							/>
-							<h5>{example.title}</h5>
-						</div>
-					))}
+				<div>
+					<ul
+						aria-label="Available layout options"
+						className={styles["layout-list"]}
+					>
+						{layoutExamples.map((example) => (
+							<li
+								aria-label={`Visual layout option: ${example.title}`}
+								className={styles["layout-card"]}
+								key={example.id}
+							>
+								<img
+									alt={`Preview of the ${example.title} layout`}
+									src={example.img}
+								/>
+								<h5>{example.title}</h5>
+							</li>
+						))}
+					</ul>
 				</div>
 			</div>
 		</section>

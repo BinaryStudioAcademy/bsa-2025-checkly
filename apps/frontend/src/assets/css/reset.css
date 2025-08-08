@@ -119,3 +119,10 @@ img:not([alt]) {
 :target {
 	scroll-margin-block: 5ex;
 }
+
+ul[data-list],
+ol[data-list] {
+	padding-inline: 0;
+	margin: 0;
+	list-style: none;
+}

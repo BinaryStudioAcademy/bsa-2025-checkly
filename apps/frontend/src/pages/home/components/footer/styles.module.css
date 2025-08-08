@@ -1,6 +1,6 @@
 .footer {
 	--cluster-horizontal-alignment: space-between;
-	--gutter: --space-l;
+	--gutter: var(--space-l);
 	--grid-color: var(--color-grid-line-cream);
 	--grid-opacity: 0.2;
 
