@@ -53,7 +53,7 @@
 	height: auto;
 	height: 100%;
 	padding: var(--gutter);
-	overflow-y: scroll;
+	overflow: hidden auto;
 	border-right: 1px solid var(--color-border-grey);
 }
 
