@@ -3,6 +3,12 @@ import {
 	Avatar02,
 	Avatar03,
 } from "~/assets/img/shared/avatars/avatars.img.js";
+import {
+	ExampleColourful,
+	ExampleMinimal,
+	ExampleMotivating,
+	ExampleWithRemarks,
+} from "~/assets/img/shared/illustrations/layouts/layouts.img.js";
 
 const FEEDBACKS = [
 	{
@@ -25,4 +31,47 @@ const FEEDBACKS = [
 	},
 ] as const;
 
-export { FEEDBACKS };
+const PAST_PLANS = [
+	{
+		id: 1,
+		name: "Plan 1",
+		path: ExampleColourful,
+	},
+	{
+		id: 2,
+		name: "Plan 2",
+		path: ExampleMinimal,
+	},
+	{
+		id: 3,
+		name: "Plan 3",
+		path: ExampleMotivating,
+	},
+	{
+		id: 4,
+		name: "Plan 4",
+		path: ExampleWithRemarks,
+	},
+	{
+		id: 5,
+		name: "Plan 5",
+		path: ExampleColourful,
+	},
+	{
+		id: 6,
+		name: "Plan 6",
+		path: ExampleMinimal,
+	},
+	{
+		id: 7,
+		name: "Plan 7",
+		path: ExampleMotivating,
+	},
+	{
+		id: 8,
+		name: "Plan 8",
+		path: ExampleWithRemarks,
+	},
+] as const;
+
+export { FEEDBACKS, PAST_PLANS };

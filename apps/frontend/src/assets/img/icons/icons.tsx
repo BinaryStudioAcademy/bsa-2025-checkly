@@ -1,3 +1,4 @@
+export { default as CreateDoc } from "./create_doc.svg?react";
 export { default as Download } from "./download.svg";
 export { default as Edit } from "./edit.svg";
 export { default as EyeClosedIcon } from "./eye-closed.svg?react";

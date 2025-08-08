@@ -1,11 +1,9 @@
 import { type RouteObject } from "react-router-dom";
 
+import { DashboardWrapper } from "./libs/components/dashboard-wrapper/dashboard-wrapper.js";
+import { Dashboard } from "./libs/components/dashboard/dashboard.js";
 import { AppRoute, RouteAccess } from "./libs/enums/enums.js";
-import {
-	Dashboard,
-	Plan,
-	Wrapper,
-} from "./pages/dashboard-wrapper-mock/components/components.js";
+import { Plan } from "./pages/dashboard-wrapper-mock/components/components.js";
 import { Auth, Home, NotFound } from "./pages/pages.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
@@ -43,7 +41,7 @@ const routes: CustomRouteObject[] = [
 				path: AppRoute.PLAN,
 			},
 		],
-		element: <Wrapper />,
+		element: <DashboardWrapper />,
 		handle: { access: RouteAccess.AUTHENTICATED },
 		path: AppRoute.ROOT,
 	},
