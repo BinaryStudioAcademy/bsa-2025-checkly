@@ -43,7 +43,7 @@ const ChooseStyle: React.FC = () => {
 				)}
 			>
 				<div className={styles["nav"]}>
-					<NavLink className={styles["nav-link"] ?? ""} to={AppRoute.DASHBOARD}>
+					<NavLink className={styles["nav-link"] ?? ""} to={AppRoute.PLAN}>
 						<button aria-label="Go back">
 							<ArrowLeftIcon aria-hidden="true" />
 						</button>
@@ -106,7 +106,7 @@ const ChooseStyle: React.FC = () => {
 							label="Download"
 						/>
 					</NavLink>
-					<NavLink className={styles["nav-link"] ?? ""} to={AppRoute.DASHBOARD}>
+					<NavLink className={styles["nav-link"] ?? ""} to={AppRoute.PLAN}>
 						<Button
 							icon={<ArrowLeftIcon aria-hidden="true" />}
 							label="Back"
