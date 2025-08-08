@@ -1,8 +1,10 @@
 import { useCallback, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 import { Download, Save } from "~/assets/img/icons/icons.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { ONE, ZERO } from "~/libs/constants/constants.js";
+import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import { Day, Task } from "./components/components.js";
@@ -57,14 +59,19 @@ const Plan: React.FC = () => {
 					{daysTasksMockData[selectedDay]?.map((item, index) => {
 						return <Task indexItem={index + ONE} item={item} key={index} />;
 					})}
-					<Button
-						icon={<DecorativeImage src={Download} />}
-						iconOnlySize="medium"
-						label="Download PDF"
-						size="large"
-						type="button"
-						variant="primary"
-					/>
+					<NavLink
+						className={styles["nav-link"] ?? ""}
+						to={AppRoute.CHOOSE_STYLE}
+					>
+						<Button
+							icon={<DecorativeImage src={Download} />}
+							iconOnlySize="medium"
+							label="Download PDF"
+							size="large"
+							type="button"
+							variant="primary"
+						/>
+					</NavLink>
 					<Button
 						icon={<DecorativeImage src={Save} />}
 						iconOnlySize="medium"

@@ -17,6 +17,10 @@
 	font-weight: var(--font-weight-body);
 }
 
+.nav-link {
+	text-decoration: none;
+}
+
 .select-day {
 	display: none;
 	padding: var(--space-2xs) var(--space-m);
