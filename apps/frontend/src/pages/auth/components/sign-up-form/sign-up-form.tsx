@@ -24,6 +24,7 @@ import {
 } from "~/modules/users/users.js";
 
 import { AUTH_PLACEHOLDERS } from "../../libs/constants.js";
+import sharedStyles from "../shared/shared.module.css";
 import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
 import styles from "./sign-up-form.module.css";
 
@@ -61,36 +62,35 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		styles["image-position"],
 		styles["car-image"],
 	);
+	const containerClasses = getClassNames(
+		sharedStyles["container"],
+		styles["sign-up-container"],
+		"grid-pattern",
+	);
+	const authFormContainerClasses = getClassNames(
+		sharedStyles["auth-form-container"],
+		styles["sign-up"],
+		"wrapper grid-pattern flow-loose",
+	);
 
 	return (
-		<div className={getClassNames(styles["container"], "grid-pattern")}>
-			<main
-				className={getClassNames(
-					styles["sign-in"],
-					"wrapper grid-pattern flow-loose",
-				)}
-			>
-				<div className="flow-loose">
-					<Logo />
-					<header className="flow">
-						<h1 className={styles["title"]} id="sign-in-title">
-							Create an account
-						</h1>
-						<p className={styles["redirect-text"]}>
-							Already have an account? Go to{" "}
-							<Link
-								aria-label="Go to carate account page"
-								className={styles["redirect-link"]}
-								to={AppRoute.SIGN_IN}
-							>
-								Sign In
-							</Link>
-						</p>
-					</header>
-				</div>
+		<div className={containerClasses}>
+			<main className={authFormContainerClasses}>
+				<Logo />
+				<header className="flow">
+					<h1 className={sharedStyles["title"]} id="sign-up-title">
+						Create an account
+					</h1>
+					<p className={sharedStyles["redirect-text"]}>
+						Already have an account? Go to{" "}
+						<Link aria-label="Go to carate account page" to={AppRoute.SIGN_IN}>
+							Sign In
+						</Link>
+					</p>
+				</header>
 				<form
 					aria-labelledby="sign-up-title"
-					className={getClassNames(styles["form"], "cluster")}
+					className={getClassNames(sharedStyles["form"], "cluster")}
 					onSubmit={handleFormSubmit}
 				>
 					<div className="flow-loose">
@@ -103,8 +103,6 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							required
 							type="text"
 						/>
-					</div>
-					<div className="flow-loose">
 						<Input
 							control={control}
 							errors={errors}
@@ -114,8 +112,6 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							required
 							type="text"
 						/>
-					</div>
-					<div className="flow-loose">
 						<Input
 							control={control}
 							errors={errors}
@@ -125,8 +121,6 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							required
 							type="password"
 						/>
-					</div>
-					<div className="flow-loose">
 						<Input
 							control={control}
 							errors={errors}

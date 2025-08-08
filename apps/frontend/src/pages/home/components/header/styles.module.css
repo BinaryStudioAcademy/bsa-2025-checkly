@@ -4,7 +4,7 @@
 	position: fixed;
 	z-index: 999;
 	width: 100%;
-	padding: var(--gutter);
+	padding: var(--space-s);
 	background-color: var(--color-card-pink);
 	border-end-start-radius: var(--base-radius);
 	border-end-end-radius: var(--base-radius);
@@ -12,7 +12,7 @@
 
 .header a {
 	--button-padding-block: var(--space-3xs);
-	--button-padding-inline: var(--space-l);
+	--button-padding-inline: var(--space-m);
 
 	text-decoration: none;
 }

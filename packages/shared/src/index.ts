@@ -35,6 +35,22 @@ export {
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
 export {
+	type PlanDayCreateRequestDto,
+	planDayCreateValidationSchema,
+	type PlanDayGetAllResponseDto,
+	type PlanDayResponseDto,
+	PlanDaysApiPath,
+} from "./modules/plan-days/plan-days.js";
+export {
+	type PlanCreateRequestDto,
+	planCreateValidationSchema,
+	type PlanDayDto,
+	type PlanDaysTaskDto,
+	type PlanGetAllResponseDto,
+	type PlanResponseDto,
+	PlansApiPath,
+} from "./modules/plans/plans.js";
+export {
 	type QuestionDto,
 	type QuestionType,
 	type QuizAnswer,
@@ -46,6 +62,14 @@ export {
 	QuizQuestionFormat,
 	type QuizQuestionsResponseDto,
 } from "./modules/quiz/quiz.js";
+export {
+	ExecutionTimeType,
+	type TaskCreateRequestDto,
+	taskCreateValidationSchema,
+	type TaskGetAllResponseDto,
+	type TaskResponseDto,
+	TasksApiPath,
+} from "./modules/tasks/tasks.js";
 export {
 	type SignUpFormValidationSchema,
 	type UserDto,
