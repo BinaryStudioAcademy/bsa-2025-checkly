@@ -1,56 +1,53 @@
-import { http, HttpResponse } from "msw";
+import { delay, HttpResponse } from "msw";
+import { http } from "~/libs/modules/api/mocks/http.js";
+import { ApiSchemas } from "~/libs/modules/api/schema/schema.js";
 
-type LoginRequestBody = {
-	name: string;
-	email: string;
-	password: string;
-};
+const mockUsers: ApiSchemas["User"][] = [
+	{
+		id: "1",
+		email: "admin@gmail.com",
+		name: "admin",
+	},
+];
 
-const mockUser: LoginRequestBody = {
-	name: "admiin",
-	email: "admin@gmail.com",
-	password: "paS1sword",
-};
-
-const mockToken =
+const generateTokens = async (payload: { userId: string; email: string }) =>
 	"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjY2LCJpYXQiOjE3NTQ1NzU5NTAsImV4cCI6MTc1NDY2MjM1MH0.www1Dauo2DsQ3vwSA61IW4SM-SWeXNx129pFZpkFy38";
 
+const userPasswords = new Map<string, string>();
+userPasswords.set("admin@gmail.com", "123456");
+
 const signInHandlers = [
-	http.post("/login", async ({ request }) => {
-		const body = (await request.json()) as LoginRequestBody;
+	http.post("/auth/login", async ({ request }) => {
+		const body = await request.json();
 
-		const { email, password } = body;
+		const user = mockUsers.find((u) => u.email === body.email);
+		const storedPassword = userPasswords.get(body.email);
 
-		if (!email || !password) {
+		await delay();
+
+		if (!user || !storedPassword || storedPassword !== body.password) {
 			return HttpResponse.json(
 				{
-					errorType: "VALIDATION",
-					message: "Email and password are required",
-				},
-				{ status: 400 },
-			);
-		}
-
-		if (email !== mockUser.email || password !== mockUser.password) {
-			return HttpResponse.json(
-				{
-					errorType: "AUTH",
-					message: "Invalid email or password",
+					errorType: "COMMON",
+					message: "Invalid Credentials",
 				},
 				{ status: 401 },
 			);
 		}
 
+		const token = await generateTokens({
+			userId: user.id,
+			email: user.email,
+		});
+
 		return HttpResponse.json(
 			{
-				token: mockToken,
-				user: {
-					email,
-					id: 1,
-					name,
-				},
+				token,
+				user,
 			},
-			{ status: 200 },
+			{
+				status: 200,
+			},
 		);
 	}),
 ];
