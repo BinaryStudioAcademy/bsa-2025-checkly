@@ -1,0 +1,22 @@
+openapi: 3.0.0
+info:
+  title: Checkly
+  description: Checkly - your personalised plans
+  version: 1.0.0
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+paths:
+
+  /auth/login:
+    post:
+      $ref: "./endpoints/auth.yaml#/login"
+
+  /auth/register:
+    post:
+      $ref: "./endpoints/auth.yaml#/register"
