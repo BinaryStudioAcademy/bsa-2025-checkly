@@ -38,7 +38,7 @@
 
 .content__days-wrapper {
 	position: relative;
-	width: clamp(180px,20vw,200px);
+	width: clamp(180px, 20vw, 200px);
 }
 
 .content__days {
