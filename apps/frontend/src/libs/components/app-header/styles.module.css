@@ -215,10 +215,6 @@
 	transform: rotate(-45deg);
 }
 
-.menu-user-profile {
-	display: none;
-}
-
 @media (width < 1024px) {
 	.user-image,
 	.user-name-arrow {
@@ -229,9 +225,5 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
-	}
-
-	.menu-user-profile {
-		display: block;
 	}
 }
