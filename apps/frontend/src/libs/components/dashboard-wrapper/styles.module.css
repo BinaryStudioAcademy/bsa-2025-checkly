@@ -1,0 +1,11 @@
+.appContainer {
+	min-height: 100vh;
+}
+
+.mainLayout {
+	display: flex;
+	height: 100vh;
+	padding-top: var(--app-header-height);
+	overflow: hidden;
+	transition: all 0.3s ease-in-out;
+}
