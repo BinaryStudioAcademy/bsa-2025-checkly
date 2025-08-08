@@ -1,5 +1,47 @@
 # Changelog
 
+## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.9.0...v1.10.0) (2025-08-08)
+
+
+### Features
+
+* * update categories section cy-179 ([2d0d527](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2d0d5270fafbabb8e55227eb00b663b05d8d9f7e))
+* * update decorative image position cy-179 ([cd85224](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cd852241ff2bee239c3cd54c97a5b15967c79834))
+* * update feedbacks section cy-179 ([310c303](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/310c303ae66821e74983dc22d2885851450d229a))
+* * update footer cy-179 ([b815a6e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b815a6e5f4ba1669c115e7ee3090e57a879d52cc))
+* * update grid-pattern css default opacity value cy-179 ([a3271b4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a3271b4af77d350ff6bb917e62097917f0fdd2d5))
+* * update hero section cy-179 ([79c7de6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/79c7de60d2d8d6262b396f9e435a7dac7ad1fc7b))
+* * update how-it-works section cy-179 ([f03067c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f03067c8eda22db5a6dce2b9085139668ce7025a))
+* * update landing header cy-179 ([c17ee01](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c17ee01925b566023316efc7e1d845f2b1263ad2))
+* * update styles to use colour vars cy-179 ([91cc1ef](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/91cc1efb0e513af18a6e1040681b26f3f0a61bb4))
+* * update visual-layouts section cy-179 ([cbc20e0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cbc20e000629b689f62dc757a5e69fae171a30bb))
+* + add new spacing cy-179 ([c0c43ab](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c0c43ab01c66c726a9fd7d10ee87db398bf3877a))
+* + add ul and ol reset cy-179 ([65030b8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/65030b822de12a78e8d5779b070765656105afaa))
+* add "My plan overview" page cy-39 ([1231444](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1231444b9973bea0d9b6f9a5c2792eb6da883042))
+* add database plan entities cy-41 ([83e39ad](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/83e39ade0aa3a4cd2b93814c2e718b9027aab11a))
+
+
+### Bug Fixes
+
+* * update categories section styles cy-179 ([e70a406](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e70a406434f39ec2b1582258cad35c7851a174f2))
+* * update category item styles cy-179 ([698f4e8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/698f4e8d9c6e5b21a9dcaaaa32a13aff6e2ccf60))
+* * update how-it-works section cy-179 ([a00e17a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a00e17ac8cf1633a526b87a7d3e9137b63acbb54))
+* * update import path cy-179 ([32236fd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/32236fd9f2796aa8382e9319f07a09231ff9b2cf))
+* add shared styles for sign-in, sign-up, replace styles with flexible variables cy-164 ([6fe49fb](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6fe49fb1879de2bb6fc75c62c6bedb0e98f271d0))
+* category card animation cy-179 ([78d1522](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/78d15229edd476c84b3e604d9433e7e39cc565ee))
+* change password input field placeholder to match design pattern cy-164 ([127f5f6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/127f5f667c36eca1e875ceb80aa3cac64efc4ed2))
+* fix toastify single error message sign-in cy-188 ([6dca295](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6dca2955bc32af9b06796245019bf230142da81a))
+* fixed email input type cy-172 ([40060fe](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/40060fed94eb0a742d8a147411637d667921e6d6))
+* fixed validation to exclude in-built validation cy-172 ([3e5f3b1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3e5f3b18eb071d131a706d82ed819f9824c41719))
+* **frontend:** fix toastify single error message sign-in cy-188 ([c748065](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c7480657d02ad7beafad48224556226dd3aaa49e))
+* inconsistent email validation messages cy-172 ([df029bd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/df029bde7c415e988b58bd9451ff380eec1b124d))
+* lint errors cy-164 ([02f7251](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/02f7251912db46fb28d48708e2b1a4e65572a781))
+* linter error cy-188 ([35b80d6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/35b80d6322a225da747acaa0779fe2bc87d04bfb))
+* remove sign-up white bar cy-164 ([12bcca3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/12bcca312758c28221da26f35526016c5ef98b13))
+* remove white bar, add white spacing in sign-up cy-164 ([4077c4c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/4077c4c0154f15ef7b6c8503183424022fb2f47e))
+* replace password placeholder cy-164 ([b37c5eb](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b37c5eb28ce18ad77fd6ef0c65014ccd302d85da))
+* turn off in-built validation cy-172 ([e69944a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e69944ab7a3d0380ee1e93df9e574e3bee118e0c))
+
 ## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.8.0...v1.9.0) (2025-08-06)
 
 
