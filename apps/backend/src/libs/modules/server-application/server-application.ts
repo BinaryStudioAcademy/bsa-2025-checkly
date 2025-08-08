@@ -2,6 +2,9 @@ import { config } from "~/libs/modules/config/config.js";
 import { database } from "~/libs/modules/database/database.js";
 import { logger } from "~/libs/modules/logger/logger.js";
 import { authController } from "~/modules/auth/auth.js";
+import { planDayController } from "~/modules/plan-days/plan-days.js";
+import { planController } from "~/modules/plans/plans.js";
+import { taskController } from "~/modules/tasks/tasks.js";
 import { userController } from "~/modules/users/users.js";
 
 import { BaseServerApplicationApi } from "./base-server-application-api.js";
@@ -12,6 +15,9 @@ const apiV1 = new BaseServerApplicationApi(
 	config,
 	...authController.routes,
 	...userController.routes,
+	...planController.routes,
+	...planDayController.routes,
+	...taskController.routes,
 );
 const serverApplication = new BaseServerApplication({
 	apis: [apiV1],

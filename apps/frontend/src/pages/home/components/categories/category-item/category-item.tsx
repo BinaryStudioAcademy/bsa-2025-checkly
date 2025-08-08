@@ -1,9 +1,9 @@
 import React, { memo, useCallback } from "react";
 
-import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { getClassNames } from "~/libs/helpers/helpers.js";
 
 import { type CategoryData } from "../libs/types/category-data.js";
-import styles from "./category-items.module.css";
+import styles from "./styles.module.css";
 
 type Properties = {
 	activeCategoryId: null | string;
@@ -40,7 +40,7 @@ const CategoryItemComponent: React.FC<Properties> = ({
 					className={styles["categories-image"]}
 					src={category.image}
 				/>
-				<h2 className={styles["category-title-landing"]}>{category.name}</h2>
+				<h3 className={styles["category-title-landing"]}>{category.name}</h3>
 			</button>
 		</li>
 	);
