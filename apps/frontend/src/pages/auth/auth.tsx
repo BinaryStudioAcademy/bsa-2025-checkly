@@ -1,9 +1,10 @@
 import React, { type JSX, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { AppRoute } from "~/libs/enums/enums.js";
+import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
+	useAppSelector,
 	useCallback,
 	useLocation,
 } from "~/libs/hooks/hooks.js";
@@ -20,6 +21,11 @@ const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
+
+	const { dataStatus } = useAppSelector(({ auth }) => auth);
+
+	const isLoading =
+		dataStatus === DataStatus.PENDING || dataStatus === DataStatus.IDLE;
 
 	useEffect(() => {
 		navigation.setNavigate(navigate);
@@ -42,11 +48,15 @@ const Auth: React.FC = () => {
 	const getScreen = (screen: string): JSX.Element => {
 		switch (screen) {
 			case AppRoute.SIGN_IN: {
-				return <SignInForm onSubmit={handleSignInSubmit} />;
+				return (
+					<SignInForm isLoading={isLoading} onSubmit={handleSignInSubmit} />
+				);
 			}
 
 			case AppRoute.SIGN_UP: {
-				return <SignUpForm onSubmit={handleSignUpSubmit} />;
+				return (
+					<SignUpForm isLoading={isLoading} onSubmit={handleSignUpSubmit} />
+				);
 			}
 		}
 

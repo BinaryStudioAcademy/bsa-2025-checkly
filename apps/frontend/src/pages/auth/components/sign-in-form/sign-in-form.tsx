@@ -13,6 +13,7 @@ import {
 	Button,
 	DecorativeImage,
 	Input,
+	Loader,
 } from "~/libs/components/components.js";
 import { Logo } from "~/libs/components/logo/logo.js";
 import { AppRoute } from "~/libs/enums/enums.js";
@@ -29,10 +30,14 @@ import { DEFAULT_SIGN_IN_PAYLOAD } from "../sign-in-form/libs/constants.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	isLoading: boolean;
 	onSubmit: (payload: UserSignInRequestDto) => void;
 };
 
-const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
+const SignInForm: React.FC<Properties> = ({
+	isLoading,
+	onSubmit,
+}: Properties) => {
 	const pinkStarsClasses = getClassNames(
 		styles["floating-image"],
 		styles["pink-stars"],
@@ -119,7 +124,18 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							type="password"
 						/>
 					</div>
-					<Button label="Sign In" type="submit" />
+					<Button
+						label="Sign In"
+						loader={
+							<Loader
+								container="inline"
+								isLoading={isLoading}
+								size="small"
+								theme="accent"
+							/>
+						}
+						type="submit"
+					/>
 				</form>
 				<DecorativeImage className={pinkStarsClasses} src={StarsPink01} />
 				<DecorativeImage className={cupClasses} src={CupGreen} />
