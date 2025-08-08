@@ -1,7 +1,7 @@
 .mainContent {
 	flex: 1;
 	min-width: 0;
-	padding: 24px;
+	padding: var(--space-l);
 	overflow-x: auto;
 	transition: padding 0.3s ease-in-out;
 }
@@ -14,7 +14,7 @@
 .contentGrid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 24px;
+	gap: var(--space-l);
 	transition: gap 0.3s ease-in-out;
 }
 
@@ -26,6 +26,6 @@
 
 @media (width <= 768px) {
 	.mainContent {
-		padding: 16px;
+		padding: var(--space-m);
 	}
 }

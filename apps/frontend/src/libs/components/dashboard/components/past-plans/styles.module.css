@@ -2,31 +2,30 @@
 	padding: var(--space-s) var(--space-l);
 	background-color: var(--color-bg-light);
 	border: 2px solid var(--color-card-gray);
-	border-radius: var(--base-radius);
+	border-radius: var(--radius-s);
 	transition: all 0.3s ease-in-out;
 }
 
 .title {
-	margin-bottom: 16px;
-	font-size: 18px;
-	font-weight: 600;
-	color: #1f2937;
+	font-family: var(--font-family-primary);
+	font-size: var(--text-size-heading-3);
+	font-weight: var(--font-weight-semi-bold);
+	color: var(--color-text-primary);
 	transition: font-size 0.3s ease-in-out;
 }
 
 .plansGrid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	gap: 16px;
+	gap: var(--space-m);
 	padding: var(--space-l) var(--space-xs);
 	transition: gap 0.3s ease-in-out;
 }
 
 .planCard {
 	overflow: hidden;
-	border: 1px solid #d1d5db;
-	border: 2px solid black;
-	border-radius: 8px;
+	border: 2px solid var(--color-text-primary);
+	border-radius: var(--radius-m);
 	transition: all 0.3s ease-in-out;
 }
 
