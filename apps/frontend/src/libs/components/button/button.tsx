@@ -10,7 +10,7 @@ type Properties = {
 	iconOnlySize?: "large" | "medium" | "small";
 	isIconOnly?: boolean;
 	label: string;
-	loader: React.ReactNode;
+	loader?: React.ReactNode;
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 	size?: "large" | "small";
 	type?: "button" | "submit";
