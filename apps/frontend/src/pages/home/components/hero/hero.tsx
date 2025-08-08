@@ -20,10 +20,12 @@ const Hero: React.FC = () => {
 
 	return (
 		<section className={getClassNames(styles["hero"], "grid-pattern")}>
-			<div className={getClassNames(styles["container"], "wrapper flow-loose")}>
-				<div className={getClassNames(styles["text-wrapper"], "flow")}>
-					<div className="flow-loose">
-						<h1>Create a personal development plan in 2 minutes</h1>
+			<div className={getClassNames("wrapper", styles["container"])}>
+				<div className={getClassNames(styles["text-wrapper"], "cluster flow")}>
+					<div className="cluster">
+						<h1 className={styles["hero-title"]}>
+							Create a personal development plan in 2 minutes
+						</h1>
 						<p className={styles["hero-subtitle"]}>
 							AI-powered checklist generator for your goals — from fitness to
 							creativity
