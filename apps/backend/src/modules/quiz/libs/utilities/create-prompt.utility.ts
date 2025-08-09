@@ -1,5 +1,5 @@
-import { type QuizAnswersRequestDto, sanitizeTextInput } from "shared";
-import { type QuizAnswer } from "shared/src/modules/quiz/libs/types/quiz-answer.type.js";
+import { type QuizAnswer, type QuizAnswersRequestDto } from "../types/types.js";
+import { sanitizeTextInput } from "./utilities.js";
 
 const USER_DATA_START = "USER DATA START";
 const USER_DATA_END = "USER DATA END";
