@@ -16,6 +16,7 @@ type Properties = {
 	className?: string;
 	icon: ReactNode;
 	navigateTo: ValueOf<typeof AppRoute>;
+	onClick?: () => void;
 };
 
 const NavigationItem: React.FC<Properties> = ({
@@ -24,6 +25,7 @@ const NavigationItem: React.FC<Properties> = ({
 	className,
 	icon,
 	navigateTo,
+	onClick,
 }: Properties) => {
 	const itemClass = getClassNames(
 		styles["menu-item"],
@@ -40,10 +42,11 @@ const NavigationItem: React.FC<Properties> = ({
 
 	return (
 		<li className={liClassNames} ref={navReference}>
-			<Link to={navigateTo}>
+			{buttonType === "logout" ? (
 				<button
 					aria-label={buttonText}
 					className={itemClass}
+					onClick={onClick}
 					role="menuitem"
 					tabIndex={0}
 					type="button"
@@ -51,7 +54,20 @@ const NavigationItem: React.FC<Properties> = ({
 					{icon}
 					{buttonText}
 				</button>
-			</Link>
+			) : (
+				<Link to={navigateTo}>
+					<button
+						aria-label={buttonText}
+						className={itemClass}
+						role="menuitem"
+						tabIndex={0}
+						type="button"
+					>
+						{icon}
+						{buttonText}
+					</button>
+				</Link>
+			)}
 		</li>
 	);
 };
