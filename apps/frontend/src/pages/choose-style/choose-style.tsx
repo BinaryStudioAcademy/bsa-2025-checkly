@@ -23,8 +23,12 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { styleCards } from "./choose-style.data.js";
 import styles from "./style.module.css";
 
+const preselectedElement = 1;
+
 const ChooseStyle: React.FC = () => {
-	const [selectedCard, setSelectedCard] = useState<null | string>("box-2");
+	const [selectedCard, setSelectedCard] = useState<null | string>(
+		styleCards[preselectedElement]?.id || null,
+	);
 
 	const handleCardClick = useCallback(
 		(event: React.MouseEvent<HTMLButtonElement>): void => {
