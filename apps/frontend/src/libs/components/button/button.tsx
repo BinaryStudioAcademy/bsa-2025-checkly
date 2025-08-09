@@ -10,6 +10,7 @@ type Properties = {
 	iconOnlySize?: "large" | "medium" | "small";
 	isIconOnly?: boolean;
 	label: string;
+	loader?: React.ReactNode;
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 	size?: "large" | "small";
 	type?: "button" | "submit";
@@ -17,12 +18,13 @@ type Properties = {
 };
 
 const Button: React.FC<Properties> = ({
-	className,
+	className = "",
 	disabled = false,
 	icon,
 	iconOnlySize = "large",
 	isIconOnly = false,
 	label,
+	loader,
 	onClick,
 	size = "large",
 	type = "button",
@@ -53,6 +55,7 @@ const Button: React.FC<Properties> = ({
 				</span>
 			)}
 			{!isIconOnly && <span>{label}</span>}
+			{loader}
 		</button>
 	);
 };
