@@ -1,8 +1,13 @@
+export { default as ArrowLeftIcon } from "./arrow-left.svg?react";
 export { default as Download } from "./download.svg";
+export { default as DownloadIcon } from "./download.svg?react";
 export { default as Edit } from "./edit.svg";
 export { default as EyeClosedIcon } from "./eye-closed.svg?react";
 export { default as EyeOpenIcon } from "./eye-open.svg?react";
+export { default as FileIcon } from "./file.svg?react";
+export { default as MonitorIcon } from "./monitor.svg?react";
 export { default as Regenerate } from "./regenerate.svg";
 export { default as Remove } from "./remove.svg";
 export { default as Save } from "./save.svg";
+export { default as SmartphoneIcon } from "./smartphone.svg?react";
 export { default as Timer } from "./timer.svg";
