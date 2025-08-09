@@ -1,0 +1,65 @@
+.progress-bar {
+	width: 100%;
+	padding: var(--space-l) 0;
+	margin-bottom: var(--space-xl);
+}
+
+.progress-container {
+	position: relative;
+	display: flex;
+	gap: var(--space-s);
+	align-items: center;
+	justify-content: center;
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+.progress-container::before {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 1;
+	width: calc(100% - 80px);
+	height: 2px;
+	content: "";
+	background-color: var(--color-text-primary);
+	transform: translate(-50%, -50%);
+}
+
+.progress-circle {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	background-color: white;
+	border: 2px solid var(--color-text-primary);
+	border-radius: 50%;
+	transition: all 0.3s ease;
+}
+
+.progress-circle.current {
+	color: white;
+	background-color: var(--color-text-primary);
+	border-color: var(--color-text-primary);
+}
+
+.progress-circle.completed {
+	color: white;
+	background-color: var(--color-text-primary);
+	border-color: var(--color-text-primary);
+}
+
+.progress-circle .number {
+	font-size: var(--text-size-body);
+	font-weight: var(--font-weight-semi-bold);
+	color: var(--color-text-primary);
+}
+
+.progress-circle .checkmark {
+	font-size: var(--text-size-body);
+	font-weight: var(--font-weight-bold);
+	color: white;
+}

@@ -6,7 +6,7 @@ import {
 	Plan,
 	Wrapper,
 } from "./pages/dashboard-wrapper-mock/components/components.js";
-import { Auth, Home, NotFound } from "./pages/pages.js";
+import { Auth, Home, NotFound, QuestionFlow, Quiz } from "./pages/pages.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
 
@@ -29,6 +29,16 @@ const routes: CustomRouteObject[] = [
 		element: <Auth />,
 		handle: { access: RouteAccess.NOT_AUTHENTICATED },
 		path: AppRoute.SIGN_UP,
+	},
+	{
+		element: <QuestionFlow />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.QUIZ_QUESTIONS,
+	},
+	{
+		element: <Quiz />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.QUIZ,
 	},
 	{
 		children: [

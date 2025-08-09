@@ -5,6 +5,7 @@ export {
 	ErrorConstants,
 	ErrorMessage,
 	FastifyHook,
+	QuizCategory,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
 export {
@@ -12,7 +13,7 @@ export {
 	HTTPError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
-export { configureString } from "./libs/helpers/helpers.js";
+export { configureString, sanitizeTextInput } from "./libs/helpers/helpers.js";
 export { type Config } from "./libs/modules/config/config.js";
 export {
 	type HTTP,
@@ -49,6 +50,18 @@ export {
 	type PlanResponseDto,
 	PlansApiPath,
 } from "./modules/plans/plans.js";
+export {
+	type QuestionDto,
+	type QuestionType,
+	type QuizAnswer,
+	type QuizAnswersRequestDto,
+	type QuizAnswersResponseDto,
+	QuizAnswersValidationSchema,
+	QuizApiPath,
+	type QuizCategoryType,
+	QuizQuestionFormat,
+	type QuizQuestionsResponseDto,
+} from "./modules/quiz/quiz.js";
 export {
 	ExecutionTimeType,
 	type TaskCreateRequestDto,
