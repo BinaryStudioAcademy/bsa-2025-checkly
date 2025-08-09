@@ -1,0 +1,41 @@
+.plan-container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.plan-preview {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.plan-image {
+	display: block;
+	width: 100%;
+	max-width: 600px;
+	height: auto;
+	max-height: calc(100vh - 240px);
+	object-fit: contain;
+}
+
+@media (width <= 768px) {
+	.plan-image {
+		max-width: 450px;
+		max-height: calc(100vh - 180px);
+	}
+}
+
+@media (width <= 480px) {
+	.plan-image {
+		max-width: 350px;
+		max-height: calc(100vh - 160px);
+	}
+}
+
+@media (width <= 375px) {
+	.plan-image {
+		max-width: 300px;
+		max-height: calc(100vh - 140px);
+	}
+}
