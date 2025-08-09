@@ -13,6 +13,7 @@ import {
 	Button,
 	DecorativeImage,
 	Input,
+	Loader,
 } from "~/libs/components/components.js";
 import { Logo } from "~/libs/components/logo/logo.js";
 import { AppRoute } from "~/libs/enums/enums.js";
@@ -24,14 +25,19 @@ import {
 } from "~/modules/users/users.js";
 
 import { AUTH_PLACEHOLDERS } from "../../libs/constants.js";
-import { DEFAULT_SIGN_IN_PAYLOAD } from "../sign-up-form/libs/constants.js";
+import sharedStyles from "../shared/shared.module.css";
+import { DEFAULT_SIGN_IN_PAYLOAD } from "../sign-in-form/libs/constants.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	isLoading: boolean;
 	onSubmit: (payload: UserSignInRequestDto) => void;
 };
 
-const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
+const SignInForm: React.FC<Properties> = ({
+	isLoading,
+	onSubmit,
+}: Properties) => {
 	const pinkStarsClasses = getClassNames(
 		styles["floating-image"],
 		styles["pink-stars"],
@@ -51,6 +57,16 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		styles["laptop"],
 		"show-desktop-up",
 	);
+	const containerClasses = getClassNames(
+		sharedStyles["container"],
+		styles["sign-in-container"],
+		"grid-pattern",
+	);
+	const authFormContainerClasses = getClassNames(
+		sharedStyles["auth-form-container"],
+		styles["sign-in"],
+		"wrapper grid-pattern flow-loose",
+	);
 	const cupClasses = getClassNames(styles["floating-image"], styles["cup"]);
 	const { control, errors, handleSubmit } = useAppForm<UserSignInRequestDto>({
 		defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
@@ -65,34 +81,28 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	);
 
 	return (
-		<div className={getClassNames(styles["container"], "grid-pattern")}>
-			<main
-				className={getClassNames(
-					styles["sign-in"],
-					"wrapper grid-pattern flow-loose",
-				)}
-			>
-				<div className="flow-loose">
-					<Logo />
-					<header className="flow">
-						<h1 className={styles["title"]} id="sign-in-title">
-							Sign In
-						</h1>
-						<p>
-							No account? Go to&nbsp;
-							<Link
-								aria-label="Go to create account page"
-								className={styles["redirect-text__link"]}
-								to={AppRoute.SIGN_UP}
-							>
-								Create an account
-							</Link>
-						</p>
-					</header>
-				</div>
+		<div className={containerClasses}>
+			<main className={authFormContainerClasses}>
+				<Logo />
+				<header className="flow">
+					<h1 className={sharedStyles["title"]} id="sign-in-title">
+						Sign In
+					</h1>
+					<p>
+						No account? Go to&nbsp;
+						<Link
+							aria-label="Go to create account page"
+							className={sharedStyles["redirect-text__link"]}
+							to={AppRoute.SIGN_UP}
+						>
+							Create an account
+						</Link>
+					</p>
+				</header>
 				<form
 					aria-labelledby="sign-in-title"
-					className={getClassNames(styles["form"], "cluster")}
+					className={getClassNames(sharedStyles["form"], "cluster")}
+					noValidate
 					onSubmit={handleFormSubmit}
 				>
 					<div className="flow-loose">
@@ -115,7 +125,18 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							type="password"
 						/>
 					</div>
-					<Button label="Sign In" type="submit" />
+					<Button
+						label="Sign In"
+						loader={
+							<Loader
+								container="inline"
+								isLoading={isLoading}
+								size="small"
+								theme="accent"
+							/>
+						}
+						type="submit"
+					/>
 				</form>
 				<DecorativeImage className={pinkStarsClasses} src={StarsPink01} />
 				<DecorativeImage className={cupClasses} src={CupGreen} />

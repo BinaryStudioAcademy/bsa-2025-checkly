@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 
-import { DownloadIcon, EditIcon } from "~/assets/img/icons/icons.js";
+import DownloadIcon from "~/assets/img/icons/download.svg";
+import EditIcon from "~/assets/img/icons/edit.svg";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 
 import styles from "./styles.module.css";
@@ -30,7 +31,7 @@ const PlanActions: React.FC<Properties> = ({ onDownload, onEdit }) => {
 				onClick={handleEditClick}
 				type="button"
 			>
-				<EditIcon className={styles["button-icon"]} />
+				<img alt="Edit" className={styles["button-icon"]} src={EditIcon} />
 				EDIT
 			</button>
 
@@ -43,7 +44,11 @@ const PlanActions: React.FC<Properties> = ({ onDownload, onEdit }) => {
 				onClick={handleDownloadClick}
 				type="button"
 			>
-				<DownloadIcon className={styles["button-icon"]} />
+				<img
+					alt="Download"
+					className={styles["button-icon"]}
+					src={DownloadIcon}
+				/>
 				DOWNLOAD
 			</button>
 		</div>

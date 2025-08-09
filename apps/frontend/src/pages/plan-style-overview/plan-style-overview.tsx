@@ -3,18 +3,18 @@ import { useNavigate } from "react-router-dom";
 
 import { StarsYellow02 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { arrowBackIcon } from "~/assets/img/shared/shared.img.js";
-import { AppHeader, DecorativeImage } from "~/libs/components/components.js";
+import {
+	AppHeader,
+	DecorativeImage,
+	PlanDisplay,
+} from "~/libs/components/components.js";
 import { getCategoryName, MESSAGES } from "~/libs/constants/constants.js";
 import { AppRoute, PlanCategoryId } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { usePlanCategory } from "~/libs/hooks/hooks.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 
-import {
-	PlanActions,
-	PlanDisplay,
-	PlanStyleCategory,
-} from "./components/components.js";
+import { PlanActions, PlanStyleCategory } from "./components/components.js";
 import { downloadPlanAsPdf } from "./lib/helpers.js";
 import styles from "./styles.module.css";
 

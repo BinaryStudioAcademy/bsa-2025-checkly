@@ -11,21 +11,12 @@
 	width: 100%;
 	height: 100%;
 	padding-top: 62.5%;
-	cursor: pointer;
-	background-color: transparent;
-	border: none;
+	transition: box-shadow 0.3s ease-in-out;
 }
 
 .category-title-landing {
-	font-size: var(--text-size-heading-5);
-	line-height: 0.94;
-	color: var(--color-bg-dark);
-}
-
-.category-title {
-	font-size: 24px;
-	font-weight: var(--font-weight-bold);
-	line-height: 0.94;
+	font-family: var(--font-family-primary);
+	font-size: var(--text-size-heading-4);
 	color: var(--color-bg-dark);
 }
 
@@ -40,6 +31,7 @@
 	bottom: 75px;
 	width: 143px;
 	height: 132px;
+	transition: transform 0.5s ease;
 }
 
 .checkbox-icon {
@@ -80,34 +72,16 @@
 }
 
 .category-item-animation:hover,
-.category-item-animation:focus {
+.category-item-animation:focus-visible {
 	z-index: 2;
 	box-shadow: 0 0 0 8px var(--color-brand-muted);
 }
 
 .category-item-animation:hover .categories-image,
-.category-item-animation:focus .categories-image {
-	animation: rotation 0.8s ease forwards;
+.category-item-animation:focus-visible .categories-image {
+	transform: rotate(-21deg);
 }
 
-@keyframes rotation {
-	0% {
-		transform: rotate(0deg);
-	}
-
-	100% {
-		transform: rotate(-21deg);
-	}
-}
-
-@media (width <= 900px) {
-	.category-title-landing {
-		font-size: var(--text-size-heading-3);
-	}
-}
-
-@media (width <= 575px) {
-	.category-title-landing {
-		font-size: var(--text-size-heading-2);
-	}
+.category-button:focus-visible {
+	border-radius: var(--radius-s);
 }

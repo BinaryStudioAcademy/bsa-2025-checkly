@@ -1,4 +1,5 @@
 export { default as Arrow } from "./arrow.svg";
+export { default as ArrowBold } from "./arrow_bold.svg";
 export { default as FlowerGreen } from "./flower-green.svg";
 export { default as FlowerPink } from "./flower-pink.svg";
 export { default as LogoPlaceholder } from "./logo-placeholder.svg";
