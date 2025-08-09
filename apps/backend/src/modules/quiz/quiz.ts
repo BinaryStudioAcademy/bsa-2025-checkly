@@ -1,6 +1,6 @@
 import { logger } from "~/libs/modules/logger/logger.js";
 
-import { QuestionModel } from "./libs/models/question.model.js";
+import { QuestionModel } from "./libs/models/models.js";
 import { QuizController } from "./quiz.controller.js";
 import { QuizRepository } from "./quiz.repository.js";
 import { QuizService } from "./quiz.service.js";

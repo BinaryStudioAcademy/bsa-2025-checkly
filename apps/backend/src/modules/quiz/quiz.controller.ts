@@ -1,19 +1,18 @@
 import {
-	APIPath,
-	HTTPCode,
-	HTTPRequestMethod,
-	type QuizAnswersRequestDto,
-	QuizAnswersValidationSchema,
-	QuizzApiPath,
-} from "shared";
-
-import {
 	type APIHandlerOptions,
 	type APIHandlerResponse,
 	BaseController,
 } from "~/libs/modules/controller/controller.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 
+import {
+	APIPath,
+	HTTPCode,
+	HTTPRequestMethod,
+	QuizzApiPath,
+} from "./libs/enums/enums.js";
+import { type QuizAnswersRequestDto } from "./libs/types/types.js";
+import { QuizAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 import { type QuizService } from "./quiz.service.js";
 
 class QuizController extends BaseController {
