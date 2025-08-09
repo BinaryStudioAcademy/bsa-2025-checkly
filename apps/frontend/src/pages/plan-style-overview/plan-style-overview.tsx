@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { StarsYellow02 } from "~/assets/img/shared/shapes/shapes.img.js";
@@ -30,9 +30,7 @@ const PlanStyleOverview: React.FC = () => {
 		PlanCategoryId.PDF,
 	);
 
-	const selectedCategoryName = useMemo(() => {
-		return getCategoryName(selectedCategory);
-	}, [selectedCategory]);
+	const selectedCategoryName = getCategoryName(selectedCategory);
 
 	const handleEditPlan = useCallback((): void => {
 		notifications.info(MESSAGES.FEATURE.NOT_IMPLEMENTED);
