@@ -3,6 +3,7 @@ export { App } from "./app/app.js";
 export { Button } from "./button/button.js";
 export { DashboardWrapper } from "./dashboard-wrapper/dashboard-wrapper.js";
 export { Dashboard } from "./dashboard/dashboard.js";
+export { DaysNav } from "./days-nav/days-nav.js";
 export { DecorativeImage } from "./decorative-image/decorative-image.js";
 export { Input } from "./input/input.js";
 export { Link } from "./link/link.js";
