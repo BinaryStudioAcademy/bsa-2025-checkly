@@ -77,12 +77,12 @@ const PlanStyleOverview: React.FC = () => {
 						<PlanDisplay categoryId={selectedCategory} />
 
 						<DecorativeImage
-							className={styles["yellow-stars"] || ""}
+							className={styles["yellow-stars"] ?? ""}
 							src={StarsYellow02}
 						/>
 
 						<DecorativeImage
-							className={styles["yellow-stars-reflection"] || ""}
+							className={styles["yellow-stars-reflection"] ?? ""}
 							src={StarsYellow02}
 						/>
 					</div>
@@ -97,7 +97,7 @@ const PlanStyleOverview: React.FC = () => {
 							</p>
 						</div>
 						<DecorativeImage
-							className={styles["yellow-stars"] || ""}
+							className={styles["yellow-stars"] ?? ""}
 							src={StarsYellow02}
 						/>
 					</div>
