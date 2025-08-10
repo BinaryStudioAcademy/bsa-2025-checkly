@@ -2,9 +2,9 @@ import { type FC, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { PlanBig } from "~/assets/img/shared/illustrations/layouts/layouts.img.js";
+import { Button } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 
-import { Button } from "../button/button.js";
 import styles from "./styles.module.css";
 
 const CurrentPlan: FC = () => {
@@ -19,15 +19,15 @@ const CurrentPlan: FC = () => {
 	return (
 		<div className={styles["container"]}>
 			<h2 className={styles["title"]}>Current active plan</h2>
-			<div className={styles["planCard"]}>
+			<div className={styles["plan-card"]}>
 				<img
 					alt="Current Plan Card"
-					className={styles["planImage"]}
+					className={styles["plan-image"]}
 					src={PlanBig}
 				/>
 			</div>
 			<Button
-				className={styles["actionButton"]}
+				className={styles["action-button"] ?? ""}
 				label="CONTINUE"
 				onClick={handleClick}
 			/>

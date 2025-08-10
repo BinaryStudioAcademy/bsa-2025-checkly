@@ -10,18 +10,18 @@ import styles from "./styles.module.css";
 const classMainContent = getClassNames(
 	"grid-pattern",
 	styles["light-background"],
-	styles["mainContent"],
+	styles["content"],
 );
 
 const Dashboard: FC = () => {
 	return (
-		<main className={classMainContent}>
+		<div className={classMainContent}>
 			<Greeting />
-			<div className={styles["contentGrid"]}>
+			<div className={styles["content-grid"]}>
 				<CurrentPlan />
 				<PastPlans />
 			</div>
-		</main>
+		</div>
 	);
 };
 

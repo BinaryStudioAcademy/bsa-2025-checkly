@@ -1,0 +1,33 @@
+.button {
+	--button-bg-color: var(--color-brand-primary);
+	--button-text-color: var(--color-text-primary);
+	--button-border-color: transparent;
+	--button-padding-block: var(--space-m);
+
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: Poppins, sans-serif;
+	font-size: var(--text-size-heading-3);
+	font-weight: var(--font-weight-bold);
+	text-transform: none;
+	background-color: var(--color-bg-white);
+	border-radius: var(--radius-l);
+}
+
+.button:hover {
+	color: var(--color-text-primary);
+}
+
+.button .large-icon {
+	display: none;
+}
+
+.button:not(:disabled):hover span[class*="button-icon"] {
+	transform: none;
+}
+
+.button::after {
+	display: none;
+}

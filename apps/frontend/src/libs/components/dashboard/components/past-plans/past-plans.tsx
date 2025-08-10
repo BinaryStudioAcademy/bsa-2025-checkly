@@ -8,12 +8,12 @@ const PastPlans: FC = () => {
 	return (
 		<div className={styles["container"]}>
 			<h2 className={styles["title"]}>Past plans</h2>
-			<div className={styles["plansGrid"]}>
+			<div className={styles["plans-grid"]}>
 				{PAST_PLANS.map((plan) => (
-					<div className={styles["planCard"]} key={plan.id}>
+					<div className={styles["plan-card"]} key={plan.id}>
 						<img
 							alt={plan.name}
-							className={styles["planImage"]}
+							className={styles["plan-image"]}
 							src={plan.path}
 						/>
 					</div>

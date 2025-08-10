@@ -14,41 +14,41 @@
 	transition: font-size 0.3s ease-in-out;
 }
 
-.plansGrid {
+.plans-grid {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: 1fr;
 	gap: var(--space-m);
 	padding: var(--space-l) var(--space-xs);
 	transition: gap 0.3s ease-in-out;
 }
 
-.planCard {
+.plan-card {
 	overflow: hidden;
 	border: 2px solid var(--color-text-primary);
 	border-radius: var(--radius-m);
 	transition: all 0.3s ease-in-out;
 }
 
-.planCard:hover {
+.plan-card:hover {
 	cursor: pointer;
 	box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
 	transform: translateY(-2px);
 }
 
-.planImage {
+.plan-image {
 	display: block;
 	width: 100%;
 	height: auto;
 }
 
-@media (width <= 768px) {
-	.plansGrid {
+@media (width >= 480px) {
+	.plans-grid {
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
 
-@media (width <= 480px) {
-	.plansGrid {
-		grid-template-columns: 1fr;
+@media (width >= 768px) {
+	.plans-grid {
+		grid-template-columns: repeat(3, 1fr);
 	}
 }

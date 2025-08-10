@@ -14,23 +14,23 @@
 	transition: font-size 0.3s ease-in-out;
 }
 
-.planCard {
+.plan-card {
 	padding: var(--space-l);
 	overflow: hidden;
 	transition: all 0.3s ease-in-out;
 }
 
-.planImage {
+.plan-image {
 	display: block;
 	width: 100%;
 	height: auto;
 }
 
-.actionButton {
+.action-button {
 	display: block;
 	margin: 0 auto;
 }
 
-.actionButton::after {
+.action-button::after {
 	display: none;
 }

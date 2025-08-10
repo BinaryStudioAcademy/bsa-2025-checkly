@@ -1,88 +1,58 @@
 .container {
 	display: flex;
+	flex-direction: column;
+	gap: var(--space-m);
 	align-items: center;
-	justify-content: space-between;
 	padding: var(--space-l);
 	margin-bottom: var(--space-m);
+	text-align: center;
 	background-color: var(--color-brand-primary);
 	border: 2px solid var(--color-bg-black);
 	border-radius: var(--radius-m);
 	transition: margin 0.3s ease-in-out;
 }
 
+.button .large-icon {
+	display: none;
+}
+
 .greeting {
 	margin: 0;
 	font-family: var(--font-family-secondary);
-	font-size: var(--text-size-heading-2);
+	font-size: var(--text-size-heading-3);
 	font-weight: var(--font-weight-heading);
 	transition: font-size 0.3s ease-in-out;
 }
 
-.button {
-	--button-bg-color: var(--color-brand-primary);
-	--button-text-color: var(--color-text-primary);
-	--button-border-color: transparent;
-	--button-padding-block: var(--space-m);
+@media (width >= 768px) {
+	.container {
+		flex-direction: row;
+		gap: 0;
+		justify-content: space-between;
+		text-align: left;
+	}
 
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 49%;
-	font-family: Poppins, sans-serif;
-	font-size: var(--text-size-heading-3);
-	font-weight: var(--font-weight-bold);
-	text-transform: none;
-	background-color: var(--color-bg-white);
-	border-radius: var(--radius-l);
-}
+	.greeting {
+		font-size: var(--text-size-heading-2);
+	}
 
-.button:hover {
-	color: var(--color-text-primary);
-}
+	.button {
+		width: 49%;
+	}
 
-.button .largeIcon {
-	position: absolute;
-	top: 50%;
-	left: var(--space-2xl);
-	transform: translateY(-50%) scale(2);
-}
-
-.button:not(:disabled):hover span[class*="button-icon"] {
-	transform: none;
-}
-
-.button::after {
-	display: none;
-}
-
-@media (width <= 1240px) {
-	.button .largeIcon {
+	.button .large-icon {
 		position: absolute;
 		top: 50%;
-		left: var(--space-l);
+		left: var(--space-m);
+		display: block;
 		transform: translateY(-50%) scale(1.5);
 	}
 }
 
-@media (width <= 768px) {
-	.container {
-		flex-direction: column;
-		gap: var(--space-m);
-		align-items: center;
-		text-align: center;
-	}
-
-	.greeting {
-		font-size: var(--text-size-heading-3);
-	}
-
-	.button {
-		justify-content: center;
-		width: 80%;
-	}
-
-	.button .largeIcon {
-		display: none;
+@media (width >= 1024px) {
+	.button .large-icon {
+		left: var(--space-2xl);
+		left: 10%;
+		transform: translateY(-50%) scale(2);
 	}
 }
