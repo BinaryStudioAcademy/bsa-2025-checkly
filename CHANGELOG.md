@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.10.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.10.0...v1.10.1) (2025-08-08)
+
+
+### Bug Fixes
+
+* created favicon for checkly cy-184 ([ea15cf5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ea15cf5269bb08e204b8d18831f6dab28d8b5dca))
+* fixed webmanifest cy-184 ([1774915](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/17749150b271f1c4600d7abbdc5a94fbf37ac534))
+* **frontend:** add checkly favicon cy-184 ([f417d7c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f417d7c631396555ff2a1ef6c71324036cab28ac))
+* make loader optional in button props cy-181 ([28eef41](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/28eef411d1c1e299ea73b422d6f181ee6bca6707))
+* modify loader and button, add flag to auth slice cy-181 ([1f25cf2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1f25cf2ad45c9afc27dad40474f59924a7694d68))
+* Plan Overview UI issues cy-197 ([69294ea](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/69294eaafe205a5d195a7c48da253ced590271fe))
+* Prevent Sign In/Sign Up from reloading when receiving an error on submit cy-181 ([96b6562](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/96b656236a760d401e54e92aff814a0cd35b7e6d))
+* update day selector, change button hover cy-197 ([c3cc61d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c3cc61d84ec88a3b76c1c6c018e5a7e1a5f9c19d))
+
 ## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.9.0...v1.10.0) (2025-08-08)
 
 
