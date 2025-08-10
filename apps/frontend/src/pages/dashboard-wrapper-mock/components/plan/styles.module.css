@@ -29,8 +29,8 @@
 
 .content {
 	display: flex;
+	flex: 1;
 	flex-direction: row;
-	height: 100%;
 }
 
 .content__days.content__days__open {
