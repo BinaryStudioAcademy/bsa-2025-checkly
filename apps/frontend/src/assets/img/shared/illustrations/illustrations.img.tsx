@@ -13,4 +13,4 @@ export { default as Laptop } from "./laptop.svg";
 export { default as OrangeWhole } from "./orange-image.png";
 export { default as OrangeSliced } from "./orange-sliced.svg";
 export { default as Phone } from "./phone.svg";
-export { default as Teddy } from "./teddy.svg";
+export { default as Teddy } from "./teddy.png";

@@ -1,14 +1,26 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Teddy } from "~/assets/img/shared/illustrations/illustrations.img.js";
-import { DecorativeImage } from "~/libs/components/components.js";
+import {
+	Book,
+	Croissant,
+	CupCoffee,
+	CupGreen,
+	Drink,
+	Greens,
+	IceCream,
+	Laptop,
+	OrangeWhole,
+	Phone,
+	Teddy,
+} from "~/assets/img/shared/illustrations/illustrations.img.js";
 import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
 
+import { ImageSlider } from "./components/slider/slider.js";
 import {
 	FAST_INCREMENT,
 	FAST_INTERVAL_MS,
@@ -21,6 +33,20 @@ import {
 } from "./libs/constants/constants.js";
 import { type QuizAnswersDto } from "./libs/types/types.js";
 import styles from "./styles.module.css";
+
+const slides = [
+	Teddy,
+	Book,
+	Croissant,
+	CupCoffee,
+	CupGreen,
+	Drink,
+	Greens,
+	IceCream,
+	Laptop,
+	OrangeWhole,
+	Phone,
+];
 
 const PlanGeneration: React.FC = () => {
 	const [progress, setProgress] = useState<number>(PROGRESS_MIN);
@@ -95,7 +121,7 @@ const PlanGeneration: React.FC = () => {
 
 	return (
 		<main className={containerClasses}>
-			<DecorativeImage src={Teddy} />
+			<ImageSlider slides={slides} />
 			<h1 className={styles["progress"]}>
 				Analyzing{" "}
 				<span className={styles["progress-number"]}>
