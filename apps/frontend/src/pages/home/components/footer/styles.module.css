@@ -1,97 +1,67 @@
 .footer {
-	--cluster-horizontal-alignment: space-between;
-	--gutter: var(--space-l);
 	--grid-color: var(--color-grid-line-cream);
 	--grid-opacity: 0.2;
 
-	padding-block: var(--space-m);
-	padding-inline: var(--space-2xl);
-	font-family: var(--font-family-primary);
-	font-size: var(--text-body-small);
-	background-color: var(--color-text-secondary);
+	background-color: var(--color-card-darkblue);
 }
 
-.logo-wrapper a {
-	display: flex;
-	gap: var(--space-s);
-	align-items: center;
-	text-decoration: none;
+.container {
+	--cluster-direction: column;
+	--cluster-vertical-alignment: flex-start;
+	--gutter: var(--space-m);
+
+	padding-block: var(--space-m);
 }
 
 .nav-links {
-	--gutter: var(--space-xl);
+	--cluster-direction: column;
+	--cluster-vertical-alignment: flex-start;
+	--gutter: var(--space-xs);
 }
 
 .nav-links a {
-	color: var(--color-text-light);
 	text-decoration: none;
-	transition: color 0.2s ease-in-out;
-}
-
-.logo-wrapper a:hover,
-.nav-links a:hover {
-	color: var(--color-card-yellow);
 }
 
 .social-links {
-	--gutter: var(--space-m);
+	--cluster-direction: row;
 }
 
-.social-links a svg {
-	width: 24px;
-	height: 24px;
-	transition: fill 0.2s ease-in-out;
+.social-links a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: transform 0.2s ease;
 }
 
-.social-links a:hover svg {
-	fill: var(--color-card-yellow);
+.social-links a:hover {
+	transform: translateY(-2px) scale(1.1);
 }
 
-@media (width >= 510px) and (width <= 768px) {
-	.footer {
-		--cluster-wrap: wrap;
-		--cluster-horizontal-alignment: space-between;
-	}
-
-	.logo-wrapper,
-	.nav-links {
-		margin-right: 0;
-	}
-
-	.social-links {
-		flex-basis: 100%;
-
-		--cluster-horizontal-alignment: center;
-
-		margin-top: var(--space-l);
-	}
+.social-links a:active {
+	transform: translateY(0) scale(0.95);
 }
 
-@media (width <= 509px) {
-	.footer {
-		--cluster-direction: column;
-		--cluster-vertical-alignment: center;
-		--gutter: var(--space-l);
+.social-links svg {
+	display: block;
+	width: 1.5rem;
+	height: auto;
+}
 
-		padding-block: var(--space-l);
-	}
-
-	.nav-links {
-		--cluster-direction: column;
-		--cluster-vertical-alignment: center;
-		--gutter: var(--space-m);
-	}
-
-	.social-links {
-		flex-basis: auto;
-
+@media (width >= 768px) {
+	.container {
 		--cluster-direction: row;
 		--cluster-vertical-alignment: center;
+
+		justify-content: space-between;
+	}
+
+	.nav-links {
+		--cluster-direction: row;
 		--gutter: var(--space-l);
 	}
 
-	.social-links a svg {
-		width: 36px;
-		height: 36px;
+	.social-links svg {
+		width: 1.75rem;
 	}
 }

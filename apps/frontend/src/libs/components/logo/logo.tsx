@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 const Logo: React.FC = () => {
 	return (
 		<Link
-			className={getClassNames(styles["container"], "cluster")}
+			className={getClassNames("cluster", styles["container"])}
 			to={AppRoute.ROOT}
 		>
 			<img alt="Binary Checkly web-application logo" src={logoIcon} />
