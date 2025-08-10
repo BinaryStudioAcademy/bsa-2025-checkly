@@ -4,6 +4,7 @@ import { Download, Save } from "~/assets/img/icons/icons.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { ONE, ZERO } from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { useAppSelector } from "~/libs/hooks/hooks.js";
 
 import { Day, Task } from "./components/components.js";
 import { daysTasksMockData } from "./mock-data/days-tasks-mock.js";
@@ -12,6 +13,8 @@ import styles from "./styles.module.css";
 const Plan: React.FC = () => {
 	const [selectedDay, setSelectedDay] = useState<number>(ZERO);
 	const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
+
+	const user = useAppSelector((state) => state.auth.user);
 
 	const toggleSelect = useCallback((): void => {
 		setIsSelectOpen((previous) => !previous);
@@ -67,14 +70,16 @@ const Plan: React.FC = () => {
 						type="button"
 						variant="primary"
 					/>
-					<Button
-						icon={<DecorativeImage src={Save} />}
-						iconOnlySize="medium"
-						label="Save to profile"
-						size="large"
-						type="button"
-						variant="secondary"
-					/>
+					{user && (
+						<Button
+							icon={<DecorativeImage src={Save} />}
+							iconOnlySize="medium"
+							label="Save to profile"
+							size="large"
+							type="button"
+							variant="secondary"
+						/>
+					)}
 				</div>
 			</div>
 		</div>

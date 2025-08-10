@@ -6,7 +6,7 @@ import {
 	Plan,
 	Wrapper,
 } from "./pages/dashboard-wrapper-mock/components/components.js";
-import { Auth, Home, NotFound } from "./pages/pages.js";
+import { Auth, Home, NotFound, PlanGeneration } from "./pages/pages.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
 
@@ -39,7 +39,7 @@ const routes: CustomRouteObject[] = [
 			},
 			{
 				element: <Plan />,
-				handle: { access: RouteAccess.AUTHENTICATED },
+				handle: { access: RouteAccess.PUBLIC },
 				path: AppRoute.PLAN,
 			},
 		],
@@ -51,6 +51,11 @@ const routes: CustomRouteObject[] = [
 		element: <NotFound />,
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.NOT_FOUND,
+	},
+	{
+		element: <PlanGeneration />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.PLAN_GENERATION,
 	},
 ];
 

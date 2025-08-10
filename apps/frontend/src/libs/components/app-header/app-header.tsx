@@ -62,22 +62,30 @@ const AppHeader: React.FC = () => {
 			</div>
 
 			<div className={styles["user-section"]} ref={menuReference}>
-				<img
-					alt="User profile"
-					className={styles["user-image"]}
-					src={profileDefault}
-				/>
-				<div className={styles["user-name-arrow"]}>
-					<span className={styles["user-name"]}>{displayName}</span>
-					<button
-						aria-label="Open user menu"
-						className={styles["arrow-button"]}
-						onClick={handleMenuToggle}
-						type="button"
-					>
-						<img alt="Open menu" className={arrowClassName} src={arrowDown} />
-					</button>
-				</div>
+				{user && (
+					<>
+						<img
+							alt="User profile"
+							className={styles["user-image"]}
+							src={profileDefault}
+						/>
+						<div className={styles["user-name-arrow"]}>
+							<span className={styles["user-name"]}>{displayName}</span>
+							<button
+								aria-label="Open user menu"
+								className={styles["arrow-button"]}
+								onClick={handleMenuToggle}
+								type="button"
+							>
+								<img
+									alt="Open menu"
+									className={arrowClassName}
+									src={arrowDown}
+								/>
+							</button>
+						</div>
+					</>
+				)}
 				<button
 					aria-label="Open user menu"
 					className={burgerMenuClassName}
