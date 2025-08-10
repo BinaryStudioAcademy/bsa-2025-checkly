@@ -1,13 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Teddy } from "~/assets/img/shared/illustrations/illustrations.img.js";
 import { DecorativeImage } from "~/libs/components/components.js";
-import { AppRoute } from "~/libs/enums/enums.js";
+import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
+import { StorageKey } from "~/libs/modules/storage/storage.js";
+import { actions as planActions } from "~/modules/plans/plans.js";
 
 import {
-	EMULATE_FULFILED_ON_PLAN_GENERATED_DELAY,
 	FAST_INCREMENT,
 	FAST_INTERVAL_MS,
 	PROGRESS_MAX,
@@ -17,16 +19,26 @@ import {
 	SLOW_INCREMENT_MAX,
 	SLOW_INTERVAL_MS,
 } from "./libs/constants/constants.js";
-import { type CleanupFunction } from "./libs/types/types.js";
+import { type QuizAnswersDto } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 const PlanGeneration: React.FC = () => {
 	const [progress, setProgress] = useState<number>(PROGRESS_MIN);
 
+	const dispatch = useAppDispatch();
+	const status = useAppSelector((state) => state.plan.dataStatus);
+
 	const navigate = useNavigate();
 
-	const startSlowProgress = (): CleanupFunction => {
-		const intervalId = setInterval(() => {
+	useEffect(() => {
+		const stored = localStorage.getItem(StorageKey.QUIZ_ANSWER);
+		const quizAnswers: QuizAnswersDto = stored
+			? (JSON.parse(stored) as QuizAnswersDto)
+			: [];
+
+		void dispatch(planActions.generate(quizAnswers));
+
+		const slowProgressId = setInterval(() => {
 			setProgress((previous) => {
 				if (previous >= PROGRESS_MAX_SLOW) {
 					return previous;
@@ -42,41 +54,38 @@ const PlanGeneration: React.FC = () => {
 			});
 		}, SLOW_INTERVAL_MS);
 
-		return () => {
-			clearInterval(intervalId);
+		return (): void => {
+			clearInterval(slowProgressId);
 		};
-	};
-
-	const startFastProgress = useCallback((): CleanupFunction => {
-		const intervalId = setInterval(() => {
-			setProgress((previous) => {
-				if (previous >= PROGRESS_MAX) {
-					// eslint-disable-next-line @typescript-eslint/no-floating-promises
-					navigate(AppRoute.PLAN);
-
-					return PROGRESS_MAX;
-				}
-
-				return Math.min(previous + FAST_INCREMENT, PROGRESS_MAX);
-			});
-		}, FAST_INTERVAL_MS);
-
-		return () => {
-			clearInterval(intervalId);
-		};
-	}, [navigate]);
+	}, [dispatch]);
 
 	useEffect(() => {
-		startSlowProgress();
+		let fastProgressId: null | ReturnType<typeof setInterval> = null;
 
-		const timeoutId = setTimeout(() => {
-			startFastProgress();
-		}, EMULATE_FULFILED_ON_PLAN_GENERATED_DELAY);
+		if (status === DataStatus.FULFILLED) {
+			fastProgressId = setInterval(() => {
+				setProgress((previous) =>
+					Math.min(previous + FAST_INCREMENT, PROGRESS_MAX),
+				);
+			}, FAST_INTERVAL_MS);
+		}
 
 		return (): void => {
-			clearTimeout(timeoutId);
+			if (fastProgressId !== null) {
+				clearInterval(fastProgressId);
+			}
 		};
-	}, [navigate, startFastProgress]);
+	}, [status]);
+
+	useEffect(() => {
+		const redirect = async (): Promise<void> => {
+			if (progress === PROGRESS_MAX) {
+				await navigate(AppRoute.PLAN);
+			}
+		};
+
+		void redirect();
+	}, [progress, navigate]);
 
 	const containerClasses = getClassNames(
 		styles["container"],

@@ -6,3 +6,4 @@ type QuizAnswerDto = {
 type QuizAnswersDto = QuizAnswerDto[];
 
 export { type QuizAnswersDto };
+export { type PlanDaysTaskDto } from "shared";

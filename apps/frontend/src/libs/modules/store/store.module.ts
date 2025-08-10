@@ -9,6 +9,7 @@ import { AppEnvironment } from "~/libs/enums/enums.js";
 import { type Config } from "~/libs/modules/config/config.js";
 import { storage } from "~/libs/modules/storage/storage.js";
 import { authApi, reducer as authReducer } from "~/modules/auth/auth.js";
+import { planApi, reducer as planReducer } from "~/modules/plans/plans.js";
 import { userApi } from "~/modules/users/users.js";
 
 import { notifications } from "../notifications/notifications.js";
@@ -18,12 +19,14 @@ import { listenerMiddleware } from "./listener-middleware/listener-middleware.js
 type ExtraArguments = {
 	authApi: typeof authApi;
 	notifications: typeof notifications;
+	planApi: typeof planApi;
 	storage: BaseStorage;
 	userApi: typeof userApi;
 };
 
 type RootReducer = {
 	auth: ReturnType<typeof authReducer>;
+	plan: ReturnType<typeof planReducer>;
 };
 
 class Store {
@@ -39,6 +42,7 @@ class Store {
 		return {
 			authApi,
 			notifications,
+			planApi,
 			storage,
 			userApi,
 		};
@@ -56,6 +60,7 @@ class Store {
 			},
 			reducer: {
 				auth: authReducer,
+				plan: planReducer,
 			},
 		});
 	}
