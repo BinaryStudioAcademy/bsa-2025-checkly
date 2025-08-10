@@ -7,6 +7,7 @@ import {
 	Wrapper,
 } from "./pages/dashboard-wrapper-mock/components/components.js";
 import { Auth, Home, NotFound } from "./pages/pages.js";
+import { TestPage } from "./pages/test-page/test-page.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
 
@@ -46,6 +47,11 @@ const routes: CustomRouteObject[] = [
 		element: <Wrapper />,
 		handle: { access: RouteAccess.AUTHENTICATED },
 		path: AppRoute.ROOT,
+	},
+	{
+		element: <TestPage />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.TEST_PAGE,
 	},
 	{
 		element: <NotFound />,

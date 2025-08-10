@@ -4,6 +4,7 @@
 	--color-bg-white: #ffffff;
 	--color-text-primary: #000000;
 	--color-text-secondary: #68819e;
+	--color-text-tertiary: #0c0c1f;
 	--color-brand-primary: #c6e7f9;
 	--color-bg-hover: #ececec;
 	--color-brand-accent: #ff7171;
@@ -29,4 +30,11 @@
 	--color-bg-black: var(--color-text-primary);
 	--color-surface: var(--color-bg-white);
 	--color-selection-bg: var(--color-card-yellow);
+	--color-bg-plan-style-with-remarks: #f7e9ce;
+	--color-text-deep-blue: #25233d;
+	--color-text-night-blue: #082a52;
+	--color-border-soft-pink: #f0cfd6;
+	--color-border-pink-red: #9a5d6a;
+	--color-bg-task-checkbox: #9a5d6a20;
+	--color-text-checked-task: #0c1c1f70;
 }

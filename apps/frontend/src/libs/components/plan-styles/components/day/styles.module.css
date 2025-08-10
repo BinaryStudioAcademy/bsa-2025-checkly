@@ -1,0 +1,39 @@
+.day-item {
+	padding: 12px;
+	font-family: var(--font-family-tretiary);
+	border-block: 1px solid var(--color-border-soft-pink);
+}
+
+.day-item:nth-child(odd) {
+	border-right: 1px solid var(--color-border-pink-red);
+	border-left: 1px solid var(--color-border-soft-pink);
+}
+
+.day-item:nth-child(even) {
+	border-right: 1px solid var(--color-border-soft-pink);
+}
+
+.day-item:nth-child(n + 3) {
+	border-top: none;
+}
+
+.day-title {
+	margin-bottom: 14px;
+	font-family: var(--font-family-tretiary);
+	font-size: 14px;
+	font-weight: 800;
+	line-height: 1.4;
+	color: var(--color-text-night-blue);
+}
+
+.day-of-week {
+	color: var(--color-border-pink-red);
+}
+
+.task-list {
+	display: flex;
+	flex-direction: column;
+	row-gap: 8px;
+	padding: 0;
+	list-style: none;
+}

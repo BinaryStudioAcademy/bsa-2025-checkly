@@ -3,6 +3,7 @@ import {
 	StarsYellow03,
 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { DecorativeImage } from "~/libs/components/components.js";
+import { PlanStyleWithRemarks } from "~/libs/components/plan-styles/with-remarks/with-remarks.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import { layoutExamples } from "./layout-examples.data.js";
@@ -42,10 +43,7 @@ const VisualLayouts: React.FC = () => {
 								className={styles["layout-card"]}
 								key={example.id}
 							>
-								<img
-									alt={`Preview of the ${example.title} layout`}
-									src={example.img}
-								/>
+								<PlanStyleWithRemarks />
 								<h5>{example.title}</h5>
 							</li>
 						))}

@@ -1,0 +1,40 @@
+.notes {
+	padding: 12px;
+	font-family: var(--font-family-tretiary);
+	line-height: 1.4;
+	color: var(--color-text-deep-blue);
+}
+
+.notes-title {
+	font-family: var(--font-family-tretiary);
+	font-size: 12px;
+	font-weight: var(--font-weight-extra-bold);
+}
+
+.notes-hint {
+	margin-bottom: 12px;
+	font-size: 10px;
+	font-weight: var(--font-weight-regular);
+}
+
+.notes:nth-child(even) {
+	border: none;
+	border-left: 1px solid var(--color-border-soft-pink);
+}
+
+.notes:nth-child(odd) {
+	border: none;
+	border-right: 1px solid var(--color-border-pink-red);
+	border-bottom: 1px solid var(--color-border-soft-pink);
+	border-left: 1px solid var(--color-border-soft-pink);
+}
+
+.notes-text {
+	font-size: 10px;
+	font-weight: var(--font-weight-regular);
+	line-height: 2.5;
+	text-align: justify;
+	text-decoration: underline;
+	text-decoration-color: var(--color-border-soft-pink);
+	text-underline-offset: 5px;
+}

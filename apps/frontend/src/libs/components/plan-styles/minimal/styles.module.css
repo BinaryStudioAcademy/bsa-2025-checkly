@@ -1,0 +1,54 @@
+.container {
+	width: 100%;
+	max-width: 595px;
+	height: 100%;
+	margin: 0 auto;
+	border: 1px solid #000000;
+}
+
+.header {
+	border-bottom: 1px solid #000000;
+}
+
+.plan-title {
+	font-size: 36px;
+}
+
+.plan-body {
+	padding-block: 30px;
+}
+
+.day-section {
+	border-bottom: 1px dashed #000000;
+}
+
+.day-header {
+	width: fit-content;
+	padding: 10px 20px;
+	margin: 0 auto 30px;
+	font-size: 24px;
+	border: 1px solid #000000;
+}
+
+.day-list {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	padding: 15px;
+}
+
+.task {
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.task-text {
+	margin-right: 25px;
+	text-align: justify;
+}
+
+.task-checkbox:checked ~ .task-text {
+	text-decoration: line-through;
+}
