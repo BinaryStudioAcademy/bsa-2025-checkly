@@ -7,11 +7,11 @@ import styles from "./styles.module.css";
 const classMainContent = getClassNames(
 	"grid-pattern",
 	styles["light-background"],
-	styles["mainContent"],
+	styles["content"],
 );
 
 const Dashboard: FC = () => {
-	return <main className={classMainContent} />;
+	return <div className={classMainContent} />;
 };
 
 export { Dashboard };

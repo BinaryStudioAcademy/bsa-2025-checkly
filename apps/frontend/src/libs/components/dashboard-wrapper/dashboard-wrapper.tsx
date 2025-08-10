@@ -8,11 +8,13 @@ import styles from "./styles.module.css";
 
 const DashboardWrapper: FC = () => {
 	return (
-		<div className={styles["appContainer"]}>
+		<div className={styles["app-container"]}>
 			<AppHeader />
-			<div className={styles["mainLayout"]}>
+			<div className={styles["main-layout"]}>
 				<SidePanel />
-				<Outlet />
+				<main className={styles["main-content"]}>
+					<Outlet />
+				</main>
 			</div>
 		</div>
 	);

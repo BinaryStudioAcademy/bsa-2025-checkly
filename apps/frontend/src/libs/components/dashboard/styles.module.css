@@ -1,7 +1,6 @@
-.mainContent {
-	flex: 1;
-	min-width: 0;
-	padding: var(--space-l);
+.content {
+	height: 100%;
+	padding: var(--space-m);
 	overflow-x: auto;
 	transition: padding 0.3s ease-in-out;
 }
@@ -11,9 +10,9 @@
 	--grid-line: 1px;
 }
 
-.contentGrid {
+.content-grid {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr;
 	gap: var(--space-l);
 	transition: gap 0.3s ease-in-out;
 }
