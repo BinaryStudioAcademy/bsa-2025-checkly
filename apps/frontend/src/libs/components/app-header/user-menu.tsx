@@ -25,7 +25,6 @@ const UserMenu: React.FC<Properties> = ({ isOpen }) => {
 				<NavigationItem
 					buttonText="Profile"
 					buttonType="user-menu"
-					className={styles["menu-user-profile"]}
 					icon={<FiUser />}
 					navigateTo={AppRoute.PROFILE}
 				/>
