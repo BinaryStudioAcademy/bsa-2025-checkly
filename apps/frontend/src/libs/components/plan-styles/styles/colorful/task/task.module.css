@@ -1,6 +1,6 @@
 .task--colorful {
 	text-align: center;
-	border: 1px solid #000000;
+	border: 1px solid var(--color-bg-black);
 	border-radius: calc(10px * var(--coefficient));
 }
 

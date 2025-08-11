@@ -1,7 +1,8 @@
 .day-item--colorful {
 	display: flex;
 	flex-direction: column;
-	border-bottom: calc(5px * var(--coefficient)) dashed #e9dd32;
+	border-bottom: calc(5px * var(--coefficient)) dashed
+		var(--color-border-yellow);
 }
 
 .day-title--colorful {
@@ -9,11 +10,11 @@
 	padding: calc(5px * var(--coefficient));
 	color: #090979;
 	text-shadow:
-		-1px -1px 0 #ffffff,
-		1px -1px 0 #ffffff,
-		-1px 1px 0 #ffffff,
-		1px 1px 0 #ffffff;
-	border: 1px solid #000000;
+		calc(-1px * var(--coefficient)) calc(-1px * var(--coefficient)) 0 #ffffff,
+		calc(1px * var(--coefficient)) calc(-1px * var(--coefficient)) 0 #ffffff,
+		calc(-1px * var(--coefficient)) calc(1px * var(--coefficient)) 0 #ffffff,
+		calc(1px * var(--coefficient)) calc(1px * var(--coefficient)) 0 #ffffff;
+	border: 1px solid var(--color-bg-black);
 	border-radius: calc(10px * var(--coefficient));
 }
 

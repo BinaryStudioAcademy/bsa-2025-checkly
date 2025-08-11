@@ -1,5 +1,5 @@
 .container--minimal {
-	border: 1px solid #000000;
+	border: 1px solid var(--color-bg-black);
 }
 
 .day-list--minimal {

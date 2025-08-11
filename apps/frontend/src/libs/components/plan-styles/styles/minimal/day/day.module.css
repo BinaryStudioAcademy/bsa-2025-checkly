@@ -1,14 +1,14 @@
 .day-item--minimal {
 	display: flex;
 	flex-direction: column;
-	border-bottom: 3px solid #000000;
+	border-bottom: 3px solid var(--color-bg-black);
 }
 
 h2.day-title--minimal {
 	align-self: center;
 	padding: calc(5px * var(--coefficient)) calc(10px * var(--coefficient));
 	font-size: calc(24px * var(--coefficient));
-	border-bottom: calc(5px * var(--coefficient)) dotted #000000;
+	border-bottom: calc(5px * var(--coefficient)) dotted var(--color-bg-black);
 }
 
 .task-list--minimal {
