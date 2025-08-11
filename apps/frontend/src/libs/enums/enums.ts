@@ -1,18 +1,19 @@
 export { AppRoute } from "./app-route.enum.js";
-export { ButtonLabels } from "./button-labels.enum.js";
-export { DataStatus } from "./data-status.enum.js";
+export { ButtonLabels, ButtonVariants } from "./button-properties.enum.js";
+export { CategoriesColors } from "./categories-colors.enum.js";
+export { ElementTypes } from "./element-types.enum.js";
 export { ErrorMessage } from "./error-messages.enum.js";
-export {
-	NAVIGATION_CONSTANTS,
-	PROGRESS_CONSTANTS,
-	QUIZ_CONSTANTS,
-} from "./quiz-constants.enum.js";
+export { IconsPositions } from "./icons-positions.enum.js";
+export { KeyboardKeys } from "./keyboard-keys.enum.js";
+export { PlaceholderValues } from "./placeholder-values.enum.js";
 export { RouteAccess } from "./route-access.js";
 export {
 	APIPath,
 	AppEnvironment,
 	ContentType,
+	DataStatus,
 	HTTPRequestMethod,
+	QuizIndexes,
 	QuizQuestionFormat,
 	ServerErrorType,
 } from "shared";

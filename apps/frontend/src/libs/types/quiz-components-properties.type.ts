@@ -1,29 +1,28 @@
-import { type QuestionDto } from "shared";
-
+import { type QuestionDto } from "~/libs/types/types.js";
 import {
 	type QuizAnswer,
 	type QuizCategoryValue,
 } from "~/modules/quiz/quiz.js";
 
 interface CheckboxQuestionProperties {
-	currentAnswer?: MultipleAnswers;
-	onAnswer: (answer: MultipleAnswers) => void;
+	currentAnswer?: MultipleAnswers[];
+	onAnswer: (answer: MultipleAnswers[]) => void;
 	question: QuestionDto;
 }
 
 interface MixedQuestionProperties {
 	currentAnswer?: {
-		selectedOptions: MultipleAnswers;
+		selectedOptions: MultipleAnswers[];
 		userInput: string;
 	};
 	onAnswer: (answer: {
-		selectedOptions: MultipleAnswers;
+		selectedOptions: MultipleAnswers[];
 		userInput: string;
 	}) => void;
 	question: QuestionDto;
 }
 
-type MultipleAnswers = (number | string)[];
+type MultipleAnswers = number | string;
 
 interface ProgressBarProperties {
 	currentQuestion: number;

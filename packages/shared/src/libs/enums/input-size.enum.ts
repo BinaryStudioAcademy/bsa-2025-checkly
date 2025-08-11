@@ -1,6 +1,6 @@
-const INPUT_SIZE = {
+const InputSize = {
 	MAX: 1000,
 	MIN: 0,
-} as const;
+};
 
-export { INPUT_SIZE };
+export { InputSize };
