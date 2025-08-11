@@ -1,0 +1,39 @@
+.task--withremarks {
+	display: flex;
+	align-items: center;
+}
+
+.task-checkbox--withremarks {
+	position: relative;
+	width: 100%;
+	max-width: 12px;
+	height: 12px;
+	margin: 0 8px 0 0;
+	appearance: none;
+	background-color: var(--color-bg-task-checkbox);
+	border: 1px solid var(--color-text-night-blue);
+	border-radius: 50%;
+}
+
+.task-checkbox--withremarks::before {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 10;
+	width: 80%;
+	height: 80%;
+	content: "";
+	background-color: var(--color-text-night-blue);
+	border-radius: 50%;
+	transform: scale(0);
+	transition: 120ms transform ease-in-out;
+}
+
+.task-checkbox--withremarks:checked::before {
+	transform: scale(1) translate(-50%, -50%);
+}
+
+.task-text--withremarks {
+	font-size: 10px;
+	color: var(--color-text-tertiary);
+}

@@ -1,0 +1,8 @@
+.header--colorful {
+	padding-bottom: 10px;
+	border-bottom: 5px double #e9dd32;
+}
+
+.plan-title--colorful {
+	color: var(--color-bg-white);
+}

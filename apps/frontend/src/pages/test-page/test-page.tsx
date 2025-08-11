@@ -1,5 +1,8 @@
 import { AppHeader } from "~/libs/components/components.js";
-import { PlanStyleWithRemarks } from "~/libs/components/plan-styles/with-remarks/with-remarks.js";
+import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
+import { type PlanStyleOption } from "~/libs/types/types.js";
+
+const SELECTED_STYLE: PlanStyleOption = "withremarks";
 
 const TestPage: React.FC = () => {
 	return (
@@ -21,7 +24,7 @@ const TestPage: React.FC = () => {
 					}}
 				/>
 				<div style={{ flex: "1 1 auto", overflowY: "auto" }}>
-					<PlanStyleWithRemarks />
+					<PlanStyle inputStyle={SELECTED_STYLE} />
 				</div>
 				<div
 					style={{

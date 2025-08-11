@@ -1,0 +1,42 @@
+.task--colorful {
+	text-align: center;
+	border: 1px solid #000000;
+	border-radius: 10px;
+}
+
+.task--colorful:nth-child(n) {
+	background-color: #e9dd32;
+}
+
+.task--colorful:nth-child(2n) {
+	background-color: #b8fa3e;
+}
+
+.task-colorful:nth-child(3n) {
+	background-color: #e97b32;
+}
+
+.task--colorful:nth-child(4n) {
+	background-color: #e9324b;
+}
+
+.task--colorful:nth-child(5n) {
+	background-color: #f358c5;
+}
+
+.task-checkbox--colorful {
+	display: none;
+}
+
+.task-text--colorful {
+	display: block;
+	width: 100%;
+	padding: 10px 5px;
+	font-size: 14px;
+	color: #020024;
+}
+
+.task--colorful:has(.task-checkbox--colorful:checked) {
+	background-color: #00ff2a80;
+	box-shadow: 0 0 5px 5px #00ff2a80;
+}

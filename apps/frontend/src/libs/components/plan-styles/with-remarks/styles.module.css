@@ -1,20 +1,11 @@
-.container {
-	width: 100%;
-	max-width: 595px;
-	min-height: 100%;
-	padding: 24px;
-	margin: 0 auto;
+.container--withremarks {
 	background-color: var(--color-bg-plan-style-with-remarks);
 }
 
-.day-list {
+.day-list--withremarks {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-auto-rows: 1fr;
 	padding: 0;
 	list-style: none;
-}
-
-.sample-container {
-	min-height: 0;
 }

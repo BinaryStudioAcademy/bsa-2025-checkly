@@ -2,6 +2,7 @@ export { type AsyncThunkConfig } from "./async-thunk-config.type.js";
 export { type ButtonSize } from "./button-size.type.js";
 export { type ButtonVariant } from "./button-variant.type.js";
 export { type PlanDay } from "./plan/plan-day.type.js";
+export { type PlanStyleOption } from "./plan/plan-type-option.type.js";
 export { type Plan } from "./plan/plan.type.js";
 export { type Task } from "./plan/task.type.js";
 export {

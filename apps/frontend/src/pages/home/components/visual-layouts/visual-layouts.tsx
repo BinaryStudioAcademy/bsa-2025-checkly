@@ -3,11 +3,14 @@ import {
 	StarsYellow03,
 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { DecorativeImage } from "~/libs/components/components.js";
-import { PlanStyleWithRemarks } from "~/libs/components/plan-styles/with-remarks/with-remarks.js";
+import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { type PlanStyleOption } from "~/libs/types/types.js";
 
 import { layoutExamples } from "./layout-examples.data.js";
 import styles from "./styles.module.css";
+
+const SELECTED_STYLE: PlanStyleOption = "withremarks";
 
 const VisualLayouts: React.FC = () => {
 	return (
@@ -43,7 +46,7 @@ const VisualLayouts: React.FC = () => {
 								className={styles["layout-card"]}
 								key={example.id}
 							>
-								<PlanStyleWithRemarks />
+								<PlanStyle inputStyle={SELECTED_STYLE} />
 								<h5>{example.title}</h5>
 							</li>
 						))}

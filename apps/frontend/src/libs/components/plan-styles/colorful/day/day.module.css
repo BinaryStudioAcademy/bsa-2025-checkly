@@ -1,0 +1,50 @@
+.day-item--colorful {
+	display: flex;
+	flex-direction: column;
+	border-bottom: 5px dashed #e9dd32;
+}
+
+.day-title--colorful {
+	align-self: flex-end;
+	padding: 5px;
+	color: #090979;
+	text-shadow:
+		-1px -1px 0 #ffffff,
+		1px -1px 0 #ffffff,
+		-1px 1px 0 #ffffff,
+		1px 1px 0 #ffffff;
+	border: 1px solid #000000;
+	border-radius: 10px;
+}
+
+.day-item--colorful:nth-child(n) > .day-title--colorful {
+	background-color: #ac1aac;
+}
+
+.day-item--colorful:nth-child(2n) > .day-title--colorful {
+	background-color: #e9a032;
+}
+
+.day-item--colorful:nth-child(3n) > .day-title--colorful {
+	background-color: #c22f0b;
+}
+
+.day-item--colorful:nth-child(4n) > .day-title--colorful {
+	background-color: #f16487;
+}
+
+.day-item--colorful:nth-child(5n) > .day-title--colorful {
+	background-color: #e9dd32;
+}
+
+.day-item--colorful:nth-child(6n) > .day-title--colorful {
+	background-color: #e03c0a;
+}
+
+.day-item--colorful:nth-child(7n) > .day-title--colorful {
+	background-color: #c2459c;
+}
+
+.task-list--colorful {
+	row-gap: 15px;
+}

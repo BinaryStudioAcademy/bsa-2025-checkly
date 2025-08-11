@@ -1,0 +1,10 @@
+.container--colorful {
+	background: radial-gradient(circle, #020024 0%, #090979 35%, #00d4ff 100%);
+}
+
+.day-list--colorful {
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	list-style: none;
+}

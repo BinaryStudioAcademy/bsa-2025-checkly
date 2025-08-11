@@ -1,0 +1,11 @@
+.container {
+	width: 100%;
+	max-width: 595px;
+	min-height: 100%;
+	padding: 24px;
+	margin: 0 auto;
+}
+
+.sample-container {
+	min-height: 0;
+}
