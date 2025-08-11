@@ -1,5 +1,5 @@
 .plan-title {
 	font-family: var(--font-family-secondary);
-	font-size: 42px;
+	font-size: calc(42px * var(--coefficient));
 	font-weight: 600;
 }

@@ -1,11 +1,22 @@
+.regular-view {
+	--coefficient: 1;
+}
+
+.sample-view {
+	--coefficient: 0.32;
+}
+
 .container {
 	width: 100%;
-	max-width: 595px;
+	max-width: calc(595px * var(--coefficient));
 	min-height: 100%;
-	padding: 24px;
+	padding: calc(24px * var(--coefficient));
 	margin: 0 auto;
 }
 
 .sample-container {
+	height: 100%;
 	min-height: 0;
+	max-height: 250px;
+	overflow-y: hidden;
 }

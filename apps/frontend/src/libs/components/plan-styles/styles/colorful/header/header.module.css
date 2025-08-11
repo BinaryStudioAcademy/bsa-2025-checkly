@@ -1,0 +1,8 @@
+.header--colorful {
+	padding-bottom: calc(10px * var(--coefficient));
+	border-bottom: calc(5px * var(--coefficient)) double #e9dd32;
+}
+
+.plan-title--colorful {
+	color: var(--color-bg-white);
+}

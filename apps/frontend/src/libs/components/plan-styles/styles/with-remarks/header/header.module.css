@@ -1,5 +1,5 @@
 .header--withremarks {
-	margin-bottom: 10px;
+	margin-bottom: calc(10px * var(--coefficient));
 }
 
 .plan-title--withremarks {

@@ -23,7 +23,7 @@
 
 .layout-card {
 	flex: 0 0 auto;
-	width: clamp(150px, 16vw, 205px);
+	width: clamp(180px, 16vw, 205px);
 	padding: 10px;
 	color: var(--color-text-primary);
 	text-align: center;

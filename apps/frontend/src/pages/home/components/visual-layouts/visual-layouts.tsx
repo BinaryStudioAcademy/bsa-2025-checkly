@@ -5,12 +5,11 @@ import {
 import { DecorativeImage } from "~/libs/components/components.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { type PlanStyleOption } from "~/libs/types/types.js";
 
 import { layoutExamples } from "./layout-examples.data.js";
 import styles from "./styles.module.css";
 
-const SELECTED_STYLE: PlanStyleOption = "withremarks";
+const IS_SAMPLE_VIEW = true;
 
 const VisualLayouts: React.FC = () => {
 	return (
@@ -46,7 +45,10 @@ const VisualLayouts: React.FC = () => {
 								className={styles["layout-card"]}
 								key={example.id}
 							>
-								<PlanStyle inputStyle={SELECTED_STYLE} />
+								<PlanStyle
+									inputStyle={example.planStyle}
+									isSampleView={IS_SAMPLE_VIEW}
+								/>
 								<h5>{example.title}</h5>
 							</li>
 						))}

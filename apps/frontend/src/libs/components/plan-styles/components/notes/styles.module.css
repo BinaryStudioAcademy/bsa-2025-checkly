@@ -1,5 +1,5 @@
 .notes {
-	padding: 12px;
+	padding: calc(12px * var(--coefficient));
 	font-family: var(--font-family-tretiary);
 	line-height: 1.4;
 	color: var(--color-text-deep-blue);
@@ -7,13 +7,13 @@
 
 .notes-title {
 	font-family: var(--font-family-tretiary);
-	font-size: 12px;
+	font-size: calc(12px * var(--coefficient));
 	font-weight: var(--font-weight-extra-bold);
 }
 
 .notes-hint {
-	margin-bottom: 12px;
-	font-size: 10px;
+	margin-bottom: calc(12px * var(--coefficient));
+	font-size: calc(10px * var(--coefficient));
 	font-weight: var(--font-weight-regular);
 }
 
@@ -30,11 +30,11 @@
 }
 
 .notes-text {
-	font-size: 10px;
+	font-size: calc(10px * var(--coefficient));
 	font-weight: var(--font-weight-regular);
 	line-height: 2.5;
 	text-align: justify;
 	text-decoration: underline;
 	text-decoration-color: var(--color-border-soft-pink);
-	text-underline-offset: 5px;
+	text-underline-offset: calc(5px * var(--coefficient));
 }

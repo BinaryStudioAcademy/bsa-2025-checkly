@@ -1,7 +1,7 @@
 .task--colorful {
 	text-align: center;
 	border: 1px solid #000000;
-	border-radius: 10px;
+	border-radius: calc(10px * var(--coefficient));
 }
 
 .task--colorful:nth-child(n) {
@@ -31,12 +31,13 @@
 .task-text--colorful {
 	display: block;
 	width: 100%;
-	padding: 10px 5px;
-	font-size: 14px;
+	padding: calc(10px * var(--coefficient)) calc(5px * var(--coefficient));
+	font-size: calc(14px * var(--coefficient));
 	color: #020024;
 }
 
 .task--colorful:has(.task-checkbox--colorful:checked) {
 	background-color: #00ff2a80;
-	box-shadow: 0 0 5px 5px #00ff2a80;
+	box-shadow: 0 0 calc(5px * var(--coefficient)) calc(5px * var(--coefficient))
+		#00ff2a80;
 }

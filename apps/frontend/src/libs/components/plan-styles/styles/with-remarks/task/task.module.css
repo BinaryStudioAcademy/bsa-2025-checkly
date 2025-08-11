@@ -6,9 +6,9 @@
 .task-checkbox--withremarks {
 	position: relative;
 	width: 100%;
-	max-width: 12px;
-	height: 12px;
-	margin: 0 8px 0 0;
+	max-width: calc(12px * var(--coefficient));
+	height: calc(12px * var(--coefficient));
+	margin: 0 calc(8px * var(--coefficient)) 0 0;
 	appearance: none;
 	background-color: var(--color-bg-task-checkbox);
 	border: 1px solid var(--color-text-night-blue);
@@ -34,6 +34,6 @@
 }
 
 .task-text--withremarks {
-	font-size: 10px;
+	font-size: calc(10px * var(--coefficient));
 	color: var(--color-text-tertiary);
 }

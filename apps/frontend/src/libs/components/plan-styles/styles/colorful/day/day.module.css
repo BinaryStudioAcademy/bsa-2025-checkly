@@ -1,12 +1,12 @@
 .day-item--colorful {
 	display: flex;
 	flex-direction: column;
-	border-bottom: 5px dashed #e9dd32;
+	border-bottom: calc(5px * var(--coefficient)) dashed #e9dd32;
 }
 
 .day-title--colorful {
 	align-self: flex-end;
-	padding: 5px;
+	padding: calc(5px * var(--coefficient));
 	color: #090979;
 	text-shadow:
 		-1px -1px 0 #ffffff,
@@ -14,7 +14,7 @@
 		-1px 1px 0 #ffffff,
 		1px 1px 0 #ffffff;
 	border: 1px solid #000000;
-	border-radius: 10px;
+	border-radius: calc(10px * var(--coefficient));
 }
 
 .day-item--colorful:nth-child(n) > .day-title--colorful {
@@ -46,5 +46,5 @@
 }
 
 .task-list--colorful {
-	row-gap: 15px;
+	row-gap: calc(15px * var(--coefficient));
 }
