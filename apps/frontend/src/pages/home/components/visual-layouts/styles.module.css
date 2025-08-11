@@ -18,6 +18,7 @@
 	gap: clamp(15px, 2.1vw, 25px);
 	padding: 10px;
 	overflow: auto hidden;
+	list-style-type: none;
 	scrollbar-width: none;
 }
 
