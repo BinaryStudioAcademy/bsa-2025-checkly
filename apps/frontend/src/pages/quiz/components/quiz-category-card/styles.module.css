@@ -118,7 +118,8 @@
 	}
 
 	.quiz-category-card-image {
-		top: -20px;
+		top: -25px;
+		left: 40%;
 		width: 100px;
 		height: 100px;
 	}
