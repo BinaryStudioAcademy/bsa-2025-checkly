@@ -5,7 +5,7 @@ import {
 import { OPTIONS } from "./libs/enums/enums.js";
 import { type QuestionModel } from "./libs/models/models.js";
 
-class QuizRepository {
+class QuizQuestionRepository {
 	private questionModel: typeof QuestionModel;
 
 	public constructor(questionModel: typeof QuestionModel) {
@@ -35,4 +35,4 @@ class QuizRepository {
 	}
 }
 
-export { QuizRepository };
+export { QuizQuestionRepository };

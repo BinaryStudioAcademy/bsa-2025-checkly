@@ -1,10 +1,7 @@
-import { type QuestionOptionDto } from "../types/types.js";
-
-type QuestionOptionProperties = {
-	id: number;
-	order: number;
-	text: string;
-};
+import {
+	type QuestionOptionDto,
+	type QuestionOptionProperties,
+} from "../types/types.js";
 
 class QuestionOptionEntity {
 	constructor(

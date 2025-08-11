@@ -1,9 +1,5 @@
-import {
-	type QuizAnswersRequestDto,
-	type QuizQuestionsResponseDto,
-} from "./libs/types/types.js";
+import { type QuizAnswersRequestDto } from "./libs/types/types.js";
 import { createPrompt } from "./libs/utilities/utilities.js";
-import { type QuizRepository } from "./quiz.repository.js";
 
 const MockPlan = {
 	"days": [
@@ -41,20 +37,6 @@ const MockPlan = {
 };
 
 class QuizService {
-	private quizRepository: QuizRepository;
-
-	public constructor(quizRepository: QuizRepository) {
-		this.quizRepository = quizRepository;
-	}
-
-	public async findAllQuestions(): Promise<QuizQuestionsResponseDto> {
-		const questions = await this.quizRepository.findAllQuestionsWithOptions();
-
-		return {
-			items: questions.map((question) => question.toObject()),
-		};
-	}
-
 	public handleAnswers(payload: QuizAnswersRequestDto): unknown {
 		const prompt = createPrompt(payload);
 
