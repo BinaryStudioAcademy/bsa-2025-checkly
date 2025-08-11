@@ -2,6 +2,7 @@ export {
 	APIPath,
 	AppEnvironment,
 	ContentType,
+	DataStatus,
 	ErrorConstants,
 	ErrorMessage,
 	FastifyHook,
@@ -59,8 +60,10 @@ export {
 	QuizAnswersValidationSchema,
 	QuizApiPath,
 	type QuizCategoryType,
+	QuizIndexes,
 	QuizQuestionFormat,
 	type QuizQuestionsResponseDto,
+	QuizStateValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
 	ExecutionTimeType,
