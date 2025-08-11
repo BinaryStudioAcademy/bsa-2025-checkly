@@ -6,7 +6,7 @@ import { DecorativeImage } from "~/libs/components/components.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
-import { layoutExamples } from "./layout-examples.data.js";
+import { layoutExamples } from "./libs/constants.js";
 import styles from "./styles.module.css";
 
 const IS_SAMPLE_VIEW = true;
@@ -38,6 +38,7 @@ const VisualLayouts: React.FC = () => {
 					<ul
 						aria-label="Available layout options"
 						className={styles["layout-list"]}
+						data-list
 					>
 						{layoutExamples.map((example) => (
 							<li

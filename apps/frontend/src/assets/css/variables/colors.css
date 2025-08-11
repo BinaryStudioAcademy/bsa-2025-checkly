@@ -37,4 +37,5 @@
 	--color-border-pink-red: #9a5d6a;
 	--color-bg-task-checkbox: #9a5d6a20;
 	--color-text-checked-task: #0c1c1f70;
+	--color-bg-sidebar: var(--color-bg-light);
 }

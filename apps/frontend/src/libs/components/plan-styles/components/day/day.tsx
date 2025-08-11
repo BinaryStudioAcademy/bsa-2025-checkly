@@ -2,7 +2,7 @@ import { planStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { type PlanStyleOption, type Task } from "~/libs/types/types.js";
 
-import { Task as TaskItem } from "../task/task.js";
+import { Task as TaskItem } from "../components.js";
 import styles from "./styles.module.css";
 
 type Properties = {
