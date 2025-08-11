@@ -7,6 +7,7 @@ import {
 	Wrapper,
 } from "./pages/dashboard-wrapper-mock/components/components.js";
 import { Auth, Home, NotFound } from "./pages/pages.js";
+import { PlanEdit } from "./pages/plan-edit/plan-edit.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
 
@@ -29,6 +30,11 @@ const routes: CustomRouteObject[] = [
 		element: <Auth />,
 		handle: { access: RouteAccess.NOT_AUTHENTICATED },
 		path: AppRoute.SIGN_UP,
+	},
+	{
+		element: <PlanEdit />,
+		handle: { access: RouteAccess.AUTHENTICATED },
+		path: AppRoute.PLAN_EDIT,
 	},
 	{
 		children: [
