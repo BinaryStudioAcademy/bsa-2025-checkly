@@ -35,7 +35,6 @@ const VisualLayouts: React.FC = () => {
 					<ul
 						aria-label="Available layout options"
 						className={styles["layout-list"]}
-						data-list
 					>
 						{layoutExamples.map((example) => (
 							<li

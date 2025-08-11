@@ -46,6 +46,7 @@
 }
 
 .layout-card:hover {
+	z-index: 100;
 	transform: scale(1.05);
 }
 
