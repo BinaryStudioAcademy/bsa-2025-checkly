@@ -1,13 +1,14 @@
 import { useState } from "react";
 
 import { logoIcon } from "~/assets/img/shared/shared.img.js";
+import { ElementTypes, PlaceholderValues } from "~/libs/enums/enums.js";
 import { sanitizeTextInput } from "~/libs/helpers/helpers.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type MixedQuestionProperties,
 	type MultipleAnswers,
-	type SingleAnswer,
 } from "~/libs/types/types.js";
+import { isOptionSelected, isOtherOption, toggleOption } from "~/pages/quiz/questions/libs/utilities.js";
 
 import styles from "./styles.module.css";
 
@@ -16,7 +17,7 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 	onAnswer,
 	question,
 }: MixedQuestionProperties): React.ReactElement => {
-	const [selectedOptions, setSelectedOptions] = useState<MultipleAnswers>(
+	const [selectedOptions, setSelectedOptions] = useState<MultipleAnswers[]>(
 		currentAnswer?.selectedOptions || [],
 	);
 	const [userInput, setUserInput] = useState<string>(
@@ -25,13 +26,11 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 
 	const handleOptionChange = useCallback(
 		(option: string, checked: boolean): void => {
-			const newSelectedOptions = checked
-				? [...selectedOptions, option]
-				: selectedOptions.filter((item: SingleAnswer) => item !== option);
+			const newSelectedOptions = toggleOption(option, selectedOptions, checked);
 
 			let newUserInput = userInput;
 
-			if (option.trim().toLowerCase().includes("other") && !checked) {
+			if (isOtherOption(option) && !checked) {
 				newUserInput = "";
 				setUserInput("");
 			}
@@ -65,8 +64,7 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 
 	const isOthersSelected = selectedOptions.some(
 		(option) =>
-			typeof option === "string" &&
-			option.trim().toLowerCase().includes("other"),
+			typeof option === "string" && isOtherOption(option),
 	);
 
 	return (
@@ -76,13 +74,13 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 					{question.options.map((option) => (
 						<label className={styles["checkbox-option"]} key={option.text}>
 							<input
-								checked={selectedOptions.includes(option.text) || false}
+								checked={isOptionSelected(option.text, selectedOptions)}
 								className={styles["checkbox-input"]}
 								onChange={handleInputChange(option.text)}
-								type="checkbox"
+								type={ElementTypes.CHECKBOX}
 							/>
 							<div className={styles["checkbox-custom"]}>
-								{selectedOptions.includes(option.text) && (
+								{isOptionSelected(option.text, selectedOptions) && (
 									<img alt="Selected" src={logoIcon} />
 								)}
 							</div>
@@ -101,8 +99,8 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 						className={styles["text-input"]}
 						id="mixed-text-answer"
 						onChange={handleTextChange}
-						placeholder="Enter your additional options..."
-						type="text"
+						placeholder={PlaceholderValues.ENTER_YOUR_ADDITIONAL_OPTIONS}
+						type={ElementTypes.TEXT}
 						value={userInput}
 					/>
 				</div>

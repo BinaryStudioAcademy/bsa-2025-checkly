@@ -6,43 +6,44 @@ import {
 	RollerSkate,
 	TeddyBear,
 } from "~/assets/img/shared/illustrations/categories/categories.img.js";
+import { CategoriesColors } from "~/libs/enums/enums.js";
 import { type QuizCategoryProperties } from "~/libs/types/types.js";
 import { QuizCategory } from "~/modules/quiz/libs/enums/enums.js";
 
-const QUIZ_CATEGORIES: readonly QuizCategoryProperties[] = [
+const QUIZ_CATEGORIES: QuizCategoryProperties[] = [
 	{
 		category: QuizCategory.PERSONAL_DEVELOPMENT,
-		color: "card-peach",
+		color: CategoriesColors.CARD_PEACH,
 		icon: TeddyBear,
 		selected: false,
 	},
 	{
 		category: QuizCategory.SPIRITUALITY,
-		color: "card-purple",
+		color: CategoriesColors.CARD_PURPLE,
 		icon: Flowers,
 		selected: false,
 	},
 	{
 		category: QuizCategory.SPORT,
-		color: "card-yellow",
+		color: CategoriesColors.CARD_YELLOW,
 		icon: Athlete,
 		selected: false,
 	},
 	{
 		category: QuizCategory.MONEY,
-		color: "card-gray",
+		color: CategoriesColors.CARD_GRAY,
 		icon: Money,
 		selected: false,
 	},
 	{
 		category: QuizCategory.CREATIVITY,
-		color: "card-pink",
+		color: CategoriesColors.CARD_PINK,
 		icon: Camera,
 		selected: false,
 	},
 	{
 		category: QuizCategory.HOBBY,
-		color: "card-cyan",
+		color: CategoriesColors.CARD_CYAN,
 		icon: RollerSkate,
 		selected: false,
 	},

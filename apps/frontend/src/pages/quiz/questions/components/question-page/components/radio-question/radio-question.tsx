@@ -1,4 +1,5 @@
 import { logoIcon } from "~/assets/img/shared/shared.img.js";
+import { ElementTypes } from "~/libs/enums/enums.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { type RadioQuestionProperties } from "~/libs/types/types.js";
 
@@ -27,7 +28,7 @@ const RadioQuestion: React.FC<RadioQuestionProperties> = ({
 						className={styles["radio-input"]}
 						name="radio-option"
 						onChange={handleOptionSelect(option.text)}
-						type="radio"
+						type={ElementTypes.RADIO}
 						value={option.text}
 					/>
 					<div className={styles["radio-custom"]}>

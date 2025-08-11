@@ -1,6 +1,8 @@
 import { logoIcon } from "~/assets/img/shared/shared.img.js";
+import { ElementTypes } from "~/libs/enums/enums.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { type CheckboxQuestionProperties } from "~/libs/types/types.js";
+import { isOptionSelected, toggleOption } from "~/pages/quiz/questions/libs/utilities.js";
 
 import styles from "./styles.module.css";
 
@@ -12,14 +14,8 @@ const CheckboxQuestion: React.FC<CheckboxQuestionProperties> = ({
 	const handleOptionChange = useCallback(
 		(option: string, checked: boolean): void => {
 			const currentSelections = currentAnswer || [];
-
-			if (checked) {
-				if (!currentSelections.includes(option)) {
-					onAnswer([...currentSelections, option]);
-				}
-			} else {
-				onAnswer(currentSelections.filter((item) => item !== option));
-			}
+			const newSelections = toggleOption(option, currentSelections, checked);
+			onAnswer(newSelections);
 		},
 		[currentAnswer, onAnswer],
 	);
@@ -39,13 +35,13 @@ const CheckboxQuestion: React.FC<CheckboxQuestionProperties> = ({
 				{question.options.map((option) => (
 					<label className={styles["checkbox-option"]} key={option.text}>
 						<input
-							checked={currentAnswer?.includes(option.text) || false}
+							checked={isOptionSelected(option.text, currentAnswer)}
 							className={styles["checkbox-input"]}
 							onChange={handleInputChange(option.text)}
-							type="checkbox"
+							type={ElementTypes.CHECKBOX}
 						/>
 						<div className={styles["checkbox-custom"]}>
-							{currentAnswer?.includes(option.text) && (
+							{isOptionSelected(option.text, currentAnswer) && (
 								<img alt="Selected" src={logoIcon} />
 							)}
 						</div>

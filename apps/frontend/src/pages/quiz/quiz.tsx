@@ -8,7 +8,7 @@ import {
 	TwinklesYellow,
 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
-import { AppRoute } from "~/libs/enums/enums.js";
+import { AppRoute, ButtonLabels, ButtonVariants, ErrorMessage } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { type QuizCategoryValue } from "~/modules/quiz/libs/types/types.js";
@@ -24,16 +24,13 @@ const Quiz: React.FC = (): React.ReactElement => {
 
 	const { selectedCategory } = useAppSelector((state) => state.quiz);
 
-	const safeNavigate = useCallback(
-		(path: string): void => {
-			const result = navigate(path);
-
-			if (result && typeof result.then === "function") {
-				result.then(() => {}).catch(() => {});
-			}
-		},
-		[navigate],
-	);
+	const safeNavigate = useCallback(async (path: string): Promise<void> => {
+		try {
+			await navigate(path);
+		} catch {
+			throw new Error(ErrorMessage.DEFAULT_ERROR_MESSAGE);
+		}
+	}, [navigate]);
 
 	const handleCategorySelect = useCallback(
 		(category: QuizCategoryValue): void => {
@@ -44,7 +41,7 @@ const Quiz: React.FC = (): React.ReactElement => {
 
 	const handleNext = useCallback((): void => {
 		if (selectedCategory) {
-			safeNavigate(AppRoute.QUIZ_QUESTIONS);
+			void safeNavigate(AppRoute.QUIZ_QUESTIONS);
 		}
 	}, [selectedCategory, safeNavigate]);
 
@@ -111,9 +108,9 @@ const Quiz: React.FC = (): React.ReactElement => {
 						<div className={getClassNames("cluster", styles["actions"])}>
 							<Button
 								disabled={!selectedCategory}
-								label="NEXT"
+								label={ButtonLabels.NEXT}
 								onClick={handleNext}
-								variant="primary"
+								variant={ButtonVariants.PRIMARY}
 							/>
 						</div>
 					</div>

@@ -1,5 +1,5 @@
 import { DecorativeImage } from "~/libs/components/decorative-image/decorative-image.js";
-import { QUIZ_CONSTANTS, QuizQuestionFormat } from "~/libs/enums/enums.js";
+import { QuizIndexes, QuizQuestionFormat } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { getQuestionIcons } from "~/libs/helpers/helpers.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
@@ -22,7 +22,7 @@ const QuestionPage: React.FC<QuestionPageProperties> = ({
 	questionNumber,
 }: QuestionPageProperties): React.ReactElement => {
 	const handleCheckboxAnswer = useCallback(
-		(selectedOptions: MultipleAnswers): void => {
+		(selectedOptions: MultipleAnswers[]): void => {
 			onAnswer({
 				isSkipped: false,
 				questionId: question.id,
@@ -61,7 +61,7 @@ const QuestionPage: React.FC<QuestionPageProperties> = ({
 	);
 
 	const handleMixedAnswer = useCallback(
-		(answer: { selectedOptions: MultipleAnswers; userInput: string }): void => {
+		(answer: { selectedOptions: MultipleAnswers[]; userInput: string }): void => {
 			onAnswer({
 				isSkipped: false,
 				questionId: question.id,
@@ -110,21 +110,12 @@ const QuestionPage: React.FC<QuestionPageProperties> = ({
 					<RadioQuestion
 						currentAnswer={
 							currentAnswer?.selectedOptions[
-								QUIZ_CONSTANTS.FIRST_ANSWER_INDEX
+								QuizIndexes.ZERO_INDEX
 							] || ""
 						}
 						onAnswer={handleRadioAnswer}
 						question={question}
 					/>
-				);
-			}
-
-			case QuizQuestionFormat.SINGLE_CHOICE_WITH_TEXT_INPUT: {
-				return (
-					<div className={styles["error"]}>
-						<h2>Unsupported question type</h2>
-						<p>Single choice with text input is not yet supported.</p>
-					</div>
 				);
 			}
 

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Loader } from "~/libs/components/components.js";
-import { AppRoute, DataStatus, QUIZ_CONSTANTS } from "~/libs/enums/enums.js";
+import { AppRoute, ErrorMessage, QuizIndexes } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import {
 	useAppDispatch,
@@ -16,6 +16,22 @@ import { NotesPage } from "./components/notes-page/notes-page.js";
 import { ProgressBar } from "./components/progress-bar/progress-bar.js";
 import { QuestionNavigation } from "./components/question-navigation/question-navigation.js";
 import { QuestionPage } from "./components/question-page/question-page.js";
+import {
+	canGoBack,
+	canSubmitQuiz,
+	getCurrentAnswer,
+	getCurrentQuestionData,
+	getTotalSteps,
+	hasError,
+	hasNoQuestions,
+	isLoading,
+	isNextDisabled,
+	isNotesPage,
+	isQuestionNotFound,
+	shouldFetchQuestions,
+	shouldMoveToNext,
+	shouldRedirectToQuiz,
+} from "./libs/utilities.js";
 import styles from "./styles.module.css";
 
 const QuestionFlow: React.FC = (): React.ReactElement => {
@@ -33,41 +49,36 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 
 	const { clearStorage } = useQuizSaved();
 
-	const safeNavigate = useCallback(
-		(path: string): void => {
-			const result = navigate(path);
-
-			if (result && typeof result.then === "function") {
-				result.then(() => {}).catch(() => {});
-			}
-		},
-		[navigate],
-	);
+	const safeNavigate = useCallback(async (path: string): Promise<void> => {
+		try {
+			await navigate(path);
+		} catch {
+			throw new Error(ErrorMessage.DEFAULT_ERROR_MESSAGE);
+		}
+	}, [navigate]);
 
 	useEffect(() => {
 		const initializeQuiz = async (): Promise<void> => {
-			const isIdleStatus = dataStatus === DataStatus.IDLE;
-			const shouldFetchQuestions =
-				selectedCategory && !questions && isIdleStatus;
-
-			if (shouldFetchQuestions) {
+			if (shouldFetchQuestions(selectedCategory, questions, dataStatus)) {
 				void dispatch(actions.fetchQuestions());
 			}
 
 			const hasSavedState = await storage.has(StorageKey.QUIZ_STATE);
 
-			if (!selectedCategory && !hasSavedState) {
-				safeNavigate(AppRoute.QUIZ);
+			if (shouldRedirectToQuiz(selectedCategory, hasSavedState)) {
+				void safeNavigate(AppRoute.QUIZ);
 			}
 		};
 
 		void initializeQuiz();
 	}, [dataStatus, dispatch, questions, selectedCategory, safeNavigate]);
 
-	const handleQuizComplete = useCallback((): void => {
-		const canSubmit = selectedCategory && questions;
+	const handleQuizComplete = useCallback(async (): Promise<void> => {
+		if (!canSubmitQuiz(selectedCategory, questions)) {
+			return;
+		}
 
-		if (!canSubmit) {
+		if (!selectedCategory) {
 			return;
 		}
 
@@ -85,10 +96,14 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 			localStorageKey,
 			JSON.stringify(submission, null, JSON_INDENTATION),
 		);
-		void dispatch(actions.submitQuiz(submission));
-		void clearStorage();
-		dispatch(actions.resetQuiz());
-		safeNavigate(AppRoute.QUIZ);
+		const result = await dispatch(actions.submitQuiz(submission));
+		const isFulfilled = /fulfilled/.test(result.type);
+		
+		if (isFulfilled) {
+			void clearStorage();
+			dispatch(actions.resetQuiz());
+			void safeNavigate(AppRoute.QUIZ);
+		}
 	}, [
 		answers,
 		dispatch,
@@ -100,35 +115,29 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 	]);
 
 	const handleNext = useCallback((): void => {
-		const hasMoreQuestions =
-			questions && currentQuestion < questions.items.length;
-		const isLastQuestion =
-			questions && currentQuestion === questions.items.length;
-
-		if (hasMoreQuestions || isLastQuestion) {
+		if (shouldMoveToNext(questions, currentQuestion)) {
 			dispatch(
 				actions.setCurrentQuestion(
-					currentQuestion + QUIZ_CONSTANTS.FIRST_QUESTION,
+					currentQuestion + QuizIndexes.FIRST_INDEX,
 				),
 			);
 		} else {
-			handleQuizComplete();
+			void handleQuizComplete();
 		}
 	}, [currentQuestion, dispatch, handleQuizComplete, questions]);
 
 	const handleBack = useCallback((): void => {
-		if (currentQuestion > QUIZ_CONSTANTS.FIRST_QUESTION) {
+		if (canGoBack(currentQuestion)) {
 			dispatch(
 				actions.setCurrentQuestion(
-					currentQuestion - QUIZ_CONSTANTS.FIRST_QUESTION,
+					currentQuestion - QuizIndexes.FIRST_INDEX,
 				),
 			);
 		}
 	}, [currentQuestion, dispatch]);
 
 	const handleSkip = useCallback((): void => {
-		const currentQuestionData =
-			questions?.items[currentQuestion - QUIZ_CONSTANTS.FIRST_QUESTION];
+		const currentQuestionData = getCurrentQuestionData(questions, currentQuestion);
 
 		if (currentQuestionData) {
 			dispatch(
@@ -142,26 +151,20 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 			);
 		}
 
-		const hasMoreQuestions =
-			questions && currentQuestion < questions.items.length;
-		const isLastQuestion =
-			questions && currentQuestion === questions.items.length;
-
-		if (hasMoreQuestions || isLastQuestion) {
+		if (shouldMoveToNext(questions, currentQuestion)) {
 			dispatch(
 				actions.setCurrentQuestion(
-					currentQuestion + QUIZ_CONSTANTS.FIRST_QUESTION,
+					currentQuestion + QuizIndexes.FIRST_INDEX,
 				),
 			);
 		} else {
-			handleQuizComplete();
+			void handleQuizComplete();
 		}
 	}, [currentQuestion, dispatch, handleQuizComplete, questions]);
 
 	const handleAnswer = useCallback(
 		(answer: QuizAnswer): void => {
-			const currentQuestionData =
-				questions?.items[currentQuestion - QUIZ_CONSTANTS.FIRST_QUESTION];
+			const currentQuestionData = getCurrentQuestionData(questions, currentQuestion);
 
 			if (currentQuestionData) {
 				dispatch(actions.saveAnswer(answer));
@@ -170,52 +173,30 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 		[currentQuestion, dispatch, questions],
 	);
 
-	const totalSteps =
-		(questions?.items.length ?? QUIZ_CONSTANTS.ZERO_QUESTIONS) +
-		QUIZ_CONSTANTS.FIRST_QUESTION;
-	const isNotesPage =
-		currentQuestion >
-		(questions?.items.length ?? QUIZ_CONSTANTS.ZERO_QUESTIONS);
-	const currentQuestionData =
-		questions?.items[currentQuestion - QUIZ_CONSTANTS.FIRST_QUESTION];
-	const currentAnswer = answers[currentQuestion];
+	const handleNotesNext = useCallback((): void => {
+		void handleQuizComplete();
+	}, [handleQuizComplete]);
 
-	const hasOtherSelected =
-		currentAnswer?.selectedOptions.some(
-			(option) =>
-				typeof option === "string" &&
-				option.trim().toLowerCase().includes("other"),
-		) ?? false;
+	const handleNotesSkip = useCallback((): void => {
+		void handleQuizComplete();
+	}, [handleQuizComplete]);
 
-	const hasNoOptions =
-		currentAnswer?.selectedOptions.length === QUIZ_CONSTANTS.ZERO_QUESTIONS;
-	const hasNoUserInput = !currentAnswer?.userInput.trim();
-	const hasOnlyOtherSelected =
-		hasOtherSelected &&
-		currentAnswer?.selectedOptions.length === QUIZ_CONSTANTS.FIRST_QUESTION;
-
-	const isQuestionRequired = currentQuestionData
-		? !currentQuestionData.isOptional
-		: false;
-	const isNextDisabled = isQuestionRequired
-		? !currentAnswer ||
-			(hasNoOptions && hasNoUserInput) ||
-			(hasOnlyOtherSelected && hasNoUserInput)
-		: false;
-
-	const isLoading =
-		dataStatus === DataStatus.PENDING || (!questions && selectedCategory);
-	const hasError = dataStatus === DataStatus.REJECTED;
-	const hasNoQuestions =
-		questions?.items.length === QUIZ_CONSTANTS.ZERO_QUESTIONS;
-	const isQuestionNotFound = !currentQuestionData;
+	const totalSteps = getTotalSteps(questions);
+	const isNotesPageValue = isNotesPage(currentQuestion, questions);
+	const currentQuestionData = getCurrentQuestionData(questions, currentQuestion);
+	const currentAnswer = getCurrentAnswer(answers, currentQuestion);
+	const isNextDisabledValue = isNextDisabled(currentAnswer, currentQuestionData);
+	const isLoadingValue = isLoading(dataStatus, questions, selectedCategory);
+	const hasErrorValue = hasError(dataStatus);
+	const hasNoQuestionsValue = hasNoQuestions(questions);
+	const isQuestionNotFoundValue = isQuestionNotFound(currentQuestionData);
 
 	const renderContent = (): React.ReactElement => {
-		if (isLoading) {
+		if (isLoadingValue) {
 			return <Loader container="fullscreen" size="large" theme="brand" />;
 		}
 
-		if (hasError) {
+		if (hasErrorValue) {
 			return (
 				<div className={styles["error"]}>
 					<h2>Error loading questions</h2>
@@ -224,7 +205,7 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 			);
 		}
 
-		if (hasNoQuestions) {
+		if (hasNoQuestionsValue) {
 			return (
 				<div className={styles["no-questions"]}>
 					<h2>No questions available</h2>
@@ -233,7 +214,7 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 			);
 		}
 
-		if (isNotesPage) {
+		if (isNotesPageValue) {
 			return (
 				<>
 					<ProgressBar
@@ -246,15 +227,24 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 						isNextDisabled={false}
 						isQuestionRequired={false}
 						onBack={handleBack}
-						onNext={handleQuizComplete}
-						onSkip={handleQuizComplete}
+						onNext={handleNotesNext}
+						onSkip={handleNotesSkip}
 						totalQuestions={totalSteps}
 					/>
 				</>
 			);
 		}
 
-		if (isQuestionNotFound) {
+		if (isQuestionNotFoundValue) {
+			return (
+				<div className={styles["error"]}>
+					<h2>Question not found</h2>
+					<p>Sorry, this question could not be loaded.</p>
+				</div>
+			);
+		}
+
+		if (!currentQuestionData) {
 			return (
 				<div className={styles["error"]}>
 					<h2>Question not found</h2>
@@ -277,7 +267,7 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 				/>
 				<QuestionNavigation
 					currentQuestion={currentQuestion}
-					isNextDisabled={isNextDisabled}
+					isNextDisabled={isNextDisabledValue}
 					isQuestionRequired={!currentQuestionData.isOptional}
 					onBack={handleBack}
 					onNext={handleNext}

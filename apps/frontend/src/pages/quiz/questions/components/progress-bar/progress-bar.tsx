@@ -1,6 +1,7 @@
-import { PROGRESS_CONSTANTS } from "~/libs/enums/enums.js";
+import { QuizIndexes } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { type ProgressBarProperties } from "~/libs/types/types.js";
+import { isCurrentQuestion, isQuestionCompleted } from "~/pages/quiz/questions/libs/utilities.js";
 
 import styles from "./styles.module.css";
 
@@ -12,9 +13,9 @@ const ProgressBar: React.FC<ProgressBarProperties> = ({
 		<div className={styles["progress-bar"]}>
 			<div className={styles["progress-container"]}>
 				{Array.from({ length: totalQuestions }, (_, index) => {
-					const questionNumber = index + PROGRESS_CONSTANTS.FIRST_QUESTION;
-					const isCompleted = currentQuestion > questionNumber;
-					const isCurrent = currentQuestion === questionNumber;
+					const questionNumber = index + QuizIndexes.FIRST_INDEX;
+					const isCompleted = isQuestionCompleted(currentQuestion, questionNumber);
+					const isCurrent = isCurrentQuestion(currentQuestion, questionNumber);
 
 					return (
 						<div

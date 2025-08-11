@@ -1,5 +1,6 @@
 import { logoIcon } from "~/assets/img/shared/shared.img.js";
 import { DecorativeImage } from "~/libs/components/decorative-image/decorative-image.js";
+import { ElementTypes, KeyboardKeys, QuizIndexes } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { type QuizCategoryCardProperties } from "~/libs/types/types.js";
@@ -20,7 +21,7 @@ const QuizCategoryCard: React.FC<QuizCategoryCardProperties> = ({
 
 	const handleKeyDown = useCallback(
 		(event: React.KeyboardEvent): void => {
-			if (event.key === "Enter" || event.key === " ") {
+			if (event.key === KeyboardKeys.ENTER || event.key === KeyboardKeys.SPACE) {
 				event.preventDefault();
 				onSelect();
 			}
@@ -40,8 +41,8 @@ const QuizCategoryCard: React.FC<QuizCategoryCardProperties> = ({
 			)}
 			onClick={onSelect}
 			onKeyDown={handleKeyDown}
-			role="button"
-			tabIndex={0}
+			role={ElementTypes.BUTTON}
+			tabIndex={QuizIndexes.ZERO_INDEX}
 		>
 			<div className={styles["quiz-category-card-image"]}>
 				<DecorativeImage
@@ -58,7 +59,7 @@ const QuizCategoryCard: React.FC<QuizCategoryCardProperties> = ({
 				id={`quiz-category-${category}`}
 				name="quiz-category"
 				onChange={handleChange}
-				type="radio"
+				type={ElementTypes.RADIO}
 				value={category}
 			/>
 			{selected && (

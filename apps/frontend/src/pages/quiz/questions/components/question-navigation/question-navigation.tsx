@@ -1,7 +1,8 @@
 import { Button } from "~/libs/components/components.js";
-import { ButtonLabels, NAVIGATION_CONSTANTS } from "~/libs/enums/enums.js";
+import { ButtonLabels } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { type QuestionNavigationProperties } from "~/libs/types/types.js";
+import { getNextButtonLabel, isFirstQuestion, shouldShowSkip } from "~/pages/quiz/questions/libs/utilities.js";
 
 import styles from "./styles.module.css";
 
@@ -14,18 +15,14 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 	onSkip,
 	totalQuestions,
 }: QuestionNavigationProperties): React.ReactElement => {
-	const isFirstQuestion =
-		currentQuestion === NAVIGATION_CONSTANTS.FIRST_QUESTION;
-	const isLastQuestion = currentQuestion === totalQuestions;
-	const showSkip = !isLastQuestion && !isQuestionRequired;
-
-	const getNextButtonLabel = (): string =>
-		isLastQuestion ? ButtonLabels.SUBMIT : ButtonLabels.NEXT;
+	const isFirst = isFirstQuestion(currentQuestion);
+	const showSkip = shouldShowSkip(currentQuestion, totalQuestions, isQuestionRequired);
+	const nextButtonLabel = getNextButtonLabel(currentQuestion, totalQuestions);
 
 	return (
 		<div className={styles["question-navigation"]}>
 			<div className={getClassNames("cluster", styles["navigation-buttons"])}>
-				{!isFirstQuestion && (
+				{!isFirst && (
 					<Button
 						label={ButtonLabels.BACK}
 						onClick={onBack}
@@ -36,7 +33,7 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 
 				<Button
 					disabled={isNextDisabled}
-					label={getNextButtonLabel()}
+					label={nextButtonLabel}
 					onClick={onNext}
 					size="large"
 					variant="primary"
