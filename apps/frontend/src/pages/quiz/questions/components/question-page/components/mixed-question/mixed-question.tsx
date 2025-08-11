@@ -8,7 +8,11 @@ import {
 	type MixedQuestionProperties,
 	type MultipleAnswers,
 } from "~/libs/types/types.js";
-import { isOptionSelected, isOtherOption, toggleOption } from "~/pages/quiz/questions/libs/utilities.js";
+import {
+	isOptionSelected,
+	isOtherOption,
+	toggleOption,
+} from "~/pages/quiz/questions/libs/utilities.js";
 
 import styles from "./styles.module.css";
 
@@ -63,8 +67,7 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 	);
 
 	const isOthersSelected = selectedOptions.some(
-		(option) =>
-			typeof option === "string" && isOtherOption(option),
+		(option) => typeof option === "string" && isOtherOption(option),
 	);
 
 	return (

@@ -1,7 +1,11 @@
 import { DataStatus } from "shared";
 import { z } from "zod";
 
-import { QuizCategory, QuizIndexes, QuizQuestionFormat } from "../enums/enums.js";
+import {
+	QuizCategory,
+	QuizIndexes,
+	QuizQuestionFormat,
+} from "../enums/enums.js";
 
 const QuestionOptionSchema = z.object({
 	id: z.number().int().positive(),
@@ -31,7 +35,9 @@ const QuizAnswerSchema = z.object({
 });
 
 const QuizStateSchema = z.object({
-	answers: z.record(z.coerce.number().int().positive(), QuizAnswerSchema).default({}),
+	answers: z
+		.record(z.coerce.number().int().positive(), QuizAnswerSchema)
+		.default({}),
 	currentQuestion: z.number().int().positive().default(QuizIndexes.FIRST_INDEX),
 	dataStatus: z.nativeEnum(DataStatus).default(DataStatus.IDLE),
 	notes: z.string().default(""),

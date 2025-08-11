@@ -2,7 +2,10 @@ import { logoIcon } from "~/assets/img/shared/shared.img.js";
 import { ElementTypes } from "~/libs/enums/enums.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { type CheckboxQuestionProperties } from "~/libs/types/types.js";
-import { isOptionSelected, toggleOption } from "~/pages/quiz/questions/libs/utilities.js";
+import {
+	isOptionSelected,
+	toggleOption,
+} from "~/pages/quiz/questions/libs/utilities.js";
 
 import styles from "./styles.module.css";
 

@@ -26,7 +26,7 @@ const loadQuizState = async (): Promise<null | Partial<QuizState>> => {
 		return validatedData as Partial<QuizState>;
 	} catch {
 		await storage.drop(StorageKey.QUIZ_STATE);
-		
+
 		throw new Error(ErrorMessage.QUIZ_STORAGE_LOAD_ERROR_MESSAGE);
 	}
 };

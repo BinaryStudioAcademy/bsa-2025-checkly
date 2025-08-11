@@ -1,10 +1,15 @@
 import { QuizIndexes } from "~/libs/enums/enums.js";
 import { type MultipleAnswers } from "~/libs/types/types.js";
-import { type QuestionDto, type QuizAnswer } from "~/modules/quiz/libs/types/types.js";
+import {
+	type QuestionDto,
+	type QuizAnswer,
+} from "~/modules/quiz/libs/types/types.js";
 
 const hasValidAnswer = (currentAnswer: QuizAnswer): boolean => {
-	const hasOptions = currentAnswer.selectedOptions.length > QuizIndexes.ZERO_INDEX;
-	const hasUserInput = currentAnswer.userInput.trim().length > QuizIndexes.ZERO_INDEX;
+	const hasOptions =
+		currentAnswer.selectedOptions.length > QuizIndexes.ZERO_INDEX;
+	const hasUserInput =
+		currentAnswer.userInput.trim().length > QuizIndexes.ZERO_INDEX;
 
 	return hasOptions || hasUserInput;
 };
@@ -18,15 +23,13 @@ const isOtherOption = (option: string): boolean => {
 };
 
 const hasOtherSelected = (currentAnswer: QuizAnswer): boolean => {
-	return currentAnswer.selectedOptions.some(
-		(option) => {
-			if (typeof option !== "string") {
-				return false;
-			}
+	return currentAnswer.selectedOptions.some((option) => {
+		if (typeof option !== "string") {
+			return false;
+		}
 
-			return isOtherOption(option);
-		},
-	);
+		return isOtherOption(option);
+	});
 };
 
 const hasNoOptions = (currentAnswer: QuizAnswer): boolean => {
@@ -60,17 +63,26 @@ const isNextDisabled = (
 		return true;
 	}
 
-	const hasNoValidOptions = hasNoOptions(currentAnswer) && hasNoUserInput(currentAnswer);
-	const hasOnlyOtherWithNoInput = hasOnlyOtherSelected(currentAnswer) && hasNoUserInput(currentAnswer);
+	const hasNoValidOptions =
+		hasNoOptions(currentAnswer) && hasNoUserInput(currentAnswer);
+	const hasOnlyOtherWithNoInput =
+		hasOnlyOtherSelected(currentAnswer) && hasNoUserInput(currentAnswer);
 
 	return hasNoValidOptions || hasOnlyOtherWithNoInput;
 };
 
-const isOptionSelected = (option: string, selectedOptions: MultipleAnswers[] | undefined): boolean => {
+const isOptionSelected = (
+	option: string,
+	selectedOptions: MultipleAnswers[] | undefined,
+): boolean => {
 	return selectedOptions?.includes(option) ?? false;
 };
 
-const toggleOption = (option: string, selectedOptions: MultipleAnswers[], checked: boolean): MultipleAnswers[] => {
+const toggleOption = (
+	option: string,
+	selectedOptions: MultipleAnswers[],
+	checked: boolean,
+): MultipleAnswers[] => {
 	if (!checked) {
 		return selectedOptions.filter((item) => item !== option);
 	}

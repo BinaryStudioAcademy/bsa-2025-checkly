@@ -1,6 +1,10 @@
 import { QuizIndexes } from "~/libs/enums/enums.js";
 import { type MultipleAnswers } from "~/libs/types/types.js";
-import { type QuestionDto, type QuizAnswer, type QuizQuestionsResponseDto } from "~/modules/quiz/libs/types/types.js";
+import {
+	type QuestionDto,
+	type QuizAnswer,
+	type QuizQuestionsResponseDto,
+} from "~/modules/quiz/libs/types/types.js";
 
 const getCurrentAnswerText = (currentAnswer: QuizAnswer): string => {
 	return currentAnswer.userInput || "";
@@ -10,45 +14,63 @@ const getTextAnswerValue = (currentAnswer: string | undefined): string => {
 	return currentAnswer || "";
 };
 
-const getCurrentAnswerOptions = (currentAnswer: QuizAnswer): MultipleAnswers[] => {
+const getCurrentAnswerOptions = (
+	currentAnswer: QuizAnswer,
+): MultipleAnswers[] => {
 	return currentAnswer.selectedOptions;
 };
 
 const getTotalSteps = (questions: null | QuizQuestionsResponseDto): number => {
-	return (questions?.items.length ?? QuizIndexes.ZERO_INDEX) + QuizIndexes.FIRST_INDEX;
+	return (
+		(questions?.items.length ?? QuizIndexes.ZERO_INDEX) +
+		QuizIndexes.FIRST_INDEX
+	);
 };
 
-const isNotesPage = (currentQuestion: number, questions: null | QuizQuestionsResponseDto): boolean => {
+const isNotesPage = (
+	currentQuestion: number,
+	questions: null | QuizQuestionsResponseDto,
+): boolean => {
 	return currentQuestion > (questions?.items.length ?? QuizIndexes.ZERO_INDEX);
 };
 
 const getCurrentQuestionData = (
 	questions: null | QuizQuestionsResponseDto,
-	currentQuestion: number
+	currentQuestion: number,
 ): QuestionDto | undefined => {
 	return questions?.items[currentQuestion - QuizIndexes.FIRST_INDEX];
 };
 
 const getCurrentAnswer = (
 	answers: Record<number, QuizAnswer>,
-	currentQuestion: number
+	currentQuestion: number,
 ): QuizAnswer | undefined => {
 	return answers[currentQuestion];
 };
 
-const isQuestionCompleted = (currentQuestion: number, questionNumber: number): boolean => {
+const isQuestionCompleted = (
+	currentQuestion: number,
+	questionNumber: number,
+): boolean => {
 	return currentQuestion > questionNumber;
 };
 
-const isCurrentQuestion = (currentQuestion: number, questionNumber: number): boolean => {
+const isCurrentQuestion = (
+	currentQuestion: number,
+	questionNumber: number,
+): boolean => {
 	return currentQuestion === questionNumber;
 };
 
-const hasNoQuestions = (questions: null | QuizQuestionsResponseDto): boolean => {
+const hasNoQuestions = (
+	questions: null | QuizQuestionsResponseDto,
+): boolean => {
 	return !questions || questions.items.length === QuizIndexes.ZERO_INDEX;
 };
 
-const isQuestionNotFound = (currentQuestionData: QuestionDto | undefined): boolean => {
+const isQuestionNotFound = (
+	currentQuestionData: QuestionDto | undefined,
+): boolean => {
 	return !currentQuestionData;
 };
 

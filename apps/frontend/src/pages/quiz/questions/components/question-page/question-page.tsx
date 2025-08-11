@@ -61,7 +61,10 @@ const QuestionPage: React.FC<QuestionPageProperties> = ({
 	);
 
 	const handleMixedAnswer = useCallback(
-		(answer: { selectedOptions: MultipleAnswers[]; userInput: string }): void => {
+		(answer: {
+			selectedOptions: MultipleAnswers[];
+			userInput: string;
+		}): void => {
 			onAnswer({
 				isSkipped: false,
 				questionId: question.id,
@@ -109,9 +112,7 @@ const QuestionPage: React.FC<QuestionPageProperties> = ({
 				return (
 					<RadioQuestion
 						currentAnswer={
-							currentAnswer?.selectedOptions[
-								QuizIndexes.ZERO_INDEX
-							] || ""
+							currentAnswer?.selectedOptions[QuizIndexes.ZERO_INDEX] || ""
 						}
 						onAnswer={handleRadioAnswer}
 						question={question}

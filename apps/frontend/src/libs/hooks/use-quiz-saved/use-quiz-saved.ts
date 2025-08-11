@@ -11,9 +11,8 @@ import { actions } from "~/modules/quiz/quiz.js";
 const useQuizSaved = (): { clearStorage: () => Promise<void> } => {
 	const dispatch = useAppDispatch();
 
-	const { answers, currentQuestion, notes, questions, selectedCategory } = useAppSelector(
-		(state) => state.quiz,
-	);
+	const { answers, currentQuestion, notes, questions, selectedCategory } =
+		useAppSelector((state) => state.quiz);
 
 	useEffect(() => {
 		const initializeState = async (): Promise<void> => {

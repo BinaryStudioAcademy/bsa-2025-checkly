@@ -49,13 +49,16 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 
 	const { clearStorage } = useQuizSaved();
 
-	const safeNavigate = useCallback(async (path: string): Promise<void> => {
-		try {
-			await navigate(path);
-		} catch {
-			throw new Error(ErrorMessage.DEFAULT_ERROR_MESSAGE);
-		}
-	}, [navigate]);
+	const safeNavigate = useCallback(
+		async (path: string): Promise<void> => {
+			try {
+				await navigate(path);
+			} catch {
+				throw new Error(ErrorMessage.DEFAULT_ERROR_MESSAGE);
+			}
+		},
+		[navigate],
+	);
 
 	useEffect(() => {
 		const initializeQuiz = async (): Promise<void> => {
@@ -98,7 +101,7 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 		);
 		const result = await dispatch(actions.submitQuiz(submission));
 		const isFulfilled = /fulfilled/.test(result.type);
-		
+
 		if (isFulfilled) {
 			void clearStorage();
 			dispatch(actions.resetQuiz());
@@ -117,9 +120,7 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 	const handleNext = useCallback((): void => {
 		if (shouldMoveToNext(questions, currentQuestion)) {
 			dispatch(
-				actions.setCurrentQuestion(
-					currentQuestion + QuizIndexes.FIRST_INDEX,
-				),
+				actions.setCurrentQuestion(currentQuestion + QuizIndexes.FIRST_INDEX),
 			);
 		} else {
 			void handleQuizComplete();
@@ -129,15 +130,16 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 	const handleBack = useCallback((): void => {
 		if (canGoBack(currentQuestion)) {
 			dispatch(
-				actions.setCurrentQuestion(
-					currentQuestion - QuizIndexes.FIRST_INDEX,
-				),
+				actions.setCurrentQuestion(currentQuestion - QuizIndexes.FIRST_INDEX),
 			);
 		}
 	}, [currentQuestion, dispatch]);
 
 	const handleSkip = useCallback((): void => {
-		const currentQuestionData = getCurrentQuestionData(questions, currentQuestion);
+		const currentQuestionData = getCurrentQuestionData(
+			questions,
+			currentQuestion,
+		);
 
 		if (currentQuestionData) {
 			dispatch(
@@ -153,9 +155,7 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 
 		if (shouldMoveToNext(questions, currentQuestion)) {
 			dispatch(
-				actions.setCurrentQuestion(
-					currentQuestion + QuizIndexes.FIRST_INDEX,
-				),
+				actions.setCurrentQuestion(currentQuestion + QuizIndexes.FIRST_INDEX),
 			);
 		} else {
 			void handleQuizComplete();
@@ -164,7 +164,10 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 
 	const handleAnswer = useCallback(
 		(answer: QuizAnswer): void => {
-			const currentQuestionData = getCurrentQuestionData(questions, currentQuestion);
+			const currentQuestionData = getCurrentQuestionData(
+				questions,
+				currentQuestion,
+			);
 
 			if (currentQuestionData) {
 				dispatch(actions.saveAnswer(answer));
@@ -183,9 +186,15 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 
 	const totalSteps = getTotalSteps(questions);
 	const isNotesPageValue = isNotesPage(currentQuestion, questions);
-	const currentQuestionData = getCurrentQuestionData(questions, currentQuestion);
+	const currentQuestionData = getCurrentQuestionData(
+		questions,
+		currentQuestion,
+	);
 	const currentAnswer = getCurrentAnswer(answers, currentQuestion);
-	const isNextDisabledValue = isNextDisabled(currentAnswer, currentQuestionData);
+	const isNextDisabledValue = isNextDisabled(
+		currentAnswer,
+		currentQuestionData,
+	);
 	const isLoadingValue = isLoading(dataStatus, questions, selectedCategory);
 	const hasErrorValue = hasError(dataStatus);
 	const hasNoQuestionsValue = hasNoQuestions(questions);

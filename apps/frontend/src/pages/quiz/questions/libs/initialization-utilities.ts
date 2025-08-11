@@ -8,27 +8,33 @@ const isIdleStatus = (dataStatus: string): boolean => {
 const shouldFetchQuestions = (
 	selectedCategory: null | string,
 	questions: null | QuizQuestionsResponseDto,
-	dataStatus: string
+	dataStatus: string,
 ): boolean => {
 	return !!selectedCategory && !questions && isIdleStatus(dataStatus);
 };
 
 const shouldRedirectToQuiz = (
 	selectedCategory: null | string,
-	hasSavedState: boolean
+	hasSavedState: boolean,
 ): boolean => {
 	return !selectedCategory && !hasSavedState;
 };
 
 const canSubmitQuiz = (
 	selectedCategory: null | string,
-	questions: null | QuizQuestionsResponseDto
+	questions: null | QuizQuestionsResponseDto,
 ): boolean => {
 	return !!selectedCategory && !!questions;
 };
 
-const isLoading = (dataStatus: string, questions: null | QuizQuestionsResponseDto, selectedCategory: null | string): boolean => {
-	return dataStatus === DataStatus.PENDING || (!questions && !!selectedCategory);
+const isLoading = (
+	dataStatus: string,
+	questions: null | QuizQuestionsResponseDto,
+	selectedCategory: null | string,
+): boolean => {
+	return (
+		dataStatus === DataStatus.PENDING || (!questions && !!selectedCategory)
+	);
 };
 
 const hasError = (dataStatus: string): boolean => {

@@ -2,7 +2,11 @@ import { Button } from "~/libs/components/components.js";
 import { ButtonLabels } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { type QuestionNavigationProperties } from "~/libs/types/types.js";
-import { getNextButtonLabel, isFirstQuestion, shouldShowSkip } from "~/pages/quiz/questions/libs/utilities.js";
+import {
+	getNextButtonLabel,
+	isFirstQuestion,
+	shouldShowSkip,
+} from "~/pages/quiz/questions/libs/utilities.js";
 
 import styles from "./styles.module.css";
 
@@ -16,7 +20,11 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 	totalQuestions,
 }: QuestionNavigationProperties): React.ReactElement => {
 	const isFirst = isFirstQuestion(currentQuestion);
-	const showSkip = shouldShowSkip(currentQuestion, totalQuestions, isQuestionRequired);
+	const showSkip = shouldShowSkip(
+		currentQuestion,
+		totalQuestions,
+		isQuestionRequired,
+	);
 	const nextButtonLabel = getNextButtonLabel(currentQuestion, totalQuestions);
 
 	return (

@@ -21,7 +21,10 @@ const QuizCategoryCard: React.FC<QuizCategoryCardProperties> = ({
 
 	const handleKeyDown = useCallback(
 		(event: React.KeyboardEvent): void => {
-			if (event.key === KeyboardKeys.ENTER || event.key === KeyboardKeys.SPACE) {
+			if (
+				event.key === KeyboardKeys.ENTER ||
+				event.key === KeyboardKeys.SPACE
+			) {
 				event.preventDefault();
 				onSelect();
 			}

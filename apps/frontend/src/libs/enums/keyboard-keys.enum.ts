@@ -1,6 +1,6 @@
 const KeyboardKeys = {
-    ENTER: "Enter",
-    SPACE: " ",
+	ENTER: "Enter",
+	SPACE: " ",
 } as const;
 
 export { KeyboardKeys };

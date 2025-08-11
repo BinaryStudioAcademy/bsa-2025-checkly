@@ -17,7 +17,7 @@ type Icon = {
 	position: IconPosition;
 };
 
-type IconPosition = typeof IconsPositions[keyof typeof IconsPositions];
+type IconPosition = (typeof IconsPositions)[keyof typeof IconsPositions];
 
 const QUESTION_ICON_SETS = [
 	[
@@ -44,8 +44,7 @@ const QUESTION_ICON_SETS = [
 
 const getQuestionIcons = (questionNumber: number): Icon[] => {
 	const setIndex =
-		(questionNumber - QuizIndexes.FIRST_INDEX) %
-		QUESTION_ICON_SETS.length;
+		(questionNumber - QuizIndexes.FIRST_INDEX) % QUESTION_ICON_SETS.length;
 	const iconSet = QUESTION_ICON_SETS[setIndex];
 
 	if (!iconSet) {

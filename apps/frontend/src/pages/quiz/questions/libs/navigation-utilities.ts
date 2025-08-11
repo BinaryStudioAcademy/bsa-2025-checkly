@@ -5,21 +5,35 @@ const isFirstQuestion = (currentQuestion: number): boolean => {
 	return currentQuestion === QuizIndexes.FIRST_INDEX;
 };
 
-const isLastQuestion = (currentQuestion: number, totalQuestions: number): boolean => {
+const isLastQuestion = (
+	currentQuestion: number,
+	totalQuestions: number,
+): boolean => {
 	return currentQuestion === totalQuestions;
 };
 
-const shouldShowSkip = (currentQuestion: number, totalQuestions: number, isQuestionRequired: boolean): boolean => {
-	return !isLastQuestion(currentQuestion, totalQuestions) && !isQuestionRequired;
+const shouldShowSkip = (
+	currentQuestion: number,
+	totalQuestions: number,
+	isQuestionRequired: boolean,
+): boolean => {
+	return (
+		!isLastQuestion(currentQuestion, totalQuestions) && !isQuestionRequired
+	);
 };
 
-const getNextButtonLabel = (currentQuestion: number, totalQuestions: number): string => {
-	return isLastQuestion(currentQuestion, totalQuestions) ? ButtonLabels.SUBMIT : ButtonLabels.NEXT;
+const getNextButtonLabel = (
+	currentQuestion: number,
+	totalQuestions: number,
+): string => {
+	return isLastQuestion(currentQuestion, totalQuestions)
+		? ButtonLabels.SUBMIT
+		: ButtonLabels.NEXT;
 };
 
 const shouldMoveToNext = (
 	questions: null | QuizQuestionsResponseDto,
-	currentQuestion: number
+	currentQuestion: number,
 ): boolean => {
 	if (!questions) {
 		return false;
@@ -35,7 +49,10 @@ const canGoBack = (currentQuestion: number): boolean => {
 	return currentQuestion > QuizIndexes.ZERO_INDEX;
 };
 
-const hasMoreQuestions = (questions: null | QuizQuestionsResponseDto, currentQuestion: number): boolean => {
+const hasMoreQuestions = (
+	questions: null | QuizQuestionsResponseDto,
+	currentQuestion: number,
+): boolean => {
 	return !!questions && currentQuestion < questions.items.length;
 };
 
