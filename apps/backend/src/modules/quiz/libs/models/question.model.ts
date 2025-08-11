@@ -1,5 +1,4 @@
 import { type RelationMappings, type RelationMappingsThunk } from "objection";
-import { type QuestionType } from "shared";
 
 import {
 	AbstractModel,
@@ -7,6 +6,7 @@ import {
 } from "~/libs/modules/database/database.js";
 
 import { OPTIONS } from "../enums/enums.js";
+import { type QuestionType } from "../types/types.js";
 import { QuestionOptionModel } from "./models.js";
 
 class QuestionModel extends AbstractModel {

@@ -1,4 +1,4 @@
-import { type QuestionOptionDto } from "shared/src/modules/quiz/libs/types/question-option.dto.js";
+import { type QuestionOptionDto } from "../types/types.js";
 
 type QuestionOptionProperties = {
 	id: number;

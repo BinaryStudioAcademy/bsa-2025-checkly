@@ -53,6 +53,7 @@ export {
 } from "./modules/plans/plans.js";
 export {
 	type QuestionDto,
+	type QuestionOptionDto,
 	type QuestionType,
 	type QuizAnswer,
 	type QuizAnswersRequestDto,

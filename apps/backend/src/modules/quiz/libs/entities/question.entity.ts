@@ -1,5 +1,4 @@
-import { type QuestionDto, type QuestionType } from "shared";
-
+import { type QuestionDto, type QuestionType } from "../types/types.js";
 import { type QuestionOptionEntity } from "./question-option.entity.js";
 
 type QuestionProperties = {
