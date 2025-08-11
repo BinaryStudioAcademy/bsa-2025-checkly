@@ -85,9 +85,4 @@ const toggleOption = (
 	return selectedOptions;
 };
 
-export {
-	isNextDisabled,
-	isOptionSelected,
-	isOtherOption,
-	toggleOption,
-};
+export { isNextDisabled, isOptionSelected, isOtherOption, toggleOption };

@@ -24,11 +24,10 @@ const CheckboxQuestion: React.FC<CheckboxQuestionProperties> = ({
 	);
 
 	const handleInputChange = useCallback(
-		(optionText: string) => {
-			return function (event_: React.ChangeEvent<HTMLInputElement>): void {
+		(optionText: string) =>
+			(event_: React.ChangeEvent<HTMLInputElement>): void => {
 				handleOptionChange(optionText, event_.target.checked);
-			};
-		},
+			},
 		[handleOptionChange],
 	);
 

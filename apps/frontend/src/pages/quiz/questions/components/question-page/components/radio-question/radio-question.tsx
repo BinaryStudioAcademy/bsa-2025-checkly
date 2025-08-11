@@ -11,10 +11,8 @@ const RadioQuestion: React.FC<RadioQuestionProperties> = ({
 	question,
 }: RadioQuestionProperties): React.ReactElement => {
 	const handleOptionSelect = useCallback(
-		(optionText: string) => {
-			return function (): void {
-				onAnswer(optionText);
-			};
+		(optionText: string) => (): void => {
+			onAnswer(optionText);
 		},
 		[onAnswer],
 	);
