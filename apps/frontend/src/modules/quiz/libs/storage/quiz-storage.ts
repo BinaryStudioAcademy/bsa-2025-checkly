@@ -2,6 +2,7 @@ import { ErrorMessage } from "~/libs/enums/enums.js";
 import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 
 import { type QuizState } from "../../slices/quiz.slice.js";
+import { QuizStateValidationSchema } from "../validation-schemas/quiz.validation-schema.js";
 
 const saveQuizState = async (state: Partial<QuizState>): Promise<void> => {
 	try {
@@ -13,10 +14,19 @@ const saveQuizState = async (state: Partial<QuizState>): Promise<void> => {
 
 const loadQuizState = async (): Promise<null | Partial<QuizState>> => {
 	try {
-		const stored = await storage.get(StorageKey.QUIZ_STATE);
+		const storedState = await storage.get(StorageKey.QUIZ_STATE);
 
-		return stored ? (JSON.parse(stored) as Partial<QuizState>) : null;
+		if (!storedState) {
+			return null;
+		}
+
+		const parsedData = JSON.parse(storedState) as Partial<QuizState>;
+		const validatedData = QuizStateValidationSchema.partial().parse(parsedData);
+
+		return validatedData as Partial<QuizState>;
 	} catch {
+		await storage.drop(StorageKey.QUIZ_STATE);
+		
 		throw new Error(ErrorMessage.QUIZ_STORAGE_LOAD_ERROR_MESSAGE);
 	}
 };

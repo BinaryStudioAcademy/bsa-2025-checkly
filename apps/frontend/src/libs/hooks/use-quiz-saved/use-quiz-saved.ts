@@ -11,7 +11,7 @@ import { actions } from "~/modules/quiz/quiz.js";
 const useQuizSaved = (): { clearStorage: () => Promise<void> } => {
 	const dispatch = useAppDispatch();
 
-	const { answers, currentQuestion, notes, selectedCategory } = useAppSelector(
+	const { answers, currentQuestion, notes, questions, selectedCategory } = useAppSelector(
 		(state) => state.quiz,
 	);
 
@@ -34,13 +34,14 @@ const useQuizSaved = (): { clearStorage: () => Promise<void> } => {
 					answers,
 					currentQuestion,
 					notes,
+					questions,
 					selectedCategory,
 				});
 			}
 		};
 
 		void persistState();
-	}, [answers, currentQuestion, notes, selectedCategory]);
+	}, [answers, currentQuestion, notes, questions, selectedCategory]);
 
 	const clearStorage = useCallback(async (): Promise<void> => {
 		await clearQuizState();

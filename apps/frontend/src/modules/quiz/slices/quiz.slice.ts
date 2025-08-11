@@ -50,12 +50,13 @@ const { actions, name, reducer } = createSlice({
 	name: "quiz",
 	reducers: {
 		initializeFromStorage: (state, action: { payload: Partial<QuizState> }) => {
-			const { answers, currentQuestion, notes, selectedCategory } =
+			const { answers, currentQuestion, notes, questions, selectedCategory } =
 				action.payload;
 
 			state.answers = answers || state.answers;
 			state.currentQuestion = currentQuestion || state.currentQuestion;
 			state.notes = notes ?? state.notes;
+			state.questions = questions || state.questions;
 			state.selectedCategory = selectedCategory || state.selectedCategory;
 		},
 		resetQuiz: (state) => {
