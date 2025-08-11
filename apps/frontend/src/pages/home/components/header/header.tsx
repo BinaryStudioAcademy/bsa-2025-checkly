@@ -1,5 +1,4 @@
-import { Link } from "~/libs/components/components.js";
-import { Logo } from "~/libs/components/logo/logo.js";
+import { Link, Logo } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { useAppSelector } from "~/libs/hooks/hooks.js";
 
