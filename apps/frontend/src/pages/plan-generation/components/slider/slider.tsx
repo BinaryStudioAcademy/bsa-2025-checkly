@@ -65,7 +65,7 @@ const ImageSlider: React.FC<Properties> = ({ slides }) => {
 			{nextIndex && (
 				<DecorativeImage
 					className={nextClasses}
-					src={slides[currentIndex] ?? ""}
+					src={slides[nextIndex] ?? ""}
 				/>
 			)}
 		</div>
