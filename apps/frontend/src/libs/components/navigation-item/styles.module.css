@@ -9,7 +9,6 @@
 	color: var(--color-text-primary);
 	text-align: left;
 	cursor: pointer;
-	background: var(--color-bg-white);
 	border: none;
 	border-radius: 0.5rem;
 	opacity: 0;
