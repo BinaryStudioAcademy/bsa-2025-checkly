@@ -37,7 +37,9 @@
 	}
 
 	.button {
-		width: 49%;
+		flex: 0 1 auto;
+		inline-size: clamp(14rem, 32vw, 22rem);
+		padding-left: calc(var(--space-xl) + 2.5rem);
 	}
 
 	.button .large-icon {
@@ -45,7 +47,8 @@
 		top: 50%;
 		left: var(--space-m);
 		display: block;
-		transform: translateY(-50%) scale(1.5);
+		pointer-events: none;
+		transform: translateY(-50%) scale(1);
 	}
 }
 
@@ -53,6 +56,6 @@
 	.button .large-icon {
 		left: var(--space-2xl);
 		left: 10%;
-		transform: translateY(-50%) scale(2);
+		transform: translateY(-50%) scale(1.2);
 	}
 }
