@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 
 import { PlaceholderValues } from "~/libs/enums/enums.js";
+import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { sanitizeTextInput } from "~/libs/helpers/helpers.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { actions } from "~/modules/quiz/quiz.js";
@@ -20,7 +21,7 @@ const NotesPage: React.FC = (): React.ReactElement => {
 
 	return (
 		<div className={styles["notes-page"]}>
-			<div className={styles["notes-content"]}>
+			<div className={getClassNames(styles["notes-content"], "grid-pattern")}>
 				<h2 className={styles["notes-title"]}>
 					Want to add any personal notes for your plan?
 				</h2>

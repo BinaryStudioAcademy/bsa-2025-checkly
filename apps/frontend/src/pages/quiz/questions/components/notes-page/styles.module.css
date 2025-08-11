@@ -15,8 +15,14 @@
 	max-width: 600px;
 	padding: var(--space-2xl);
 	background-color: var(--color-bg-white);
+	background-position: 1px 1px;
+	border: 2px solid var(--color-bg-dark);
 	border-radius: var(--radius-l);
 	box-shadow: 0 4px 20px rgb(var(--color-bg-dark) / 10%);
+
+	--grid-opacity: 0.4;
+	--grid-size: 8px;
+	--grid-line: 0.5px;
 }
 
 .notes-title {
