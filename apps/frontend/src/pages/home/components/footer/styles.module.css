@@ -7,7 +7,7 @@
 
 .container {
 	--cluster-direction: column;
-	--cluster-vertical-alignment: flex-start;
+	--cluster-vertical-alignment: center;
 	--gutter: var(--space-m);
 
 	padding-block: var(--space-m);
@@ -15,7 +15,7 @@
 
 .nav-links {
 	--cluster-direction: column;
-	--cluster-vertical-alignment: flex-start;
+	--cluster-vertical-alignment: center;
 	--gutter: var(--space-xs);
 }
 
