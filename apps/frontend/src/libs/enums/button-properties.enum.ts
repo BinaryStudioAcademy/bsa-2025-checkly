@@ -8,6 +8,12 @@ const ButtonLabels = {
 const ButtonVariants = {
 	PRIMARY: "primary",
 	SECONDARY: "secondary",
+	TRANSPARENT: "transparent",
 } as const;
 
-export { ButtonLabels, ButtonVariants };
+const ButtonSizes = {
+	LARGE: "large",
+	SMALL: "small",
+} as const;
+
+export { ButtonLabels, ButtonSizes, ButtonVariants };

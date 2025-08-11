@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 
+import { PlaceholderValues } from "~/libs/enums/enums.js";
 import { sanitizeTextInput } from "~/libs/helpers/helpers.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { actions } from "~/modules/quiz/quiz.js";
@@ -31,7 +32,7 @@ const NotesPage: React.FC = (): React.ReactElement => {
 				<textarea
 					className={styles["notes-textarea"]}
 					onChange={handleNotesChange}
-					placeholder="Write your notes here..."
+					placeholder={PlaceholderValues.WRITE_YOUR_NOTES_HERE}
 					value={notes}
 				/>
 			</div>

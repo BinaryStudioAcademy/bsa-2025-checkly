@@ -1,5 +1,9 @@
 import { Button } from "~/libs/components/components.js";
-import { ButtonLabels } from "~/libs/enums/enums.js";
+import {
+	ButtonLabels,
+	ButtonSizes,
+	ButtonVariants,
+} from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { type QuestionNavigationProperties } from "~/libs/types/types.js";
 import {
@@ -34,8 +38,8 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 					<Button
 						label={ButtonLabels.BACK}
 						onClick={onBack}
-						size="large"
-						variant="secondary"
+						size={ButtonSizes.LARGE}
+						variant={ButtonVariants.SECONDARY}
 					/>
 				)}
 
@@ -43,16 +47,16 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 					disabled={isNextDisabled}
 					label={nextButtonLabel}
 					onClick={onNext}
-					size="large"
-					variant="primary"
+					size={ButtonSizes.LARGE}
+					variant={ButtonVariants.PRIMARY}
 				/>
 
 				{showSkip && (
 					<Button
 						label={ButtonLabels.SKIP}
 						onClick={onSkip}
-						size="large"
-						variant="transparent"
+						size={ButtonSizes.LARGE}
+						variant={ButtonVariants.TRANSPARENT}
 					/>
 				)}
 			</div>

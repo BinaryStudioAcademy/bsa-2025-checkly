@@ -1,5 +1,9 @@
 export { AppRoute } from "./app-route.enum.js";
-export { ButtonLabels, ButtonVariants } from "./button-properties.enum.js";
+export {
+	ButtonLabels,
+	ButtonSizes,
+	ButtonVariants,
+} from "./button-properties.enum.js";
 export { CategoriesColors } from "./categories-colors.enum.js";
 export { ElementTypes } from "./element-types.enum.js";
 export { ErrorMessage } from "./error-messages.enum.js";
