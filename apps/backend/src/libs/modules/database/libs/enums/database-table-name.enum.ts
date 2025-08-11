@@ -1,4 +1,5 @@
 const DatabaseTableName = {
+	FEEDBACK: "feedbacks",
 	MIGRATIONS: "migrations",
 	PLAN_DAYS: "plan_days",
 	PLANS: "plans",

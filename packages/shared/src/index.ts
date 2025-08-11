@@ -34,6 +34,16 @@ export {
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
 export {
+	FeedbackApiPath,
+	type FeedbackCreateRequestDto,
+	feedbackCreateValidationSchema,
+	type FeedbackDeleteResponseDto,
+	type FeedbackGetAllResponseDto,
+	type FeedbackUpdateRequestDto,
+	type FeedbackUpdateResponseDto,
+	feedbackUpdateValidationSchema,
+} from "./modules/feedbacks/feedbacks.js";
+export {
 	type PlanDayCreateRequestDto,
 	planDayCreateValidationSchema,
 	type PlanDayGetAllResponseDto,

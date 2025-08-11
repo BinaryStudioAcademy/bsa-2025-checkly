@@ -2,6 +2,7 @@ import { config } from "~/libs/modules/config/config.js";
 import { database } from "~/libs/modules/database/database.js";
 import { logger } from "~/libs/modules/logger/logger.js";
 import { authController } from "~/modules/auth/auth.js";
+import { feedbackController } from "~/modules/feedbacks/feedbacks.js";
 import { planDayController } from "~/modules/plan-days/plan-days.js";
 import { planController } from "~/modules/plans/plans.js";
 import { taskController } from "~/modules/tasks/tasks.js";
@@ -18,6 +19,7 @@ const apiV1 = new BaseServerApplicationApi(
 	...planController.routes,
 	...planDayController.routes,
 	...taskController.routes,
+	...feedbackController.routes,
 );
 const serverApplication = new BaseServerApplication({
 	apis: [apiV1],

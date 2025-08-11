@@ -1,0 +1,122 @@
+import { type Entity } from "~/libs/types/types.js";
+import { type UserEntity } from "~/modules/users/user.entity.js";
+
+import { type UserProfileResponseDto } from "./libs/types/types.js";
+
+class FeedbackEntity implements Entity {
+	private createdAt: string;
+	private id: null | number;
+	private text: string;
+	private updatedAt: string;
+	private user: null | UserEntity;
+	private userId: number;
+
+	private constructor({
+		createdAt,
+		id,
+		text,
+		updatedAt,
+		user = null,
+		userId,
+	}: {
+		createdAt: string;
+		id: null | number;
+		text: string;
+		updatedAt: string;
+		user?: null | UserEntity;
+		userId: number;
+	}) {
+		this.id = id;
+		this.text = text;
+		this.userId = userId;
+		this.user = user;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
+
+	public static initialize({
+		createdAt,
+		id,
+		text,
+		updatedAt,
+		user,
+		userId,
+	}: {
+		createdAt: string;
+		id: null | number;
+		text: string;
+		updatedAt: string;
+		user?: null | UserEntity;
+		userId: number;
+	}): FeedbackEntity {
+		return new FeedbackEntity({
+			createdAt,
+			id,
+			text,
+			updatedAt,
+			user: user ?? null,
+			userId,
+		});
+	}
+
+	public static initializeNew({
+		text,
+		userId,
+	}: {
+		text: string;
+		userId: number;
+	}): FeedbackEntity {
+		return new FeedbackEntity({
+			createdAt: "",
+			id: null,
+			text,
+			updatedAt: "",
+			user: null,
+			userId,
+		});
+	}
+
+	public toNewObject(): {
+		text: string;
+		userId: number;
+	} {
+		return {
+			text: this.text,
+			userId: this.userId,
+		};
+	}
+
+	public toObject(): {
+		createdAt: string;
+		id: number;
+		text: string;
+		updatedAt: string;
+		userId: number;
+	} {
+		return {
+			createdAt: this.createdAt,
+			id: this.id as number,
+			text: this.text,
+			updatedAt: this.updatedAt,
+			userId: this.userId,
+		};
+	}
+
+	public toObjectWithRelations(): {
+		createdAt: string;
+		id: number;
+		text: string;
+		updatedAt: string;
+		user: null | UserProfileResponseDto;
+		userId: number;
+	} {
+		const user = this.user ? this.user.toObject() : null;
+
+		return {
+			...this.toObject(),
+			user,
+		};
+	}
+}
+
+export { FeedbackEntity };
