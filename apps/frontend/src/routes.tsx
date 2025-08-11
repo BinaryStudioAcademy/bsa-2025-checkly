@@ -1,5 +1,6 @@
 import { type RouteObject } from "react-router-dom";
 
+import { Dashboard, DashboardWrapper } from "./libs/components/components.js";
 import { AppRoute, RouteAccess } from "./libs/enums/enums.js";
 import {
 	Dashboard,
@@ -43,7 +44,7 @@ const routes: CustomRouteObject[] = [
 				path: AppRoute.PLAN,
 			},
 		],
-		element: <Wrapper />,
+		element: <DashboardWrapper />,
 		handle: { access: RouteAccess.AUTHENTICATED },
 		path: AppRoute.ROOT,
 	},
