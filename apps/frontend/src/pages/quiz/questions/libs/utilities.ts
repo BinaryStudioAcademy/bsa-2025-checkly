@@ -27,6 +27,5 @@ export {
 	isNextDisabled,
 	isOptionSelected,
 	isOtherOption,
-	isQuestionRequired,
 	toggleOption,
 } from "./validation-utilities.js";

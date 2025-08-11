@@ -89,6 +89,5 @@ export {
 	isNextDisabled,
 	isOptionSelected,
 	isOtherOption,
-	isQuestionRequired,
 	toggleOption,
 };

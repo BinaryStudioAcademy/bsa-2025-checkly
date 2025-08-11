@@ -45,4 +45,4 @@ const QuizStateSchema = z.object({
 	selectedCategory: z.nativeEnum(QuizCategory).nullable().default(null),
 });
 
-export { QuizAnswerSchema, QuizStateSchema };
+export { QuizStateSchema };
