@@ -18,9 +18,9 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { type QuizCategoryValue } from "~/modules/quiz/libs/types/types.js";
 import { actions } from "~/modules/quiz/quiz.js";
+import { QuizCategoryCard } from "~/pages/quiz/components/quiz-category-card/quiz-category-card.js";
+import { QUIZ_CATEGORIES } from "~/pages/quiz/mock-data/quiz-categories.js";
 
-import { QuizCategoryCard } from "./components/quiz-category-card/quiz-category-card.js";
-import { QUIZ_CATEGORIES } from "./mock-data/index.js";
 import styles from "./styles.module.css";
 
 const Quiz: React.FC = (): React.ReactElement => {

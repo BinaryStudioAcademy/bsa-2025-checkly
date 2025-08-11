@@ -2,14 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
-
-import { clearQuizState } from "../libs/storage/quiz-storage.js";
+import { clearQuizState } from "~/modules/quiz/libs/storage/quiz-storage.js";
 import {
 	type QuizAnswer,
 	type QuizCategoryValue,
 	type QuizQuestionsResponseDto,
-} from "../libs/types/types.js";
-import { fetchQuestions, submitQuiz } from "./actions.js";
+} from "~/modules/quiz/libs/types/types.js";
+import { fetchQuestions, submitQuiz } from "~/modules/quiz/slices/actions.js";
 
 interface QuizState {
 	answers: Record<number, QuizAnswer>;

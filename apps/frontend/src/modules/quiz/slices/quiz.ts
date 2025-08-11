@@ -1,5 +1,5 @@
-import { fetchQuestions, submitQuiz } from "./actions.js";
-import { actions } from "./quiz.slice.js";
+import { fetchQuestions, submitQuiz } from "~/modules/quiz/slices/actions.js";
+import { actions } from "~/modules/quiz/slices/quiz.slice.js";
 
 const allActions = {
 	...actions,
@@ -8,4 +8,4 @@ const allActions = {
 };
 
 export { allActions as actions };
-export { reducer } from "./quiz.slice.js";
+export { reducer } from "~/modules/quiz/slices/quiz.slice.js";

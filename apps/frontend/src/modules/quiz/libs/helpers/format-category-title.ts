@@ -1,5 +1,4 @@
-import { QuizCategory } from "shared";
-
+import { QuizCategory } from "~/modules/quiz/libs/enums/enums.js";
 import { type QuizCategoryValue } from "~/modules/quiz/quiz.js";
 
 const formatCategoryTitle = (category: QuizCategoryValue): string => {
