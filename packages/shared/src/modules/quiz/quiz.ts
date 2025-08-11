@@ -8,4 +8,4 @@ export {
 	type QuizCategoryType,
 	type QuizQuestionsResponseDto,
 } from "./libs/types/types.js";
-export { QuizAnswersSchema as QuizAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+export { quizAnswersSchema as quizAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";

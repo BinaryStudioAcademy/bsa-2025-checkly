@@ -5,7 +5,7 @@ import { QuizCategory, QuizValidationMessage } from "../enums/enums.js";
 
 const ZERO_ARRAY_LENGTH = 0;
 
-const QuizAnswersSchema = z.object({
+const quizAnswersSchema = z.object({
 	answers: z.array(
 		z
 			.object({
@@ -38,4 +38,4 @@ const QuizAnswersSchema = z.object({
 	notes: z.string().trim().optional().default(""),
 });
 
-export { QuizAnswersSchema };
+export { quizAnswersSchema };
