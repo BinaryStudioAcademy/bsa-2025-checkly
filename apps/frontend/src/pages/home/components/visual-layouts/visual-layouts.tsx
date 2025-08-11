@@ -5,7 +5,7 @@ import {
 import { DecorativeImage } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
-import { layoutExamples } from "./layout-examples.data.js";
+import { layoutExamples } from "./libs/constants.js";
 import styles from "./styles.module.css";
 
 const VisualLayouts: React.FC = () => {
