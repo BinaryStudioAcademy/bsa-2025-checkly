@@ -9,7 +9,6 @@
 	color: var(--color-text-primary);
 	text-align: left;
 	cursor: pointer;
-	background: var(--color-bg-white);
 	border: none;
 	border-radius: 0.5rem;
 	opacity: 0;
@@ -22,7 +21,7 @@
 	transform: translateY(-1px);
 }
 
-svg {
+.menu-item svg {
 	display: inline-block;
 	width: 20px;
 	height: 20px;

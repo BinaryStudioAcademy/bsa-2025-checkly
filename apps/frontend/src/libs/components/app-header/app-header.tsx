@@ -62,6 +62,8 @@ const AppHeader: React.FC = () => {
 				</Link>
 			</div>
 
+			<div className={styles["vertical-divider"]} />
+
 			<div className={styles["user-section"]} ref={menuReference}>
 				<Link to={AppRoute.PROFILE}>
 					<img
