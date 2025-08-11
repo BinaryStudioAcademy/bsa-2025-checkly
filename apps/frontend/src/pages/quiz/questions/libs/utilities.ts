@@ -1,7 +1,5 @@
 export {
 	getCurrentAnswer,
-	getCurrentAnswerOptions,
-	getCurrentAnswerText,
 	getCurrentQuestionData,
 	getTextAnswerValue,
 	getTotalSteps,
@@ -14,7 +12,6 @@ export {
 export {
 	canSubmitQuiz,
 	hasError,
-	isIdleStatus,
 	isLoading,
 	shouldFetchQuestions,
 	shouldRedirectToQuiz,
@@ -22,18 +19,11 @@ export {
 export {
 	canGoBack,
 	getNextButtonLabel,
-	hasMoreQuestions,
 	isFirstQuestion,
-	isLastQuestion,
 	shouldMoveToNext,
 	shouldShowSkip,
 } from "./navigation-utilities.js";
 export {
-	hasNoOptions,
-	hasNoUserInput,
-	hasOnlyOtherSelected,
-	hasOtherSelected,
-	hasValidAnswer,
 	isNextDisabled,
 	isOptionSelected,
 	isOtherOption,

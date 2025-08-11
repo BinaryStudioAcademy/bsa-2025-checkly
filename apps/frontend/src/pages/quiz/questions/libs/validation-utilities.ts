@@ -5,15 +5,6 @@ import {
 	type QuizAnswer,
 } from "~/modules/quiz/libs/types/types.js";
 
-const hasValidAnswer = (currentAnswer: QuizAnswer): boolean => {
-	const hasOptions =
-		currentAnswer.selectedOptions.length > QuizIndexes.ZERO_INDEX;
-	const hasUserInput =
-		currentAnswer.userInput.trim().length > QuizIndexes.ZERO_INDEX;
-
-	return hasOptions || hasUserInput;
-};
-
 const OTHER_OPTION_TITLE = "other";
 
 const isOtherOption = (option: string): boolean => {
@@ -95,11 +86,6 @@ const toggleOption = (
 };
 
 export {
-	hasNoOptions,
-	hasNoUserInput,
-	hasOnlyOtherSelected,
-	hasOtherSelected,
-	hasValidAnswer,
 	isNextDisabled,
 	isOptionSelected,
 	isOtherOption,

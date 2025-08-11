@@ -44,7 +44,6 @@ const hasError = (dataStatus: string): boolean => {
 export {
 	canSubmitQuiz,
 	hasError,
-	isIdleStatus,
 	isLoading,
 	shouldFetchQuestions,
 	shouldRedirectToQuiz,

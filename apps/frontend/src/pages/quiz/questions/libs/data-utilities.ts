@@ -1,23 +1,12 @@
 import { QuizIndexes } from "~/libs/enums/enums.js";
-import { type MultipleAnswers } from "~/libs/types/types.js";
 import {
 	type QuestionDto,
 	type QuizAnswer,
 	type QuizQuestionsResponseDto,
 } from "~/modules/quiz/libs/types/types.js";
 
-const getCurrentAnswerText = (currentAnswer: QuizAnswer): string => {
-	return currentAnswer.userInput || "";
-};
-
 const getTextAnswerValue = (currentAnswer: string | undefined): string => {
 	return currentAnswer || "";
-};
-
-const getCurrentAnswerOptions = (
-	currentAnswer: QuizAnswer,
-): MultipleAnswers[] => {
-	return currentAnswer.selectedOptions;
 };
 
 const getTotalSteps = (questions: null | QuizQuestionsResponseDto): number => {
@@ -76,8 +65,6 @@ const isQuestionNotFound = (
 
 export {
 	getCurrentAnswer,
-	getCurrentAnswerOptions,
-	getCurrentAnswerText,
 	getCurrentQuestionData,
 	getTextAnswerValue,
 	getTotalSteps,

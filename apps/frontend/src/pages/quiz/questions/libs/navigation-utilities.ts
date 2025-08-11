@@ -59,9 +59,7 @@ const hasMoreQuestions = (
 export {
 	canGoBack,
 	getNextButtonLabel,
-	hasMoreQuestions,
 	isFirstQuestion,
-	isLastQuestion,
 	shouldMoveToNext,
 	shouldShowSkip,
 };
