@@ -3,6 +3,7 @@ const AppRoute = {
 	DASHBOARD: "/dashboard",
 	NOT_FOUND: "*",
 	PLAN: "/plan",
+	PLAN_EDIT: "/plan/edit",
 	PLAN_GENERATION: "/plan/generation",
 	PROFILE: "/dashboard/profile",
 	QUIZ: "/quiz",
