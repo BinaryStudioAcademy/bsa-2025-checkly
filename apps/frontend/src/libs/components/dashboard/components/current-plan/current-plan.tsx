@@ -7,7 +7,6 @@ import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import styles from "./styles.module.css";
 
 const CurrentPlan: FC = () => {
-
 	return (
 		<div className={styles["container"]}>
 			<h2 className={styles["title"]}>Current active plan</h2>
@@ -19,7 +18,9 @@ const CurrentPlan: FC = () => {
 				/>
 			</div>
 			<div className={styles["continue-button"]}>
-				<Link asButtonSize="small" asButtonVariant="primary" to={AppRoute.PLAN}>Continue</Link>
+				<Link asButtonSize="small" asButtonVariant="primary" to={AppRoute.PLAN}>
+					Continue
+				</Link>
 			</div>
 		</div>
 	);
