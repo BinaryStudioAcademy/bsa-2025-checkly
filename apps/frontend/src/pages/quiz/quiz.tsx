@@ -19,7 +19,7 @@ import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { type QuizCategoryValue } from "~/modules/quiz/libs/types/types.js";
 import { actions } from "~/modules/quiz/quiz.js";
 import { QuizCategoryCard } from "~/pages/quiz/components/quiz-category-card/quiz-category-card.js";
-import { QUIZ_CATEGORIES } from "~/pages/quiz/mock-data/quiz-categories.js";
+import { QUIZ_CATEGORIES } from "~/pages/quiz/mock-data/index.js";
 
 import styles from "./styles.module.css";
 
