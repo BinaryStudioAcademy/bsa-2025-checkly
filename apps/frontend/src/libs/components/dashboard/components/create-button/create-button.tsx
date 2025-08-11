@@ -33,4 +33,4 @@ const CreatePlanButton: React.FC<Properties> = ({
 	);
 };
 
-export { CreateButton };
+export { CreatePlanButton };
