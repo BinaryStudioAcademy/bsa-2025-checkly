@@ -16,7 +16,7 @@ const processAnswers = (answers: QuizAnswer[]): string[] =>
 
 			const inputs = [
 				...answer.selectedOptions,
-				sanitizeTextInput(answer.userInput),
+				answer.userInput ? sanitizeTextInput(answer.userInput) : "",
 			];
 
 			return `Question #${String(++index)}. ${answer.questionText} - ${inputs.join(", ")}`;
