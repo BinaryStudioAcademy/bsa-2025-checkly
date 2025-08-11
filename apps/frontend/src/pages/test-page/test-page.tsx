@@ -2,7 +2,7 @@ import { AppHeader } from "~/libs/components/components.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { type PlanStyleOption } from "~/libs/types/types.js";
 
-const SELECTED_STYLE: PlanStyleOption = "withremarks";
+const SELECTED_STYLE: PlanStyleOption = "minimal";
 
 const TestPage: React.FC = () => {
 	return (

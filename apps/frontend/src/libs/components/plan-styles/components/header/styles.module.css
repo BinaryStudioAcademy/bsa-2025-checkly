@@ -2,4 +2,5 @@
 	font-family: var(--font-family-secondary);
 	font-size: calc(42px * var(--coefficient));
 	font-weight: 600;
+	text-align: justify;
 }

@@ -39,7 +39,7 @@ const Day: React.FC<Properties> = ({
 				{`Day ${dayNumber.toString()}`}&nbsp;
 				{weekday && <span className={styles["day-of-week"]}>({weekday})</span>}
 			</h2>
-			<ul className={taskListClasses}>
+			<ol className={taskListClasses}>
 				{tasks.map((task: Task) => {
 					return (
 						<TaskItem
@@ -50,7 +50,7 @@ const Day: React.FC<Properties> = ({
 						/>
 					);
 				})}
-			</ul>
+			</ol>
 		</li>
 	);
 };

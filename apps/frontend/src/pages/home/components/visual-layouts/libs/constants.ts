@@ -20,27 +20,37 @@ const layoutExamples: LayoutExample[] = [
 		planStyle: "withremarks",
 		title: "With Remarks",
 	},
-	{ id: 2, img: ExampleMinimal, planStyle: "colorful", title: "Minimal" },
+	{ id: 2, img: ExampleMinimal, planStyle: "colorful", title: "Colorful" },
 	{
 		id: 3,
 		img: ExampleColourful,
-		planStyle: "withremarks",
-		title: "Colourful",
+		planStyle: "minimal",
+		title: "Minimal",
 	},
-	{ id: 4, img: ExampleMotivating, planStyle: "colorful", title: "Motivating" },
+	{
+		id: 4,
+		img: ExampleMotivating,
+		planStyle: "withremarks",
+		title: "With Remarks",
+	},
 	{
 		id: 5,
 		img: ExampleWithRemarks,
-		planStyle: "withremarks",
-		title: "With Remarks",
+		planStyle: "colorful",
+		title: "Colorful",
 	},
 	{
 		id: 6,
 		img: ExampleWithRemarks,
-		planStyle: "colorful",
+		planStyle: "minimal",
+		title: "Minimal",
+	},
+	{
+		id: 7,
+		img: ExampleMinimal,
+		planStyle: "withremarks",
 		title: "With Remarks",
 	},
-	{ id: 7, img: ExampleMinimal, planStyle: "withremarks", title: "Minimal" },
 ];
 
 export { layoutExamples };
