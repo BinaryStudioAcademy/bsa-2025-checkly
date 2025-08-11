@@ -1,5 +1,6 @@
 import React, { memo, useCallback } from "react";
 
+import { DecorativeImage } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 
 import { type CategoryData } from "../libs/types/category-data.js";
@@ -35,9 +36,8 @@ const CategoryItemComponent: React.FC<Properties> = ({
 				onClick={handleButtonClick}
 				type="button"
 			>
-				<img
-					alt={category.name}
-					className={styles["categories-image"]}
+				<DecorativeImage
+					className={getClassNames(styles["categories-image"])}
 					src={category.image}
 				/>
 				<h3 className={styles["category-title-landing"]}>{category.name}</h3>
