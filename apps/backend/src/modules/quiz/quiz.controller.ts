@@ -19,10 +19,15 @@ import { type QuizService } from "./quiz.service.js";
  * @swagger
  * tags:
  *   - name: quiz
- *     description: Endpoints related to quiz
+ *     description: Endpoints related to quiz functionality
  *
+ * components:
+ *   schemas:
  *     QuizAnswer:
  *       type: object
+ *       required:
+ *         - questionId
+ *         - isSkipped
  *       properties:
  *         isSkipped:
  *           type: boolean
@@ -67,47 +72,89 @@ import { type QuizService } from "./quiz.service.js";
  *           example: "sport"
  *         notes:
  *           type: string
- *           example: "Some notes"
+ *           example: "Some additional notes"
+ *           description: Additional user notes
+ *
+ *     Task:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         title:
+ *           type: string
+ *           example: "Morning workout"
+ *         description:
+ *           type: string
+ *           example: "30 minutes cardio session"
+ *         duration:
+ *           type: integer
+ *           example: 30
+ *           description: Duration in minutes
+ *         completed:
+ *           type: boolean
+ *           example: false
+ *
+ *     Day:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         dayNumber:
+ *           type: integer
+ *           example: 1
+ *         date:
+ *           type: string
+ *           format: date
+ *           example: "2024-01-01"
+ *         tasks:
+ *           type: array
+ *           items:
+ *             $ref: "#/components/schemas/Task"
+ *
+ *     PlanMeta:
+ *       type: object
+ *       properties:
+ *         prompt:
+ *           type: string
+ *           example: "Generated prompt based on user answers"
+ *
  *     PlanResponseDto:
  *       type: object
  *       properties:
- *         response:
- *           type: object
- *           properties:
- *             days:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: integer
- *                     example: 1
- *                   dayNumber:
- *                     type: integer
- *                     example: 1
- *                   tasks:
- *                     type: array
- *                     items:
- *                       type: object
- *             duration:
- *               type: integer
- *               example: 2
- *             intensity:
- *               type: string
- *               example: "2"
- *             title:
- *               type: string
- *               example: "Test title"
- *             userId:
- *               type: integer
- *               example: 1
- *             meta:
- *               type: object
- *               properties:
- *                 prompt:
- *                   type: string
- *                   example: "Generated prompt based on user answers"
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         title:
+ *           type: string
+ *           example: "30-Day Fitness Challenge"
+ *         duration:
+ *           type: integer
+ *           example: 30
+ *         intensity:
+ *           type: string
+ *           example: "medium"
+ *           enum: ["low", "medium", "high"]
+ *         userId:
+ *           type: integer
+ *           example: 1
+ *         days:
+ *           type: array
+ *           items:
+ *             $ref: "#/components/schemas/Day"
+ *         meta:
+ *           $ref: "#/components/schemas/PlanMeta"
  *
+ *     ErrorResponse:
+ *       type: object
+ *       properties:
+ *         errorType:
+ *           type: string
+ *           example: "VALIDATION"
+ *         message:
+ *           type: string
+ *           example: "Validation failed."
  */
 class QuizController extends BaseController {
 	public constructor(
@@ -147,6 +194,20 @@ class QuizController extends BaseController {
 	 *         application/json:
 	 *           schema:
 	 *             $ref: '#/components/schemas/QuizAnswersRequestDto'
+	 *           example:
+	 *             answers:
+	 *               - questionId: 1
+	 *                 questionText: "What motivates you the most?"
+	 *                 isSkipped: false
+	 *                 selectedOptions: [1, "Achieving goals"]
+	 *                 userInput: "I want to be successful"
+	 *               - questionId: 2
+	 *                 questionText: "How much time can you dedicate daily?"
+	 *                 isSkipped: false
+	 *                 selectedOptions: ["30 minutes"]
+	 *                 userInput: ""
+	 *             category: "sport"
+	 *             notes: "Looking for a beginner plan"
 	 *     responses:
 	 *       200:
 	 *         description: Plan generated successfully
@@ -154,6 +215,15 @@ class QuizController extends BaseController {
 	 *           application/json:
 	 *             schema:
 	 *               $ref: '#/components/schemas/PlanResponseDto'
+	 *       400:
+	 *         description: Invalid request data
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/ErrorResponse'
+	 *             example:
+	 *               errorType: "VALIDATION"
+	 *               message: "At least one of the selected options or user input must be provided for a non-skipped question."
 	 */
 	private handleAnswers(
 		options: APIHandlerOptions<{
