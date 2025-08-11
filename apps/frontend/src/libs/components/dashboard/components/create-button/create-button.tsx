@@ -11,7 +11,7 @@ type Properties = {
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const CreateButton: React.FC<Properties> = ({
+const CreatePlanButton: React.FC<Properties> = ({
 	className,
 	disabled = false,
 	icon,
