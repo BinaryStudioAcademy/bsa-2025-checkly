@@ -1,8 +1,8 @@
 .section {
 	--grid-color: var(--color-text-primary);
-	--grid-opacity: 0.4;
+	--grid-opacity: 0.3;
 
-	padding-block: 64px;
+	padding-block: var(--section-padding-block);
 	color: var(--color-bg);
 	background-color: var(--color-bg-dark);
 }
@@ -10,16 +10,15 @@
 .layout-header {
 	position: relative;
 	display: inline-block;
-	padding-bottom: 7vw;
-	font-size: clamp(1.5rem, 2.5vw, 2.2rem);
-	text-align: center;
+	font-size: var(--text-size-heading-2);
 }
 
 .layout-list {
 	display: flex;
 	gap: clamp(15px, 2.1vw, 25px);
-	padding: 10px 10px 7vw;
+	padding: 10px;
 	overflow: auto hidden;
+	list-style-type: none;
 	scrollbar-width: none;
 }
 
@@ -27,11 +26,11 @@
 	flex: 0 0 auto;
 	width: clamp(150px, 16vw, 205px);
 	padding: 10px;
-	color: black;
+	color: var(--color-text-primary);
 	text-align: center;
 	cursor: pointer;
-	background: white;
-	border-radius: 8px;
+	background: var(--color-bg-white);
+	border-radius: var(--radius-s);
 	transition: transform 0.2s ease;
 }
 
@@ -57,6 +56,8 @@
 }
 
 .layout-wrapper {
+	--flow-space: var(--space-2xl);
+
 	position: relative;
 	z-index: 2;
 }

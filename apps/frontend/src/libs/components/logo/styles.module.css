@@ -1,4 +1,6 @@
 .container {
+	--cluster-direction: row;
+	--cluster-vertical-alignment: center;
 	--cluster-wrap: nowrap;
 	--gutter: 0;
 

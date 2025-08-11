@@ -2,6 +2,7 @@
 	display: flex;
 	flex: 1;
 	flex-direction: column;
+	height: 100%;
 }
 
 .nav {
@@ -32,20 +33,32 @@
 
 .content {
 	display: flex;
+	flex: 1;
 	flex-direction: row;
-	height: 100%;
 }
 
 .content__days.content__days__open {
 	display: flex;
 }
 
+.content__days-wrapper {
+	position: relative;
+	width: clamp(180px, 20vw, 200px);
+}
+
 .content__days {
+	position: absolute;
+	top: 0;
+	left: 0;
 	display: flex;
 	flex-direction: column;
 	gap: var(--space-2xs);
+	align-items: center;
+	width: 100%;
 	height: auto;
+	height: 100%;
 	padding: var(--gutter);
+	overflow: hidden auto;
 	border-right: 1px solid var(--color-border-grey);
 }
 
@@ -76,7 +89,11 @@
 	}
 
 	.content__days {
+		position: static;
 		display: none;
-		flex-flow: row wrap;
+		flex-flow: row nowrap;
+		width: 100vw;
+		height: auto;
+		overflow-x: auto;
 	}
 }

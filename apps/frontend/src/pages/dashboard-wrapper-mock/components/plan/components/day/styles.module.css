@@ -4,12 +4,12 @@
 	gap: var(--space-3xs);
 	align-items: center;
 	justify-content: space-between;
-	padding-left: var(--space-l);
 }
 
 .content__days__day {
 	padding: var(--space-2xs) var(--space-m);
 	text-transform: none;
+	white-space: nowrap;
 	border: 2px solid black;
 }
 
@@ -17,23 +17,29 @@
 	background-color: var(--color-brand-primary);
 }
 
-.selectedDay-icon {
-	width: clamp(20px, 3vw, 35px);
+.selectedDay-icon,
+.regenerate-button {
+	display: flex;
+	justify-content: center;
+	width: 20%;
 }
 
-.regenerate-button {
-	visibility: hidden;
-	width: clamp(15px, 2vw, 20px);
+.selectedDay-icon {
+	width: clamp(25px, 3vw, 35px);
+}
+
+.regenerate-button button {
+	width: clamp(18px, 2.5vw, 30px);
 	padding: var(--space-3xs);
 }
 
-.content__days-item:hover .regenerate-button {
-	visibility: visible;
-	cursor: pointer;
+.regenerate-button button:not(:disabled):hover {
+	background: transparent;
 }
 
 @media (width <= 768px) {
 	.content__days-item {
+		flex-shrink: 0;
 		flex-direction: row;
 		padding: 0;
 	}
@@ -45,9 +51,5 @@
 
 	.selectedDay-icon {
 		transform: rotate(90deg);
-	}
-
-	.regenerate-button {
-		visibility: visible;
 	}
 }

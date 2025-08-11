@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.1.1...backend-v1.2.0) (2025-08-08)
+
+
+### Features
+
+* add database plan entities cy-41 ([83e39ad](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/83e39ade0aa3a4cd2b93814c2e718b9027aab11a))
+
 ## [1.1.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.1.0...backend-v1.1.1) (2025-08-06)
 
 
