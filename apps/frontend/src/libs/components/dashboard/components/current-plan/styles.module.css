@@ -26,11 +26,11 @@
 	height: auto;
 }
 
-.action-button {
-	display: block;
+.continue-button {
+	width: 35%;
 	margin: 0 auto;
 }
 
-.action-button::after {
-	display: none;
+.continue-button a {
+	text-decoration: none;
 }

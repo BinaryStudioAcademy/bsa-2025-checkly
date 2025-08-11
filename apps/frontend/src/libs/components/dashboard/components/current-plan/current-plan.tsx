@@ -1,20 +1,12 @@
-import { type FC, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { type FC } from "react";
 
 import { PlanBig } from "~/assets/img/shared/illustrations/layouts/layouts.img.js";
-import { Button } from "~/libs/components/components.js";
+import { Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 
 import styles from "./styles.module.css";
 
 const CurrentPlan: FC = () => {
-	const navigate = useNavigate();
-
-	const handleClick = useCallback((): void => {
-		void (async (): Promise<void> => {
-			await navigate(AppRoute.PLAN);
-		})();
-	}, [navigate]);
 
 	return (
 		<div className={styles["container"]}>
@@ -26,11 +18,9 @@ const CurrentPlan: FC = () => {
 					src={PlanBig}
 				/>
 			</div>
-			<Button
-				className={styles["action-button"] ?? ""}
-				label="CONTINUE"
-				onClick={handleClick}
-			/>
+			<div className={styles["continue-button"]}>
+				<Link asButtonSize="small" asButtonVariant="primary" to={AppRoute.PLAN}>Continue</Link>
+			</div>
 		</div>
 	);
 };
