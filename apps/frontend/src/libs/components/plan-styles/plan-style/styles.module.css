@@ -2,10 +2,6 @@
 	--coefficient: 1;
 }
 
-.sample-view {
-	--coefficient: 0.32;
-}
-
 .container {
 	width: 100%;
 	max-width: calc(595px * var(--coefficient));
@@ -19,4 +15,24 @@
 	min-height: 0;
 	max-height: 250px;
 	overflow-y: hidden;
+}
+
+@media (width <= 768px) {
+	.regular-view {
+		--coefficient: 0.7;
+	}
+}
+
+@media (width <= 475px) {
+	.regular-view {
+		--coefficient: 0.5;
+	}
+
+	.container {
+		min-height: 0;
+	}
+}
+
+.sample-view {
+	--coefficient: 0.32;
 }
