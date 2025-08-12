@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.14.0...v1.15.0) (2025-08-12)
+
+
+### Features
+
+* add dashboard screen cy-89 ([0d71c44](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0d71c44b5ca4a16259e2d4b53947d5619c7f6098))
+
+
+### Bug Fixes
+
+* **frontend:** eliminate bottom empty space in dashboard wrapper cy-89 ([a278dff](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a278dff5925900644dbc055da3a8479537342f66))
+
 ## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.13.0...v1.14.0) (2025-08-12)
 
 
