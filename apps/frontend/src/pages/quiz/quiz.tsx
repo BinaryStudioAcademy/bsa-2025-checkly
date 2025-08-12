@@ -8,12 +8,7 @@ import {
 	TwinklesYellow,
 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
-import {
-	AppRoute,
-	ButtonLabels,
-	ButtonVariants,
-	ErrorMessage,
-} from "~/libs/enums/enums.js";
+import { AppRoute, ButtonLabels, ButtonVariants } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { type QuizCategoryValue } from "~/modules/quiz/libs/types/types.js";
@@ -29,17 +24,6 @@ const Quiz: React.FC = (): React.ReactElement => {
 
 	const { selectedCategory } = useAppSelector((state) => state.quiz);
 
-	const safeNavigate = useCallback(
-		async (path: string): Promise<void> => {
-			try {
-				await navigate(path);
-			} catch {
-				throw new Error(ErrorMessage.DEFAULT_ERROR_MESSAGE);
-			}
-		},
-		[navigate],
-	);
-
 	const handleCategorySelect = useCallback(
 		(category: QuizCategoryValue): void => {
 			dispatch(actions.setCategory(category));
@@ -48,10 +32,14 @@ const Quiz: React.FC = (): React.ReactElement => {
 	);
 
 	const handleNext = useCallback((): void => {
-		if (selectedCategory) {
-			void safeNavigate(AppRoute.QUIZ_QUESTIONS);
-		}
-	}, [selectedCategory, safeNavigate]);
+		const redirect = async (): Promise<void> => {
+			if (selectedCategory) {
+				await navigate(AppRoute.QUIZ_QUESTIONS);
+			}
+		};
+
+		void redirect();
+	}, [selectedCategory, navigate]);
 
 	const createHandleSelect = useCallback(
 		(category: QuizCategoryValue): (() => void) => {
