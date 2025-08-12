@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.4.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.4.0...backend-v1.4.1) (2025-08-12)
+
+
+### Bug Fixes
+
+* fix seeds run command in prestart scripts cy-54 ([300ebf6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/300ebf6502f2d62a2d605d820734fce9f50e88aa))
+* fix seeds run command in prestart scripts cy-54 ([4343350](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/434335028d24f12e6d797b7d42de802dd00be19b))
+* rename seeds run command in prestart scripts cy-54 ([da152b5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/da152b5696a44535437cf868ee23a540a13e2fd4))
+
 ## [1.4.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.3.0...backend-v1.4.0) (2025-08-12)
 
 

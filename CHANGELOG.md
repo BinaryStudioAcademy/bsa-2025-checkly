@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.13.0...v1.14.0) (2025-08-12)
+
+
+### Features
+
+* implement download choose the plan page cy-64 ([479d3aa](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/479d3aaf8b275c437ab99eeeeae4778d03f71c77))
+
+
+### Bug Fixes
+
+* fix seeds run command in prestart scripts cy-54 ([300ebf6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/300ebf6502f2d62a2d605d820734fce9f50e88aa))
+* fix seeds run command in prestart scripts cy-54 ([4343350](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/434335028d24f12e6d797b7d42de802dd00be19b))
+* linting issue cy-64 ([3008960](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3008960d1f9f22c6dd56d5dbd6c0f6fd523e082e))
+* rename seeds run command in prestart scripts cy-54 ([da152b5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/da152b5696a44535437cf868ee23a540a13e2fd4))
+
 ## [1.13.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.12.0...v1.13.0) (2025-08-12)
 
 
