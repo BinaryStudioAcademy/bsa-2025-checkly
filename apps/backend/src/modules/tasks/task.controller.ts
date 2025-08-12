@@ -188,7 +188,7 @@ class TaskController extends BaseController {
 		const { id } = options.params;
 
 		return {
-			payload: await this.taskService.findById(id),
+			payload: await this.taskService.find(id),
 			status: HTTPCode.OK,
 		};
 	}

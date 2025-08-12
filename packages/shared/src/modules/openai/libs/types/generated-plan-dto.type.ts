@@ -1,5 +1,6 @@
 import { type ValueOf } from "src/libs/types/types.js";
-import { type ExecutionTimeType } from "src/modules/tasks/libs/enums/enums.js";
+
+import { type ExecutionTimeType } from "../../../tasks/tasks.js";
 
 type GeneratedDayDTO = {
 	dayNumber: number;

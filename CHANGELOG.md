@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.11.0...v1.12.0) (2025-08-12)
+
+
+### Features
+
+* update repository, service interface and entities cy-219 ([1318064](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/13180641e6621d6d3fee36794e1ef02912346f97))
+* update repository, service interface, update entities methods cy-219 ([9a519d4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9a519d49e58dfaa434ad58c37fc5ef562f68c517))
+
+
+### Bug Fixes
+
+* add novalidate to sign-up form cy-215 ([e2c6833](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e2c68337d724173485628ca3ba6e87245c0f70d0))
+* **frontend:** add profile button cy-174 ([ab65408](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ab65408bcef5198f50dca0e0a8475100c99310ce))
+* **frontend:** remove signup form html validation cy-215 ([6b2eaa9](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6b2eaa967131259d0f80ee56493962a02a5e937e))
+
 ## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.10.1...v1.11.0) (2025-08-11)
 
 
