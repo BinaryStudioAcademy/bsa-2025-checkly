@@ -3,7 +3,7 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	className?: string;
+	className?: string | undefined;
 	src: string;
 };
 

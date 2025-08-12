@@ -1,5 +1,96 @@
 # Changelog
 
+## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.14.0...v1.15.0) (2025-08-12)
+
+
+### Features
+
+* add dashboard screen cy-89 ([0d71c44](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0d71c44b5ca4a16259e2d4b53947d5619c7f6098))
+
+
+### Bug Fixes
+
+* **frontend:** eliminate bottom empty space in dashboard wrapper cy-89 ([a278dff](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a278dff5925900644dbc055da3a8479537342f66))
+
+## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.13.0...v1.14.0) (2025-08-12)
+
+
+### Features
+
+* implement download choose the plan page cy-64 ([479d3aa](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/479d3aaf8b275c437ab99eeeeae4778d03f71c77))
+
+
+### Bug Fixes
+
+* fix seeds run command in prestart scripts cy-54 ([300ebf6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/300ebf6502f2d62a2d605d820734fce9f50e88aa))
+* fix seeds run command in prestart scripts cy-54 ([4343350](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/434335028d24f12e6d797b7d42de802dd00be19b))
+* linting issue cy-64 ([3008960](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3008960d1f9f22c6dd56d5dbd6c0f6fd523e082e))
+* rename seeds run command in prestart scripts cy-54 ([da152b5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/da152b5696a44535437cf868ee23a540a13e2fd4))
+
+## [1.13.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.12.0...v1.13.0) (2025-08-12)
+
+
+### Features
+
+* * combine quiz migrations into one file cy-54 ([a800891](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a800891d202e191682c16cba74fd988e07eae210))
+* * extract quiz-questions into separate module cy-54 ([8ecc45a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8ecc45a4782742481e5c29c106386fcafd6ce5bc))
+* * update backend package.json to add seed commands cy-54 ([6e46a1c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6e46a1ce57502a910606be73da8966b60ccf4791))
+* * update create-prompt util cy-54 ([f307a40](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f307a401038d6c8e774693d65f14557298034a59))
+* * update create-prompt utility cy-54 ([3ab2a63](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3ab2a6397763db901cf28066fb2b097c60a3fe1d))
+* * update imports cy-54 ([dcba0d4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/dcba0d4369bcd5154bdef1e3dc385b9e9bd5a1b6))
+* * update knip config to ignore db seeds cy-54 ([721fa41](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/721fa4140e534461d34188d08c02ced3e1e96c5a))
+* * update landing page footer cy-54 ([5daf3c7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5daf3c79d7518625fc6ff6b4c6dc9b9ba11bf53c))
+* * update migration file cy-54 ([e8a8134](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e8a81346fc823c9941783fd0326d50e92b23c2b5))
+* * update prestart in backend package.json cy-54 ([d674364](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d674364e1d020b1a88c487dc984ea859f3cf9218))
+* * update quiz answer type cy-54 ([bcf32b3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bcf32b31bf0a97e4ad177d0915a25ca7310f00c7))
+* * update quiz controller cy-54 ([dc8b53e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/dc8b53ec0ea20befe9c4449805b6570dfce143d1))
+* * update quiz controller route cy-54 ([6295b9b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6295b9b5780318c0bf259086f093f940482e780e))
+* * update quiz imports cy-54 ([829675b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/829675b6ef0344eeb65c8a14e9d8c49b44748a00))
+* * update quiz models cy-54 ([76a9ee4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/76a9ee4397f745fc337b7541939bd3f493d72f36))
+* * update quiz module index cy-54 ([23fa1d3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/23fa1d322ca48362be4f1a870c590a9b2cfabeeb))
+* * update quiz repo cy-54 ([33dc64f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/33dc64f2c4a4917467b0e5645b7f9e1a81b54072))
+* * update quiz repository cy-54 ([013ca16](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/013ca163e86b904d834056e0454371174d4c0433))
+* * update quiz service and quiz controller cy-54 ([6a4697e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6a4697ef75c6f6ec37327c091abacbda0d704b5f))
+* * update quiz service cy-54 ([52b65f7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/52b65f73d2887216edc4b4eba02e9592ac5292d2))
+* * update quiz service method name cy-54 ([f89a1c0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f89a1c0680ff5b8095d251ddbab207209855d57b))
+* * update quiz service to return mocked plan cy-54 ([240c64f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/240c64f2b94f65ba661c6e4b98b1904f5bdfe4e2))
+* * update quiz swagger docs cy-54 ([1682952](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1682952ad984f29b09170dae84f80fe4446d5359))
+* * update quiz types, quiz module and quiz validation schema cy-54 ([8c01222](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8c012224451dbe7c3a96ffccde9b0ec21ea685aa))
+* * update quiz-answers validation schema name cy-54 ([82d6318](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/82d6318426eef1bc7a0d61c4bcda6532a5a958d6))
+* * update sanitize-text-input util cy-54 ([d43c7d5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d43c7d50dfa8812f6d7a147811809743e1d6df02))
+* * update seed file cy-54 ([43bf82e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/43bf82e41c8469f1c7dc136e8427c3d64e61575d))
+* * update seeds cy-54 ([a235862](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a235862c6148a46c11bd5f14dc18cfa069996766))
+* * update shared export cy-54 ([60cab96](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/60cab9697fcf35e55b83304411e047a6cd459881))
+* + add create-prompt util cy-54 ([9568385](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/95683856c15e2c52be6b395eca69bc0fe41cdf43))
+* + add question and question-options models cy-54 ([271ceb3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/271ceb343fb4e42756672f0580d6eb3254637bf6))
+* + add question-options table migration file cy-54 ([3fdb8b2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3fdb8b2c431ef6729408cfc3e9f251f2db42b85d))
+* + add questions and options to seed cy-54 ([b11d45a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b11d45ac9350d7f09f376c59df3f02114ce30921))
+* + add questions seed cy-54 ([642ca6b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/642ca6bba25da678ccfb034b7b7c861e3b30ff42))
+* + add questions table migration file cy-54 ([f39709e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f39709e6b3d0a81e607061a6df34cd8792bf31b3))
+* + add quiz controller cy-54 ([a7f01d8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a7f01d8e37392001427548d38e4a4b51cd66f662))
+* + add quiz controller cy-54 ([67ffc2d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/67ffc2d41ed214d928c627bfa7ca7212f8324bf4))
+* + add quiz entities cy-54 ([6a90859](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6a9085931135843c8d4c72698a9bb92e50e58aa9))
+* + add quiz enums cy-54 ([12a5470](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/12a54705c991f673ca9da7201d8ee6af426ee8a5))
+* + add quiz enums to shared folder cy-54 ([9e86ff6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9e86ff69bccfcfd89f3a70d1ae85475821d5f26f))
+* + add quiz repository cy-54 ([7f43b2e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7f43b2edbedcd5afbc22ad57b6eda4240896f702))
+* + add quiz service cy-54 ([ebf634d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ebf634dcb8a0c768df62a3f0a70fd519fd8668e5))
+* + add quiz type to shared folder cy-54 ([066ae13](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/066ae13e09fdcc94c08662bac60f316745b30d10))
+* + add sanitize helper cy-54 ([44ad24a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/44ad24a01e9c8a6bc15cafe6a42ebfe53128b742))
+* + add swagger to "get" route in quiz controller cy-54 ([1390528](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1390528e18211eece4c8ce2146f729fb5856b3a4))
+* + add swagger to "post" route in quiz controller cy-54 ([e704c1c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e704c1c1cf02421b49709ca13fbc3daac17b55ea))
+* + init quiz cy-54 ([c3888f6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c3888f65fa870397d37e9a8cd2ae7a867299aac2))
+* + register quiz routes cy-54 ([f966115](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f966115634c529e3cfa28215d501205b982596b4))
+* + update api-path to add /quiz cy-54 ([da09111](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/da09111d615a56649156731023ecc9f32cdfdd8e))
+* + update db module to add seeds path cy-54 ([c48890f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c48890fb3e82d345ad6080b604ec993697add872))
+* + update db table enum to add question-options and questions cy-15 ([d75f9d8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d75f9d84123971a7d1ecd3334460cf1881945147))
+* + update quiz types, add validation schema and dtos cy-54 ([de328cd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/de328cd72d798a7adbc826e823e2f0efb7170666))
+* quiz backend cy-54 ([a44c7ca](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a44c7cacafc9fe48fe97929e2d082a292c2b7b22))
+
+
+### Bug Fixes
+
+* * typo in quiz-repo cy-54 ([6e83ee2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6e83ee2be9350e4ef9b72b1ee50b8cda37f60ef2))
+
 ## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.11.0...v1.12.0) (2025-08-12)
 
 
