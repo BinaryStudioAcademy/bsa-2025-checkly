@@ -1,7 +1,7 @@
 .day-item--minimal {
 	display: flex;
 	flex-direction: column;
-	border-bottom: 3px solid var(--color-bg-black);
+	border-bottom: calc(3px * var(--coefficient)) solid var(--color-bg-black);
 }
 
 h2.day-title--minimal {

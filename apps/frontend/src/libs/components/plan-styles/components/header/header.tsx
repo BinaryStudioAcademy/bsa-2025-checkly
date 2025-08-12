@@ -14,8 +14,8 @@ const PlanHeader: React.FC<Properties> = ({
 	title,
 }: Properties) => {
 	const headerClasses = getClassNames(
-		styles["header"],
-		planStyleModules[inputStyle][`header--${inputStyle}`],
+		styles["plan-header"],
+		planStyleModules[inputStyle][`plan-header--${inputStyle}`],
 	);
 
 	const planTitleClasses = getClassNames(

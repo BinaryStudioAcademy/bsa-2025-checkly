@@ -1,4 +1,4 @@
-.header--colorful {
+.plan-header--colorful {
 	padding-bottom: calc(10px * var(--coefficient));
 	border-bottom: calc(5px * var(--coefficient)) double
 		var(--color-border-yellow);
