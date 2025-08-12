@@ -3,8 +3,8 @@ import jsPDF from "jspdf";
 import React, { useCallback, useMemo } from "react";
 
 type Html2CanvasFunction = (
-  element: HTMLElement,
-  options?: object,
+	element: HTMLElement,
+	options?: object,
 ) => Promise<HTMLCanvasElement>;
 
 const html2canvas = H2C as unknown as Html2CanvasFunction;
