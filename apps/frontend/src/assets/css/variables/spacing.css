@@ -10,4 +10,5 @@
 	--flow-space: var(--space-xs);
 	--stroke: 3px solid var(--stroke-color, var(--color-bg-dark));
 	--section-padding-block: var(--space-3xl);
+	--sidebar-border-width: 3px;
 }

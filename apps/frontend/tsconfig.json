@@ -1,7 +1,7 @@
 {
 	"extends": "../../tsconfig.json",
 	"include": ["**/*.ts", "**/*.js", "**/*.tsx"],
-	"exclude": ["node_modules", "build"],
+	"exclude": ["node_modules", "build", "apps/frontend/public"],
 	"files": ["packages.d.ts"],
 	"compilerOptions": {
 		"lib": ["DOM", "DOM.Iterable", "ESNext"],

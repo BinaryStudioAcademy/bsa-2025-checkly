@@ -44,7 +44,7 @@ const extractUserFromRequest = async (
 
 		const payload = (await token.decodeToken(tokenValue)) as { userId: number };
 
-		const user = await userService.findById(payload.userId);
+		const user = await userService.find(payload.userId);
 
 		if (!user) {
 			throw new AuthorizationError({

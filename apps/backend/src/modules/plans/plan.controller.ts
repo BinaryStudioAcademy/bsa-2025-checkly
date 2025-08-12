@@ -122,7 +122,8 @@ class PlanController extends BaseController {
 		this.planService = planService;
 
 		this.addRoute({
-			handler: (options) => this.findById(options as IdParametersOption),
+			handler: (options) =>
+				this.findWithRelations(options as IdParametersOption),
 			method: HTTPRequestMethod.GET,
 			path: PlansApiPath.PLAN,
 		});
@@ -214,13 +215,13 @@ class PlanController extends BaseController {
 	 *                   type: string
 	 *                   example: "Unauthorized"
 	 */
-	private async findById(
+	private async findWithRelations(
 		options: IdParametersOption,
 	): Promise<APIHandlerResponse> {
 		const { id } = options.params;
 
 		return {
-			payload: await this.planService.findById(id),
+			payload: await this.planService.findWithRelations(id),
 			status: HTTPCode.OK,
 		};
 	}

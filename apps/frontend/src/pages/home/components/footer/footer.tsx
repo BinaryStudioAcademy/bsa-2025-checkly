@@ -8,15 +8,17 @@ const Footer: React.FC = () => {
 	return (
 		<footer className={getClassNames("grid-pattern", styles["footer"])}>
 			<div className={getClassNames("wrapper cluster", styles["container"])}>
-				<Logo />
-				<nav
-					aria-label="Footer navigation"
-					className={getClassNames("cluster", styles["nav-links"])}
-				>
-					<Link to="/">Terms of Service</Link>
-					<Link to="/">Privacy Policy</Link>
-					<Link to="/">Contact Us</Link>
-				</nav>
+				<div className={getClassNames("cluster", styles["nav-container"])}>
+					<Logo />
+					<nav
+						aria-label="Footer navigation"
+						className={getClassNames("cluster", styles["nav-links"])}
+					>
+						<Link to="/">Terms of Service</Link>
+						<Link to="/">Privacy Policy</Link>
+						<Link to="/">Contact Us</Link>
+					</nav>
+				</div>
 				<nav
 					aria-label="Social links"
 					className={getClassNames("cluster", styles["social-links"])}

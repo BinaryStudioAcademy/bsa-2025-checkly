@@ -16,7 +16,7 @@
 .nav-links {
 	--cluster-direction: column;
 	--cluster-vertical-alignment: center;
-	--gutter: var(--space-xs);
+	--gutter: var(--space-s);
 }
 
 .nav-links a {
@@ -48,6 +48,20 @@
 	height: auto;
 }
 
+@media (width >= 510px) {
+	.nav-container {
+		--cluster-direction: row;
+		--cluster-horizontal-alignment: space-between;
+
+		width: 100%;
+	}
+
+	.nav-links {
+		--cluster-direction: row;
+		--gutter: var(--space-m);
+	}
+}
+
 @media (width >= 768px) {
 	.container {
 		--cluster-direction: row;
@@ -56,9 +70,17 @@
 		justify-content: space-between;
 	}
 
+	.nav-container {
+		--cluster-horizontal-alignment: flex-start;
+
+		flex: 1;
+		width: auto;
+	}
+
 	.nav-links {
-		--cluster-direction: row;
 		--gutter: var(--space-l);
+
+		margin-inline: auto;
 	}
 
 	.social-links svg {

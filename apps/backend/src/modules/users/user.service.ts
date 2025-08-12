@@ -7,6 +7,7 @@ import {
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserSignUpRequestDto,
+	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
 
 class UserService implements Service {
@@ -33,12 +34,14 @@ class UserService implements Service {
 		return item.toObject();
 	}
 
-	public delete(): ReturnType<Service["delete"]> {
-		return Promise.resolve(true);
+	public async delete(id: number): Promise<boolean> {
+		return await this.userRepository.delete(id);
 	}
 
-	public find(): Promise<null | UserEntity> {
-		return Promise.resolve(null);
+	public async find(id: number): Promise<null | UserDto> {
+		const item = await this.userRepository.find(id);
+
+		return item ? item.toObject() : null;
 	}
 
 	public async findAll(): Promise<UserGetAllResponseDto> {
@@ -53,14 +56,13 @@ class UserService implements Service {
 		return await this.userRepository.findByField("email", email);
 	}
 
-	public async findById(id: number): Promise<null | UserDto> {
-		const item = await this.userRepository.findById(id);
+	public async update(
+		id: number,
+		payload: UserUpdateRequestDto,
+	): Promise<null | UserDto> {
+		const item = await this.userRepository.update(id, payload);
 
 		return item ? item.toObject() : null;
-	}
-
-	public update(): ReturnType<Service["update"]> {
-		return Promise.resolve(null);
 	}
 }
 

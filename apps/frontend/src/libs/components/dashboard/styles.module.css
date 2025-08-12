@@ -16,3 +16,15 @@
 	gap: var(--space-l);
 	transition: gap 0.3s ease-in-out;
 }
+
+@media (width >= 768px) {
+	.content {
+		padding: var(--space-l);
+	}
+}
+
+@media (width >= 1024px) {
+	.content-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}

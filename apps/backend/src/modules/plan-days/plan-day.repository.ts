@@ -23,12 +23,16 @@ class PlanDayRepository implements Repository {
 		return PlanDayEntity.initialize(planDays);
 	}
 
-	public delete(): ReturnType<Repository["delete"]> {
-		return Promise.resolve(true);
+	public async delete(id: number): Promise<boolean> {
+		const deletedPlanDay = await this.planDayModel.query().deleteById(id);
+
+		return Boolean(deletedPlanDay);
 	}
 
-	public find(): ReturnType<Repository["find"]> {
-		return Promise.resolve(null);
+	public async find(id: number): Promise<null | PlanDayEntity> {
+		const planDay = await this.planDayModel.query().where({ id }).first();
+
+		return planDay ? PlanDayEntity.initialize(planDay) : null;
 	}
 
 	public async findAll(): Promise<PlanDayEntity[]> {
@@ -37,13 +41,7 @@ class PlanDayRepository implements Repository {
 		return planDays.map((planDay) => PlanDayEntity.initialize(planDay));
 	}
 
-	public async findById(id: number): Promise<null | PlanDayEntity> {
-		const planDay = await this.planDayModel.query().where({ id }).first();
-
-		return planDay ? PlanDayEntity.initialize(planDay) : null;
-	}
-
-	public update(): ReturnType<Repository["find"]> {
+	public update(): ReturnType<Repository["update"]> {
 		return Promise.resolve(null);
 	}
 }

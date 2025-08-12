@@ -18,6 +18,10 @@
 	font-weight: var(--font-weight-body);
 }
 
+.nav-link {
+	text-decoration: none;
+}
+
 .select-day {
 	display: none;
 	padding: var(--space-2xs) var(--space-m);
@@ -59,7 +63,7 @@
 }
 
 .content__tasks {
-	z-index: -1;
+	z-index: 0;
 	flex: 1;
 	flex-direction: column;
 	padding: var(--gutter);
