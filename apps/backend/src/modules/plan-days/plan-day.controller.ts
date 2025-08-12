@@ -156,7 +156,7 @@ class PlanDayController extends BaseController {
 		const { id } = options.params;
 
 		return {
-			payload: await this.planDayService.findById(id),
+			payload: await this.planDayService.find(id),
 			status: HTTPCode.OK,
 		};
 	}

@@ -25,12 +25,16 @@ class PlanRepository implements Repository {
 		return PlanEntity.initialize(plan);
 	}
 
-	public delete(): ReturnType<Repository["delete"]> {
-		return Promise.resolve(true);
+	public async delete(id: number): Promise<boolean> {
+		const deletedPlan = await this.planModel.query().deleteById(id);
+
+		return Boolean(deletedPlan);
 	}
 
-	public find(): ReturnType<Repository["find"]> {
-		return Promise.resolve(null);
+	public async find(id: number): Promise<null | PlanEntity> {
+		const plan = await this.planModel.query().findById(id);
+
+		return plan ? PlanEntity.initialize(plan) : null;
 	}
 
 	public async findAll(): Promise<PlanEntity[]> {
@@ -39,7 +43,7 @@ class PlanRepository implements Repository {
 		return plans.map((plan) => PlanEntity.initialize(plan));
 	}
 
-	public async findById(id: number): Promise<null | PlanEntity> {
+	public async findWithRelations(id: number): Promise<null | PlanEntity> {
 		const plan = await this.planModel
 			.query()
 			.findById(id)
@@ -48,8 +52,15 @@ class PlanRepository implements Repository {
 		return plan ? PlanEntity.initialize(plan) : null;
 	}
 
-	public update(): ReturnType<Repository["find"]> {
-		return Promise.resolve(null);
+	public async update(
+		id: number,
+		payload: Partial<PlanModel>,
+	): Promise<null | PlanEntity> {
+		const updatedPlan = await this.planModel
+			.query()
+			.patchAndFetchById(id, payload);
+
+		return PlanEntity.initialize(updatedPlan);
 	}
 }
 
