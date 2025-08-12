@@ -1,7 +1,8 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
 
 import { arrowDown, profileDefault } from "~/assets/img/header/header.img.js";
-import { Logo } from "~/libs/components/logo/logo.js";
+import { Link, Logo } from "~/libs/components/components.js";
+import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppSelector, useDropdownMenu } from "~/libs/hooks/hooks.js";
 
@@ -55,12 +56,16 @@ const AppHeader: React.FC = () => {
 				<Logo />
 			</div>
 
+			<div className={styles["vertical-divider"]} />
+
 			<div className={styles["user-section"]} ref={menuReference}>
-				<img
-					alt="User profile"
-					className={styles["user-image"]}
-					src={profileDefault}
-				/>
+				<Link to={AppRoute.PROFILE}>
+					<img
+						alt="User profile"
+						className={styles["user-image"]}
+						src={profileDefault}
+					/>
+				</Link>
 				<div className={styles["user-name-arrow"]}>
 					<span className={styles["user-name"]}>{displayName}</span>
 					<button

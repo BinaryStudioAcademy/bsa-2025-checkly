@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { MESSAGES } from "~/libs/constants/messages.constants.js";
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
@@ -63,14 +64,29 @@ const getCurrentUser = createAsyncThunk<
 	return await authApi.getCurrentUser();
 });
 
-const logout = createAsyncThunk<null, undefined, AsyncThunkConfig>(
-	`${sliceName}/logout`,
-	async (_, { dispatch, extra }) => {
-		const { storage } = extra;
-		await storage.drop(StorageKey.TOKEN);
-		dispatch(authSliceActions.resetAuthState());
+type LogoutThunkArgument = { navigate: (path: string) => Promise<void> | void };
 
-		return null;
+const logout = createAsyncThunk<null, LogoutThunkArgument, AsyncThunkConfig>(
+	`${sliceName}/logout`,
+	async ({ navigate }, { dispatch, extra }) => {
+		const { notifications, storage } = extra;
+
+		try {
+			await storage.drop(StorageKey.TOKEN);
+			dispatch(authSliceActions.resetAuthState());
+
+			try {
+				await Promise.resolve(navigate("/sign-in"));
+			} catch {
+				notifications.error(MESSAGES.NAVIGATION.FAILED);
+			}
+
+			return null;
+		} catch (error) {
+			notifications.error(MESSAGES.AUTH.LOGOUT_FAILED);
+
+			throw error;
+		}
 	},
 );
 

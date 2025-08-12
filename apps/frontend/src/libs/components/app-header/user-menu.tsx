@@ -1,14 +1,12 @@
 import React, { useCallback } from "react";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogOut, FiUser } from "react-icons/fi";
 import { MdDashboard } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 import { Plan } from "~/assets/img/side-panel/side-panel.img.js";
-import { MESSAGES } from "~/libs/constants/messages.constants.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppDispatch } from "~/libs/hooks/hooks.js";
-import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { actions as authActions } from "~/modules/auth/slices/auth.js";
 
 import { NavigationItem } from "../navigation-item/navigation-item.js";
@@ -27,26 +25,18 @@ const UserMenu: React.FC<Properties> = function UserMenu({ isOpen }) {
 	const navigate = useNavigate();
 
 	const handleLogout = useCallback((): void => {
-		const dispatchResult = dispatch(authActions.logout());
-
-		if (dispatchResult instanceof Promise) {
-			dispatchResult.catch(() => {
-				notifications.error(MESSAGES.AUTH.LOGOUT_FAILED);
-			});
-		}
-
-		const navigateResult = navigate(AppRoute.SIGN_IN);
-
-		if (navigateResult instanceof Promise) {
-			navigateResult.catch(() => {
-				notifications.error(MESSAGES.NAVIGATION.FAILED);
-			});
-		}
+		void dispatch(authActions.logout({ navigate }));
 	}, [dispatch, navigate]);
 
 	return (
 		<nav aria-label="User menu" className={menuDropdownClass}>
 			<ul>
+				<NavigationItem
+					buttonText="Profile"
+					buttonType="user-menu"
+					icon={<FiUser />}
+					navigateTo={AppRoute.PROFILE}
+				/>
 				<NavigationItem
 					buttonText="Dashboard"
 					buttonType="user-menu"
