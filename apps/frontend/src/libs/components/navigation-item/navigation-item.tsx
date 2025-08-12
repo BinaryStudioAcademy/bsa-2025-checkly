@@ -1,6 +1,7 @@
 import { type ReactNode, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
+import { ZERO } from "~/libs/constants/constants.js";
 import { type AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { type ValueOf } from "~/libs/types/types.js";
@@ -48,7 +49,7 @@ const NavigationItem: React.FC<Properties> = ({
 					className={itemClass}
 					onClick={onClick}
 					role="menuitem"
-					tabIndex={0}
+					tabIndex={ZERO}
 					type="button"
 				>
 					{icon}
@@ -60,7 +61,7 @@ const NavigationItem: React.FC<Properties> = ({
 						aria-label={buttonText}
 						className={itemClass}
 						role="menuitem"
-						tabIndex={0}
+						tabIndex={ZERO}
 						type="button"
 					>
 						{icon}

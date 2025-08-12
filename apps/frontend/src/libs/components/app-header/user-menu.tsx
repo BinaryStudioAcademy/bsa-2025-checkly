@@ -16,7 +16,7 @@ type Properties = {
 	isOpen: boolean;
 };
 
-const UserMenu: React.FC<Properties> = function UserMenu({ isOpen }) {
+const UserMenu: React.FC<Properties> = ({ isOpen }) => {
 	const menuDropdownClass = getClassNames(
 		styles["menu-dropdown"],
 		isOpen && styles["menu-dropdown--open"],

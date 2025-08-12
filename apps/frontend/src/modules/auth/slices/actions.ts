@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { MESSAGES } from "~/libs/constants/messages.constants.js";
+import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
@@ -76,7 +77,7 @@ const logout = createAsyncThunk<null, LogoutThunkArgument, AsyncThunkConfig>(
 			dispatch(authSliceActions.resetAuthState());
 
 			try {
-				await Promise.resolve(navigate("/sign-in"));
+				await Promise.resolve(navigate(AppRoute.SIGN_IN));
 			} catch {
 				notifications.error(MESSAGES.NAVIGATION.FAILED);
 			}
