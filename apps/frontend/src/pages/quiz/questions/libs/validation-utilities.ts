@@ -5,12 +5,12 @@ import {
 	type QuizAnswer,
 } from "~/modules/quiz/libs/types/types.js";
 
-const OTHER_OPTION_TITLE = "other";
+const OTHER_OPTION_TITLE = "✍️ Other";
 
 const isOtherOption = (option: string): boolean => {
-	const otherOption = option.trim().toLowerCase();
+	const trimmedOption = option.trim().toLowerCase();
 
-	return otherOption.includes(OTHER_OPTION_TITLE);
+	return trimmedOption === OTHER_OPTION_TITLE.toLowerCase();
 };
 
 const hasOtherSelected = (currentAnswer: QuizAnswer): boolean => {
@@ -64,7 +64,7 @@ const isNextDisabled = (
 
 const isOptionSelected = (
 	option: string,
-	selectedOptions: MultipleAnswers[] | undefined,
+	selectedOptions?: MultipleAnswers[],
 ): boolean => {
 	return selectedOptions?.includes(option) ?? false;
 };

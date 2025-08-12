@@ -5,8 +5,8 @@ import {
 	type QuizQuestionsResponseDto,
 } from "~/modules/quiz/libs/types/types.js";
 
-const getTextAnswerValue = (currentAnswer: string | undefined): string => {
-	return currentAnswer || "";
+const getTextAnswerValue = (currentAnswer?: string): string => {
+	return currentAnswer ?? "";
 };
 
 const getTotalSteps = (questions: null | QuizQuestionsResponseDto): number => {
