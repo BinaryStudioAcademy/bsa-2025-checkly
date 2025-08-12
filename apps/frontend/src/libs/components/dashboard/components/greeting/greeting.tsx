@@ -6,6 +6,8 @@ import { useAppSelector } from "~/libs/hooks/hooks.js";
 import { CreatePlanButton } from "../create-plan-button/create-plan-button.js";
 import styles from "./styles.module.css";
 
+const handleCreatePlan = (): void => {};
+
 const Greeting: FC = () => {
 	const user = useAppSelector((state) => state.auth.user);
 
@@ -17,6 +19,7 @@ const Greeting: FC = () => {
 				disabled
 				icon={<CreateDoc className={styles["large-icon"]} />}
 				label="Create New Plan"
+				onClick={handleCreatePlan}
 			/>
 		</div>
 	);
