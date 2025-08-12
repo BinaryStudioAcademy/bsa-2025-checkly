@@ -3,7 +3,7 @@ import { type RouteObject } from "react-router-dom";
 import { Dashboard, DashboardWrapper } from "./libs/components/components.js";
 import { AppRoute, RouteAccess } from "./libs/enums/enums.js";
 import { Plan } from "./pages/dashboard-wrapper-mock/components/components.js";
-import { Auth, Home, NotFound } from "./pages/pages.js";
+import { Auth, Home, NotFound, Profile } from "./pages/pages.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
 
@@ -33,6 +33,11 @@ const routes: CustomRouteObject[] = [
 				element: <Dashboard />,
 				handle: { access: RouteAccess.AUTHENTICATED },
 				path: AppRoute.DASHBOARD,
+			},
+			{
+				element: <Profile />,
+				handle: { access: RouteAccess.AUTHENTICATED },
+				path: AppRoute.PROFILE,
 			},
 			{
 				element: <Plan />,

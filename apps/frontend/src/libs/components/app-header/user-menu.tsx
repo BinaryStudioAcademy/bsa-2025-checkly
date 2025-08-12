@@ -1,4 +1,5 @@
 import React from "react";
+import { CgProfile } from "react-icons/cg";
 import { FiLogOut } from "react-icons/fi";
 import { MdDashboard } from "react-icons/md";
 
@@ -22,6 +23,12 @@ const UserMenu: React.FC<Properties> = ({ isOpen }) => {
 	return (
 		<nav aria-label="User menu" className={menuDropdownClass}>
 			<ul>
+				<NavigationItem
+					buttonText="Profile"
+					buttonType="user-menu"
+					icon={<CgProfile />}
+					navigateTo={AppRoute.PROFILE}
+				/>
 				<NavigationItem
 					buttonText="Dashboard"
 					buttonType="user-menu"
