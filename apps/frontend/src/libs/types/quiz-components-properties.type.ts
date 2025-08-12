@@ -83,6 +83,7 @@ type TextQuestionProperties = {
 
 export {
 	type CheckboxQuestionProperties,
+	type MixedAnswer,
 	type MixedQuestionProperties,
 	type MultipleAnswers,
 	type ProgressBarProperties,
@@ -92,6 +93,7 @@ export {
 	type QuizCategoryProperties,
 	type RadioQuestionProperties,
 	type SingleAnswer,
+	type SingleChoiceWithTextAnswer,
 	type SingleChoiceWithTextQuestionProperties,
 	type TextQuestionProperties,
 };

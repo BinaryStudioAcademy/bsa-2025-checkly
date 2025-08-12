@@ -28,10 +28,15 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 		currentAnswer?.userInput || "",
 	);
 
+	const isOthersSelected = selectedOptions.some(
+		(option) => typeof option === "string" && isOtherOption(option),
+	);
+
 	const handleOptionChange = useCallback(
 		(option: string, checked: boolean): void => {
 			const newSelectedOptions = toggleOption(option, selectedOptions, checked);
-			const newUserInput = isOtherOption(option) && !checked ? "" : userInput;
+			const isSwitchingFromOther = isOtherOption(option) && !checked;
+			const newUserInput = isSwitchingFromOther ? "" : userInput;
 
 			setSelectedOptions(newSelectedOptions);
 			onAnswer({
@@ -39,7 +44,7 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 				userInput: newUserInput,
 			});
 
-			if (isOtherOption(option) && !checked) {
+			if (isSwitchingFromOther) {
 				setUserInput("");
 			}
 		},
@@ -47,9 +52,10 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 	);
 
 	const handleInputChange = useCallback(
-		(optionText: string) => (event_: React.ChangeEvent<HTMLInputElement>): void => {
-			handleOptionChange(optionText, event_.target.checked);
-		},
+		(optionText: string) =>
+			(event_: React.ChangeEvent<HTMLInputElement>): void => {
+				handleOptionChange(optionText, event_.target.checked);
+			},
 		[handleOptionChange],
 	);
 
@@ -60,10 +66,6 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 			onAnswer({ selectedOptions, userInput: newUserInput });
 		},
 		[onAnswer, selectedOptions],
-	);
-
-	const isOthersSelected = selectedOptions.some(
-		(option) => typeof option === "string" && isOtherOption(option),
 	);
 
 	return (

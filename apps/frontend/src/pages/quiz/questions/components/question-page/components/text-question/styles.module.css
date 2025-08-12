@@ -19,8 +19,8 @@
 	padding: var(--space-l);
 	font-family: inherit;
 	font-size: var(--text-size-body);
-	background-color: var(--color-white);
-	border: 1px solid var(--color-border-light);
+	background-color: var(--color-bg-white);
+	border: 2px solid var(--color-border-grey);
 	border-radius: var(--radius-m);
 	transition: all 0.2s ease;
 }

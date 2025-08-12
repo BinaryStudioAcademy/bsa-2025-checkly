@@ -17,6 +17,7 @@ export {
 	ContentType,
 	DataStatus,
 	HTTPRequestMethod,
+	QuizApiPath,
 	QuizIndexes,
 	QuizQuestionFormat,
 	ServerErrorType,

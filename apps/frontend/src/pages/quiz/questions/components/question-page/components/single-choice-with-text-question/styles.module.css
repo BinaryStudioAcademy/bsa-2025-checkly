@@ -1,4 +1,4 @@
-.mixed-question {
+.single-choice-with-text-question {
 	display: flex;
 	flex-direction: column;
 	gap: var(--space-xl);
@@ -8,7 +8,7 @@
 	margin-left: auto;
 }
 
-.checkbox-section,
+.radio-section,
 .text-section {
 	display: flex;
 	flex-direction: column;
@@ -32,7 +32,7 @@
 	gap: var(--space-m);
 }
 
-.checkbox-option {
+.radio-option {
 	position: relative;
 	display: flex;
 	gap: var(--space-m);
@@ -45,12 +45,12 @@
 	transition: all 0.2s ease;
 }
 
-.checkbox-option:hover {
+.radio-option:hover {
 	box-shadow: 0 2px 8px var(--color-text-primary);
 	transform: translateY(-1px);
 }
 
-.checkbox-input {
+.radio-input {
 	position: absolute;
 	width: 0;
 	height: 0;
@@ -58,7 +58,7 @@
 	opacity: 0;
 }
 
-.checkbox-custom {
+.radio-custom {
 	position: relative;
 	display: flex;
 	flex-shrink: 0;
@@ -68,22 +68,22 @@
 	height: 2rem;
 	background: var(--color-white);
 	border: 2px solid var(--color-text-primary);
-	border-radius: var(--radius-s);
+	border-radius: 50%;
 	transition: all 0.2s ease;
 }
 
-.checkbox-custom img {
+.radio-custom img {
 	width: 1.75rem;
 	height: 1.75rem;
 }
 
-.checkbox-input:checked + .checkbox-custom img {
+.radio-input:checked + .radio-custom img {
 	width: 100%;
 	height: 100%;
 	object-fit: contain;
 }
 
-.checkbox-input:checked + .checkbox-custom {
+.radio-input:checked + .radio-custom {
 	background: transparent;
 	border-color: transparent;
 	transition: none;
@@ -125,12 +125,12 @@
 	color: var(--color-text-secondary);
 }
 
-.checkbox-option:has(.checkbox-input:checked) {
+.radio-option:has(.radio-input:checked) {
 	background: var(--color-card-mint);
 	border-color: var(--color-bg-dark);
 }
 
-.checkbox-option:has(.checkbox-input:checked) .option-text {
+.radio-option:has(.radio-input:checked) .option-text {
 	font-weight: var(--font-weight-semibold);
 	color: var(--color-text-primary);
 }
@@ -143,12 +143,12 @@
 		margin: 0 auto;
 	}
 
-	.checkbox-custom {
+	.radio-custom {
 		width: 1rem;
 		height: 1rem;
 	}
 
-	.checkbox-option {
+	.radio-option {
 		padding: var(--space-s);
 	}
 
@@ -165,11 +165,11 @@
 		justify-content: center;
 	}
 
-	.checkbox-option {
+	.radio-option {
 		padding: var(--space-xs);
 	}
 
-	.checkbox-custom {
+	.radio-custom {
 		width: 1rem;
 		height: 1rem;
 	}

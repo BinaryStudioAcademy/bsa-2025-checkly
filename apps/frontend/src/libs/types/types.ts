@@ -3,6 +3,7 @@ export { type ButtonSize } from "./button-size.type.js";
 export { type ButtonVariant } from "./button-variant.type.js";
 export {
 	type CheckboxQuestionProperties,
+	type MixedAnswer,
 	type MixedQuestionProperties,
 	type MultipleAnswers,
 	type ProgressBarProperties,
@@ -12,6 +13,8 @@ export {
 	type QuizCategoryProperties,
 	type RadioQuestionProperties,
 	type SingleAnswer,
+	type SingleChoiceWithTextAnswer,
+	type SingleChoiceWithTextQuestionProperties,
 	type TextQuestionProperties,
 } from "./quiz-components-properties.type.js";
 export {
