@@ -4,14 +4,17 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { getQuestionIcons } from "~/libs/helpers/helpers.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import {
+	type MixedAnswer,
 	type MultipleAnswers,
 	type QuestionPageProperties,
 	type SingleAnswer,
+	type SingleChoiceWithTextAnswer,
 } from "~/libs/types/types.js";
 
 import { CheckboxQuestion } from "./components/checkbox-question/checkbox-question.js";
 import { MixedQuestion } from "./components/mixed-question/mixed-question.js";
 import { RadioQuestion } from "./components/radio-question/radio-question.js";
+import { SingleChoiceWithTextQuestion } from "./components/single-choice-with-text-question/single-choice-with-text-question.js";
 import { TextQuestion } from "./components/text-question/text-question.js";
 import styles from "./styles.module.css";
 
@@ -61,15 +64,25 @@ const QuestionPage: React.FC<QuestionPageProperties> = ({
 	);
 
 	const handleMixedAnswer = useCallback(
-		(answer: {
-			selectedOptions: MultipleAnswers[];
-			userInput: string;
-		}): void => {
+		(answer: MixedAnswer): void => {
 			onAnswer({
 				isSkipped: false,
 				questionId: question.id,
 				questionText: question.text,
 				selectedOptions: answer.selectedOptions,
+				userInput: answer.userInput,
+			});
+		},
+		[onAnswer, question],
+	);
+
+	const handleSingleChoiceWithTextAnswer = useCallback(
+		(answer: SingleChoiceWithTextAnswer): void => {
+			onAnswer({
+				isSkipped: false,
+				questionId: question.id,
+				questionText: question.text,
+				selectedOptions: answer.selectedOption ? [answer.selectedOption] : [],
 				userInput: answer.userInput,
 			});
 		},
@@ -91,17 +104,10 @@ const QuestionPage: React.FC<QuestionPageProperties> = ({
 			case QuizQuestionFormat.MULTIPLE_CHOICE_WITH_TEXT_INPUT: {
 				return (
 					<MixedQuestion
-						currentAnswer={
-							currentAnswer
-								? {
-										selectedOptions: currentAnswer.selectedOptions,
-										userInput: currentAnswer.userInput,
-									}
-								: {
-										selectedOptions: [],
-										userInput: "",
-									}
-						}
+						currentAnswer={{
+							selectedOptions: currentAnswer?.selectedOptions ?? [],
+							userInput: currentAnswer?.userInput ?? "",
+						}}
 						onAnswer={handleMixedAnswer}
 						question={question}
 					/>
@@ -112,9 +118,25 @@ const QuestionPage: React.FC<QuestionPageProperties> = ({
 				return (
 					<RadioQuestion
 						currentAnswer={
-							currentAnswer?.selectedOptions[QuizIndexes.ZERO_INDEX] || ""
+							currentAnswer?.selectedOptions[QuizIndexes.ZERO_INDEX] ?? ""
 						}
 						onAnswer={handleRadioAnswer}
+						question={question}
+					/>
+				);
+			}
+
+			case QuizQuestionFormat.SINGLE_CHOICE_WITH_TEXT_INPUT: {
+				return (
+					<SingleChoiceWithTextQuestion
+						currentAnswer={{
+							selectedOption:
+								currentAnswer?.selectedOptions[
+									QuizIndexes.ZERO_INDEX
+								]?.toString() ?? null,
+							userInput: currentAnswer?.userInput ?? "",
+						}}
+						onAnswer={handleSingleChoiceWithTextAnswer}
 						question={question}
 					/>
 				);
@@ -123,7 +145,7 @@ const QuestionPage: React.FC<QuestionPageProperties> = ({
 			case QuizQuestionFormat.TEXT_INPUT: {
 				return (
 					<TextQuestion
-						currentAnswer={currentAnswer ? currentAnswer.userInput : ""}
+						currentAnswer={currentAnswer?.userInput ?? ""}
 						onAnswer={handleTextAnswer}
 						question={question}
 					/>
