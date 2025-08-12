@@ -12,7 +12,7 @@ export {
 	HTTPError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
-export { configureString } from "./libs/helpers/helpers.js";
+export { configureString, sanitizeTextInput } from "./libs/helpers/helpers.js";
 export { type Config } from "./libs/modules/config/config.js";
 export {
 	type HTTP,
@@ -51,6 +51,18 @@ export {
 	PlansApiPath,
 	type PlanUpdateRequestDto,
 } from "./modules/plans/plans.js";
+export {
+	type QuestionDto,
+	type QuestionOptionDto,
+	type QuestionType,
+	type QuizAnswer,
+	type QuizAnswersRequestDto,
+	quizAnswersValidationSchema,
+	type QuizCategoryType,
+	QuizQuestionFormat,
+	type QuizQuestionsResponseDto,
+	QuizzApiPath,
+} from "./modules/quiz/quiz.js";
 export {
 	ExecutionTimeType,
 	type TaskCreateRequestDto,
