@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { DataStatus } from "~/libs/enums/enums.js";
+import { DataStatus, QuizIndexes } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
-import { clearQuizState } from "~/modules/quiz/libs/storage/quiz-storage.js";
 import {
 	type QuizAnswer,
 	type QuizCategoryValue,
@@ -21,7 +20,7 @@ interface QuizState {
 
 const initialState: QuizState = {
 	answers: {},
-	currentQuestion: 1,
+	currentQuestion: QuizIndexes.FIRST_INDEX,
 	dataStatus: DataStatus.IDLE,
 	notes: "",
 	questions: null,
@@ -52,20 +51,19 @@ const { actions, name, reducer } = createSlice({
 			const { answers, currentQuestion, notes, questions, selectedCategory } =
 				action.payload;
 
-			state.answers = answers || state.answers;
-			state.currentQuestion = currentQuestion || state.currentQuestion;
+			state.answers = answers ?? state.answers;
+			state.currentQuestion = currentQuestion ?? state.currentQuestion;
 			state.notes = notes ?? state.notes;
-			state.questions = questions || state.questions;
-			state.selectedCategory = selectedCategory || state.selectedCategory;
+			state.questions = questions ?? state.questions;
+			state.selectedCategory = selectedCategory ?? state.selectedCategory;
 		},
 		resetQuiz: (state) => {
 			state.answers = {};
-			state.currentQuestion = 1;
+			state.currentQuestion = QuizIndexes.FIRST_INDEX;
 			state.dataStatus = DataStatus.IDLE;
 			state.notes = "";
 			state.questions = null;
 			state.selectedCategory = null;
-			void clearQuizState();
 		},
 		saveAnswer: (state, action: { payload: QuizAnswer }) => {
 			const answer = action.payload;
