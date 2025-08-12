@@ -21,15 +21,15 @@
 	.regular-view {
 		--coefficient: 0.7;
 	}
+
+	.container {
+		min-height: 0;
+	}
 }
 
 @media (width <= 475px) {
 	.regular-view {
 		--coefficient: 0.5;
-	}
-
-	.container {
-		min-height: 0;
 	}
 }
 
