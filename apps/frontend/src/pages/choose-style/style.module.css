@@ -96,14 +96,6 @@ html {
 	transition: box-shadow 0.2s ease-in-out;
 }
 
-.card-image {
-	display: block;
-	width: 100%;
-	height: 80%;
-	object-fit: cover;
-	border-radius: 0.75rem;
-}
-
 .card-text {
 	display: flex;
 	flex-grow: 1;

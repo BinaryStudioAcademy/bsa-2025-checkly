@@ -1,21 +1,23 @@
-import {
-	ExampleColourful,
-	ExampleMinimal,
-	ExampleMotivating,
-	ExampleWithRemarks,
-} from "~/assets/img/shared/illustrations/layouts/layouts.img.js";
+import { type PlanStyleOption } from "~/libs/types/types.js";
 
 type StyleCard = {
 	id: string;
-	img: string;
 	label: string;
+	planStyle: PlanStyleOption;
 };
 
 const styleCards: StyleCard[] = [
-	{ id: "box-1", img: ExampleMinimal, label: "Minimal" },
-	{ id: "box-2", img: ExampleWithRemarks, label: "With Remarks" },
-	{ id: "box-3", img: ExampleMotivating, label: "Motivating" },
-	{ id: "box-4", img: ExampleColourful, label: "Colourful" },
+	{ id: "box-1", label: "Minimal", planStyle: "minimal" },
+	{
+		id: "box-2",
+		label: "With Remarks",
+		planStyle: "withremarks",
+	},
+	{
+		id: "box-4",
+		label: "Colourful",
+		planStyle: "colorful",
+	},
 ];
 
 export { styleCards };

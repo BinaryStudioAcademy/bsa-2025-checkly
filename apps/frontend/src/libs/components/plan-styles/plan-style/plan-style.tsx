@@ -1,6 +1,6 @@
 import { planStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { type PlanStyleOption } from "~/libs/types/types.js";
+import { type PlanStyleOption, type ViewOptions } from "~/libs/types/types.js";
 
 import { Day, Notes, PlanHeader } from "../components/components.js";
 import { plan } from "../mocks/plan-mocks.js";
@@ -8,19 +8,21 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	inputStyle: PlanStyleOption;
-	isSampleView?: boolean;
+	view?: ViewOptions;
 };
 
 const PlanStyle: React.FC<Properties> = ({
 	inputStyle,
-	isSampleView = false,
+	view = "regular",
 }: Properties) => {
 	const withRemarks = inputStyle === "withremarks";
 
 	const containerClasses = getClassNames(
 		styles["container"],
-		isSampleView ? styles["sample-view"] : styles["regular-view"],
-		isSampleView && styles["sample-container"],
+		view === "homepage" && styles[`${view}-view`],
+		view === "homepage" && styles[`${view}-container`],
+		view === "selection" && styles[`${view}-view`],
+		view === "selection" && styles[`${view}-container`],
 		planStyleModules[inputStyle][`container--${inputStyle}`],
 	);
 

@@ -5,11 +5,12 @@ import {
 import { DecorativeImage } from "~/libs/components/components.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { type ViewOptions } from "~/libs/types/types.js";
 
 import { layoutExamples } from "./libs/constants.js";
 import styles from "./styles.module.css";
 
-const IS_SAMPLE_VIEW = true;
+const PLAN_VIEW_OPTION: ViewOptions = "homepage";
 
 const VisualLayouts: React.FC = () => {
 	return (
@@ -47,7 +48,7 @@ const VisualLayouts: React.FC = () => {
 							>
 								<PlanStyle
 									inputStyle={example.planStyle}
-									isSampleView={IS_SAMPLE_VIEW}
+									view={PLAN_VIEW_OPTION}
 								/>
 								<h5>{example.title}</h5>
 							</li>

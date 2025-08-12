@@ -10,10 +10,17 @@
 	margin: 0 auto;
 }
 
-.sample-container {
+.homepage-container {
 	height: 100%;
 	min-height: 0;
 	max-height: 250px;
+	overflow-y: hidden;
+}
+
+.selection-container {
+	height: 100%;
+	min-height: 0;
+	max-height: 285px;
 	overflow-y: hidden;
 }
 
@@ -33,6 +40,10 @@
 	}
 }
 
-.sample-view {
+.homepage-view {
 	--coefficient: 0.32;
+}
+
+.selection-view {
+	--coefficient: 0.37;
 }
