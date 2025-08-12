@@ -8,11 +8,13 @@ import { getCurrentUser, signIn, signUp } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
+	isPreparing: boolean;
 	user: null | UserDto;
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
+	isPreparing: true,
 	user: null,
 };
 
@@ -20,6 +22,7 @@ const { actions, name, reducer } = createSlice({
 	extraReducers(builder) {
 		builder.addCase(signUp.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
+			state.isPreparing = !initialState.isPreparing;
 		});
 		builder.addCase(signUp.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
@@ -29,8 +32,10 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.REJECTED;
 			state.user = null;
 		});
+
 		builder.addCase(getCurrentUser.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
+			state.isPreparing = initialState.isPreparing;
 		});
 		builder.addCase(getCurrentUser.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
@@ -43,6 +48,7 @@ const { actions, name, reducer } = createSlice({
 
 		builder.addCase(signIn.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
+			state.isPreparing = !initialState.isPreparing;
 		});
 		builder.addCase(signIn.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;

@@ -29,24 +29,26 @@ const Plan: React.FC = () => {
 				/>
 			</div>
 			<div className={styles["content"]}>
-				<div
-					className={getClassNames(
-						styles["content__days"],
-						isSelectOpen ? styles["content__days__open"] : "",
-					)}
-				>
-					{daysTasksMockData.map((_, index) => {
-						return (
-							<Day
-								indexDay={index}
-								isOpen={isSelectOpen}
-								key={index}
-								selectedDay={selectedDay}
-								setIsOpen={setIsSelectOpen}
-								setSelectedDay={setSelectedDay}
-							/>
-						);
-					})}
+				<div className={styles["content__days-wrapper"]}>
+					<div
+						className={getClassNames(
+							styles["content__days"],
+							isSelectOpen ? styles["content__days__open"] : "",
+						)}
+					>
+						{daysTasksMockData.map((_, index) => {
+							return (
+								<Day
+									indexDay={index}
+									isOpen={isSelectOpen}
+									key={index}
+									selectedDay={selectedDay}
+									setIsOpen={setIsSelectOpen}
+									setSelectedDay={setSelectedDay}
+								/>
+							);
+						})}
+					</div>
 				</div>
 				<div
 					className={getClassNames(

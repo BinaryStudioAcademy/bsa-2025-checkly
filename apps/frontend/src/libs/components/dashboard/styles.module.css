@@ -1,0 +1,18 @@
+.content {
+	height: 100%;
+	padding: var(--space-m);
+	overflow-x: auto;
+	transition: padding 0.3s ease-in-out;
+}
+
+.light-background {
+	--grid-color: var(--color-light-grey);
+	--grid-line: 1px;
+}
+
+.content-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--space-l);
+	transition: gap 0.3s ease-in-out;
+}

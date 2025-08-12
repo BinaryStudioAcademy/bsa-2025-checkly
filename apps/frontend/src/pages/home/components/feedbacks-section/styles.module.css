@@ -1,23 +1,23 @@
 .wrapper {
 	position: relative;
-	width: 100%;
-	padding: 100px 0;
+	padding-block: var(--section-padding-block);
 }
 
 .light-background {
 	--grid-color: var(--color-light-grey);
 	--grid-line: 1px;
+	--grid-opacity: 0.4;
 }
 
 .landing-section {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 100vh;
-	scroll-snap-align: start;
 }
 
 .container {
+	--flow-space: var(--space-2xl);
+
 	position: relative;
 	width: 100%;
 	max-width: 1200px;
@@ -25,7 +25,7 @@
 }
 
 .title {
-	margin: 0 0 60px;
+	font-size: var(--text-size-heading-2);
 	text-align: center;
 }
 
@@ -62,8 +62,6 @@
 	}
 
 	.wrapper {
-		padding: 60px 0;
-
 		--grid-size: 12px;
 	}
 }

@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.1.0...shared-v1.2.0) (2025-08-08)
+
+
+### Features
+
+* add database plan entities cy-41 ([83e39ad](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/83e39ade0aa3a4cd2b93814c2e718b9027aab11a))
+
+
+### Bug Fixes
+
+* fixed validation to exclude in-built validation cy-172 ([3e5f3b1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3e5f3b18eb071d131a706d82ed819f9824c41719))
+* turn off in-built validation cy-172 ([e69944a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e69944ab7a3d0380ee1e93df9e574e3bee118e0c))
+
 ## [1.1.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.0.1...shared-v1.1.0) (2025-08-06)
 
 

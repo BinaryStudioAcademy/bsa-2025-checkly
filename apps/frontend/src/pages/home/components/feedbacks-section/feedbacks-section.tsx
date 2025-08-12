@@ -19,7 +19,7 @@ const FeedbacksSection: FC = () => {
 			<div className="wrapper">
 				<div className={getClassNames(styles["wrapper"])}>
 					<FeedbackSectionDecoration />
-					<div className={styles["container"]}>
+					<div className={getClassNames("flow", styles["container"])}>
 						<h2 className={styles["title"]}>Testimonials</h2>
 						<div className={styles["grid"]}>
 							{FEEDBACKS.map((item) => (

@@ -12,6 +12,7 @@ import {
 	Button,
 	DecorativeImage,
 	Input,
+	Loader,
 } from "~/libs/components/components.js";
 import { Logo } from "~/libs/components/logo/logo.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
@@ -29,10 +30,14 @@ import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
 import styles from "./sign-up-form.module.css";
 
 type Properties = {
+	isLoading: boolean;
 	onSubmit: (payload: UserSignUpRequestDto) => void;
 };
 
-const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
+const SignUpForm: React.FC<Properties> = ({
+	isLoading,
+	onSubmit,
+}: Properties) => {
 	const { control, errors, handleSubmit } =
 		useAppForm<SignUpFormValidationSchema>({
 			defaultValues: { ...DEFAULT_SIGN_UP_PAYLOAD, confirmPassword: "" },
@@ -131,7 +136,18 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 							type="password"
 						/>
 					</div>
-					<Button label="Create an account" type="submit" />
+					<Button
+						label="Create an account"
+						loader={
+							<Loader
+								container="inline"
+								isLoading={isLoading}
+								size="small"
+								theme="accent"
+							/>
+						}
+						type="submit"
+					/>
 				</form>
 				<DecorativeImage className={orangeClasses} src={OrangeWhole} />
 				<DecorativeImage className={carClasses} src={Car} />

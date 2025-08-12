@@ -1,6 +1,6 @@
 .grid-pattern {
 	--grid-color: var(--color-text-secondary, #f6f5fa);
-	--grid-opacity: 1;
+	--grid-opacity: 0.6;
 	--grid-size: 8px;
 	--grid-line: 1px;
 	--color: color-mix(

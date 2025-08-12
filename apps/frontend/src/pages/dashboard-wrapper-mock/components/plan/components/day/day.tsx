@@ -33,6 +33,15 @@ const Day: React.FC<Properties> = ({
 
 	return (
 		<div className={styles["content__days-item"]} key={indexDay}>
+			<div className={getClassNames(styles["regenerate-button"])}>
+				{selectedDay === indexDay && (
+					<Button
+						icon={<DecorativeImage src={Regenerate} />}
+						isIconOnly
+						label=""
+					/>
+				)}
+			</div>
 			<Button
 				className={getClassNames(
 					styles["content__days__day"],
@@ -42,16 +51,9 @@ const Day: React.FC<Properties> = ({
 				onClick={handleDay}
 				variant="transparent"
 			/>
-			{selectedDay === indexDay ? (
-				<img alt="" className={styles["selectedDay-icon"]} src={ArrowBold} />
-			) : (
-				<Button
-					className={getClassNames(styles["regenerate-button"])}
-					icon={<DecorativeImage src={Regenerate} />}
-					isIconOnly
-					label=""
-				/>
-			)}
+			<div className={styles["selectedDay-icon"]}>
+				{selectedDay === indexDay && <img alt="" src={ArrowBold} />}
+			</div>
 		</div>
 	);
 };

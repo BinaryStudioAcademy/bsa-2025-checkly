@@ -2,27 +2,28 @@
 	--grid-color: var(--color-light-grey);
 	--grid-opacity: 0.4;
 
-	display: flex;
-	align-items: center;
-	min-height: 100vh;
-	padding: 100px 0 0;
+	padding-block: calc(var(--section-padding-block) + calc(var(--gutter) * 7))
+		var(--section-padding-block);
+}
+
+.hero-title {
 	text-align: center;
 }
 
 .hero-subtitle {
+	max-width: 75%;
 	font-size: var(--text-size-heading-4);
+	text-align: center;
+	text-wrap: balance;
 }
 
 .container {
+	--cluster-horizontal-alignment: center;
+
 	position: relative;
-	width: 100%;
 }
 
 .hero a {
-	--button-font-size: var(--text-button);
-
-	display: inline-block;
-	padding: var(--space-2xs) var(--space-l-xl);
 	text-decoration: none;
 }
 

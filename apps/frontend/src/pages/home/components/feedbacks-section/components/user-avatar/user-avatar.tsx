@@ -10,7 +10,7 @@ type AvatarProperties = {
 const UserAvatar: FC<AvatarProperties> = ({ alt, src }) => {
 	return (
 		<div className={styles["wrapper"]}>
-			<img alt={alt} className={styles["image"]} src={src} />
+			<img alt={alt} className={styles["image"]} draggable="false" src={src} />
 		</div>
 	);
 };

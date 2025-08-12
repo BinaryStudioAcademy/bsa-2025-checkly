@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { ErrorMessage } from "~/libs/enums/enums.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
@@ -14,14 +15,21 @@ const signIn = createAsyncThunk<
 	UserDto,
 	UserSignInRequestDto,
 	AsyncThunkConfig
->(`${sliceName}/sign-in`, async (registerPayload, { extra }) => {
-	const { authApi, storage } = extra;
+>(
+	`${sliceName}/sign-in`,
+	async (registerPayload, { extra, rejectWithValue }) => {
+		const { authApi, storage } = extra;
 
-	const { token, user } = await authApi.signIn(registerPayload);
-	await storage.set(StorageKey.TOKEN, token);
+		try {
+			const { token, user } = await authApi.signIn(registerPayload);
+			await storage.set(StorageKey.TOKEN, token);
 
-	return user;
-});
+			return user;
+		} catch {
+			return rejectWithValue(ErrorMessage.INVALID_CREDENTIALS);
+		}
+	},
+);
 
 const signUp = createAsyncThunk<
 	UserDto,
