@@ -37,6 +37,8 @@ const ChooseStyle: React.FC = () => {
 		[],
 	);
 
+	const navLink = getClassNames(styles["nav-link"]);
+
 	return (
 		<>
 			<AppHeader />
@@ -47,7 +49,7 @@ const ChooseStyle: React.FC = () => {
 				)}
 			>
 				<div className={styles["nav"]}>
-					<NavLink className={styles["nav-link"] ?? ""} to={AppRoute.PLAN}>
+					<NavLink className={navLink} to={AppRoute.PLAN}>
 						<button aria-label="Go back">
 							<ArrowLeftIcon aria-hidden="true" />
 						</button>
@@ -104,13 +106,13 @@ const ChooseStyle: React.FC = () => {
 					))}
 				</div>
 				<div className={styles["bottom-buttons"]}>
-					<NavLink className={styles["nav-link"] ?? ""} to={AppRoute.ROOT}>
+					<NavLink className={navLink} to={AppRoute.ROOT}>
 						<Button
 							icon={<DownloadIcon aria-hidden="true" />}
 							label="Download"
 						/>
 					</NavLink>
-					<NavLink className={styles["nav-link"] ?? ""} to={AppRoute.PLAN}>
+					<NavLink className={navLink} to={AppRoute.PLAN}>
 						<Button
 							icon={<ArrowLeftIcon aria-hidden="true" />}
 							label="Back"
@@ -118,11 +120,8 @@ const ChooseStyle: React.FC = () => {
 						/>
 					</NavLink>
 				</div>
-				<DecorativeImage className={styles["flower"] ?? ""} src={FlowerPink} />
-				<DecorativeImage
-					className={styles["stars"] ?? ""}
-					src={StarsYellow02}
-				/>
+				<DecorativeImage className={styles["flower"]} src={FlowerPink} />
+				<DecorativeImage className={styles["stars"]} src={StarsYellow02} />
 			</section>
 		</>
 	);

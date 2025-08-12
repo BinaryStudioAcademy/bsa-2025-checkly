@@ -19,6 +19,8 @@ const Plan: React.FC = () => {
 		setIsSelectOpen((previous) => !previous);
 	}, []);
 
+	const navLink = getClassNames(styles["nav-link"]);
+
 	return (
 		<div className={styles["plan"]}>
 			<div className={styles["nav"]}>
@@ -62,7 +64,7 @@ const Plan: React.FC = () => {
 						return <Task indexItem={index + ONE} item={item} key={index} />;
 					})}
 					<NavLink
-						className={styles["nav-link"] ?? ""}
+						className={navLink}
 						to={AppRoute.CHOOSE_STYLE}
 					>
 						<Button
