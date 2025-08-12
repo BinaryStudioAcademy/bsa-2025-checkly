@@ -9,11 +9,13 @@ class UserRepository implements Repository {
 	}
 
 	public async create(entity: UserEntity): Promise<UserEntity> {
-		const { email, name, passwordHash, passwordSalt } = entity.toNewObject();
+		const { dob, email, name, passwordHash, passwordSalt } =
+			entity.toNewObject();
 
 		const user = await this.userModel
 			.query()
 			.insert({
+				dob,
 				email,
 				name,
 				passwordHash,
@@ -56,6 +58,24 @@ class UserRepository implements Repository {
 
 	public update(): ReturnType<Repository["update"]> {
 		return Promise.resolve(null);
+	}
+
+	public async updateById(
+		id: number,
+		payload: Partial<{
+			dob: null | string;
+			email: string;
+			name: string;
+			passwordHash: string;
+			passwordSalt: string;
+		}>,
+	): Promise<UserEntity> {
+		const updated = await this.userModel
+			.query()
+			.patchAndFetchById(id, payload)
+			.execute();
+
+		return UserEntity.initialize(updated);
 	}
 }
 

@@ -61,7 +61,6 @@ export {
 	type SignUpFormValidationSchema,
 	type UserDto,
 	type UserGetAllResponseDto,
-	type UserProfileResponseDto,
 	UsersApiPath,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -70,6 +69,7 @@ export {
 	type UserSignUpResponseDto,
 	userSignUpValidationSchema,
 	userSignUpValidationSchemaExtended,
+	type UserUpdateRequestDto,
 	UserValidationMessage,
 	UserValidationRule,
 } from "./modules/users/users.js";

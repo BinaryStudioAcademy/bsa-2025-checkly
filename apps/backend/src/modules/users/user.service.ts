@@ -7,6 +7,7 @@ import {
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserSignUpRequestDto,
+	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
 
 class UserService implements Service {
@@ -23,6 +24,7 @@ class UserService implements Service {
 
 		const item = await this.userRepository.create(
 			UserEntity.initializeNew({
+				dob: null,
 				email: payload.email,
 				name: payload.name,
 				passwordHash: hash,
@@ -61,6 +63,33 @@ class UserService implements Service {
 
 	public update(): ReturnType<Service["update"]> {
 		return Promise.resolve(null);
+	}
+
+	public async updateById(
+		id: number,
+		payload: UserUpdateRequestDto,
+	): Promise<UserDto> {
+		const updateData: Partial<{
+			dob: null | string;
+			email: string;
+			name: string;
+			passwordHash: string;
+			passwordSalt: string;
+		}> = {
+			dob: payload.dob,
+			email: payload.email,
+			name: payload.name,
+		};
+
+		if (payload.password && payload.password.trim()) {
+			const { hash, salt } = await this.encryptor.encrypt(payload.password);
+			updateData.passwordHash = hash;
+			updateData.passwordSalt = salt;
+		}
+
+		const updated = await this.userRepository.updateById(id, updateData);
+
+		return updated.toObject();
 	}
 }
 
