@@ -1,0 +1,47 @@
+.button {
+	--button-bg-color: var(--color-brand-primary);
+	--button-text-color: var(--color-text-primary);
+	--button-min-font: var(--text-button-small, 0.75rem);
+	--button-max-font: var(--text-button, 1rem);
+
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--space-s) var(--space-l);
+	padding-inline: clamp(var(--space-l), 5vw, var(--space-2xl));
+	font-size: clamp(var(--button-min-font), 2.2vw, var(--button-max-font));
+	font-weight: var(--font-weight-black);
+	line-height: 1.15;
+	text-align: center;
+	text-transform: uppercase;
+	background-color: var(--color-bg-white);
+	border-radius: var(--radius-l);
+}
+
+.button:hover {
+	color: var(--color-text-primary);
+}
+
+.button .large-icon {
+	display: none;
+}
+
+.button span {
+	max-width: 100%;
+	overflow-wrap: anywhere;
+}
+
+@media (width >= 768px) {
+	.button {
+		font-size: clamp(var(--button-min-font), 1.3vw, var(--button-max-font));
+	}
+}
+
+.button:not(:disabled):hover span[class*="button-icon"] {
+	transform: none;
+}
+
+.button::after {
+	display: none;
+}
