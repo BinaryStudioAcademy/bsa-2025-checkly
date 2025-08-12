@@ -63,7 +63,9 @@ const Quiz: React.FC = (): React.ReactElement => {
 	);
 
 	return (
-		<div className="grid-pattern">
+		<div
+			className={getClassNames("grid-pattern", styles["quiz-page-container"])}
+		>
 			<main className={styles["main"]}>
 				<DecorativeImage
 					className={getClassNames(

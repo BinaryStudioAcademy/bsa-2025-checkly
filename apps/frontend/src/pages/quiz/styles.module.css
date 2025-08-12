@@ -1,10 +1,17 @@
+.quiz-page-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100%;
+}
+
 .main {
 	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: calc(100% - 2 * var(--space-l));
-	min-height: calc(100vh - 2 * var(--space-l));
+	width: 100%;
+	min-height: 100vh;
 	padding: var(--space-xl);
 	margin: var(--space-l);
 	border: var(--space-3xs) solid var(--color-bg-dark);
@@ -94,15 +101,16 @@
 
 @media (width <= 1024px) {
 	.main {
-		width: calc(100% - 2 * var(--space-m));
-		min-height: calc(100vh - 2 * var(--space-m));
+		width: 100%;
+		min-height: 100vh;
 		padding: var(--space-l);
 		margin: var(--space-m);
 	}
 
 	.container {
-		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+		grid-template-columns: repeat(3, 1fr);
 		gap: var(--space-l);
+		justify-items: center;
 		max-width: 700px;
 	}
 
@@ -129,8 +137,8 @@
 
 @media (width <= 768px) {
 	.main {
-		width: calc(100% - 2 * var(--space-s));
-		min-height: calc(100vh - 2 * var(--space-s));
+		width: 100%;
+		min-height: 100vh;
 		padding: var(--space-m);
 		margin: var(--space-s);
 	}
@@ -150,8 +158,8 @@
 
 @media (width <= 320px) {
 	.main {
-		width: calc(100% - 2 * var(--space-xs));
-		min-height: calc(100vh - 2 * var(--space-xs));
+		width: 100%;
+		min-height: 100vh;
 		padding: var(--space-s);
 		margin: var(--space-xs);
 	}
