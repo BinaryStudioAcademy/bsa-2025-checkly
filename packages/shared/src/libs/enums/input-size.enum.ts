@@ -1,5 +1,5 @@
 const InputSize = {
-	MAX: 1000,
+	MAX: 200,
 	MIN: 0,
 };
 

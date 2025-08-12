@@ -1,3 +1,4 @@
+export { type QuestionOptionDto } from "./question-option.dto.js";
 export { type QuestionDto } from "./question.dto.js";
 export { type QuizAnswer } from "./quiz-answer.type.js";
 export { type QuizCategoryType } from "./quiz-category.type.js";

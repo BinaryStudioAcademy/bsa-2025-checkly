@@ -2,6 +2,7 @@ const AppRoute = {
 	DASHBOARD: "/dashboard",
 	NOT_FOUND: "*",
 	PLAN: "/plan",
+	PROFILE: "/profile",
 	QUIZ: "/quiz",
 	QUIZ_QUESTIONS: "/quiz/questions",
 	ROOT: "/",

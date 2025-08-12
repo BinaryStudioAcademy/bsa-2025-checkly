@@ -5,6 +5,7 @@ export {
 } from "./libs/enums/enums.js";
 export {
 	type QuestionDto,
+	type QuestionOptionDto,
 	type QuestionType,
 	type QuizAnswer,
 	type QuizAnswersRequestDto,
