@@ -63,10 +63,7 @@ const Plan: React.FC = () => {
 					{daysTasksMockData[selectedDay]?.map((item, index) => {
 						return <Task indexItem={index + ONE} item={item} key={index} />;
 					})}
-					<NavLink
-						className={navLink}
-						to={AppRoute.CHOOSE_STYLE}
-					>
+					<NavLink className={navLink} to={AppRoute.CHOOSE_STYLE}>
 						<Button
 							icon={<DecorativeImage src={Download} />}
 							iconOnlySize="medium"
