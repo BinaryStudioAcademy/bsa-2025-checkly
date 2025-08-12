@@ -64,6 +64,24 @@ class UserRepository implements Repository {
 
 		return UserEntity.initialize(updatedUser);
 	}
+
+	public async updateById(
+		id: number,
+		payload: Partial<{
+			dob: null | string;
+			email: string;
+			name: string;
+			passwordHash: string;
+			passwordSalt: string;
+		}>,
+	): Promise<UserEntity> {
+		const updated = await this.userModel
+			.query()
+			.patchAndFetchById(id, payload)
+			.execute();
+
+		return UserEntity.initialize(updated);
+	}
 }
 
 export { UserRepository };
