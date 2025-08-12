@@ -31,19 +31,17 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 	const handleOptionChange = useCallback(
 		(option: string, checked: boolean): void => {
 			const newSelectedOptions = toggleOption(option, selectedOptions, checked);
-
-			let newUserInput = userInput;
-
-			if (isOtherOption(option) && !checked) {
-				newUserInput = "";
-				setUserInput("");
-			}
+			const newUserInput = isOtherOption(option) && !checked ? "" : userInput;
 
 			setSelectedOptions(newSelectedOptions);
 			onAnswer({
 				selectedOptions: newSelectedOptions,
 				userInput: newUserInput,
 			});
+
+			if (isOtherOption(option) && !checked) {
+				setUserInput("");
+			}
 		},
 		[onAnswer, selectedOptions, userInput],
 	);
