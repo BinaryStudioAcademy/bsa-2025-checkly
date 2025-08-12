@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.7.1...frontend-v1.8.0) (2025-08-12)
+
+
+### Features
+
+* * update landing page footer cy-54 ([5daf3c7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5daf3c79d7518625fc6ff6b4c6dc9b9ba11bf53c))
+* quiz backend cy-54 ([a44c7ca](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a44c7cacafc9fe48fe97929e2d082a292c2b7b22))
+
 ## [1.7.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.7.0...frontend-v1.7.1) (2025-08-12)
 
 
