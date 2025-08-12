@@ -3,82 +3,23 @@
  * Do not make direct changes to the file.
  */
 
-export type $defs = Record<string, never>;
-export interface components {
-	headers: never;
-	parameters: never;
-	pathItems: never;
-	requestBodies: never;
-	responses: {
-		/** @description Bad request */
-		BadRequestError: {
-			content: {
-				"application/json": components["schemas"]["Error"];
-			};
-			headers: {
-				[name: string]: unknown;
-			};
-		};
-		/** @description Unauthorized */
-		UnauthorizedError: {
-			content: {
-				"application/json": components["schemas"]["Error"];
-			};
-			headers: {
-				[name: string]: unknown;
-			};
-		};
-	};
-	schemas: {
-		AuthResponse: {
-			token: string;
-			user: components["schemas"]["User"];
-		};
-		Error: {
-			errorType: string;
-			message: string;
-		};
-		User: {
-			/** Format: email */
-			email: string;
-			id: string;
-			name: string;
-		};
-		UserSignInRequestDto: {
-			/** Format: email */
-			email: string;
-			password: string;
-		};
-		UserSignUpRequestDto: {
-			/** Format: email */
-			email: string;
-			name: string;
-			/** Format: password */
-			password: string;
-		};
-	};
-}
-export type operations = Record<string, never>;
 export interface paths {
 	"/auth/login": {
-		delete?: never;
-		get?: never;
-		head?: never;
-		options?: never;
 		parameters: {
-			cookie?: never;
+			query?: never;
 			header?: never;
 			path?: never;
-			query?: never;
+			cookie?: never;
 		};
-		patch?: never;
+		get?: never;
+		put?: never;
 		/** Login user */
 		post: {
 			parameters: {
-				cookie?: never;
+				query?: never;
 				header?: never;
 				path?: never;
-				query?: never;
+				cookie?: never;
 			};
 			requestBody: {
 				content: {
@@ -88,38 +29,38 @@ export interface paths {
 			responses: {
 				/** @description Login successful */
 				201: {
-					content: {
-						"application/json": components["schemas"]["AuthResponse"];
-					};
 					headers: {
 						[name: string]: unknown;
+					};
+					content: {
+						"application/json": components["schemas"]["AuthResponse"];
 					};
 				};
 				401: components["responses"]["UnauthorizedError"];
 			};
 		};
-		put?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
 		trace?: never;
 	};
 	"/auth/register": {
-		delete?: never;
-		get?: never;
-		head?: never;
-		options?: never;
 		parameters: {
-			cookie?: never;
+			query?: never;
 			header?: never;
 			path?: never;
-			query?: never;
+			cookie?: never;
 		};
-		patch?: never;
+		get?: never;
+		put?: never;
 		/** Sign up a new user */
 		post: {
 			parameters: {
-				cookie?: never;
+				query?: never;
 				header?: never;
 				path?: never;
-				query?: never;
+				cookie?: never;
 			};
 			requestBody: {
 				content: {
@@ -129,18 +70,77 @@ export interface paths {
 			responses: {
 				/** @description Successful operation */
 				201: {
-					content: {
-						"application/json": components["schemas"]["AuthResponse"];
-					};
 					headers: {
 						[name: string]: unknown;
+					};
+					content: {
+						"application/json": components["schemas"]["AuthResponse"];
 					};
 				};
 				400: components["responses"]["BadRequestError"];
 			};
 		};
-		put?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
 		trace?: never;
 	};
 }
 export type webhooks = Record<string, never>;
+export interface components {
+	schemas: {
+		UserSignInRequestDto: {
+			/** Format: email */
+			email: string;
+			password: string;
+		};
+		User: {
+			id: number;
+			/** Format: email */
+			email: string;
+			name: string;
+		};
+		AuthResponse: {
+			token: string;
+			user: components["schemas"]["User"];
+		};
+		Error: {
+			message: string;
+			errorType: string;
+		};
+		UserSignUpRequestDto: {
+			/** Format: email */
+			email: string;
+			name: string;
+			/** Format: password */
+			password: string;
+		};
+	};
+	responses: {
+		/** @description Unauthorized */
+		UnauthorizedError: {
+			headers: {
+				[name: string]: unknown;
+			};
+			content: {
+				"application/json": components["schemas"]["Error"];
+			};
+		};
+		/** @description Bad request */
+		BadRequestError: {
+			headers: {
+				[name: string]: unknown;
+			};
+			content: {
+				"application/json": components["schemas"]["Error"];
+			};
+		};
+	};
+	parameters: never;
+	requestBodies: never;
+	headers: never;
+	pathItems: never;
+}
+export type $defs = Record<string, never>;
+export type operations = Record<string, never>;

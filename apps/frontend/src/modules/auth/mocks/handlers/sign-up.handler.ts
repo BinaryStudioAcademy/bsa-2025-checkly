@@ -1,61 +1,49 @@
-import { delay, HttpResponse } from "msw";
 import { http } from "~/libs/modules/api/mocks/http.js";
+import {
+	generateTokens,
+	findUserByEmail,
+} from "../libs/utilities/utilities.js";
 import { ApiSchemas } from "~/libs/modules/api/schema/schema.js";
+import { HTTPCode, UserValidationMessage } from "../libs/enums/enums.js";
+import { delay } from "msw";
+import { makeErrorResponse } from "~/libs/modules/api/mocks/libs/utilities/utilities.js";
+import {
+	INCREMENT,
+	MOCK_USERS,
+	USER_PASSWORDS,
+} from "../libs/constants/constants.js";
 
-const mockUsers: ApiSchemas["User"][] = [
-	{
-		id: "1",
-		email: "admin@gmail.com",
-		name: "admin",
-	},
-];
-
-const generateTokens = async (payload: { userId: string; email: string }) =>
-	"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjY2LCJpYXQiOjE3NTQ1NzU5NTAsImV4cCI6MTc1NDY2MjM1MH0.www1Dauo2DsQ3vwSA61IW4SM-SWeXNx129pFZpkFy38";
-
-const userPasswords = new Map<string, string>();
-userPasswords.set("admin@gmail.com", "123456");
-
-const signUpHandlers = [
+export const signUpHandlers = [
 	http.post("/auth/register", async ({ request }) => {
-		const body = await request.json();
+		const { email, name, password } = await request.json();
 
 		await delay();
 
-		if (mockUsers.some((u) => u.email === body.email)) {
-			return HttpResponse.json(
-				{
-					errorType: "COMMON",
-					message: "Email already in use",
-				},
-				{ status: 400 },
+		if (findUserByEmail(email)) {
+			return makeErrorResponse(
+				UserValidationMessage.EMAIL_ALREADY_EXISTS,
+				HTTPCode.BAD_REQUEST,
 			);
 		}
 
 		const newUser: ApiSchemas["User"] = {
-			id: String(mockUsers.length + 1),
-			email: body.email,
-			name: body.name,
+			id: MOCK_USERS.length + INCREMENT,
+			email,
+			name,
 		};
 
-		const token = await generateTokens({
-			userId: newUser.id,
-			email: newUser.email,
-		});
+		MOCK_USERS.push(newUser);
+		USER_PASSWORDS.set(email, password);
 
-		mockUsers.push(newUser);
-		userPasswords.set(body.email, body.password);
-
-		return HttpResponse.json(
-			{
-				token,
+		return new Response(
+			JSON.stringify({
+				token: await generateTokens({
+					userId: newUser.id,
+					email: newUser.email,
+				}),
 				user: newUser,
-			},
-			{
-				status: 201,
-			},
+			}),
+			{ status: HTTPCode.CREATED },
 		);
 	}),
 ];
-
-export { signUpHandlers };
