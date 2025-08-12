@@ -1,0 +1,93 @@
+schemas:
+  User:
+    type: object
+    required:
+      - id
+      - email
+      - name
+    properties:
+      id:
+        type: number
+      email:
+        type: string
+        format: email
+      name:
+        type: string
+
+  UserSignInRequestDto:
+    type: object
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+        format: email
+      password:
+        type: string
+
+  UserSignUpRequestDto:
+    type: object
+    required:
+      - email
+      - name
+      - password
+    properties:
+      email:
+        type: string
+        format: email
+      name:
+        type: string
+      password:
+        type: string
+        format: password
+
+  AuthResponse:
+    type: object
+    required:
+      - token
+      - user
+    properties:
+      token:
+        type: string
+      user:
+        $ref: '#/schemas/User'
+
+login:
+  summary: Login user
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/schemas/UserSignInRequestDto'
+  responses:
+    '201':
+      description: Login successful
+      content:
+        application/json:
+          schema:
+            $ref: '#/schemas/AuthResponse'
+    '401':
+      $ref: '../shared/responses.yaml#/UnauthorizedError'
+
+register:
+  summary: Sign up a new user
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/schemas/UserSignUpRequestDto'
+  responses:
+    '201':
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/schemas/AuthResponse'
+    '400':
+      $ref: '../shared/responses.yaml#/BadRequestError'
+
+
+
