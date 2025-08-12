@@ -19,9 +19,8 @@ const PlanStyle: React.FC<Properties> = ({
 
 	const containerClasses = getClassNames(
 		styles["container"],
-		view === "homepage" && styles[`${view}-view`],
+		styles[`${view}-view`],
 		view === "homepage" && styles[`${view}-container`],
-		view === "selection" && styles[`${view}-view`],
 		view === "selection" && styles[`${view}-container`],
 		planStyleModules[inputStyle][`container--${inputStyle}`],
 	);

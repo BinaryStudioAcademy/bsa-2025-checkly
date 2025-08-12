@@ -1,3 +1,7 @@
+@import url("./header/header.module.css");
+@import url("./day/day.module.css");
+@import url("./task/task.module.css");
+
 .container--minimal {
 	border: 1px solid var(--color-bg-black);
 }
