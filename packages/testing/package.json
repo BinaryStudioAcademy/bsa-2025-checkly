@@ -1,0 +1,32 @@
+{
+	"name": "@checkly/testing",
+	"private": true,
+	"version": "1.0.0",
+	"description": "Automated API and UI tests for the Checkly project (Binary Studio Academy 2025)",
+	"type": "commonjs",
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"scripts": {
+		"postinstall": "npx playwright install --with-deps",
+		"test": "npx playwright test",
+		"test:ui": "dotenv -e .env.local -- npx playwright test --project=ui",
+		"test:api": "dotenv -e .env.local -- npx playwright test --project=api",
+		"test:all:local": "dotenv -e .env.local -- npx playwright test",
+		"test:ui:prod": "dotenv -e .env.production -- npx playwright test --project=ui",
+		"test:api:prod": "dotenv -e .env.production -- npx playwright test --project=api",
+		"test:all:prod": "dotenv -e .env.production -- npx playwright test",
+		"report": "npx playwright show-report"
+	},
+	"dependencies": {
+		"@faker-js/faker": "^9.9.0",
+		"ajv": "^8.17.1"
+	},
+	"devDependencies": {
+		"@playwright/test": "^1.54.1",
+		"@types/node": "^24.1.0",
+		"dotenv": "^17.2.1",
+		"dotenv-cli": "^10.0.0",
+		"typescript": "^5.5.4"
+	}
+}
