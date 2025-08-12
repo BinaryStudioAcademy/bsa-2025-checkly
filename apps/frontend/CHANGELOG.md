@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.9.0...frontend-v1.10.0) (2025-08-12)
+
+
+### Features
+
+* add dashboard screen cy-89 ([0d71c44](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0d71c44b5ca4a16259e2d4b53947d5619c7f6098))
+
+
+### Bug Fixes
+
+* **frontend:** eliminate bottom empty space in dashboard wrapper cy-89 ([a278dff](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a278dff5925900644dbc055da3a8479537342f66))
+
+## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.8.0...frontend-v1.9.0) (2025-08-12)
+
+
+### Features
+
+* implement download choose the plan page cy-64 ([479d3aa](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/479d3aaf8b275c437ab99eeeeae4778d03f71c77))
+
+
+### Bug Fixes
+
+* linting issue cy-64 ([3008960](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3008960d1f9f22c6dd56d5dbd6c0f6fd523e082e))
+
 ## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.7.1...frontend-v1.8.0) (2025-08-12)
 
 
