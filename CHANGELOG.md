@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.16.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.15.0...v1.16.0) (2025-08-12)
+
+
+### Features
+
+* add mock service worker basic setup cy-182 ([c00ec44](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c00ec4453d1f460ace94a81143664292ebfd255c))
+
 ## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.14.0...v1.15.0) (2025-08-12)
 
 
