@@ -34,6 +34,7 @@ const Task: React.FC<Properties> = ({
 		<li className={taskClasses} key={id}>
 			<input
 				className={taskCheckboxClasses}
+				disabled
 				id={id}
 				name={`Task${id}`}
 				type="checkbox"
