@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { PlanBig } from "~/assets/img/shared/illustrations/layouts/layouts.img.js";
+import { ExampleWithRemarksBig } from "~/assets/img/shared/illustrations/layouts/layouts.img.js";
 import { Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 
@@ -14,7 +14,7 @@ const CurrentPlan: FC = () => {
 				<img
 					alt="Current Plan Card"
 					className={styles["plan-image"]}
-					src={PlanBig}
+					src={ExampleWithRemarksBig}
 				/>
 			</div>
 			<div className={styles["continue-button"]}>

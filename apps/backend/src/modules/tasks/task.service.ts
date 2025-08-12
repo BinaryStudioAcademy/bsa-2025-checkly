@@ -1,4 +1,4 @@
-import { type Repository, type Service } from "~/libs/types/types.js";
+import { type Service } from "~/libs/types/types.js";
 import { TaskEntity } from "~/modules/tasks/task.entity.js";
 import { type TaskRepository } from "~/modules/tasks/task.repository.js";
 
@@ -6,6 +6,7 @@ import {
 	type TaskCreateRequestDto,
 	type TaskGetAllResponseDto,
 	type TaskResponseDto,
+	type TaskUpdateRequestDto,
 } from "./libs/types/types.js";
 
 class TaskService implements Service {
@@ -23,12 +24,14 @@ class TaskService implements Service {
 		return item.toObject();
 	}
 
-	public delete(): ReturnType<Repository["delete"]> {
-		return Promise.resolve(true);
+	public async delete(id: number): Promise<boolean> {
+		return await this.taskRepository.delete(id);
 	}
 
-	public find(): ReturnType<Repository["find"]> {
-		return Promise.resolve(null);
+	public async find(id: number): Promise<null | TaskResponseDto> {
+		const item = await this.taskRepository.find(id);
+
+		return item ? item.toObject() : null;
 	}
 
 	public async findAll(): Promise<TaskGetAllResponseDto> {
@@ -39,14 +42,13 @@ class TaskService implements Service {
 		};
 	}
 
-	public async findById(id: number): Promise<null | TaskResponseDto> {
-		const item = await this.taskRepository.findById(id);
+	public async update(
+		id: number,
+		payload: TaskUpdateRequestDto,
+	): Promise<null | TaskResponseDto> {
+		const item = await this.taskRepository.update(id, payload);
 
 		return item ? item.toObject() : null;
-	}
-
-	public update(): ReturnType<Repository["find"]> {
-		return Promise.resolve(null);
 	}
 }
 
