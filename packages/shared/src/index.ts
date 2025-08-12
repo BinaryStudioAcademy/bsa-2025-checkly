@@ -45,9 +45,11 @@ export {
 	planCreateValidationSchema,
 	type PlanDayDto,
 	type PlanDaysTaskDto,
+	type PlanDto,
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
 	PlansApiPath,
+	type PlanUpdateRequestDto,
 } from "./modules/plans/plans.js";
 export {
 	ExecutionTimeType,
@@ -56,6 +58,7 @@ export {
 	type TaskGetAllResponseDto,
 	type TaskResponseDto,
 	TasksApiPath,
+	type TaskUpdateRequestDto,
 } from "./modules/tasks/tasks.js";
 export {
 	type SignUpFormValidationSchema,
@@ -70,6 +73,7 @@ export {
 	type UserSignUpResponseDto,
 	userSignUpValidationSchema,
 	userSignUpValidationSchemaExtended,
+	type UserUpdateRequestDto,
 	UserValidationMessage,
 	UserValidationRule,
 } from "./modules/users/users.js";
