@@ -4,32 +4,31 @@ import {
 	type QuizCategoryValue,
 } from "~/modules/quiz/quiz.js";
 
-interface CheckboxQuestionProperties {
+type CheckboxQuestionProperties = {
 	currentAnswer?: MultipleAnswers[];
 	onAnswer: (answer: MultipleAnswers[]) => void;
 	question: QuestionDto;
-}
+};
 
-interface MixedQuestionProperties {
-	currentAnswer?: {
-		selectedOptions: MultipleAnswers[];
-		userInput: string;
-	};
-	onAnswer: (answer: {
-		selectedOptions: MultipleAnswers[];
-		userInput: string;
-	}) => void;
+type MixedAnswer = {
+	selectedOptions: MultipleAnswers[];
+	userInput: string;
+};
+
+type MixedQuestionProperties = {
+	currentAnswer?: MixedAnswer;
+	onAnswer: (answer: MixedAnswer) => void;
 	question: QuestionDto;
-}
+};
 
 type MultipleAnswers = number | string;
 
-interface ProgressBarProperties {
+type ProgressBarProperties = {
 	currentQuestion: number;
 	totalQuestions: number;
-}
+};
 
-interface QuestionNavigationProperties {
+type QuestionNavigationProperties = {
 	currentQuestion: number;
 	isNextDisabled: boolean;
 	isQuestionRequired: boolean;
@@ -37,39 +36,50 @@ interface QuestionNavigationProperties {
 	onNext: () => void;
 	onSkip: () => void;
 	totalQuestions: number;
-}
+};
 
-interface QuestionPageProperties {
+type QuestionPageProperties = {
 	currentAnswer?: QuizAnswer;
 	onAnswer: (answer: QuizAnswer) => void;
 	question: QuestionDto;
 	questionNumber?: number;
-}
+};
 
-interface QuizCategoryCardProperties extends QuizCategoryProperties {
+type QuizCategoryCardProperties = QuizCategoryProperties & {
 	onSelect: () => void;
-}
+};
 
-interface QuizCategoryProperties {
+type QuizCategoryProperties = {
 	category: QuizCategoryValue;
 	color: string;
 	icon: string;
 	selected: boolean;
-}
+};
 
-interface RadioQuestionProperties {
+type RadioQuestionProperties = {
 	currentAnswer?: SingleAnswer;
 	onAnswer: (answer: SingleAnswer) => void;
 	question: QuestionDto;
-}
+};
 
 type SingleAnswer = number | string;
 
-interface TextQuestionProperties {
+type SingleChoiceWithTextAnswer = {
+	selectedOption: null | string;
+	userInput: string;
+};
+
+type SingleChoiceWithTextQuestionProperties = {
+	currentAnswer?: SingleChoiceWithTextAnswer;
+	onAnswer: (answer: SingleChoiceWithTextAnswer) => void;
+	question: QuestionDto;
+};
+
+type TextQuestionProperties = {
 	currentAnswer?: string;
 	onAnswer: (answer: string) => void;
 	question: QuestionDto;
-}
+};
 
 export {
 	type CheckboxQuestionProperties,
@@ -82,5 +92,6 @@ export {
 	type QuizCategoryProperties,
 	type RadioQuestionProperties,
 	type SingleAnswer,
+	type SingleChoiceWithTextQuestionProperties,
 	type TextQuestionProperties,
 };
