@@ -49,10 +49,8 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 	);
 
 	const handleInputChange = useCallback(
-		(optionText: string) => {
-			return function (event_: React.ChangeEvent<HTMLInputElement>): void {
-				handleOptionChange(optionText, event_.target.checked);
-			};
+		(optionText: string) => (event_: React.ChangeEvent<HTMLInputElement>): void => {
+			handleOptionChange(optionText, event_.target.checked);
 		},
 		[handleOptionChange],
 	);
