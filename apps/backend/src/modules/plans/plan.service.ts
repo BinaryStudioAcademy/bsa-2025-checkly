@@ -9,7 +9,9 @@ import {
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
 	type PlanUpdateRequestDto,
+	type QuizAnswersRequestDto,
 } from "./libs/types/types.js";
+import { createPrompt } from "./libs/utilities/utilities.js";
 
 class PlanService implements Service {
 	private planRepository: PlanRepository;
@@ -48,6 +50,48 @@ class PlanService implements Service {
 		const item = await this.planRepository.findWithRelations(id);
 
 		return item ? item.toObjectWithRelations() : null;
+	}
+
+	public generateFromQuizAnswers(
+		payload: QuizAnswersRequestDto,
+	): PlanDaysTaskDto {
+		createPrompt(payload);
+		const mockedPlan = {
+			"days": [
+				{
+					"dayNumber": 3,
+					"id": 1,
+					"tasks": [],
+				},
+				{
+					"dayNumber": 3,
+					"id": 2,
+					"tasks": [],
+				},
+				{
+					"dayNumber": 3,
+					"id": 3,
+					"tasks": [
+						{
+							"completedAt": null,
+							"description": "Test description",
+							"executionTimeType": "",
+							"id": 2,
+							"isCompleted": false,
+							"order": 1,
+							"title": "do 1",
+						},
+					],
+				},
+			],
+			"duration": 2,
+			"id": 1,
+			"intensity": "2",
+			"title": "Test title",
+			"userId": 2,
+		};
+
+		return mockedPlan;
 	}
 
 	public async update(

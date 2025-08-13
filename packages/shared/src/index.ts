@@ -60,6 +60,7 @@ export {
 	type QuizAnswer,
 	type QuizAnswersRequestDto,
 	type QuizAnswersResponseDto,
+	QuizAnswersRule,
 	QuizAnswersValidationSchema,
 	QuizApiPath,
 	type QuizCategoryType,

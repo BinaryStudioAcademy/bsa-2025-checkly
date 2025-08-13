@@ -7,9 +7,9 @@ import { QuizQuestionService } from "./quiz-question.service.js";
 
 const quizQuestionRepository = new QuizQuestionRepository(QuestionModel);
 const quizQuestionService = new QuizQuestionService(quizQuestionRepository);
-const quizQuestionContolller = new QuizQuestionController(
+const quizQuestionController = new QuizQuestionController(
 	logger,
 	quizQuestionService,
 );
 
-export { quizQuestionContolller };
+export { quizQuestionController };
