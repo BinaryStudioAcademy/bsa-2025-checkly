@@ -1,5 +1,49 @@
 # Changelog
 
+## [1.5.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.4.0...shared-v1.5.0) (2025-08-13)
+
+
+### Features
+
+* **frontend:** quiz frontend implementation cy-15 ([e535ae4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e535ae4e1afa514869821dc0f344615f8275b102))
+
+
+### Bug Fixes
+
+* merge branch 15-feat-quiz-frontend into 15-feat-quiz-frontend cy-15 ([479b01f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/479b01f32bd4f26dac3a68f2393734f7b439a309))
+* merge main into 15-feat-quiz-frontend cy-15 ([00b5fc1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/00b5fc1937a70d06fa4129cda277ac7cf36eef1b))
+
+## [1.4.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.3.0...shared-v1.4.0) (2025-08-12)
+
+
+### Features
+
+* * extract quiz-questions into separate module cy-54 ([8ecc45a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8ecc45a4782742481e5c29c106386fcafd6ce5bc))
+* * update imports cy-54 ([dcba0d4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/dcba0d4369bcd5154bdef1e3dc385b9e9bd5a1b6))
+* * update quiz answer type cy-54 ([bcf32b3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bcf32b31bf0a97e4ad177d0915a25ca7310f00c7))
+* * update quiz controller route cy-54 ([6295b9b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6295b9b5780318c0bf259086f093f940482e780e))
+* * update quiz imports cy-54 ([829675b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/829675b6ef0344eeb65c8a14e9d8c49b44748a00))
+* * update quiz service to return mocked plan cy-54 ([240c64f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/240c64f2b94f65ba661c6e4b98b1904f5bdfe4e2))
+* * update quiz types, quiz module and quiz validation schema cy-54 ([8c01222](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8c012224451dbe7c3a96ffccde9b0ec21ea685aa))
+* * update quiz-answers validation schema name cy-54 ([82d6318](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/82d6318426eef1bc7a0d61c4bcda6532a5a958d6))
+* * update sanitize-text-input util cy-54 ([d43c7d5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d43c7d50dfa8812f6d7a147811809743e1d6df02))
+* * update shared export cy-54 ([60cab96](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/60cab9697fcf35e55b83304411e047a6cd459881))
+* + add create-prompt util cy-54 ([9568385](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/95683856c15e2c52be6b395eca69bc0fe41cdf43))
+* + add quiz enums to shared folder cy-54 ([9e86ff6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9e86ff69bccfcfd89f3a70d1ae85475821d5f26f))
+* + add quiz type to shared folder cy-54 ([066ae13](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/066ae13e09fdcc94c08662bac60f316745b30d10))
+* + add sanitize helper cy-54 ([44ad24a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/44ad24a01e9c8a6bc15cafe6a42ebfe53128b742))
+* + update api-path to add /quiz cy-54 ([da09111](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/da09111d615a56649156731023ecc9f32cdfdd8e))
+* + update quiz types, add validation schema and dtos cy-54 ([de328cd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/de328cd72d798a7adbc826e823e2f0efb7170666))
+* quiz backend cy-54 ([a44c7ca](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a44c7cacafc9fe48fe97929e2d082a292c2b7b22))
+
+## [1.3.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.2.0...shared-v1.3.0) (2025-08-12)
+
+
+### Features
+
+* update repository, service interface and entities cy-219 ([1318064](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/13180641e6621d6d3fee36794e1ef02912346f97))
+* update repository, service interface, update entities methods cy-219 ([9a519d4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9a519d49e58dfaa434ad58c37fc5ef562f68c517))
+
 ## [1.2.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.1.0...shared-v1.2.0) (2025-08-08)
 
 

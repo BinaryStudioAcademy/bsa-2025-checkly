@@ -43,10 +43,7 @@ const VisualLayouts: React.FC = () => {
 								className={styles["layout-card"]}
 								key={example.id}
 							>
-								<img
-									alt={`Preview of the ${example.title} layout`}
-									src={example.img}
-								/>
+								<DecorativeImage src={example.img} />
 								<h5>{example.title}</h5>
 							</li>
 						))}

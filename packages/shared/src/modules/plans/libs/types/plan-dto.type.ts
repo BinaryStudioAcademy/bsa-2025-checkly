@@ -26,4 +26,4 @@ type TaskDto = {
 	title: string;
 };
 
-export { type PlanDayDto, type PlanDaysTaskDto };
+export { type PlanDayDto, type PlanDaysTaskDto, type PlanDto };

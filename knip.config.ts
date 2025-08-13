@@ -7,6 +7,7 @@ const config: KnipConfig = {
 		"apps/frontend/src/assets/img/shared/illustrations/layouts/layouts.img.tsx",
 		"apps/frontend/src/assets/img/shared/illustrations/illustrations.img.tsx",
 		"apps/frontend/src/assets/img/shared/shapes/shapes.img.tsx",
+		"apps/frontend/src/libs/modules/api/schema/generated.ts",
 	],
 	prettier: ["./prettier.config.js"],
 	stylelint: ["./stylelint.config.js"],
@@ -15,7 +16,7 @@ const config: KnipConfig = {
 			entry: ["./dangerfile.ts"],
 		},
 		"apps/backend": {
-			entry: ["src/db/migrations/*.ts", "knexfile.ts"],
+			entry: ["src/db/migrations/*.ts", "src/db/seeds/*.ts", "knexfile.ts"],
 			ignoreDependencies: ["pg"],
 		},
 		"apps/frontend": {
