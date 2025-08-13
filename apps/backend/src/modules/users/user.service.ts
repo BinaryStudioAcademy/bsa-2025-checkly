@@ -4,6 +4,7 @@ import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
 import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
 import { type Service } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
+import { type UserModel } from "~/modules/users/user.model.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 
 import {
@@ -38,12 +39,14 @@ class UserService implements Service {
 		return item.toObject();
 	}
 
-	public delete(): ReturnType<Service["delete"]> {
-		return Promise.resolve(true);
+	public async delete(id: number): Promise<boolean> {
+		return await this.userRepository.delete(id);
 	}
 
-	public find(): Promise<null | UserEntity> {
-		return Promise.resolve(null);
+	public async find(id: number): Promise<null | UserDto> {
+		const item = await this.userRepository.find(id);
+
+		return item ? item.toObject() : null;
 	}
 
 	public async findAll(): Promise<UserGetAllResponseDto> {
@@ -58,20 +61,10 @@ class UserService implements Service {
 		return await this.userRepository.findByField("email", email);
 	}
 
-	public async findById(id: number): Promise<null | UserDto> {
-		const item = await this.userRepository.findById(id);
-
-		return item ? item.toObject() : null;
-	}
-
-	public update(): ReturnType<Service["update"]> {
-		return Promise.resolve(null);
-	}
-
-	public async updateById(
+	public async update(
 		id: number,
 		payload: UserUpdateRequestDto,
-	): Promise<UserDto> {
+	): Promise<null | UserDto> {
 		if (payload.email) {
 			const existing = await this.userRepository.findByField(
 				"email",
@@ -86,17 +79,13 @@ class UserService implements Service {
 			}
 		}
 
-		const updateData: Partial<{
-			dob: null | string;
-			email: string;
-			name: string;
-			passwordHash: string;
-			passwordSalt: string;
-		}> = {
-			dob: payload.dob,
-			email: payload.email,
-			name: payload.name,
-		};
+		const updateData = Object.fromEntries(
+			Object.entries({
+				dob: payload.dob,
+				email: payload.email,
+				name: payload.name,
+			}).filter(([, value]) => value != undefined),
+		) as Partial<UserModel>;
 
 		if (payload.password && payload.password.trim()) {
 			const { hash, salt } = await this.encryptor.encrypt(payload.password);
@@ -104,9 +93,9 @@ class UserService implements Service {
 			updateData.passwordSalt = salt;
 		}
 
-		const updated = await this.userRepository.updateById(id, updateData);
+		const item = await this.userRepository.update(id, updateData);
 
-		return updated.toObject();
+		return item ? item.toObject() : null;
 	}
 }
 

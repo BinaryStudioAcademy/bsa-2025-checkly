@@ -27,12 +27,16 @@ class TaskRepository implements Repository {
 		return TaskEntity.initialize(task);
 	}
 
-	public delete(): ReturnType<Repository["delete"]> {
-		return Promise.resolve(true);
+	public async delete(id: number): Promise<boolean> {
+		const deletedTask = await this.taskModel.query().deleteById(id);
+
+		return Boolean(deletedTask);
 	}
 
-	public find(): ReturnType<Repository["find"]> {
-		return Promise.resolve(null);
+	public async find(id: number): Promise<null | TaskEntity> {
+		const task = await this.taskModel.query().findById(id);
+
+		return task ? TaskEntity.initialize(task) : null;
 	}
 
 	public async findAll(): Promise<TaskEntity[]> {
@@ -41,14 +45,15 @@ class TaskRepository implements Repository {
 		return tasks.map((task) => TaskEntity.initialize(task));
 	}
 
-	public async findById(id: number): Promise<null | TaskEntity> {
-		const task = await this.taskModel.query().where({ id }).first();
+	public async update(
+		id: number,
+		payload: Partial<TaskModel>,
+	): Promise<null | TaskEntity> {
+		const updatedTask = await this.taskModel
+			.query()
+			.patchAndFetchById(id, payload);
 
-		return task ? TaskEntity.initialize(task) : null;
-	}
-
-	public update(): ReturnType<Repository["find"]> {
-		return Promise.resolve(null);
+		return TaskEntity.initialize(updatedTask);
 	}
 }
 

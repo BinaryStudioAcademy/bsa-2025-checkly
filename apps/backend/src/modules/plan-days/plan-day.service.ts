@@ -25,12 +25,14 @@ class PlanDayService implements Service {
 		return item.toObject();
 	}
 
-	public delete(): ReturnType<Repository["delete"]> {
-		return Promise.resolve(true);
+	public async delete(id: number): Promise<boolean> {
+		return await this.planDayRepository.delete(id);
 	}
 
-	public find(): ReturnType<Repository["find"]> {
-		return Promise.resolve(null);
+	public async find(id: number): Promise<null | PlanDayResponseDto> {
+		const item = await this.planDayRepository.find(id);
+
+		return item ? item.toObject() : null;
 	}
 
 	public async findAll(): Promise<PlanDayGetAllResponseDto> {
@@ -41,13 +43,7 @@ class PlanDayService implements Service {
 		};
 	}
 
-	public async findById(id: number): Promise<null | PlanDayResponseDto> {
-		const item = await this.planDayRepository.findById(id);
-
-		return item ? item.toObject() : null;
-	}
-
-	public update(): ReturnType<Repository["find"]> {
+	public update(): ReturnType<Repository["update"]> {
 		return Promise.resolve(null);
 	}
 }

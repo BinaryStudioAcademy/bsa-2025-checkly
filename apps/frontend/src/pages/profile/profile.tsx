@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 
 import { Button, Input, Loader } from "~/libs/components/components.js";
+import { DataStatus } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import {
 	useAppDispatch,
@@ -15,7 +16,6 @@ import {
 
 type ProfileFormValues = UserUpdateRequestDto & { confirmPassword?: string };
 
-import { DataStatus } from "~/libs/enums/data-status.enum.js";
 import { formatDateForInput } from "~/libs/helpers/date-helpers.js";
 
 import sharedStyles from "../auth/components/shared/shared.module.css";
@@ -44,7 +44,7 @@ const Profile: React.FC = () => {
 
 	const handleFormSubmit = handleSubmit((data) => {
 		const payload: UserUpdateRequestDto = {
-			dob: data.dob || null,
+			dob: data.dob || "",
 			email: data.email,
 			name: data.name,
 			password: data.password?.trim() ? data.password : "",

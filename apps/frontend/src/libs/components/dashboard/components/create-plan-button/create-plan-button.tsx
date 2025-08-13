@@ -8,7 +8,7 @@ type Properties = {
 	disabled?: boolean;
 	icon?: React.ReactNode;
 	label: string;
-	onClick?: React.MouseEventHandler<HTMLButtonElement>;
+	onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const CreatePlanButton: React.FC<Properties> = ({
@@ -26,7 +26,7 @@ const CreatePlanButton: React.FC<Properties> = ({
 			disabled={disabled}
 			icon={icon}
 			label={label}
-			{...(onClick ? { onClick } : {})}
+			onClick={onClick}
 			size="large"
 			variant="primary"
 		/>

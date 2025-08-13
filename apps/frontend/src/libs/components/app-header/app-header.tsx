@@ -1,13 +1,14 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
 
-import {
-	arrowDown,
-	logo,
-	profileDefault,
-} from "~/assets/img/header/header.img.js";
-import { Link } from "~/libs/components/components.js";
+import { arrowDown, profileDefault } from "~/assets/img/header/header.img.js";
+import { Link, Logo } from "~/libs/components/components.js";
+import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
-import { useAppSelector, useDropdownMenu } from "~/libs/hooks/hooks.js";
+import {
+	useAppSelector,
+	useDropdownMenu,
+	useLocation,
+} from "~/libs/hooks/hooks.js";
 
 import styles from "./styles.module.css";
 import { UserMenu } from "./user-menu.js";
@@ -18,6 +19,8 @@ const AppHeader: React.FC = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 	const menuReference = useRef<HTMLDivElement>(null);
 	const user = useAppSelector((state) => state.auth.user);
+
+	const { pathname } = useLocation();
 
 	const displayName = useMemo(() => user?.name ?? DEFAULT_USER_NAME, [user]);
 
@@ -56,19 +59,21 @@ const AppHeader: React.FC = () => {
 	return (
 		<header className={styles["app-header"]}>
 			<div className={styles["logo-section"]}>
-				<Link to="/">
-					<img alt="Checkly logo" className={styles["logo-svg"]} src={logo} />
-				</Link>
+				<Logo />
 			</div>
 
-			<div className={styles["vertical-divider"]} />
+			{pathname === AppRoute.DASHBOARD && (
+				<div className={styles["vertical-divider"]} />
+			)}
 
 			<div className={styles["user-section"]} ref={menuReference}>
-				<img
-					alt="User profile"
-					className={styles["user-image"]}
-					src={profileDefault}
-				/>
+				<Link to={AppRoute.PROFILE}>
+					<img
+						alt="User profile"
+						className={styles["user-image"]}
+						src={profileDefault}
+					/>
+				</Link>
 				<div className={styles["user-name-arrow"]}>
 					<span className={styles["user-name"]}>{displayName}</span>
 					<button

@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import { type JSX, StrictMode, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 
 import "~/assets/css/styles.css";
@@ -9,26 +9,39 @@ import {
 	StoreProvider,
 } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
+import { enableMocking } from "~/libs/modules/api/mocks/mocks.js";
 import { store } from "~/libs/modules/store/store.js";
 
 import { routes } from "./routes.js";
 
-createRoot(document.querySelector("#root") as HTMLElement).render(
-	<StrictMode>
-		<StoreProvider store={store.instance}>
-			<RouterProvider
-				routes={[
-					{
-						children: routes,
-						element: (
-							<App>
-								<ProtectedRoute />
-							</App>
-						),
-						path: AppRoute.ROOT,
-					},
-				]}
-			/>
-		</StoreProvider>
-	</StrictMode>,
-);
+const Root = (): JSX.Element => {
+	useEffect(() => {
+		const startMocking = async (): Promise<void> => {
+			await enableMocking();
+		};
+
+		void startMocking();
+	}, []);
+
+	return (
+		<StrictMode>
+			<StoreProvider store={store.instance}>
+				<RouterProvider
+					routes={[
+						{
+							children: routes,
+							element: (
+								<App>
+									<ProtectedRoute />
+								</App>
+							),
+							path: AppRoute.ROOT,
+						},
+					]}
+				/>
+			</StoreProvider>
+		</StrictMode>
+	);
+};
+
+createRoot(document.querySelector("#root") as HTMLElement).render(<Root />);

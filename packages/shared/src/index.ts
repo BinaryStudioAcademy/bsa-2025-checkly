@@ -2,9 +2,11 @@ export {
 	APIPath,
 	AppEnvironment,
 	ContentType,
+	DataStatus,
 	ErrorConstants,
 	ErrorMessage,
 	FastifyHook,
+	QuizCategory,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
 export {
@@ -12,7 +14,7 @@ export {
 	HTTPError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
-export { configureString } from "./libs/helpers/helpers.js";
+export { configureString, sanitizeTextInput } from "./libs/helpers/helpers.js";
 export { type Config } from "./libs/modules/config/config.js";
 export {
 	type HTTP,
@@ -45,10 +47,27 @@ export {
 	planCreateValidationSchema,
 	type PlanDayDto,
 	type PlanDaysTaskDto,
+	type PlanDto,
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
 	PlansApiPath,
+	type PlanUpdateRequestDto,
 } from "./modules/plans/plans.js";
+export {
+	type QuestionDto,
+	type QuestionOptionDto,
+	type QuestionType,
+	type QuizAnswer,
+	type QuizAnswersRequestDto,
+	type QuizAnswersResponseDto,
+	QuizAnswersValidationSchema,
+	QuizApiPath,
+	type QuizCategoryType,
+	QuizIndexes,
+	QuizQuestionFormat,
+	type QuizQuestionsResponseDto,
+	QuizStateValidationSchema,
+} from "./modules/quiz/quiz.js";
 export {
 	ExecutionTimeType,
 	type TaskCreateRequestDto,
@@ -56,6 +75,7 @@ export {
 	type TaskGetAllResponseDto,
 	type TaskResponseDto,
 	TasksApiPath,
+	type TaskUpdateRequestDto,
 } from "./modules/tasks/tasks.js";
 export {
 	type SignUpFormValidationSchema,

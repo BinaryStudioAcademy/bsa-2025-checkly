@@ -38,7 +38,7 @@ class UserController extends BaseController {
 
 		this.addRoute({
 			handler: () => this.findAll(),
-			method: "GET",
+			method: HTTPRequestMethod.GET,
 			path: UsersApiPath.ROOT,
 		});
 
@@ -122,7 +122,7 @@ class UserController extends BaseController {
 		options: APIBodyOptions<UserUpdateRequestDto> & { user?: { id: number } },
 	): Promise<APIHandlerResponse> {
 		const userId = options.user?.id;
-		const updated = await this.userService.updateById(
+		const updated = await this.userService.update(
 			userId as number,
 			options.body,
 		);

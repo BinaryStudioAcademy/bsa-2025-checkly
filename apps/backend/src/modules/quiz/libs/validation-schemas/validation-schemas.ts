@@ -1,0 +1,1 @@
+export { QuizAnswersValidationSchema } from "shared";
