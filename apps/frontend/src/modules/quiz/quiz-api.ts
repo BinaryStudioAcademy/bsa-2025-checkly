@@ -1,9 +1,4 @@
-import {
-	APIPath,
-	ContentType,
-	HTTPRequestMethod,
-	QuizApiPath,
-} from "~/libs/enums/enums.js";
+import { APIPath, ContentType, HTTPRequestMethod } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
@@ -20,7 +15,7 @@ type Constructor = {
 
 class QuizApi extends BaseHTTPApi {
 	public constructor({ baseUrl, http, storage }: Constructor) {
-		super({ baseUrl, http, path: QuizApiPath.ROOT, storage });
+		super({ baseUrl, http, path: "", storage });
 	}
 
 	public async getQuestions(): Promise<QuizQuestionsResponseDto> {

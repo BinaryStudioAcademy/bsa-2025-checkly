@@ -62,7 +62,6 @@ export {
 	type QuizAnswersResponseDto,
 	QuizAnswersRule,
 	quizAnswersValidationSchema,
-	QuizApiPath,
 	type QuizCategoryType,
 	QuizIndexes,
 	QuizQuestionFormat,
