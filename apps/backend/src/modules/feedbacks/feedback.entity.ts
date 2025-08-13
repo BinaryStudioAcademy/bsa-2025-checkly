@@ -1,3 +1,4 @@
+// feedback.entity.ts
 import { type Entity } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 
@@ -43,7 +44,7 @@ class FeedbackEntity implements Entity {
 		userId,
 	}: {
 		createdAt: string;
-		id: null | number;
+		id: number;
 		text: string;
 		updatedAt: string;
 		user?: null | { email: string; id: number; name: string };
@@ -90,14 +91,14 @@ class FeedbackEntity implements Entity {
 
 	public toObject(): {
 		createdAt: string;
-		id: number;
+		id: null | number;
 		text: string;
 		updatedAt: string;
 		userId: number;
 	} {
 		return {
 			createdAt: this.createdAt,
-			id: this.id as number,
+			id: this.id,
 			text: this.text,
 			updatedAt: this.updatedAt,
 			userId: this.userId,
@@ -112,11 +113,19 @@ class FeedbackEntity implements Entity {
 		user: null | UserProfileResponseDto;
 		userId: number;
 	} {
+		if (this.id === null) {
+			throw new Error("Cannot serialize a new object.");
+		}
+
 		const user = this.user ? this.user.toObject() : null;
 
 		return {
-			...this.toObject(),
+			createdAt: this.createdAt,
+			id: this.id,
+			text: this.text,
+			updatedAt: this.updatedAt,
 			user,
+			userId: this.userId,
 		};
 	}
 }

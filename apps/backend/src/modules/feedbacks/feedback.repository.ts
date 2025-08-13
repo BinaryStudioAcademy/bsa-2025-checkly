@@ -5,14 +5,9 @@ import { type FeedbackModel } from "~/modules/feedbacks/feedback.model.js";
 type FeedbackRepositoryReturn = Promise<FeedbackEntity | null>;
 type FeedbackRepositoryReturns = Promise<FeedbackEntity[]>;
 
-type LocalRepository<T> = Omit<Repository<T>, "delete" | "update"> & {
-	delete(id: number): Promise<boolean>;
-	update(id: number, entity: T): Promise<null | T>;
-};
-
 const DELETED_COUNT_THRESHOLD = 0;
 
-class FeedbackRepository implements LocalRepository<FeedbackEntity> {
+class FeedbackRepository implements Repository<FeedbackEntity> {
 	private feedbackModel: typeof FeedbackModel;
 
 	public constructor(feedbackModel: typeof FeedbackModel) {
@@ -35,6 +30,7 @@ class FeedbackRepository implements LocalRepository<FeedbackEntity> {
 
 		return FeedbackEntity.initialize(feedback);
 	}
+
 	public async delete(id: number): Promise<boolean> {
 		const deletedCount = await this.feedbackModel
 			.query()
@@ -74,18 +70,11 @@ class FeedbackRepository implements LocalRepository<FeedbackEntity> {
 
 	public async update(
 		id: number,
-		entity: FeedbackEntity,
-	): FeedbackRepositoryReturn {
-		const { text, userId } = entity.toNewObject();
-
+		payload: Partial<FeedbackEntity>,
+	): Promise<FeedbackEntity> {
 		const updatedFeedback = await this.feedbackModel
 			.query()
-			.patchAndFetchById(id, {
-				text,
-				userId,
-			})
-			.returning("*")
-			.execute();
+			.patchAndFetchById(id, payload as Partial<FeedbackModel>);
 
 		return FeedbackEntity.initialize(updatedFeedback);
 	}

@@ -1,6 +1,6 @@
 type FeedbackUpdateResponseDto = {
 	createdAt: string;
-	id: number;
+	id: null | number;
 	text: string;
 	updatedAt: string;
 	userId: number;

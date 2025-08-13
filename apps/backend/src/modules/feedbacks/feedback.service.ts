@@ -43,21 +43,7 @@ class FeedbackService implements Service {
 		id: number,
 		userId: number,
 	): Promise<FeedbackDeleteResponseDto> {
-		const feedback = await this.feedbackRepository.findById(id);
-
-		if (!feedback) {
-			throw new HTTPError({
-				message: "Feedback not found.",
-				status: HTTPCode.NOT_FOUND,
-			});
-		}
-
-		if (feedback.toObject().userId !== userId) {
-			throw new HTTPError({
-				message: "You can only delete your own feedback.",
-				status: HTTPCode.FORBIDDEN,
-			});
-		}
+		await this.checkFeedbackAccess(id, userId);
 
 		const isDeleted = await this.feedbackRepository.delete(id);
 
@@ -91,6 +77,20 @@ class FeedbackService implements Service {
 		payload: FeedbackUpdateRequestDto,
 		userId: number,
 	): Promise<FeedbackUpdateResponseDto | null> {
+		await this.checkFeedbackAccess(id, userId);
+
+		const item = await this.feedbackRepository.update(
+			id,
+			payload as Partial<FeedbackEntity>,
+		);
+
+		return item.toObject();
+	}
+
+	private async checkFeedbackAccess(
+		id: number,
+		userId: number,
+	): Promise<FeedbackEntity> {
 		const feedback = await this.feedbackRepository.findById(id);
 
 		if (!feedback) {
@@ -102,22 +102,12 @@ class FeedbackService implements Service {
 
 		if (feedback.toObject().userId !== userId) {
 			throw new HTTPError({
-				message: "You can only update your own feedback.",
+				message: "You can only edit your own feedback.",
 				status: HTTPCode.FORBIDDEN,
 			});
 		}
 
-		const entity = FeedbackEntity.initialize({
-			createdAt: "",
-			...payload,
-			id,
-			updatedAt: "",
-			user: null,
-		});
-
-		const item = await this.feedbackRepository.update(id, entity);
-
-		return item ? item.toObject() : null;
+		return feedback;
 	}
 }
 
