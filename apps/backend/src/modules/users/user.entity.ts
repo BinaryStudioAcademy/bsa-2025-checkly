@@ -1,23 +1,22 @@
 import { type Entity } from "~/libs/types/types.js";
 
 class UserEntity implements Entity {
+	private avatarUrl: null | string;
 	private email: string;
-
 	private id: null | number;
-
 	private name: string;
-
 	private passwordHash: string;
-
 	private passwordSalt: string;
 
 	private constructor({
+		avatarUrl = null,
 		email,
 		id,
 		name,
 		passwordHash,
 		passwordSalt,
 	}: {
+		avatarUrl: null | string;
 		email: string;
 		id: null | number;
 		name: string;
@@ -29,15 +28,11 @@ class UserEntity implements Entity {
 		this.name = name;
 		this.passwordHash = passwordHash;
 		this.passwordSalt = passwordSalt;
+		this.avatarUrl = avatarUrl;
 	}
 
-	public static initialize({
-		email,
-		id,
-		name,
-		passwordHash,
-		passwordSalt,
-	}: {
+	public static initialize(properties: {
+		avatarUrl?: null | string;
 		email: string;
 		id: number;
 		name: string;
@@ -45,38 +40,33 @@ class UserEntity implements Entity {
 		passwordSalt: string;
 	}): UserEntity {
 		return new UserEntity({
-			email,
-			id,
-			name,
-			passwordHash,
-			passwordSalt,
+			avatarUrl: properties.avatarUrl ?? null,
+			email: properties.email,
+			id: properties.id,
+			name: properties.name,
+			passwordHash: properties.passwordHash,
+			passwordSalt: properties.passwordSalt,
 		});
 	}
 
-	public static initializeNew({
-		email,
-		name,
-		passwordHash,
-		passwordSalt,
-	}: {
+	public static initializeNew(properties: {
+		avatarUrl?: null | string;
 		email: string;
 		name: string;
 		passwordHash: string;
 		passwordSalt: string;
 	}): UserEntity {
 		return new UserEntity({
-			email,
+			avatarUrl: properties.avatarUrl ?? null,
+			email: properties.email,
 			id: null,
-			name,
-			passwordHash,
-			passwordSalt,
+			name: properties.name,
+			passwordHash: properties.passwordHash,
+			passwordSalt: properties.passwordSalt,
 		});
 	}
 
-	public getPasswordData(): {
-		passwordHash: string;
-		passwordSalt: string;
-	} {
+	public getPasswordData(): { passwordHash: string; passwordSalt: string } {
 		return {
 			passwordHash: this.passwordHash,
 			passwordSalt: this.passwordSalt,
@@ -84,12 +74,14 @@ class UserEntity implements Entity {
 	}
 
 	public toNewObject(): {
+		avatarUrl: null | string;
 		email: string;
 		name: string;
 		passwordHash: string;
 		passwordSalt: string;
 	} {
 		return {
+			avatarUrl: this.avatarUrl,
 			email: this.email,
 			name: this.name,
 			passwordHash: this.passwordHash,
@@ -98,11 +90,13 @@ class UserEntity implements Entity {
 	}
 
 	public toObject(): {
+		avatarUrl: null | string;
 		email: string;
 		id: number;
 		name: string;
 	} {
 		return {
+			avatarUrl: this.avatarUrl,
 			email: this.email,
 			id: this.id as number,
 			name: this.name,

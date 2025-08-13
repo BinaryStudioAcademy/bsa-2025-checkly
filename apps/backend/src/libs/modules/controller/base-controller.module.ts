@@ -39,7 +39,14 @@ class BaseController implements Controller {
 	): Promise<void> {
 		this.logger.info(`${request.method.toUpperCase()} on ${request.url}`);
 
-		const handlerOptions = this.mapRequest(request);
+		const mapped = this.mapRequest(request);
+		const handlerOptions: APIHandlerOptions = {
+			body: mapped.body,
+			originalRequest: request as never,
+			params: mapped.params,
+			query: mapped.query,
+			user: mapped.user,
+		};
 		const { payload, status } = await handler(handlerOptions);
 
 		return await reply.status(status).send(payload);

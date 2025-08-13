@@ -9,11 +9,13 @@ class UserRepository implements Repository {
 	}
 
 	public async create(entity: UserEntity): Promise<UserEntity> {
-		const { email, name, passwordHash, passwordSalt } = entity.toNewObject();
+		const { avatarUrl, email, name, passwordHash, passwordSalt } =
+			entity.toNewObject();
 
 		const user = await this.userModel
 			.query()
 			.insert({
+				avatarUrl,
 				email,
 				name,
 				passwordHash,

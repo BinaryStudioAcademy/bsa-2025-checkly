@@ -2,3 +2,4 @@ export { Auth } from "./auth/auth.js";
 export { ChooseStyle } from "./choose-style/choose-style.js";
 export { Home } from "./home/home.js";
 export { NotFound } from "./not-found-page/not-found-page.js";
+export { Test } from "./test/test.js";

@@ -16,6 +16,12 @@ type EnvironmentSchema = {
 	ENCRYPTOR: {
 		SALT_SIZE: number;
 	};
+	S3: {
+		ACCESS_KEY_ID: string;
+		BUCKET: string;
+		REGION: string;
+		SECRET_ACCESS_KEY: string;
+	};
 	TOKEN: {
 		ENCRYPTION: string;
 		EXPIRATION: string;
