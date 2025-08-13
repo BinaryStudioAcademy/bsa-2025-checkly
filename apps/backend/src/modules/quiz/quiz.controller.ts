@@ -9,10 +9,10 @@ import {
 	APIPath,
 	HTTPCode,
 	HTTPRequestMethod,
-	QuizzApiPath,
+	QuizApiPath,
 } from "./libs/enums/enums.js";
 import { type QuizAnswersRequestDto } from "./libs/types/types.js";
-import { quizAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+import { QuizAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 import { type QuizService } from "./quiz.service.js";
 
 /**
@@ -174,9 +174,9 @@ class QuizController extends BaseController {
 				),
 			isPublic: true,
 			method: HTTPRequestMethod.POST,
-			path: QuizzApiPath.ROOT,
+			path: QuizApiPath.ROOT,
 			validation: {
-				body: quizAnswersValidationSchema,
+				body: QuizAnswersValidationSchema,
 			},
 		});
 	}

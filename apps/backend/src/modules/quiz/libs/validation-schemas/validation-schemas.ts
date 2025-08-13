@@ -1,1 +1,1 @@
-export { quizAnswersValidationSchema } from "shared";
+export { QuizAnswersValidationSchema } from "shared";

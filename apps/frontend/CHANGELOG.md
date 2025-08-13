@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.10.0...frontend-v1.11.0) (2025-08-12)
+
+
+### Features
+
+* add mock service worker basic setup cy-182 ([c00ec44](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c00ec4453d1f460ace94a81143664292ebfd255c))
+
 ## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.9.0...frontend-v1.10.0) (2025-08-12)
 
 
