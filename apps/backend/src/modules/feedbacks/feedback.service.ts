@@ -1,3 +1,4 @@
+import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
 import { type Service } from "~/libs/types/types.js";
 import { FeedbackEntity } from "~/modules/feedbacks/feedback.entity.js";
 import { type FeedbackRepository } from "~/modules/feedbacks/feedback.repository.js";
@@ -37,7 +38,27 @@ class FeedbackService implements Service {
 	public delete(): ReturnType<Service["delete"]> {
 		return Promise.resolve(false);
 	}
-	public async deleteById(id: number): Promise<FeedbackDeleteResponseDto> {
+
+	public async deleteById(
+		id: number,
+		userId: number,
+	): Promise<FeedbackDeleteResponseDto> {
+		const feedback = await this.feedbackRepository.findById(id);
+
+		if (!feedback) {
+			throw new HTTPError({
+				message: "Feedback not found.",
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		if (feedback.toObject().userId !== userId) {
+			throw new HTTPError({
+				message: "You can only delete your own feedback.",
+				status: HTTPCode.FORBIDDEN,
+			});
+		}
+
 		const isDeleted = await this.feedbackRepository.delete(id);
 
 		return { isDeleted };
@@ -68,17 +89,33 @@ class FeedbackService implements Service {
 	public async updateById(
 		id: number,
 		payload: FeedbackUpdateRequestDto,
+		userId: number,
 	): Promise<FeedbackUpdateResponseDto | null> {
-		const item = await this.feedbackRepository.update(
+		const feedback = await this.feedbackRepository.findById(id);
+
+		if (!feedback) {
+			throw new HTTPError({
+				message: "Feedback not found.",
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		if (feedback.toObject().userId !== userId) {
+			throw new HTTPError({
+				message: "You can only update your own feedback.",
+				status: HTTPCode.FORBIDDEN,
+			});
+		}
+
+		const entity = FeedbackEntity.initialize({
+			createdAt: "",
+			...payload,
 			id,
-			FeedbackEntity.initialize({
-				createdAt: "",
-				id,
-				text: payload.text,
-				updatedAt: "",
-				userId: payload.userId,
-			}),
-		);
+			updatedAt: "",
+			user: null,
+		});
+
+		const item = await this.feedbackRepository.update(id, entity);
 
 		return item ? item.toObject() : null;
 	}

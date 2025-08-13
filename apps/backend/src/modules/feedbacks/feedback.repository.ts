@@ -28,6 +28,8 @@ class FeedbackRepository implements LocalRepository<FeedbackEntity> {
 				text,
 				userId,
 			})
+			.onConflict("userId")
+			.merge()
 			.returning("*")
 			.execute();
 
@@ -47,14 +49,17 @@ class FeedbackRepository implements LocalRepository<FeedbackEntity> {
 	}
 
 	public async findAll(): FeedbackRepositoryReturns {
-		const feedbackRecords = await this.feedbackModel
+		const feedbacks = await this.feedbackModel
 			.query()
-			.withGraphFetched("user")
+			.withGraphFetched("user(shortInfo)")
+			.modifiers({
+				shortInfo(builder) {
+					builder.select("id", "name");
+				},
+			})
 			.execute();
 
-		return feedbackRecords.map((feedback) =>
-			FeedbackEntity.initialize(feedback),
-		);
+		return feedbacks.map((feedback) => FeedbackEntity.initialize(feedback));
 	}
 
 	public async findById(id: number): FeedbackRepositoryReturn {

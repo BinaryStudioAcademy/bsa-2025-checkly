@@ -88,6 +88,7 @@ class FeedbackController extends BaseController {
 
 		this.addRoute({
 			handler: () => this.findAll(),
+			isPublic: true,
 			method: HTTPRequestMethod.GET,
 			path: FeedbackApiPath.ROOT,
 		});
@@ -112,7 +113,7 @@ class FeedbackController extends BaseController {
 			handler: (options) =>
 				this.update(
 					options as APIBodyOptions<FeedbackUpdateRequestDto> &
-						IdParametersOption,
+						IdParametersOption & { user: { id: number } },
 				),
 			method: HTTPRequestMethod.PUT,
 			path: FeedbackApiPath.FEEDBACK,
@@ -122,7 +123,8 @@ class FeedbackController extends BaseController {
 		});
 
 		this.addRoute({
-			handler: (options) => this.delete(options as IdParametersOption),
+			handler: (options) =>
+				this.delete(options as IdParametersOption & { user: { id: number } }),
 			method: HTTPRequestMethod.DELETE,
 			path: FeedbackApiPath.FEEDBACK,
 		});
@@ -169,7 +171,7 @@ class FeedbackController extends BaseController {
 	 *   delete:
 	 *     tags:
 	 *       - feedbacks
-	 *     summary: Delete a feedback by ID
+	 *     summary: Delete a feedback by ID (only if created by the current user)
 	 *     security:
 	 *       - bearerAuth: []
 	 *     parameters:
@@ -180,30 +182,32 @@ class FeedbackController extends BaseController {
 	 *         required: true
 	 *         description: Feedback ID
 	 *     responses:
-	 *       '200':
+	 *       '204':
 	 *         description: Feedback deleted successfully
-	 *         content:
-	 *           application/json:
-	 *             schema:
-	 *               type: object
-	 *               properties:
-	 *                 isDeleted:
-	 *                   type: boolean
 	 *       '401':
 	 *         description: Unauthorized
 	 *       '404':
-	 *         description: Feedback not found
+	 *         description: Feedback not found or not owned by the user
 	 */
 
 	private async delete(
-		options: IdParametersOption,
+		options: IdParametersOption & { user: { id: number } },
 	): Promise<APIHandlerResponse> {
 		const { id } = options.params;
-		const feedback = await this.feedbackService.deleteById(id);
+		const { id: userId } = options.user;
+
+		const feedback = await this.feedbackService.deleteById(id, userId);
+
+		if (!feedback.isDeleted) {
+			return {
+				payload: null,
+				status: HTTPCode.NOT_FOUND,
+			};
+		}
 
 		return {
-			payload: feedback,
-			status: HTTPCode.OK,
+			payload: null,
+			status: HTTPCode.NO_CONTENT,
 		};
 	}
 	/**
@@ -213,8 +217,6 @@ class FeedbackController extends BaseController {
 	 *     tags:
 	 *       - feedbacks
 	 *     summary: Get all feedbacks
-	 *     security:
-	 *       - bearerAuth: []
 	 *     responses:
 	 *       '200':
 	 *         description: Successfully retrieved feedbacks
@@ -279,13 +281,15 @@ class FeedbackController extends BaseController {
 			payload: feedback,
 			status: HTTPCode.OK,
 		};
-	} /**
+	}
+
+	/**
 	 * @swagger
 	 * /feedbacks/{id}:
 	 *   put:
 	 *     tags:
 	 *       - feedbacks
-	 *     summary: Update an existing feedback
+	 *     summary: Update an existing feedback (only if created by the current user)
 	 *     security:
 	 *       - bearerAuth: []
 	 *     parameters:
@@ -311,14 +315,21 @@ class FeedbackController extends BaseController {
 	 *       '401':
 	 *         description: Unauthorized
 	 *       '404':
-	 *         description: Feedback not found
+	 *         description: Feedback not found or not owned by the user
 	 */
 
 	private async update(
-		options: APIBodyOptions<FeedbackUpdateRequestDto> & IdParametersOption,
+		options: APIBodyOptions<FeedbackUpdateRequestDto> &
+			IdParametersOption & { user: { id: number } },
 	): Promise<APIHandlerResponse> {
 		const { id } = options.params;
-		const feedback = await this.feedbackService.updateById(id, options.body);
+		const { id: userId } = options.user;
+
+		const feedback = await this.feedbackService.updateById(
+			id,
+			options.body,
+			userId,
+		);
 
 		if (!feedback) {
 			return {

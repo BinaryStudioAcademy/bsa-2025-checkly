@@ -1,5 +1,5 @@
 import { type Entity } from "~/libs/types/types.js";
-import { type UserEntity } from "~/modules/users/user.entity.js";
+import { UserEntity } from "~/modules/users/user.entity.js";
 
 import { type UserProfileResponseDto } from "./libs/types/types.js";
 
@@ -46,15 +46,17 @@ class FeedbackEntity implements Entity {
 		id: null | number;
 		text: string;
 		updatedAt: string;
-		user?: null | UserEntity;
+		user?: null | { email: string; id: number; name: string };
 		userId: number;
 	}): FeedbackEntity {
+		const userInstance = user ? UserEntity.initializeWithShortInfo(user) : null;
+
 		return new FeedbackEntity({
 			createdAt,
 			id,
 			text,
 			updatedAt,
-			user: user ?? null,
+			user: userInstance,
 			userId,
 		});
 	}

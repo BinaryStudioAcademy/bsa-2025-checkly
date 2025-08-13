@@ -1,6 +1,6 @@
 import { type Knex } from "knex";
 
-const TABLE_NAME = "feedback";
+const TABLE_NAME = "feedbacks";
 
 const ColumnName = {
 	CREATED_AT: "created_at",
@@ -22,6 +22,7 @@ function up(knex: Knex): Promise<void> {
 			.integer(ColumnName.USER_ID)
 			.unsigned()
 			.notNullable()
+			.unique()
 			.references("id")
 			.inTable("users")
 			.onUpdate("CASCADE")
