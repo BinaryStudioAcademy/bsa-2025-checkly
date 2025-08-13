@@ -1,8 +1,8 @@
-# BSA 2025 – Checkly Automation Test
+# BSA 2025 – Checkly Automation Testing
 
-Automated API and UI tests for the Checkly project, developed as part of the Binary Studio Academy 2025 program.
+Automated API and UI tests for the Checkly monorepo, developed as part of the Binary Studio Academy 2025 program.
 
-This project uses [Playwright](https://playwright.dev/) to test both backend and frontend functionality of Checkly.
+This package uses [Playwright](https://playwright.dev/) to test both backend and frontend functionality of Checkly.
 Includes Continuous Integration via GitHub Actions and generates HTML test reports as build artifacts.
 
 ---
@@ -20,111 +20,87 @@ Includes Continuous Integration via GitHub Actions and generates HTML test repor
 
 ## 🚀 Getting Started
 
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/VictorVagabculov/BSA-2025-Checkly-Automation-Test.git
-cd BSA-2025-Checkly-Automation-Test
-```
-
-### 2. Install dependencies
+### 1. Install dependencies (from the monorepo root)
 
 ```bash
 npm install
 ```
 
-### 3. Install Playwright browsers
+> 🛠 This will also automatically install Playwright browsers for testing.
 
-```bash
-npx playwright install
-```
+### 2. Environment variables
 
-### 4. Create a `.env` file (or `.env.local`)
+Create `.env.local` and `.env.production` inside `packages/testing/`:
 
 ```env
-API_URL=http://localhost:3001/api/v1/
+# Local environment
 FRONTEND_URL=http://localhost:3000/
+API_URL=http://localhost:3001/api/v1/
+
+# Production environment
+FRONTEND_URL=http://checkly.eu-north-1.elasticbeanstalk.com/
+API_URL=http://checkly.eu-north-1.elasticbeanstalk.com/api/v1/
 ```
 
-> ⚠️ **Important**: Make sure your URLs end with a `/`.
+> ⚠ **Important:** Make sure URLs end with a `/`.
 
 ---
 
 ## 🧪 Running the Tests
 
-### Run all tests
+From the **monorepo root**:
 
 ```bash
-npm test
-```
-
-### Run only API tests
-
-```bash
-npx playwright test --project=api
-```
-
-### Run only UI tests
-
-```bash
-npx playwright test --project=ui
-```
-
-### Run a specific test file
-
-```bash
-npx playwright test tests/api/auth/sign-in.api.spec.ts --project=api
-npx playwright test tests/ui/auth/sign-in.ui.spec.ts --project=ui
-```
-
-### View the HTML report
-
-```bash
-npm run report
-# Then open: playwright-report/index.html
+npm run testing:test       # Run all tests (local env)
+npm run testing:ui         # Run only UI tests
+npm run testing:api        # Run only API tests
+npm run testing:report     # View the last HTML report
 ```
 
 ---
 
-## 🧠 Folder Structure
+## 📂 Folder Structure
 
 ```
-.
-├── api/
-│   ├── controllers/          # API controllers
-│   ├── helpers/              # Data generators, schema validator, etc.
-│   └── schemas/              # OpenAPI schemas
-│
-├── tests/
-│   ├── api/                  # API tests
-│   │   └── authentication/
-│   │   └── helpers/
-│   └── ui/                   # UI tests
-│       └── auth/
-│
-├── ui/
-│   ├── controllers/          # UI Page Objects
-│   └── utils/                # UI helpers (coming soon)
-│
-├── .env                      # Environment variables
-├── playwright.config.ts      # Playwright test config
+packages/testing
+├── .env.example
+├── .env.local
+├── .env.production
+├── .gitignore
+├── package.json
+├── playwright.config.ts
+├── README.md
 ├── tsconfig.json
-└── package.json
+├── playwright-report/ # HTML report
+└── tests/
+├── api/
+│ ├── auth/
+│ ├── controllers/
+│ ├── fixtures/
+│ ├── helpers/
+│ └── schemas/
+├── ui/
+│ ├── auth/
+│ ├── controllers/
+│ ├── fixtures/
+│ ├── helpers/
+│ └── landing/
+└── utils/
 ```
 
 ---
 
 ## ✨ Features
 
-- ✅ Fully separated UI and API test projects
-- ✅ Type-safe test data using Faker
-- ✅ Schema validation with Ajv
-- ✅ Page Object Model for UI interactions
-- ✅ Custom helper methods for repeated logic
-- ✅ Multi-environment setup via `.env` files
+- ✅ Separate UI and API projects
+- ✅ Page Object Model for UI
+- ✅ Faker for type-safe test data
+- ✅ Ajv for schema validation
+- ✅ Multi-environment support via `.env` files
+- ✅ CI-ready with GitHub Actions
 
 ---
 
-## ✅ TODO
+## 📌 TODO
 
-- [x] Finalize CI configuration with production deployment
+- [ ] Integrate CI workflow (`playwright.yml`)
