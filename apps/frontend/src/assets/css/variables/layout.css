@@ -3,4 +3,5 @@
 	--size-text-max-width: 900px;
 	--app-header-height: 64px;
 	--sidebar-width: 250px;
+	--header-divider-width: calc(var(--sidebar-width) - 1px);
 }
