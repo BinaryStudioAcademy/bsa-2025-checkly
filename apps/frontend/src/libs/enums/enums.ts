@@ -11,6 +11,7 @@ export { IconsPositions } from "./icons-positions.enum.js";
 export { KeyboardKeys } from "./keyboard-keys.enum.js";
 export { PlaceholderValues } from "./placeholder-values.enum.js";
 export { RouteAccess } from "./route-access.js";
+export { SuccessMessage } from "./success-messages.enum.js";
 export {
 	APIPath,
 	AppEnvironment,
