@@ -142,8 +142,8 @@
 	position: absolute;
 	top: -11px;
 	right: -11px;
-	width: 2rem;
-	height: 2rem;
+	width: 2em;
+	height: 2em;
 	content: "";
 	border: 2px solid var(--color-bg-dark);
 	border-bottom: none;
