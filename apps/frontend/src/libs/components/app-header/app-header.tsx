@@ -8,7 +8,11 @@ import {
 import { Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
-import { useAppSelector, useDropdownMenu } from "~/libs/hooks/hooks.js";
+import {
+	useAppSelector,
+	useDropdownMenu,
+	useLocation,
+} from "~/libs/hooks/hooks.js";
 
 import styles from "./styles.module.css";
 import { UserMenu } from "./user-menu.js";
@@ -19,6 +23,8 @@ const AppHeader: React.FC = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 	const menuReference = useRef<HTMLDivElement>(null);
 	const user = useAppSelector((state) => state.auth.user);
+
+	const { pathname } = useLocation();
 
 	const displayName = useMemo(() => user?.name ?? DEFAULT_USER_NAME, [user]);
 
@@ -62,7 +68,9 @@ const AppHeader: React.FC = () => {
 				</Link>
 			</div>
 
-			<div className={styles["vertical-divider"]} />
+			{pathname === AppRoute.DASHBOARD && (
+				<div className={styles["vertical-divider"]} />
+			)}
 
 			<div className={styles["user-section"]} ref={menuReference}>
 				<Link to={AppRoute.PROFILE}>
