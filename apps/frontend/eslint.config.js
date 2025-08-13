@@ -23,6 +23,9 @@ const mainConfig = {
 			React: true,
 		},
 	},
+	rules: {
+		"sonarjs/void-use": "off",
+	},
 };
 
 /** @type {Config} */
@@ -37,7 +40,6 @@ const reactConfig = {
 		"react/jsx-boolean-value": ["error"],
 		"react/jsx-curly-brace-presence": ["error"],
 		"react/jsx-no-bind": ["error", { ignoreRefs: true }],
-		"react/prop-types": "off",
 		"react/self-closing-comp": ["error"],
 	},
 };

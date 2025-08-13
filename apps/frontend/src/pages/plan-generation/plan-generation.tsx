@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -14,23 +14,14 @@ import {
 	Phone,
 	Teddy,
 } from "~/assets/img/shared/illustrations/illustrations.img.js";
-import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
+import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
 
 import { ImageSlider } from "./components/slider/slider.js";
-import {
-	FAST_INCREMENT,
-	FAST_INTERVAL_MS,
-	PROGRESS_MAX,
-	PROGRESS_MAX_SLOW,
-	PROGRESS_MIN,
-	SLOW_INCREMENT_DIVISOR,
-	SLOW_INCREMENT_MAX,
-	SLOW_INTERVAL_MS,
-} from "./libs/constants/constants.js";
+import { useProgress } from "./libs/hooks/hooks.js";
 import { type QuizAnswersDto } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
@@ -49,69 +40,28 @@ const slides = [
 ];
 
 const PlanGeneration: React.FC = () => {
-	const [progress, setProgress] = useState<number>(PROGRESS_MIN);
-
 	const dispatch = useAppDispatch();
 	const status = useAppSelector((state) => state.plan.dataStatus);
 
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const stored = localStorage.getItem(StorageKey.QUIZ_ANSWER);
-		const quizAnswers: QuizAnswersDto = stored
-			? (JSON.parse(stored) as QuizAnswersDto)
-			: [];
+		const generatePlan = async (): Promise<void> => {
+			const stored = localStorage.getItem(StorageKey.QUIZ_ANSWER);
+			const quizAnswers: QuizAnswersDto = stored
+				? (JSON.parse(stored) as QuizAnswersDto)
+				: [];
 
-		void dispatch(planActions.generate(quizAnswers));
-
-		const slowProgressId = setInterval(() => {
-			setProgress((previous) => {
-				if (previous >= PROGRESS_MAX_SLOW) {
-					return previous;
-				}
-
-				const distance = PROGRESS_MAX_SLOW - previous;
-				const increment = Math.max(
-					SLOW_INCREMENT_MAX,
-					distance / SLOW_INCREMENT_DIVISOR,
-				);
-
-				return previous + increment;
-			});
-		}, SLOW_INTERVAL_MS);
-
-		return (): void => {
-			clearInterval(slowProgressId);
+			await dispatch(planActions.generate(quizAnswers));
 		};
+
+		void generatePlan();
 	}, [dispatch]);
 
-	useEffect(() => {
-		let fastProgressId: null | ReturnType<typeof setInterval> = null;
-
-		if (status === DataStatus.FULFILLED) {
-			fastProgressId = setInterval(() => {
-				setProgress((previous) =>
-					Math.min(previous + FAST_INCREMENT, PROGRESS_MAX),
-				);
-			}, FAST_INTERVAL_MS);
-		}
-
-		return (): void => {
-			if (fastProgressId !== null) {
-				clearInterval(fastProgressId);
-			}
-		};
-	}, [status]);
-
-	useEffect(() => {
-		const redirect = async (): Promise<void> => {
-			if (progress === PROGRESS_MAX) {
-				await navigate(AppRoute.PLAN);
-			}
-		};
-
-		void redirect();
-	}, [progress, navigate]);
+	const progress = useProgress({
+		onComplete: () => void navigate(AppRoute.PLAN),
+		status,
+	});
 
 	const containerClasses = getClassNames(
 		styles["container"],
