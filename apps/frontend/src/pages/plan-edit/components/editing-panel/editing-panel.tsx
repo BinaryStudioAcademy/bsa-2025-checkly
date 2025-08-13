@@ -8,7 +8,7 @@ import styles from "./styles.module.css";
 type Properties = {
 	control: Control<PlanEditForm>;
 	errors: FieldErrors<PlanEditForm>;
-	selectedItem: "notes" | number;
+	selectedItem: "notes" | "preview" | number;
 };
 
 const EditingPanel: FC<Properties> = ({ control, errors, selectedItem }) => {
@@ -22,7 +22,9 @@ const EditingPanel: FC<Properties> = ({ control, errors, selectedItem }) => {
 					key={selectedItem}
 				/>
 			) : (
-				<NotesEditor control={control} errors={errors} />
+				selectedItem === "notes" && (
+					<NotesEditor control={control} errors={errors} />
+				)
 			)}
 		</div>
 	);
