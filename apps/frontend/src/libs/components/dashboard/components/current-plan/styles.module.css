@@ -15,7 +15,8 @@
 }
 
 .plan-card {
-	padding: var(--space-l);
+	padding: var(--space-l) var(--space-l) 0;
+	margin-bottom: var(--space-l);
 	overflow: hidden;
 	transition: all 0.3s ease-in-out;
 }
@@ -33,4 +34,41 @@
 
 .continue-button a {
 	text-decoration: none;
+}
+
+@media (width >= 320px) {
+	.plan-card {
+		min-width: 260px;
+		max-height: 375px;
+		padding: var(--space-l) 0;
+	}
+}
+
+@media (width >= 375px) {
+	.plan-card {
+		min-width: 305px;
+		max-height: 432px;
+	}
+}
+
+@media (width >= 475px) {
+	.plan-card {
+		min-width: 385px;
+		max-height: 545px;
+	}
+}
+
+@media (width >= 500px) {
+	.plan-card {
+		min-width: 390px;
+		max-height: 590px;
+		padding: var(--space-l) var(--space-l) 0;
+	}
+}
+
+@media (width >= 768px) {
+	.plan-card {
+		min-width: 595px;
+		max-height: 842px;
+	}
 }
