@@ -37,7 +37,8 @@
 		"testing:ui:prod": "npm -w @checkly/testing run test:ui:prod",
 		"testing:api:prod": "npm -w @checkly/testing run test:api:prod",
 		"testing:all:prod": "npm -w @checkly/testing run test:all:prod",
-		"testing:report": "npm -w @checkly/testing run report"
+		"testing:report": "npm -w @checkly/testing run report",
+		"postinstall": "npm -w @checkly/testing run pw:install"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "19.8.1",

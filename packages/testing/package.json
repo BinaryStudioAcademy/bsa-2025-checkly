@@ -16,7 +16,8 @@
 		"test:ui:prod": "dotenv -e .env.production -- npx playwright test --project=ui",
 		"test:api:prod": "dotenv -e .env.production -- npx playwright test --project=api",
 		"test:all:prod": "dotenv -e .env.production -- npx playwright test",
-		"report": "npx playwright show-report"
+		"report": "npx playwright show-report",
+		"pw:install": "playwright install"
 	},
 	"dependencies": {
 		"@faker-js/faker": "^9.9.0",
