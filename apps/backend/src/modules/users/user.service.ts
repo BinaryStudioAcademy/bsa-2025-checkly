@@ -1,4 +1,7 @@
+import { UserValidationMessage } from "shared";
+
 import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
+import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
 import { type Service } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
@@ -69,6 +72,20 @@ class UserService implements Service {
 		id: number,
 		payload: UserUpdateRequestDto,
 	): Promise<UserDto> {
+		if (payload.email) {
+			const existing = await this.userRepository.findByField(
+				"email",
+				payload.email,
+			);
+
+			if (existing && existing.toObject().id !== id) {
+				throw new HTTPError({
+					message: UserValidationMessage.EMAIL_ALREADY_EXISTS,
+					status: HTTPCode.CONFLICT,
+				});
+			}
+		}
+
 		const updateData: Partial<{
 			dob: null | string;
 			email: string;

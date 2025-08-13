@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { ErrorMessage } from "~/libs/enums/enums.js";
+import { HTTPError } from "~/libs/modules/http/http.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
@@ -72,7 +73,11 @@ const updateProfile = createAsyncThunk<
 
 		try {
 			return await userApi.updateMe(payload);
-		} catch {
+		} catch (error) {
+			if (error instanceof HTTPError) {
+				return rejectWithValue(error.message);
+			}
+
 			return rejectWithValue(ErrorMessage.DEFAULT_ERROR_MESSAGE);
 		}
 	},
