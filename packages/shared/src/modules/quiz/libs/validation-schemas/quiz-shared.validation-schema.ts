@@ -8,7 +8,9 @@ const quizAnswerSchema = z.object({
 	isSkipped: z.boolean(),
 	questionId: z.coerce.number().int().positive(),
 	questionText: z
-		.string()
+		.string({
+			required_error: QuizValidationMessage.QUESTION_TEXT_REQUIRED,
+		})
 		.trim()
 		.min(QuizAnswersRule.QUESTION_TEXT_MIN_LENGTH, {
 			message: QuizValidationMessage.QUESTION_TEXT_MIN_LENGTH,
