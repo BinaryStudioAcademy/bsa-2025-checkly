@@ -47,12 +47,12 @@ const PlanGeneration: React.FC = () => {
 
 	useEffect(() => {
 		const generatePlan = async (): Promise<void> => {
-			const stored = localStorage.getItem(StorageKey.QUIZ_ANSWER);
+			const stored = localStorage.getItem(StorageKey.QUIZ_STATE);
 			const quizAnswers: QuizAnswersDto = stored
 				? (JSON.parse(stored) as QuizAnswersDto)
 				: [];
 
-			await dispatch(planActions.generate(quizAnswers));
+			await dispatch(planActions.generatePlan(quizAnswers));
 		};
 
 		void generatePlan();

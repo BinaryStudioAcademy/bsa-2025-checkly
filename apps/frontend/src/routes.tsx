@@ -8,7 +8,7 @@ import {
 	ChooseStyle,
 	Home,
 	NotFound,
-  PlanGeneration,
+	PlanGeneration,
 	QuestionFlow,
 	Quiz,
 } from "./pages/pages.js";

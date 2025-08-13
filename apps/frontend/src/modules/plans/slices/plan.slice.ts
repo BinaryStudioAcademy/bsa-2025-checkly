@@ -4,7 +4,7 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
-import { generate } from "./actions.js";
+import { generatePlan } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
@@ -18,14 +18,14 @@ const initialState: State = {
 
 const { actions, name, reducer } = createSlice({
 	extraReducers(builder) {
-		builder.addCase(generate.pending, (state) => {
+		builder.addCase(generatePlan.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
-		builder.addCase(generate.fulfilled, (state, action) => {
+		builder.addCase(generatePlan.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
 			state.plan = action.payload;
 		});
-		builder.addCase(generate.rejected, (state) => {
+		builder.addCase(generatePlan.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 			state.plan = null;
 		});

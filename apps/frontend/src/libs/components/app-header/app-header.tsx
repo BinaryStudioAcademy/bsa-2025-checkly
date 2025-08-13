@@ -68,12 +68,12 @@ const AppHeader: React.FC = () => {
 				{user && (
 					<>
 						<Link to={AppRoute.PROFILE}>
-              <img
-                alt="User profile"
-                className={styles["user-image"]}
-                src={profileDefault}
-              />
-            </Link>
+							<img
+								alt="User profile"
+								className={styles["user-image"]}
+								src={profileDefault}
+							/>
+						</Link>
 						<div className={styles["user-name-arrow"]}>
 							<span className={styles["user-name"]}>{displayName}</span>
 							<button

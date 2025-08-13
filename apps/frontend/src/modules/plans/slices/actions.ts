@@ -6,7 +6,7 @@ import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 import { type QuizAnswersDto } from "../libs/types/types.js";
 import { name as sliceName } from "./plan.slice.js";
 
-const generate = createAsyncThunk<
+const generatePlan = createAsyncThunk<
 	PlanDaysTaskDto,
 	QuizAnswersDto,
 	AsyncThunkConfig
@@ -18,4 +18,4 @@ const generate = createAsyncThunk<
 	return plan;
 });
 
-export { generate };
+export { generatePlan };

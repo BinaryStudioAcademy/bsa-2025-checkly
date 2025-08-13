@@ -1,9 +1,9 @@
-import { generate } from "./actions.js";
+import { generatePlan } from "./actions.js";
 import { actions } from "./plan.slice.js";
 
 const allActions = {
 	...actions,
-	generate,
+	generatePlan,
 };
 
 export { allActions as actions };
