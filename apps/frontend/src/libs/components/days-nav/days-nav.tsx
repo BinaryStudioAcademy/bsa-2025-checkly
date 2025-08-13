@@ -14,14 +14,17 @@ type Properties = {
 	className?: string;
 	items: NavItem[];
 	notesLabel?: string;
-	onSelectItem: (index: "notes" | number) => void;
+	onSelectItem: (index: "notes" | "preview" | number) => void;
+	onSelectPreview?: () => void;
+	previewLabel?: string;
 	renderExtraAction?: (
 		itemIndex: number,
 		isSelected: boolean,
 	) => React.ReactNode;
 	renderSelectedIcon?: (itemIndex: number) => React.ReactNode;
-	selectedItem: "notes" | number;
+	selectedItem: "notes" | "preview" | number;
 	showNotes?: boolean;
+	showPreviewButton?: boolean;
 };
 
 const DaysNav: FC<Properties> = ({
@@ -29,16 +32,23 @@ const DaysNav: FC<Properties> = ({
 	items,
 	notesLabel = "Notes",
 	onSelectItem,
+	onSelectPreview,
+	previewLabel = "Preview",
 	renderExtraAction,
 	renderSelectedIcon,
 	selectedItem,
 	showNotes = false,
+	showPreviewButton = false,
 }) => {
 	const handleClick = useCallback(
-		(index: "notes" | number) => (): void => {
-			onSelectItem(index);
+		(index: "notes" | "preview" | number) => (): void => {
+			if (index === "preview" && onSelectPreview) {
+				onSelectPreview();
+			} else {
+				onSelectItem(index);
+			}
 		},
-		[onSelectItem],
+		[onSelectItem, onSelectPreview],
 	);
 
 	return (
@@ -74,6 +84,20 @@ const DaysNav: FC<Properties> = ({
 							)}
 							label={notesLabel}
 							onClick={handleClick("notes")}
+							variant="transparent"
+						/>
+					</li>
+				)}
+
+				{showPreviewButton && onSelectPreview && (
+					<li className={styles["mobile-only"]}>
+						<Button
+							className={getClassNames(
+								styles["navButton"],
+								selectedItem === "preview" && styles["active"],
+							)}
+							label={previewLabel}
+							onClick={handleClick("preview")}
 							variant="transparent"
 						/>
 					</li>
