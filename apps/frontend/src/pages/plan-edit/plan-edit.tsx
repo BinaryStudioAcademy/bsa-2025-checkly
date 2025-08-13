@@ -15,8 +15,7 @@ import {
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm } from "~/libs/hooks/hooks.js";
 
-import { EditingPanel } from "./components/components.js";
-import { DownloadButton } from "./components/download-button/download-button.js";
+import { DownloadButton, EditingPanel } from "./components/components.js";
 import { type PlanEditForm } from "./libs/types/plan-edit-form.type.js";
 import styles from "./styles.module.css";
 

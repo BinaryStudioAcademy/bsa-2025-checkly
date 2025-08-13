@@ -8,6 +8,15 @@ import styles from "./styles.module.css";
 
 const INCREMENT_VALUE = 1;
 
+const getFieldName = (
+	dayIndex: number,
+	activityIndex: number,
+): `days.${number}.activities.${number}.text` => {
+	return `days.${String(dayIndex)}.activities.${String(
+		activityIndex,
+	)}.text` as `days.${number}.activities.${number}.text`;
+};
+
 type Properties = {
 	control: Control<PlanEditForm>;
 	dayIndex: number;
@@ -15,9 +24,13 @@ type Properties = {
 };
 
 const DayEditor: FC<Properties> = ({ control, dayIndex, errors }) => {
+	const fieldArrayName = `days.${String(
+		dayIndex,
+	)}.activities` as `days.${number}.activities`;
+
 	const { fields, remove } = useFieldArray({
 		control,
-		name: `days.${String(dayIndex)}.activities` as `days.${number}.activities`,
+		name: fieldArrayName,
 	});
 
 	const handleRemoveActivity = useCallback(
@@ -36,9 +49,7 @@ const DayEditor: FC<Properties> = ({ control, dayIndex, errors }) => {
 							control={control}
 							errors={errors}
 							label={`Task ${String(activityIndex + INCREMENT_VALUE)}`}
-							name={
-								`days.${String(dayIndex)}.activities.${String(activityIndex)}.text` as `days.${number}.activities.${number}.text`
-							}
+							name={getFieldName(dayIndex, activityIndex)}
 						/>
 						<Button
 							icon={<>&times;</>}

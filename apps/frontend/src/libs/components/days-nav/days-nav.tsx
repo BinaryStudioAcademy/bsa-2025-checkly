@@ -14,7 +14,7 @@ type Properties = {
 	className?: string;
 	items: NavItem[];
 	notesLabel?: string;
-	onSelectItem: (index: "notes" | "preview" | number) => void;
+	onSelectItem: (index: SelectedItemType) => void;
 	onSelectPreview?: () => void;
 	previewLabel?: string;
 	renderExtraAction?: (
@@ -22,10 +22,12 @@ type Properties = {
 		isSelected: boolean,
 	) => React.ReactNode;
 	renderSelectedIcon?: (itemIndex: number) => React.ReactNode;
-	selectedItem: "notes" | "preview" | number;
+	selectedItem: SelectedItemType;
 	showNotes?: boolean;
 	showPreviewButton?: boolean;
 };
+
+type SelectedItemType = "notes" | "preview" | number;
 
 const DaysNav: FC<Properties> = ({
 	className = "",
@@ -41,7 +43,7 @@ const DaysNav: FC<Properties> = ({
 	showPreviewButton = false,
 }) => {
 	const handleClick = useCallback(
-		(index: "notes" | "preview" | number) => (): void => {
+		(index: SelectedItemType) => (): void => {
 			if (index === "preview" && onSelectPreview) {
 				onSelectPreview();
 			} else {

@@ -1,25 +1,10 @@
-import H2C from "html2canvas";
-import jsPDF from "jspdf";
 import React, { useCallback, useMemo } from "react";
 
-type Html2CanvasFunction = (
-	element: HTMLElement,
-	options?: object,
-) => Promise<HTMLCanvasElement>;
-
-const html2canvas = H2C as unknown as Html2CanvasFunction;
-
-const PAPER_IN_HALF = 2;
-
-type DownloadOptions = {
-	background?: string;
-	format?: "jpg" | "png";
-	pdfFormat?: "a3" | "a4" | "a5" | "legal" | "letter";
-	pdfOrientation?: "landscape" | "portrait";
-	pdfUnit?: "cm" | "in" | "mm" | "px";
-	quality?: number;
-	useCORS?: boolean;
-};
+import {
+	DownloadError,
+	generatePdfFromElement,
+} from "~/libs/helpers/helpers.js";
+import { type DownloadOptions } from "~/libs/types/pdf.types.js";
 
 type Properties = {
 	children: React.ReactNode;
@@ -52,60 +37,10 @@ const DownloadButton: React.FC<Properties> = ({
 
 	const handleDownload = useCallback(async (): Promise<void> => {
 		try {
-			const element = document.querySelector<HTMLElement>(`#${targetId}`);
-
-			if (!element) {
-				throw new Error(`Elemento com ID "${targetId}" não encontrado`);
-			}
-
-			const canvasOptions = {
-				allowTaint: false,
-				background: defaultOptions.background,
-				logging: false,
-				useCORS: defaultOptions.useCORS,
-			};
-
-			const canvas = await html2canvas(element, canvasOptions);
-
-			const imgData =
-				defaultOptions.format === "jpg"
-					? canvas.toDataURL("image/jpeg", defaultOptions.quality)
-					: canvas.toDataURL("image/png");
-
-			const pdf = new jsPDF({
-				format: defaultOptions.pdfFormat,
-				orientation: defaultOptions.pdfOrientation,
-				unit: defaultOptions.pdfUnit,
-			});
-
-			const pdfWidth = pdf.internal.pageSize.getWidth();
-			const pdfHeight = pdf.internal.pageSize.getHeight();
-
-			const imgWidth = canvas.width;
-			const imgHeight = canvas.height;
-
-			const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
-
-			const finalWidth = imgWidth * ratio;
-			const finalHeight = imgHeight * ratio;
-
-			const x = (pdfWidth - finalWidth) / PAPER_IN_HALF;
-			const y = (pdfHeight - finalHeight) / PAPER_IN_HALF;
-
-			pdf.addImage(
-				imgData,
-				defaultOptions.format.toUpperCase(),
-				x,
-				y,
-				finalWidth,
-				finalHeight,
-			);
-			pdf.save(`${fileName}.pdf`);
+			await generatePdfFromElement(targetId, fileName, defaultOptions);
 		} catch (error: unknown) {
 			const errorMessage =
-				error instanceof Error
-					? error
-					: new Error("Erro desconhecido ao fazer download");
+				error instanceof Error ? error : new Error(DownloadError.UNKNOWN);
 			onDownloadError?.(errorMessage);
 		}
 	}, [targetId, fileName, defaultOptions, onDownloadError]);
