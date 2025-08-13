@@ -1,5 +1,3 @@
-import { PlansApiPath } from "shared";
-
 import { APIPath, ContentType, HTTPRequestMethod } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
@@ -8,6 +6,8 @@ import {
 	type QuizAnswersRequestDto,
 	type QuizQuestionsResponseDto,
 } from "~/modules/quiz/libs/types/types.js";
+
+import { PlansApiPath } from "./libs/enums/enums.js";
 
 type Constructor = {
 	baseUrl: string;
