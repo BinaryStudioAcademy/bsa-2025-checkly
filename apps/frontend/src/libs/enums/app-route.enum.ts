@@ -1,8 +1,12 @@
 const AppRoute = {
+	CHOOSE_STYLE: "/choose-style",
 	DASHBOARD: "/dashboard",
 	NOT_FOUND: "*",
 	PLAN: "/plan",
-	PLAN_GENERATION: "/plan-generation",
+	PLAN_GENERATION: "/generation",
+	PROFILE: "/profile",
+	QUIZ: "/quiz",
+	QUIZ_QUESTIONS: "/quiz/questions",
 	ROOT: "/",
 	SIGN_IN: "/sign-in",
 	SIGN_UP: "/sign-up",

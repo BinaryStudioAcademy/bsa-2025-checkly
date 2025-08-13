@@ -96,6 +96,7 @@ const SignUpForm: React.FC<Properties> = ({
 				<form
 					aria-labelledby="sign-up-title"
 					className={getClassNames(sharedStyles["form"], "cluster")}
+					noValidate
 					onSubmit={handleFormSubmit}
 				>
 					<div className="flow-loose">

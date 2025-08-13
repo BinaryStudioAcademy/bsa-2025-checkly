@@ -1,12 +1,14 @@
-import { type Repository, type Service } from "~/libs/types/types.js";
+import { type Service } from "~/libs/types/types.js";
 import { PlanEntity } from "~/modules/plans/plan.entity.js";
 import { type PlanRepository } from "~/modules/plans/plan.repository.js";
 
 import {
 	type PlanCreateRequestDto,
 	type PlanDaysTaskDto,
+	type PlanDto,
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
+	type PlanUpdateRequestDto,
 } from "./libs/types/types.js";
 
 class PlanService implements Service {
@@ -24,12 +26,14 @@ class PlanService implements Service {
 		return item.toObject();
 	}
 
-	public delete(): ReturnType<Repository["delete"]> {
-		return Promise.resolve(true);
+	public async delete(id: number): Promise<boolean> {
+		return await this.planRepository.delete(id);
 	}
 
-	public find(): ReturnType<Repository["find"]> {
-		return Promise.resolve(null);
+	public async find(id: number): Promise<null | PlanDto> {
+		const item = await this.planRepository.find(id);
+
+		return item ? item.toObject() : null;
 	}
 
 	public async findAll(): Promise<PlanGetAllResponseDto> {
@@ -40,14 +44,19 @@ class PlanService implements Service {
 		};
 	}
 
-	public async findById(id: number): Promise<null | PlanDaysTaskDto> {
-		const item = await this.planRepository.findById(id);
+	public async findWithRelations(id: number): Promise<null | PlanDaysTaskDto> {
+		const item = await this.planRepository.findWithRelations(id);
 
 		return item ? item.toObjectWithRelations() : null;
 	}
 
-	public update(): ReturnType<Repository["find"]> {
-		return Promise.resolve(null);
+	public async update(
+		id: number,
+		payload: PlanUpdateRequestDto,
+	): Promise<null | PlanDto> {
+		const plan = await this.planRepository.update(id, payload);
+
+		return plan ? plan.toObject() : null;
 	}
 }
 

@@ -4,7 +4,7 @@
 
 .main-layout {
 	display: flex;
-	height: 100vh;
+	flex: 1;
 	padding-top: var(--app-header-height);
 	overflow: hidden;
 	transition: all 0.3s ease-in-out;

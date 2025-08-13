@@ -1,5 +1,5 @@
 const StorageKey = {
-	QUIZ_ANSWER: "quiz-answer",
+	QUIZ_STATE: "quiz_state",
 	TOKEN: "token",
 } as const;
 

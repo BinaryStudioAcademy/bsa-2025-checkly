@@ -6,6 +6,7 @@ import {
 	profileDefault,
 } from "~/assets/img/header/header.img.js";
 import { Link } from "~/libs/components/components.js";
+import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppSelector, useDropdownMenu } from "~/libs/hooks/hooks.js";
 
@@ -66,11 +67,13 @@ const AppHeader: React.FC = () => {
 			<div className={styles["user-section"]} ref={menuReference}>
 				{user && (
 					<>
-						<img
-							alt="User profile"
-							className={styles["user-image"]}
-							src={profileDefault}
-						/>
+						<Link to={AppRoute.PROFILE}>
+              <img
+                alt="User profile"
+                className={styles["user-image"]}
+                src={profileDefault}
+              />
+            </Link>
 						<div className={styles["user-name-arrow"]}>
 							<span className={styles["user-name"]}>{displayName}</span>
 							<button

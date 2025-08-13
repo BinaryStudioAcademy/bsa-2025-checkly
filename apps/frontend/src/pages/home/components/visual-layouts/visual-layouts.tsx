@@ -5,7 +5,7 @@ import {
 import { DecorativeImage } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
-import { layoutExamples } from "./layout-examples.data.js";
+import { layoutExamples } from "./libs/constants.js";
 import styles from "./styles.module.css";
 
 const VisualLayouts: React.FC = () => {
@@ -35,6 +35,7 @@ const VisualLayouts: React.FC = () => {
 					<ul
 						aria-label="Available layout options"
 						className={styles["layout-list"]}
+						data-list
 					>
 						{layoutExamples.map((example) => (
 							<li
@@ -42,10 +43,7 @@ const VisualLayouts: React.FC = () => {
 								className={styles["layout-card"]}
 								key={example.id}
 							>
-								<img
-									alt={`Preview of the ${example.title} layout`}
-									src={example.img}
-								/>
+								<DecorativeImage src={example.img} />
 								<h5>{example.title}</h5>
 							</li>
 						))}
