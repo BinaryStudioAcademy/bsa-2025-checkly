@@ -1,12 +1,11 @@
-const SLIDE_DURATION_MS = 500;
-const SLIDE_INTERVAL_MS = 2000;
+const SlideTiming = {
+	DURATION_MS: 500,
+	INTERVAL_MS: 2000,
+} as const;
 
-const SLIDE_START_INDEX = 0;
-const SLIDE_INCREMENT = 1;
+const SlideIndexing = {
+	INCREMENT: 1,
+	START_INDEX: 0,
+} as const;
 
-export {
-	SLIDE_DURATION_MS,
-	SLIDE_INCREMENT,
-	SLIDE_INTERVAL_MS,
-	SLIDE_START_INDEX,
-};
+export { SlideIndexing, SlideTiming };

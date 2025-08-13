@@ -4,24 +4,22 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
 import {
-	FAST_INCREMENT,
-	FAST_INTERVAL_MS,
-	PROGRESS_MAX,
-	PROGRESS_MAX_SLOW,
-	PROGRESS_MIN,
-	SLOW_INCREMENT_DIVISOR,
-	SLOW_INCREMENT_MAX,
-	SLOW_INTERVAL_MS,
+	FastTiming,
+	ProgressLimits,
+	SlowTiming,
 } from "../constants/constants.js";
 
 const getProgressStep = (currentProgress: number): number => {
-	const distance = PROGRESS_MAX_SLOW - currentProgress;
+	const distance = ProgressLimits.MAX_SLOW - currentProgress;
 
-	return Math.max(SLOW_INCREMENT_MAX, distance / SLOW_INCREMENT_DIVISOR);
+	return Math.max(
+		SlowTiming.INCREMENT_MAX,
+		distance / SlowTiming.INCREMENT_DIVISOR,
+	);
 };
 
 const getUpdatedProgress = (previous: number): number => {
-	if (previous >= PROGRESS_MAX_SLOW) {
+	if (previous >= ProgressLimits.MAX_SLOW) {
 		return previous;
 	}
 
@@ -29,7 +27,7 @@ const getUpdatedProgress = (previous: number): number => {
 };
 
 const getFastProgressUpdate = (previous: number): number => {
-	return Math.min(previous + FAST_INCREMENT, PROGRESS_MAX);
+	return Math.min(previous + FastTiming.INCREMENT, ProgressLimits.MAX);
 };
 
 type Properties = {
@@ -38,12 +36,12 @@ type Properties = {
 };
 
 const useProgress = ({ onComplete, status }: Properties): number => {
-	const [progress, setProgress] = useState<number>(PROGRESS_MIN);
+	const [progress, setProgress] = useState<number>(ProgressLimits.MIN);
 
 	useEffect(() => {
 		const slowId = setInterval(() => {
 			setProgress(getUpdatedProgress);
-		}, SLOW_INTERVAL_MS);
+		}, SlowTiming.INTERVAL_MS);
 
 		return (): void => {
 			clearInterval(slowId);
@@ -57,7 +55,7 @@ const useProgress = ({ onComplete, status }: Properties): number => {
 
 		const fastId = setInterval(() => {
 			setProgress(getFastProgressUpdate);
-		}, FAST_INTERVAL_MS);
+		}, FastTiming.INTERVAL_MS);
 
 		return (): void => {
 			clearInterval(fastId);
@@ -65,7 +63,7 @@ const useProgress = ({ onComplete, status }: Properties): number => {
 	}, [status]);
 
 	useEffect(() => {
-		if (progress === PROGRESS_MAX) {
+		if (progress === ProgressLimits.MAX) {
 			onComplete();
 		}
 	}, [progress, onComplete]);

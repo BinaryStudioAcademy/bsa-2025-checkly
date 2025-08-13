@@ -3,12 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { DecorativeImage } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 
-import {
-	SLIDE_DURATION_MS,
-	SLIDE_INCREMENT,
-	SLIDE_INTERVAL_MS,
-	SLIDE_START_INDEX,
-} from "./libs/constants/constants.js";
+import { SlideIndexing, SlideTiming } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -16,7 +11,9 @@ type Properties = {
 };
 
 const ImageSlider: React.FC<Properties> = ({ slides }) => {
-	const [currentIndex, setCurrentIndex] = useState<number>(SLIDE_START_INDEX);
+	const [currentIndex, setCurrentIndex] = useState<number>(
+		SlideIndexing.START_INDEX,
+	);
 	const [nextIndex, setNextIndex] = useState<null | number>(null);
 	const [isSliding, setIsSliding] = useState<boolean>(false);
 
@@ -25,7 +22,7 @@ const ImageSlider: React.FC<Properties> = ({ slides }) => {
 			return;
 		}
 
-		const newIndex = (currentIndex + SLIDE_INCREMENT) % slides.length;
+		const newIndex = (currentIndex + SlideIndexing.INCREMENT) % slides.length;
 		setNextIndex(newIndex);
 		setIsSliding(true);
 
@@ -33,11 +30,11 @@ const ImageSlider: React.FC<Properties> = ({ slides }) => {
 			setCurrentIndex(newIndex);
 			setNextIndex(null);
 			setIsSliding(false);
-		}, SLIDE_DURATION_MS);
+		}, SlideTiming.DURATION_MS);
 	}, [currentIndex, isSliding, slides]);
 
 	useEffect(() => {
-		const slideId = setInterval(startSlideTransition, SLIDE_INTERVAL_MS);
+		const slideId = setInterval(startSlideTransition, SlideTiming.INTERVAL_MS);
 
 		return (): void => {
 			clearInterval(slideId);

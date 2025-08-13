@@ -18,7 +18,7 @@ import {
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
-import { StorageKey } from "~/libs/modules/storage/storage.js";
+import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
 
 import { ImageSlider } from "./components/slider/slider.js";
@@ -48,7 +48,7 @@ const PlanGeneration: React.FC = () => {
 
 	useEffect(() => {
 		const generatePlan = async (): Promise<void> => {
-			const stored = localStorage.getItem(StorageKey.QUIZ_STATE);
+			const stored = await storage.get(StorageKey.QUIZ_STATE);
 			const quizAnswers: QuizAnswersRequestDto = stored
 				? (JSON.parse(stored) as QuizAnswersRequestDto)
 				: DEFAULT_QUIZ_ANSERS_PAYLOAD;

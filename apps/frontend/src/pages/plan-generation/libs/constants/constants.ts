@@ -10,25 +10,21 @@ const DEFAULT_QUIZ_ANSERS_PAYLOAD: QuizAnswersRequestDto = {
 	notes: "",
 };
 
-const SLOW_INTERVAL_MS = 100;
-const SLOW_INCREMENT_MAX = 0.2;
-const SLOW_INCREMENT_DIVISOR = 20;
+const SlowTiming = {
+	INCREMENT_DIVISOR: 20,
+	INCREMENT_MAX: 0.2,
+	INTERVAL_MS: 100,
+} as const;
 
-const FAST_INTERVAL_MS = 150;
-const FAST_INCREMENT = 1.5;
+const FastTiming = {
+	INCREMENT: 1.5,
+	INTERVAL_MS: 150,
+} as const;
 
-const PROGRESS_MAX_SLOW = 90;
-const PROGRESS_MIN = 1;
-const PROGRESS_MAX = 100;
+const ProgressLimits = {
+	MAX: 100,
+	MAX_SLOW: 90,
+	MIN: 1,
+} as const;
 
-export {
-	DEFAULT_QUIZ_ANSERS_PAYLOAD,
-	FAST_INCREMENT,
-	FAST_INTERVAL_MS,
-	PROGRESS_MAX,
-	PROGRESS_MAX_SLOW,
-	PROGRESS_MIN,
-	SLOW_INCREMENT_DIVISOR,
-	SLOW_INCREMENT_MAX,
-	SLOW_INTERVAL_MS,
-};
+export { DEFAULT_QUIZ_ANSERS_PAYLOAD, FastTiming, ProgressLimits, SlowTiming };
