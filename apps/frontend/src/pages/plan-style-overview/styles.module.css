@@ -33,16 +33,16 @@
 .yellow-stars {
 	position: absolute;
 	top: 35%;
-	right: -80px;
+	right: -180px;
 	z-index: 10;
 	pointer-events: none;
-	transform: translateY(-50%);
+	transform: translateY(-100%);
 }
 
 .yellow-stars-reflection {
 	position: absolute;
 	bottom: 35%;
-	left: -80px;
+	left: -200px;
 	z-index: 1;
 	pointer-events: none;
 	opacity: 0.6;

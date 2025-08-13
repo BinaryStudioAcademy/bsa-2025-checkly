@@ -35,8 +35,8 @@ const routes: CustomRouteObject[] = [
 	},
 	{
 		element: <PlanStyleOverview />,
-		handle: { access: RouteAccess.AUTHENTICATED },
-		path: AppRoute.PLAN_STYLE_OVERVIEW,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.OVERVIEW_PAGE,
 	},
 	{
 		children: [

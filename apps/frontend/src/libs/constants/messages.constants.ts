@@ -1,6 +1,8 @@
 const MESSAGES = {
 	DOWNLOAD: {
+		CLEANUP_FAILED: "Error restoring original state after download.",
 		FAILED: "Download failed",
+		NO_PLAN_FOUND: "No plan content found to download",
 		NOT_AVAILABLE: "Download not available for",
 		SUCCESS: "Plan downloaded successfully!",
 	},

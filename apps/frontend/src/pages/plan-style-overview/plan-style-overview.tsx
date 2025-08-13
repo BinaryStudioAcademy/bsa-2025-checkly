@@ -15,7 +15,7 @@ import { usePlanCategory } from "~/libs/hooks/hooks.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 
 import { PlanActions, PlanStyleCategory } from "./components/components.js";
-import { downloadPlanAsPdf } from "./lib/helpers.js";
+import { downloadPlan } from "./lib/helpers.js";
 import styles from "./styles.module.css";
 
 const CATEGORIES = [
@@ -37,7 +37,7 @@ const PlanStyleOverview: React.FC = () => {
 	}, []);
 
 	const handleDownloadPlan = useCallback((): void => {
-		downloadPlanAsPdf(selectedCategory);
+		void downloadPlan(selectedCategory);
 	}, [selectedCategory]);
 
 	const handleGoBack = useCallback(() => {
@@ -84,8 +84,7 @@ const PlanStyleOverview: React.FC = () => {
 							src={StarsYellow02}
 						/>
 					</div>
-				)}
-
+				)}{" "}
 				{selectedCategory !== PlanCategoryId.PDF && (
 					<div className={styles["plan-content"]}>
 						<div className={styles["coming-soon"]}>
