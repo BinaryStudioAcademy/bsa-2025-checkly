@@ -2,6 +2,7 @@ export { type AppRouteType } from "./app-route.type.js";
 export { type AsyncThunkConfig } from "./async-thunk-config.type.js";
 export { type ButtonSize } from "./button-size.type.js";
 export { type ButtonVariant } from "./button-variant.type.js";
+export { type DownloadOptions } from "./pdf.types.js";
 export { type PlanDay } from "./plan/plan-day.type.js";
 export { type PlanStyleOption } from "./plan/plan-style-option.type.js";
 export { type ViewOptions } from "./plan/plan-view-option.type.js";

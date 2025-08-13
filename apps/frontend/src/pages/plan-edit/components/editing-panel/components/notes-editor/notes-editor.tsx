@@ -9,6 +9,8 @@ type Properties = {
 	errors: FieldErrors<PlanEditForm>;
 };
 
+const EDITOR_ROWS = 10;
+
 const NotesEditor: FC<Properties> = ({ control, errors }) => {
 	return (
 		<Textarea
@@ -17,7 +19,7 @@ const NotesEditor: FC<Properties> = ({ control, errors }) => {
 			label="Your Notes"
 			name="notes"
 			placeholder="Add any extra notes here..."
-			rows={10}
+			rows={EDITOR_ROWS}
 		/>
 	);
 };

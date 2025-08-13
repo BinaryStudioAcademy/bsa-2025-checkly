@@ -1,12 +1,10 @@
 import React from "react";
 
 import themeStyles from "~/assets/mock-data/themes.mock.module.css";
+import { ONE, TWO } from "~/libs/constants/numbers.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import styles from "./styles.module.css";
-
-const ONE = 1;
-const TWO = 2;
 
 interface DayTopic {
 	main: string;
@@ -14,8 +12,8 @@ interface DayTopic {
 }
 
 const parseDayTopic = (topic: string): DayTopic => {
-	const regex = /^(.+?) \((.+?)\)$/;
-	const match = regex.exec(topic);
+	const TOPIC_WITH_WEEKDAY_REGEX = /^(.+?) \((.+?)\)$/;
+	const match = TOPIC_WITH_WEEKDAY_REGEX.exec(topic);
 
 	if (match && match[ONE] && match[TWO]) {
 		return {

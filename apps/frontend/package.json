@@ -28,7 +28,9 @@
 		"react-redux": "9.2.0",
 		"react-router-dom": "7.6.3",
 		"react-toastify": "11.0.5",
-		"shared": "*"
+		"shared": "*",
+		"html2canvas": "1.4.1",
+		"jspdf": "3.0.1"
 	},
 	"devDependencies": {
 		"@types/react": "19.1.8",
