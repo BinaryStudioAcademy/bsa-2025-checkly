@@ -1,1 +1,1 @@
-export { HTTPCode, UserValidationMessage } from "shared";
+export { HTTPCode } from "shared";
