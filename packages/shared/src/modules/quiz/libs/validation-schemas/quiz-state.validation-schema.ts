@@ -6,6 +6,7 @@ import {
 	QuizIndexes,
 	QuizQuestionFormat,
 } from "../enums/enums.js";
+import { quizAnswerSchema } from "./quiz-shared.validation-schema.js";
 
 const questionOptionSchema = z.object({
 	id: z.number().int().positive(),
@@ -22,16 +23,8 @@ const questionSchema = z.object({
 	type: z.nativeEnum(QuizQuestionFormat),
 });
 
-const QuizQuestionsResponseSchema = z.object({
+const quizQuestionsResponseSchema = z.object({
 	items: z.array(questionSchema),
-});
-
-const quizAnswerSchema = z.object({
-	isSkipped: z.boolean(),
-	questionId: z.coerce.number().int().positive(),
-	questionText: z.string().min(QuizIndexes.FIRST_INDEX),
-	selectedOptions: z.array(z.union([z.number(), z.string()])),
-	userInput: z.string().default(""),
 });
 
 const quizStateSchema = z.object({
@@ -41,7 +34,7 @@ const quizStateSchema = z.object({
 	currentQuestion: z.number().int().positive().default(QuizIndexes.FIRST_INDEX),
 	dataStatus: z.nativeEnum(DataStatus).default(DataStatus.IDLE),
 	notes: z.string().default(""),
-	questions: QuizQuestionsResponseSchema.nullable().default(null),
+	questions: quizQuestionsResponseSchema.nullable().default(null),
 	selectedCategory: z.nativeEnum(QuizCategory).nullable().default(null),
 });
 
