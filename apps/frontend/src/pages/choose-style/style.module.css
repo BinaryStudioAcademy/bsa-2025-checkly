@@ -33,16 +33,13 @@
 	text-decoration: none;
 }
 
-html {
-	zoom: 0.9;
-}
-
 .choose-style-section {
 	--grid-color: var(--color-light-grey);
 	--grid-opacity: 0.4;
 
-	min-height: 111vh;
+	flex: 1;
 	padding-top: 128px;
+	zoom: 0.9;
 }
 
 .bottom-buttons button {
@@ -199,10 +196,6 @@ html {
 		flex: 0 0 auto;
 		margin: 0 auto;
 		scroll-snap-align: center;
-	}
-
-	html {
-		zoom: 1;
 	}
 
 	.choose-style-section {

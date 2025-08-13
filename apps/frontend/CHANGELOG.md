@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.11.0...frontend-v1.12.0) (2025-08-13)
+
+
+### Features
+
+* **frontend:** quiz frontend implementation cy-15 ([e535ae4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e535ae4e1afa514869821dc0f344615f8275b102))
+* implmented single choice with text component cy-15 ([a41b66c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a41b66cf00f324f1aa367d4687d71ca97860d56a))
+
+
+### Bug Fixes
+
+* fix navigation cy-15 ([19fe446](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/19fe446b2af491415b6cad29ac60da2dedea8ae0))
+* merge conflicts with main cy-15 ([f11ad8f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f11ad8fc6c0f5c0b639efdf77813e2fb64700e01))
+* quiz category page styles cy-15 ([488eeab](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/488eeab1cdbfc601e6c8abd2ec0d1b4ff5642b22))
+* remove blank white at the bootom cy-230 ([1988df8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1988df8c5f5ed8c42d350662b5b841dab55ea4ae))
+* remove blank white at the bootom cy-230 ([c32b0dd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c32b0dd46d99f6a43c0e5894519c208b6d73572f))
+
 ## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.10.0...frontend-v1.11.0) (2025-08-12)
 
 
