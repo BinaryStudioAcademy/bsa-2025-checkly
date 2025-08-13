@@ -7,26 +7,26 @@ import {
 	QuizQuestionFormat,
 } from "../enums/enums.js";
 
-const QuestionOptionSchema = z.object({
+const questionOptionSchema = z.object({
 	id: z.number().int().positive(),
 	order: z.number().int().positive(),
 	text: z.string().min(QuizIndexes.FIRST_INDEX),
 });
 
-const QuestionSchema = z.object({
+const questionSchema = z.object({
 	id: z.number().int().positive(),
 	isOptional: z.boolean(),
-	options: z.array(QuestionOptionSchema),
+	options: z.array(questionOptionSchema),
 	order: z.number().int().positive(),
 	text: z.string().min(QuizIndexes.FIRST_INDEX),
 	type: z.nativeEnum(QuizQuestionFormat),
 });
 
 const QuizQuestionsResponseSchema = z.object({
-	items: z.array(QuestionSchema),
+	items: z.array(questionSchema),
 });
 
-const QuizAnswerSchema = z.object({
+const quizAnswerSchema = z.object({
 	isSkipped: z.boolean(),
 	questionId: z.coerce.number().int().positive(),
 	questionText: z.string().min(QuizIndexes.FIRST_INDEX),
@@ -34,9 +34,9 @@ const QuizAnswerSchema = z.object({
 	userInput: z.string().default(""),
 });
 
-const QuizStateSchema = z.object({
+const quizStateSchema = z.object({
 	answers: z
-		.record(z.coerce.number().int().positive(), QuizAnswerSchema)
+		.record(z.coerce.number().int().positive(), quizAnswerSchema)
 		.default({}),
 	currentQuestion: z.number().int().positive().default(QuizIndexes.FIRST_INDEX),
 	dataStatus: z.nativeEnum(DataStatus).default(DataStatus.IDLE),
@@ -45,4 +45,4 @@ const QuizStateSchema = z.object({
 	selectedCategory: z.nativeEnum(QuizCategory).nullable().default(null),
 });
 
-export { QuizStateSchema };
+export { quizStateSchema };

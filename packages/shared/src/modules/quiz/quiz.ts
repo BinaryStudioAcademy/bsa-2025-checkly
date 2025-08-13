@@ -15,6 +15,6 @@ export {
 	type QuizQuestionsResponseDto,
 } from "./libs/types/types.js";
 export {
-	quizAnswersSchema as QuizAnswersValidationSchema,
-	QuizStateSchema as QuizStateValidationSchema,
+	quizAnswersSchema as quizAnswersValidationSchema,
+	quizStateSchema as quizStateValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
