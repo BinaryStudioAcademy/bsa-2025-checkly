@@ -14,7 +14,7 @@ const styleCards: StyleCard[] = [
 		planStyle: "withremarks",
 	},
 	{
-		id: "box-4",
+		id: "box-3",
 		label: "Colourful",
 		planStyle: "colorful",
 	},
