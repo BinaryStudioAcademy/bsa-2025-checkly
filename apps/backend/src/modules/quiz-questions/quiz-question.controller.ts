@@ -8,7 +8,7 @@ import {
 	APIPath,
 	HTTPCode,
 	HTTPRequestMethod,
-	QuizzApiPath,
+	QuizApiPath,
 } from "./libs/enums/enums.js";
 import { type QuizQuestionService } from "./quiz-question.service.js";
 
@@ -105,7 +105,7 @@ class QuizQuestionController extends BaseController {
 			handler: () => this.findAllQuestions(),
 			isPublic: true,
 			method: HTTPRequestMethod.GET,
-			path: QuizzApiPath.ROOT,
+			path: QuizApiPath.ROOT,
 		});
 	}
 
