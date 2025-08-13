@@ -1,8 +1,1 @@
-type QuizAnswerDto = {
-	answer: string;
-	quiz_id: number;
-};
-
-type QuizAnswersDto = QuizAnswerDto[];
-
-export { type QuizAnswersDto };
+export { type QuizAnswersRequestDto, type QuizCategoryType } from "shared";

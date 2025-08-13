@@ -1,4 +1,4 @@
-import { type JSX, StrictMode, useEffect } from "react";
+import { type JSX, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 import "~/assets/css/styles.css";
@@ -15,14 +15,6 @@ import { store } from "~/libs/modules/store/store.js";
 import { routes } from "./routes.js";
 
 const Root = (): JSX.Element => {
-	useEffect(() => {
-		const startMocking = async (): Promise<void> => {
-			await enableMocking();
-		};
-
-		void startMocking();
-	}, []);
-
 	return (
 		<StrictMode>
 			<StoreProvider store={store.instance}>
@@ -43,5 +35,7 @@ const Root = (): JSX.Element => {
 		</StrictMode>
 	);
 };
+
+await enableMocking();
 
 createRoot(document.querySelector("#root") as HTMLElement).render(<Root />);

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { type QuizAnswersRequestDto } from "shared";
 
 import {
 	Book,
@@ -21,8 +22,8 @@ import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
 
 import { ImageSlider } from "./components/slider/slider.js";
+import { DEFAULT_QUIZ_ANSERS_PAYLOAD } from "./libs/constants/constants.js";
 import { useProgress } from "./libs/hooks/hooks.js";
-import { type QuizAnswersDto } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 const slides = [
@@ -48,9 +49,9 @@ const PlanGeneration: React.FC = () => {
 	useEffect(() => {
 		const generatePlan = async (): Promise<void> => {
 			const stored = localStorage.getItem(StorageKey.QUIZ_STATE);
-			const quizAnswers: QuizAnswersDto = stored
-				? (JSON.parse(stored) as QuizAnswersDto)
-				: [];
+			const quizAnswers: QuizAnswersRequestDto = stored
+				? (JSON.parse(stored) as QuizAnswersRequestDto)
+				: DEFAULT_QUIZ_ANSERS_PAYLOAD;
 
 			await dispatch(planActions.generatePlan(quizAnswers));
 		};

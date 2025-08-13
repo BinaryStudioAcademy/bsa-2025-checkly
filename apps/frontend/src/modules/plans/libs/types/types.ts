@@ -1,9 +1,2 @@
-type QuizAnswerDto = {
-	answer: string;
-	quiz_id: number;
-};
-
-type QuizAnswersDto = QuizAnswerDto[];
-
-export { type QuizAnswersDto };
+export { type QuizAnswersRequestDto } from "shared";
 export { type PlanDaysTaskDto } from "shared";

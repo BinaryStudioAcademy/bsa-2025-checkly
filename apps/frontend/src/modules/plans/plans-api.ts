@@ -5,7 +5,7 @@ import { type Storage } from "~/libs/modules/storage/storage.js";
 import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
 import { PlansApiPath } from "./libs/enums/enums.js";
-import { type QuizAnswersDto } from "./libs/types/types.js";
+import { type QuizAnswersRequestDto } from "./libs/types/types.js";
 
 type Constructor = {
 	baseUrl: string;
@@ -15,10 +15,12 @@ type Constructor = {
 
 class PlanApi extends BaseHTTPApi {
 	public constructor({ baseUrl, http, storage }: Constructor) {
-		super({ baseUrl, http, path: APIPath.AUTH, storage });
+		super({ baseUrl, http, path: APIPath.PLANS, storage });
 	}
 
-	public async generate(payload: QuizAnswersDto): Promise<PlanDaysTaskDto> {
+	public async generate(
+		payload: QuizAnswersRequestDto,
+	): Promise<PlanDaysTaskDto> {
 		const response = await this.load(
 			this.getFullEndpoint(PlansApiPath.PLAN_GENERATE, {}),
 			{

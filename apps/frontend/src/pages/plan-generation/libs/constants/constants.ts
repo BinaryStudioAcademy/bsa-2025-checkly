@@ -1,3 +1,15 @@
+import {
+	type QuizAnswersRequestDto,
+	type QuizCategoryType,
+} from "../types/types.js";
+
+const DEFAULT_CATEGORY: QuizCategoryType = "hobby";
+const DEFAULT_QUIZ_ANSERS_PAYLOAD: QuizAnswersRequestDto = {
+	answers: [],
+	category: DEFAULT_CATEGORY,
+	notes: "",
+};
+
 const SLOW_INTERVAL_MS = 100;
 const SLOW_INCREMENT_MAX = 0.2;
 const SLOW_INCREMENT_DIVISOR = 20;
@@ -10,6 +22,7 @@ const PROGRESS_MIN = 1;
 const PROGRESS_MAX = 100;
 
 export {
+	DEFAULT_QUIZ_ANSERS_PAYLOAD,
 	FAST_INCREMENT,
 	FAST_INTERVAL_MS,
 	PROGRESS_MAX,
