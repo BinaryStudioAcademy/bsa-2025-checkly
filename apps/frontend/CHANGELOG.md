@@ -1,5 +1,36 @@
 # Changelog
 
+## [1.12.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.12.0...frontend-v1.12.1) (2025-08-13)
+
+
+### Bug Fixes
+
+* change borders styles cy-234 ([7cb2eb1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7cb2eb1db953589b8aa70048499f99691c668f21))
+* Checkly logo incorrect font in Landing, Sign-in, and Sign-up pages cy-236 ([db3dc3e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/db3dc3e07acea484fbae4a0484ab17984f51b6c8))
+* Header has incorrect background color and visible divider cy-235 ([b5095ed](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b5095ed5d8f380173604c6ccdd1885d885160f9b))
+* plan overview container minimum height and task control hover contrast cy-231 ([c24a825](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c24a825f8a33cd4b83824c6fe9d58e4e81b1f1fd))
+* remove unused exports cy-236 ([940911d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/940911dc1174cdb1ab636c9a8b860af26847f564))
+* render divider if on dashboard page cy-235 ([ed8cf28](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ed8cf289db2caebf4202e66079d626f908bd347a))
+* Side Panel's border width is too big and uneven cy-234 ([bd13523](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bd13523923e166013b49a49da1d3d0c88cc0c35e))
+* update checkly logo font cy-236 ([c7ecabe](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c7ecabeb45d2b3c8248e262f8cb07f81c276081e))
+
+## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.11.0...frontend-v1.12.0) (2025-08-13)
+
+
+### Features
+
+* **frontend:** quiz frontend implementation cy-15 ([e535ae4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e535ae4e1afa514869821dc0f344615f8275b102))
+* implmented single choice with text component cy-15 ([a41b66c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a41b66cf00f324f1aa367d4687d71ca97860d56a))
+
+
+### Bug Fixes
+
+* fix navigation cy-15 ([19fe446](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/19fe446b2af491415b6cad29ac60da2dedea8ae0))
+* merge conflicts with main cy-15 ([f11ad8f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f11ad8fc6c0f5c0b639efdf77813e2fb64700e01))
+* quiz category page styles cy-15 ([488eeab](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/488eeab1cdbfc601e6c8abd2ec0d1b4ff5642b22))
+* remove blank white at the bootom cy-230 ([1988df8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1988df8c5f5ed8c42d350662b5b841dab55ea4ae))
+* remove blank white at the bootom cy-230 ([c32b0dd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c32b0dd46d99f6a43c0e5894519c208b6d73572f))
+
 ## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.10.0...frontend-v1.11.0) (2025-08-12)
 
 

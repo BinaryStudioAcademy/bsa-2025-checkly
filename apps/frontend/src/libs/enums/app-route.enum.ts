@@ -5,6 +5,8 @@ const AppRoute = {
 	PLAN: "/plan",
 	PLAN_EDIT: "/plan/edit",
 	PROFILE: "/profile",
+	QUIZ: "/quiz",
+	QUIZ_QUESTIONS: "/quiz/questions",
 	ROOT: "/",
 	SIGN_IN: "/sign-in",
 	SIGN_UP: "/sign-up",

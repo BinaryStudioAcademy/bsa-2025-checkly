@@ -1,5 +1,5 @@
-const QuizzApiPath = {
+const QuizApiPath = {
 	ROOT: "/",
 } as const;
 
-export { QuizzApiPath };
+export { QuizApiPath };

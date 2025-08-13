@@ -84,6 +84,10 @@
 	border-radius: var(--radius-full);
 }
 
+.item-actions_buttons-wrapper button:not(:disabled):hover {
+	background: white;
+}
+
 @media (width <= 1024px) {
 	.item-actions {
 		flex-direction: column;

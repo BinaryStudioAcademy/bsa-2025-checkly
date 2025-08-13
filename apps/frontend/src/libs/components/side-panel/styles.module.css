@@ -4,7 +4,7 @@
 	font-size: var(--step-minus-1);
 	color: var(--color-text);
 	background-color: var(--color-bg-sidebar);
-	border-right: var(--sidebar-border-width) solid var(--color-card-gray);
+	border-right: var(--sidebar-border-width) solid var(--color-border-grey);
 }
 
 .navigation {

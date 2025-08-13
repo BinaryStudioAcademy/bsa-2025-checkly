@@ -1,12 +1,11 @@
-const MIN_INPUT_LENGTH = 0;
-const MAX_INPUT_LENGTH = 200;
+import { InputSize } from "../../enums/enums.js";
 
 const sanitizeTextInput = (input: string): string =>
 	input
 		.trim()
-		.replaceAll(/[<>'"&`$]/g, "")
+		.replaceAll(/[<>'"&]/g, "")
 		.replaceAll(/[\n\r\t]/g, "")
 		.replaceAll(/\s+/g, " ")
-		.slice(MIN_INPUT_LENGTH, MAX_INPUT_LENGTH);
+		.slice(InputSize.MIN, InputSize.MAX);
 
 export { sanitizeTextInput };

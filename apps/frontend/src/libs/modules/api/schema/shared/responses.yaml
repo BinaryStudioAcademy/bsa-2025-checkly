@@ -30,4 +30,3 @@ schemas:
         type: string
       errorType:
         type: string
-

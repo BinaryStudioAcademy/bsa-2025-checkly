@@ -3,7 +3,14 @@ import { type RouteObject } from "react-router-dom";
 import { Dashboard, DashboardWrapper } from "./libs/components/components.js";
 import { AppRoute, RouteAccess } from "./libs/enums/enums.js";
 import { Plan } from "./pages/dashboard-wrapper-mock/components/components.js";
-import { Auth, ChooseStyle, Home, NotFound } from "./pages/pages.js";
+import {
+	Auth,
+	ChooseStyle,
+	Home,
+	NotFound,
+	QuestionFlow,
+	Quiz,
+} from "./pages/pages.js";
 import { PlanEdit } from "./pages/plan-edit/plan-edit.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
@@ -32,6 +39,14 @@ const routes: CustomRouteObject[] = [
 		element: <PlanEdit />,
 		handle: { access: RouteAccess.AUTHENTICATED },
 		path: AppRoute.PLAN_EDIT,
+		element: <QuestionFlow />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.QUIZ_QUESTIONS,
+	},
+	{
+		element: <Quiz />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.QUIZ,
 	},
 	{
 		children: [
