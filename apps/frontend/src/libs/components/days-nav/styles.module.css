@@ -49,14 +49,29 @@
 	border-color: var(--color-bg-dark);
 }
 
-@media (width <= 768px) {
-	.navList li {
-		flex-direction: row;
-		padding: 0;
+.navList li.mobile-only {
+	display: none;
+}
+
+@media (width <= 1024px) {
+	.navList {
+		flex-flow: row wrap;
+		gap: var(--space-s);
+		justify-content: center;
 	}
 
+	.navList li {
+		padding: 0;
+	}
+}
+
+@media (width <= 768px) {
 	.navButton {
 		padding: var(--space-2xs) var(--space-s);
 		font-size: var(--text-body-small);
+	}
+
+	.navList li.mobile-only {
+		display: flex;
 	}
 }
