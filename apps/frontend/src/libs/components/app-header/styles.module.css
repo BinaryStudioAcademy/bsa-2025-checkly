@@ -34,7 +34,7 @@
 	height: var(--app-header-height);
 	padding: 0 2rem;
 	background: var(--color-bg-white);
-	border-bottom: 3px solid var(--color-card-gray);
+	border-bottom: var(--sidebar-border-width) solid var(--color-border-grey);
 	backdrop-filter: blur(8px);
 	animation: slide-down 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -71,11 +71,11 @@
 	left: 1px;
 	z-index: 1;
 	display: none;
-	width: var(--sidebar-width);
+	width: var(--header-divider-width);
 	height: 100%;
 	pointer-events: none;
 	background-color: var(--color-bg-sidebar);
-	border-right: var(--sidebar-border-width) solid var(--color-card-gray);
+	border-right: var(--sidebar-border-width) solid var(--color-border-grey);
 }
 
 @media (width >= 1024px) {
