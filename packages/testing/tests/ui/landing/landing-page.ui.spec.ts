@@ -159,7 +159,8 @@ test.describe("Categories", async () => {
 			const h2 = button.locator("h3");
 			const img = button.locator("img");
 
-			await expect(h2).toHaveText(categoriesTitles[i]);
+			const title = categoriesTitles[i]!;
+			await expect(h2).toHaveText(title);
 			await expect(img).toBeVisible(); //If alt is added and matches the category, it might be better to instead .toHaveAttribute('alt', categoriesTitles[i]);
 			await expect(button).toHaveAttribute("aria-pressed", /true|false/); //Check if buttons are clickable (optional)
 		}

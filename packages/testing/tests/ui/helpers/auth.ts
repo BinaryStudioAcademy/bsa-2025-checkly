@@ -9,7 +9,8 @@ export async function signUpUser(
 	name = "Test User",
 	opts: SignUpOptions = { tolerateExisting: true },
 ) {
-	const url = `${process.env.API_URL}auth/register`;
+	const apiBase = process.env["API_URL"] ?? "http://localhost:3001/api/v1/";
+	const url = `${apiBase}auth/register`;
 
 	// Sanitize name: allow only letters and spaces (backend forbids digits/special chars)
 	const safeName =

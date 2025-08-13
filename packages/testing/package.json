@@ -8,6 +8,7 @@
 		"node": ">=18.0.0"
 	},
 	"scripts": {
+		"lint": "echo 'No custom lint for @checkly/testing'",
 		"postinstall": "npx playwright install --with-deps",
 		"test": "npx playwright test",
 		"test:ui": "dotenv -e .env.local -- npx playwright test --project=ui",
