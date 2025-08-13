@@ -39,7 +39,7 @@ type Properties = {
 	containerId?: string;
 	days: Day[];
 	notes?: string;
-	theme?: "colorful" | "minimal" | "warm";
+	theme?: "colourful" | "minimal" | "motivating" | "with remarks";
 	title?: string;
 };
 
@@ -47,10 +47,10 @@ const PlanPreview: React.FC<Properties> = ({
 	containerId = "plan-preview",
 	days,
 	notes,
-	theme = "colorful",
+	theme = "colourful",
 	title = "My Personal Plan",
 }) => {
-	const themeClass = themeStyles[theme] || themeStyles["colorful"];
+	const themeClass = themeStyles[theme] || themeStyles["colourful"];
 
 	return (
 		<div
