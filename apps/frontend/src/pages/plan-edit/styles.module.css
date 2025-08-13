@@ -41,13 +41,17 @@
 	overflow: hidden;
 }
 
+.content-grid-padding {
+	padding-bottom: 70px;
+}
+
 .left-panel {
 	position: sticky;
 	height: 100%;
 	padding: var(--radius-xl);
 	overflow-y: auto;
 	background-color: var(--color-bg-white);
-	border: 1px solid var(--color-border-grey);
+	border-right: 1px solid var(--color-border-grey);
 }
 
 .center-panel {
@@ -58,7 +62,8 @@
 	margin-right: calc(var(--radius-xl));
 	overflow-y: auto;
 	background-color: var(--color-bg-light);
-	border: 1px solid var(--color-border-grey);
+	border-right: 1px solid var(--color-border-grey);
+	border-left: 1px solid var(--color-border-grey);
 }
 
 .right-panel {
@@ -69,6 +74,11 @@
 	height: 100%;
 	padding: var(--radius-l);
 	margin: 0 auto;
+	overflow-y: auto;
+}
+
+.mobile-only button {
+	display: none;
 }
 
 .page-footer {
@@ -82,4 +92,80 @@
 	padding: var(--gutter);
 	background-color: var(--color-bg-white);
 	border-top: 1px solid var(--color-border-grey);
+}
+
+@media (width <= 1024px) {
+	.content-grid {
+		grid-template-areas:
+			"nav nav"
+			"editor preview";
+		grid-template-columns: minmax(320px, 480px) 1fr;
+	}
+
+	.left-panel {
+		position: static;
+		grid-area: nav;
+		width: 100%;
+		height: auto;
+		border-right: none;
+		border-bottom: 1px solid var(--color-border-grey);
+	}
+
+	.center-panel {
+		grid-area: editor;
+	}
+
+	.right-panel {
+		grid-area: preview;
+	}
+
+	.page-footer {
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 10;
+	}
+}
+
+@media (width <= 768px) {
+	.content-grid {
+		grid-template-areas:
+			"nav"
+			"content";
+		grid-template-columns: 1fr;
+	}
+
+	.center-panel,
+	.right-panel {
+		grid-area: content;
+		width: 100%;
+		margin: 0 auto;
+		border-right: none;
+		border-left: none;
+	}
+
+	.center-panel {
+		display: block;
+	}
+
+	.right-panel {
+		display: none;
+	}
+
+	.preview-mode-mobile .center-panel {
+		display: none;
+	}
+
+	.preview-mode-mobile .right-panel {
+		display: flex;
+	}
+
+	.page-footer {
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 10;
+	}
 }
