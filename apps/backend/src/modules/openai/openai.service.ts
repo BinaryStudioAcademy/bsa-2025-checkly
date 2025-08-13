@@ -6,6 +6,7 @@ import {
 	MAX_ATTEMPTS,
 	ONE,
 	SECONDS_TO_MILLISECONDS,
+	TEMPERATURE,
 	ZERO,
 } from "./libs/constants/constants.js";
 import { OpenAIRoles, PlanErrorMessages } from "./libs/enums/enums.js";
@@ -51,7 +52,6 @@ class OpenAIService {
 			return planData;
 		} catch (error) {
 			if (attempts + ONE < this.maxAttempts) {
-				// Delay before next retry
 				await new Promise((resolve) =>
 					setTimeout(resolve, SECONDS_TO_MILLISECONDS * attempts),
 				);
@@ -89,7 +89,7 @@ class OpenAIService {
 			],
 			model: config.ENV.OPEN_AI.TEXT_GENERATION_MODEL,
 			response_format: { type: "json_object" },
-			temperature: 0.6,
+			temperature: TEMPERATURE,
 		});
 
 		return response.choices[ZERO]?.message.content || "{}";
