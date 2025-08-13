@@ -27,6 +27,7 @@ for (let index = ZERO; index < DAY_NUM; index++) {
 }
 
 const plan: Plan = {
+	createdAt: "2025-08-30",
 	days,
 	id: ZERO.toString(),
 	title: PLAN_TITLE,

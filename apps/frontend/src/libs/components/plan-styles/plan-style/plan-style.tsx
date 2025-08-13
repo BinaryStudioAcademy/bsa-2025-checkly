@@ -44,6 +44,7 @@ const PlanStyle: React.FC<Properties> = ({
 						return (
 							<Day
 								dayNumber={day.dayNumber}
+								firstDayDate={plan.createdAt as string}
 								inputStyle={inputStyle}
 								key={day.id}
 								tasks={day.tasks}

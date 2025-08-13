@@ -1,5 +1,6 @@
 import { planStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { getWeekday } from "~/libs/helpers/get-weekday.js";
 import { type PlanStyleOption, type Task } from "~/libs/types/types.js";
 
 import { Task as TaskItem } from "../components.js";
@@ -7,16 +8,16 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	dayNumber: number;
+	firstDayDate?: string;
 	inputStyle: PlanStyleOption;
 	tasks: Task[];
-	weekday?: string;
 };
 
 const Day: React.FC<Properties> = ({
 	dayNumber,
+	firstDayDate,
 	inputStyle,
 	tasks,
-	weekday,
 }: Properties) => {
 	const dayItemClasses = getClassNames(
 		styles["day-item"],
@@ -33,11 +34,21 @@ const Day: React.FC<Properties> = ({
 		planStyleModules[inputStyle][`task-list--${inputStyle}`],
 	);
 
+	const weekday = getWeekday(firstDayDate as string, dayNumber);
+
 	return (
 		<li className={dayItemClasses} key={dayNumber}>
 			<h2 className={dayTitleClasses}>
 				{`Day ${dayNumber.toString()}`}&nbsp;
-				{weekday && <span className={styles["day-of-week"]}>({weekday})</span>}
+				{inputStyle === "withremarks" && (
+					<span
+						className={
+							planStyleModules[inputStyle][`day-of-week--${inputStyle}`]
+						}
+					>
+						({weekday})
+					</span>
+				)}
 			</h2>
 			<ol className={taskListClasses}>
 				{tasks.map((task: Task) => {
