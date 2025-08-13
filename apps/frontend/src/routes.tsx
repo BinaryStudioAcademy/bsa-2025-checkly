@@ -39,6 +39,8 @@ const routes: CustomRouteObject[] = [
 		element: <PlanEdit />,
 		handle: { access: RouteAccess.AUTHENTICATED },
 		path: AppRoute.PLAN_EDIT,
+	},
+	{
 		element: <QuestionFlow />,
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.QUIZ_QUESTIONS,
