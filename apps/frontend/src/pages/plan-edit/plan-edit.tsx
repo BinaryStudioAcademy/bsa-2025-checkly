@@ -24,9 +24,9 @@ const PlanEdit: FC = () => {
 	const INITIAL_ITEM = 0;
 	const DAY_INDEX = 1;
 
-	const [selectedItem, setSelectedItem] = useState<"notes" | number>(
-		INITIAL_ITEM,
-	);
+	const [selectedItem, setSelectedItem] = useState<
+		"notes" | "preview" | number
+	>(INITIAL_ITEM);
 
 	const { control, errors } = useAppForm<PlanEditForm>({
 		defaultValues: activitiesMockData,
@@ -38,13 +38,22 @@ const PlanEdit: FC = () => {
 
 	const planPreviewKey = JSON.stringify(formValues);
 
-	const handleSelectItem = useCallback((item: "notes" | number): void => {
-		setSelectedItem(item);
-	}, []);
+	const handleSelectItem = useCallback(
+		(item: "notes" | "preview" | number): void => {
+			setSelectedItem(item);
+		},
+		[],
+	);
+
+	const handleSelectPreview = useCallback((): void => {
+		handleSelectItem("preview");
+	}, [handleSelectItem]);
 
 	if (formValues.days.length === INITIAL_ITEM) {
 		return <Loader />;
 	}
+
+	const isPreviewActiveOnMobile = selectedItem === "preview";
 
 	return (
 		<>
@@ -65,7 +74,13 @@ const PlanEdit: FC = () => {
 					/>
 				</nav>
 
-				<div className={styles["content-grid"]}>
+				<div
+					className={getClassNames(
+						styles["content-grid"],
+						styles["content-grid-padding"],
+						isPreviewActiveOnMobile && styles["preview-mode-mobile"],
+					)}
+				>
 					<div className={styles["left-panel"]}>
 						<DaysNav
 							items={formValues.days.map((_, index) => ({
@@ -73,10 +88,13 @@ const PlanEdit: FC = () => {
 							}))}
 							notesLabel="Notes"
 							onSelectItem={handleSelectItem}
+							onSelectPreview={handleSelectPreview}
+							previewLabel="Preview"
 							selectedItem={selectedItem}
 							showNotes={Boolean(
 								formValues.notes && formValues.notes.trim() !== "",
 							)}
+							showPreviewButton
 						/>
 					</div>
 
@@ -94,7 +112,7 @@ const PlanEdit: FC = () => {
 							days={formValues.days}
 							key={planPreviewKey}
 							notes={formValues.notes}
-							theme="colorful" // This is the theme being applied hardcoded just for the moment
+							theme="colourful" // This is the theme being applied hardcoded just for the moment
 							title="My Personal Plan"
 						/>
 					</div>
