@@ -300,7 +300,7 @@ class PlanController extends BaseController {
 	 *         content:
 	 *           application/json:
 	 *             schema:
-	 *               $ref: '#/components/schemas/PlanResponseDto'
+	 *               $ref: '#/components/schemas/PlanDaysTaskDto'
 	 *       400:
 	 *         description: Invalid request data
 	 *         content:
