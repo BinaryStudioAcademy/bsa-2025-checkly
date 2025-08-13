@@ -1,6 +1,6 @@
 import { test as base, expect as baseExpect } from "@playwright/test";
 import { test, expect } from "@ui/fixtures/user.fixture";
-import { SignInPage } from "../controllers/sign-in-page";
+import { SignInPage } from "@tests/ui/controllers/signin-page";
 import { signUpUser } from "@ui/helpers/auth";
 
 test.describe("[Sign in - UI] Consolidated suite", () => {
