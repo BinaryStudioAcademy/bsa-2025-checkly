@@ -1,5 +1,6 @@
 export {
 	QuizAnswersRule,
+	QuizApiPath,
 	QuizIndexes,
 	QuizQuestionFormat,
 } from "./libs/enums/enums.js";

@@ -1,3 +1,5 @@
+import { PlansApiPath } from "shared";
+
 import { APIPath, ContentType, HTTPRequestMethod } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
@@ -32,8 +34,9 @@ class QuizApi extends BaseHTTPApi {
 	}
 
 	public async submitQuiz(payload: QuizAnswersRequestDto): Promise<boolean> {
+		const planGenerateApiPath = APIPath.PLANS + PlansApiPath.PLAN_GENERATE;
 		const response = await this.load(
-			this.getFullEndpoint(APIPath.PLAN_GENERATE, {}),
+			this.getFullEndpoint(planGenerateApiPath, {}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: false,
