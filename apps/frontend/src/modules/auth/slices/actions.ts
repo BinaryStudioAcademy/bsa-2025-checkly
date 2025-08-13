@@ -7,6 +7,7 @@ import {
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
+	type UserUpdateRequestDto,
 } from "~/modules/users/users.js";
 
 import { name as sliceName } from "./auth.slice.js";
@@ -60,4 +61,21 @@ const getCurrentUser = createAsyncThunk<
 	return await authApi.getCurrentUser();
 });
 
-export { getCurrentUser, signIn, signUp };
+const updateProfile = createAsyncThunk<
+	UserDto,
+	UserUpdateRequestDto,
+	AsyncThunkConfig
+>(
+	`${sliceName}/update-profile`,
+	async (payload, { extra, rejectWithValue }) => {
+		const { userApi } = extra;
+
+		try {
+			return await userApi.updateMe(payload);
+		} catch {
+			return rejectWithValue(ErrorMessage.DEFAULT_ERROR_MESSAGE);
+		}
+	},
+);
+
+export { getCurrentUser, signIn, signUp, updateProfile };

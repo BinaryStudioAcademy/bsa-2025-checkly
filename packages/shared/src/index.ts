@@ -70,6 +70,7 @@ export {
 	userSignUpValidationSchema,
 	userSignUpValidationSchemaExtended,
 	type UserUpdateRequestDto,
+	userUpdateValidationSchema,
 	UserValidationMessage,
 	UserValidationRule,
 } from "./modules/users/users.js";
