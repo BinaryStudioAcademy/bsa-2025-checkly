@@ -41,20 +41,11 @@
 
 .logo-section {
 	z-index: 2;
-	display: flex;
-	gap: 1rem;
-	align-items: center;
-}
-
-.logo-svg {
-	display: block;
-	width: auto;
-	height: 32px;
 	cursor: pointer;
 	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.logo-svg:hover {
+.logo-section:hover {
 	transform: scale(1.1) rotate(0deg);
 }
 
