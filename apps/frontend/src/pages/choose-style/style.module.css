@@ -119,6 +119,7 @@
 .box-4 {
 	background-color: white;
 	border-color: black;
+	border-width: 2.75px;
 }
 
 .selected {
