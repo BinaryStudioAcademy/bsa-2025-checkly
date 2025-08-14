@@ -4,7 +4,7 @@ import {
 } from "../types/types.js";
 
 const DEFAULT_CATEGORY: QuizCategoryType = "hobby";
-const DEFAULT_QUIZ_ANSERS_PAYLOAD: QuizAnswersRequestDto = {
+const DEFAULT_QUIZ_ANSWERS_PAYLOAD: QuizAnswersRequestDto = {
 	answers: [],
 	category: DEFAULT_CATEGORY,
 	notes: "",
@@ -27,4 +27,4 @@ const ProgressLimits = {
 	MIN: 1,
 } as const;
 
-export { DEFAULT_QUIZ_ANSERS_PAYLOAD, FastTiming, ProgressLimits, SlowTiming };
+export { DEFAULT_QUIZ_ANSWERS_PAYLOAD, FastTiming, ProgressLimits, SlowTiming };

@@ -22,7 +22,7 @@ import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
 
 import { ImageSlider } from "./components/slider/slider.js";
-import { DEFAULT_QUIZ_ANSERS_PAYLOAD } from "./libs/constants/constants.js";
+import { DEFAULT_QUIZ_ANSWERS_PAYLOAD } from "./libs/constants/constants.js";
 import { useProgress } from "./libs/hooks/hooks.js";
 import styles from "./styles.module.css";
 
@@ -51,7 +51,7 @@ const PlanGeneration: React.FC = () => {
 			const stored = await storage.get(StorageKey.QUIZ_STATE);
 			const quizAnswers: QuizAnswersRequestDto = stored
 				? (JSON.parse(stored) as QuizAnswersRequestDto)
-				: DEFAULT_QUIZ_ANSERS_PAYLOAD;
+				: DEFAULT_QUIZ_ANSWERS_PAYLOAD;
 
 			await dispatch(planActions.generatePlan(quizAnswers));
 		};

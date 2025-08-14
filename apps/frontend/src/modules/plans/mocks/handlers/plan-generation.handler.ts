@@ -11,10 +11,10 @@ export const planGenerationHandlers = [
 	http.post("/plans/generate", async ({ request }) => {
 		const { answers } = await request.json();
 
-		const planGeneration =
-			Math.floor(Math.random() * (MAX_DELAY_MS - MIN_DELAY_MS)) + MIN_DELAY_MS;
+		// const planGeneration =
+		// 	Math.floor(Math.random() * (MAX_DELAY_MS - MIN_DELAY_MS)) + MIN_DELAY_MS;
 
-		await delay(planGeneration);
+		await delay(8000);
 
 		return new Response(JSON.stringify(MOCK_PLAN), {
 			status: HTTPCode.OK,
