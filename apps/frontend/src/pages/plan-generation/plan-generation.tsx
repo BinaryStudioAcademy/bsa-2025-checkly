@@ -11,7 +11,6 @@ import {
 	Greens,
 	IceCream,
 	Laptop,
-	OrangeWhole,
 	Phone,
 	Teddy,
 } from "~/assets/img/shared/illustrations/illustrations.img.js";
@@ -36,7 +35,6 @@ const slides = [
 	Greens,
 	IceCream,
 	Laptop,
-	OrangeWhole,
 	Phone,
 ];
 

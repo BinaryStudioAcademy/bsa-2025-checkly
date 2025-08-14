@@ -5,6 +5,7 @@ import { type ValueOf } from "~/libs/types/types.js";
 
 import {
 	FastTiming,
+	LOADING_DURATION_MS,
 	ProgressLimits,
 	SlowTiming,
 } from "../constants/constants.js";
@@ -30,6 +31,23 @@ const getFastProgressUpdate = (previous: number): number => {
 	return Math.min(previous + FastTiming.INCREMENT, ProgressLimits.MAX);
 };
 
+const startFastProgressWithDelay = (
+	delayMs: number,
+	updateFunction: () => void,
+	intervalMs: number,
+): (() => void) => {
+	let fastId: ReturnType<typeof setTimeout>;
+
+	const delayId = setTimeout(() => {
+		fastId = setInterval(updateFunction, intervalMs);
+	}, delayMs);
+
+	return () => {
+		clearTimeout(delayId);
+		clearInterval(fastId);
+	};
+};
+
 type Properties = {
 	onComplete: () => void;
 	status: ValueOf<typeof DataStatus>;
@@ -53,13 +71,13 @@ const useProgress = ({ onComplete, status }: Properties): number => {
 			return;
 		}
 
-		const fastId = setInterval(() => {
-			setProgress(getFastProgressUpdate);
-		}, FastTiming.INTERVAL_MS);
-
-		return (): void => {
-			clearInterval(fastId);
-		};
+		return startFastProgressWithDelay(
+			LOADING_DURATION_MS,
+			() => {
+				setProgress(getFastProgressUpdate);
+			},
+			FastTiming.INTERVAL_MS,
+		);
 	}, [status]);
 
 	useEffect(() => {

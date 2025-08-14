@@ -1,6 +1,6 @@
 const SlideTiming = {
 	DURATION_MS: 500,
-	INTERVAL_MS: 2000,
+	INTERVAL_MS: 700,
 } as const;
 
 const SlideIndexing = {

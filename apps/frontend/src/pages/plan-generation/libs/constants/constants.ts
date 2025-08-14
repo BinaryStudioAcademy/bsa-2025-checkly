@@ -18,7 +18,7 @@ const SlowTiming = {
 
 const FastTiming = {
 	INCREMENT: 1.5,
-	INTERVAL_MS: 150,
+	INTERVAL_MS: 100,
 } as const;
 
 const ProgressLimits = {
@@ -27,4 +27,12 @@ const ProgressLimits = {
 	MIN: 1,
 } as const;
 
-export { DEFAULT_QUIZ_ANSWERS_PAYLOAD, FastTiming, ProgressLimits, SlowTiming };
+const LOADING_DURATION_MS = 6000;
+
+export {
+	DEFAULT_QUIZ_ANSWERS_PAYLOAD,
+	FastTiming,
+	LOADING_DURATION_MS,
+	ProgressLimits,
+	SlowTiming,
+};
