@@ -21,6 +21,8 @@ const AppHeader: React.FC = () => {
 	const user = useAppSelector((state) => state.auth.user);
 
 	const { pathname } = useLocation();
+	const hasDivider =
+		pathname === AppRoute.DASHBOARD || pathname === AppRoute.PLAN;
 
 	const displayName = useMemo(() => user?.name ?? DEFAULT_USER_NAME, [user]);
 
@@ -62,9 +64,7 @@ const AppHeader: React.FC = () => {
 				<Logo />
 			</div>
 
-			{pathname === AppRoute.DASHBOARD && (
-				<div className={styles["vertical-divider"]} />
-			)}
+			{hasDivider && <div className={styles["vertical-divider"]} />}
 
 			<div className={styles["user-section"]} ref={menuReference}>
 				<Link to={AppRoute.PROFILE}>
