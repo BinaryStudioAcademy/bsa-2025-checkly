@@ -41,10 +41,6 @@
 	overflow: hidden;
 }
 
-.content-grid-padding {
-	padding-bottom: 70px;
-}
-
 .left-panel {
 	position: sticky;
 	height: 100%;
