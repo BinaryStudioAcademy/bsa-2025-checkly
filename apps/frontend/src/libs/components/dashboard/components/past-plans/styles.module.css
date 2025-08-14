@@ -1,4 +1,7 @@
 .container {
+	--card-width: 205px;
+	--coefficient: 0.45;
+
 	padding: var(--space-s) var(--space-l);
 	background-color: var(--color-bg-light);
 	border: 2px solid var(--color-card-gray);
@@ -18,11 +21,13 @@
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: var(--space-m);
+	justify-items: center;
 	padding: var(--space-l) var(--space-xs);
 	transition: gap 0.3s ease-in-out;
 }
 
 .plan-card {
+	width: var(--card-width);
 	overflow: hidden;
 	border: 2px solid var(--color-text-primary);
 	border-radius: var(--radius-m);
@@ -43,30 +48,30 @@
 
 @media (width >= 520px) {
 	.plans-grid {
-		grid-template-columns: repeat(2, minmax(205px, 1fr));
+		grid-template-columns: repeat(2, minmax(var(--card-width), 1fr));
 	}
 }
 
 @media (width >= 740px) {
 	.plans-grid {
-		grid-template-columns: repeat(3, minmax(205px, 1fr));
+		grid-template-columns: repeat(3, minmax(var(--card-width), 1fr));
 	}
 }
 
 @media (width >= 1210px) {
 	.plans-grid {
-		grid-template-columns: minmax(205px, 1fr);
+		grid-template-columns: minmax(var(--card-width), 1fr);
 	}
 }
 
 @media (width >= 1410px) {
 	.plans-grid {
-		grid-template-columns: repeat(2, minmax(205px, 1fr));
+		grid-template-columns: repeat(2, minmax(var(--card-width), 1fr));
 	}
 }
 
 @media (width >= 1640px) {
 	.plans-grid {
-		grid-template-columns: repeat(3, minmax(205px, 1fr));
+		grid-template-columns: repeat(3, minmax(var(--card-width), 1fr));
 	}
 }
