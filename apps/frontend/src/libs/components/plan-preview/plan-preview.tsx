@@ -50,7 +50,7 @@ const PlanPreview: React.FC<Properties> = ({
 	title = "My Personal Plan",
 }) => {
 	const themeClass = themeStyles[theme] || themeStyles["colourful"];
-	
+
 	const { scale, viewportReference } = useA4Scale();
 
 	return (
