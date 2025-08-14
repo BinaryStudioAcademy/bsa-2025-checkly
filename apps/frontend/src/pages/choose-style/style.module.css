@@ -7,7 +7,7 @@
 
 .nav {
 	position: fixed;
-	top: 64px;
+	top: 71px;
 	left: 0;
 	z-index: 2;
 	display: flex;
@@ -27,6 +27,10 @@
 	font-size: var(--text-size-heading-5);
 	font-weight: var(--font-weight-heading);
 	text-align: left;
+}
+
+.nav button {
+	padding-top: 7px;
 }
 
 .nav-link {
