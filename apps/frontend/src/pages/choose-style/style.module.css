@@ -56,6 +56,11 @@
 	cursor: pointer;
 }
 
+.header-buttons button svg {
+	width: unset;
+	height: unset;
+}
+
 .choose-style-main {
 	padding-top: 4rem;
 }
@@ -177,13 +182,23 @@
 	}
 }
 
+@media (width <= 829px) {
+	.header-buttons button {
+		display: block;
+		margin-right: auto;
+		margin-left: auto;
+		font-size: 0%;
+	}
+}
+
 @media (width <= 430px) {
 	.header-buttons button {
 		font-size: 0%;
 	}
 
 	.header-buttons button svg {
-		margin-bottom: -7px;
+		margin-top: auto;
+		margin-bottom: auto;
 	}
 }
 
@@ -191,7 +206,7 @@
 	.card-container {
 		display: flex;
 		flex-wrap: nowrap;
-		gap: 12rem;
+		gap: 15rem;
 		justify-content: flex-start;
 		padding: 1rem 12rem;
 		overflow-x: auto;
