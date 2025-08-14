@@ -1,6 +1,6 @@
 export {
 	MAX_ATTEMPTS,
-	SECONDS_TO_MILLISECONDS,
+	MILLISECONDS_IN_SECONDS,
 	TEMPERATURE,
 } from "./config-constants.js";
-export { ONE, ZERO } from "./numbers.js";
+export { ONE, ZERO } from "shared";

@@ -4,12 +4,13 @@ import { config } from "~/libs/modules/config/config.js";
 
 import {
 	MAX_ATTEMPTS,
+	MILLISECONDS_IN_SECONDS,
 	ONE,
-	SECONDS_TO_MILLISECONDS,
 	TEMPERATURE,
 	ZERO,
 } from "./libs/constants/constants.js";
 import { OpenAIRoles, PlanErrorMessages } from "./libs/enums/enums.js";
+import { ResponseFormats } from "./libs/enums/response-formats.js";
 import { type GeneratedPlanDTO } from "./libs/types/types.js";
 import {
 	generateAssistantPrompt,
@@ -51,22 +52,28 @@ class OpenAIService {
 
 			return planData;
 		} catch (error) {
-			if (attempts + ONE < this.maxAttempts) {
-				await new Promise((resolve) =>
-					setTimeout(resolve, SECONDS_TO_MILLISECONDS * attempts),
-				);
+			const { status: errorStatus } = error as { status: number };
 
-				const errorMessage =
-					error instanceof Error ? error.message : String(error);
-
-				return await this.generatePlan(
-					userPrompt,
-					attempts + ONE,
-					generateAssistantPrompt(errorMessage, answer),
-				);
+			if (errorStatus) {
+				throw new Error(PlanErrorMessages.OPENAI_FAILED);
 			}
 
-			throw new Error(PlanErrorMessages.GENERATION_FAILED);
+			if (attempts + ONE >= this.maxAttempts) {
+				throw new Error(PlanErrorMessages.GENERATION_FAILED);
+			}
+
+			await new Promise((resolve) =>
+				setTimeout(resolve, MILLISECONDS_IN_SECONDS * attempts),
+			);
+
+			const errorMessage =
+				error instanceof Error ? error.message : String(error);
+
+			return await this.generatePlan(
+				userPrompt,
+				attempts + ONE,
+				generateAssistantPrompt(errorMessage, answer),
+			);
 		}
 	}
 
@@ -88,7 +95,7 @@ class OpenAIService {
 					: []),
 			],
 			model: config.ENV.OPEN_AI.TEXT_GENERATION_MODEL,
-			response_format: { type: "json_object" },
+			response_format: { type: ResponseFormats.JSON_OBJECT },
 			temperature: TEMPERATURE,
 		});
 
