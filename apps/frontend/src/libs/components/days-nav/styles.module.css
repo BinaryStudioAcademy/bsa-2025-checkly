@@ -16,7 +16,7 @@
 	flex-direction: row;
 	gap: var(--space-3xs);
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 	padding-left: var(--space-l);
 }
 
