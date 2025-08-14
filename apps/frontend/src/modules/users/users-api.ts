@@ -5,7 +5,11 @@ import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
-import { type UserGetAllResponseDto } from "./libs/types/types.js";
+import {
+	type UserDto,
+	type UserGetAllResponseDto,
+	type UserUpdateRequestDto,
+} from "./libs/types/types.js";
 
 type Constructor = {
 	baseUrl: string;
@@ -39,6 +43,20 @@ class UserApi extends BaseHTTPApi {
 				method: "DELETE",
 			},
 		);
+	}
+
+	public async updateMe(payload: UserUpdateRequestDto): Promise<UserDto> {
+		const response = await this.load(
+			this.getFullEndpoint(UsersApiPath.ME, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<UserDto>();
 	}
 
 	public async uploadAvatar(userId: number, file: File): Promise<Response> {

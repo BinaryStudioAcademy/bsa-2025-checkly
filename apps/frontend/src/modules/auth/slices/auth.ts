@@ -1,11 +1,21 @@
-import { getCurrentUser, signIn, signUp } from "./actions.js";
+import {
+	avatarRemove,
+	avatarUpload,
+	getCurrentUser,
+	signIn,
+	signUp,
+	updateProfile,
+} from "./actions.js";
 import { actions } from "./auth.slice.js";
 
 const allActions = {
 	...actions,
+	avatarRemove,
+	avatarUpload,
 	getCurrentUser,
 	signIn,
 	signUp,
+	updateProfile,
 };
 
 export { allActions as actions };

@@ -2,6 +2,7 @@ import { type Entity } from "~/libs/types/types.js";
 
 class UserEntity implements Entity {
 	private avatarUrl: null | string;
+	private dob: null | string;
 	private email: string;
 	private id: null | number;
 	private name: string;
@@ -10,6 +11,7 @@ class UserEntity implements Entity {
 
 	private constructor({
 		avatarUrl = null,
+		dob,
 		email,
 		id,
 		name,
@@ -17,12 +19,14 @@ class UserEntity implements Entity {
 		passwordSalt,
 	}: {
 		avatarUrl: null | string;
+		dob: null | string;
 		email: string;
 		id: null | number;
 		name: string;
 		passwordHash: string;
 		passwordSalt: string;
 	}) {
+		this.dob = dob;
 		this.id = id;
 		this.email = email;
 		this.name = name;
@@ -33,6 +37,7 @@ class UserEntity implements Entity {
 
 	public static initialize(properties: {
 		avatarUrl?: null | string;
+		dob: null | string;
 		email: string;
 		id: number;
 		name: string;
@@ -41,6 +46,7 @@ class UserEntity implements Entity {
 	}): UserEntity {
 		return new UserEntity({
 			avatarUrl: properties.avatarUrl ?? null,
+			dob: properties.dob,
 			email: properties.email,
 			id: properties.id,
 			name: properties.name,
@@ -51,6 +57,7 @@ class UserEntity implements Entity {
 
 	public static initializeNew(properties: {
 		avatarUrl?: null | string;
+		dob: null | string;
 		email: string;
 		name: string;
 		passwordHash: string;
@@ -58,6 +65,7 @@ class UserEntity implements Entity {
 	}): UserEntity {
 		return new UserEntity({
 			avatarUrl: properties.avatarUrl ?? null,
+			dob: properties.dob,
 			email: properties.email,
 			id: null,
 			name: properties.name,
@@ -75,6 +83,7 @@ class UserEntity implements Entity {
 
 	public toNewObject(): {
 		avatarUrl: null | string;
+		dob: null | string;
 		email: string;
 		name: string;
 		passwordHash: string;
@@ -82,6 +91,7 @@ class UserEntity implements Entity {
 	} {
 		return {
 			avatarUrl: this.avatarUrl,
+			dob: this.dob,
 			email: this.email,
 			name: this.name,
 			passwordHash: this.passwordHash,
@@ -91,12 +101,14 @@ class UserEntity implements Entity {
 
 	public toObject(): {
 		avatarUrl: null | string;
+		dob: null | string;
 		email: string;
 		id: number;
 		name: string;
 	} {
 		return {
 			avatarUrl: this.avatarUrl,
+			dob: this.dob,
 			email: this.email,
 			id: this.id as number,
 			name: this.name,

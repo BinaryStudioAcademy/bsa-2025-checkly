@@ -1,81 +1,31 @@
-import { type ChangeEvent, useCallback, useRef, useState } from "react";
-import { UPLOAD_MAX_FILE_SIZE_BYTES, type UserDto } from "shared";
+import { useCallback, useRef, useState } from "react";
 
 import { EditPhoto, Remove } from "~/assets/img/icons/icons.js";
 import { AvatarDefault } from "~/assets/img/shared/avatars//avatars.img.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
-import { actions as authActions } from "~/modules/auth/auth.js";
-import { userApi } from "~/modules/users/users.js";
 
+import { buildAvatarEditHandlers } from "./handlers.js";
 import styles from "./styles.module.css";
-
-const ALLOWED_TYPES = new Set<string>(["image/jpeg", "image/png"]);
 
 type Nullable<T> = null | T;
 
-const Test: React.FC = () => {
+const AvatarEdit: React.FC = () => {
 	const user = useAppSelector((state) => state.auth.user);
 	const dispatch = useAppDispatch();
 	const [preview, setPreview] = useState<Nullable<string>>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const fileInputReference = useRef<HTMLInputElement | null>(null);
 
+	const { handleFileChange, handleRemove } = buildAvatarEditHandlers({
+		dispatch,
+		getUser: () => user,
+		setIsLoading,
+		setPreview,
+	});
+
 	const handleOpenFilePicker = useCallback((): void => {
 		fileInputReference.current?.click();
 	}, []);
-
-	const handleFileChange = useCallback(
-		(event: ChangeEvent<HTMLInputElement>): void => {
-			void (async (): Promise<void> => {
-				const { files } = event.target;
-				const [file] = files ? [...files] : [];
-
-				if (!file || !user) {
-					return;
-				}
-
-				if (!ALLOWED_TYPES.has(file.type)) {
-					return;
-				}
-
-				if (file.size > UPLOAD_MAX_FILE_SIZE_BYTES) {
-					return;
-				}
-
-				setIsLoading(true);
-
-				try {
-					const response = await userApi.uploadAvatar(user.id, file);
-					const updated: UserDto =
-						(await response.json()) as unknown as UserDto;
-					setPreview(URL.createObjectURL(file));
-					dispatch(authActions.setUser(updated));
-				} finally {
-					setIsLoading(false);
-				}
-			})();
-		},
-		[dispatch, user],
-	);
-
-	const handleRemove = useCallback((): void => {
-		void (async (): Promise<void> => {
-			if (!user) {
-				return;
-			}
-
-			setIsLoading(true);
-
-			try {
-				const response = await userApi.removeAvatar(user.id);
-				const updated: UserDto = (await response.json()) as unknown as UserDto;
-				setPreview(null);
-				dispatch(authActions.setUser(updated));
-			} finally {
-				setIsLoading(false);
-			}
-		})();
-	}, [dispatch, user]);
 
 	if (!user) {
 		return;
@@ -123,4 +73,4 @@ const Test: React.FC = () => {
 	);
 };
 
-export { Test };
+export { AvatarEdit };

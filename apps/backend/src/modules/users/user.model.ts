@@ -10,6 +10,8 @@ class UserModel extends AbstractModel {
 
 	public avatarUrl!: null | string;
 
+	public dob!: null | string;
+
 	public email!: string;
 
 	public name!: string;

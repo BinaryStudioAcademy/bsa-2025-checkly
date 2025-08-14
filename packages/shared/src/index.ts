@@ -6,9 +6,11 @@ export {
 	APIPath,
 	AppEnvironment,
 	ContentType,
+	DataStatus,
 	ErrorConstants,
 	ErrorMessage,
 	FastifyHook,
+	QuizCategory,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
 export {
@@ -61,11 +63,14 @@ export {
 	type QuestionType,
 	type QuizAnswer,
 	type QuizAnswersRequestDto,
-	quizAnswersValidationSchema,
+	type QuizAnswersResponseDto,
+	QuizAnswersValidationSchema,
+	QuizApiPath,
 	type QuizCategoryType,
+	QuizIndexes,
 	QuizQuestionFormat,
 	type QuizQuestionsResponseDto,
-	QuizzApiPath,
+	QuizStateValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
 	ExecutionTimeType,
@@ -80,7 +85,6 @@ export {
 	type SignUpFormValidationSchema,
 	type UserDto,
 	type UserGetAllResponseDto,
-	type UserProfileResponseDto,
 	UsersApiPath,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -90,6 +94,7 @@ export {
 	userSignUpValidationSchema,
 	userSignUpValidationSchemaExtended,
 	type UserUpdateRequestDto,
+	userUpdateValidationSchema,
 	UserValidationMessage,
 	UserValidationRule,
 } from "./modules/users/users.js";
