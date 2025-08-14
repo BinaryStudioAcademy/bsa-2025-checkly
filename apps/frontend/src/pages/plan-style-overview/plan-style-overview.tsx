@@ -72,7 +72,7 @@ const PlanStyleOverview: React.FC = () => {
 			<div className={getClassNames(styles["container"], "grid-pattern")}>
 				{selectedCategory === PlanCategoryId.PDF && (
 					<div className={styles["plan-content"]}>
-						<PlanDisplay categoryId={selectedCategory} />
+						<PlanDisplay categoryId={selectedCategory} theme="with-remarks" />
 
 						<DecorativeImage
 							className={styles["yellow-stars"] ?? ""}

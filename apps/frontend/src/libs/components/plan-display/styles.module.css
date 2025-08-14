@@ -1,3 +1,5 @@
+@import url("~/assets/css/variables/custom-themes.css");
+
 .plan-container {
 	display: flex;
 	justify-content: center;
@@ -170,15 +172,15 @@
 	flex-direction: column;
 	gap: 12px;
 	width: auto;
-	height: 1400px;
-	padding: 0 30px 5px 110px;
-	margin: 0 auto;
+	height: auto;
+	min-height: 1580px;
+	padding: 0 170px 20px 180px;
+	margin: 0;
 	background-color: var(--page-bg, #f7e9ce);
 }
 
 .pdf-export .plan-title {
-	margin-top: 0;
-	margin-bottom: 48px;
+	margin-bottom: 64px;
 	font-size: 54px;
 	text-align: left;
 }
