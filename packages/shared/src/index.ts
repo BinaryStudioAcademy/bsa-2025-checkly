@@ -2,9 +2,11 @@ export {
 	APIPath,
 	AppEnvironment,
 	ContentType,
+	DataStatus,
 	ErrorConstants,
 	ErrorMessage,
 	FastifyHook,
+	QuizCategory,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
 export {
@@ -57,11 +59,14 @@ export {
 	type QuestionType,
 	type QuizAnswer,
 	type QuizAnswersRequestDto,
-	quizAnswersValidationSchema,
+	type QuizAnswersResponseDto,
+	QuizAnswersValidationSchema,
+	QuizApiPath,
 	type QuizCategoryType,
+	QuizIndexes,
 	QuizQuestionFormat,
 	type QuizQuestionsResponseDto,
-	QuizzApiPath,
+	QuizStateValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
 	ExecutionTimeType,

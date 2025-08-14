@@ -1,1 +1,1 @@
-export { APIPath, HTTPCode, HTTPRequestMethod, QuizzApiPath } from "shared";
+export { APIPath, HTTPCode, HTTPRequestMethod, QuizApiPath } from "shared";
