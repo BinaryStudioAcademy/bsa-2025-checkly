@@ -74,20 +74,15 @@ const logout = createAsyncThunk<null, LogoutThunkArgument, AsyncThunkConfig>(
 
 		try {
 			await storage.drop(StorageKey.TOKEN);
-			dispatch(authSliceActions.resetAuthState());
-
-			try {
-				await Promise.resolve(navigate(AppRoute.SIGN_IN));
-			} catch {
-				notifications.error(MESSAGES.NAVIGATION.FAILED);
-			}
-
-			return null;
-		} catch (error) {
+		} catch {
 			notifications.error(MESSAGES.AUTH.LOGOUT_FAILED);
-
-			throw error;
 		}
+
+		dispatch(authSliceActions.resetAuthState());
+
+		await navigate(AppRoute.SIGN_IN);
+
+		return null;
 	},
 );
 
