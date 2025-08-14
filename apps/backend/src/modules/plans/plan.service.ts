@@ -52,9 +52,7 @@ class PlanService implements Service {
 		return item ? item.toObjectWithRelations() : null;
 	}
 
-	public generateFromQuizAnswers(
-		payload: QuizAnswersRequestDto,
-	): PlanDaysTaskDto {
+	public generate(payload: QuizAnswersRequestDto): PlanDaysTaskDto {
 		createPrompt(payload);
 		const mockedPlan = {
 			"days": [

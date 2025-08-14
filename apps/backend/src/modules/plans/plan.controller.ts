@@ -168,9 +168,7 @@ class PlanController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.generateFromQuizAnswers(
-					options as APIBodyOptions<QuizAnswersRequestDto>,
-				),
+				this.generate(options as APIBodyOptions<QuizAnswersRequestDto>),
 			isPublic: true,
 			method: HTTPRequestMethod.POST,
 			path: PlansApiPath.PLAN_GENERATE,
@@ -316,11 +314,11 @@ class PlanController extends BaseController {
 	 *                   example: "At least one of the selected options or user input must be provided for a non-skipped question."
 	 */
 
-	private generateFromQuizAnswers(
+	private generate(
 		options: APIBodyOptions<QuizAnswersRequestDto>,
 	): APIHandlerResponse {
 		return {
-			payload: this.planService.generateFromQuizAnswers(options.body),
+			payload: this.planService.generate(options.body),
 			status: HTTPCode.OK,
 		};
 	}
