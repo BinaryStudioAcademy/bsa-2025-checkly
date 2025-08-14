@@ -1,4 +1,5 @@
 type UserUpdateRequestDto = {
+	confirmPassword?: string | undefined;
 	dob?: string | undefined;
 	email?: string | undefined;
 	name?: string | undefined;

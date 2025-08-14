@@ -1,7 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 
 import { Button, Input, Loader } from "~/libs/components/components.js";
-import { DataStatus } from "~/libs/enums/enums.js";
+import { ZERO } from "~/libs/constants/constants.js";
+import { formatDateForInput } from "~/libs/helpers/date-helpers.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import {
 	useAppDispatch,
@@ -14,19 +15,48 @@ import {
 	userUpdateValidationSchema,
 } from "~/modules/users/users.js";
 
-type ProfileFormValues = UserUpdateRequestDto & { confirmPassword?: string };
-
-import { formatDateForInput } from "~/libs/helpers/date-helpers.js";
-
 import sharedStyles from "../auth/components/shared/shared.module.css";
 import styles from "./styles.module.css";
 
+const getChangedProfileFields = (
+	data: UserUpdateRequestDto,
+	defaultValues: UserUpdateRequestDto,
+): UserUpdateRequestDto => {
+	const changed: UserUpdateRequestDto = {};
+
+	if (data.name !== defaultValues.name && data.name !== undefined) {
+		changed.name = data.name;
+	}
+
+	if (data.email !== defaultValues.email && data.email !== undefined) {
+		changed.email = data.email;
+	}
+
+	const currentDob = data.dob ?? "";
+	const defaultDob = defaultValues.dob ?? "";
+
+	if (currentDob !== defaultDob) {
+		changed.dob = currentDob === "" ? undefined : currentDob;
+	}
+
+	const password = data.password ?? "";
+
+	if (password.trim().length > ZERO) {
+		changed.password = password;
+
+		if (data.confirmPassword !== undefined) {
+			changed.confirmPassword = data.confirmPassword;
+		}
+	}
+
+	return changed;
+};
+
 const Profile: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { dataStatus, user } = useAppSelector(({ auth }) => auth);
-	const isLoading = dataStatus === DataStatus.PENDING;
+	const { user } = useAppSelector(({ auth }) => auth);
 
-	const defaultValues = useMemo<ProfileFormValues>(
+	const defaultValues = useMemo<UserUpdateRequestDto>(
 		() => ({
 			confirmPassword: "",
 			dob: formatDateForInput(user?.dob ?? null),
@@ -37,20 +67,24 @@ const Profile: React.FC = () => {
 		[user],
 	);
 
-	const { control, errors, handleSubmit } = useAppForm<ProfileFormValues>({
-		defaultValues,
-		validationSchema: userUpdateValidationSchema,
-	});
+	const { control, errors, handleSubmit, isDirty, isSubmitting, reset } =
+		useAppForm<UserUpdateRequestDto>({
+			defaultValues,
+			validationSchema: userUpdateValidationSchema,
+		});
+
+	useEffect(() => {
+		reset(defaultValues);
+	}, [defaultValues, reset]);
 
 	const handleFormSubmit = handleSubmit((data) => {
-		const payload: UserUpdateRequestDto = {
-			dob: data.dob || "",
-			email: data.email,
-			name: data.name,
-			password: data.password?.trim() ? data.password : "",
-		};
+		const changed = getChangedProfileFields(data, defaultValues);
 
-		void dispatch(updateProfile(payload));
+		if (Object.keys(changed).length === ZERO) {
+			return;
+		}
+
+		void dispatch(updateProfile(changed));
 	});
 
 	const contentClasses = getClassNames(
@@ -116,12 +150,12 @@ const Profile: React.FC = () => {
 						/>
 					</div>
 					<Button
-						disabled={isLoading}
+						disabled={isSubmitting || !isDirty}
 						label="Save changes"
 						loader={
 							<Loader
 								container="inline"
-								isLoading={isLoading}
+								isLoading={isSubmitting}
 								size="small"
 								theme="accent"
 							/>

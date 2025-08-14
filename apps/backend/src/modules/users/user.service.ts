@@ -84,7 +84,7 @@ class UserService implements Service {
 				dob: payload.dob,
 				email: payload.email,
 				name: payload.name,
-			}).filter(([, value]) => value != undefined),
+			}).filter(([, value]) => value !== undefined),
 		) as Partial<UserModel>;
 
 		if (payload.password && payload.password.trim()) {
