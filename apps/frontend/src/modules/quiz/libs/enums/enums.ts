@@ -1,0 +1,1 @@
+export { QuizCategory } from "shared";

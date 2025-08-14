@@ -9,6 +9,8 @@ import {
 	Home,
 	NotFound,
 	PlanStyleOverview,
+	QuestionFlow,
+	Quiz,
 } from "./pages/pages.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
@@ -37,6 +39,16 @@ const routes: CustomRouteObject[] = [
 		element: <PlanStyleOverview />,
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.OVERVIEW_PAGE,
+	},
+	{
+		element: <QuestionFlow />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.QUIZ_QUESTIONS,
+	},
+	{
+		element: <Quiz />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.QUIZ,
 	},
 	{
 		children: [

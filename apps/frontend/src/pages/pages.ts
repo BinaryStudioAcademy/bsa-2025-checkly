@@ -3,3 +3,5 @@ export { ChooseStyle } from "./choose-style/choose-style.js";
 export { Home } from "./home/home.js";
 export { NotFound } from "./not-found-page/not-found-page.js";
 export { PlanStyleOverview } from "./plan-style-overview/plan-style-overview.js";
+export { QuestionFlow } from "./quiz/questions/question-flow.js";
+export { Quiz } from "./quiz/quiz.js";

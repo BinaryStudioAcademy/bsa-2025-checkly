@@ -12,7 +12,7 @@ const Header: React.FC = () => {
 			<div className="wrapper repel">
 				<Logo />
 				<nav className="cluster">
-					<Link asButtonVariant="secondary" to={AppRoute.ROOT}>
+					<Link asButtonVariant="secondary" to={AppRoute.QUIZ}>
 						Start quiz
 					</Link>
 					{user ? (

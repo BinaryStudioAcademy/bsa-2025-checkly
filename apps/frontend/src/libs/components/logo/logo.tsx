@@ -13,7 +13,7 @@ const Logo: React.FC = () => {
 			to={AppRoute.ROOT}
 		>
 			<img alt="Binary Checkly web-application logo" src={logoIcon} />
-			Checkly
+			<h1>Checkly</h1>
 		</Link>
 	);
 };

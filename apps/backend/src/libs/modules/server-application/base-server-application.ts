@@ -1,4 +1,3 @@
-import cors from "@fastify/cors";
 import fastifyStatic from "@fastify/static";
 import swagger, { type StaticDocumentSpec } from "@fastify/swagger";
 import swaggerUi from "@fastify/swagger-ui";
@@ -214,10 +213,6 @@ class BaseServerApplication implements ServerApplication {
 	}
 
 	private async initPlugins(): Promise<void> {
-		await this.app.register(cors, {
-			origin: true,
-		});
-
 		await this.app.register(authorizationPlugin, {
 			userService,
 			whiteRoutes: this.getWhiteRoutes(),
