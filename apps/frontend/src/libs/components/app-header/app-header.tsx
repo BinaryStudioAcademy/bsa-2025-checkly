@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
 
-import { arrowDown, profileDefault } from "~/assets/img/header/header.img.js";
+import { arrowDown } from "~/assets/img/header/header.img.js";
+import { AvatarDefault } from "~/assets/img/shared/avatars/avatars.img.js";
 import { Link, Logo } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
@@ -25,6 +26,8 @@ const AppHeader: React.FC = () => {
 		pathname === AppRoute.DASHBOARD || pathname === AppRoute.PLAN;
 
 	const displayName = useMemo(() => user?.name ?? DEFAULT_USER_NAME, [user]);
+
+	const dispayAvatar = useMemo(() => user?.avatarUrl ?? AvatarDefault, [user]);
 
 	const handleMenuToggle = useCallback((): void => {
 		setIsMenuOpen((previous) => !previous);
@@ -71,7 +74,7 @@ const AppHeader: React.FC = () => {
 					<img
 						alt="User profile"
 						className={styles["user-image"]}
-						src={profileDefault}
+						src={dispayAvatar}
 					/>
 				</Link>
 				<div className={styles["user-name-arrow"]}>

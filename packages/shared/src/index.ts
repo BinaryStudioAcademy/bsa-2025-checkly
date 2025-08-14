@@ -1,4 +1,8 @@
 export {
+	UPLOAD_MAX_FILE_SIZE_BYTES,
+	UPLOAD_MAX_FILE_SIZE_MB,
+} from "./libs/constants/upload.constants.js";
+export {
 	APIPath,
 	AppEnvironment,
 	ContentType,
@@ -81,7 +85,6 @@ export {
 	type SignUpFormValidationSchema,
 	type UserDto,
 	type UserGetAllResponseDto,
-	type UserProfileResponseDto,
 	UsersApiPath,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -91,6 +94,7 @@ export {
 	userSignUpValidationSchema,
 	userSignUpValidationSchemaExtended,
 	type UserUpdateRequestDto,
+	userUpdateValidationSchema,
 	UserValidationMessage,
 	UserValidationRule,
 } from "./modules/users/users.js";
