@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.5.0...shared-v1.5.1) (2025-08-14)
+
+
+### Bug Fixes
+
+* fixed quiz api path cy-254 ([5bf17b5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5bf17b5801ee7bafac2e12411b78e2ad4753a0a7))
+* **frontend:** fixed quiz api path cy-254 ([f58b9d8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f58b9d8a39c37965424e31f6fe938674ac90ac47))
+
 ## [1.5.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.4.0...shared-v1.5.0) (2025-08-13)
 
 
