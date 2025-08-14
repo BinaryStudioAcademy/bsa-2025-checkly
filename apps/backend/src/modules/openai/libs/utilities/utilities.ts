@@ -1,2 +1,1 @@
-export { generateAssistantPrompt } from "./assistant-prompt.js";
-export { systemPrompt } from "./system-prompt.js";
+export { PromptBuilder } from "./prompt-builder.js";

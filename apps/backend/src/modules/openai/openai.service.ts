@@ -3,19 +3,18 @@ import OpenAI from "openai";
 import { config } from "~/libs/modules/config/config.js";
 
 import {
+	HTTPCode,
 	MAX_ATTEMPTS,
-	MILLISECONDS_IN_SECONDS,
+	MILLISECONDS_IN_SECOND,
 	ONE,
+	SYSTEM_PROMPT as systemPrompt,
 	TEMPERATURE,
 	ZERO,
 } from "./libs/constants/constants.js";
 import { OpenAIRoles, PlanErrorMessages } from "./libs/enums/enums.js";
 import { ResponseFormats } from "./libs/enums/response-formats.js";
 import { type GeneratedPlanDTO } from "./libs/types/types.js";
-import {
-	generateAssistantPrompt,
-	systemPrompt,
-} from "./libs/utilities/utilities.js";
+import { PromptBuilder } from "./libs/utilities/utilities.js";
 import {
 	planCreateValidationSchema,
 	taskCreateValidationSchema,
@@ -54,7 +53,11 @@ class OpenAIService {
 		} catch (error) {
 			const { status: errorStatus } = error as { status: number };
 
-			if (errorStatus) {
+			if (
+				errorStatus === HTTPCode.BAD_REQUEST ||
+				errorStatus === HTTPCode.UNAUTHORIZED ||
+				errorStatus === HTTPCode.NOT_FOUND
+			) {
 				throw new Error(PlanErrorMessages.OPENAI_FAILED);
 			}
 
@@ -63,7 +66,7 @@ class OpenAIService {
 			}
 
 			await new Promise((resolve) =>
-				setTimeout(resolve, MILLISECONDS_IN_SECONDS * attempts),
+				setTimeout(resolve, MILLISECONDS_IN_SECOND * attempts),
 			);
 
 			const errorMessage =
@@ -72,7 +75,10 @@ class OpenAIService {
 			return await this.generatePlan(
 				userPrompt,
 				attempts + ONE,
-				generateAssistantPrompt(errorMessage, answer),
+				PromptBuilder.create()
+					.addError(errorMessage)
+					.addPreviousResponse(answer)
+					.build(),
 			);
 		}
 	}

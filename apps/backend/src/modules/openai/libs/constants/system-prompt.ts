@@ -1,15 +1,10 @@
-const schema = `{
-"days": [{"dayNumber": number, "tasks": [{"title": string, "description": string, "executionTimeType": "afternoon" | "evening" | "morning" | null, "order": number}]}],
-"duration": number,
-"intensity": string,
-"title": string
-}`;
+import { PLAN_SCHEMA } from "./constants.js";
 
-const systemPrompt = `
+const SYSTEM_PROMPT = `
 You are a strict JSON generator.
 Return ONLY valid JSON following this schema:
 
-${schema}
+${PLAN_SCHEMA}
 
 Rules:
 - No explanations, no markdown, no extra text.
@@ -21,4 +16,4 @@ Rules:
 - Do NOT rephrase existing descriptions.
 `;
 
-export { systemPrompt };
+export { SYSTEM_PROMPT };
