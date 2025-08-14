@@ -1,15 +1,10 @@
-import { type PlanDaysTaskDto } from "shared";
-
 import { APIPath, ContentType, HTTPRequestMethod } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
-import {
-	type QuizAnswersRequestDto,
-	type QuizQuestionsResponseDto,
-} from "~/modules/quiz/libs/types/types.js";
+import { type QuizQuestionsResponseDto } from "~/modules/quiz/libs/types/types.js";
 
-import { PlansApiPath, QuizApiPath } from "./libs/enums/enums.js";
+import { QuizApiPath } from "./libs/enums/enums.js";
 
 type Constructor = {
 	baseUrl: string;
@@ -33,23 +28,6 @@ class QuizApi extends BaseHTTPApi {
 		);
 
 		return await response.json<QuizQuestionsResponseDto>();
-	}
-
-	public async submitQuiz(
-		payload: QuizAnswersRequestDto,
-	): Promise<PlanDaysTaskDto> {
-		const planGenerateApiPath = APIPath.PLANS + PlansApiPath.PLAN_GENERATE;
-		const response = await this.load(
-			this.getFullEndpoint(planGenerateApiPath, {}),
-			{
-				contentType: ContentType.JSON,
-				hasAuth: false,
-				method: HTTPRequestMethod.POST,
-				payload: JSON.stringify(payload),
-			},
-		);
-
-		return await response.json<PlanDaysTaskDto>();
 	}
 }
 

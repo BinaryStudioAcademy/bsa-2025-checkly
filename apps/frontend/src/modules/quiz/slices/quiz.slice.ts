@@ -7,7 +7,7 @@ import {
 	type QuizCategoryValue,
 	type QuizQuestionsResponseDto,
 } from "~/modules/quiz/libs/types/types.js";
-import { fetchQuestions, submitQuiz } from "~/modules/quiz/slices/actions.js";
+import { fetchQuestions } from "~/modules/quiz/slices/actions.js";
 
 interface QuizState {
 	answers: Record<number, QuizAnswer>;
@@ -38,9 +38,6 @@ const { actions, name, reducer } = createSlice({
 				state.questions = action.payload;
 			})
 			.addCase(fetchQuestions.rejected, (state) => {
-				state.dataStatus = DataStatus.REJECTED;
-			})
-			.addCase(submitQuiz.rejected, (state) => {
 				state.dataStatus = DataStatus.REJECTED;
 			});
 	},
