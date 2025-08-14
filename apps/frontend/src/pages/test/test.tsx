@@ -1,14 +1,14 @@
-import { type ChangeEvent, useCallback, useState } from "react";
-import { UPLOAD_MAX_FILE_SIZE_BYTES, UPLOAD_MAX_FILE_SIZE_MB } from "shared";
-import { type UserDto } from "shared";
+import { type ChangeEvent, useCallback, useRef, useState } from "react";
+import { UPLOAD_MAX_FILE_SIZE_BYTES, type UserDto } from "shared";
 
+import { EditPhoto, Remove } from "~/assets/img/icons/icons.js";
+import { AvatarDefault } from "~/assets/img/shared/avatars//avatars.img.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import { userApi } from "~/modules/users/users.js";
 
-import avatarDefault from "./avatar-default.png";
+import styles from "./styles.module.css";
 
-const DEFAULT_AVATAR = avatarDefault;
 const ALLOWED_TYPES = new Set<string>(["image/jpeg", "image/png"]);
 
 type Nullable<T> = null | T;
@@ -18,7 +18,11 @@ const Test: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const [preview, setPreview] = useState<Nullable<string>>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [errorMessage, setErrorMessage] = useState<Nullable<string>>(null);
+	const fileInputReference = useRef<HTMLInputElement | null>(null);
+
+	const handleOpenFilePicker = useCallback((): void => {
+		fileInputReference.current?.click();
+	}, []);
 
 	const handleFileChange = useCallback(
 		(event: ChangeEvent<HTMLInputElement>): void => {
@@ -30,17 +34,11 @@ const Test: React.FC = () => {
 					return;
 				}
 
-				setErrorMessage(null);
-
 				if (!ALLOWED_TYPES.has(file.type)) {
-					setErrorMessage("Only PNG or JPEG allowed");
-
 					return;
 				}
 
 				if (file.size > UPLOAD_MAX_FILE_SIZE_BYTES) {
-					setErrorMessage(`Max ${String(UPLOAD_MAX_FILE_SIZE_MB)}MB`);
-
 					return;
 				}
 
@@ -52,8 +50,6 @@ const Test: React.FC = () => {
 						(await response.json()) as unknown as UserDto;
 					setPreview(URL.createObjectURL(file));
 					dispatch(authActions.setUser(updated));
-				} catch {
-					setErrorMessage("Upload failed");
 				} finally {
 					setIsLoading(false);
 				}
@@ -69,15 +65,12 @@ const Test: React.FC = () => {
 			}
 
 			setIsLoading(true);
-			setErrorMessage(null);
 
 			try {
 				const response = await userApi.removeAvatar(user.id);
 				const updated: UserDto = (await response.json()) as unknown as UserDto;
 				setPreview(null);
 				dispatch(authActions.setUser(updated));
-			} catch {
-				setErrorMessage("Remove failed");
 			} finally {
 				setIsLoading(false);
 			}
@@ -85,46 +78,47 @@ const Test: React.FC = () => {
 	}, [dispatch, user]);
 
 	if (!user) {
-		return <div>Please sign in first.</div>;
+		return;
 	}
 
-	const shown = preview ?? user.avatarUrl ?? DEFAULT_AVATAR;
+	const shown = preview ?? user.avatarUrl ?? AvatarDefault;
 
 	return (
-		<div
-			style={{ fontFamily: "sans-serif", margin: "2rem auto", maxWidth: 320 }}
-		>
-			<h2>Avatar demo</h2>
-			<img
-				alt="avatar"
-				src={shown}
-				style={{
-					border: "1px solid #ccc",
-					borderRadius: "50%",
-					height: 140,
-					objectFit: "cover",
-					width: 140,
-				}}
-			/>
-			<div style={{ marginTop: "1rem" }}>
+		<div className={styles["container"]}>
+			<div className={styles["avatarWrapper"]}>
+				<img alt="avatar" className={styles["avatarImage"]} src={shown} />
+				<button
+					className={styles["changeButton"]}
+					disabled={isLoading}
+					onClick={handleOpenFilePicker}
+					type="button"
+				>
+					<img
+						alt="edit"
+						className={styles["avatarEditIcon"]}
+						src={EditPhoto}
+					/>
+				</button>
+				{(preview ?? user.avatarUrl) && (
+					<button
+						aria-label="Remove avatar"
+						className={styles["removeButton"]}
+						disabled={isLoading}
+						onClick={handleRemove}
+						type="button"
+					>
+						<img alt="remove" className={styles["removeIcon"]} src={Remove} />
+					</button>
+				)}
 				<input
 					accept="image/png,image/jpeg"
+					className={styles["hiddenInput"]}
 					disabled={isLoading}
 					onChange={handleFileChange}
+					ref={fileInputReference}
 					type="file"
 				/>
 			</div>
-			{(preview ?? user.avatarUrl) && (
-				<button
-					disabled={isLoading}
-					onClick={handleRemove}
-					style={{ marginTop: "0.5rem" }}
-				>
-					Remove avatar
-				</button>
-			)}
-			{isLoading && <div>Loading...</div>}
-			{errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
 		</div>
 	);
 };
