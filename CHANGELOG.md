@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.17.2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.17.1...v1.17.2) (2025-08-14)
+
+
+### Bug Fixes
+
+* add plan page to divider rendering condition cy-235 ([ca9e1e0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ca9e1e0cc98179cceccd9e5751a2991691211d69))
+* Dashboard and My Plan sections stretch to fill the browser cy-232 ([55f2bb2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/55f2bb2eab8e45b2bef3c586d0c6d1674bac890e))
+* fixed quiz api path cy-254 ([5bf17b5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5bf17b5801ee7bafac2e12411b78e2ad4753a0a7))
+* **frontend:** fixed quiz api path cy-254 ([f58b9d8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f58b9d8a39c37965424e31f6fe938674ac90ac47))
+* Header has incorrect background color and visible divider cy-235 ([3093a43](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3093a439099789ebf7ed1a9e6f17f47f642cf39b))
+* remove sections stretch cy-232 ([3560864](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/35608646019c60d605e9c89da98d23abe90b3280))
+
 ## [1.17.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.17.0...v1.17.1) (2025-08-13)
 
 
