@@ -99,6 +99,7 @@ const ChooseStyle: React.FC = () => {
 								alt={label}
 								aria-hidden="true"
 								className={styles["card-image"]}
+								draggable={false}
 								src={img}
 							/>
 							<span className={styles["card-text"]}>{label}</span>
