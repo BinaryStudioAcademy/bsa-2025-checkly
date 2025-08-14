@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.5.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.4.1...backend-v1.5.0) (2025-08-13)
+
+
+### Features
+
+* **frontend:** quiz frontend implementation cy-15 ([e535ae4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e535ae4e1afa514869821dc0f344615f8275b102))
+
+
+### Bug Fixes
+
+* merge conflicts with main cy-15 ([f11ad8f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f11ad8fc6c0f5c0b639efdf77813e2fb64700e01))
+
 ## [1.4.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.4.0...backend-v1.4.1) (2025-08-12)
 
 

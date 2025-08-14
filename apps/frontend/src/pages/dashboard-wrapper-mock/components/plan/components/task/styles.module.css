@@ -5,7 +5,6 @@
 	align-items: center;
 	justify-content: flex-start;
 	width: 100%;
-	padding: 0;
 	padding: var(--gutter);
 	margin: 0;
 	border: 2px solid black;
@@ -82,6 +81,10 @@
 	padding: calc(var(--space-3xs) * 1.5);
 	background: white;
 	border-radius: var(--radius-full);
+}
+
+.item-actions_buttons-wrapper button:not(:disabled):hover {
+	background: white;
 }
 
 @media (width <= 1024px) {
