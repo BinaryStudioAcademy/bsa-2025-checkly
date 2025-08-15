@@ -26,4 +26,18 @@ type IdParameter = {
 
 type IdParametersOption = APIHandlerOptions<{ params: IdParameter }>;
 
-export { type APIBodyOptions, type APIHandlerOptions, type IdParametersOption };
+type SearchQueryParameter = {
+	categoryId?: number;
+	title?: string;
+};
+
+type SearchQueryParametersOption = APIHandlerOptions<{
+	query: SearchQueryParameter;
+}>;
+
+export {
+	type APIBodyOptions,
+	type APIHandlerOptions,
+	type IdParametersOption,
+	type SearchQueryParametersOption,
+};
