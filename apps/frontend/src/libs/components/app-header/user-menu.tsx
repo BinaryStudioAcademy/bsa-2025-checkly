@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { FiLogOut, FiUser } from "react-icons/fi";
 import { MdDashboard } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 import { Plan } from "~/assets/img/side-panel/side-panel.img.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
+import { useAppDispatch } from "~/libs/hooks/hooks.js";
+import { actions as authActions } from "~/modules/auth/slices/auth.js";
 
 import { NavigationItem } from "../navigation-item/navigation-item.js";
 import styles from "./styles.module.css";
@@ -18,6 +21,12 @@ const UserMenu: React.FC<Properties> = ({ isOpen }) => {
 		styles["menu-dropdown"],
 		isOpen && styles["menu-dropdown--open"],
 	);
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+
+	const handleLogout = useCallback((): void => {
+		void dispatch(authActions.logout({ navigate }));
+	}, [dispatch, navigate]);
 
 	return (
 		<nav aria-label="User menu" className={menuDropdownClass}>
@@ -45,7 +54,8 @@ const UserMenu: React.FC<Properties> = ({ isOpen }) => {
 					buttonText="Log out"
 					buttonType="logout"
 					icon={<FiLogOut />}
-					navigateTo={AppRoute.ROOT}
+					navigateTo={AppRoute.SIGN_IN}
+					onClick={handleLogout}
 				/>
 			</ul>
 		</nav>
