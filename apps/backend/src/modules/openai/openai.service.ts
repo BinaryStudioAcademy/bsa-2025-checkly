@@ -1,5 +1,3 @@
-import OpenAI from "openai";
-
 import { config } from "~/libs/modules/config/config.js";
 
 import {
@@ -22,15 +20,14 @@ import {
 	planCreateValidationSchema,
 	taskCreateValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
+import { type OpenAIModule } from "./openai.module.js";
 
 class OpenAIService {
 	private maxAttempts: number;
-	private openai: OpenAI;
+	private openAiModule: OpenAIModule;
 
-	public constructor() {
-		this.openai = new OpenAI({
-			apiKey: config.ENV.OPEN_AI.OPEN_AI_KEY,
-		});
+	public constructor(openAiModule: OpenAIModule) {
+		this.openAiModule = openAiModule;
 		this.maxAttempts = MAX_ATTEMPTS;
 	}
 
@@ -96,7 +93,7 @@ class OpenAIService {
 		systemPrompt: string;
 		userPrompt: string;
 	}): Promise<string> {
-		const response = await this.openai.chat.completions.create({
+		const response = await this.openAiModule.client.chat.completions.create({
 			messages: [
 				{ content: userPrompt, role: OpenAIRole.USER },
 				{ content: systemPrompt, role: OpenAIRole.SYSTEM },
