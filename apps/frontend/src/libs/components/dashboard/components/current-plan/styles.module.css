@@ -15,7 +15,7 @@
 }
 
 .plan-card {
-	padding: var(--space-l) var(--space-l) 0;
+	padding: var(--space-s) var(--space-s) 0;
 	margin-bottom: var(--space-l);
 	overflow: hidden;
 	transition: all 0.3s ease-in-out;
@@ -62,7 +62,7 @@
 	.plan-card {
 		min-width: 390px;
 		max-height: 590px;
-		padding: var(--space-l) var(--space-l) 0;
+		padding: var(--space-s) var(--space-s) 0;
 	}
 }
 

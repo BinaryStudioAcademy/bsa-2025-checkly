@@ -2,7 +2,7 @@
 	--gutter: 1rem;
 	--base-radius: 1rem;
 	--space-3xs: 0.25rem;
-	--space-l: 1rem;
+	--paragraph-padding-left: 1rem;
 }
 
 .nav {
@@ -22,7 +22,7 @@
 }
 
 .nav p {
-	padding-left: var(--space-l);
+	padding-left: var(--paragraph-padding-left);
 	font: var(--font-family-nunito);
 	font-size: var(--text-size-heading-5);
 	font-weight: var(--font-weight-heading);

@@ -20,7 +20,7 @@
 .plans-grid {
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: var(--space-m);
+	gap: var(--space-s);
 	justify-items: center;
 	padding: var(--space-l) var(--space-xs);
 	transition: gap 0.3s ease-in-out;
@@ -46,7 +46,7 @@
 	height: auto;
 }
 
-@media (width >= 520px) {
+@media (width >= 540px) {
 	.plans-grid {
 		grid-template-columns: repeat(2, minmax(var(--card-width), 1fr));
 	}
@@ -58,19 +58,19 @@
 	}
 }
 
-@media (width >= 1210px) {
+@media (width >= 1310px) {
 	.plans-grid {
 		grid-template-columns: minmax(var(--card-width), 1fr);
 	}
 }
 
-@media (width >= 1410px) {
+@media (width >= 1525px) {
 	.plans-grid {
 		grid-template-columns: repeat(2, minmax(var(--card-width), 1fr));
 	}
 }
 
-@media (width >= 1640px) {
+@media (width >= 1930px) {
 	.plans-grid {
 		grid-template-columns: repeat(3, minmax(var(--card-width), 1fr));
 	}
