@@ -90,9 +90,7 @@ const PlanEdit: FC = () => {
 							onSelectPreview={handleSelectPreview}
 							previewLabel="Preview"
 							selectedItem={selectedItem}
-							showNotes={Boolean(
-								formValues.notes && formValues.notes.trim() !== "",
-							)}
+showNotes={!!formValues.notes?.trim()}
 							showPreviewButton
 						/>
 					</div>
