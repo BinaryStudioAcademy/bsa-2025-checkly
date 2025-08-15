@@ -1,2 +1,5 @@
-export { type QuizAnswersRequestDto } from "shared";
-export { type PlanDaysTaskDto } from "shared";
+export {
+	type PlanDaysTaskDto,
+	type PlanWithCategoryDto,
+	type QuizAnswersRequestDto,
+} from "shared";
