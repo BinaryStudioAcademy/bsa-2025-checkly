@@ -13,10 +13,15 @@
 }
 
 .a4-viewport {
-	position: relative;
-	width: 100%;
-	max-width: calc((210 / 297) * 800px);
-	aspect-ratio: 210 / 297;
+  --a4-page-width-mm: 210;
+  --a4-page-height-mm: 297;
+  --a4-aspect-ratio: calc(var(--a4-page-width-mm) / var(--a4-page-height-mm));
+  --a4-preview-max-height: 800px;
+
+    position: relative;
+    width: 100%;
+    max-width: calc(var(--a4-aspect-ratio) * var(--a4-preview-max-height));
+    aspect-ratio: var(--a4-aspect-ratio);
 	overflow: hidden;
 	border: var(--preview-border, none);
 	border-radius: var(--preview-border-radius, 10px);
