@@ -17,7 +17,6 @@ class PlanService implements Service {
 	public constructor(planRepository: PlanRepository) {
 		this.planRepository = planRepository;
 	}
-
 	public async create(payload: PlanCreateRequestDto): Promise<PlanResponseDto> {
 		const item = await this.planRepository.create(
 			PlanEntity.initializeNew(payload),
@@ -54,6 +53,21 @@ class PlanService implements Service {
 		const item = await this.planRepository.findWithRelations(id);
 
 		return item ? item.toObjectWithRelations() : null;
+	}
+
+	public async search(
+		userId: number,
+		filters: {
+			categoryId?: number;
+			title?: string;
+		},
+	): Promise<PlanDto[]> {
+		return await this.planRepository
+			.search({
+				userId,
+				...filters,
+			})
+			.then((plans) => plans.map((plan) => plan.toObjectWithCategory()));
 	}
 
 	public async update(

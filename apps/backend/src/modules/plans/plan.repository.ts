@@ -64,6 +64,34 @@ class PlanRepository implements Repository {
 		return plan ? PlanEntity.initialize(plan) : null;
 	}
 
+	public async search({
+		categoryId,
+		title,
+		userId,
+	}: {
+		categoryId?: number;
+		title?: string;
+		userId: number;
+	}): Promise<PlanEntity[]> {
+		let query = this.planModel
+			.query()
+			.where({ userId })
+			.withGraphFetched("days.tasks")
+			.withGraphFetched("category");
+
+		if (title) {
+			query = query.whereILike("title", `%${title}%`);
+		}
+
+		if (categoryId) {
+			query = query.where({ categoryId });
+		}
+
+		const foundPlans = await query;
+
+		return foundPlans.map((plan) => PlanEntity.initialize(plan));
+	}
+
 	public async update(
 		id: number,
 		payload: Partial<PlanModel>,

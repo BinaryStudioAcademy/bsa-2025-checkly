@@ -1,9 +1,11 @@
 import { APIPath } from "~/libs/enums/enums.js";
 import {
 	type APIBodyOptions,
+	type APIHandlerOptions,
 	type APIHandlerResponse,
 	BaseController,
 	type IdParametersOption,
+	type SearchQueryParametersOption,
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
@@ -139,10 +141,16 @@ class PlanController extends BaseController {
 		});
 
 		this.addRoute({
-			handler: (options) =>
-				this.findAllUserPlans(options as IdParametersOption),
+			handler: (options) => this.findAllUserPlans(options),
 			method: HTTPRequestMethod.GET,
 			path: PlansApiPath.ROOT,
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.searchByCategoryAndTitle(options as SearchQueryParametersOption),
+			method: HTTPRequestMethod.GET,
+			path: PlansApiPath.SEARCH,
 		});
 	}
 
@@ -189,7 +197,7 @@ class PlanController extends BaseController {
 	}
 
 	private async findAllUserPlans(
-		options: IdParametersOption,
+		options: APIHandlerOptions,
 	): Promise<APIHandlerResponse> {
 		const userId = options.user?.id;
 
@@ -239,6 +247,23 @@ class PlanController extends BaseController {
 
 		return {
 			payload: await this.planService.findWithRelations(id),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async searchByCategoryAndTitle(
+		options: SearchQueryParametersOption,
+	): Promise<APIHandlerResponse> {
+		const NO_CATEGORY_ID = -1;
+		const userId = options.user?.id;
+		const { categoryId = NO_CATEGORY_ID, title = "" } = options.query;
+		const query = {
+			categoryId,
+			title,
+		};
+
+		return {
+			payload: await this.planService.search(userId as number, query),
 			status: HTTPCode.OK,
 		};
 	}
