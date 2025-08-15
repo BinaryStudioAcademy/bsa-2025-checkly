@@ -8,6 +8,7 @@ import {
 	ChooseStyle,
 	Home,
 	NotFound,
+	PlanGeneration,
 	QuestionFlow,
 	Quiz,
 } from "./pages/pages.js";
@@ -53,7 +54,7 @@ const routes: CustomRouteObject[] = [
 			},
 			{
 				element: <Plan />,
-				handle: { access: RouteAccess.AUTHENTICATED },
+				handle: { access: RouteAccess.PUBLIC },
 				path: AppRoute.PLAN,
 			},
 		],
@@ -70,6 +71,11 @@ const routes: CustomRouteObject[] = [
 		element: <NotFound />,
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.NOT_FOUND,
+	},
+	{
+		element: <PlanGeneration />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.PLAN_GENERATION,
 	},
 ];
 

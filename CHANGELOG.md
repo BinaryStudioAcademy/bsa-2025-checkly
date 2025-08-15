@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.18.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.18.0...v1.18.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* replace await with promise enableMocking cy-259 ([1fe0513](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1fe0513c23c10cc94b03898b2848f6b38a742884))
+* replace await with promise enableMocking cy-259 ([ca08b97](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ca08b97962b4ab1bc532566e768b69f77d3d5bf7))
+
+## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.17.2...v1.18.0) (2025-08-15)
+
+
+### Features
+
+* add delay before loader finishes, speed up img slider cy-56 ([4a2e5bd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/4a2e5bd134ec1a8cd4078fa0be6db34339dcf6e9))
+* add plan generation loader cy-56 ([82aee53](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/82aee533b605d39e2056a27f2694b75b3a601c2e))
+
+
+### Bug Fixes
+
+* add random artificial delay cy-56 ([aee99f7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/aee99f726dc0dd30d2624c07c4ae5ceb628a6fb8))
+
 ## [1.17.2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.17.1...v1.17.2) (2025-08-14)
 
 

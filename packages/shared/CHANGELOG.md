@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.5.1...shared-v1.6.0) (2025-08-15)
+
+
+### Features
+
+* add plan generation loader cy-56 ([82aee53](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/82aee533b605d39e2056a27f2694b75b3a601c2e))
+
 ## [1.5.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.5.0...shared-v1.5.1) (2025-08-14)
 
 

@@ -28,6 +28,9 @@ const mainConfig = {
 			React: true,
 		},
 	},
+	rules: {
+		"sonarjs/void-use": "off",
+	},
 };
 
 /** @type {Config} */
@@ -86,6 +89,12 @@ const overridesConfigs = [
 		files: ["src/vite-env.d.ts"],
 		rules: {
 			"unicorn/prevent-abbreviations": ["off"],
+		},
+	},
+	{
+		files: ["src/index.tsx"],
+		rules: {
+			"unicorn/prefer-top-level-await": "off",
 		},
 	},
 ];
