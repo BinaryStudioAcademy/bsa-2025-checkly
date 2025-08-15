@@ -7,7 +7,7 @@ import { useA4Scale } from "~/libs/hooks/hooks.js";
 
 import styles from "./styles.module.css";
 
-interface DayTopic {
+type DayTopic = {
 	main: string;
 	weekday: string;
 }
