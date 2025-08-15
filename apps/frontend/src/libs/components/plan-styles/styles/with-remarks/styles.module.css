@@ -1,12 +1,13 @@
-@import url("./header/header.module.css");
-@import url("./day/day.module.css");
-@import url("./task/task.module.css");
+@import url("./themes/regular//header/header.module.css");
+@import url("./themes/regular/day/day.module.css");
+@import url("./themes/regular/task/task.module.css");
+@import url("../../components/notes/styles.module.css");
 
-.container--withremarks {
+.container {
 	background-color: var(--color-bg-plan-style-with-remarks);
 }
 
-.day-list--withremarks {
+.day-list {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-auto-rows: 1fr;

@@ -17,17 +17,17 @@ const Task: React.FC<Properties> = ({
 }: Properties) => {
 	const taskClasses = getClassNames(
 		styles["task"],
-		planStyleModules[inputStyle][`task--${inputStyle}`],
+		planStyleModules[inputStyle]["task"],
 	);
 
 	const taskCheckboxClasses = getClassNames(
 		styles["task-checkbox"],
-		planStyleModules[inputStyle][`task-checkbox--${inputStyle}`],
+		planStyleModules[inputStyle]["task-checkbox"],
 	);
 
 	const taskTextClasses = getClassNames(
 		styles["task-text"],
-		planStyleModules[inputStyle][`task-text--${inputStyle}`],
+		planStyleModules[inputStyle]["task-text"],
 	);
 
 	return (

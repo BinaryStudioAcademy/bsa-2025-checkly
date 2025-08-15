@@ -4,7 +4,7 @@ import { type PlanStyleOption } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
 
-const SELECTED_STYLE: PlanStyleOption = "withremarks";
+const SELECTED_STYLE: PlanStyleOption = "colourful";
 
 const TestPage: React.FC = () => {
 	return (

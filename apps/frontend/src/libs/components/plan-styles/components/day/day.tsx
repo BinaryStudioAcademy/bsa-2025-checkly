@@ -21,17 +21,17 @@ const Day: React.FC<Properties> = ({
 }: Properties) => {
 	const dayItemClasses = getClassNames(
 		styles["day-item"],
-		planStyleModules[inputStyle][`day-item--${inputStyle}`],
+		planStyleModules[inputStyle]["day-item"],
 	);
 
 	const dayTitleClasses = getClassNames(
 		styles["day-title"],
-		planStyleModules[inputStyle][`day-title--${inputStyle}`],
+		planStyleModules[inputStyle]["day-title"],
 	);
 
 	const taskListClasses = getClassNames(
 		styles["task-list"],
-		planStyleModules[inputStyle][`task-list--${inputStyle}`],
+		planStyleModules[inputStyle]["task-list"],
 	);
 
 	const weekday = getWeekday(firstDayDate as string, dayNumber);
@@ -40,15 +40,9 @@ const Day: React.FC<Properties> = ({
 		<li className={dayItemClasses} key={dayNumber}>
 			<h2 className={dayTitleClasses}>
 				{`Day ${dayNumber.toString()}`}&nbsp;
-				{inputStyle === "withremarks" && (
-					<span
-						className={
-							planStyleModules[inputStyle][`day-of-week--${inputStyle}`]
-						}
-					>
-						({weekday})
-					</span>
-				)}
+				<span className={planStyleModules[inputStyle]["day-of-week"]}>
+					({weekday})
+				</span>
 			</h2>
 			<ol className={taskListClasses}>
 				{tasks.map((task: Task) => {

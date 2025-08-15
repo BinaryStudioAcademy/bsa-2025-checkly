@@ -35,7 +35,7 @@ const PAST_PLANS = [
 		id: 1,
 		name: "Plan 1",
 		path: ExampleColourful,
-		planStyle: "colorful",
+		planStyle: "colourful",
 	},
 	{
 		id: 2,
@@ -65,7 +65,7 @@ const PAST_PLANS = [
 		id: 6,
 		name: "Plan 6",
 		path: ExampleColourful,
-		planStyle: "colorful",
+		planStyle: "colourful",
 	},
 	{
 		id: 7,
@@ -77,7 +77,7 @@ const PAST_PLANS = [
 		id: 8,
 		name: "Plan 8",
 		path: ExampleColourful,
-		planStyle: "colorful",
+		planStyle: "colourful",
 	},
 ] as const;
 

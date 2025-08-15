@@ -1,3 +1,3 @@
-type PlanStyleOption = "colorful" | "minimal" | "withremarks";
+type PlanStyleOption = "colourful" | "minimal" | "withremarks";
 
 export { type PlanStyleOption };

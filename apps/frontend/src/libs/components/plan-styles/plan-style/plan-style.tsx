@@ -15,24 +15,22 @@ const PlanStyle: React.FC<Properties> = ({
 	inputStyle,
 	view = "regular",
 }: Properties) => {
-	const withRemarks = inputStyle === "withremarks";
-
 	const containerClasses = getClassNames(
 		styles["container"],
 		styles[`${view}-view`],
 		view === "homepage" && styles[`${view}-container`],
 		view === "selection" && styles[`${view}-container`],
-		planStyleModules[inputStyle][`container--${inputStyle}`],
+		planStyleModules[inputStyle]["container"],
 	);
 
 	const planBodyClasses = getClassNames(
 		styles["plan-body"],
-		planStyleModules[inputStyle][`plan-body--${inputStyle}`],
+		planStyleModules[inputStyle]["plan-body"],
 	);
 
 	const dayListClasses = getClassNames(
 		styles["day-list"],
-		planStyleModules[inputStyle][`day-list--${inputStyle}`],
+		planStyleModules[inputStyle]["day-list"],
 	);
 
 	return (
@@ -51,7 +49,7 @@ const PlanStyle: React.FC<Properties> = ({
 							/>
 						);
 					})}
-					{withRemarks && <Notes />}
+					<Notes inputStyle={inputStyle} />
 				</ul>
 			</div>
 		</section>

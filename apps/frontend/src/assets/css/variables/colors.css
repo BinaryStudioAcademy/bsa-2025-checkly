@@ -29,9 +29,16 @@
 	--color-text-night-blue: #082a52;
 	--color-border-soft-pink: #f0cfd6;
 	--color-border-pink-red: #9a5d6a;
-	--color-bg-task-checkbox: #9a5d6a20;
+	--color-border-light-blue: #cfcfff;
+	--color-border-purple: #9a9aff;
+	--color-bg-task-checkbox-dark-blue: #9a5d6a20;
+	--color-bg-task-checkbox-purple: #9a9aff32;
 	--color-text-checked-task: #0c1c1f70;
 	--color-border-yellow: #e9dd32;
+	--color-plan-style-minimal-grey: #55556b;
+	--color-header-pink: #de71c9;
+	--color-remark-purple: #9a9aff;
+	--color-colourful-task-text: #6e627b;
 	--color-text: var(--color-text-primary);
 	--color-text-muted: var(--color-text-secondary);
 	--color-bg: var(--color-bg-light);

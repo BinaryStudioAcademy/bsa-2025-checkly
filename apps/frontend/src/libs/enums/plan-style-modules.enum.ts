@@ -1,9 +1,9 @@
-import colorfulStyles from "../components/plan-styles/styles/colorful/styles.module.css";
-import minimalStyles from "../components/plan-styles/styles/minimal/styles.module.css";
 import withRemarksStyles from "../components/plan-styles/styles/with-remarks/styles.module.css";
+import colourfulStyles from "../components/plan-styles/styles/with-remarks/themes/colourful/styles.module.css";
+import minimalStyles from "../components/plan-styles/styles/with-remarks/themes/minimal/styles.module.css";
 
 const planStyleModules = {
-	colorful: colorfulStyles,
+	colourful: colourfulStyles,
 	minimal: minimalStyles,
 	withremarks: withRemarksStyles,
 } as const;

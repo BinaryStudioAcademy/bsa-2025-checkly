@@ -1,11 +1,11 @@
 .day-item {
 	padding: calc(12px * var(--coefficient));
-	font-family: var(--font-family-tretiary);
+	font-family: var(--font-family-avenir);
 }
 
 .day-title {
 	margin-bottom: calc(14px * var(--coefficient));
-	font-family: var(--font-family-tretiary);
+	font-family: var(--font-family-avenir);
 	font-size: calc(14px * var(--coefficient));
 	font-weight: 800;
 	line-height: 1.4;

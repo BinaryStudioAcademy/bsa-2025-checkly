@@ -1,7 +1,7 @@
-.plan-header--withremarks {
+.plan-header {
 	margin-bottom: calc(10px * var(--coefficient));
 }
 
-.plan-title--withremarks {
+.plan-title {
 	color: var(--color-text-tertiary);
 }

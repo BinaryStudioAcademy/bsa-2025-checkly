@@ -12,7 +12,7 @@ const layoutExamples: LayoutExample[] = [
 		planStyle: "withremarks",
 		title: "With Remarks",
 	},
-	{ id: 2, planStyle: "colorful", title: "Colourful" },
+	{ id: 2, planStyle: "colourful", title: "Colourful" },
 	{
 		id: 3,
 		planStyle: "minimal",
@@ -25,7 +25,7 @@ const layoutExamples: LayoutExample[] = [
 	},
 	{
 		id: 5,
-		planStyle: "colorful",
+		planStyle: "colourful",
 		title: "Colourful",
 	},
 	{

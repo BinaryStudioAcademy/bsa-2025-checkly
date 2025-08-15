@@ -1,9 +1,9 @@
-.task--withremarks {
+.task {
 	display: flex;
 	align-items: center;
 }
 
-.task-checkbox--withremarks {
+.task-checkbox {
 	position: relative;
 	width: 100%;
 	max-width: calc(12px * var(--coefficient));
@@ -15,7 +15,7 @@
 	border-radius: 50%;
 }
 
-.task-checkbox--withremarks::before {
+.task-checkbox::before {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -29,11 +29,11 @@
 	transition: 120ms transform ease-in-out;
 }
 
-.task-checkbox--withremarks:checked::before {
+.task-checkbox:checked::before {
 	transform: scale(1) translate(-50%, -50%);
 }
 
-.task-text--withremarks {
+.task-text {
 	font-size: calc(10px * var(--coefficient));
 	color: var(--color-text-tertiary);
 }

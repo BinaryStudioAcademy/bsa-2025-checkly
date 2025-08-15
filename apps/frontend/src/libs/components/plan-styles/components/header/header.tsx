@@ -15,12 +15,12 @@ const PlanHeader: React.FC<Properties> = ({
 }: Properties) => {
 	const headerClasses = getClassNames(
 		styles["plan-header"],
-		planStyleModules[inputStyle][`plan-header--${inputStyle}`],
+		planStyleModules[inputStyle]["plan-header"],
 	);
 
 	const planTitleClasses = getClassNames(
 		styles["plan-title"],
-		planStyleModules[inputStyle][`plan-title--${inputStyle}`],
+		planStyleModules[inputStyle]["plan-title"],
 	);
 
 	return (

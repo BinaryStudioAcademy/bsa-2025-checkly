@@ -4,7 +4,7 @@ body {
 	min-width: 320px;
 	min-height: 100vh;
 	margin: 0;
-	font-family: var(--font-family-primary);
+	font-family: var(--font-family-nunito);
 	font-size: var(--text-body);
 	font-weight: var(--font-weight-body);
 	line-height: var(--leading);
@@ -22,12 +22,12 @@ body {
 }
 
 :is(h1, h2, h3) {
-	font-family: var(--font-family-secondary);
+	font-family: var(--font-family-onest);
 	line-height: var(--leading-fine);
 }
 
 :is(h4, h5) {
-	font-family: var(--font-family-primary);
+	font-family: var(--font-family-nunito);
 }
 
 h1 {

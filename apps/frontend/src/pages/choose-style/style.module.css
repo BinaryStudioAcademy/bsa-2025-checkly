@@ -23,7 +23,7 @@
 
 .nav p {
 	padding-left: var(--space-l);
-	font: var(--font-family-primary);
+	font: var(--font-family-nunito);
 	font-size: var(--text-size-heading-5);
 	font-weight: var(--font-weight-heading);
 	text-align: left;
@@ -99,7 +99,7 @@
 	align-items: center;
 	justify-content: center;
 	padding: 0.25rem;
-	font: var(--font-family-primary);
+	font: var(--font-family-nunito);
 	font-size: 1.4rem;
 	font-weight: var(--font-weight-heading);
 	text-align: center;

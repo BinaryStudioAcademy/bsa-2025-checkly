@@ -10,7 +10,7 @@
 }
 
 .title {
-	font-family: var(--font-family-primary);
+	font-family: var(--font-family-nunito);
 	font-size: var(--text-size-heading-3);
 	font-weight: var(--font-weight-semi-bold);
 	color: var(--color-text-primary);
