@@ -16,9 +16,9 @@ class QuizService {
 	public async handleAnswers(
 		payload: QuizAnswersRequestDto,
 	): Promise<GeneratedPlanDTO> {
-		const prompt = createPrompt(payload);
+		const userPrompt = createPrompt(payload);
 
-		const plan = await this.openAIService.generatePlan(prompt);
+		const plan = await this.openAIService.generatePlan({ userPrompt });
 
 		return plan;
 	}

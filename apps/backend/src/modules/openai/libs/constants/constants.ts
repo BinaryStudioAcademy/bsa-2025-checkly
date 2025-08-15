@@ -1,7 +1,7 @@
 export {
 	MAX_ATTEMPTS,
 	MILLISECONDS_IN_SECOND,
-	TEMPERATURE,
+	MODEL_TEMPERATURE,
 } from "./config-constants.js";
 export { PLAN_SCHEMA } from "./schemas.js";
 export { SYSTEM_PROMPT } from "./system-prompt.js";

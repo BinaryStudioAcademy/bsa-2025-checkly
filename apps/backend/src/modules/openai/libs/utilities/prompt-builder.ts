@@ -5,16 +5,16 @@ class PromptBuilder {
 		return new PromptBuilder();
 	}
 
-	public addContext(instructions: string): this {
-		this.prompt.push(`Instructions:\n${instructions}`);
-
-		return this;
-	}
-
 	public addError(message: string): this {
 		this.prompt.push(
 			`The previous response contains the following error: ${message}. Please fix it.`,
 		);
+
+		return this;
+	}
+
+	public addInstruction(instruction: string): this {
+		this.prompt.push(instruction);
 
 		return this;
 	}

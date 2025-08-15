@@ -6,15 +6,18 @@ import {
 	HTTPCode,
 	MAX_ATTEMPTS,
 	MILLISECONDS_IN_SECOND,
+	MODEL_TEMPERATURE,
 	ONE,
 	SYSTEM_PROMPT as systemPrompt,
-	TEMPERATURE,
 	ZERO,
 } from "./libs/constants/constants.js";
-import { OpenAIRole, PlanErrorMessage } from "./libs/enums/enums.js";
-import { ResponseFormats } from "./libs/enums/response-formats.js";
+import {
+	OpenAIRole,
+	PlanErrorMessage,
+	ResponseFormat,
+} from "./libs/enums/enums.js";
 import { type GeneratedPlanDTO } from "./libs/types/types.js";
-import { PromptBuilder } from "./libs/utilities/utilities.js";
+import { delay, PromptBuilder } from "./libs/utilities/utilities.js";
 import {
 	planCreateValidationSchema,
 	taskCreateValidationSchema,
@@ -31,11 +34,15 @@ class OpenAIService {
 		this.maxAttempts = MAX_ATTEMPTS;
 	}
 
-	public async generatePlan(
-		userPrompt: string,
-		attempts: number = ZERO,
-		assistantPrompt?: string,
-	): Promise<GeneratedPlanDTO> {
+	public async generatePlan({
+		assistantPrompt,
+		attempts = ZERO,
+		userPrompt,
+	}: {
+		assistantPrompt?: string;
+		attempts?: number;
+		userPrompt: string;
+	}): Promise<GeneratedPlanDTO> {
 		let answer = "";
 
 		try {
@@ -65,21 +72,18 @@ class OpenAIService {
 				throw new Error(PlanErrorMessage.GENERATION_FAILED);
 			}
 
-			await new Promise((resolve) =>
-				setTimeout(resolve, MILLISECONDS_IN_SECOND * attempts),
-			);
-
+			await delay(MILLISECONDS_IN_SECOND * attempts);
 			const errorMessage =
 				error instanceof Error ? error.message : String(error);
 
-			return await this.generatePlan(
-				userPrompt,
-				attempts + ONE,
-				PromptBuilder.create()
+			return await this.generatePlan({
+				assistantPrompt: PromptBuilder.create()
 					.addError(errorMessage)
 					.addPreviousResponse(answer)
 					.build(),
-			);
+				attempts: attempts + ONE,
+				userPrompt,
+			});
 		}
 	}
 
@@ -101,8 +105,8 @@ class OpenAIService {
 					: []),
 			],
 			model: config.ENV.OPEN_AI.TEXT_GENERATION_MODEL,
-			response_format: { type: ResponseFormats.JSON_OBJECT },
-			temperature: TEMPERATURE,
+			response_format: { type: ResponseFormat.JSON_OBJECT },
+			temperature: MODEL_TEMPERATURE,
 		});
 
 		return response.choices[ZERO]?.message.content || "{}";
@@ -133,7 +137,7 @@ class OpenAIService {
 				throw new Error(PlanErrorMessage.TASKS_FAILED);
 			}
 
-			for (const [, task] of day.tasks.entries()) {
+			for (const task of day.tasks) {
 				const taskResult = taskCreateValidationSchema
 					.pick({
 						description: true,
