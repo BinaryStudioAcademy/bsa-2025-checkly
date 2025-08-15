@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.13.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.13.0...frontend-v1.13.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* replace await with promise enableMocking cy-259 ([1fe0513](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1fe0513c23c10cc94b03898b2848f6b38a742884))
+* replace await with promise enableMocking cy-259 ([ca08b97](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ca08b97962b4ab1bc532566e768b69f77d3d5bf7))
+
 ## [1.13.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.12.2...frontend-v1.13.0) (2025-08-15)
 
 
