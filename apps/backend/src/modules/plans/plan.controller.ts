@@ -1,9 +1,11 @@
 import { APIPath } from "~/libs/enums/enums.js";
 import {
 	type APIBodyOptions,
+	type APIHandlerOptions,
 	type APIHandlerResponse,
 	BaseController,
 	type IdParametersOption,
+	type SearchQueryParametersOption,
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
@@ -210,7 +212,6 @@ class PlanController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-<<<<<<< HEAD
 				this.generate(options as APIBodyOptions<QuizAnswersRequestDto>),
 			isPublic: true,
 			method: HTTPRequestMethod.POST,
@@ -218,11 +219,21 @@ class PlanController extends BaseController {
 			validation: {
 				body: quizAnswersValidationSchema,
 			},
-=======
-				this.findAllUserPlans(options as IdParametersOption),
+		});
+
+		this.addRoute({
+			handler: (options) => this.findAllUserPlans(options),
 			method: HTTPRequestMethod.GET,
 			path: PlansApiPath.ROOT,
->>>>>>> 0a250930 (feat: + update plan module to add category cy-171)
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.searchByCategoryAndTitle(
+					options as SearchQueryParametersOption<PlanSearchQueryParameter>,
+				),
+			method: HTTPRequestMethod.GET,
+			path: PlansApiPath.SEARCH,
 		});
 	}
 
@@ -269,7 +280,7 @@ class PlanController extends BaseController {
 	}
 
 	private async findAllUserPlans(
-		options: IdParametersOption,
+		options: APIHandlerOptions,
 	): Promise<APIHandlerResponse> {
 		const userId = options.user?.id;
 
@@ -377,6 +388,23 @@ class PlanController extends BaseController {
 	): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.planService.generate(options.body),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async searchByCategoryAndTitle(
+		options: SearchQueryParametersOption,
+	): Promise<APIHandlerResponse> {
+		const NO_CATEGORY_ID = -1;
+		const userId = options.user?.id;
+		const { categoryId = NO_CATEGORY_ID, title = "" } = options.query;
+		const query = {
+			categoryId,
+			title,
+		};
+
+		return {
+			payload: await this.planService.search(userId as number, query),
 			status: HTTPCode.OK,
 		};
 	}

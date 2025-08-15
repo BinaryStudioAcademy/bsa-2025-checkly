@@ -24,7 +24,6 @@ class PlanService implements Service {
 		this.planRepository = planRepository;
 		this.openAIService = openAiService;
 	}
-
 	public async create(payload: PlanCreateRequestDto): Promise<PlanResponseDto> {
 		const item = await this.planRepository.create(
 			PlanEntity.initializeNew(payload),
@@ -71,6 +70,21 @@ class PlanService implements Service {
 		const plan = await this.openAIService.generatePlan({ userPrompt });
 
 		return plan;
+	}
+
+	public async search(
+		userId: number,
+		filters: {
+			categoryId?: number;
+			title?: string;
+		},
+	): Promise<PlanDto[]> {
+		return await this.planRepository
+			.search({
+				userId,
+				...filters,
+			})
+			.then((plans) => plans.map((plan) => plan.toObjectWithCategory()));
 	}
 
 	public async update(
