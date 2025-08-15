@@ -36,6 +36,6 @@ const Root = (): JSX.Element => {
 	);
 };
 
-await enableMocking();
-
-createRoot(document.querySelector("#root") as HTMLElement).render(<Root />);
+void enableMocking().then(() => {
+	createRoot(document.querySelector("#root") as HTMLElement).render(<Root />);
+});

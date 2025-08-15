@@ -91,6 +91,12 @@ const overridesConfigs = [
 			"unicorn/prevent-abbreviations": ["off"],
 		},
 	},
+	{
+		files: ["src/index.tsx"],
+		rules: {
+			"unicorn/prefer-top-level-await": "off",
+		},
+	},
 ];
 
 /** @type {Config[]} */
