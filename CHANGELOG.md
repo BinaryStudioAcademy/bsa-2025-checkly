@@ -1,5 +1,38 @@
 # Changelog
 
+## [1.18.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.18.0...v1.18.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* replace await with promise enableMocking cy-259 ([1fe0513](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1fe0513c23c10cc94b03898b2848f6b38a742884))
+* replace await with promise enableMocking cy-259 ([ca08b97](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ca08b97962b4ab1bc532566e768b69f77d3d5bf7))
+
+## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.17.2...v1.18.0) (2025-08-15)
+
+
+### Features
+
+* add delay before loader finishes, speed up img slider cy-56 ([4a2e5bd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/4a2e5bd134ec1a8cd4078fa0be6db34339dcf6e9))
+* add plan generation loader cy-56 ([82aee53](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/82aee533b605d39e2056a27f2694b75b3a601c2e))
+
+
+### Bug Fixes
+
+* add random artificial delay cy-56 ([aee99f7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/aee99f726dc0dd30d2624c07c4ae5ceb628a6fb8))
+
+## [1.17.2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.17.1...v1.17.2) (2025-08-14)
+
+
+### Bug Fixes
+
+* add plan page to divider rendering condition cy-235 ([ca9e1e0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ca9e1e0cc98179cceccd9e5751a2991691211d69))
+* Dashboard and My Plan sections stretch to fill the browser cy-232 ([55f2bb2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/55f2bb2eab8e45b2bef3c586d0c6d1674bac890e))
+* fixed quiz api path cy-254 ([5bf17b5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5bf17b5801ee7bafac2e12411b78e2ad4753a0a7))
+* **frontend:** fixed quiz api path cy-254 ([f58b9d8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f58b9d8a39c37965424e31f6fe938674ac90ac47))
+* Header has incorrect background color and visible divider cy-235 ([3093a43](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3093a439099789ebf7ed1a9e6f17f47f642cf39b))
+* remove sections stretch cy-232 ([3560864](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/35608646019c60d605e9c89da98d23abe90b3280))
+
 ## [1.17.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.17.0...v1.17.1) (2025-08-13)
 
 

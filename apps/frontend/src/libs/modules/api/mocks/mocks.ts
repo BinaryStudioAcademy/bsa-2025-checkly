@@ -2,10 +2,7 @@ import { AppEnvironment } from "~/libs/enums/enums.js";
 import { config } from "~/libs/modules/config/config.js";
 
 async function enableMocking(): Promise<ServiceWorkerRegistration | undefined> {
-	if (
-		config.ENV.APP.ENVIRONMENT === AppEnvironment.PRODUCTION ||
-		config.ENV.APP.ENVIRONMENT === AppEnvironment.DEVELOPMENT
-	) {
+	if (config.ENV.APP.ENVIRONMENT !== AppEnvironment.LOCAL) {
 		return;
 	}
 
