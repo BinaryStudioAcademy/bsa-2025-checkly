@@ -10,7 +10,7 @@ import styles from "./styles.module.css";
 type DayTopic = {
 	main: string;
 	weekday: string;
-}
+};
 
 const parseDayTopic = (topic: string): DayTopic => {
 	const TOPIC_WITH_WEEKDAY_REGEX = /^(.+?) \((.+?)\)$/;
