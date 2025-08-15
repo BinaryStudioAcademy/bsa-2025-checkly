@@ -6,22 +6,22 @@
 .plan-container {
 	--cluster-vertical-alignment: flex-start;
 	--cluster-horizontal-alignment: center;
-	
+
 	width: 100%;
 	background: var(--page-bg, #ffffff);
 	border: 1px solid var(--border-color, #d3c4ae);
 }
 
 .a4-viewport {
-  --a4-page-width-mm: 210;
-  --a4-page-height-mm: 297;
-  --a4-aspect-ratio: calc(var(--a4-page-width-mm) / var(--a4-page-height-mm));
-  --a4-preview-max-height: 800px;
+	--a4-page-width-mm: 210;
+	--a4-page-height-mm: 297;
+	--a4-aspect-ratio: calc(var(--a4-page-width-mm) / var(--a4-page-height-mm));
+	--a4-preview-max-height: 800px;
 
-    position: relative;
-    width: 100%;
-    max-width: calc(var(--a4-aspect-ratio) * var(--a4-preview-max-height));
-    aspect-ratio: var(--a4-aspect-ratio);
+	position: relative;
+	width: 100%;
+	max-width: calc(var(--a4-aspect-ratio) * var(--a4-preview-max-height));
+	aspect-ratio: var(--a4-aspect-ratio);
 	overflow: hidden;
 	border: var(--preview-border, none);
 	border-radius: var(--preview-border-radius, 10px);
