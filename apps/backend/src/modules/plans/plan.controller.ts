@@ -137,6 +137,13 @@ class PlanController extends BaseController {
 				body: planCreateValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.findAllUserPlans(options as IdParametersOption),
+			method: HTTPRequestMethod.GET,
+			path: PlansApiPath.ROOT,
+		});
 	}
 
 	/**
@@ -181,6 +188,16 @@ class PlanController extends BaseController {
 		};
 	}
 
+	private async findAllUserPlans(
+		options: IdParametersOption,
+	): Promise<APIHandlerResponse> {
+		const userId = options.user?.id;
+
+		return {
+			payload: await this.planService.findAllUserPlans(userId as number),
+			status: HTTPCode.OK,
+		};
+	}
 	/**
 	 * @swagger
 	 * /plans/{id}:

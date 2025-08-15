@@ -6,4 +6,5 @@ export {
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
 	type PlanUpdateRequestDto,
+	type PlanWithCategoryDto,
 } from "shared";

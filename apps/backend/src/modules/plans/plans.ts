@@ -14,5 +14,6 @@ export {
 	type PlanCreateRequestDto,
 	type PlanDayDto,
 	type PlanDaysTaskDto,
+	type PlanWithCategoryDto,
 } from "./libs/types/types.js";
 export { planCreateValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
