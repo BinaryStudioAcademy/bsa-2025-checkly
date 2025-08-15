@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.5.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.5.0...backend-v1.5.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* **backend:** changed seed for questions cy-251 ([1d83e82](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1d83e8288b097d9b183b972dbbca8e123c834aef))
+* changed seed for questions cy-251 ([cd9cc8e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cd9cc8e2c5ed37f86f0789e5321e1ce0795c86e2))
+* **frontend:** fix conflicts with main branch cy-169 ([7f9d38d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7f9d38dbbbc0f78c9c3add19d269ef773653b751))
+
 ## [1.5.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.4.1...backend-v1.5.0) (2025-08-13)
 
 
