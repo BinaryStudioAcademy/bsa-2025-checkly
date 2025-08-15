@@ -4,25 +4,14 @@
 	background-color: var(--color-bg-white);
 }
 
-/* Header styles */
-
-h1.plan-title {
-	font-family: var(--font-family-caveat);
-}
-
 /* Day styles */
 
 .day-item {
-	border-block-color: var(--color-plan-style-minimal-grey);
+	border: none;
 }
 
-.day-item:nth-child(odd) {
-	border-right-color: var(--color-bg-black);
-	border-left-color: var(--color-plan-style-minimal-grey);
-}
-
-.day-item:nth-child(even) {
-	border-right-color: var(--color-plan-style-minimal-grey);
+.day-item:nth-child(n) {
+	border: none;
 }
 
 h2.day-title {
@@ -32,8 +21,6 @@ h2.day-title {
 }
 
 .day-of-week {
-	font-family: var(--font-family-caveat);
-	font-size: calc(18px * var(--coefficient));
 	color: var(--color-plan-style-minimal-grey);
 }
 
@@ -45,27 +32,13 @@ h2.day-title {
 }
 
 .task-text {
-	font-family: var(--font-family-caveat);
-	font-size: calc(12px * var(--coefficient));
-	color: #55556b;
+	color: var(--color-plan-style-minimal-grey);
 }
 
 /* Notes styles */
 
-li.notes {
-	font-family: var(--font-family-caveat);
-	font-size: calc(12px * var(--coefficient));
-}
-
 li.notes:nth-child(odd) {
-	border-right-color: var(--color-plan-style-minimal-grey);
-	border-bottom-color: var(--color-plan-style-minimal-grey);
-	border-left-color: var(--color-plan-style-minimal-grey);
-}
-
-h2.notes-title {
-	font-family: var(--font-family-caveat);
-	font-size: calc(14px * var(--coefficient));
+	border: none;
 }
 
 p.notes-text {
