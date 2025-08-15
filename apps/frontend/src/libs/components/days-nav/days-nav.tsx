@@ -60,7 +60,7 @@ const DaysNav: FC<Properties> = ({
 					const isSelected = selectedItem === index;
 
 					return (
-						<li key={item.id || index}>
+						<li key={item.id}>
 							<Button
 								className={getClassNames(
 									styles["navButton"],
