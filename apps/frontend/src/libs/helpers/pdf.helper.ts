@@ -42,6 +42,7 @@ const generatePdfFromElement = async (
 		allowTaint: false,
 		background: options.background,
 		logging: false,
+		scale: 3,
 		useCORS: options.useCORS,
 	});
 
