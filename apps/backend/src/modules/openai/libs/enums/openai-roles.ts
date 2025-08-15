@@ -1,7 +1,7 @@
-const OpenAIRoles = {
+const OpenAIRole = {
 	ASSISTANT: "assistant",
 	SYSTEM: "system",
 	USER: "user",
 } as const;
 
-export { OpenAIRoles };
+export { OpenAIRole };

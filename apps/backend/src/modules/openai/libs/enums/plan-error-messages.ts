@@ -1,4 +1,4 @@
-const PlanErrorMessages = {
+const PlanErrorMessage = {
 	DAYS_FAILED: "Days must not be an empty array.",
 	GENERATION_FAILED: "Failed to generate plan.",
 	OPENAI_FAILED:
@@ -9,4 +9,4 @@ const PlanErrorMessages = {
 		"Tasks should be not empty and day number must correspond to the proper day index.",
 } as const;
 
-export { PlanErrorMessages };
+export { PlanErrorMessage };

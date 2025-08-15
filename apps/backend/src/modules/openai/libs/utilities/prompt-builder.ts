@@ -1,17 +1,17 @@
 class PromptBuilder {
 	private prompt: string[] = [];
 
-	static create(): PromptBuilder {
+	public static create(): PromptBuilder {
 		return new PromptBuilder();
 	}
 
-	addContext(instructions: string): this {
+	public addContext(instructions: string): this {
 		this.prompt.push(`Instructions:\n${instructions}`);
 
 		return this;
 	}
 
-	addError(message: string): this {
+	public addError(message: string): this {
 		this.prompt.push(
 			`The previous response contains the following error: ${message}. Please fix it.`,
 		);
@@ -19,13 +19,13 @@ class PromptBuilder {
 		return this;
 	}
 
-	addPreviousResponse(response: string): this {
+	public addPreviousResponse(response: string): this {
 		this.prompt.push(`Previous response:\n${response}`);
 
 		return this;
 	}
 
-	build(): string {
+	public build(): string {
 		return this.prompt.join("\n");
 	}
 }

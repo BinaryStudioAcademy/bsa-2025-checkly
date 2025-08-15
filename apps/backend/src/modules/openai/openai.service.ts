@@ -11,7 +11,7 @@ import {
 	TEMPERATURE,
 	ZERO,
 } from "./libs/constants/constants.js";
-import { OpenAIRoles, PlanErrorMessages } from "./libs/enums/enums.js";
+import { OpenAIRole, PlanErrorMessage } from "./libs/enums/enums.js";
 import { ResponseFormats } from "./libs/enums/response-formats.js";
 import { type GeneratedPlanDTO } from "./libs/types/types.js";
 import { PromptBuilder } from "./libs/utilities/utilities.js";
@@ -58,11 +58,11 @@ class OpenAIService {
 				errorStatus === HTTPCode.UNAUTHORIZED ||
 				errorStatus === HTTPCode.NOT_FOUND
 			) {
-				throw new Error(PlanErrorMessages.OPENAI_FAILED);
+				throw new Error(PlanErrorMessage.OPENAI_FAILED);
 			}
 
 			if (attempts + ONE >= this.maxAttempts) {
-				throw new Error(PlanErrorMessages.GENERATION_FAILED);
+				throw new Error(PlanErrorMessage.GENERATION_FAILED);
 			}
 
 			await new Promise((resolve) =>
@@ -94,10 +94,10 @@ class OpenAIService {
 	}): Promise<string> {
 		const response = await this.openai.chat.completions.create({
 			messages: [
-				{ content: userPrompt, role: OpenAIRoles.USER },
-				{ content: systemPrompt, role: OpenAIRoles.SYSTEM },
+				{ content: userPrompt, role: OpenAIRole.USER },
+				{ content: systemPrompt, role: OpenAIRole.SYSTEM },
 				...(assistantPrompt
-					? [{ content: assistantPrompt, role: OpenAIRoles.ASSISTANT }]
+					? [{ content: assistantPrompt, role: OpenAIRole.ASSISTANT }]
 					: []),
 			],
 			model: config.ENV.OPEN_AI.TEXT_GENERATION_MODEL,
@@ -114,14 +114,14 @@ class OpenAIService {
 			.safeParse(generetedPlan);
 
 		if (!planResults.success) {
-			throw new Error(PlanErrorMessages.PLAN_FAILED);
+			throw new Error(PlanErrorMessage.PLAN_FAILED);
 		}
 
 		if (
 			!Array.isArray(generetedPlan.days) ||
 			generetedPlan.days.length === ZERO
 		) {
-			throw new Error(PlanErrorMessages.DAYS_FAILED);
+			throw new Error(PlanErrorMessage.DAYS_FAILED);
 		}
 
 		for (const [dayIndex, day] of generetedPlan.days.entries()) {
@@ -130,7 +130,7 @@ class OpenAIService {
 				day.tasks.length === ZERO ||
 				day.dayNumber != dayIndex + ONE
 			) {
-				throw new Error(PlanErrorMessages.TASKS_FAILED);
+				throw new Error(PlanErrorMessage.TASKS_FAILED);
 			}
 
 			for (const [, task] of day.tasks.entries()) {
@@ -144,7 +144,7 @@ class OpenAIService {
 					.safeParse(task);
 
 				if (!taskResult.success) {
-					throw new Error(PlanErrorMessages.TASK_FAILED);
+					throw new Error(PlanErrorMessage.TASK_FAILED);
 				}
 			}
 		}
