@@ -144,7 +144,7 @@ class PlanEntity implements Entity {
 
 	public toObjectWithCategory(): PlanWithCategoryDto {
 		return {
-			...this.toObject(),
+			...this.toObjectWithRelations(),
 			category: this.category,
 		};
 	}
