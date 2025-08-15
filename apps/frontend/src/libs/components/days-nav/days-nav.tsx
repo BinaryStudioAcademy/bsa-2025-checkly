@@ -44,11 +44,9 @@ const DaysNav: FC<Properties> = ({
 }) => {
 	const handleClick = useCallback(
 		(index: SelectedItemType) => (): void => {
-			if (index === "preview" && onSelectPreview) {
-				onSelectPreview();
-			} else {
-				onSelectItem(index);
-			}
+			(index === "preview" && onSelectPreview)
+				? onSelectPreview()
+				: onSelectItem(index);
 		},
 		[onSelectItem, onSelectPreview],
 	);
