@@ -254,9 +254,10 @@ class PlanController extends BaseController {
 	private async searchByCategoryAndTitle(
 		options: SearchQueryParametersOption,
 	): Promise<APIHandlerResponse> {
-		const NO_CATEGORY_ID = -1;
+		const NO_CATEGORY_ID = 0;
 		const userId = options.user?.id;
 		const { categoryId = NO_CATEGORY_ID, title = "" } = options.query;
+
 		const query = {
 			categoryId,
 			title,
