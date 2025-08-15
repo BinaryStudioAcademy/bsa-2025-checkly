@@ -4,4 +4,5 @@ export {
 	type APIHandlerOptions,
 	type APIHandlerResponse,
 	type IdParametersOption,
+	type SearchQueryParametersOption,
 } from "./libs/types/types.js";

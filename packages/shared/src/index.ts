@@ -36,6 +36,10 @@ export {
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
 export {
+	PlanCategoriesApiPath,
+	type PlanCategoryDto,
+} from "./modules/plan-categories/plan-categories.js";
+export {
 	type PlanDayCreateRequestDto,
 	planDayCreateValidationSchema,
 	type PlanDayGetAllResponseDto,
@@ -52,6 +56,7 @@ export {
 	type PlanResponseDto,
 	PlansApiPath,
 	type PlanUpdateRequestDto,
+	type PlanWithCategoryDto,
 } from "./modules/plans/plans.js";
 export {
 	type QuestionDto,

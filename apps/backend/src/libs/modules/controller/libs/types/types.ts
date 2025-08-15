@@ -2,6 +2,7 @@ export {
 	type APIBodyOptions,
 	type APIHandlerOptions,
 	type IdParametersOption,
+	type SearchQueryParametersOption,
 } from "./api-handler-options.type.js";
 export { type APIHandlerResponse } from "./api-handler-response.type.js";
 export { type APIHandler } from "./api-handler.type.js";
