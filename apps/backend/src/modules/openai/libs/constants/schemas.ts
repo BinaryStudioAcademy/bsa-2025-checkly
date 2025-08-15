@@ -1,6 +1,6 @@
-const TASK_SCHEMA = `{
-"title": string, "description": string, "executionTimeType": "afternoon" | "evening" | "morning" | null, "order": number
-}`;
+import { ExecutionTimeType } from "../types/types.js";
+
+const TASK_SCHEMA = `{"title": string, "description": string, "executionTimeType": "${ExecutionTimeType.AFTERNOON}" | "${ExecutionTimeType.MORNING}" | "${ExecutionTimeType.EVENING}" | null, "order": number}`;
 
 const DAY_SCHEMA = `{"dayNumber": number,"tasks": [${TASK_SCHEMA}]}`;
 
