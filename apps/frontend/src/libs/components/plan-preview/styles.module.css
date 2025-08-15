@@ -4,9 +4,9 @@
 }
 
 .plan-container {
-	display: flex;
-	align-items: flex-start;
-	justify-content: center;
+	--cluster-vertical-alignment: flex-start;
+	--cluster-horizontal-alignment: center;
+	
 	width: 100%;
 	background: var(--page-bg, #ffffff);
 	border: 1px solid var(--border-color, #d3c4ae);
@@ -39,8 +39,8 @@
 
 .plan-title {
 	margin: 0 0 32px;
-	font-size: 48px;
-	font-weight: 900;
+	font-size: var(--text-size-heading-1);
+	font-weight: var(--font-weight-heading);
 	color: #4a4a4a;
 	text-transform: uppercase;
 }
@@ -55,20 +55,20 @@
 
 .day-block,
 .notes-section {
-	padding: var(--day-block-padding, 16px);
+	padding: var(--day-block-padding, var(--space-s));
 	border: var(--day-block-border, 1px solid rgb(0 0 0 / 0%));
 	border-radius: var(--day-block-border-radius, 8px);
 }
 
 .day-topic {
-	margin: 0 0 12px;
-	font-size: 20px;
-	font-weight: 800;
+	margin: 0 0 var(--space-s);
+	font-size: var(--text-body);
+	font-weight: var(--font-weight-heading-semi-bold);
 	color: var(--topic-color, #4a4a4a);
 }
 
 .day-weekday {
-	font-weight: 600;
+	font-weight: var(--font-weight-semi-bold);
 	color: var(--topic-weekday-color, var(--topic-color));
 }
 
@@ -81,7 +81,7 @@
 
 .activity-item {
 	display: flex;
-	gap: 12px;
+	gap: var(--space-s);
 	align-items: flex-start;
 	margin: 6px 0;
 	line-height: 1.4;
