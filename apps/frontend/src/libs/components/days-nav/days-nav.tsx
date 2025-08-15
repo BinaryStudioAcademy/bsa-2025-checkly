@@ -42,7 +42,7 @@ const DaysNav: FC<Properties> = ({
 	showNotes = false,
 	showPreviewButton = false,
 }) => {
-	const handleClick = useCallback(
+	const handleSelectItem = useCallback(
 		(index: SelectedItemType) => (): void => {
 			(index === "preview" && onSelectPreview)
 				? onSelectPreview()
@@ -53,7 +53,7 @@ const DaysNav: FC<Properties> = ({
 
 	return (
 		<nav className={getClassNames(styles["nav"], className)}>
-			<ul className={styles["navList"]}>
+			<ul className={getClassNames("cluster", styles["navList"])}>
 				{items.map((item, index) => {
 					const isSelected = selectedItem === index;
 
@@ -65,7 +65,7 @@ const DaysNav: FC<Properties> = ({
 									isSelected && styles["active"],
 								)}
 								label={item.label}
-								onClick={handleClick(index)}
+								onClick={handleSelectItem(index)}
 								variant="transparent"
 							/>
 							{isSelected && renderSelectedIcon?.(index)}
@@ -83,7 +83,7 @@ const DaysNav: FC<Properties> = ({
 								selectedItem === "notes" && styles["active"],
 							)}
 							label={notesLabel}
-							onClick={handleClick("notes")}
+							onClick={handleSelectItem("notes")}
 							variant="transparent"
 						/>
 					</li>
@@ -97,7 +97,7 @@ const DaysNav: FC<Properties> = ({
 								selectedItem === "preview" && styles["active"],
 							)}
 							label={previewLabel}
-							onClick={handleClick("preview")}
+							onClick={handleSelectItem("preview")}
 							variant="transparent"
 						/>
 					</li>
