@@ -4,16 +4,19 @@ import { type PlanModel } from "~/modules/plans/plan.model.js";
 
 class PlanRepository implements Repository {
 	private planModel: typeof PlanModel;
+
 	public constructor(planModel: typeof PlanModel) {
 		this.planModel = planModel;
 	}
 
 	public async create(entity: PlanEntity): Promise<PlanEntity> {
-		const { duration, intensity, title, userId } = entity.toNewObject();
+		const { categoryId, duration, intensity, title, userId } =
+			entity.toNewObject();
 
 		const plan = await this.planModel
 			.query()
 			.insert({
+				categoryId,
 				duration,
 				intensity,
 				title,
@@ -41,6 +44,15 @@ class PlanRepository implements Repository {
 		const plans = await this.planModel.query().execute();
 
 		return plans.map((plan) => PlanEntity.initialize(plan));
+	}
+
+	public async findAllUserPlans(userId: number): Promise<PlanEntity[]> {
+		return await this.planModel
+			.query()
+			.where({ userId })
+			.withGraphFetched("days.tasks")
+			.withGraphFetched("category")
+			.then((plans) => plans.map((plan) => PlanEntity.initialize(plan)));
 	}
 
 	public async findWithRelations(id: number): Promise<null | PlanEntity> {

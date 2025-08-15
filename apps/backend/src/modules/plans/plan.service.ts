@@ -51,6 +51,12 @@ class PlanService implements Service {
 		};
 	}
 
+	public async findAllUserPlans(userId: number): Promise<PlanDto[]> {
+		return await this.planRepository
+			.findAllUserPlans(userId)
+			.then((plan) => plan.map((item) => item.toObjectWithCategory()));
+	}
+
 	public async findWithRelations(id: number): Promise<null | PlanDaysTaskDto> {
 		const item = await this.planRepository.findWithRelations(id);
 

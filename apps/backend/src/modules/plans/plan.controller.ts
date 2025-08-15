@@ -210,6 +210,7 @@ class PlanController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
+<<<<<<< HEAD
 				this.generate(options as APIBodyOptions<QuizAnswersRequestDto>),
 			isPublic: true,
 			method: HTTPRequestMethod.POST,
@@ -217,6 +218,11 @@ class PlanController extends BaseController {
 			validation: {
 				body: quizAnswersValidationSchema,
 			},
+=======
+				this.findAllUserPlans(options as IdParametersOption),
+			method: HTTPRequestMethod.GET,
+			path: PlansApiPath.ROOT,
+>>>>>>> 0a250930 (feat: + update plan module to add category cy-171)
 		});
 	}
 
@@ -262,6 +268,16 @@ class PlanController extends BaseController {
 		};
 	}
 
+	private async findAllUserPlans(
+		options: IdParametersOption,
+	): Promise<APIHandlerResponse> {
+		const userId = options.user?.id;
+
+		return {
+			payload: await this.planService.findAllUserPlans(userId as number),
+			status: HTTPCode.OK,
+		};
+	}
 	/**
 	 * @swagger
 	 * /plans/{id}:
