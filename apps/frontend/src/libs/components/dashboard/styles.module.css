@@ -1,13 +1,20 @@
-.content {
+.dashboard {
+	display: flex;
+	flex: 1;
+	justify-content: center;
 	height: 100%;
-	padding: var(--space-m);
 	overflow-x: auto;
-	transition: padding 0.3s ease-in-out;
-}
 
-.light-background {
 	--grid-color: var(--color-light-grey);
 	--grid-line: 1px;
+}
+
+.content {
+	width: 100%;
+	max-width: 1300px;
+	height: fit-content;
+	padding: var(--space-m);
+	transition: padding 0.3s ease-in-out;
 }
 
 .content-grid {

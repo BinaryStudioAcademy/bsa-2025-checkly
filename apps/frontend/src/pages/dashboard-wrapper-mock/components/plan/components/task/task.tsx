@@ -17,6 +17,7 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 		<div
 			className={getClassNames(
 				styles["content__tasks-item"],
+				"wrapper",
 				styles[`color-${String(indexItem)}`],
 			)}
 			key={indexItem}

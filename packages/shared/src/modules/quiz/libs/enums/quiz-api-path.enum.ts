@@ -1,5 +1,5 @@
 const QuizApiPath = {
-	ROOT: "/",
+	ROOT: "",
 } as const;
 
 export { QuizApiPath };

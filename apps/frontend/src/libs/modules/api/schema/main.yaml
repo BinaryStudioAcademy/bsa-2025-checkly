@@ -12,6 +12,10 @@ components:
       bearerFormat: JWT
 
 paths:
+  /auth/me:
+    get:
+      $ref: "./endpoints/auth.yaml#/me"
+
   /auth/login:
     post:
       $ref: "./endpoints/auth.yaml#/login"
@@ -19,3 +23,7 @@ paths:
   /auth/register:
     post:
       $ref: "./endpoints/auth.yaml#/register"
+
+  /plans/generate:
+    post:
+      $ref: "./endpoints/plan.yaml#/generate"

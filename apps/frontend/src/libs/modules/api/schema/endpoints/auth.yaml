@@ -88,3 +88,13 @@ register:
             $ref: "#/schemas/AuthResponse"
     "400":
       $ref: "../shared/responses.yaml#/BadRequestError"
+
+me:
+  summary: Get current logged-in user
+  responses:
+    "200":
+      description: Current user retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: "#/schemas/User"
