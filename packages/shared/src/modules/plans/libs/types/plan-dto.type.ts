@@ -18,7 +18,7 @@ type PlanDto = {
 	userId: number;
 };
 
-type PlanWithCategoryDto = PlanDto & {
+type PlanWithCategoryDto = PlanDaysTaskDto & {
 	category?: PlanCategoryDto | undefined;
 };
 
