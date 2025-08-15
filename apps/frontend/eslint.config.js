@@ -28,6 +28,9 @@ const mainConfig = {
 			React: true,
 		},
 	},
+	rules: {
+		"sonarjs/void-use": "off",
+	},
 };
 
 /** @type {Config} */
