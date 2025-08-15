@@ -1,3 +1,5 @@
+import { buildQueryString } from "shared/src/libs/helpers/helpers.js";
+
 import { APIPath, ContentType, HTTPRequestMethod } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
@@ -5,7 +7,10 @@ import { type Storage } from "~/libs/modules/storage/storage.js";
 import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
 import { PlansApiPath } from "./libs/enums/enums.js";
-import { type QuizAnswersRequestDto } from "./libs/types/types.js";
+import {
+	type PlanWithCategoryDto,
+	type QuizAnswersRequestDto,
+} from "./libs/types/types.js";
 
 type Constructor = {
 	baseUrl: string;
@@ -32,6 +37,51 @@ class PlanApi extends BaseHTTPApi {
 		);
 
 		return await response.json<PlanDaysTaskDto>();
+	}
+
+	public async getAllUserPlans(): Promise<PlanDaysTaskDto[]> {
+		const response = await this.load(
+			this.getFullEndpoint(PlansApiPath.ROOT, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: HTTPRequestMethod.GET,
+			},
+		);
+
+		return await response.json<PlanDaysTaskDto[]>();
+	}
+
+	public async search({
+		categoryId,
+		title,
+	}: {
+		categoryId?: number | undefined;
+		title?: string | undefined;
+	}): Promise<PlanWithCategoryDto[]> {
+		const queryParameters: Record<string, string> = {};
+
+		if (title) {
+			queryParameters["title"] = title;
+		}
+
+		if (categoryId) {
+			queryParameters["categoryId"] = categoryId.toString();
+		}
+
+		const endpoint = this.getFullEndpoint(PlansApiPath.SEARCH, {});
+		const queryString = buildQueryString(queryParameters);
+		const endpointWithQuery = queryString
+			? `${endpoint}?${queryString}`
+			: endpoint;
+
+		const response = await this.load(endpointWithQuery, {
+			contentType: ContentType.JSON,
+			hasAuth: true,
+			method: HTTPRequestMethod.GET,
+		});
+
+		return await response.json<PlanWithCategoryDto[]>();
 	}
 }
 
