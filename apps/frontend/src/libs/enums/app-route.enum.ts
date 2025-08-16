@@ -4,6 +4,7 @@ const AppRoute = {
 	NOT_FOUND: "*",
 	OVERVIEW_PAGE: "/plan-style-overview",
 	PLAN: "/plan",
+	PLAN_GENERATION: "/plan/generation",
 	PROFILE: "/profile",
 	QUIZ: "/quiz",
 	QUIZ_QUESTIONS: "/quiz/questions",

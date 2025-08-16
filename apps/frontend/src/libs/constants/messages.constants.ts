@@ -1,4 +1,7 @@
 const MESSAGES = {
+	AUTH: {
+		LOGOUT_FAILED: "Logout failed. Please try again.",
+	},
 	DOWNLOAD: {
 		CLEANUP_FAILED: "Error restoring original state after download.",
 		FAILED: "Download failed",
