@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 
 const CurrentPlan: FC = () => {
 	return (
-		<div className={getClassNames("cluster", styles["container"])}>
+		<div className={getClassNames("flow-loose", styles["container"])}>
 			<h2 className={styles["title"]}>Current active plan</h2>
 			<div className={styles["plan-card"]}>
 				<img
@@ -18,14 +18,11 @@ const CurrentPlan: FC = () => {
 					src={ExampleWithRemarksBig}
 				/>
 			</div>
-			<Link
-				asButtonSize="small"
-				asButtonVariant="primary"
-				className={getClassNames(styles["continue-button"])}
-				to={AppRoute.PLAN}
-			>
-				Continue
-			</Link>
+			<div className={styles["button-wrapper"]}>
+				<Link asButtonSize="small" asButtonVariant="primary" to={AppRoute.PLAN}>
+					Continue
+				</Link>
+			</div>
 		</div>
 	);
 };
