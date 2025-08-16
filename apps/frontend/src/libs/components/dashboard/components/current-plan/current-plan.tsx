@@ -3,12 +3,13 @@ import { type FC } from "react";
 import { ExampleWithRemarksBig } from "~/assets/img/shared/illustrations/layouts/layouts.img.js";
 import { Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
+import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import styles from "./styles.module.css";
 
 const CurrentPlan: FC = () => {
 	return (
-		<div className={styles["container"]}>
+		<div className={getClassNames("cluster", styles["container"])}>
 			<h2 className={styles["title"]}>Current active plan</h2>
 			<div className={styles["plan-card"]}>
 				<img
@@ -17,11 +18,14 @@ const CurrentPlan: FC = () => {
 					src={ExampleWithRemarksBig}
 				/>
 			</div>
-			<div className={styles["continue-button"]}>
-				<Link asButtonSize="small" asButtonVariant="primary" to={AppRoute.PLAN}>
-					Continue
-				</Link>
-			</div>
+			<Link
+				asButtonSize="small"
+				asButtonVariant="primary"
+				className={getClassNames(styles["continue-button"])}
+				to={AppRoute.PLAN}
+			>
+				Continue
+			</Link>
 		</div>
 	);
 };
