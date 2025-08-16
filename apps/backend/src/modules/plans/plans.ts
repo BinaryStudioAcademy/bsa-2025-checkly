@@ -14,11 +14,9 @@ export {
 	type PlanCreateRequestDto,
 	type PlanDayDto,
 	type PlanDaysTaskDto,
-<<<<<<< HEAD
-	type QuizAnswersRequestDto,
-=======
+	type PlanSearchQueryParameter,
 	type PlanWithCategoryDto,
->>>>>>> 0a250930 (feat: + update plan module to add category cy-171)
+	type QuizAnswersRequestDto,
 } from "./libs/types/types.js";
 export {
 	planCreateValidationSchema,

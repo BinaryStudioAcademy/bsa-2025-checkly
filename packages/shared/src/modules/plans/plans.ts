@@ -5,6 +5,7 @@ export {
 	type PlanDto,
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
+	type PlanSearchQueryParameter,
 	type PlanUpdateRequestDto,
 	type PlanWithCategoryDto,
 } from "./libs/types/types.js";

@@ -63,6 +63,7 @@ export {
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
 	PlansApiPath,
+	type PlanSearchQueryParameter,
 	type PlanUpdateRequestDto,
 	type PlanWithCategoryDto,
 } from "./modules/plans/plans.js";

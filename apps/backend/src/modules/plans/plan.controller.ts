@@ -13,6 +13,7 @@ import { type PlanService } from "~/modules/plans/plan.service.js";
 import {
 	type PlanCreateRequestDto,
 	planCreateValidationSchema,
+	type PlanSearchQueryParameter,
 	type QuizAnswersRequestDto,
 	quizAnswersValidationSchema,
 } from "~/modules/plans/plans.js";
@@ -393,7 +394,7 @@ class PlanController extends BaseController {
 	}
 
 	private async searchByCategoryAndTitle(
-		options: SearchQueryParametersOption,
+		options: SearchQueryParametersOption<PlanSearchQueryParameter>,
 	): Promise<APIHandlerResponse> {
 		const NO_CATEGORY_ID = 0;
 		const userId = options.user?.id;
