@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.20.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.19.0...v1.20.0) (2025-08-16)
+
+
+### Features
+
+* Add 3 more plans styles cy-160 ([631e4ee](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/631e4eeb0ce5456758e184f9ec2daf296e7a13e7))
+
 ## [1.19.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.18.1...v1.19.0) (2025-08-15)
 
 
