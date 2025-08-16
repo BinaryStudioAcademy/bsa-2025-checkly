@@ -3,13 +3,11 @@ import { useEffect, useState } from "react";
 import { getAllUserPlans, searchPlan } from "~/modules/plans/slices/actions.js";
 
 import { useAppDispatch, useAppSelector, useDebounce } from "../hooks.js";
-import { DataStatus } from "./libs/enums/enums.js";
+import { DataStatus, ZERO_CATEGORY_ID } from "./libs/enums/enums.js";
 import {
 	type PlanDaysTaskDto,
 	type PlanSearchQueryParameter,
 } from "./libs/types/types.js";
-
-const ZERO_CATEGORY_ID = 0;
 
 const prepareSearchPayload = (
 	categoryId?: number,

@@ -1,1 +1,1 @@
-export { DataStatus } from "shared";
+export { DataStatus, ZERO_CATEGORY_ID } from "shared";
