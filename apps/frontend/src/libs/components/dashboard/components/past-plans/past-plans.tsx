@@ -54,7 +54,7 @@ const PastPlans: FC = () => {
 
 	useEffect(() => {
 		const isCategoryIdSelected = categoryId !== ZERO_CATEGORY_ID;
-		const hasFilters = isCategoryIdSelected && !title.trim();
+		const hasFilters = isCategoryIdSelected || !!title.trim();
 
 		if (hasFilters) {
 			void dispatch(
@@ -93,7 +93,7 @@ const PastPlans: FC = () => {
 					styles["search-plans-container"],
 				)}
 			>
-				<div className="flow">
+				<div className={getClassNames("flow", styles["search-plans-item"])}>
 					<label htmlFor="category-select">Select category:</label>
 					<select
 						className={styles["search-select"]}
@@ -113,7 +113,7 @@ const PastPlans: FC = () => {
 					</select>
 				</div>
 
-				<div className="flow">
+				<div className={getClassNames("flow", styles["search-plans-item"])}>
 					<label
 						className={getClassNames("flow", styles["filter-label"])}
 						htmlFor="search-input"
