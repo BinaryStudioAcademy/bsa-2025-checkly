@@ -1,52 +1,19 @@
+:root {
+	--plan-card-hover-translate-y: 2px;
+}
+
 .container {
-	padding: var(--space-s) var(--space-l);
+	--gutter: var(--space-m);
+
+	padding: var(--space-m);
 	background-color: var(--color-bg-light);
 	border: 2px solid var(--color-card-gray);
-	border-radius: var(--radius-s);
+	border-radius: var(--base-radius);
 }
 
 .title {
 	font-family: var(--font-family-primary);
 	font-size: var(--text-size-heading-3);
-	font-weight: var(--font-weight-semi-bold);
-	color: var(--color-text-primary);
-}
-
-.plans-grid {
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: var(--space-m);
-}
-
-.plan-card {
-	padding: var(--space-s);
-	overflow: hidden;
-	border: 2px solid var(--color-text-primary);
-	border-radius: var(--radius-m);
-}
-
-.plan-card:hover {
-	cursor: pointer;
-	box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
-	transform: translateY(-2px);
-}
-
-.plan-image {
-	display: block;
-	width: 100%;
-	height: auto;
-}
-
-@media (width >= 480px) {
-	.plans-grid {
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
-
-@media (width >= 768px) {
-	.plans-grid {
-		grid-template-columns: repeat(3, 1fr);
-	}
 }
 
 .search-input {
@@ -99,4 +66,8 @@
 	background-color: white;
 	border: 2px solid var(--color-bg-dark);
 	border-radius: var(--radius-s);
+}
+
+.search-plans-item {
+	--flow-space: var(--space-2xs);
 }
