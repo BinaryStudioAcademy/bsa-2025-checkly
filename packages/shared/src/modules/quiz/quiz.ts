@@ -1,4 +1,5 @@
 export {
+	QuizAnswersRule,
 	QuizApiPath,
 	QuizIndexes,
 	QuizQuestionFormat,
@@ -14,6 +15,6 @@ export {
 	type QuizQuestionsResponseDto,
 } from "./libs/types/types.js";
 export {
-	QuizAnswersSchema as QuizAnswersValidationSchema,
-	QuizStateSchema as QuizStateValidationSchema,
+	quizAnswersSchema as quizAnswersValidationSchema,
+	quizStateSchema as quizStateValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
