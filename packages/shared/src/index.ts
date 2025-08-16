@@ -38,6 +38,7 @@ export { AuthApiPath } from "./modules/auth/auth.js";
 export {
 	PlanCategoriesApiPath,
 	type PlanCategoryDto,
+	ZERO_CATEGORY_ID,
 } from "./modules/plan-categories/plan-categories.js";
 export {
 	type PlanDayCreateRequestDto,
