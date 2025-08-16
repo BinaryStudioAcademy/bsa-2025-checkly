@@ -46,6 +46,7 @@ export { type GeneratedPlanDTO } from "./modules/openai/openai.js";
 export {
 	PlanCategoriesApiPath,
 	type PlanCategoryDto,
+	ZERO_CATEGORY_ID,
 } from "./modules/plan-categories/plan-categories.js";
 export {
 	type PlanDayCreateRequestDto,
