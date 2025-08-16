@@ -225,13 +225,13 @@ class QuizController extends BaseController {
 	 *               errorType: "VALIDATION"
 	 *               message: "At least one of the selected options or user input must be provided for a non-skipped question."
 	 */
-	private handleAnswers(
+	private async handleAnswers(
 		options: APIHandlerOptions<{
 			body: QuizAnswersRequestDto;
 		}>,
-	): APIHandlerResponse {
+	): Promise<APIHandlerResponse> {
 		return {
-			payload: this.quizService.handleAnswers(options.body),
+			payload: await this.quizService.handleAnswers(options.body),
 			status: HTTPCode.OK,
 		};
 	}

@@ -5,7 +5,7 @@ import { authController } from "~/modules/auth/auth.js";
 import { planDayController } from "~/modules/plan-days/plan-days.js";
 import { planController } from "~/modules/plans/plans.js";
 import { quizQuestionContolller } from "~/modules/quiz-questions/quiz-question.js";
-import { quizContolller } from "~/modules/quiz/quiz.js";
+import { quizController } from "~/modules/quiz/quiz.js";
 import { taskController } from "~/modules/tasks/tasks.js";
 import { userController } from "~/modules/users/users.js";
 
@@ -21,7 +21,7 @@ const apiV1 = new BaseServerApplicationApi(
 	...planDayController.routes,
 	...taskController.routes,
 	...quizQuestionContolller.routes,
-	...quizContolller.routes,
+	...quizController.routes,
 );
 const serverApplication = new BaseServerApplication({
 	apis: [apiV1],

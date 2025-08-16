@@ -1,53 +1,26 @@
-import { type QuizAnswersRequestDto } from "./libs/types/types.js";
+import { openAiService } from "../openai/openai.js";
+import { type OpenAIService } from "../openai/openai.service.js";
+import {
+	type GeneratedPlanDTO,
+	type QuizAnswersRequestDto,
+} from "./libs/types/types.js";
 import { createPrompt } from "./libs/utilities/utilities.js";
 
-const MockPlan = {
-	"days": [
-		{
-			"dayNumber": 3,
-			"id": 1,
-			"tasks": [],
-		},
-		{
-			"dayNumber": 3,
-			"id": 2,
-			"tasks": [],
-		},
-		{
-			"dayNumber": 3,
-			"id": 3,
-			"tasks": [
-				{
-					"completedAt": null,
-					"description": "Test description",
-					"executionTimeType": null,
-					"id": 2,
-					"isCompleted": false,
-					"order": 1,
-					"title": "do 1",
-				},
-			],
-		},
-	],
-	"duration": 2,
-	"id": 1,
-	"intensity": "2",
-	"title": "Test title",
-	"userId": 2,
-};
-
 class QuizService {
-	public handleAnswers(payload: QuizAnswersRequestDto): unknown {
-		const prompt = createPrompt(payload);
+	private openAIService: OpenAIService;
 
-		return {
-			response: {
-				...MockPlan,
-				meta: {
-					prompt,
-				},
-			},
-		};
+	public constructor() {
+		this.openAIService = openAiService;
+	}
+
+	public async handleAnswers(
+		payload: QuizAnswersRequestDto,
+	): Promise<GeneratedPlanDTO> {
+		const userPrompt = createPrompt(payload);
+
+		const plan = await this.openAIService.generatePlan({ userPrompt });
+
+		return plan;
 	}
 }
 

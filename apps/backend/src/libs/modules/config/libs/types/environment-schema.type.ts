@@ -16,6 +16,10 @@ type EnvironmentSchema = {
 	ENCRYPTOR: {
 		SALT_SIZE: number;
 	};
+	OPEN_AI: {
+		OPEN_AI_KEY: string;
+		TEXT_GENERATION_MODEL: string;
+	};
 	TOKEN: {
 		ENCRYPTION: string;
 		EXPIRATION: string;
