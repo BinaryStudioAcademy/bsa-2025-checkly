@@ -1,39 +1,19 @@
 .container {
-	padding: var(--space-s) var(--space-l);
+	--gutter: var(--space-m);
+
+	padding: var(--space-m);
 	background-color: var(--color-bg-light);
 	border: 2px solid var(--color-card-gray);
 	border-radius: var(--base-radius);
-	transition: all 0.3s ease-in-out;
 }
 
 .title {
 	font-family: var(--font-family-nunito);
 	font-size: var(--text-size-heading-3);
-	font-weight: var(--font-weight-semi-bold);
-	color: var(--color-text-primary);
-	transition: font-size 0.3s ease-in-out;
-}
-
-.plan-card {
-	padding: var(--space-s) var(--space-s) 0;
-	margin-bottom: var(--space-l);
-	overflow: hidden;
-	transition: all 0.3s ease-in-out;
-}
-
-.plan-image {
-	display: block;
-	width: 100%;
-	height: auto;
 }
 
 .continue-button {
-	width: 35%;
-	margin: 0 auto;
-}
-
-.continue-button a {
-	text-decoration: none;
+	margin-inline: auto;
 }
 
 @media (width >= 320px) {
