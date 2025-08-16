@@ -13,6 +13,7 @@ import { type PlanService } from "~/modules/plans/plan.service.js";
 import {
 	type PlanCreateRequestDto,
 	planCreateValidationSchema,
+	type PlanSearchQueryParameter,
 } from "~/modules/plans/plans.js";
 
 import { PlansApiPath } from "./libs/enums/enums.js";
@@ -148,7 +149,9 @@ class PlanController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.searchByCategoryAndTitle(options as SearchQueryParametersOption),
+				this.searchByCategoryAndTitle(
+					options as SearchQueryParametersOption<PlanSearchQueryParameter>,
+				),
 			method: HTTPRequestMethod.GET,
 			path: PlansApiPath.SEARCH,
 		});
@@ -252,7 +255,7 @@ class PlanController extends BaseController {
 	}
 
 	private async searchByCategoryAndTitle(
-		options: SearchQueryParametersOption,
+		options: SearchQueryParametersOption<PlanSearchQueryParameter>,
 	): Promise<APIHandlerResponse> {
 		const NO_CATEGORY_ID = 0;
 		const userId = options.user?.id;
