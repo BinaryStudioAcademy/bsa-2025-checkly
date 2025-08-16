@@ -24,7 +24,7 @@
 
 .layout-card {
 	flex: 0 0 auto;
-	width: clamp(150px, 16vw, 205px);
+	width: 205px;
 	padding: 10px;
 	color: var(--color-text-primary);
 	text-align: center;
@@ -37,12 +37,6 @@
 .layout-card h5 {
 	margin: 15px 0;
 	font-size: 1.2rem;
-}
-
-.layout-card img {
-	width: 100%;
-	height: auto;
-	border-radius: 5px;
 }
 
 .layout-card:hover {
