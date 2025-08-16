@@ -8,6 +8,19 @@
 	border-radius: var(--base-radius);
 }
 
+.search-plans-container {
+	padding-block: var(--space-s) var(--space-m);
+	padding-inline: var(--space-s);
+	background-color: var(--color-card-darkblue);
+	border-radius: var(--radius-m);
+}
+
+.search-plans-container label {
+	font-size: var(--text-body);
+	font-weight: var(--font-weight-body);
+	color: var(--color-bg-dark);
+}
+
 .title {
 	font-family: var(--font-family-nunito);
 	font-size: var(--text-size-heading-3);
@@ -28,11 +41,6 @@
 	transition: all 0.15s ease;
 }
 
-.search-input:hover::placeholder {
-	opacity: 1;
-	transform: translateX(2px);
-}
-
 .search-input:focus {
 	outline: 4px solid var(--color-brand-muted);
 	outline-offset: 0;
@@ -50,8 +58,15 @@
 	height: 1.75lh;
 	padding-inline: var(--space-2xs);
 	border-radius: var(--radius-xs);
+	opacity: 0.45;
 	transform: translateY(-50%);
 	transition: all 0.15s ease;
+}
+
+.search-input:hover::placeholder,
+.search-input:hover + .search-icon,
+.search-input:focus + .search-icon {
+	opacity: 1;
 }
 
 .search-select {
@@ -63,8 +78,63 @@
 	background-color: white;
 	border: 2px solid var(--color-bg-dark);
 	border-radius: var(--radius-s);
+	transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-select:focus-visible,
+.search-select:focus {
+	outline: 4px solid var(--color-brand-muted);
+	outline-offset: 0;
 }
 
 .search-plans-item {
 	--flow-space: var(--space-2xs);
+}
+
+.plans-found {
+	font-size: var(--text-body-small);
+	font-weight: var(--font-weight-body-small);
+}
+
+.plans-found span {
+	padding: 0.2em;
+	color: var(--color-bg-dark);
+	background-color: var(--color-card-yellow);
+	border-radius: var(--space-2xs);
+}
+
+.plans-grid {
+	--grid-min-item-size: 10rem;
+
+	max-height: 450px;
+	overflow-y: auto;
+	scrollbar-color: var(--color-border-grey) transparent;
+	scrollbar-width: thin;
+}
+
+.plan-card {
+	display: grid;
+	place-content: center;
+	min-height: 200px;
+	background-color: var(--color-border-grey);
+	border-radius: var(--radius-m);
+}
+
+.plans-grid::-webkit-scrollbar {
+	width: 6px;
+}
+
+.plans-grid::-webkit-scrollbar-track {
+	background: transparent;
+	border-radius: 3px;
+}
+
+.plans-grid::-webkit-scrollbar-thumb {
+	background-color: var(--color-border-grey);
+	border-radius: 3px;
+	transition: background-color 0.2s ease;
+}
+
+.plans-grid::-webkit-scrollbar-thumb:hover {
+	background-color: var(--color-bg-dark);
 }

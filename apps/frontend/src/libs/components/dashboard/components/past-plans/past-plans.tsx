@@ -1,9 +1,12 @@
 import React, { type FC, useCallback } from "react";
 
 import { Search } from "~/assets/img/icons/icons.js";
+import { Button, Loader } from "~/libs/components/components.js";
+import { ZERO } from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useUserPlanSearch } from "~/libs/hooks/hooks.js";
 
+import { ZERO_CATEGORY_ID } from "../libs/enums//enums.js";
 import styles from "./styles.module.css";
 
 const planCategories = [
@@ -62,6 +65,13 @@ const PastPlans: FC = () => {
 		[setTitle],
 	);
 
+	const handleClearFilters = useCallback((): void => {
+		setCategoryId(ZERO_CATEGORY_ID);
+		setTitle("");
+	}, [setCategoryId, setTitle]);
+
+	const plansFoundAmount = userPlans.length;
+
 	return (
 		<div className={getClassNames("flow-loose", styles["container"])}>
 			<h2 className={styles["title"]}>Past plans</h2>
@@ -112,14 +122,28 @@ const PastPlans: FC = () => {
 					</div>
 				</div>
 			</div>
-			<div className={styles["plans-grid"]}>
-				{isUserPlansLoading
-					? null
-					: userPlans.map((plan) => (
-							<div className={styles["plan-card"]} key={plan.id}>
-								<p>{plan.title}</p>
-							</div>
-						))}
+			<div className="repel">
+				<p className={styles["plans-found"]}>
+					Found: <span>{plansFoundAmount}</span>
+				</p>
+				<Button
+					className={styles["clear-filters-button"]}
+					label="Clear filters"
+					onClick={handleClearFilters}
+					size="small"
+					variant="secondary"
+				/>
+			</div>
+			<div className={getClassNames("grid", styles["plans-grid"])}>
+				{isUserPlansLoading && userPlans.length === ZERO ? (
+					<Loader container="inline" />
+				) : (
+					userPlans.map((plan) => (
+						<div className={styles["plan-card"]} key={plan.id}>
+							<p>{plan.title}</p>
+						</div>
+					))
+				)}
 			</div>
 		</div>
 	);
