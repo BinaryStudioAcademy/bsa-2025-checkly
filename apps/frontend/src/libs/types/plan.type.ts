@@ -1,3 +1,8 @@
+type DayTopic = {
+	main: string;
+	weekday: string;
+};
+
 type PlanActivity = {
 	id: string;
 	text: string;
@@ -9,9 +14,4 @@ type PlanDay = {
 	topic: string;
 };
 
-type PlanEditForm = {
-	days: PlanDay[];
-	notes: string;
-};
-
-export { type PlanEditForm };
+export { type DayTopic, type PlanActivity, type PlanDay };

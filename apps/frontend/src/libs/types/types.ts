@@ -1,7 +1,9 @@
 export { type AsyncThunkConfig } from "./async-thunk-config.type.js";
 export { type ButtonSize } from "./button-size.type.js";
 export { type ButtonVariant } from "./button-variant.type.js";
-export { type DownloadOptions } from "./pdf.types.js";
+export { type DownloadOptions, type Html2CanvasFunction } from "./pdf.type.js";
+export { type PlanEditForm } from "./plan-edit-form.type.js";
+export { type DayTopic, type PlanActivity, type PlanDay } from "./plan.type.js";
 export {
 	type CheckboxQuestionProperties,
 	type MixedAnswer,
