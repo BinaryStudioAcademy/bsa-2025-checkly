@@ -1,14 +1,12 @@
 import { type MultipartFile } from "@fastify/multipart";
 import { type FastifyRequest } from "fastify";
-import {
-	UPLOAD_MAX_FILE_SIZE_BYTES as AVATAR_MAX_FILE_SIZE,
-	HTTPCode,
-	HTTPError,
-} from "shared";
+import { HTTPCode, HTTPError } from "shared";
 
-import { logger } from "../../../libs/modules/logger/logger.js";
-import { fileService } from "../../files/file.js";
-import { type UserRepository } from "../user.repository.js";
+import { UPLOAD_MAX_FILE_SIZE_BYTES as AVATAR_MAX_FILE_SIZE } from "~/libs/constants/constants.js";
+import { logger } from "~/libs/modules/logger/logger.js";
+import { fileService } from "~/modules/files/file.js";
+import { type UserRepository } from "~/modules/users/user.repository.js";
+import { ErrorMessage } from "~/plugins/authorization/libs/types/types.js";
 
 const AVATAR_ALLOWED_MIME_TYPES = new Set(["image/jpeg", "image/png"]);
 
@@ -19,15 +17,15 @@ type UserPlainObject = {
 	name: string;
 };
 
-async function handleAvatarRemove(
+const handleAvatarRemove = async (
 	userRepository: UserRepository,
 	userId: number,
-): Promise<null | UserPlainObject> {
+): Promise<null | UserPlainObject> => {
 	const existing = await userRepository.find(userId);
 
 	if (!existing) {
 		throw new HTTPError({
-			message: "User not found",
+			message: ErrorMessage.USER_NOT_FOUND,
 			status: HTTPCode.NOT_FOUND,
 		});
 	}
@@ -45,12 +43,12 @@ async function handleAvatarRemove(
 	const updated = await userRepository.update(userId, { avatarUrl: null });
 
 	return updated ? updated.toObject() : null;
-}
+};
 
-async function handleAvatarUpload(
+const handleAvatarUpload = async (
 	userRepository: UserRepository,
 	request: FastifyRequest,
-): Promise<UserPlainObject> {
+): Promise<UserPlainObject> => {
 	const requestWithFile = request as FastifyRequest & {
 		file: () => Promise<MultipartFile | undefined>;
 	};
@@ -58,14 +56,14 @@ async function handleAvatarUpload(
 
 	if (!multipartFile) {
 		throw new HTTPError({
-			message: "No file uploaded",
+			message: ErrorMessage.FILE_MISSING,
 			status: HTTPCode.BAD_REQUEST,
 		});
 	}
 
 	if (!AVATAR_ALLOWED_MIME_TYPES.has(multipartFile.mimetype)) {
 		throw new HTTPError({
-			message: "Invalid file type. Allowed: image/png, image/jpeg",
+			message: ErrorMessage.FILE_TYPE_INVALID,
 			status: HTTPCode.BAD_REQUEST,
 		});
 	}
@@ -79,7 +77,7 @@ async function handleAvatarUpload(
 
 		if (size > AVATAR_MAX_FILE_SIZE) {
 			throw new HTTPError({
-				message: "File too large (max 2MB)",
+				message: ErrorMessage.FILE_TOO_LARGE,
 				status: HTTPCode.BAD_REQUEST,
 			});
 		}
@@ -95,7 +93,7 @@ async function handleAvatarUpload(
 
 	if (!Number.isInteger(userId)) {
 		throw new HTTPError({
-			message: "Invalid user id",
+			message: ErrorMessage.ID_INVALID,
 			status: HTTPCode.BAD_REQUEST,
 		});
 	}
@@ -104,7 +102,7 @@ async function handleAvatarUpload(
 
 	if (!existing) {
 		throw new HTTPError({
-			message: "User not found",
+			message: ErrorMessage.USER_NOT_FOUND,
 			status: HTTPCode.NOT_FOUND,
 		});
 	}
@@ -134,7 +132,7 @@ async function handleAvatarUpload(
 		logger.error("Failed to upload avatar to storage", { error, userId });
 
 		throw new HTTPError({
-			message: "Failed to upload avatar",
+			message: ErrorMessage.AVATAR_UPDATE_FAILED,
 			status: HTTPCode.INTERNAL_SERVER_ERROR,
 		});
 	}
@@ -143,12 +141,12 @@ async function handleAvatarUpload(
 
 	if (!updated) {
 		throw new HTTPError({
-			message: "Failed to update user avatar",
+			message: ErrorMessage.AVATAR_UPDATE_FAILED,
 			status: HTTPCode.INTERNAL_SERVER_ERROR,
 		});
 	}
 
 	return updated.toObject();
-}
+};
 
 export { handleAvatarRemove, handleAvatarUpload };

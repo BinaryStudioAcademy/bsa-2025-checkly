@@ -5,8 +5,8 @@ import swaggerUi from "@fastify/swagger-ui";
 import Fastify, { type FastifyError, type FastifyInstance } from "fastify";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { UPLOAD_MAX_FILE_SIZE_BYTES as UPLOAD_MAX_FILE_SIZE } from "shared";
 
+import { UPLOAD_MAX_FILE_SIZE_BYTES as UPLOAD_MAX_FILE_SIZE } from "~/libs/constants/constants.js";
 import { FastifyHook, ServerErrorType } from "~/libs/enums/enums.js";
 import { type ValidationError } from "~/libs/exceptions/exceptions.js";
 import { type Config } from "~/libs/modules/config/config.js";

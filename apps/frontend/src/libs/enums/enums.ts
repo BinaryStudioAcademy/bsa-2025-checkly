@@ -21,4 +21,5 @@ export {
 	QuizIndexes,
 	QuizQuestionFormat,
 	ServerErrorType,
+	ErrorMessage as SharedErrorMessage,
 } from "shared";

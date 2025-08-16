@@ -5,21 +5,22 @@ import {
 	type APIHandlerResponse,
 } from "~/libs/modules/controller/controller.js";
 import { type UserService } from "~/modules/users/user.service.js";
+import { ErrorMessage } from "~/plugins/authorization/libs/types/types.js";
 
 const INVALID_ID_RESPONSE: APIHandlerResponse = {
-	payload: { message: "Invalid user id" },
+	payload: { message: ErrorMessage.ID_INVALID },
 	status: HTTPCode.BAD_REQUEST,
 };
 
 const FORBIDDEN_RESPONSE: APIHandlerResponse = {
-	payload: { message: "Forbidden" },
+	payload: { message: ErrorMessage.FORBIDDEN },
 	status: HTTPCode.UNAUTHORIZED,
 };
 
-async function removeAvatarController(
+const removeAvatarController = async (
 	userService: UserService,
 	{ params, user }: APIHandlerOptions,
-): Promise<APIHandlerResponse> {
+): Promise<APIHandlerResponse> => {
 	const routeParameters = params as undefined | { id?: unknown };
 	const idRaw = routeParameters?.id;
 	const userId = Number(idRaw);
@@ -35,12 +36,12 @@ async function removeAvatarController(
 	const payload = await userService.removeAvatar(userId);
 
 	return { payload, status: HTTPCode.OK };
-}
+};
 
-async function uploadAvatarController(
+const uploadAvatarController = async (
 	userService: UserService,
 	handlerOptions: APIHandlerOptions,
-): Promise<APIHandlerResponse> {
+): Promise<APIHandlerResponse> => {
 	const { originalRequest, params, user } = handlerOptions;
 	const routeParameters = params as undefined | { id?: unknown };
 	const idRaw = routeParameters?.id;
@@ -50,13 +51,13 @@ async function uploadAvatarController(
 		return INVALID_ID_RESPONSE;
 	}
 
-	if (!user || user.id !== userId) {
+	if (user?.id !== userId) {
 		return FORBIDDEN_RESPONSE;
 	}
 
 	if (!originalRequest) {
 		return {
-			payload: { message: "Missing original request for multipart processing" },
+			payload: { message: ErrorMessage.MISSING_REQUEST },
 			status: HTTPCode.BAD_REQUEST,
 		};
 	}
@@ -64,6 +65,6 @@ async function uploadAvatarController(
 	const result = await userService.uploadAvatar(originalRequest as never);
 
 	return { payload: result, status: HTTPCode.OK };
-}
+};
 
 export { removeAvatarController, uploadAvatarController };

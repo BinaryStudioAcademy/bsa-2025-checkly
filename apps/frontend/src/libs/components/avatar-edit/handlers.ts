@@ -1,7 +1,9 @@
 import { type ChangeEvent } from "react";
-import { UPLOAD_MAX_FILE_SIZE_BYTES } from "shared";
 
+import { UPLOAD_MAX_FILE_SIZE_BYTES } from "~/libs/constants/constants.js";
+import { SharedErrorMessage } from "~/libs/enums/enums.js";
 import { type useAppDispatch } from "~/libs/hooks/use-app-dispatch/use-app-dispatch.hook.js";
+import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 
 const ALLOWED_TYPES = new Set<string>(["image/jpeg", "image/png"]);
@@ -34,15 +36,27 @@ function buildAvatarEditHandlers({
 			const [file] = files ? [...files] : [];
 			const user = getUser();
 
-			if (!file || !user) {
+			if (!file) {
+				notifications.error(SharedErrorMessage.FILE_MISSING);
+
+				return;
+			}
+
+			if (!user) {
+				notifications.error(SharedErrorMessage.USER_NOT_FOUND);
+
 				return;
 			}
 
 			if (!ALLOWED_TYPES.has(file.type)) {
+				notifications.error(SharedErrorMessage.FILE_TYPE_INVALID);
+
 				return;
 			}
 
 			if (file.size > UPLOAD_MAX_FILE_SIZE_BYTES) {
+				notifications.error(SharedErrorMessage.FILE_TOO_LARGE);
+
 				return;
 			}
 
@@ -69,6 +83,8 @@ function buildAvatarEditHandlers({
 			const user = getUser();
 
 			if (!user) {
+				notifications.error(SharedErrorMessage.USER_NOT_FOUND);
+
 				return;
 			}
 

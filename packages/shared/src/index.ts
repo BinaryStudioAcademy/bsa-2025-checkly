@@ -31,6 +31,7 @@ export {
 export { type Storage } from "./libs/modules/storage/storage.js";
 export {
 	type EnumValue,
+	type Nullable,
 	type ServerCommonErrorResponse,
 	type ServerErrorDetail,
 	type ServerErrorResponse,
@@ -82,6 +83,7 @@ export {
 	type TaskUpdateRequestDto,
 } from "./modules/tasks/tasks.js";
 export {
+	S3BucketIndex,
 	type SignUpFormValidationSchema,
 	type UserDto,
 	type UserGetAllResponseDto,

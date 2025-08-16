@@ -1,13 +1,15 @@
 import { useCallback, useRef, useState } from "react";
 
-import { EditPhoto, Remove } from "~/assets/img/icons/icons.js";
+import {
+	EditPhoto as EditPhotoIcon,
+	Remove as RemoveAvatarIcon,
+} from "~/assets/img/icons/icons.js";
 import { AvatarDefault } from "~/assets/img/shared/avatars//avatars.img.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
+import { type Nullable } from "~/libs/types/types.js";
 
 import { buildAvatarEditHandlers } from "./handlers.js";
 import styles from "./styles.module.css";
-
-type Nullable<T> = null | T;
 
 const AvatarEdit: React.FC = () => {
 	const user = useAppSelector((state) => state.auth.user);
@@ -31,12 +33,16 @@ const AvatarEdit: React.FC = () => {
 		return;
 	}
 
-	const shown = preview ?? user.avatarUrl ?? AvatarDefault;
+	const avatarDisplayed = preview ?? user.avatarUrl ?? AvatarDefault;
 
 	return (
 		<div className={styles["container"]}>
 			<div className={styles["avatarWrapper"]}>
-				<img alt="avatar" className={styles["avatarImage"]} src={shown} />
+				<img
+					alt="avatar"
+					className={styles["avatarImage"]}
+					src={avatarDisplayed}
+				/>
 				<button
 					className={styles["changeButton"]}
 					disabled={isLoading}
@@ -46,7 +52,7 @@ const AvatarEdit: React.FC = () => {
 					<img
 						alt="edit"
 						className={styles["avatarEditIcon"]}
-						src={EditPhoto}
+						src={EditPhotoIcon}
 					/>
 				</button>
 				{(preview ?? user.avatarUrl) && (
@@ -57,7 +63,11 @@ const AvatarEdit: React.FC = () => {
 						onClick={handleRemove}
 						type="button"
 					>
-						<img alt="remove" className={styles["removeIcon"]} src={Remove} />
+						<img
+							alt="remove"
+							className={styles["removeIcon"]}
+							src={RemoveAvatarIcon}
+						/>
 					</button>
 				)}
 				<input

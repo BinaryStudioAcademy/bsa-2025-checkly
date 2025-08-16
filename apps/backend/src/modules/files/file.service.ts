@@ -5,8 +5,7 @@ import {
 } from "@aws-sdk/client-s3";
 import { randomUUID } from "node:crypto";
 
-const PARTS_BUCKET_INDEX = 0;
-const START_AFTER_BUCKET_INDEX = 1;
+import { S3BucketIndex } from "~/libs/enums/enums.js";
 
 type Constructor = {
 	accessKeyId: string;
@@ -79,8 +78,8 @@ class BaseFileService {
 
 			const parts = parsed.pathname.split("/").filter(Boolean);
 
-			if (parts[PARTS_BUCKET_INDEX] === this.bucket) {
-				return parts.slice(START_AFTER_BUCKET_INDEX).join("/");
+			if (parts[S3BucketIndex.PARTS] === this.bucket) {
+				return parts.slice(S3BucketIndex.START_AFTER).join("/");
 			}
 
 			return null;

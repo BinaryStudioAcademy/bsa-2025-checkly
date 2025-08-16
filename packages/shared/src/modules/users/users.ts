@@ -1,4 +1,5 @@
 export {
+	S3BucketIndex,
 	UsersApiPath,
 	UserValidationMessage,
 	UserValidationRule,

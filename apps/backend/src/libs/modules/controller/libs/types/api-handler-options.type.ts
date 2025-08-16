@@ -11,7 +11,7 @@ type APIHandlerOptions<
 	originalRequest?: FastifyRequest | undefined;
 	params: T["params"];
 	query: T["query"];
-	user?: undefined | UserDto;
+	user?: UserDto;
 };
 
 type DefaultApiHandlerOptions = {
