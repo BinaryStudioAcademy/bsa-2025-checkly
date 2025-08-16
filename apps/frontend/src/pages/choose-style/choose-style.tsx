@@ -17,13 +17,16 @@ import {
 	Button,
 	DecorativeImage,
 } from "~/libs/components/components.js";
+import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { type ViewOptions } from "~/libs/types/types.js";
 
 import { styleCards } from "./choose-style.data.js";
 import styles from "./style.module.css";
 
 const preselectedElement = 1;
+const PLAN_VIEW_OPTION: ViewOptions = "selection";
 
 const ChooseStyle: React.FC = () => {
 	const [selectedCard, setSelectedCard] = useState<null | string>(
@@ -81,7 +84,7 @@ const ChooseStyle: React.FC = () => {
 					className={styles["card-container"]}
 					role="radiogroup"
 				>
-					{styleCards.map(({ id, img, label }) => (
+					{styleCards.map(({ id, label, planStyle }) => (
 						<button
 							aria-checked={selectedCard === id}
 							className={getClassNames(
@@ -95,12 +98,7 @@ const ChooseStyle: React.FC = () => {
 							role="radio"
 							type="button"
 						>
-							<img
-								alt={label}
-								aria-hidden="true"
-								className={styles["card-image"]}
-								src={img}
-							/>
+							<PlanStyle inputStyle={planStyle} view={PLAN_VIEW_OPTION} />
 							<span className={styles["card-text"]}>{label}</span>
 						</button>
 					))}

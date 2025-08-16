@@ -1,5 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { MESSAGES } from "~/libs/constants/messages.constants.js";
+import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { HTTPError } from "~/libs/modules/http/http.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
@@ -11,7 +13,10 @@ import {
 	type UserUpdateRequestDto,
 } from "~/modules/users/users.js";
 
-import { name as sliceName } from "./auth.slice.js";
+import {
+	actions as authSliceActions,
+	name as sliceName,
+} from "./auth.slice.js";
 
 const signIn = createAsyncThunk<
 	UserDto,
@@ -105,11 +110,25 @@ const avatarUpload = createAsyncThunk<
 	return (await response.json()) as UserDto;
 });
 
-export {
-	avatarRemove,
-	avatarUpload,
-	getCurrentUser,
-	signIn,
-	signUp,
-	updateProfile,
-};
+type LogoutThunkArgument = { navigate: (path: string) => Promise<void> | void };
+
+const logout = createAsyncThunk<null, LogoutThunkArgument, AsyncThunkConfig>(
+	`${sliceName}/logout`,
+	async ({ navigate }, { dispatch, extra }) => {
+		const { notifications, storage } = extra;
+
+		try {
+			await storage.drop(StorageKey.TOKEN);
+		} catch {
+			notifications.error(MESSAGES.AUTH.LOGOUT_FAILED);
+		}
+
+		dispatch(authSliceActions.resetAuthState());
+
+		await navigate(AppRoute.ROOT);
+
+		return null;
+	},
+);
+
+export { avatarRemove, avatarUpload, getCurrentUser, logout, signIn, signUp, updateProfile };
