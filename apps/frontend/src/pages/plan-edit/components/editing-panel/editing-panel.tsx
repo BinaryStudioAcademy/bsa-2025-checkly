@@ -1,7 +1,8 @@
 import { type FC } from "react";
 import { type Control, type FieldErrors } from "react-hook-form";
 
-import { type PlanEditForm } from "../../libs/types/plan-edit-form.type.js";
+import { type PlanEditForm } from "~/libs/types/types.js";
+
 import { DayEditor, NotesEditor } from "../components.js";
 import styles from "./styles.module.css";
 

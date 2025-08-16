@@ -3,9 +3,14 @@ type DownloadOptions = {
 	format?: "jpg" | "png";
 	pdfFormat?: "a3" | "a4" | "a5" | "legal" | "letter";
 	pdfOrientation?: "landscape" | "portrait";
-	pdfUnit?: "cm" | "in" | "mm" | "px";
+	pdfUnit?: "cm" | "in" | "mm" | "pt" | "px";
 	quality?: number;
 	useCORS?: boolean;
 };
 
-export { type DownloadOptions };
+type Html2CanvasFunction = (
+	element: HTMLElement,
+	options?: object,
+) => Promise<HTMLCanvasElement>;
+
+export { type DownloadOptions, type Html2CanvasFunction };

@@ -4,7 +4,7 @@ import {
 	DownloadError,
 	generatePdfFromElement,
 } from "~/libs/helpers/helpers.js";
-import { type DownloadOptions } from "~/libs/types/pdf.types.js";
+import { type DownloadOptions } from "~/libs/types/pdf.type.js";
 
 type Properties = {
 	children: React.ReactNode;
