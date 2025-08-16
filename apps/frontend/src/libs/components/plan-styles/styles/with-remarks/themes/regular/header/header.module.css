@@ -1,0 +1,7 @@
+.plan-header {
+	margin-bottom: calc(10px * var(--coefficient));
+}
+
+.plan-title {
+	color: var(--color-text-tertiary);
+}

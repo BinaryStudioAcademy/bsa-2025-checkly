@@ -1,5 +1,6 @@
 import { type FC } from "react";
 
+import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { PAST_PLANS } from "~/pages/home/lib/constants.js";
 
 import styles from "./styles.module.css";
@@ -11,11 +12,7 @@ const PastPlans: FC = () => {
 			<div className={styles["plans-grid"]}>
 				{PAST_PLANS.map((plan) => (
 					<div className={styles["plan-card"]} key={plan.id}>
-						<img
-							alt={plan.name}
-							className={styles["plan-image"]}
-							src={plan.path}
-						/>
+						<PlanStyle inputStyle={plan.planStyle} view="selection" />
 					</div>
 				))}
 			</div>

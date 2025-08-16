@@ -17,7 +17,7 @@
 	padding-block: var(--space-xl) var(--space-3xl);
 	padding-inline: var(--space-xl);
 	margin-inline: var(--space-s);
-	font-family: var(--font-family-primary);
+	font-family: var(--font-family-nunito);
 	background-color: var(--color-bg-white);
 	border-radius: var(--radius-l);
 }

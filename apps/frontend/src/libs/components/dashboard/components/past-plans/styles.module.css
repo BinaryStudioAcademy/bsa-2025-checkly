@@ -1,4 +1,7 @@
 .container {
+	--card-width: 205px;
+	--coefficient: 0.45;
+
 	padding: var(--space-s) var(--space-l);
 	background-color: var(--color-bg-light);
 	border: 2px solid var(--color-card-gray);
@@ -7,7 +10,7 @@
 }
 
 .title {
-	font-family: var(--font-family-primary);
+	font-family: var(--font-family-nunito);
 	font-size: var(--text-size-heading-3);
 	font-weight: var(--font-weight-semi-bold);
 	color: var(--color-text-primary);
@@ -17,12 +20,14 @@
 .plans-grid {
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: var(--space-m);
+	gap: var(--space-s);
+	justify-items: center;
 	padding: var(--space-l) var(--space-xs);
 	transition: gap 0.3s ease-in-out;
 }
 
 .plan-card {
+	width: var(--card-width);
 	overflow: hidden;
 	border: 2px solid var(--color-text-primary);
 	border-radius: var(--radius-m);
@@ -41,14 +46,32 @@
 	height: auto;
 }
 
-@media (width >= 480px) {
+@media (width >= 540px) {
 	.plans-grid {
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(2, minmax(var(--card-width), 1fr));
 	}
 }
 
-@media (width >= 768px) {
+@media (width >= 740px) {
 	.plans-grid {
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(3, minmax(var(--card-width), 1fr));
+	}
+}
+
+@media (width >= 1310px) {
+	.plans-grid {
+		grid-template-columns: minmax(var(--card-width), 1fr);
+	}
+}
+
+@media (width >= 1525px) {
+	.plans-grid {
+		grid-template-columns: repeat(2, minmax(var(--card-width), 1fr));
+	}
+}
+
+@media (width >= 1930px) {
+	.plans-grid {
+		grid-template-columns: repeat(3, minmax(var(--card-width), 1fr));
 	}
 }

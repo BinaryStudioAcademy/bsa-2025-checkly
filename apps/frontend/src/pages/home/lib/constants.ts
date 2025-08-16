@@ -6,7 +6,6 @@ import {
 import {
 	ExampleColourful,
 	ExampleMinimal,
-	ExampleMotivating,
 	ExampleWithRemarks,
 } from "~/assets/img/shared/illustrations/layouts/layouts.img.js";
 
@@ -36,41 +35,49 @@ const PAST_PLANS = [
 		id: 1,
 		name: "Plan 1",
 		path: ExampleColourful,
+		planStyle: "colourful",
 	},
 	{
 		id: 2,
 		name: "Plan 2",
 		path: ExampleMinimal,
+		planStyle: "minimal",
 	},
 	{
 		id: 3,
 		name: "Plan 3",
-		path: ExampleMotivating,
+		path: ExampleWithRemarks,
+		planStyle: "withremarks",
 	},
 	{
 		id: 4,
 		name: "Plan 4",
-		path: ExampleWithRemarks,
+		path: ExampleMinimal,
+		planStyle: "minimal",
 	},
 	{
 		id: 5,
 		name: "Plan 5",
-		path: ExampleColourful,
+		path: ExampleWithRemarks,
+		planStyle: "withremarks",
 	},
 	{
 		id: 6,
 		name: "Plan 6",
-		path: ExampleMinimal,
+		path: ExampleColourful,
+		planStyle: "colourful",
 	},
 	{
 		id: 7,
 		name: "Plan 7",
-		path: ExampleMotivating,
+		path: ExampleWithRemarks,
+		planStyle: "withremarks",
 	},
 	{
 		id: 8,
 		name: "Plan 8",
-		path: ExampleWithRemarks,
+		path: ExampleColourful,
+		planStyle: "colourful",
 	},
 ] as const;
 

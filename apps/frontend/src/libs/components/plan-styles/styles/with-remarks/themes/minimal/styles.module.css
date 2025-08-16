@@ -1,0 +1,46 @@
+@import url("../../styles.module.css");
+
+.container {
+	background-color: var(--color-bg-white);
+}
+
+/* Day styles */
+
+.day-item {
+	border: none;
+}
+
+.day-item:nth-child(n) {
+	border: none;
+}
+
+h2.day-title {
+	font-family: var(--font-family-caveat);
+	font-size: calc(18px * var(--coefficient));
+	color: var(--color-text-primary);
+}
+
+.day-of-week {
+	color: var(--color-plan-style-minimal-grey);
+}
+
+/* Task styles */
+
+.task-checkbox {
+	background-color: transparent;
+	border-radius: 0;
+}
+
+.task-text {
+	color: var(--color-plan-style-minimal-grey);
+}
+
+/* Notes styles */
+
+li.notes:nth-child(odd) {
+	border: none;
+}
+
+p.notes-text {
+	text-decoration-color: var(--color-plan-style-minimal-grey);
+}

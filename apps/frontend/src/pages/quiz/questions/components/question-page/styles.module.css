@@ -17,7 +17,7 @@
 
 .question-number {
 	margin-bottom: var(--space-m);
-	font-family: var(--font-family-secondary);
+	font-family: var(--font-family-onest);
 	font-size: var(--text-size-heading-1);
 	font-weight: var(--font-weight-semibold);
 	color: var(--color-text-primary);
