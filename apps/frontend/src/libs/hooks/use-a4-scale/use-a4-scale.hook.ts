@@ -1,9 +1,6 @@
 import { useLayoutEffect, useRef, useState } from "react";
 
-import { ONE, ZERO } from "~/libs/constants/numbers.js";
-
-const BASE_WIDTH = 794;
-const BASE_HEIGHT = 1123;
+import { BASE_HEIGHT, BASE_WIDTH, ONE, ZERO } from "~/libs/constants/constants.js";
 
 function useA4Scale(): {
 	readonly scale: number;

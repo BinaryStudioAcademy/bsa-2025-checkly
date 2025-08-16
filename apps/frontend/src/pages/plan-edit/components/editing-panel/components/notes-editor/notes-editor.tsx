@@ -2,14 +2,13 @@ import { type FC } from "react";
 import { type Control, type FieldErrors } from "react-hook-form";
 
 import { Textarea } from "~/libs/components/components.js";
-import { type PlanEditForm } from "~/pages/plan-edit/libs/types/plan-edit-form.type.js";
+import { EDITOR_ROWS } from "~/libs/constants/constants.js";
+import { type PlanEditForm } from "~/libs/types/plan-edit-form.type.js";
 
 type Properties = {
 	control: Control<PlanEditForm>;
 	errors: FieldErrors<PlanEditForm>;
 };
-
-const EDITOR_ROWS = 10;
 
 const NotesEditor: FC<Properties> = ({ control, errors }) => {
 	return (

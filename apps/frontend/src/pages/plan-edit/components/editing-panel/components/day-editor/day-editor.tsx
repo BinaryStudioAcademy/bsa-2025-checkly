@@ -2,11 +2,10 @@ import { type FC, useCallback } from "react";
 import { type Control, type FieldErrors, useFieldArray } from "react-hook-form";
 
 import { Button, Input } from "~/libs/components/components.js";
-import { type PlanEditForm } from "~/pages/plan-edit/libs/types/plan-edit-form.type.js";
+import { INCREMENT_VALUE } from "~/libs/constants/constants.js";
+import { type PlanEditForm } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
-
-const INCREMENT_VALUE = 1;
 
 const getFieldName = (
 	dayIndex: number,
