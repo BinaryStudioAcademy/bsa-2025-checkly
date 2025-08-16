@@ -9,10 +9,13 @@ import {
 	type ValueOf,
 } from "~/libs/types/types.js";
 
+import styles from "./styles.module.css";
+
 type Properties = {
 	asButtonSize?: ButtonSize;
 	asButtonVariant?: ButtonVariant;
 	children: React.ReactNode;
+	className?: string;
 	to: ValueOf<typeof AppRoute>;
 };
 
@@ -20,6 +23,7 @@ const Link: React.FC<Properties> = ({
 	asButtonSize = "small",
 	asButtonVariant,
 	children,
+	className,
 	to,
 }: Properties) => {
 	const linkClasses = asButtonVariant
@@ -27,13 +31,12 @@ const Link: React.FC<Properties> = ({
 				buttonStyles["button"],
 				buttonStyles[`button-${asButtonVariant}`],
 				buttonStyles[`button-${asButtonSize}`],
-				buttonStyles["button-cluster"],
-				"cluster",
+				styles["link"],
 			)
 		: "";
 
 	return (
-		<NavLink className={linkClasses} to={to}>
+		<NavLink className={getClassNames(linkClasses, className)} to={to}>
 			{asButtonVariant ? children : <span>{children}</span>}
 		</NavLink>
 	);
