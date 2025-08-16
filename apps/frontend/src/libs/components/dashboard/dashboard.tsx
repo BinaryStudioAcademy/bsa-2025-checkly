@@ -10,7 +10,7 @@ import styles from "./styles.module.css";
 const Dashboard: FC = () => {
 	return (
 		<div className={getClassNames(styles["dashboard"], "grid-pattern")}>
-			<div className={styles["content"]}>
+			<div className={getClassNames("wrapper", styles["content"])}>
 				<Greeting />
 				<div className={styles["content-grid"]}>
 					<CurrentPlan />
