@@ -1,46 +1,32 @@
-import React, { type FC, useCallback } from "react";
+import React, { type FC, useCallback, useEffect } from "react";
 
 import { Search } from "~/assets/img/icons/icons.js";
 import { Button, Loader } from "~/libs/components/components.js";
 import { ZERO } from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { useUserPlanSearch } from "~/libs/hooks/hooks.js";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useUserPlanSearch,
+} from "~/libs/hooks/hooks.js";
+import { getAll } from "~/modules/plan-categories/slices/actions.js";
 
 import { ZERO_CATEGORY_ID } from "../libs/enums//enums.js";
 import styles from "./styles.module.css";
 
-const planCategories = [
-	{
-		id: 0,
-		title: "All categories",
-	},
-	{
-		id: 1,
-		title: "Personal development",
-	},
-	{
-		id: 2,
-		title: "Spirituality",
-	},
-	{
-		id: 3,
-		title: "Sport",
-	},
-	{
-		id: 4,
-		title: "Money",
-	},
-	{
-		id: 5,
-		title: "Creativity",
-	},
-	{
-		id: 6,
-		title: "Hobby",
-	},
-];
-
 const PastPlans: FC = () => {
+	const dispatch = useAppDispatch();
+	const { planCategories } = useAppSelector((state) => state.planCategory);
+
+	useEffect(() => {
+		void dispatch(getAll());
+	}, [dispatch]);
+
+	const categoryOptions = [
+		{ id: ZERO_CATEGORY_ID, title: "All categories" },
+		...planCategories,
+	];
+
 	const {
 		categoryId,
 		isUserPlansLoading,
@@ -94,11 +80,12 @@ const PastPlans: FC = () => {
 						<option defaultChecked disabled value="">
 							Select category
 						</option>
-						{planCategories.map((category) => (
-							<option key={category.id} value={category.id}>
-								{category.title}
-							</option>
-						))}
+						{planCategories.length > ZERO &&
+							categoryOptions.map((category) => (
+								<option key={category.id} value={category.id}>
+									{category.title}
+								</option>
+							))}
 					</select>
 				</div>
 
