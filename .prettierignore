@@ -1,2 +1,6 @@
 CHANGELOG.md
 docs/requirements/*.md
+playwright-report/
+test-results/
+packages/testing/playwright-report/
+packages/testing/test-results/

@@ -151,6 +151,20 @@ As we are already using js on both frontend and backend it would be useful to sh
 
 1. [Zod](https://github.com/colinhacks/zod) — a schema validator
 
+### 5.5 Testing Package
+
+#### 5.5.1 Reason
+
+This package (`packages/testing`) contains automated API and UI tests for the Checkly application. It uses [Playwright](https://playwright.dev/) to test both backend and frontend functionality, with environment-based configurations and CI integration.
+
+#### 5.5.2 Technologies
+
+- [Playwright](https://playwright.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Faker](https://www.npmjs.com/package/@faker-js/faker)
+- [Ajv](https://ajv.js.org/)
+- [dotenv](https://www.npmjs.com/package/dotenv)
+
 ## 6. How to Run
 
 ### 6.1 Manually
@@ -218,3 +232,33 @@ Examples:
 ## 8. Deployment
 
 CI/CD implemented using [GitHub Actions](https://docs.github.com/en/actions)
+
+## 9. Running Tests (packages/testing)
+
+From the **monorepo root**:
+
+1. Ensure dependencies are installed:
+
+```bash
+npm install
+```
+
+> 🛠 This will also automatically install Playwright browsers.
+
+2. Create `.env.local` inside `packages/testing/`:
+
+```env
+FRONTEND_URL=http://localhost:3000/
+API_URL=http://localhost:3001/api/v1/
+```
+
+3. Run tests:
+
+```bash
+npm run testing:test       # Run all tests (local)
+npm run testing:ui         # Run only UI tests
+npm run testing:api        # Run only API tests
+npm run testing:report     # View last HTML report
+```
+
+> The Playwright HTML report will be generated in `packages/testing/playwright-report/index.html`.
