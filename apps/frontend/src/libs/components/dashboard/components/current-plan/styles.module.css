@@ -1,6 +1,4 @@
 .container {
-	--gutter: var(--space-m);
-
 	padding: var(--space-m);
 	background-color: var(--color-bg-light);
 	border: 2px solid var(--color-card-gray);
@@ -12,8 +10,9 @@
 	font-size: var(--text-size-heading-3);
 }
 
-.continue-button {
-	margin-inline: auto;
+.button-wrapper {
+	display: flex;
+	justify-content: center;
 }
 
 @media (width >= 320px) {
