@@ -12,6 +12,7 @@ import {
 	QuestionFlow,
 	Quiz,
 } from "./pages/pages.js";
+import { PlanEdit } from "./pages/plan-edit/plan-edit.js";
 import { TestPage } from "./pages/test-page/test-page.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
@@ -35,6 +36,11 @@ const routes: CustomRouteObject[] = [
 		element: <Auth />,
 		handle: { access: RouteAccess.NOT_AUTHENTICATED },
 		path: AppRoute.SIGN_UP,
+	},
+	{
+		element: <PlanEdit />,
+		handle: { access: RouteAccess.AUTHENTICATED },
+		path: AppRoute.PLAN_EDIT,
 	},
 	{
 		element: <QuestionFlow />,
