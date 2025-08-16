@@ -1,0 +1,49 @@
+.regular-view {
+	--coefficient: 1;
+}
+
+.container {
+	width: 100%;
+	max-width: calc(595px * var(--coefficient));
+	min-height: calc(842px * var(--coefficient));
+	padding: calc(24px * var(--coefficient));
+	margin: 0 auto;
+}
+
+.homepage-container {
+	height: 100%;
+	min-height: 0;
+	max-height: 250px;
+	overflow-y: hidden;
+}
+
+.selection-container {
+	height: 100%;
+	min-height: 0;
+	max-height: 285px;
+	overflow-y: hidden;
+}
+
+@media (width <= 768px) {
+	.regular-view {
+		--coefficient: 0.7;
+	}
+
+	.container {
+		min-height: 0;
+	}
+}
+
+@media (width <= 475px) {
+	.regular-view {
+		--coefficient: 0.5;
+	}
+}
+
+.homepage-view {
+	--coefficient: 0.32;
+}
+
+.selection-view {
+	--coefficient: 0.37;
+}

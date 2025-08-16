@@ -13,6 +13,7 @@ import {
 	QuestionFlow,
 	Quiz,
 } from "./pages/pages.js";
+import { TestPage } from "./pages/test-page/test-page.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
 
@@ -72,6 +73,11 @@ const routes: CustomRouteObject[] = [
 		element: <ChooseStyle />,
 		handle: { access: RouteAccess.AUTHENTICATED },
 		path: AppRoute.CHOOSE_STYLE,
+	},
+	{
+		element: <TestPage />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.TEST_PAGE,
 	},
 	{
 		element: <NotFound />,
