@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.19.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.18.1...v1.19.0) (2025-08-15)
+
+
+### Features
+
+* dashboard header Logout button does not log out user cy-169 ([cf7a651](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cf7a65149fbdbd4644c6eb219db6b72d52eb34cc))
+
+
+### Bug Fixes
+
+* **backend:** changed seed for questions cy-251 ([1d83e82](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1d83e8288b097d9b183b972dbbca8e123c834aef))
+* changed seed for questions cy-251 ([cd9cc8e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cd9cc8e2c5ed37f86f0789e5321e1ce0795c86e2))
+
 ## [1.18.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.18.0...v1.18.1) (2025-08-15)
 
 

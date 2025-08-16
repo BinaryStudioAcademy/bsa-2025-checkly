@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.13.1...frontend-v1.14.0) (2025-08-15)
+
+
+### Features
+
+* dashboard header Logout button does not log out user cy-169 ([cf7a651](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cf7a65149fbdbd4644c6eb219db6b72d52eb34cc))
+
 ## [1.13.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.13.0...frontend-v1.13.1) (2025-08-15)
 
 
