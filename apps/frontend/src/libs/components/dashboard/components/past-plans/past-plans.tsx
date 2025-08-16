@@ -1,10 +1,8 @@
-import React, { type FC, useCallback, useEffect, useState } from "react";
-import { DataStatus } from "shared";
+import React, { type FC, useCallback } from "react";
 
 import { Search } from "~/assets/img/icons/icons.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
-import { getAllUserPlans, searchPlan } from "~/modules/plans/slices/actions.js";
+import { useUserPlanSearch } from "~/libs/hooks/hooks.js";
 
 import styles from "./styles.module.css";
 
@@ -39,48 +37,29 @@ const planCategories = [
 	},
 ];
 
-const ZERO_CATEGORY_ID = 0;
-
 const PastPlans: FC = () => {
-	const dispatch = useAppDispatch();
-	const [categoryId, setCategoryId] = useState<number>(ZERO_CATEGORY_ID);
-	const [title, setTitle] = useState<string>("");
-
-	const { userPlans, userPlansDataStatus } = useAppSelector(
-		(state) => state.plan,
-	);
-
-	const isUserPlansLoading = userPlansDataStatus === DataStatus.PENDING;
-
-	useEffect(() => {
-		const isCategoryIdSelected = categoryId !== ZERO_CATEGORY_ID;
-		const hasFilters = isCategoryIdSelected || !!title.trim();
-
-		if (hasFilters) {
-			void dispatch(
-				searchPlan({
-					categoryId: categoryId === ZERO_CATEGORY_ID ? undefined : categoryId,
-					title: title.trim() || undefined,
-				}),
-			);
-		} else {
-			void dispatch(getAllUserPlans());
-		}
-	}, [categoryId, title, dispatch]);
+	const {
+		categoryId,
+		isUserPlansLoading,
+		setCategoryId,
+		setTitle,
+		title,
+		userPlans,
+	} = useUserPlanSearch();
 
 	const handleCategoryChange = useCallback(
 		(event: React.ChangeEvent<HTMLSelectElement>): void => {
 			const id = Number(event.target.value);
 			setCategoryId(id);
 		},
-		[],
+		[setCategoryId],
 	);
 
 	const handleTitleChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
 			setTitle(event.target.value);
 		},
-		[],
+		[setTitle],
 	);
 
 	return (
