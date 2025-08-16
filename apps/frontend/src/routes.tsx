@@ -8,8 +8,8 @@ import {
 	ChooseStyle,
 	Home,
 	NotFound,
-	Profile,
 	PlanGeneration,
+	Profile,
 	QuestionFlow,
 	Quiz,
 } from "./pages/pages.js";

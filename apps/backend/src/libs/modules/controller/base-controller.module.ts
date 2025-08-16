@@ -45,7 +45,7 @@ class BaseController implements Controller {
 			originalRequest: request as never,
 			params: mapped.params,
 			query: mapped.query,
-			...(mapped.user && { user: mapped.user }),
+			user: request.user,
 		};
 		const { payload, status } = await handler(handlerOptions);
 

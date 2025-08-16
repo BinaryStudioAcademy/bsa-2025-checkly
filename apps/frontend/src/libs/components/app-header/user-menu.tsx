@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
-import { FiLogOut, FiUser } from "react-icons/fi";
+import { CgProfile } from "react-icons/cg";
+import { FiLogOut } from "react-icons/fi";
 import { MdDashboard } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 

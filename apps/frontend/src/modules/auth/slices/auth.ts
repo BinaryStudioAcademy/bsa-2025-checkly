@@ -2,12 +2,11 @@ import {
 	avatarRemove,
 	avatarUpload,
 	getCurrentUser,
-  logout,
+	logout,
 	signIn,
 	signUp,
 	updateProfile,
 } from "./actions.js";
-
 import { actions } from "./auth.slice.js";
 
 const allActions = {

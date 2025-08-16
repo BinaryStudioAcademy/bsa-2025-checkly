@@ -131,4 +131,12 @@ const logout = createAsyncThunk<null, LogoutThunkArgument, AsyncThunkConfig>(
 	},
 );
 
-export { avatarRemove, avatarUpload, getCurrentUser, logout, signIn, signUp, updateProfile };
+export {
+	avatarRemove,
+	avatarUpload,
+	getCurrentUser,
+	logout,
+	signIn,
+	signUp,
+	updateProfile,
+};
