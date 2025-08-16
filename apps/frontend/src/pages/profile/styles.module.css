@@ -1,0 +1,27 @@
+.content {
+	height: 100%;
+	padding: var(--space-m);
+	overflow-x: auto;
+	transition: padding 0.3s ease-in-out;
+}
+
+.light-background {
+	--grid-color: var(--color-light-grey);
+	--grid-line: 1px;
+}
+
+.profile-container {
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+.title {
+	padding-bottom: var(--space-s);
+	font-size: var(--text-size-heading-2);
+}
+
+@media (width >= 768px) {
+	.content {
+		padding: var(--space-l);
+	}
+}

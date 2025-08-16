@@ -1,6 +1,10 @@
+import { UserValidationMessage } from "shared";
+
 import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
+import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
 import { type Service } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
+import { type UserModel } from "~/modules/users/user.model.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 
 import {
@@ -24,6 +28,7 @@ class UserService implements Service {
 
 		const item = await this.userRepository.create(
 			UserEntity.initializeNew({
+				dob: null,
 				email: payload.email,
 				name: payload.name,
 				passwordHash: hash,
@@ -60,7 +65,35 @@ class UserService implements Service {
 		id: number,
 		payload: UserUpdateRequestDto,
 	): Promise<null | UserDto> {
-		const item = await this.userRepository.update(id, payload);
+		if (payload.email) {
+			const existing = await this.userRepository.findByField(
+				"email",
+				payload.email,
+			);
+
+			if (existing && existing.toObject().id !== id) {
+				throw new HTTPError({
+					message: UserValidationMessage.EMAIL_ALREADY_EXISTS,
+					status: HTTPCode.CONFLICT,
+				});
+			}
+		}
+
+		const updateData = Object.fromEntries(
+			Object.entries({
+				dob: payload.dob,
+				email: payload.email,
+				name: payload.name,
+			}).filter(([, value]) => value !== undefined),
+		) as Partial<UserModel>;
+
+		if (payload.password && payload.password.trim()) {
+			const { hash, salt } = await this.encryptor.encrypt(payload.password);
+			updateData.passwordHash = hash;
+			updateData.passwordSalt = salt;
+		}
+
+		const item = await this.userRepository.update(id, updateData);
 
 		return item ? item.toObject() : null;
 	}

@@ -1,6 +1,7 @@
 import { UserValidationRule } from "./user-validation-rule.enum.js";
 
 const UserValidationMessage = {
+	DATE_INVALID: "Date must be in format YYYY-MM-DD",
 	EMAIL_ALREADY_EXISTS: "Email already in use",
 	EMAIL_INVALID: "Invalid email format",
 	FIELD_REQUIRED: "Field is required",

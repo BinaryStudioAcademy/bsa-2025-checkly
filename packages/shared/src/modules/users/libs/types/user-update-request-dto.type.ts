@@ -1,7 +1,9 @@
 type UserUpdateRequestDto = {
-	email?: string;
-	name?: string;
-	password?: string;
+	confirmPassword?: string | undefined;
+	dob?: string | undefined;
+	email?: string | undefined;
+	name?: string | undefined;
+	password?: string | undefined;
 };
 
 export { type UserUpdateRequestDto };
