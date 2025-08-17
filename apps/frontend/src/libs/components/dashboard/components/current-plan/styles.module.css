@@ -2,7 +2,7 @@
 	padding: var(--space-m);
 	background-color: var(--color-bg-light);
 	border: 2px solid var(--color-card-gray);
-	border-radius: var(--base-radius);
+	border-radius: var(--radius-m);
 }
 
 .title {
@@ -19,34 +19,6 @@
 	display: flex;
 	justify-content: center;
 	width: 100%;
-	aspect-ratio: 210 / 297;
-	overflow-y: auto;
-}
-
-@media (width >= 320px) {
-	.plan-card {
-		min-width: 260px;
-		max-height: 375px;
-	}
-}
-
-@media (width >= 375px) {
-	.plan-card {
-		min-width: 305px;
-		max-height: 432px;
-	}
-}
-
-@media (width >= 475px) {
-	.plan-card {
-		min-width: 385px;
-		max-height: 545px;
-	}
-}
-
-@media (width >= 500px) {
-	.plan-card {
-		min-width: 390px;
-		max-height: 590px;
-	}
+	overflow-y: hidden;
+	border-radius: var(--radius-m);
 }
