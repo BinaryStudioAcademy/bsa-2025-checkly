@@ -10,7 +10,7 @@ import {
 	useAppSelector,
 	useUserPlanSearch,
 } from "~/libs/hooks/hooks.js";
-import { getAll } from "~/modules/plan-categories/slices/actions.js";
+import { actions as planCategoryActions } from "~/modules/plan-categories/plan-categories.js";
 
 import { ZERO_CATEGORY_ID } from "../libs/enums//enums.js";
 import styles from "./styles.module.css";
@@ -20,7 +20,7 @@ const PastPlans: FC = () => {
 	const { planCategories } = useAppSelector((state) => state.planCategory);
 
 	useEffect(() => {
-		void dispatch(getAll());
+		void dispatch(planCategoryActions.getAll());
 	}, [dispatch]);
 
 	const categoryOptions = [

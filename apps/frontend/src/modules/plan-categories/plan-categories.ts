@@ -12,4 +12,4 @@ const planCategoryApi = new PlanCategoryApi({
 
 export { planCategoryApi };
 export { type PlanCategoryDto } from "./libs/types/types.js";
-export { actions, reducer } from "./slices/plan-category.slice.js";
+export { actions, reducer } from "./slices/plan-category.js";
