@@ -19,6 +19,7 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
+import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
 import { ImageSlider } from "./components/slider/slider.js";
 import { DEFAULT_QUIZ_ANSWERS_PAYLOAD } from "./libs/constants/constants.js";
@@ -47,9 +48,15 @@ const PlanGeneration: React.FC = () => {
 	useEffect(() => {
 		const generatePlan = async (): Promise<void> => {
 			const stored = await storage.get(StorageKey.QUIZ_STATE);
-			const quizAnswers: QuizAnswersRequestDto = stored
+			const quizState = stored
 				? (JSON.parse(stored) as QuizAnswersRequestDto)
 				: DEFAULT_QUIZ_ANSWERS_PAYLOAD;
+
+			const quizAnswers: QuizAnswersRequestDto = {
+				answers: Object.values(quizState.answers),
+				category: quizState.category,
+				notes: quizState.notes,
+			};
 
 			await dispatch(planActions.generatePlan(quizAnswers));
 		};
@@ -58,7 +65,11 @@ const PlanGeneration: React.FC = () => {
 	}, [dispatch]);
 
 	const progress = useProgress({
-		onComplete: () => void navigate(AppRoute.PLAN),
+		onComplete: (): void => {
+			dispatch(quizActions.resetQuiz());
+			void storage.drop(StorageKey.QUIZ_STATE);
+			void navigate(AppRoute.PLAN);
+		},
 		status,
 	});
 
