@@ -8,7 +8,7 @@ import {
 } from "~/modules/plans/plans.js";
 
 class PlanEntity implements Entity {
-	private category?: PlanCategoryDto | undefined;
+	private category?: PlanCategoryDto;
 
 	private categoryId: number;
 
@@ -34,7 +34,7 @@ class PlanEntity implements Entity {
 		title,
 		userId,
 	}: {
-		category?: PlanCategoryDto | undefined;
+		category?: PlanCategoryDto;
 		categoryId: number;
 		days?: PlanDayDto[];
 		duration: number;
