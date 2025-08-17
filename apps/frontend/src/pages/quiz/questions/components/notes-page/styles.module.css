@@ -9,6 +9,10 @@
 }
 
 .notes-content {
+	--grid-opacity: 0.2;
+	--grid-size: 8px;
+	--grid-line: 0.5px;
+
 	position: relative;
 	z-index: 1;
 	width: 100%;
@@ -19,10 +23,6 @@
 	border: 2px solid var(--color-bg-dark);
 	border-radius: var(--radius-l);
 	box-shadow: 0 4px 20px rgb(var(--color-bg-dark) / 10%);
-
-	--grid-opacity: 0.4;
-	--grid-size: 8px;
-	--grid-line: 0.5px;
 }
 
 .notes-title {
