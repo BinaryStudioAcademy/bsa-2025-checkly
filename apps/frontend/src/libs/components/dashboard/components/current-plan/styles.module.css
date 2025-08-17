@@ -15,11 +15,18 @@
 	justify-content: center;
 }
 
+.plan-card {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	aspect-ratio: 210 / 297;
+	overflow-y: auto;
+}
+
 @media (width >= 320px) {
 	.plan-card {
 		min-width: 260px;
 		max-height: 375px;
-		padding: var(--space-l) 0;
 	}
 }
 
@@ -41,13 +48,5 @@
 	.plan-card {
 		min-width: 390px;
 		max-height: 590px;
-		padding: var(--space-s) var(--space-s) 0;
-	}
-}
-
-@media (width >= 768px) {
-	.plan-card {
-		min-width: 595px;
-		max-height: 842px;
 	}
 }
