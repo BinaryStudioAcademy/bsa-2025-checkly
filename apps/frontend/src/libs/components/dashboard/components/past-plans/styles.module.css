@@ -9,6 +9,7 @@
 	padding-block: var(--space-s) var(--space-m);
 	padding-inline: var(--space-s);
 	background-color: var(--color-card-darkblue);
+	border: 2px solid var(--color-bg-dark);
 	border-radius: var(--radius-m);
 }
 
