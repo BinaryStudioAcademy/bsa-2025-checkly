@@ -8,10 +8,10 @@ type PlanActivity = {
 	text: string;
 };
 
-type PlanDay = {
+type PlanDaily = {
 	activities: PlanActivity[];
 	id: string;
 	topic: string;
 };
 
-export { type DayTopic, type PlanActivity, type PlanDay };
+export { type DayTopic, type PlanActivity, type PlanDaily };

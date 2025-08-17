@@ -1,31 +1,11 @@
 import H2C from "html2canvas";
 import jsPDF from "jspdf";
 
-import { type DownloadOptions } from "~/libs/types/types.js";
+import { type DownloadOptions, type Html2CanvasFunction } from "~/libs/types/types.js";
 
-type Html2CanvasFunction = (
-	element: HTMLElement,
-	options?: object,
-) => Promise<HTMLCanvasElement>;
+import { DownloadError, ImageContentType, ImageFormat, PAPER_IN_HALF } from "../constants/constants.js";
 
 const html2canvas = H2C as unknown as Html2CanvasFunction;
-
-const DownloadError = {
-	ELEMENT_NOT_FOUND: "Element with ID '#{id}' not found",
-	UNKNOWN: "An unknown error occurred while downloading",
-} as const;
-
-const ImageContentType = {
-	JPEG: "image/jpeg",
-	PNG: "image/png",
-} as const;
-
-const ImageFormat = {
-	JPG: "jpg",
-	PNG: "png",
-} as const;
-
-const PAPER_IN_HALF = 2;
 
 const generatePdfFromElement = async (
 	targetId: string,
@@ -82,4 +62,5 @@ const generatePdfFromElement = async (
 	pdf.save(`${fileName}.pdf`);
 };
 
-export { DownloadError, generatePdfFromElement };
+export { DownloadError } from "../constants/constants.js";
+export { generatePdfFromElement };

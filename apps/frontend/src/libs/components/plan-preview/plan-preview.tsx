@@ -1,42 +1,16 @@
 import React from "react";
 
 import themeStyles from "~/assets/mock-data/themes.mock.module.css";
-import { ONE, TWO } from "~/libs/constants/numbers.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { useA4Scale } from "~/libs/hooks/hooks.js";
+import { parseDayTopic } from "~/libs/helpers/helpers.js";
+import { type PlanDaily } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
 
-type DayTopic = {
-	main: string;
-	weekday: string;
-};
-
-const parseDayTopic = (topic: string): DayTopic => {
-	const TOPIC_WITH_WEEKDAY_REGEX = /^(.+?) \((.+?)\)$/;
-	const match = TOPIC_WITH_WEEKDAY_REGEX.exec(topic);
-
-	if (match && match[ONE] && match[TWO]) {
-		return {
-			main: match[ONE],
-			weekday: `(${match[TWO]})`,
-		};
-	}
-
-	return { main: topic, weekday: "" };
-};
-
-type Activity = { id: string; text: string };
-
-type Day = {
-	activities: Activity[];
-	id: string;
-	topic: string;
-};
-
 type Properties = {
 	containerId?: string;
-	days: Day[];
+	days: PlanDaily[];
+	isForPrint?: boolean;
 	notes?: string;
 	theme?: "colourful" | "minimal" | "motivating" | "with remarks";
 	title?: string;
@@ -51,18 +25,11 @@ const PlanPreview: React.FC<Properties> = ({
 }) => {
 	const themeClass = themeStyles[theme] ?? themeStyles["colourful"];
 
-	const { scale, viewportReference } = useA4Scale();
-
 	return (
 		<div
 			className={getClassNames(styles["plan-container"], themeClass)}
 			id={containerId}
 		>
-			<div className={styles["a4-viewport"]} ref={viewportReference}>
-				<div
-					className={styles["plan-preview"]}
-					style={{ transform: `scale(${String(scale)})` }}
-				>
 					<h1 className={styles["plan-title"]}>{title}</h1>
 
 					<div className={styles["days-grid-container"]}>
@@ -94,8 +61,6 @@ const PlanPreview: React.FC<Properties> = ({
 								</div>
 							</div>
 						)}
-					</div>
-				</div>
 			</div>
 		</div>
 	);

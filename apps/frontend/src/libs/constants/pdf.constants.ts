@@ -15,4 +15,12 @@ const ImageFormat = {
 
 const PAPER_IN_HALF = 2;
 
-export { DownloadError, ImageContentType, ImageFormat, PAPER_IN_HALF };
+const PDF_DOWNLOAD_OPTIONS = {
+	background: "#ffffff",
+	format: "png" as const,
+	pdfFormat: "a4" as const,
+	pdfOrientation: "portrait" as const,
+	quality: 1,
+};
+
+export { DownloadError, ImageContentType, ImageFormat, PAPER_IN_HALF, PDF_DOWNLOAD_OPTIONS };

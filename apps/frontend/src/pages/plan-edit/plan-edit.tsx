@@ -12,16 +12,22 @@ import {
 	Loader,
 	PlanPreview,
 } from "~/libs/components/components.js";
+import { DAY_INDEX, INITIAL_ITEM, PDF_DOWNLOAD_OPTIONS } from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm } from "~/libs/hooks/hooks.js";
+import { type PlanDaily, type PlanEditForm } from "~/libs/types/types.js";
 
 import { DownloadButton, EditingPanel } from "./components/components.js";
-import { type PlanEditForm } from "./libs/types/plan-edit-form.type.js";
 import styles from "./styles.module.css";
 
+const mapDaysToNavItems = (days: PlanDaily[]): { id: string; label: string }[] => {
+	return days.map((day, index) => ({
+        id: day.id,
+		label: `Day ${String(index + DAY_INDEX)}`,
+	}));
+};
+
 const PlanEdit: FC = () => {
-	const INITIAL_ITEM = 0;
-	const DAY_INDEX = 1;
 
 	const [selectedItem, setSelectedItem] = useState<
 		"notes" | "preview" | number
@@ -54,6 +60,8 @@ const PlanEdit: FC = () => {
 
 	const isPreviewActiveOnMobile = selectedItem === "preview";
 
+	const navItems = mapDaysToNavItems(formValues.days);
+
 	return (
 		<>
 			<AppHeader />
@@ -63,6 +71,7 @@ const PlanEdit: FC = () => {
 					"grid-pattern",
 					styles["page-container"],
 				)}
+				style={{ overflowX: "hidden", position: "relative" }}
 			>
 				<nav className={getClassNames("cluster", styles["nav"])}>
 					<Button
@@ -82,9 +91,7 @@ const PlanEdit: FC = () => {
 				>
 					<div className={styles["left-panel"]}>
 						<DaysNav
-							items={formValues.days.map((_, index) => ({
-								label: `Day ${String(index + DAY_INDEX)}`,
-							}))}
+							items={navItems}
 							notesLabel="Notes"
 							onSelectItem={handleSelectItem}
 							onSelectPreview={handleSelectPreview}
@@ -118,13 +125,7 @@ const PlanEdit: FC = () => {
 				<footer className={getClassNames("cluster", styles["page-footer"])}>
 					<DownloadButton
 						fileName="my-personal-plan"
-						options={{
-							background: "#ffffff",
-							format: "png",
-							pdfFormat: "a4",
-							pdfOrientation: "portrait",
-							quality: 1,
-						}}
+						options={PDF_DOWNLOAD_OPTIONS}
 						targetId="plan-preview-for-download"
 					>
 						<Button
@@ -137,6 +138,17 @@ const PlanEdit: FC = () => {
 						/>
 					</DownloadButton>
 				</footer>
+
+				<div style={{ left: "-9999px", position: "absolute", top: 0, zIndex: -1 }}>
+					<PlanPreview
+						containerId="plan-for-download"
+						days={formValues.days}
+						key={`${planPreviewKey}-print`}
+						notes={formValues.notes}
+						theme="colourful"
+						title="My Personal Plan"
+					/>
+				</div>
 			</main>
 		</>
 	);
