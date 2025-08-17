@@ -15,7 +15,7 @@ import {
 	taskUpdateValidationSchema,
 } from "~/modules/tasks/tasks.js";
 
-import { TaskErrorMessage, TasksApiPath } from "./libs/enums/enums.js";
+import { TaskMessage, TasksApiPath } from "./libs/enums/enums.js";
 
 /**
  * @swagger
@@ -132,6 +132,12 @@ class TaskController extends BaseController {
 				body: taskUpdateValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) => this.delete(options as IdParametersOption),
+			method: HTTPRequestMethod.DELETE,
+			path: TasksApiPath.TASK_DELETE,
+		});
 	}
 
 	/**
@@ -172,6 +178,74 @@ class TaskController extends BaseController {
 	): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.taskService.create(options.body),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /tasks/{id}:
+	 *   delete:
+	 *     tags:
+	 *       - tasks
+	 *     summary: Delete task by ID
+	 *     security:
+	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - in: path
+	 *         name: id
+	 *         schema:
+	 *           type: number
+	 *         required: true
+	 *         description: ID of the task
+	 *     responses:
+	 *       200:
+	 *         description: Task deleted successfully
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 success:
+	 *                   type: boolean
+	 *                   example: true
+	 *       401:
+	 *         description: Unauthorized - Invalid or missing authentication token
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 message:
+	 *                   type: string
+	 *                   example: "Unauthorized"
+	 *       404:
+	 *         description: Task not found
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 message:
+	 *                   type: string
+	 *                   example: "Task not found"
+	 */
+	private async delete(
+		options: IdParametersOption,
+	): Promise<APIHandlerResponse> {
+		const { id } = options.params;
+
+		const isDeleted = await this.taskService.delete(id);
+
+		if (!isDeleted) {
+			return {
+				payload: TaskMessage.TASK_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			};
+		}
+
+		return {
+			payload: TaskMessage.TASK_DELETED,
 			status: HTTPCode.OK,
 		};
 	}
@@ -280,7 +354,7 @@ class TaskController extends BaseController {
 
 		if (!updatedTask) {
 			return {
-				payload: TaskErrorMessage.TASK_NOT_FOUND,
+				payload: TaskMessage.TASK_NOT_FOUND,
 				status: HTTPCode.NOT_FOUND,
 			};
 		}

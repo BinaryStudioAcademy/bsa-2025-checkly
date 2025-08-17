@@ -1,6 +1,6 @@
 export {
 	ExecutionTimeType,
-	TaskErrorMessage,
+	TaskMessage,
 	TasksApiPath,
 } from "./libs/enums/enums.js";
 export {
