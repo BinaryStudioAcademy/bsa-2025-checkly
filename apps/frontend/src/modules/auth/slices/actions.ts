@@ -103,7 +103,7 @@ const logout = createAsyncThunk<null, LogoutThunkArgument, AsyncThunkConfig>(
 
 		dispatch(authSliceActions.resetAuthState());
 
-		await navigate(AppRoute.SIGN_IN);
+		await navigate(AppRoute.ROOT);
 
 		return null;
 	},
