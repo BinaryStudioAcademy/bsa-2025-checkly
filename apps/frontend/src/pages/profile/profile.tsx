@@ -18,11 +18,11 @@ import {
 import sharedStyles from "../auth/components/shared/shared.module.css";
 import styles from "./styles.module.css";
 
-const getDefaultValues = (user: null | UserDto): UserUpdateRequestDto => ({
+const getDefaultValues = (user: UserDto): UserUpdateRequestDto => ({
 	confirmPassword: "",
-	dob: formatDateForInput(user?.dob ?? null),
-	email: user?.email ?? "",
-	name: user?.name ?? "",
+	dob: formatDateForInput(user.dob),
+	email: user.email,
+	name: user.name,
 	password: "",
 });
 
@@ -31,7 +31,7 @@ const Profile: React.FC = () => {
 	const { user } = useAppSelector(({ auth }) => auth);
 
 	const defaultValues = useMemo<UserUpdateRequestDto>(
-		() => getDefaultValues(user),
+		() => getDefaultValues(user as UserDto),
 		[user],
 	);
 

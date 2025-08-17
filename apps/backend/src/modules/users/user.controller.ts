@@ -6,6 +6,7 @@ import {
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
+import { type UserDto } from "~/libs/types/types.js";
 import { type UserService } from "~/modules/users/user.service.js";
 import { userUpdateValidationSchema } from "~/modules/users/users.js";
 
@@ -46,7 +47,7 @@ class UserController extends BaseController {
 			handler: (options) =>
 				this.update(
 					options as APIBodyOptions<UserUpdateRequestDto> & {
-						user?: { id: number };
+						user: UserDto;
 					},
 				),
 			method: HTTPRequestMethod.POST,
@@ -119,13 +120,10 @@ class UserController extends BaseController {
 	 *          description: Validation error
 	 */
 	private async update(
-		options: APIBodyOptions<UserUpdateRequestDto> & { user?: { id: number } },
+		options: APIBodyOptions<UserUpdateRequestDto> & { user: UserDto },
 	): Promise<APIHandlerResponse> {
-		const userId = options.user?.id;
-		const updated = await this.userService.update(
-			userId as number,
-			options.body,
-		);
+		const userId = options.user.id;
+		const updated = await this.userService.update(userId, options.body);
 
 		return {
 			payload: updated,

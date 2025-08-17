@@ -1,4 +1,4 @@
-import { type Entity } from "~/libs/types/types.js";
+import { type Entity, type UserDto } from "~/libs/types/types.js";
 
 class UserEntity implements Entity {
 	private dob: null | string;
@@ -43,11 +43,7 @@ class UserEntity implements Entity {
 		name,
 		passwordHash,
 		passwordSalt,
-	}: {
-		dob: null | string;
-		email: string;
-		id: number;
-		name: string;
+	}: UserDto & {
 		passwordHash: string;
 		passwordSalt: string;
 	}): UserEntity {
@@ -110,12 +106,7 @@ class UserEntity implements Entity {
 		};
 	}
 
-	public toObject(): {
-		dob: null | string;
-		email: string;
-		id: number;
-		name: string;
-	} {
+	public toObject(): UserDto {
 		return {
 			dob: this.dob,
 			email: this.email,
