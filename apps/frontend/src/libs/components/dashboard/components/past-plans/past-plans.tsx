@@ -1,4 +1,9 @@
 import React, { type FC, useCallback, useEffect } from "react";
+import Select, {
+	type GroupBase,
+	type SingleValue,
+	type StylesConfig,
+} from "react-select";
 
 import { Search } from "~/assets/img/icons/icons.js";
 import { Button, Loader } from "~/libs/components/components.js";
@@ -15,6 +20,11 @@ import { actions as planCategoryActions } from "~/modules/plan-categories/plan-c
 import { ZERO_CATEGORY_ID } from "../libs/enums//enums.js";
 import styles from "./styles.module.css";
 
+type CategoryOption = {
+	label: string;
+	value: number;
+};
+
 const PastPlans: FC = () => {
 	const dispatch = useAppDispatch();
 	const { planCategories } = useAppSelector((state) => state.planCategory);
@@ -23,10 +33,16 @@ const PastPlans: FC = () => {
 		void dispatch(planCategoryActions.getAll());
 	}, [dispatch]);
 
-	const categoryOptions = [
-		{ id: ZERO_CATEGORY_ID, title: "All categories" },
-		...planCategories,
-	];
+	const defaultCategoryOption = {
+		id: ZERO_CATEGORY_ID,
+		title: "All categories",
+	};
+
+	const categoryOptions = [defaultCategoryOption, ...planCategories];
+	const selectOptions: CategoryOption[] = categoryOptions.map((option) => ({
+		label: option.title,
+		value: option.id,
+	}));
 
 	const {
 		categoryId,
@@ -38,8 +54,8 @@ const PastPlans: FC = () => {
 	} = useUserPlanSearch();
 
 	const handleCategoryChange = useCallback(
-		(event: React.ChangeEvent<HTMLSelectElement>): void => {
-			const id = Number(event.target.value);
+		(selectedOption: SingleValue<CategoryOption>): void => {
+			const id = selectedOption?.value ?? ZERO_CATEGORY_ID;
 			setCategoryId(id);
 		},
 		[setCategoryId],
@@ -58,6 +74,67 @@ const PastPlans: FC = () => {
 	}, [setCategoryId, setTitle]);
 
 	const plansFoundAmount = userPlans.length;
+	const selectedCategoryOption =
+		selectOptions.find((option) => option.value === categoryId) ??
+		selectOptions[ZERO];
+
+	const customSelectStyles: StylesConfig<
+		CategoryOption,
+		false,
+		GroupBase<CategoryOption>
+	> = {
+		control: (provided, state) => ({
+			...provided,
+			"&:hover": {
+				borderColor: "var(--color-bg-dark)",
+			},
+			"@media (width >= 768px)": {
+				padding: "calc(var(--space-xs) * 0.5) var(--space-xs)",
+			},
+			backgroundColor: "var(--color-bg-light)",
+			border: "2px solid var(--color-bg-dark)",
+			borderRadius: "var(--radius-s)",
+			boxShadow: state.isFocused
+				? "0 0 0 4px var(--color-brand-muted)"
+				: "none",
+			cursor: "pointer",
+			fontFamily: "inherit",
+			fontSize: "inherit",
+			fontWeight: "var(--font-weight-regular)",
+			minHeight: "auto",
+			padding: "0 var(--space-xs)",
+			transition: "all 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
+			width: "100%",
+		}),
+		menu: (provided) => ({
+			...provided,
+			backgroundColor: "var(--color-bg-light)",
+			border: "2px solid var(--color-bg-dark)",
+			borderRadius: "var(--radius-s)",
+		}),
+		option: (provided, state) => {
+			const getBackgroundColor = (): string => {
+				if (state.isSelected) {
+					return "var(--color-brand-muted)";
+				} else if (state.isFocused) {
+					return "var(--color-card-gray)";
+				}
+
+				return "transparent";
+			};
+
+			return {
+				...provided,
+				backgroundColor: getBackgroundColor(),
+				color: "inherit",
+				cursor: "pointer",
+			};
+		},
+		singleValue: (provided) => ({
+			...provided,
+			color: "inherit",
+		}),
+	};
 
 	return (
 		<div className={getClassNames("flow-loose", styles["container"])}>
@@ -71,23 +148,17 @@ const PastPlans: FC = () => {
 			>
 				<div className={getClassNames("flow", styles["search-plans-item"])}>
 					<label htmlFor="category-select">Select category:</label>
-					<select
-						className={styles["search-select"]}
-						id="category-select"
-						name="planCategory"
+					<Select
+						defaultValue={selectedCategoryOption}
+						inputId="category-select"
+						isClearable={false}
+						isSearchable={false}
 						onChange={handleCategoryChange}
-						value={categoryId}
-					>
-						<option defaultChecked disabled value="">
-							Select category
-						</option>
-						{planCategories.length > ZERO &&
-							categoryOptions.map((category) => (
-								<option key={category.id} value={category.id}>
-									{category.title}
-								</option>
-							))}
-					</select>
+						options={selectOptions}
+						placeholder="Select category"
+						styles={customSelectStyles}
+						value={selectedCategoryOption}
+					/>
 				</div>
 
 				<div className={getClassNames("flow", styles["search-plans-item"])}>

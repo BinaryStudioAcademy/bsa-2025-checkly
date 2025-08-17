@@ -28,7 +28,7 @@
 	width: 100%;
 	padding-block: var(--space-xs);
 	padding-inline: var(--space-xl) var(--space-s);
-	background-color: inherit;
+	background-color: var(--color-bg-light);
 	border: 2px solid var(--color-bg-dark);
 	border-radius: var(--radius-s);
 	transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
