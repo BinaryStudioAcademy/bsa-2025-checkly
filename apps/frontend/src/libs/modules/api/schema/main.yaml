@@ -27,3 +27,17 @@ paths:
   /plans/generate:
     post:
       $ref: "./endpoints/plan.yaml#/generate"
+
+  /tasks:
+    post:
+      $ref: "./endpoints/tasks.yaml#/create"
+
+  /tasks/{id}:
+    get:
+      $ref: "./endpoints/tasks.yaml#/getById"
+
+    patch:
+      $ref: "./endpoints/tasks.yaml#/update"
+
+    delete:
+      $ref: "./endpoints/tasks.yaml#/delete"

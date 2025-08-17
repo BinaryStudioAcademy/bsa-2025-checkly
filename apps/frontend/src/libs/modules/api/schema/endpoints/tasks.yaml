@@ -1,0 +1,165 @@
+schemas:
+  TaskRequestDto:
+    type: object
+    required:
+      - title
+      - description
+      - order
+      - planDayId
+    properties:
+      title:
+        type: string
+        example: "Warm-up"
+      description:
+        type: string
+        example: "10-minute stretching routine"
+      executionTimeType:
+        type: string
+        nullable: true
+        example: "morning"
+      isCompleted:
+        type: boolean
+        example: false
+      order:
+        type: number
+        example: 1
+      planDayId:
+        type: number
+        example: 5
+
+  TaskUpdateRequestDto:
+    type: object
+    properties:
+      title:
+        type: string
+        example: "Task Example"
+      description:
+        type: string
+        example: "Task Description"
+      executionTimeType:
+        type: string
+        nullable: true
+        example: "morning"
+
+  TaskResponseDto:
+    type: object
+    properties:
+      id:
+        type: number
+        example: 10
+      title:
+        type: string
+        example: "Warm-up"
+      description:
+        type: string
+        example: "10-minute stretching routine"
+      executionTimeType:
+        type: string
+        nullable: true
+        example: "morning"
+      isCompleted:
+        type: boolean
+        example: false
+      order:
+        type: number
+        example: 1
+      planDayId:
+        type: number
+        example: 5
+      completedAt:
+        type: string
+        nullable: true
+        example: null
+
+create:
+  summary: Create a new task
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "#/schemas/TaskRequestDto"
+  responses:
+    "201":
+      description: Task created successfully
+      content:
+        application/json:
+          schema:
+            $ref: "#/schemas/TaskResponseDto"
+    "400":
+      $ref: "../shared/responses.yaml#/BadRequestError"
+    "401":
+      $ref: "../shared/responses.yaml#/UnauthorizedError"
+
+getById:
+  summary: Get task by ID
+  parameters:
+    - in: path
+      name: id
+      schema:
+        type: number
+      required: true
+      description: ID of the task
+  responses:
+    "200":
+      description: Task retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: "#/schemas/TaskResponseDto"
+    "401":
+      $ref: "../shared/responses.yaml#/UnauthorizedError"
+    "404":
+      $ref: "../shared/responses.yaml#/NotFoundError"
+
+update:
+  summary: Update task by ID
+  parameters:
+    - in: path
+      name: id
+      schema:
+        type: number
+      required: true
+      description: ID of the task
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "#/schemas/TaskUpdateRequestDto"
+  responses:
+    "200":
+      description: Task updated successfully
+      content:
+        application/json:
+          schema:
+            $ref: "#/schemas/TaskResponseDto"
+    "401":
+      $ref: "../shared/responses.yaml#/UnauthorizedError"
+    "404":
+      $ref: "../shared/responses.yaml#/NotFoundError"
+
+delete:
+  summary: Delete task by ID
+  parameters:
+    - in: path
+      name: id
+      schema:
+        type: number
+      required: true
+      description: ID of the task
+  responses:
+    "200":
+      description: Task deleted successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Task deleted successfully"
+    "401":
+      $ref: "../shared/responses.yaml#/UnauthorizedError"
+    "404":
+      $ref: "../shared/responses.yaml#/NotFoundError"
