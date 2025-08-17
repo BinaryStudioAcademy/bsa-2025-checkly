@@ -233,17 +233,12 @@ class TaskController extends BaseController {
 
 		const isDeleted = await this.taskService.delete(id);
 
-		if (!isDeleted) {
-			return {
-				payload: TaskMessage.TASK_NOT_FOUND,
-				status: HTTPCode.NOT_FOUND,
-			};
-		}
-
-		return {
-			payload: TaskMessage.TASK_DELETED,
-			status: HTTPCode.OK,
-		};
+		return isDeleted
+			? { payload: { message: TaskMessage.TASK_DELETED }, status: HTTPCode.OK }
+			: {
+					payload: { message: TaskMessage.TASK_NOT_FOUND },
+					status: HTTPCode.NOT_FOUND,
+				};
 	}
 
 	/**
@@ -348,17 +343,12 @@ class TaskController extends BaseController {
 
 		const updatedTask = await this.taskService.update(id, options.body);
 
-		if (!updatedTask) {
-			return {
-				payload: TaskMessage.TASK_NOT_FOUND,
-				status: HTTPCode.NOT_FOUND,
-			};
-		}
-
-		return {
-			payload: updatedTask,
-			status: HTTPCode.OK,
-		};
+		return updatedTask
+			? { payload: updatedTask, status: HTTPCode.OK }
+			: {
+					payload: { message: TaskMessage.TASK_NOT_FOUND },
+					status: HTTPCode.NOT_FOUND,
+				};
 	}
 }
 

@@ -2,8 +2,8 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
+import { TaskConstants } from "~/modules/tasks/libs/enums/enums.js";
 import { type TaskDto } from "~/modules/tasks/libs/types/types.js";
-import { TaskMockConstants } from "~/modules/tasks/mocks/libs/enums/enums.js";
 
 import { deleteTask, updateTask } from "./actions.js";
 
@@ -29,7 +29,7 @@ const { actions, name, reducer } = createSlice({
 				(task) => task.id === action.payload.id,
 			);
 
-			if (taskIndex >= TaskMockConstants.TASK_ZERO_INDEX) {
+			if (taskIndex >= TaskConstants.TASK_ZERO_INDEX) {
 				state.tasks[taskIndex] = action.payload;
 			} else {
 				state.tasks.push(action.payload);

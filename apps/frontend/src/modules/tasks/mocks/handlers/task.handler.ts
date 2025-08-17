@@ -1,9 +1,6 @@
 import { http } from "msw";
-import {
-	HTTPCode,
-	TaskMessage,
-	TaskMockConstants,
-} from "../libs/enums/enums.js";
+import { HTTPCode, TaskMessage } from "../libs/enums/enums.js";
+import { TaskConstants } from "~/modules/tasks/libs/enums/enums.js";
 import { MOCK_TASKS } from "../libs/constants/constants.js";
 import { type TaskUpdateRequestDto } from "~/modules/tasks/libs/types/types.js";
 
@@ -24,7 +21,7 @@ export const taskHandlers = [
 
 		const taskIndex = MOCK_TASKS.findIndex((task) => task.id === taskId);
 
-		if (taskIndex === TaskMockConstants.TASK_INDEX_NOT_FOUND) {
+		if (taskIndex === TaskConstants.TASK_INDEX_NOT_FOUND) {
 			return new Response(
 				JSON.stringify({ message: TaskMessage.TASK_NOT_FOUND }),
 				{ status: HTTPCode.NOT_FOUND },
@@ -46,14 +43,14 @@ export const taskHandlers = [
 		const taskId = Number(id);
 		const taskIndex = MOCK_TASKS.findIndex((task) => task.id === taskId);
 
-		if (taskIndex === TaskMockConstants.TASK_INDEX_NOT_FOUND) {
+		if (taskIndex === TaskConstants.TASK_INDEX_NOT_FOUND) {
 			return new Response(
 				JSON.stringify({ message: TaskMessage.TASK_NOT_FOUND }),
 				{ status: HTTPCode.NOT_FOUND },
 			);
 		}
 
-		MOCK_TASKS.splice(taskIndex, TaskMockConstants.TASK_FIRST_INDEX);
+		MOCK_TASKS.splice(taskIndex, TaskConstants.TASK_FIRST_INDEX);
 
 		return new Response(JSON.stringify({ message: TaskMessage.TASK_DELETED }), {
 			status: HTTPCode.OK,
