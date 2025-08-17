@@ -7,11 +7,11 @@ import { type OpenAIService } from "../openai/openai.service.js";
 import {
 	type GeneratedPlanDTO,
 	type PlanCreateRequestDto,
-	type PlanDaysTaskDto,
 	type PlanDto,
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
 	type PlanUpdateRequestDto,
+	type PlanWithCategoryDto,
 	type QuizAnswersRequestDto,
 } from "./libs/types/types.js";
 import { createPrompt } from "./libs/utilities/utilities.js";
@@ -24,6 +24,7 @@ class PlanService implements Service {
 		this.planRepository = planRepository;
 		this.openAIService = openAiService;
 	}
+
 	public async create(payload: PlanCreateRequestDto): Promise<PlanResponseDto> {
 		const item = await this.planRepository.create(
 			PlanEntity.initializeNew(payload),
@@ -50,23 +51,26 @@ class PlanService implements Service {
 		};
 	}
 
-	public async findAllUserPlans(userId: number): Promise<PlanDto[]> {
+	public async findAllUserPlans(
+		userId: number,
+	): Promise<PlanWithCategoryDto[]> {
 		return await this.planRepository
 			.findAllUserPlans(userId)
 			.then((plan) => plan.map((item) => item.toObjectWithCategory()));
 	}
 
-	public async findWithRelations(id: number): Promise<null | PlanDaysTaskDto> {
+	public async findWithRelations(
+		id: number,
+	): Promise<null | PlanWithCategoryDto> {
 		const item = await this.planRepository.findWithRelations(id);
 
-		return item ? item.toObjectWithRelations() : null;
+		return item ? item.toObjectWithCategory() : null;
 	}
 
 	public async generate(
 		payload: QuizAnswersRequestDto,
 	): Promise<GeneratedPlanDTO> {
 		const userPrompt = createPrompt(payload);
-
 		const plan = await this.openAIService.generatePlan({ userPrompt });
 
 		return plan;
@@ -78,7 +82,7 @@ class PlanService implements Service {
 			categoryId?: number;
 			title?: string;
 		},
-	): Promise<PlanDto[]> {
+	): Promise<PlanWithCategoryDto[]> {
 		return await this.planRepository
 			.search({
 				userId,

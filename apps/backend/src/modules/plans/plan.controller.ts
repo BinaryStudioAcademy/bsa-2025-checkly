@@ -19,6 +19,7 @@ import {
 } from "~/modules/plans/plans.js";
 
 import { PlansApiPath } from "./libs/enums/enums.js";
+
 /**
  * @swagger
  * tags:
@@ -27,17 +28,33 @@ import { PlansApiPath } from "./libs/enums/enums.js";
  *
  * components:
  *   schemas:
+ *     PlanCategoryDto:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         title:
+ *           type: string
+ *           example: "Sports"
+ *         iconHref:
+ *           type: string
+ *           example: "https://res.cloudinary.com/dezfqozcv/image/upload/v1755447659/spirituality_zae43g.png"
+ *         order:
+ *           type: integer
+ *           example: 1
+ *
  *     TaskDto:
  *       type: object
  *       properties:
  *         id:
- *           type: number
+ *           type: integer
  *         title:
  *           type: string
  *         description:
  *           type: string
  *         order:
- *           type: number
+ *           type: integer
  *         isCompleted:
  *           type: boolean
  *         executionTimeType:
@@ -50,9 +67,9 @@ import { PlansApiPath } from "./libs/enums/enums.js";
  *       type: object
  *       properties:
  *         id:
- *           type: number
+ *           type: integer
  *         dayNumber:
- *           type: number
+ *           type: integer
  *         tasks:
  *           type: array
  *           items:
@@ -62,15 +79,18 @@ import { PlansApiPath } from "./libs/enums/enums.js";
  *       type: object
  *       properties:
  *         id:
- *           type: number
+ *           type: integer
  *         title:
  *           type: string
  *         duration:
- *           type: number
+ *           type: integer
  *         intensity:
  *           type: string
  *         userId:
- *           type: number
+ *           type: integer
+ *         categoryId:
+ *           type: integer
+ *           description: "ID of the plan category"
  *
  *     PlanDaysTaskDto:
  *       allOf:
@@ -124,6 +144,14 @@ import { PlansApiPath } from "./libs/enums/enums.js";
  *               items:
  *                 $ref: '#/components/schemas/GeneratedPlanDayDto'
  *
+ *     PlanWithCategoryDto:
+ *       allOf:
+ *         - $ref: '#/components/schemas/PlanDaysTaskDto'
+ *         - type: object
+ *           properties:
+ *             category:
+ *               $ref: '#/components/schemas/PlanCategoryDto'
+ *
  *     PlanRequestDto:
  *       type: object
  *       required:
@@ -131,34 +159,46 @@ import { PlansApiPath } from "./libs/enums/enums.js";
  *         - userId
  *         - duration
  *         - intensity
+ *         - categoryId
  *       properties:
  *         title:
  *           type: string
  *         userId:
- *           type: number
+ *           type: integer
  *         duration:
- *           type: number
+ *           type: integer
  *         intensity:
  *           type: string
+ *         categoryId:
+ *           type: integer
  *
  *     PlanResponseDto:
+ *       $ref: '#/components/schemas/PlanDto'
+ *
+ *     QuizAnswer:
  *       type: object
+ *       required:
+ *         - questionId
+ *         - questionText
+ *         - isSkipped
  *       properties:
- *         id:
- *           type: number
- *           example: 1
- *         title:
+ *         questionId:
+ *           type: integer
+ *         questionText:
  *           type: string
- *           example: "Weight Loss Plan"
- *         duration:
- *           type: number
- *           example: 5
- *         intensity:
+ *           example: "What motivates you the most?"
+ *         isSkipped:
+ *           type: boolean
+ *         selectedOptions:
+ *           type: array
+ *           items:
+ *             oneOf:
+ *               - type: integer
+ *               - type: string
+ *           example: [1, "Achieving goals"]
+ *         userInput:
  *           type: string
- *           example: "high"
- *         userId:
- *           type: number
- *           example: 1
+ *           example: "I want to be successful"
  *
  *     QuizAnswersRequestDto:
  *       type: object
@@ -254,7 +294,7 @@ class PlanController extends BaseController {
 	 *           schema:
 	 *             $ref: '#/components/schemas/PlanRequestDto'
 	 *     responses:
-	 *       200:
+	 *       201:
 	 *         description: Plan created successfully
 	 *         content:
 	 *           application/json:
@@ -276,10 +316,39 @@ class PlanController extends BaseController {
 	): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.planService.create(options.body),
-			status: HTTPCode.OK,
+			status: HTTPCode.CREATED,
 		};
 	}
 
+	/**
+	 * @swagger
+	 * /plans:
+	 *   get:
+	 *     tags:
+	 *       - plans
+	 *     summary: Get all user plans
+	 *     security:
+	 *       - bearerAuth: []
+	 *     responses:
+	 *       200:
+	 *         description: User plans retrieved successfully
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: array
+	 *               items:
+	 *                 $ref: '#/components/schemas/PlanWithCategoryDto'
+	 *       401:
+	 *         description: Unauthorized - Invalid or missing authentication token
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 message:
+	 *                   type: string
+	 *                   example: "Unauthorized"
+	 */
 	private async findAllUserPlans(
 		options: APIHandlerOptions,
 	): Promise<APIHandlerResponse> {
@@ -303,7 +372,7 @@ class PlanController extends BaseController {
 	 *       - in: path
 	 *         name: id
 	 *         schema:
-	 *           type: number
+	 *           type: integer
 	 *         required: true
 	 *         description: ID of the plan
 	 *     responses:
@@ -312,7 +381,19 @@ class PlanController extends BaseController {
 	 *         content:
 	 *           application/json:
 	 *             schema:
-	 *               $ref: '#/components/schemas/PlanDaysTaskDto'
+	 *               $ref: '#/components/schemas/PlanWithCategoryDto'
+	 *
+	 *       404:
+	 *         description: Plan not found
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 message:
+	 *                   type: string
+	 *                   example: "Plan not found"
+	 *
 	 *       401:
 	 *         description: Unauthorized - Invalid or missing authentication token
 	 *         content:
@@ -369,6 +450,7 @@ class PlanController extends BaseController {
 	 *           application/json:
 	 *             schema:
 	 *               $ref: '#/components/schemas/GeneratedPlanDaysTaskDto'
+	 *
 	 *       400:
 	 *         description: Invalid request data
 	 *         content:
@@ -376,14 +458,10 @@ class PlanController extends BaseController {
 	 *             schema:
 	 *               type: object
 	 *               properties:
-	 *                 errorType:
-	 *                   type: string
-	 *                   example: "VALIDATION"
 	 *                 message:
 	 *                   type: string
 	 *                   example: "At least one of the selected options or user input must be provided for a non-skipped question."
 	 */
-
 	private async generate(
 		options: APIBodyOptions<QuizAnswersRequestDto>,
 	): Promise<APIHandlerResponse> {
@@ -393,6 +471,72 @@ class PlanController extends BaseController {
 		};
 	}
 
+	/**
+	 * @swagger
+	 * /plans/search:
+	 *   get:
+	 *     tags:
+	 *       - plans
+	 *     summary: Search plans by category and title
+	 *     security:
+	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - in: query
+	 *         name: categoryId
+	 *         schema:
+	 *           type: integer
+	 *         required: false
+	 *         description: Category ID required to filter by (0 or "" for all categories)
+	 *         example: 2
+	 *       - in: query
+	 *         name: title
+	 *         schema:
+	 *           type: string
+	 *         required: false
+	 *         description: Title to search for
+	 *         example: "workout"
+	 *     responses:
+	 *       200:
+	 *         description: Plans that match search criteria retrieved successfully
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: array
+	 *               items:
+	 *                 $ref: '#/components/schemas/PlanWithCategoryDto'
+	 *               with_results:
+	 *                 summary: Plans found
+	 *                 value: [
+	 *                   {
+	 *                     "id": 1,
+	 *                     "title": "Morning Workout",
+	 *                     "duration": 30,
+	 *                     "intensity": "medium",
+	 *                     "userId": 1,
+	 *                     "categoryId": 2,
+	 *                     "category": {
+	 *                       "id": 2,
+	 *                       "title": "Sports",
+	 *                       "iconHref": "https://res.cloudinary.com/dezfqozcv/image/upload/v1755447659/sport_tfegpz.png",
+	 *                       "order": 1
+	 *                     },
+	 *                     "days": []
+	 *                   }
+	 *                 ]
+	 *               no_results:
+	 *                 summary: No plans found
+	 *                 value: []
+	 *       401:
+	 *         description: Unauthorized - Invalid or missing authentication token
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 message:
+	 *                   type: string
+	 *                   example: "Unauthorized"
+	 */
 	private async searchByCategoryAndTitle(
 		options: SearchQueryParametersOption<PlanSearchQueryParameter>,
 	): Promise<APIHandlerResponse> {
