@@ -19,7 +19,7 @@ type PlanDto = {
 };
 
 type PlanWithCategoryDto = PlanDaysTaskDto & {
-	category?: PlanCategoryDto | undefined;
+	category?: PlanCategoryDto;
 };
 
 type TaskDto = {
