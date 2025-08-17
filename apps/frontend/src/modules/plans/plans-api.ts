@@ -56,8 +56,8 @@ class PlanApi extends BaseHTTPApi {
 		categoryId,
 		title,
 	}: {
-		categoryId?: number | undefined;
-		title?: string | undefined;
+		categoryId?: number;
+		title?: string;
 	}): Promise<PlanWithCategoryDto[]> {
 		const queryParameters: Record<string, string> = {};
 

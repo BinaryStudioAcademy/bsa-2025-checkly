@@ -23,8 +23,8 @@ const generatePlan = createAsyncThunk<
 const searchPlan = createAsyncThunk<
 	PlanWithCategoryDto[],
 	{
-		categoryId?: number | undefined;
-		title?: string | undefined;
+		categoryId?: number;
+		title?: string;
 	},
 	AsyncThunkConfig
 >(`${sliceName}/search`, async (payload, { extra }) => {
