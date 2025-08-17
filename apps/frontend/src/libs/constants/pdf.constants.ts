@@ -23,4 +23,10 @@ const PDF_DOWNLOAD_OPTIONS = {
 	quality: 1,
 };
 
-export { DownloadError, ImageContentType, ImageFormat, PAPER_IN_HALF, PDF_DOWNLOAD_OPTIONS };
+export {
+	DownloadError,
+	ImageContentType,
+	ImageFormat,
+	PAPER_IN_HALF,
+	PDF_DOWNLOAD_OPTIONS,
+};

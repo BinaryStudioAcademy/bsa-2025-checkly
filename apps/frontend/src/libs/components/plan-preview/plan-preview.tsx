@@ -30,37 +30,36 @@ const PlanPreview: React.FC<Properties> = ({
 			className={getClassNames(styles["plan-container"], themeClass)}
 			id={containerId}
 		>
-					<h1 className={styles["plan-title"]}>{title}</h1>
+			<h1 className={styles["plan-title"]}>{title}</h1>
 
-					<div className={styles["days-grid-container"]}>
-						{days.map((day) => {
-							const { main, weekday } = parseDayTopic(day.topic);
+			<div className={styles["days-grid-container"]}>
+				{days.map((day) => {
+					const { main, weekday } = parseDayTopic(day.topic);
 
-							return (
-								<div className={styles["day-block"]} key={day.id}>
-									<h2 className={styles["day-topic"]}>
-										{main}{" "}
-										<span className={styles["day-weekday"]}>{weekday}</span>
-									</h2>
-									<ul className={styles["activities-list"]}>
-										{day.activities.map((act) => (
-											<li className={styles["activity-item"]} key={act.id}>
-												{act.text}
-											</li>
-										))}
-									</ul>
-								</div>
-							);
-						})}
+					return (
+						<div className={styles["day-block"]} key={day.id}>
+							<h2 className={styles["day-topic"]}>
+								{main} <span className={styles["day-weekday"]}>{weekday}</span>
+							</h2>
+							<ul className={styles["activities-list"]}>
+								{day.activities.map((act) => (
+									<li className={styles["activity-item"]} key={act.id}>
+										{act.text}
+									</li>
+								))}
+							</ul>
+						</div>
+					);
+				})}
 
-						{notes && (
-							<div className={styles["notes-section"]}>
-								<h3>Notes</h3>
-								<div className={styles["notes-lines"]}>
-									<p>{notes}</p>
-								</div>
-							</div>
-						)}
+				{notes && (
+					<div className={styles["notes-section"]}>
+						<h3>Notes</h3>
+						<div className={styles["notes-lines"]}>
+							<p>{notes}</p>
+						</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);

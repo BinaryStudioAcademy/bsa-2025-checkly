@@ -4,7 +4,7 @@ export { type ButtonSize } from "./button-size.type.js";
 export { type ButtonVariant } from "./button-variant.type.js";
 export { type DownloadOptions, type Html2CanvasFunction } from "./pdf.type.js";
 export { type PlanEditForm } from "./plan-edit-form.type.js";
-export { type DayTopic, type PlanActivity } from "./plan.type.js";
+export { type DayTopic } from "./plan.type.js";
 export { type PlanDay } from "./plan/plan-day.type.js";
 export { type PlanStyleOption } from "./plan/plan-style-option.type.js";
 export { type ViewOptions } from "./plan/plan-view-option.type.js";

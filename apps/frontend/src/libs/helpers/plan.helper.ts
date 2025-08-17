@@ -1,4 +1,4 @@
-import { ONE, TWO } from "~/libs/constants/numbers.js";
+import { ONE, TWO } from "~/libs/constants/constants.js";
 import { type DayTopic } from "~/libs/types/types.js";
 
 const parseDayTopic = (topic: string): DayTopic => {

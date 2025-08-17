@@ -12,7 +12,11 @@ import {
 	Loader,
 	PlanPreview,
 } from "~/libs/components/components.js";
-import { DAY_INDEX, INITIAL_ITEM, PDF_DOWNLOAD_OPTIONS } from "~/libs/constants/constants.js";
+import {
+	DAY_INDEX,
+	INITIAL_ITEM,
+	PDF_DOWNLOAD_OPTIONS,
+} from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm } from "~/libs/hooks/hooks.js";
 import { type PlanDaily, type PlanEditForm } from "~/libs/types/types.js";
@@ -20,15 +24,16 @@ import { type PlanDaily, type PlanEditForm } from "~/libs/types/types.js";
 import { DownloadButton, EditingPanel } from "./components/components.js";
 import styles from "./styles.module.css";
 
-const mapDaysToNavItems = (days: PlanDaily[]): { id: string; label: string }[] => {
+const mapDaysToNavItems = (
+	days: PlanDaily[],
+): { id: string; label: string }[] => {
 	return days.map((day, index) => ({
-        id: day.id,
+		id: day.id,
 		label: `Day ${String(index + DAY_INDEX)}`,
 	}));
 };
 
 const PlanEdit: FC = () => {
-
 	const [selectedItem, setSelectedItem] = useState<
 		"notes" | "preview" | number
 	>(INITIAL_ITEM);
@@ -139,7 +144,9 @@ const PlanEdit: FC = () => {
 					</DownloadButton>
 				</footer>
 
-				<div style={{ left: "-9999px", position: "absolute", top: 0, zIndex: -1 }}>
+				<div
+					style={{ left: "-9999px", position: "absolute", top: 0, zIndex: -1 }}
+				>
 					<PlanPreview
 						containerId="plan-for-download"
 						days={formValues.days}

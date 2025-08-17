@@ -1,9 +1,17 @@
 import H2C from "html2canvas";
 import jsPDF from "jspdf";
 
-import { type DownloadOptions, type Html2CanvasFunction } from "~/libs/types/types.js";
+import {
+	type DownloadOptions,
+	type Html2CanvasFunction,
+} from "~/libs/types/types.js";
 
-import { DownloadError, ImageContentType, ImageFormat, PAPER_IN_HALF } from "../constants/constants.js";
+import {
+	DownloadError,
+	ImageContentType,
+	ImageFormat,
+	PAPER_IN_HALF,
+} from "../constants/constants.js";
 
 const html2canvas = H2C as unknown as Html2CanvasFunction;
 

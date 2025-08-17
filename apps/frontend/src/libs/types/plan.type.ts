@@ -14,4 +14,4 @@ type PlanDaily = {
 	topic: string;
 };
 
-export { type DayTopic, type PlanActivity, type PlanDaily };
+export { type DayTopic, type PlanDaily };
