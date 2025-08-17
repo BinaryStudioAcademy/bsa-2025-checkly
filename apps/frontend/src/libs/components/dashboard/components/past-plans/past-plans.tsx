@@ -2,6 +2,7 @@ import React, { type FC, useCallback, useEffect } from "react";
 
 import { Search } from "~/assets/img/icons/icons.js";
 import { Button, Loader } from "~/libs/components/components.js";
+import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { ZERO } from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import {
@@ -127,7 +128,7 @@ const PastPlans: FC = () => {
 				) : (
 					userPlans.map((plan) => (
 						<div className={styles["plan-card"]} key={plan.id}>
-							<p>{plan.title}</p>
+							<PlanStyle inputStyle="withremarks" view="selection" />
 						</div>
 					))
 				)}
