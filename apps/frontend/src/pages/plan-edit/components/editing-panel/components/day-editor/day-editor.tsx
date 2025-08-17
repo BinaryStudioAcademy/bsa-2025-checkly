@@ -1,7 +1,7 @@
 import { type FC, useCallback } from "react";
 import { type Control, type FieldErrors, useFieldArray } from "react-hook-form";
 
-import { Button, Input } from "~/libs/components/components.js";
+import { Button, Textarea } from "~/libs/components/components.js";
 import { INCREMENT_VALUE } from "~/libs/constants/constants.js";
 import { type PlanEditForm } from "~/libs/types/types.js";
 
@@ -44,11 +44,12 @@ const DayEditor: FC<Properties> = ({ control, dayIndex, errors }) => {
 			<div className={styles["activitiesList"]}>
 				{fields.map((field, activityIndex) => (
 					<div className={styles["activityRow"]} key={field.id}>
-						<Input
+						<Textarea
 							control={control}
 							errors={errors}
 							label={`Task ${String(activityIndex + INCREMENT_VALUE)}`}
 							name={getFieldName(dayIndex, activityIndex)}
+							rows={2}
 						/>
 						<Button
 							icon={<>&times;</>}
