@@ -17,7 +17,7 @@ const Header: React.FC = () => {
 					</Link>
 					{user ? (
 						<Link asButtonVariant="secondary" to={AppRoute.DASHBOARD}>
-							Profile
+							My Plans
 						</Link>
 					) : (
 						<Link asButtonVariant="secondary" to={AppRoute.SIGN_IN}>
