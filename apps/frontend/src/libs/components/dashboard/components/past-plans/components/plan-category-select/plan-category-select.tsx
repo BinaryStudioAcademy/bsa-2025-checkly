@@ -1,8 +1,8 @@
 import { type FC } from "react";
 import Select, { type SingleValue } from "react-select";
 
-import { type CategoryOption } from "../libs/types/types.js";
-import { planCategorySelectStyles } from "./libs/enums/enums.js";
+import { type CategoryOption } from "../../libs/types/types.js";
+import { planCategorySelectStyles } from "../libs/enums/enums.js";
 
 type Properties = {
 	className?: string;

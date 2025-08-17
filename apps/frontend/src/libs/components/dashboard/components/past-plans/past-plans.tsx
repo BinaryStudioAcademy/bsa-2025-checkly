@@ -14,7 +14,7 @@ import {
 import { actions as planCategoryActions } from "~/modules/plan-categories/plan-categories.js";
 
 import { ZERO_CATEGORY_ID } from "../libs/enums/enums.js";
-import { PlanCategorySelect } from "./components/plan-category-select.js";
+import { PlanCategorySelect } from "./components/plan-category-select/plan-category-select.js";
 import { defaultCategoryOption } from "./libs/enums/enums.js";
 import { type CategoryOption } from "./libs/types/types.js";
 import styles from "./styles.module.css";
