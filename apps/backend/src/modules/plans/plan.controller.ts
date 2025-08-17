@@ -11,6 +11,8 @@ import { type PlanService } from "~/modules/plans/plan.service.js";
 import {
 	type PlanCreateRequestDto,
 	planCreateValidationSchema,
+	type QuizAnswersRequestDto,
+	quizAnswersValidationSchema,
 } from "~/modules/plans/plans.js";
 
 import { PlansApiPath } from "./libs/enums/enums.js";
@@ -112,6 +114,32 @@ import { PlansApiPath } from "./libs/enums/enums.js";
  *         userId:
  *           type: number
  *           example: 1
+ *
+ *     QuizAnswersRequestDto:
+ *       type: object
+ *       required:
+ *         - answers
+ *         - category
+ *         - notes
+ *       properties:
+ *         answers:
+ *           type: array
+ *           items:
+ *             $ref: "#/components/schemas/QuizAnswer"
+ *         category:
+ *           type: string
+ *           enum:
+ *             - "creativity"
+ *             - "hobby"
+ *             - "money"
+ *             - "personal_development"
+ *             - "spirituality"
+ *             - "sport"
+ *           example: "sport"
+ *         notes:
+ *           type: string
+ *           example: "Some additional notes"
+ *           description: Additional user notes
  */
 class PlanController extends BaseController {
 	private planService: PlanService;
@@ -135,6 +163,17 @@ class PlanController extends BaseController {
 			path: PlansApiPath.PLAN_CREATE,
 			validation: {
 				body: planCreateValidationSchema,
+			},
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.generate(options as APIBodyOptions<QuizAnswersRequestDto>),
+			isPublic: true,
+			method: HTTPRequestMethod.POST,
+			path: PlansApiPath.PLAN_GENERATE,
+			validation: {
+				body: quizAnswersValidationSchema,
 			},
 		});
 	}
@@ -222,6 +261,64 @@ class PlanController extends BaseController {
 
 		return {
 			payload: await this.planService.findWithRelations(id),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /plans/generate:
+	 *   post:
+	 *     tags:
+	 *       - plans
+	 *     summary: Generate a new plan
+	 *     requestBody:
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             $ref: '#/components/schemas/QuizAnswersRequestDto'
+	 *           example:
+	 *             answers:
+	 *               - questionId: 1
+	 *                 questionText: "What motivates you the most?"
+	 *                 isSkipped: false
+	 *                 selectedOptions: [1, "Achieving goals"]
+	 *                 userInput: "I want to be successful"
+	 *               - questionId: 2
+	 *                 questionText: "How much time can you dedicate daily?"
+	 *                 isSkipped: false
+	 *                 selectedOptions: ["30 minutes"]
+	 *                 userInput: ""
+	 *             category: "sport"
+	 *             notes: "Looking for a beginner plan"
+	 *     responses:
+	 *       200:
+	 *         description: Plan generated successfully
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/PlanDaysTaskDto'
+	 *       400:
+	 *         description: Invalid request data
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 errorType:
+	 *                   type: string
+	 *                   example: "VALIDATION"
+	 *                 message:
+	 *                   type: string
+	 *                   example: "At least one of the selected options or user input must be provided for a non-skipped question."
+	 */
+
+	private generate(
+		options: APIBodyOptions<QuizAnswersRequestDto>,
+	): APIHandlerResponse {
+		return {
+			payload: this.planService.generate(options.body),
 			status: HTTPCode.OK,
 		};
 	}

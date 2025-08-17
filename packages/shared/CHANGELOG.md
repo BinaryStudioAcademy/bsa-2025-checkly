@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.7.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.6.0...shared-v1.7.0) (2025-08-17)
+
+
+### Features
+
+* * update plan module to add "/generate" endpoint cy-229 ([45b7684](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/45b768467eed3786ca47f312ae7b2af41ee3b440))
+* * update quiz validation schema cy-229 ([189586e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/189586e0d5bc4d9a9c77050632d0973cf5098dc6))
+* * update quiz-api cy-229 ([af0e982](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/af0e98205e88cbc585d913525f5e82006b316eca))
+* * update quiz-api path cy-229 ([70d068f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/70d068fedb5e8cba9634d33280b008df987c959a))
+* + merge with main cy-229 ([b00ee09](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b00ee098c528bf22865c60007f6231a9a175af30))
+* + update quiz validation schemas cy-229 ([01b8747](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/01b8747b3859a345711f40d25ec33ab75f311ad3))
+* update plan module to add "/generate" endpoint cy-229 ([8b34607](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8b346078be5e53ef6af2961f13ba0b7df8f848a7))
+
 ## [1.6.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.5.1...shared-v1.6.0) (2025-08-15)
 
 

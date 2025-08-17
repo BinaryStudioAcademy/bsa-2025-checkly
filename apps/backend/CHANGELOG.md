@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.6.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.5.1...backend-v1.6.0) (2025-08-17)
+
+
+### Features
+
+* * update method name in plan module cy-229 ([67ebc89](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/67ebc89ec8089dfa04204af086f76432fcf74e59))
+* * update plan controller swagger docs cy-229 ([b691441](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b6914410a2764d4258fd2683bfcfba48f868bd60))
+* * update plan module to add "/generate" endpoint cy-229 ([45b7684](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/45b768467eed3786ca47f312ae7b2af41ee3b440))
+* + merge with main cy-229 ([b00ee09](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b00ee098c528bf22865c60007f6231a9a175af30))
+* update plan module to add "/generate" endpoint cy-229 ([8b34607](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8b346078be5e53ef6af2961f13ba0b7df8f848a7))
+
 ## [1.5.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.5.0...backend-v1.5.1) (2025-08-15)
 
 
