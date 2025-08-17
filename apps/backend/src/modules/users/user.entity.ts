@@ -1,4 +1,4 @@
-import { type Entity } from "~/libs/types/types.js";
+import { type Entity, type UserDto } from "~/libs/types/types.js";
 
 class UserEntity implements Entity {
 	private avatarUrl: null | string;
@@ -35,23 +35,26 @@ class UserEntity implements Entity {
 		this.avatarUrl = avatarUrl;
 	}
 
-	public static initialize(properties: {
-		avatarUrl?: null | string;
-		dob: null | string;
-		email: string;
-		id: number;
-		name: string;
+	public static initialize({
+		avatarUrl,
+		dob,
+		email,
+		id,
+		name,
+		passwordHash,
+		passwordSalt,
+	}: UserDto & {
 		passwordHash: string;
 		passwordSalt: string;
 	}): UserEntity {
 		return new UserEntity({
-			avatarUrl: properties.avatarUrl ?? null,
-			dob: properties.dob,
-			email: properties.email,
-			id: properties.id,
-			name: properties.name,
-			passwordHash: properties.passwordHash,
-			passwordSalt: properties.passwordSalt,
+			avatarUrl: avatarUrl ?? null,
+			dob,
+			email,
+			id,
+			name,
+			passwordHash,
+			passwordSalt,
 		});
 	}
 
@@ -99,13 +102,7 @@ class UserEntity implements Entity {
 		};
 	}
 
-	public toObject(): {
-		avatarUrl: null | string;
-		dob: null | string;
-		email: string;
-		id: number;
-		name: string;
-	} {
+	public toObject(): UserDto {
 		return {
 			avatarUrl: this.avatarUrl,
 			dob: this.dob,

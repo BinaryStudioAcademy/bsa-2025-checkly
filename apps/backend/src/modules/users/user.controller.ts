@@ -55,7 +55,7 @@ class UserController extends BaseController {
 			handler: (options) =>
 				this.update(
 					options as APIBodyOptions<UserUpdateRequestDto> & {
-						user?: Pick<UserDto, "id">;
+						user: UserDto;
 					},
 				),
 			method: HTTPRequestMethod.POST,
@@ -194,15 +194,10 @@ class UserController extends BaseController {
 	 *          description: Validation error
 	 */
 	private async update(
-		options: APIBodyOptions<UserUpdateRequestDto> & {
-			user?: Pick<UserDto, "id">;
-		},
+		options: APIBodyOptions<UserUpdateRequestDto> & { user: UserDto },
 	): Promise<APIHandlerResponse> {
-		const userId = options.user?.id;
-		const updated = await this.userService.update(
-			userId as number,
-			options.body,
-		);
+		const userId = options.user.id;
+		const updated = await this.userService.update(userId, options.body);
 
 		return {
 			payload: updated,

@@ -12,9 +12,13 @@ const userUpdate = z
 		dob: z
 			.string()
 			.trim()
-			.regex(UserValidationRegexRule.DATE_VALID, {
-				message: UserValidationMessage.DATE_INVALID,
-			})
+			.refine(
+				(value) =>
+					value === "" || UserValidationRegexRule.DATE_VALID.test(value),
+				{
+					message: UserValidationMessage.DATE_INVALID,
+				},
+			)
 			.nullable()
 			.optional(),
 		email: z
@@ -25,8 +29,7 @@ const userUpdate = z
 			})
 			.regex(UserValidationRegexRule.EMAIL_VALID_CHARS_MIN_MAX, {
 				message: UserValidationMessage.EMAIL_INVALID,
-			})
-			.optional(),
+			}),
 		name: z
 			.string()
 			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
@@ -46,8 +49,7 @@ const userUpdate = z
 			)
 			.refine((value) => UserValidationRegexRule.NAME_VALID_CHARS.test(value), {
 				message: UserValidationMessage.NAME_ONLY_ALLOWED_CHARS,
-			})
-			.optional(),
+			}),
 		password: z
 			.string()
 			.trim()

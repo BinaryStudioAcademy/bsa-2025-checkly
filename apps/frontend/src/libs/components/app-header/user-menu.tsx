@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
-import { CgProfile } from "react-icons/cg";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogOut, FiUser } from "react-icons/fi";
 import { MdDashboard } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
@@ -35,7 +34,7 @@ const UserMenu: React.FC<Properties> = ({ isOpen }) => {
 				<NavigationItem
 					buttonText="Profile"
 					buttonType="user-menu"
-					icon={<CgProfile />}
+					icon={<FiUser />}
 					navigateTo={AppRoute.PROFILE}
 				/>
 				<NavigationItem

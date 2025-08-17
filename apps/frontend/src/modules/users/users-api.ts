@@ -1,4 +1,4 @@
-import { APIPath, ContentType } from "~/libs/enums/enums.js";
+import { APIPath, ContentType, HTTPRequestMethod } from "~/libs/enums/enums.js";
 import { sanitizeFilename } from "~/libs/helpers/helpers.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
@@ -28,7 +28,7 @@ class UserApi extends BaseHTTPApi {
 			{
 				contentType: ContentType.JSON,
 				hasAuth: false,
-				method: "GET",
+				method: HTTPRequestMethod.GET,
 			},
 		);
 
@@ -51,7 +51,7 @@ class UserApi extends BaseHTTPApi {
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,
-				method: "POST",
+				method: HTTPRequestMethod.POST,
 				payload: JSON.stringify(payload),
 			},
 		);

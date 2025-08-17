@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 
 import {
 	AvatarEdit,
@@ -6,7 +6,6 @@ import {
 	Input,
 	Loader,
 } from "~/libs/components/components.js";
-import { ZERO } from "~/libs/constants/constants.js";
 import { formatDateForInput } from "~/libs/helpers/date-helpers.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import {
@@ -16,6 +15,7 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { updateProfile } from "~/modules/auth/slices/actions.js";
 import {
+	type UserDto,
 	type UserUpdateRequestDto,
 	userUpdateValidationSchema,
 } from "~/modules/users/users.js";
@@ -23,52 +23,20 @@ import {
 import sharedStyles from "../auth/components/shared/shared.module.css";
 import styles from "./styles.module.css";
 
-const getChangedProfileFields = (
-	data: UserUpdateRequestDto,
-	defaultValues: UserUpdateRequestDto,
-): UserUpdateRequestDto => {
-	const changed: UserUpdateRequestDto = {};
-
-	if (data.name !== defaultValues.name && data.name !== undefined) {
-		changed.name = data.name;
-	}
-
-	if (data.email !== defaultValues.email && data.email !== undefined) {
-		changed.email = data.email;
-	}
-
-	const currentDob = data.dob ?? "";
-	const defaultDob = defaultValues.dob ?? "";
-
-	if (currentDob !== defaultDob) {
-		changed.dob = currentDob === "" ? undefined : currentDob;
-	}
-
-	const password = data.password ?? "";
-
-	if (password.trim().length > ZERO) {
-		changed.password = password;
-
-		if (data.confirmPassword !== undefined) {
-			changed.confirmPassword = data.confirmPassword;
-		}
-	}
-
-	return changed;
-};
+const getDefaultValues = (user: UserDto): UserUpdateRequestDto => ({
+	confirmPassword: "",
+	dob: formatDateForInput(user.dob),
+	email: user.email,
+	name: user.name,
+	password: "",
+});
 
 const Profile: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { user } = useAppSelector(({ auth }) => auth);
 
 	const defaultValues = useMemo<UserUpdateRequestDto>(
-		() => ({
-			confirmPassword: "",
-			dob: formatDateForInput(user?.dob ?? null),
-			email: user?.email ?? "",
-			name: user?.name ?? "",
-			password: "",
-		}),
+		() => getDefaultValues(user as UserDto),
 		[user],
 	);
 
@@ -82,15 +50,18 @@ const Profile: React.FC = () => {
 		reset(defaultValues);
 	}, [defaultValues, reset]);
 
-	const handleFormSubmit = handleSubmit((data) => {
-		const changed = getChangedProfileFields(data, defaultValues);
+	const handleFormSubmit = useCallback(
+		(event_: React.BaseSyntheticEvent): void => {
+			void handleSubmit((data) => {
+				if (!isDirty) {
+					return;
+				}
 
-		if (Object.keys(changed).length === ZERO) {
-			return;
-		}
-
-		void dispatch(updateProfile(changed));
-	});
+				void dispatch(updateProfile(data));
+			})(event_);
+		},
+		[dispatch, handleSubmit, isDirty],
+	);
 
 	const contentClasses = getClassNames(
 		"grid-pattern",
@@ -110,11 +81,7 @@ const Profile: React.FC = () => {
 				<form
 					aria-labelledby="profile-title"
 					className={getClassNames(sharedStyles["form"], "cluster")}
-					// eslint-disable-next-line react/jsx-no-bind
-					onSubmit={(event) => {
-						event.preventDefault();
-						void handleFormSubmit(event);
-					}}
+					onSubmit={handleFormSubmit}
 				>
 					<div className="flow-loose">
 						<Input

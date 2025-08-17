@@ -10,6 +10,7 @@ import {
 	useQuizSaved,
 } from "~/libs/hooks/hooks.js";
 import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
+import { type AppRouteType } from "~/libs/types/types.js";
 import { actions, type QuizAnswer } from "~/modules/quiz/quiz.js";
 
 import { NotesPage } from "./components/notes-page/notes-page.js";
@@ -38,19 +39,13 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
-	const {
-		answers,
-		currentQuestion,
-		dataStatus,
-		notes,
-		questions,
-		selectedCategory,
-	} = useAppSelector((state) => state.quiz);
+	const { answers, currentQuestion, dataStatus, questions, selectedCategory } =
+		useAppSelector((state) => state.quiz);
 
-	const { clearStorage } = useQuizSaved();
+	useQuizSaved();
 
 	const safeNavigate = useCallback(
-		async (path: string): Promise<void> => {
+		async (path: AppRouteType): Promise<void> => {
 			try {
 				await navigate(path);
 			} catch {
@@ -85,37 +80,8 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 			return;
 		}
 
-		const submission = {
-			answers: Object.values(answers),
-			category: selectedCategory,
-			notes,
-		};
-
-		const timestamp = new Date().toISOString();
-		const localStorageKey = `quiz_submission_${timestamp}`;
-
-		const JSON_INDENTATION = 2;
-		localStorage.setItem(
-			localStorageKey,
-			JSON.stringify(submission, null, JSON_INDENTATION),
-		);
-		const result = await dispatch(actions.submitQuiz(submission));
-		const isFulfilled = /fulfilled/.test(result.type);
-
-		if (isFulfilled) {
-			void clearStorage();
-			dispatch(actions.resetQuiz());
-			void safeNavigate(AppRoute.QUIZ);
-		}
-	}, [
-		answers,
-		dispatch,
-		notes,
-		safeNavigate,
-		questions,
-		selectedCategory,
-		clearStorage,
-	]);
+		await safeNavigate(AppRoute.PLAN_GENERATION);
+	}, [safeNavigate, questions, selectedCategory]);
 
 	const handleNext = useCallback((): void => {
 		if (shouldMoveToNext(questions, currentQuestion)) {

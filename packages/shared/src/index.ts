@@ -66,13 +66,14 @@ export {
 	type QuizAnswer,
 	type QuizAnswersRequestDto,
 	type QuizAnswersResponseDto,
-	QuizAnswersValidationSchema,
+	QuizAnswersRule,
+	quizAnswersValidationSchema,
 	QuizApiPath,
 	type QuizCategoryType,
 	QuizIndexes,
 	QuizQuestionFormat,
 	type QuizQuestionsResponseDto,
-	QuizStateValidationSchema,
+	quizStateValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
 	ExecutionTimeType,
