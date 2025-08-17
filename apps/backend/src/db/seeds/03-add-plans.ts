@@ -145,6 +145,7 @@ async function seed(knex: Knex): Promise<void> {
 	if (existingUsers.length === ZERO_LENGTH) {
 		const userSeedData = {
 			email: "john@gmail.com",
+			name: "john",
 			// password: John1234
 			password_hash:
 				"c11fcc10e7cc4b9dd1c3a7015a10afc9dbae7bf75791777f96d9502634ce3a5e",
