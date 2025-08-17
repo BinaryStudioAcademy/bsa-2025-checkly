@@ -8,6 +8,24 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import { APIPath, PlanCategoriesApiPath } from "./libs/enums/enums.js";
 import { type PlanCategoryService } from "./plan-category.service.js";
 
+/**
+ * @swagger
+ * tags:
+ *   - name: plan-categories
+ *     description: Endpoints related to plan-categories
+ *
+ * components:
+ *   schemas:
+ *     PlanCategoryDto:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         title:
+ *           type: string
+ *           example: "Sports"
+ */
 class PlanCategoryController extends BaseController {
 	private planCategoryService: PlanCategoryService;
 
@@ -24,6 +42,23 @@ class PlanCategoryController extends BaseController {
 		});
 	}
 
+	/**
+	 * @swagger
+	 * /plan-categories:
+	 *   get:
+	 *     tags:
+	 *       - plan-categories
+	 *     summary: Get all plan categories
+	 *     responses:
+	 *       200:
+	 *         description: Plan categories retrieved successfully
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: array
+	 *               items:
+	 *                 $ref: '#/components/schemas/PlanCategoryDto'
+	 */
 	private async findAll(): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.planCategoryService.findAll(),
