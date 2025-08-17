@@ -3,6 +3,12 @@
 	--base-radius: 1rem;
 	--space-3xs: 0.25rem;
 	--space-l: 1rem;
+	--page-inline: clamp(1rem, 6vw, 3.5rem);
+	--content-max: 1120px;
+	--card-gap: clamp(1rem, 6vw, 1.5rem);
+	--card-w: 15rem;
+	--side-center: max(0px, calc(50vw - (var(--card-w) / 2)));
+	--nav-gap: 1.47rem;
 }
 
 .nav {
@@ -10,19 +16,22 @@
 	top: 71px;
 	left: 0;
 	z-index: 2;
-	display: flex;
-	gap: clamp(0%, calc(22vw - 5.5rem), 15%);
+	display: grid;
+	grid-template-columns: 1fr minmax(0, var(--content-max)) 1fr;
 	align-items: center;
-	justify-content: flex-start;
 	width: 100%;
-	padding: var(--gutter);
+	padding-block: var(--gutter);
+	padding-inline: var(--page-inline);
 	background-color: var(--color-bg-white);
 	border-bottom: 3px solid var(--color-card-gray);
 	animation: slide-down 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav p {
-	padding-left: var(--space-l);
+	grid-column: 2;
+	justify-self: start;
+	padding-left: 0;
+	margin: 0;
 	font: var(--font-family-primary);
 	font-size: var(--text-size-heading-5);
 	font-weight: var(--font-weight-heading);
@@ -34,6 +43,8 @@
 }
 
 .nav-link {
+	grid-column: 1;
+	justify-self: start;
 	text-decoration: none;
 }
 
@@ -42,6 +53,7 @@
 	--grid-opacity: 0.4;
 
 	flex: 1;
+	padding-inline: var(--page-inline);
 	padding-top: 128px;
 	zoom: 0.9;
 }
@@ -62,6 +74,7 @@
 }
 
 .choose-style-main {
+	padding-inline: var(--page-inline);
 	padding-top: 4rem;
 }
 
@@ -69,7 +82,8 @@
 	display: flex;
 	gap: 0.75rem;
 	justify-content: center;
-	max-width: fit-content;
+	width: 100%;
+	max-width: var(--content-max);
 	padding: 0.4rem 4.5rem;
 	margin: 0.75rem auto;
 	background-color: var(--color-brand-primary);
@@ -78,11 +92,17 @@
 
 .card-container {
 	display: flex;
-	flex-wrap: wrap;
-	gap: 2rem;
+	flex-wrap: nowrap;
+	gap: 2rem clamp(1.25rem, 3vw, 1.75rem);
+	column-gap: 0;
 	align-items: center;
-	justify-content: center;
-	padding: 2rem;
+	justify-content: flex-start;
+	justify-content: space-between;
+	width: 100%;
+	max-width: var(--content-max);
+	padding-block: 2rem;
+	padding-inline: 0;
+	margin-inline: auto;
 }
 
 .card {
@@ -146,7 +166,10 @@
 	flex-direction: column;
 	gap: 1rem;
 	align-items: center;
+	width: 100%;
+	max-width: var(--content-max);
 	padding: 2rem 0;
+	margin-inline: auto;
 }
 
 .flower {
@@ -182,7 +205,7 @@
 	}
 }
 
-@media (width <= 829px) {
+@media (width <= 958px) {
 	.header-buttons button {
 		display: block;
 		margin-right: auto;
@@ -206,11 +229,14 @@
 	.card-container {
 		display: flex;
 		flex-wrap: nowrap;
-		gap: 15rem;
+		gap: calc(var(--side-center) + 20px);
 		justify-content: flex-start;
-		padding: 1rem 12rem;
+		padding-block: 1rem;
+		padding-inline: var(--side-center);
 		overflow-x: auto;
+		overscroll-behavior-x: contain;
 		scroll-snap-type: x mandatory;
+		scroll-padding-inline: var(--side-center);
 		scrollbar-width: none;
 		-webkit-overflow-scrolling: touch;
 	}
@@ -221,12 +247,34 @@
 
 	.card {
 		flex: 0 0 auto;
-		margin: 0 auto;
+		margin: 0;
 		scroll-snap-align: center;
+		scroll-snap-stop: always;
 	}
 
 	.choose-style-section {
 		min-height: 100vh;
+	}
+}
+
+@media (width <= 1050px) {
+	.card-container {
+		flex-wrap: wrap;
+		column-gap: 2rem;
+	}
+}
+
+@media (width <= 791px) {
+	.card-container {
+		column-gap: 2rem;
+		justify-content: space-evenly;
+	}
+}
+
+@media (width <= 1200px) {
+	.nav {
+		grid-template-columns: auto max-content 1fr;
+		column-gap: var(--nav-gap);
 	}
 }
 
