@@ -73,10 +73,12 @@ export {
 	ExecutionTimeType,
 	type TaskCreateRequestDto,
 	taskCreateValidationSchema,
+	TaskErrorMessage,
 	type TaskGetAllResponseDto,
 	type TaskResponseDto,
 	TasksApiPath,
 	type TaskUpdateRequestDto,
+	taskUpdateValidationSchema,
 } from "./modules/tasks/tasks.js";
 export {
 	type SignUpFormValidationSchema,

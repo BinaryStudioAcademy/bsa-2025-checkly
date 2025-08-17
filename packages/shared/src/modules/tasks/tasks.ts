@@ -1,4 +1,8 @@
-export { ExecutionTimeType, TasksApiPath } from "./libs/enums/enums.js";
+export {
+	ExecutionTimeType,
+	TaskErrorMessage,
+	TasksApiPath,
+} from "./libs/enums/enums.js";
 export {
 	type TaskGetAllResponseDto,
 	type TaskResponseDto,
@@ -7,4 +11,5 @@ export {
 export {
 	type TaskCreateRequestDto,
 	taskCreate as taskCreateValidationSchema,
+	taskUpdate as taskUpdateValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";

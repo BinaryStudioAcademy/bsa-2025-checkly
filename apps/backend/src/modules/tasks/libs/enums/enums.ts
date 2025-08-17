@@ -1,1 +1,1 @@
-export { ExecutionTimeType, TasksApiPath } from "shared";
+export { ExecutionTimeType, TaskErrorMessage, TasksApiPath } from "shared";
