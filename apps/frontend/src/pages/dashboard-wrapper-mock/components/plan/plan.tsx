@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import { Download, Save } from "~/assets/img/icons/icons.js";
@@ -6,7 +6,8 @@ import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { ONE, ZERO } from "~/libs/constants/constants.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { useAppSelector } from "~/libs/hooks/hooks.js";
+import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
+import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
 import { Day, Task } from "./components/components.js";
 import { daysTasksMockData } from "./mock-data/days-tasks-mock.js";
@@ -16,7 +17,29 @@ const Plan: React.FC = () => {
 	const [selectedDay, setSelectedDay] = useState<number>(ZERO);
 	const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
 
+	const dispatch = useAppDispatch();
 	const user = useAppSelector((state) => state.auth.user);
+	const plan = useAppSelector((state) => state.plan.plan);
+	const tasks = useAppSelector((state) => state.task.tasks);
+
+	const planDays = plan?.days || daysTasksMockData;
+
+	const currentDay = plan?.days[selectedDay];
+	const selectedDayTasks = currentDay
+		? tasks.filter((task) => task.planDayId === currentDay.id)
+		: [];
+
+	useEffect(() => {
+		if (plan?.days) {
+			const allTasks = plan.days.flatMap((day) =>
+				day.tasks.map((task) => ({
+					...task,
+					planDayId: day.id,
+				})),
+			);
+			dispatch(taskActions.setTasks(allTasks));
+		}
+	}, [plan, dispatch]);
 
 	const toggleSelect = useCallback((): void => {
 		setIsSelectOpen((previous) => !previous);
@@ -43,7 +66,7 @@ const Plan: React.FC = () => {
 							isSelectOpen ? styles["content__days__open"] : "",
 						)}
 					>
-						{daysTasksMockData.map((_, index) => {
+						{planDays.map((_, index) => {
 							return (
 								<Day
 									indexDay={index}
@@ -63,7 +86,7 @@ const Plan: React.FC = () => {
 						"cluster grid-pattern flow",
 					)}
 				>
-					{daysTasksMockData[selectedDay]?.map((item, index) => {
+					{selectedDayTasks.map((item, index) => {
 						return <Task indexItem={index + ONE} item={item} key={index} />;
 					})}
 					<NavLink className={navLink} to={AppRoute.CHOOSE_STYLE}>

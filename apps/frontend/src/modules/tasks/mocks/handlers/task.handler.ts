@@ -11,9 +11,7 @@ type TaskParams = {
 	id: string;
 };
 
-type UpdatePayload = Record<string, string | undefined>;
-
-const filterDefined = (obj: UpdatePayload) =>
+const filterDefined = (obj: TaskUpdateRequestDto) =>
 	Object.fromEntries(
 		Object.entries(obj).filter(([_, value]) => value !== undefined),
 	);
