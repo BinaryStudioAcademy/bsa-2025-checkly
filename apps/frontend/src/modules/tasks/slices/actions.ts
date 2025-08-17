@@ -17,16 +17,15 @@ const updateTask = createAsyncThunk<
 	return await taskApi.update(id, payload);
 });
 
-const deleteTask = createAsyncThunk<
-	number,
-	number,
-	AsyncThunkConfig
->(`${sliceName}/delete-task`, async (id, { extra }) => {
-	const { taskApi } = extra;
+const deleteTask = createAsyncThunk<number, number, AsyncThunkConfig>(
+	`${sliceName}/delete-task`,
+	async (id, { extra }) => {
+		const { taskApi } = extra;
 
-	await taskApi.delete(id);
-	
-	return id;
-});
+		await taskApi.delete(id);
+
+		return id;
+	},
+);
 
 export { deleteTask, updateTask };

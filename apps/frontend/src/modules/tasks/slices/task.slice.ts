@@ -25,7 +25,6 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(updateTask.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
 
-			// Update the task in our state
 			const taskIndex = state.tasks.findIndex(
 				(task) => task.id === action.payload.id,
 			);
@@ -33,7 +32,6 @@ const { actions, name, reducer } = createSlice({
 			if (taskIndex >= TaskMockConstants.TASK_ZERO_INDEX) {
 				state.tasks[taskIndex] = action.payload;
 			} else {
-				// If task not found, add it
 				state.tasks.push(action.payload);
 			}
 		});
@@ -46,7 +44,6 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(deleteTask.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
-			// Remove the task from our state
 			state.tasks = state.tasks.filter((task) => task.id !== action.meta.arg);
 		});
 		builder.addCase(deleteTask.rejected, (state) => {

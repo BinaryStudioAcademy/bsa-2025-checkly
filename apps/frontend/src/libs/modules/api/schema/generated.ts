@@ -4,445 +4,445 @@
  */
 
 export interface paths {
-    "/auth/me": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get current logged-in user */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Current user retrieved successfully */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["User"];
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/auth/login": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Login user */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["UserSignInRequestDto"];
-                };
-            };
-            responses: {
-                /** @description Login successful */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["AuthResponse"];
-                    };
-                };
-                401: components["responses"]["UnauthorizedError"];
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/auth/register": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Sign up a new user */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["UserSignUpRequestDto"];
-                };
-            };
-            responses: {
-                /** @description Successful operation */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["AuthResponse"];
-                    };
-                };
-                400: components["responses"]["BadRequestError"];
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/plans/generate": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Generate a plan based on quiz answers */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["QuizAnswersRequestDto"];
-                };
-            };
-            responses: {
-                /** @description Plan generated successfully */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["PlanDaysTaskDto"];
-                    };
-                };
-                400: components["responses"]["BadRequestError"];
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tasks": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Create a new task */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["TaskRequestDto"];
-                };
-            };
-            responses: {
-                /** @description Task created successfully */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["TaskResponseDto"];
-                    };
-                };
-                400: components["responses"]["BadRequestError"];
-                401: components["responses"]["UnauthorizedError"];
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tasks/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get task by ID */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description ID of the task */
-                    id: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Task retrieved successfully */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["TaskResponseDto"];
-                    };
-                };
-                401: components["responses"]["UnauthorizedError"];
-                404: components["responses"]["NotFoundError"];
-            };
-        };
-        put?: never;
-        post?: never;
-        /** Delete task by ID */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description ID of the task */
-                    id: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Task deleted successfully */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @example Task deleted successfully */
-                            message?: string;
-                        };
-                    };
-                };
-                401: components["responses"]["UnauthorizedError"];
-                404: components["responses"]["NotFoundError"];
-            };
-        };
-        options?: never;
-        head?: never;
-        /** Update task by ID */
-        patch: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description ID of the task */
-                    id: number;
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["TaskUpdateRequestDto"];
-                };
-            };
-            responses: {
-                /** @description Task updated successfully */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["TaskResponseDto"];
-                    };
-                };
-                401: components["responses"]["UnauthorizedError"];
-                404: components["responses"]["NotFoundError"];
-            };
-        };
-        trace?: never;
-    };
+	"/auth/me": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get current logged-in user */
+		get: {
+			parameters: {
+				query?: never;
+				header?: never;
+				path?: never;
+				cookie?: never;
+			};
+			requestBody?: never;
+			responses: {
+				/** @description Current user retrieved successfully */
+				200: {
+					headers: {
+						[name: string]: unknown;
+					};
+					content: {
+						"application/json": components["schemas"]["User"];
+					};
+				};
+			};
+		};
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/auth/login": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/** Login user */
+		post: {
+			parameters: {
+				query?: never;
+				header?: never;
+				path?: never;
+				cookie?: never;
+			};
+			requestBody: {
+				content: {
+					"application/json": components["schemas"]["UserSignInRequestDto"];
+				};
+			};
+			responses: {
+				/** @description Login successful */
+				201: {
+					headers: {
+						[name: string]: unknown;
+					};
+					content: {
+						"application/json": components["schemas"]["AuthResponse"];
+					};
+				};
+				401: components["responses"]["UnauthorizedError"];
+			};
+		};
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/auth/register": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/** Sign up a new user */
+		post: {
+			parameters: {
+				query?: never;
+				header?: never;
+				path?: never;
+				cookie?: never;
+			};
+			requestBody: {
+				content: {
+					"application/json": components["schemas"]["UserSignUpRequestDto"];
+				};
+			};
+			responses: {
+				/** @description Successful operation */
+				201: {
+					headers: {
+						[name: string]: unknown;
+					};
+					content: {
+						"application/json": components["schemas"]["AuthResponse"];
+					};
+				};
+				400: components["responses"]["BadRequestError"];
+			};
+		};
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/plans/generate": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/** Generate a plan based on quiz answers */
+		post: {
+			parameters: {
+				query?: never;
+				header?: never;
+				path?: never;
+				cookie?: never;
+			};
+			requestBody: {
+				content: {
+					"application/json": components["schemas"]["QuizAnswersRequestDto"];
+				};
+			};
+			responses: {
+				/** @description Plan generated successfully */
+				200: {
+					headers: {
+						[name: string]: unknown;
+					};
+					content: {
+						"application/json": components["schemas"]["PlanDaysTaskDto"];
+					};
+				};
+				400: components["responses"]["BadRequestError"];
+			};
+		};
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/tasks": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/** Create a new task */
+		post: {
+			parameters: {
+				query?: never;
+				header?: never;
+				path?: never;
+				cookie?: never;
+			};
+			requestBody: {
+				content: {
+					"application/json": components["schemas"]["TaskRequestDto"];
+				};
+			};
+			responses: {
+				/** @description Task created successfully */
+				201: {
+					headers: {
+						[name: string]: unknown;
+					};
+					content: {
+						"application/json": components["schemas"]["TaskResponseDto"];
+					};
+				};
+				400: components["responses"]["BadRequestError"];
+				401: components["responses"]["UnauthorizedError"];
+			};
+		};
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/tasks/{id}": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get task by ID */
+		get: {
+			parameters: {
+				query?: never;
+				header?: never;
+				path: {
+					/** @description ID of the task */
+					id: number;
+				};
+				cookie?: never;
+			};
+			requestBody?: never;
+			responses: {
+				/** @description Task retrieved successfully */
+				200: {
+					headers: {
+						[name: string]: unknown;
+					};
+					content: {
+						"application/json": components["schemas"]["TaskResponseDto"];
+					};
+				};
+				401: components["responses"]["UnauthorizedError"];
+				404: components["responses"]["NotFoundError"];
+			};
+		};
+		put?: never;
+		post?: never;
+		/** Delete task by ID */
+		delete: {
+			parameters: {
+				query?: never;
+				header?: never;
+				path: {
+					/** @description ID of the task */
+					id: number;
+				};
+				cookie?: never;
+			};
+			requestBody?: never;
+			responses: {
+				/** @description Task deleted successfully */
+				200: {
+					headers: {
+						[name: string]: unknown;
+					};
+					content: {
+						"application/json": {
+							/** @example Task deleted successfully */
+							message?: string;
+						};
+					};
+				};
+				401: components["responses"]["UnauthorizedError"];
+				404: components["responses"]["NotFoundError"];
+			};
+		};
+		options?: never;
+		head?: never;
+		/** Update task by ID */
+		patch: {
+			parameters: {
+				query?: never;
+				header?: never;
+				path: {
+					/** @description ID of the task */
+					id: number;
+				};
+				cookie?: never;
+			};
+			requestBody: {
+				content: {
+					"application/json": components["schemas"]["TaskUpdateRequestDto"];
+				};
+			};
+			responses: {
+				/** @description Task updated successfully */
+				200: {
+					headers: {
+						[name: string]: unknown;
+					};
+					content: {
+						"application/json": components["schemas"]["TaskResponseDto"];
+					};
+				};
+				401: components["responses"]["UnauthorizedError"];
+				404: components["responses"]["NotFoundError"];
+			};
+		};
+		trace?: never;
+	};
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: {
-        User: {
-            id: number;
-            /** Format: email */
-            email: string;
-            name: string;
-        };
-        UserSignInRequestDto: {
-            /** Format: email */
-            email: string;
-            password: string;
-        };
-        AuthResponse: {
-            token: string;
-            user: components["schemas"]["User"];
-        };
-        Error: {
-            message: string;
-            errorType: string;
-        };
-        UserSignUpRequestDto: {
-            /** Format: email */
-            email: string;
-            name: string;
-            /** Format: password */
-            password: string;
-        };
-        QuizAnswer: {
-            isSkipped: boolean;
-            questionId: number;
-            questionText: string;
-            selectedOptions: (string | number)[];
-            userInput: string;
-        };
-        QuizAnswersRequestDto: {
-            answers: components["schemas"]["QuizAnswer"][];
-            /** @enum {string} */
-            category: "creativity" | "fitness" | "health" | "nutrition";
-            notes: string;
-        };
-        PlanDto: {
-            id?: number;
-            title?: string;
-            duration?: number;
-            intensity?: string;
-            userId?: number;
-        };
-        TaskDto: {
-            id?: number;
-            title?: string;
-            description?: string;
-            order?: number;
-            isCompleted?: boolean;
-            executionTimeType?: string;
-            planDayId?: number;
-            completedAt?: string | null;
-        };
-        PlanDayDto: {
-            id?: number;
-            dayNumber?: number;
-            tasks?: components["schemas"]["TaskDto"][];
-        };
-        PlanDaysTaskDto: components["schemas"]["PlanDto"] & {
-            days?: components["schemas"]["PlanDayDto"][];
-        };
-        TaskRequestDto: {
-            /** @example Warm-up */
-            title: string;
-            /** @example 10-minute stretching routine */
-            description: string;
-            /** @example morning */
-            executionTimeType?: string | null;
-            /** @example false */
-            isCompleted?: boolean;
-            /** @example 1 */
-            order: number;
-            /** @example 5 */
-            planDayId: number;
-        };
-        TaskResponseDto: {
-            /** @example 10 */
-            id?: number;
-            /** @example Warm-up */
-            title?: string;
-            /** @example 10-minute stretching routine */
-            description?: string;
-            /** @example morning */
-            executionTimeType?: string | null;
-            /** @example false */
-            isCompleted?: boolean;
-            /** @example 1 */
-            order?: number;
-            /** @example 5 */
-            planDayId?: number;
-            /** @example null */
-            completedAt?: string | null;
-        };
-        TaskUpdateRequestDto: {
-            /** @example Task Example */
-            title?: string;
-            /** @example Task Description */
-            description?: string;
-        };
-    };
-    responses: {
-        /** @description Unauthorized */
-        UnauthorizedError: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": components["schemas"]["Error"];
-            };
-        };
-        /** @description Bad request */
-        BadRequestError: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": components["schemas"]["Error"];
-            };
-        };
-        /** @description Resource not found */
-        NotFoundError: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": components["schemas"]["Error"];
-            };
-        };
-    };
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+	schemas: {
+		User: {
+			id: number;
+			/** Format: email */
+			email: string;
+			name: string;
+		};
+		UserSignInRequestDto: {
+			/** Format: email */
+			email: string;
+			password: string;
+		};
+		AuthResponse: {
+			token: string;
+			user: components["schemas"]["User"];
+		};
+		Error: {
+			message: string;
+			errorType: string;
+		};
+		UserSignUpRequestDto: {
+			/** Format: email */
+			email: string;
+			name: string;
+			/** Format: password */
+			password: string;
+		};
+		QuizAnswer: {
+			isSkipped: boolean;
+			questionId: number;
+			questionText: string;
+			selectedOptions: (string | number)[];
+			userInput: string;
+		};
+		QuizAnswersRequestDto: {
+			answers: components["schemas"]["QuizAnswer"][];
+			/** @enum {string} */
+			category: "creativity" | "fitness" | "health" | "nutrition";
+			notes: string;
+		};
+		PlanDto: {
+			id?: number;
+			title?: string;
+			duration?: number;
+			intensity?: string;
+			userId?: number;
+		};
+		TaskDto: {
+			id?: number;
+			title?: string;
+			description?: string;
+			order?: number;
+			isCompleted?: boolean;
+			executionTimeType?: string;
+			planDayId?: number;
+			completedAt?: string | null;
+		};
+		PlanDayDto: {
+			id?: number;
+			dayNumber?: number;
+			tasks?: components["schemas"]["TaskDto"][];
+		};
+		PlanDaysTaskDto: components["schemas"]["PlanDto"] & {
+			days?: components["schemas"]["PlanDayDto"][];
+		};
+		TaskRequestDto: {
+			/** @example Warm-up */
+			title: string;
+			/** @example 10-minute stretching routine */
+			description: string;
+			/** @example morning */
+			executionTimeType?: string | null;
+			/** @example false */
+			isCompleted?: boolean;
+			/** @example 1 */
+			order: number;
+			/** @example 5 */
+			planDayId: number;
+		};
+		TaskResponseDto: {
+			/** @example 10 */
+			id?: number;
+			/** @example Warm-up */
+			title?: string;
+			/** @example 10-minute stretching routine */
+			description?: string;
+			/** @example morning */
+			executionTimeType?: string | null;
+			/** @example false */
+			isCompleted?: boolean;
+			/** @example 1 */
+			order?: number;
+			/** @example 5 */
+			planDayId?: number;
+			/** @example null */
+			completedAt?: string | null;
+		};
+		TaskUpdateRequestDto: {
+			/** @example Task Example */
+			title?: string;
+			/** @example Task Description */
+			description?: string;
+		};
+	};
+	responses: {
+		/** @description Unauthorized */
+		UnauthorizedError: {
+			headers: {
+				[name: string]: unknown;
+			};
+			content: {
+				"application/json": components["schemas"]["Error"];
+			};
+		};
+		/** @description Bad request */
+		BadRequestError: {
+			headers: {
+				[name: string]: unknown;
+			};
+			content: {
+				"application/json": components["schemas"]["Error"];
+			};
+		};
+		/** @description Resource not found */
+		NotFoundError: {
+			headers: {
+				[name: string]: unknown;
+			};
+			content: {
+				"application/json": components["schemas"]["Error"];
+			};
+		};
+	};
+	parameters: never;
+	requestBodies: never;
+	headers: never;
+	pathItems: never;
 }
 export type $defs = Record<string, never>;
 export type operations = Record<string, never>;

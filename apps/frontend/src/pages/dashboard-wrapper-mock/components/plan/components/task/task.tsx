@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
 	Edit,
@@ -26,9 +26,16 @@ type Properties = {
 const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 	const [isEditing, setIsEditing] = useState<boolean>(false);
 	const [editedTitle, setEditedTitle] = useState<string>(item.title);
-	const [editedDescription, setEditedDescription] = useState<string>(item.description);
+	const [editedDescription, setEditedDescription] = useState<string>(
+		item.description,
+	);
 
 	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		setEditedTitle(item.title);
+		setEditedDescription(item.description);
+	}, [item.title, item.description]);
 
 	const handleEditClick = useCallback((): void => {
 		if (isEditing) {
@@ -53,13 +60,23 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 		setIsEditing(false);
 	}, [dispatch, item.id, editedDescription, editedTitle]);
 
-	const handleTitleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
-		setEditedTitle(event.target.value);
-	}, []);
+	const handleTitleChange = useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>): void => {
+			setEditedTitle(event.target.value);
+		},
+		[],
+	);
 
-	const handleDescriptionChange = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>): void => {
-		setEditedDescription(event.target.value);
-	}, []);
+	const handleDescriptionChange = useCallback(
+		(event: React.ChangeEvent<HTMLTextAreaElement>): void => {
+			setEditedDescription(event.target.value);
+		},
+		[],
+	);
+
+	const handleDeleteClick = useCallback((): void => {
+		void dispatch(taskActions.deleteTask(item.id));
+	}, [dispatch, item.id]);
 
 	return (
 		<div
@@ -135,6 +152,7 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 						icon={<DecorativeImage src={Remove} />}
 						isIconOnly
 						label=""
+						onClick={handleDeleteClick}
 					/>
 				</div>
 			</div>
