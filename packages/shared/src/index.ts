@@ -73,6 +73,7 @@ export {
 	ExecutionTimeType,
 	type TaskCreateRequestDto,
 	taskCreateValidationSchema,
+	type TaskDto,
 	type TaskGetAllResponseDto,
 	TaskMessage,
 	type TaskResponseDto,

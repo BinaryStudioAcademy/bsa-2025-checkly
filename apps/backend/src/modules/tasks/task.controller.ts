@@ -62,10 +62,6 @@ import { TaskMessage, TasksApiPath } from "./libs/enums/enums.js";
  *         description:
  *           type: string
  *           example: "Task Description"
- *         executionTimeType:
- *           type: string
- *           nullable: true
- *           example: "morning"
  *
  *     TaskResponseDto:
  *       type: object
