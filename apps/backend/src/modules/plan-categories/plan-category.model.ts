@@ -8,6 +8,8 @@ class PlanCategoryModel extends AbstractModel {
 		return DatabaseTableName.PLAN_CATEGORIES;
 	}
 
+	public iconHref!: string;
+	public order!: number;
 	public title!: string;
 }
 

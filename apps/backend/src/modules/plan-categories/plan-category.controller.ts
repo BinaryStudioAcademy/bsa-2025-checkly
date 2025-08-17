@@ -25,6 +25,12 @@ import { type PlanCategoryService } from "./plan-category.service.js";
  *         title:
  *           type: string
  *           example: "Sports"
+ *         iconHref:
+ *           type: string
+ *           example: "https://res.cloudinary.com/dezfqozcv/image/upload/v1755447659/spirituality_zae43g.png"
+ *         order:
+ *           type: integer
+ *           example: 1
  */
 class PlanCategoryController extends BaseController {
 	private planCategoryService: PlanCategoryService;
