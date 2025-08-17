@@ -28,6 +28,9 @@ const planCategorySelectStyles: StylesConfig<
 		transition: "all 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
 		width: "100%",
 	}),
+	indicatorSeparator: () => ({
+		display: "none",
+	}),
 	menu: (provided) => ({
 		...provided,
 		backgroundColor: "var(--color-bg-light)",
