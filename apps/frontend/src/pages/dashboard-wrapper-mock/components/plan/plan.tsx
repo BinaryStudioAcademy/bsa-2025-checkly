@@ -4,9 +4,10 @@ import { NavLink } from "react-router-dom";
 import { Download, Save } from "~/assets/img/icons/icons.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { ONE, ZERO } from "~/libs/constants/constants.js";
-import { AppRoute } from "~/libs/enums/enums.js";
+import { AppRoute, ButtonSizes, ButtonVariants, ElementTypes } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
+import { TaskConstants } from "~/modules/tasks/libs/enums/enums.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
 import { Day, Task } from "./components/components.js";
@@ -30,13 +31,14 @@ const Plan: React.FC = () => {
 		: [];
 
 	useEffect(() => {
-		if (plan?.days) {
-			const allTasks = plan.days.flatMap((day) =>
-				day.tasks.map((task) => ({
-					...task,
-					planDayId: day.id,
-				})),
-			);
+		const allTasks = plan?.days.flatMap((day) =>
+			day.tasks.map((task) => ({
+				...task,
+				planDayId: day.id,
+			})),
+		) ?? [];
+		
+		if (allTasks.length > TaskConstants.TASK_ZERO_INDEX) {
 			dispatch(taskActions.setTasks(allTasks));
 		}
 	}, [plan, dispatch]);
@@ -55,7 +57,7 @@ const Plan: React.FC = () => {
 					className={getClassNames(styles["select-day"])}
 					label={`Day ${String(selectedDay + ONE)}`}
 					onClick={toggleSelect}
-					variant="transparent"
+					variant={ButtonVariants.TRANSPARENT}
 				/>
 			</div>
 			<div className={styles["content"]}>
@@ -94,9 +96,9 @@ const Plan: React.FC = () => {
 							icon={<DecorativeImage src={Download} />}
 							iconOnlySize="medium"
 							label="Download PDF"
-							size="large"
-							type="button"
-							variant="primary"
+							size={ButtonSizes.LARGE}
+							type={ElementTypes.BUTTON}
+							variant={ButtonVariants.PRIMARY}
 						/>
 					</NavLink>
 					{user && (
@@ -104,9 +106,9 @@ const Plan: React.FC = () => {
 							icon={<DecorativeImage src={Save} />}
 							iconOnlySize="medium"
 							label="Save to profile"
-							size="large"
-							type="button"
-							variant="secondary"
+							size={ButtonSizes.LARGE}
+							type={ElementTypes.BUTTON}
+							variant={ButtonVariants.SECONDARY}
 						/>
 					)}
 				</div>

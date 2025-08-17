@@ -108,7 +108,7 @@
 .edit-input-title {
 	margin-bottom: var(--space-2xs);
 	font-size: var(--text-body-large);
-	font-weight: 600;
+	font-weight: var(--font-weight-semi-bold);
 }
 
 .edit-input-description {
