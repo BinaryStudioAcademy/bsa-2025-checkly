@@ -1,6 +1,6 @@
 import { type GroupBase, type StylesConfig } from "react-select";
 
-import { type CategoryOption } from "../../../libs/types/types.js";
+import { type CategoryOption } from "../../../../libs/types/types.js";
 
 const planCategorySelectStyles: StylesConfig<
 	CategoryOption,
