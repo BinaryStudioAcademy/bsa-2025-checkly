@@ -3,12 +3,11 @@ import { type FastifyRequest } from "fastify";
 import { HTTPCode, HTTPError } from "shared";
 
 import { UPLOAD_MAX_FILE_SIZE_BYTES as AVATAR_MAX_FILE_SIZE } from "~/libs/constants/constants.js";
+import { AvatarTypes } from "~/libs/enums/enums.js";
 import { logger } from "~/libs/modules/logger/logger.js";
 import { fileService } from "~/modules/files/file.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 import { ErrorMessage } from "~/plugins/authorization/libs/types/types.js";
-
-const AVATAR_ALLOWED_MIME_TYPES = new Set(["image/jpeg", "image/png"]);
 
 type UserPlainObject = {
 	avatarUrl: null | string;
@@ -36,7 +35,10 @@ const handleAvatarRemove = async (
 		try {
 			await fileService.deleteFile(previousUrl);
 		} catch (error) {
-			logger.warn("Failed to delete previous avatar", { error, userId });
+			logger.warn(ErrorMessage.FAILED_TO_DELETE_PREVIOUS_AVATAR, {
+				error,
+				userId,
+			});
 		}
 	}
 
@@ -61,7 +63,7 @@ const handleAvatarUpload = async (
 		});
 	}
 
-	if (!AVATAR_ALLOWED_MIME_TYPES.has(multipartFile.mimetype)) {
+	if (!AvatarTypes.has(multipartFile.mimetype)) {
 		throw new HTTPError({
 			message: ErrorMessage.FILE_TYPE_INVALID,
 			status: HTTPCode.BAD_REQUEST,
@@ -113,7 +115,7 @@ const handleAvatarUpload = async (
 		try {
 			await fileService.deleteFile(previousUrl);
 		} catch (error) {
-			logger.warn("Failed to delete previous avatar before new upload", {
+			logger.warn(ErrorMessage.FAILED_TO_DELETE_PREVIOUS_AVATAR, {
 				error,
 				userId,
 			});
@@ -129,7 +131,7 @@ const handleAvatarUpload = async (
 			multipartFile.filename,
 		);
 	} catch (error) {
-		logger.error("Failed to upload avatar to storage", { error, userId });
+		logger.error(ErrorMessage.FAILED_TO_UPLOAD_AVATAR, { error, userId });
 
 		throw new HTTPError({
 			message: ErrorMessage.AVATAR_UPDATE_FAILED,

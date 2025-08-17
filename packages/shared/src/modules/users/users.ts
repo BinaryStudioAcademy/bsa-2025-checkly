@@ -1,4 +1,5 @@
 export {
+	AvatarTypes,
 	S3BucketIndex,
 	UsersApiPath,
 	UserValidationMessage,

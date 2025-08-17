@@ -8,7 +8,7 @@ type APIHandlerOptions<
 	T extends DefaultApiHandlerOptions = DefaultApiHandlerOptions,
 > = {
 	body: T["body"];
-	originalRequest?: FastifyRequest | undefined;
+	originalRequest?: FastifyRequest;
 	params: T["params"];
 	query: T["query"];
 	user?: UserDto;

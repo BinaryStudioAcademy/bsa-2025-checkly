@@ -36,7 +36,7 @@ class BaseFileService {
 		});
 	}
 
-	async deleteFile(fileUrl: string): Promise<void> {
+	public async deleteFile(fileUrl: string): Promise<void> {
 		const key = this.extractKeyFromUrl(fileUrl);
 
 		if (!key) {
@@ -48,7 +48,7 @@ class BaseFileService {
 		);
 	}
 
-	async uploadUserAvatar(
+	public async uploadUserAvatar(
 		buffer: Buffer,
 		mimeType: string,
 		originalName?: string,

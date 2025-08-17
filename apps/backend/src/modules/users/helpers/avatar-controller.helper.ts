@@ -4,6 +4,7 @@ import {
 	type APIHandlerOptions,
 	type APIHandlerResponse,
 } from "~/libs/modules/controller/controller.js";
+import { type RouteParametersWithId } from "~/libs/types/types.js";
 import { type UserService } from "~/modules/users/user.service.js";
 import { ErrorMessage } from "~/plugins/authorization/libs/types/types.js";
 
@@ -21,7 +22,7 @@ const removeAvatarController = async (
 	userService: UserService,
 	{ params, user }: APIHandlerOptions,
 ): Promise<APIHandlerResponse> => {
-	const routeParameters = params as undefined | { id?: unknown };
+	const routeParameters = params as RouteParametersWithId | undefined;
 	const idRaw = routeParameters?.id;
 	const userId = Number(idRaw);
 
@@ -43,7 +44,7 @@ const uploadAvatarController = async (
 	handlerOptions: APIHandlerOptions,
 ): Promise<APIHandlerResponse> => {
 	const { originalRequest, params, user } = handlerOptions;
-	const routeParameters = params as undefined | { id?: unknown };
+	const routeParameters = params as RouteParametersWithId | undefined;
 	const idRaw = routeParameters?.id;
 	const userId = Number(idRaw);
 

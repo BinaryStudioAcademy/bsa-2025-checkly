@@ -1,12 +1,10 @@
 import { type ChangeEvent } from "react";
 
 import { UPLOAD_MAX_FILE_SIZE_BYTES } from "~/libs/constants/constants.js";
-import { SharedErrorMessage } from "~/libs/enums/enums.js";
+import { AvatarTypes, SharedErrorMessage } from "~/libs/enums/enums.js";
 import { type useAppDispatch } from "~/libs/hooks/use-app-dispatch/use-app-dispatch.hook.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
-
-const ALLOWED_TYPES = new Set<string>(["image/jpeg", "image/png"]);
 
 type AppDispatch = ReturnType<typeof useAppDispatch>;
 
@@ -48,7 +46,7 @@ function buildAvatarEditHandlers({
 				return;
 			}
 
-			if (!ALLOWED_TYPES.has(file.type)) {
+			if (!AvatarTypes.has(file.type)) {
 				notifications.error(SharedErrorMessage.FILE_TYPE_INVALID);
 
 				return;

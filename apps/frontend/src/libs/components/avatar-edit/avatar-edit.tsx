@@ -4,7 +4,7 @@ import {
 	EditPhoto as EditPhotoIcon,
 	Remove as RemoveAvatarIcon,
 } from "~/assets/img/icons/icons.js";
-import { AvatarDefault } from "~/assets/img/shared/avatars//avatars.img.js";
+import { AvatarDefault } from "~/assets/img/shared/avatars/avatars.img.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { type Nullable } from "~/libs/types/types.js";
 

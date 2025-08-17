@@ -15,7 +15,7 @@ import {
 	uploadAvatarController,
 } from "./helpers/avatar-controller.helper.js";
 import { UsersApiPath } from "./libs/enums/enums.js";
-import { type UserUpdateRequestDto } from "./libs/types/types.js";
+import { type UserDto, type UserUpdateRequestDto } from "./libs/types/types.js";
 
 /*** @swagger
  * components:
@@ -55,7 +55,7 @@ class UserController extends BaseController {
 			handler: (options) =>
 				this.update(
 					options as APIBodyOptions<UserUpdateRequestDto> & {
-						user?: { id: number };
+						user?: Pick<UserDto, "id">;
 					},
 				),
 			method: HTTPRequestMethod.POST,
@@ -194,7 +194,9 @@ class UserController extends BaseController {
 	 *          description: Validation error
 	 */
 	private async update(
-		options: APIBodyOptions<UserUpdateRequestDto> & { user?: { id: number } },
+		options: APIBodyOptions<UserUpdateRequestDto> & {
+			user?: Pick<UserDto, "id">;
+		},
 	): Promise<APIHandlerResponse> {
 		const userId = options.user?.id;
 		const updated = await this.userService.update(

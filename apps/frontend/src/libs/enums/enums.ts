@@ -14,6 +14,7 @@ export { RouteAccess } from "./route-access.js";
 export {
 	APIPath,
 	AppEnvironment,
+	AvatarTypes,
 	ContentType,
 	DataStatus,
 	HTTPRequestMethod,
