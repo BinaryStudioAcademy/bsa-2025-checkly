@@ -57,12 +57,18 @@ class OpenAIService {
 		} catch (error) {
 			const { status: errorStatus } = error as { status: number };
 
-			if (
-				errorStatus === HTTPCode.BAD_REQUEST ||
-				errorStatus === HTTPCode.UNAUTHORIZED ||
-				errorStatus === HTTPCode.NOT_FOUND
-			) {
-				throw new Error(PlanErrorMessage.OPENAI_FAILED);
+			const isOpenAIError = (
+				[
+					HTTPCode.BAD_REQUEST,
+					HTTPCode.NOT_FOUND,
+					HTTPCode.UNAUTHORIZED,
+				] as number[]
+			).includes(errorStatus);
+
+			if (isOpenAIError) {
+				throw new Error(
+					`${PlanErrorMessage.OPENAI_FAILED} (status: ${String(errorStatus)})`,
+				);
 			}
 
 			if (attempts + ONE >= this.maxAttempts) {
@@ -89,7 +95,7 @@ class OpenAIService {
 		systemPrompt,
 		userPrompt,
 	}: {
-		assistantPrompt: string | undefined;
+		assistantPrompt?: string;
 		systemPrompt: string;
 		userPrompt: string;
 	}): Promise<string> {
@@ -118,19 +124,20 @@ class OpenAIService {
 			throw new Error(PlanErrorMessage.PLAN_FAILED);
 		}
 
-		if (
-			!Array.isArray(generetedPlan.days) ||
-			generetedPlan.days.length === ZERO
-		) {
+		const isDaysValid =
+			!Array.isArray(generetedPlan.days) || generetedPlan.days.length === ZERO;
+
+		if (isDaysValid) {
 			throw new Error(PlanErrorMessage.DAYS_FAILED);
 		}
 
 		for (const [dayIndex, day] of generetedPlan.days.entries()) {
-			if (
+			const isDayValid =
 				!Array.isArray(day.tasks) ||
 				day.tasks.length === ZERO ||
-				day.dayNumber != dayIndex + ONE
-			) {
+				day.dayNumber !== dayIndex + ONE;
+
+			if (isDayValid) {
 				throw new Error(PlanErrorMessage.TASKS_FAILED);
 			}
 

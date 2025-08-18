@@ -19,6 +19,7 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
+import { type QuizState } from "~/modules/quiz/slices/quiz.slice.js";
 
 import { ImageSlider } from "./components/slider/slider.js";
 import { DEFAULT_QUIZ_ANSWERS_PAYLOAD } from "./libs/constants/constants.js";
@@ -47,9 +48,18 @@ const PlanGeneration: React.FC = () => {
 	useEffect(() => {
 		const generatePlan = async (): Promise<void> => {
 			const stored = await storage.get(StorageKey.QUIZ_STATE);
-			const quizAnswers: QuizAnswersRequestDto = stored
-				? (JSON.parse(stored) as QuizAnswersRequestDto)
-				: DEFAULT_QUIZ_ANSWERS_PAYLOAD;
+			const storedObject = stored
+				? (JSON.parse(stored) as Omit<QuizState, "dataStatus">)
+				: undefined;
+
+			const quizAnswers: QuizAnswersRequestDto =
+				storedObject && storedObject.selectedCategory
+					? {
+							answers: Object.values(storedObject.answers),
+							category: storedObject.selectedCategory,
+							notes: storedObject.notes,
+						}
+					: DEFAULT_QUIZ_ANSWERS_PAYLOAD;
 
 			await dispatch(planActions.generatePlan(quizAnswers));
 		};
