@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.21.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.20.0...v1.21.0) (2025-08-18)
+
+
+### Features
+
+* add profile page cy-176 ([f090102](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f0901026904a8716bfccfdb9710ecedecf755525))
+
+
+### Bug Fixes
+
+* remove user menu for not authenticated users cy-271 ([0217f11](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0217f11e08a82cb072bb8e19b60f335663f81d57))
+* Sidebar displays only Dashboard cy-271 ([26803aa](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/26803aa356a1e47decb0e472fff7e96c02f8ef32))
+* update sidebar page display condition cy-271 ([f08960e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f08960efb65f6991347f55188e036fefc694ac62))
+
 ## [1.20.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.19.0...v1.20.0) (2025-08-17)
 
 
