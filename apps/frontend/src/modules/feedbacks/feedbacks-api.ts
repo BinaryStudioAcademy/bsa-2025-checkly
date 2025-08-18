@@ -2,12 +2,16 @@ import { APIPath, ContentType, HTTPRequestMethod } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
-import { FeedbackApiPath } from "~/modules/feedbacks/libs/enums/enums.js";
 import {
 	type FeedbackCreateRequestDto,
 	type FeedbackDto,
+	type feedbackPaginationParameters,
 	type FeedbackUpdateRequestDto,
-} from "~/modules/feedbacks/libs/types/types.js";
+} from "~/modules/feedbacks/feedbacks.js";
+import {
+	FeedbackApiPath,
+	FeedbackGetAllOptions,
+} from "~/modules/feedbacks/libs/enums/enums.js";
 
 type Constructor = {
 	baseUrl: string;
@@ -18,13 +22,6 @@ type Constructor = {
 type FeedbackFindAllOptions = {
 	limit?: number;
 	page?: number;
-};
-
-type feedbackPaginationParameters = {
-	items: FeedbackDto[];
-	limit: number;
-	page: number;
-	total: number;
 };
 
 class FeedbackApi extends BaseHTTPApi {
@@ -61,8 +58,11 @@ class FeedbackApi extends BaseHTTPApi {
 	public async findAll(
 		options: FeedbackFindAllOptions = {},
 	): Promise<feedbackPaginationParameters> {
-		const { page = 1, limit = 10 } = options;
-		const offset = (page - 1) * limit;
+		const {
+			limit = FeedbackGetAllOptions.PAGE_SIZE,
+			page = FeedbackGetAllOptions.SINGLE_PAGE,
+		} = options;
+		const offset = (page - FeedbackGetAllOptions.SINGLE_PAGE) * limit;
 
 		const endpoint = this.getFullEndpoint(FeedbackApiPath.ROOT, {});
 

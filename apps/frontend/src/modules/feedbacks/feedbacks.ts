@@ -11,10 +11,11 @@ const feedbackApi = new FeedbackApi({
 });
 
 export { feedbackApi };
-export { FeedbackApiPath } from "./libs/enums/enums.js";
 export {
 	type FeedbackCreateRequestDto,
 	type FeedbackDto,
+	type feedbackPaginationParameters,
+	type FeedbackServiceReturns,
 	type FeedbackUpdateRequestDto,
 } from "./libs/types/types.js";
 export {

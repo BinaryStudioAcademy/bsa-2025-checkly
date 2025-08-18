@@ -37,7 +37,7 @@ const EditFeedbackModal: React.FC<Properties> = ({
 			setIsFetching(true);
 			const fetchedFeedback = await feedbackApi.findById(id);
 
-			if (fetchedFeedback && reset) {
+			if (fetchedFeedback) {
 				reset({
 					text: fetchedFeedback.text,
 					userId: fetchedFeedback.userId,

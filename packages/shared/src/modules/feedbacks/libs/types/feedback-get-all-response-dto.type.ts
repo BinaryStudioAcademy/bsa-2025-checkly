@@ -7,6 +7,13 @@ type FeedbackDto = {
 	userId: number;
 };
 
+type feedbackPaginationParameters = {
+	items: FeedbackDto[];
+	limit: number;
+	page: number;
+	total: number;
+};
+
 type FeedbackServiceReturns = {
 	items: FeedbackDto[];
 	limit: number;
@@ -20,4 +27,8 @@ type UserDto = {
 	name: string;
 };
 
-export { type FeedbackDto, type FeedbackServiceReturns };
+export {
+	type FeedbackDto,
+	type feedbackPaginationParameters,
+	type FeedbackServiceReturns,
+};

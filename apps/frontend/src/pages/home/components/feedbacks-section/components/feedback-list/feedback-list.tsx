@@ -1,5 +1,3 @@
-// components/feedback-list/feedback-list.tsx
-
 import { type FC, useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -9,7 +7,7 @@ import { feedbackApi } from "~/modules/feedbacks/feedbacks.js";
 import {
 	type FeedbackDto,
 	type FeedbackServiceReturns,
-} from "~/modules/feedbacks/libs/types/types.js";
+} from "~/modules/feedbacks/feedbacks.js";
 import {
 	EMPTY_RESPONSE,
 	LIMIT,

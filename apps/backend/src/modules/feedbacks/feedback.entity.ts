@@ -1,8 +1,9 @@
-// feedback.entity.ts
 import { type Entity } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 
-import { type UserProfileResponseDto } from "./libs/types/types.js";
+import { type UserDto } from "./libs/types/types.js";
+
+type UserProfileResponseDto = null | UserDto;
 
 class FeedbackEntity implements Entity {
 	private createdAt: string;
@@ -110,7 +111,7 @@ class FeedbackEntity implements Entity {
 		id: number;
 		text: string;
 		updatedAt: string;
-		user: null | UserProfileResponseDto;
+		user: UserProfileResponseDto;
 		userId: number;
 	} {
 		if (this.id === null) {

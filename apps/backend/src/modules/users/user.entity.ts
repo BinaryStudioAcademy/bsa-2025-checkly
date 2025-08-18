@@ -90,6 +90,7 @@ class UserEntity implements Entity {
 		name: string;
 	}): UserEntity {
 		return new UserEntity({
+			dob: null,
 			email,
 			id,
 			name,

@@ -36,7 +36,6 @@ export {
 	type ValueOf,
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
-export { type GeneratedPlanDTO } from "./modules/openai/openai.js";
 export {
 	FeedbackApiPath,
 	type FeedbackCreateRequestDto,
@@ -44,13 +43,13 @@ export {
 	type FeedbackDeleteResponseDto,
 	type FeedbackDto,
 	FeedbackGetAllOptions,
-	type FeedbackPaginationOptions,
 	type feedbackPaginationParameters,
 	type FeedbackServiceReturns,
 	type FeedbackUpdateRequestDto,
 	type FeedbackUpdateResponseDto,
 	feedbackUpdateValidationSchema,
 } from "./modules/feedbacks/feedbacks.js";
+export { type GeneratedPlanDTO } from "./modules/openai/openai.js";
 export {
 	type PlanDayCreateRequestDto,
 	planDayCreateValidationSchema,
