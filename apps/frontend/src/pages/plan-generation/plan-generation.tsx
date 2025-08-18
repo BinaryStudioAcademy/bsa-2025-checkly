@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { type QuizAnswersRequestDto } from "shared";
 
 import {
 	Book,
@@ -19,10 +18,15 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
+import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import { type QuizState } from "~/modules/quiz/slices/quiz.slice.js";
+import {
+	type QuizAnswersRequestDto,
+	type QuizCategoryType,
+} from "~/pages/plan-generation/libs/types/types.js";
 
 import { ImageSlider } from "./components/slider/slider.js";
-import { DEFAULT_QUIZ_ANSWERS_PAYLOAD } from "./libs/constants/constants.js";
+import { DEFAULT_QUIZ_STATE } from "./libs/constants/constants.js";
 import { useProgress } from "./libs/hooks/hooks.js";
 import styles from "./styles.module.css";
 
@@ -48,18 +52,15 @@ const PlanGeneration: React.FC = () => {
 	useEffect(() => {
 		const generatePlan = async (): Promise<void> => {
 			const stored = await storage.get(StorageKey.QUIZ_STATE);
-			const storedObject = stored
-				? (JSON.parse(stored) as Omit<QuizState, "dataStatus">)
-				: undefined;
+			const quizState = stored
+				? (JSON.parse(stored) as QuizState)
+				: DEFAULT_QUIZ_STATE;
 
-			const quizAnswers: QuizAnswersRequestDto =
-				storedObject && storedObject.selectedCategory
-					? {
-							answers: Object.values(storedObject.answers),
-							category: storedObject.selectedCategory,
-							notes: storedObject.notes,
-						}
-					: DEFAULT_QUIZ_ANSWERS_PAYLOAD;
+			const quizAnswers: QuizAnswersRequestDto = {
+				answers: Object.values(quizState.answers),
+				category: quizState.selectedCategory as QuizCategoryType,
+				notes: quizState.notes,
+			};
 
 			await dispatch(planActions.generatePlan(quizAnswers));
 		};
@@ -68,7 +69,11 @@ const PlanGeneration: React.FC = () => {
 	}, [dispatch]);
 
 	const progress = useProgress({
-		onComplete: () => void navigate(AppRoute.PLAN),
+		onComplete: (): void => {
+			dispatch(quizActions.resetQuiz());
+			void storage.drop(StorageKey.QUIZ_STATE);
+			void navigate(AppRoute.PLAN);
+		},
 		status,
 	});
 
