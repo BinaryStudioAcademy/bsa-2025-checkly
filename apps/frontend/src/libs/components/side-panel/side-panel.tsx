@@ -1,3 +1,5 @@
+import { FiUser } from "react-icons/fi";
+
 import { Dashboard, Plan } from "~/assets/img/side-panel/side-panel.img.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
@@ -16,19 +18,26 @@ const SidePanel: React.FC = () => {
 			<aside className={asideClasses}>
 				<nav className={styles["navigation"]}>
 					<ul className={styles["navigation__menu"]}>
-						{user ? (
+						{user && (
 							<NavigationItem
 								buttonText="Dashboard"
 								buttonType="side-panel"
 								icon={<Dashboard />}
 								navigateTo={AppRoute.DASHBOARD}
 							/>
-						) : (
+						)}
+						<NavigationItem
+							buttonText="My plan"
+							buttonType="side-panel"
+							icon={<Plan />}
+							navigateTo={AppRoute.PLAN}
+						/>
+						{user && (
 							<NavigationItem
-								buttonText="My plan"
+								buttonText="Profile"
 								buttonType="side-panel"
-								icon={<Plan />}
-								navigateTo={AppRoute.PLAN}
+								icon={<FiUser />}
+								navigateTo={AppRoute.PROFILE}
 							/>
 						)}
 					</ul>

@@ -21,8 +21,10 @@ const AppHeader: React.FC = () => {
 	const user = useAppSelector((state) => state.auth.user);
 
 	const { pathname } = useLocation();
-	const hasDivider =
-		pathname === AppRoute.DASHBOARD || pathname === AppRoute.PLAN;
+
+	const hasDivider = (
+		[AppRoute.DASHBOARD, AppRoute.PLAN, AppRoute.PROFILE] as string[]
+	).includes(pathname);
 
 	const displayName = useMemo(() => user?.name ?? DEFAULT_USER_NAME, [user]);
 
@@ -91,18 +93,18 @@ const AppHeader: React.FC = () => {
 								/>
 							</button>
 						</div>
+						<button
+							aria-label="Open user menu"
+							className={burgerMenuClassName}
+							onClick={handleMenuToggle}
+							type="button"
+						>
+							<div className={styles["burger-menu__line"]} />
+							<div className={styles["burger-menu__line"]} />
+							<div className={styles["burger-menu__line"]} />
+						</button>
 					</>
 				)}
-				<button
-					aria-label="Open user menu"
-					className={burgerMenuClassName}
-					onClick={handleMenuToggle}
-					type="button"
-				>
-					<div className={styles["burger-menu__line"]} />
-					<div className={styles["burger-menu__line"]} />
-					<div className={styles["burger-menu__line"]} />
-				</button>
 				{isMenuOpen && <UserMenu isOpen />}
 			</div>
 		</header>
