@@ -137,6 +137,7 @@ class PlanEntity implements Entity {
 			days: this.days.map((day) => ({
 				dayNumber: day.dayNumber,
 				id: day.id,
+				planId: day.planId,
 				tasks: day.tasks.map((task) => ({
 					completedAt: task.completedAt,
 					description: task.description,

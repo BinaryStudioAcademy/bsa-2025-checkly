@@ -2,6 +2,7 @@ export {
 	type PlanDayDto,
 	type PlanDaysTaskDto,
 	type PlanDto,
+	type TaskDto,
 } from "./plan-dto.type.js";
 export { type PlanGetAllResponseDto } from "./plan-get-all-response-dto.type.js";
 export { type PlanResponseDto } from "./plan-response-dto.type.js";

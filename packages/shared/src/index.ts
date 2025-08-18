@@ -39,6 +39,7 @@ export {
 	type PlanDayCreateRequestDto,
 	planDayCreateValidationSchema,
 	type PlanDayGetAllResponseDto,
+	type PlanDayRegenerateRequestDto,
 	type PlanDayResponseDto,
 	PlanDaysApiPath,
 } from "./modules/plan-days/plan-days.js";
@@ -52,6 +53,7 @@ export {
 	type PlanResponseDto,
 	PlansApiPath,
 	type PlanUpdateRequestDto,
+	type TaskDto,
 } from "./modules/plans/plans.js";
 export {
 	QuizAnswerApiPath,

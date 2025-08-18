@@ -2,10 +2,16 @@ import { type Service } from "~/libs/types/types.js";
 import { PlanEntity } from "~/modules/plans/plan.entity.js";
 import { type PlanRepository } from "~/modules/plans/plan.repository.js";
 
-import { MOCK_GENERATED_PLAN } from "./libs/constants/constants.js";
+import { PlanDayEntity } from "../plan-days/plan-day.entity.js";
+import { type PlanDayRepository } from "../plan-days/plan-day.repository.js";
+import {
+	MOCK_GENERATED_PLAN,
+	MOCK_GENERATED_PLAN_DAY,
+} from "./libs/constants/constants.js";
 import { ErrorMessage, HTTPCode, HTTPError } from "./libs/enums/enums.js";
 import {
 	type PlanCreateRequestDto,
+	type PlanDayDto,
 	type PlanDaysTaskDto,
 	type PlanDto,
 	type PlanGetAllResponseDto,
@@ -14,10 +20,15 @@ import {
 } from "./libs/types/types.js";
 
 class PlanService implements Service {
+	private planDayRepository: PlanDayRepository;
 	private planRepository: PlanRepository;
 
-	public constructor(planRepository: PlanRepository) {
+	public constructor(
+		planRepository: PlanRepository,
+		planDayRepository: PlanDayRepository,
+	) {
 		this.planRepository = planRepository;
+		this.planDayRepository = planDayRepository;
 	}
 
 	public async create(payload: PlanCreateRequestDto): Promise<PlanResponseDto> {
@@ -83,6 +94,42 @@ class PlanService implements Service {
 		}
 
 		const newPlan = await this.planRepository.findWithRelations(newPlanId);
+
+		return newPlan ? newPlan.toObjectWithRelations() : null;
+	}
+
+	public async regenerateDay(id: number): Promise<null | PlanDaysTaskDto> {
+		const existingPlan = await this.planRepository.find(id);
+
+		if (!existingPlan) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		// TODO: Replace with actual quizId from plan when available
+		// const quizId = 1;
+		// const answers = await this.quizAnswerRepository.findAllWithOptionExceptId(quizId, planDayId);
+		// const summaryOfOtherDayTasks = await this.openAIService.summaryOfOtherDayTasks(answers);
+
+		// TODO: Replace mock with OpenAI service
+		// const prompt = createPrompt({ answers, category: "creativity", notes: "", additional: summaryOfOtherDayTasks });
+		// const generatedPlan = await this.openAIService.generatePlan(prompt);
+
+		const generatedPlanDay: PlanDayDto = MOCK_GENERATED_PLAN_DAY;
+		const planDayEntity = PlanDayEntity.initialize(generatedPlanDay);
+
+		const newPlanDayId = await this.planDayRepository.regenerate(planDayEntity);
+
+		if (!newPlanDayId) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_REGENERATION_FAILED,
+				status: HTTPCode.INTERNAL_SERVER_ERROR,
+			});
+		}
+
+		const newPlan = await this.planRepository.findWithRelations(id);
 
 		return newPlan ? newPlan.toObjectWithRelations() : null;
 	}

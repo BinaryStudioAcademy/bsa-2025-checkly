@@ -6,6 +6,7 @@ export {
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
 	type PlanUpdateRequestDto,
+	type TaskDto,
 } from "./libs/types/types.js";
 export {
 	type PlanCreateRequestDto,

@@ -1,15 +1,20 @@
-import { type PlanDaysTaskDto } from "~/modules/plans/libs/types/types.js";
+import {
+	type PlanDayDto,
+	type PlanDaysTaskDto,
+} from "~/modules/plans/libs/types/types.js";
 
 const MOCK_GENERATED_PLAN: PlanDaysTaskDto = {
 	days: [
 		{
 			dayNumber: 1,
 			id: 1,
+			planId: 1,
 			tasks: [],
 		},
 		{
 			dayNumber: 2,
 			id: 2,
+			planId: 1,
 			tasks: [
 				{
 					completedAt: null,
@@ -40,4 +45,30 @@ const MOCK_GENERATED_PLAN: PlanDaysTaskDto = {
 	userId: 2,
 };
 
-export { MOCK_GENERATED_PLAN };
+const MOCK_GENERATED_PLAN_DAY: PlanDayDto = {
+	dayNumber: 2,
+	id: 2,
+	planId: 1,
+	tasks: [
+		{
+			completedAt: null,
+			description: "Hello",
+			executionTimeType: "morning",
+			id: 2,
+			isCompleted: false,
+			order: 1,
+			title: "Meet a person in the cafe",
+		},
+		{
+			completedAt: null,
+			description: "Meet a person in the cafe multiple times...",
+			executionTimeType: "evening",
+			id: 3,
+			isCompleted: false,
+			order: 2,
+			title: "Meet a person in the cafe",
+		},
+	],
+};
+
+export { MOCK_GENERATED_PLAN, MOCK_GENERATED_PLAN_DAY };

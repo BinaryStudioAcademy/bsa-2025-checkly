@@ -1,6 +1,7 @@
 type PlanDayDto = {
 	dayNumber: number;
 	id: number;
+	planId: number;
 	tasks: TaskDto[];
 };
 
@@ -27,4 +28,4 @@ type TaskDto = {
 	title: string;
 };
 
-export { type PlanDayDto, type PlanDaysTaskDto, type PlanDto };
+export { type PlanDayDto, type PlanDaysTaskDto, type PlanDto, type TaskDto };

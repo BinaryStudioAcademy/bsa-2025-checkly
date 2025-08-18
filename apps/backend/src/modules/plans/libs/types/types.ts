@@ -1,6 +1,7 @@
 export {
 	type PlanCreateRequestDto,
 	type PlanDayDto,
+	type PlanDayRegenerateRequestDto,
 	type PlanDaysTaskDto,
 	type PlanDto,
 	type PlanGetAllResponseDto,

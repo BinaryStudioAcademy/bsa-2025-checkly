@@ -1,6 +1,7 @@
 import { APIPath } from "~/libs/enums/enums.js";
 import {
 	type APIBodyOptions,
+	type APIHandlerOptions,
 	type APIHandlerResponse,
 	BaseController,
 	type IdParametersOption,
@@ -11,6 +12,7 @@ import { type PlanService } from "~/modules/plans/plan.service.js";
 import {
 	type PlanCreateRequestDto,
 	planCreateValidationSchema,
+	type PlanDayRegenerateRequestDto,
 } from "~/modules/plans/plans.js";
 
 import { PlansApiPath } from "./libs/enums/enums.js";
@@ -136,6 +138,17 @@ class PlanController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
+				this.regenerateDay(
+					options as APIHandlerOptions<{
+						params: PlanDayRegenerateRequestDto;
+					}>,
+				),
+			method: HTTPRequestMethod.POST,
+			path: PlansApiPath.REGENERATE_DAY,
+		});
+
+		this.addRoute({
+			handler: (options) =>
 				this.create(options as APIBodyOptions<PlanCreateRequestDto>),
 			method: HTTPRequestMethod.POST,
 			path: PlansApiPath.ROOT,
@@ -239,6 +252,17 @@ class PlanController extends BaseController {
 
 		return {
 			payload: await this.planService.regenerate(id),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async regenerateDay(options: {
+		params: PlanDayRegenerateRequestDto;
+	}): Promise<APIHandlerResponse> {
+		const { planId } = options.params;
+
+		return {
+			payload: await this.planService.regenerateDay(planId),
 			status: HTTPCode.OK,
 		};
 	}
