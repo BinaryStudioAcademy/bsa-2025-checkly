@@ -44,9 +44,10 @@
 
 .plan-title {
 	margin: 0 0 32px;
-	font-size: var(--text-size-heading-1);
+	font-size: var(--text-size-heading-2);
 	font-weight: var(--font-weight-heading);
 	color: #4a4a4a;
+	text-align: center;
 	text-transform: uppercase;
 }
 
