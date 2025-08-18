@@ -30,7 +30,7 @@ export class AuthController {
 		return response;
 	}
 
-	async authMe(token: string): Promise<APIResponse> {
+	async getCurrentUser(token: string): Promise<APIResponse> {
 		const response = await this.requestContext.get("auth/me", {
 			headers: token
 				? {

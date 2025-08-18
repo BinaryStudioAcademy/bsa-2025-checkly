@@ -29,7 +29,7 @@ export const loginResponseSchema = {
 	required: ["user", "token"],
 };
 
-export const authMeSchema = {
+export const getCurrentUserSchema = {
 	type: "object",
 	properties: {
 		id: { type: "number" },

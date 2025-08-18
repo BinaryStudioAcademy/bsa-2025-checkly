@@ -1,16 +1,14 @@
 import { test } from "@tests/api/fixtures/base-fixtures";
 
 import {
-	expectSuccessfulAuthMe,
-	expectAuthMeError,
+	expectSuccessfulGetCurrentUser,
+	expectGetCurrentUserError,
 	expectSuccessfulRegistration,
 } from "@tests/api/helpers/auth-test-helpers";
 import { generateUser } from "@test-helpers-api/generators";
 
-const user = {
-	id: 0,
-	token: "",
-};
+let currentUser = {};
+let currentToken = "";
 
 test.beforeAll(async ({ api }) => {
 	const newUser = generateUser();
@@ -20,14 +18,16 @@ test.beforeAll(async ({ api }) => {
 		newUser.name,
 		newUser.password,
 	);
-	user.id = responseBody.user.id;
-	user.token = responseBody.token;
+	currentUser = {
+		...responseBody.user,
+	};
+	currentToken = responseBody.token;
 });
 
 test("[CHECKLY-58] Fetch authenticated user with a valid JWT token", async ({
 	api,
 }) => {
-	await expectSuccessfulAuthMe(api, user.token, user.id);
+	await expectSuccessfulGetCurrentUser(api, currentToken, currentUser);
 });
 
 test.describe("[CHECKLY-57] Fetch authenticated user with an invalid JWT token", async () => {
@@ -42,7 +42,7 @@ test.describe("[CHECKLY-57] Fetch authenticated user with an invalid JWT token",
 
 	for (const testCase of invalidTokenTests) {
 		test(testCase.name, async ({ api }) => {
-			await expectAuthMeError(api, testCase.value);
+			await expectGetCurrentUserError(api, testCase.value);
 		});
 	}
 });
@@ -50,5 +50,5 @@ test.describe("[CHECKLY-57] Fetch authenticated user with an invalid JWT token",
 test("[CHECKLY-56] Fetch authenticated user without a JWT token", async ({
 	api,
 }) => {
-	await expectAuthMeError(api, "");
+	await expectGetCurrentUserError(api, "");
 });

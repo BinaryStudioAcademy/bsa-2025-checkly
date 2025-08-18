@@ -4,10 +4,11 @@ import { ApiControllers } from "@tests/api/controllers/api-controllers";
 import {
 	registerResponseSchema,
 	loginResponseSchema,
-	authMeSchema,
+	getCurrentUserSchema,
 } from "@tests/api/schemas/auth-schemas";
 import { errorSchema } from "@tests/api/schemas/error-schemas";
 import { expectToMatchSchema } from "@test-helpers-api/schema-validator";
+import { expectDataToMatch } from "@test-helpers-api/data-validator";
 
 export async function expectSuccessfulRegistration(
 	api: ApiControllers,
@@ -20,6 +21,7 @@ export async function expectSuccessfulRegistration(
 
 	expect(response.status(), "Status Code should be 201").toBe(201);
 	expectToMatchSchema(responseBody, registerResponseSchema);
+	expectDataToMatch(responseBody.user, { email, name });
 
 	return { response, responseBody };
 }
@@ -55,6 +57,7 @@ export async function expectSuccessfulLogin(
 
 	expect(response.status(), "Status Code should be 200").toBe(200);
 	expectToMatchSchema(responseBody, loginResponseSchema);
+	expectDataToMatch(responseBody.user, { email });
 
 	return { response, responseBody };
 }
@@ -79,23 +82,26 @@ export async function expectLoginError(
 	return { response, responseBody };
 }
 
-export async function expectSuccessfulAuthMe(
+export async function expectSuccessfulGetCurrentUser(
 	api: ApiControllers,
 	token: string,
-	userId: number,
+	user: object,
 ) {
-	const response = await api.auth.authMe(token);
+	const response = await api.auth.getCurrentUser(token);
 	const responseBody = await response.json();
 
 	expect(response.status(), "Status Code should be 200").toBe(200);
-	expectToMatchSchema(responseBody, authMeSchema);
-	expect(responseBody.id).toBe(userId);
+	expectToMatchSchema(responseBody, getCurrentUserSchema);
+	expectDataToMatch(responseBody, user);
 
 	return { response, responseBody };
 }
 
-export async function expectAuthMeError(api: ApiControllers, token: string) {
-	const response = await api.auth.authMe(token);
+export async function expectGetCurrentUserError(
+	api: ApiControllers,
+	token: string,
+) {
+	const response = await api.auth.getCurrentUser(token);
 	const responseBody = await response.json();
 
 	expect(response.status(), "Status Code should be 401").toBe(401);
