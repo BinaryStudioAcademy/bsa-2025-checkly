@@ -1,13 +1,19 @@
-.content {
+.dashboard {
+	display: flex;
+	flex: 1;
+	justify-content: center;
 	height: 100%;
-	padding: var(--space-m);
 	overflow-x: auto;
-	transition: padding 0.3s ease-in-out;
-}
 
-.light-background {
 	--grid-color: var(--color-light-grey);
 	--grid-line: 1px;
+}
+
+.content {
+	width: 100%;
+	height: fit-content;
+	padding: var(--space-m);
+	transition: padding 0.3s ease-in-out;
 }
 
 .content-grid {
@@ -23,7 +29,7 @@
 	}
 }
 
-@media (width >= 1024px) {
+@media (width >= 1310px) {
 	.content-grid {
 		grid-template-columns: 1fr 1fr;
 	}

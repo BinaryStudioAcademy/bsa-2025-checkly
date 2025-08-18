@@ -1,3 +1,4 @@
+export { ONE, ZERO } from "./libs/constants/constants.js";
 export {
 	APIPath,
 	AppEnvironment,
@@ -35,6 +36,7 @@ export {
 	type ValueOf,
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
+export { type GeneratedPlanDTO } from "./modules/openai/openai.js";
 export {
 	FeedbackApiPath,
 	type FeedbackCreateRequestDto,
@@ -74,13 +76,14 @@ export {
 	type QuizAnswer,
 	type QuizAnswersRequestDto,
 	type QuizAnswersResponseDto,
-	QuizAnswersValidationSchema,
+	QuizAnswersRule,
+	quizAnswersValidationSchema,
 	QuizApiPath,
 	type QuizCategoryType,
 	QuizIndexes,
 	QuizQuestionFormat,
 	type QuizQuestionsResponseDto,
-	QuizStateValidationSchema,
+	quizStateValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
 	ExecutionTimeType,
@@ -95,7 +98,6 @@ export {
 	type SignUpFormValidationSchema,
 	type UserDto,
 	type UserGetAllResponseDto,
-	type UserProfileResponseDto,
 	UsersApiPath,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -105,6 +107,7 @@ export {
 	userSignUpValidationSchema,
 	userSignUpValidationSchemaExtended,
 	type UserUpdateRequestDto,
+	userUpdateValidationSchema,
 	UserValidationMessage,
 	UserValidationRule,
 } from "./modules/users/users.js";

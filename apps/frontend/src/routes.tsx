@@ -8,9 +8,12 @@ import {
 	ChooseStyle,
 	Home,
 	NotFound,
+	PlanGeneration,
+	Profile,
 	QuestionFlow,
 	Quiz,
 } from "./pages/pages.js";
+import { TestPage } from "./pages/test-page/test-page.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
 
@@ -52,8 +55,13 @@ const routes: CustomRouteObject[] = [
 				path: AppRoute.DASHBOARD,
 			},
 			{
-				element: <Plan />,
+				element: <Profile />,
 				handle: { access: RouteAccess.AUTHENTICATED },
+				path: AppRoute.PROFILE,
+			},
+			{
+				element: <Plan />,
+				handle: { access: RouteAccess.PUBLIC },
 				path: AppRoute.PLAN,
 			},
 		],
@@ -67,9 +75,19 @@ const routes: CustomRouteObject[] = [
 		path: AppRoute.CHOOSE_STYLE,
 	},
 	{
+		element: <TestPage />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.TEST_PAGE,
+	},
+	{
 		element: <NotFound />,
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.NOT_FOUND,
+	},
+	{
+		element: <PlanGeneration />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.PLAN_GENERATION,
 	},
 ];
 

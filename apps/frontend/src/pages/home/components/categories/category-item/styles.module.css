@@ -15,7 +15,7 @@
 }
 
 .category-title-landing {
-	font-family: var(--font-family-primary);
+	font-family: var(--font-family-nunito);
 	font-size: var(--text-size-heading-4);
 	color: var(--color-bg-dark);
 }

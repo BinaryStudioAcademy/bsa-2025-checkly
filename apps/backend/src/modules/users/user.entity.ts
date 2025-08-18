@@ -1,6 +1,8 @@
-import { type Entity } from "~/libs/types/types.js";
+import { type Entity, type UserDto } from "~/libs/types/types.js";
 
 class UserEntity implements Entity {
+	private dob: null | string;
+
 	private email: string;
 
 	private id: null | number;
@@ -12,18 +14,21 @@ class UserEntity implements Entity {
 	private passwordSalt: string;
 
 	private constructor({
+		dob,
 		email,
 		id,
 		name,
 		passwordHash,
 		passwordSalt,
 	}: {
+		dob: null | string;
 		email: string;
 		id: null | number;
 		name: string;
 		passwordHash: string;
 		passwordSalt: string;
 	}) {
+		this.dob = dob;
 		this.id = id;
 		this.email = email;
 		this.name = name;
@@ -32,19 +37,18 @@ class UserEntity implements Entity {
 	}
 
 	public static initialize({
+		dob,
 		email,
 		id,
 		name,
 		passwordHash,
 		passwordSalt,
-	}: {
-		email: string;
-		id: number;
-		name: string;
+	}: UserDto & {
 		passwordHash: string;
 		passwordSalt: string;
 	}): UserEntity {
 		return new UserEntity({
+			dob,
 			email,
 			id,
 			name,
@@ -54,17 +58,20 @@ class UserEntity implements Entity {
 	}
 
 	public static initializeNew({
+		dob,
 		email,
 		name,
 		passwordHash,
 		passwordSalt,
 	}: {
+		dob: null | string;
 		email: string;
 		name: string;
 		passwordHash: string;
 		passwordSalt: string;
 	}): UserEntity {
 		return new UserEntity({
+			dob,
 			email,
 			id: null,
 			name,
@@ -102,12 +109,14 @@ class UserEntity implements Entity {
 	}
 
 	public toNewObject(): {
+		dob: null | string;
 		email: string;
 		name: string;
 		passwordHash: string;
 		passwordSalt: string;
 	} {
 		return {
+			dob: this.dob,
 			email: this.email,
 			name: this.name,
 			passwordHash: this.passwordHash,
@@ -115,12 +124,9 @@ class UserEntity implements Entity {
 		};
 	}
 
-	public toObject(): {
-		email: string;
-		id: number;
-		name: string;
-	} {
+	public toObject(): UserDto {
 		return {
+			dob: this.dob,
 			email: this.email,
 			id: this.id as number,
 			name: this.name,
