@@ -1,7 +1,7 @@
-import { type PlanDaily } from "./plan.type.js";
+import { type PlanDay } from "./types.js";
 
 type PlanEditForm = {
-	days: PlanDaily[];
+	days: PlanDay[];
 	notes: string;
 };
 
