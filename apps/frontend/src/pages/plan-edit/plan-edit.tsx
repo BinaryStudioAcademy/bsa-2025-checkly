@@ -13,30 +13,28 @@ import {
 	PlanPreview,
 } from "~/libs/components/components.js";
 import {
-	DAY_INDEX,
 	INITIAL_ITEM,
 	PDF_DOWNLOAD_OPTIONS,
 } from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm } from "~/libs/hooks/hooks.js";
-import { type PlanDaily, type PlanEditForm } from "~/libs/types/types.js";
+import { type PlanDay, type PlanEditForm, type SelectedItemType } from "~/libs/types/types.js";
 
 import { DownloadButton, EditingPanel } from "./components/components.js";
 import styles from "./styles.module.css";
 
 const mapDaysToNavItems = (
-	days: PlanDaily[],
+	days: PlanDay[],
 ): { id: string; label: string }[] => {
-	return days.map((day, index) => ({
+
+	return days.map((day) => ({
 		id: day.id,
-		label: `Day ${String(index + DAY_INDEX)}`,
+		label: `Day ${String(day.dayNumber)}`,
 	}));
 };
 
 const PlanEdit: FC = () => {
-	const [selectedItem, setSelectedItem] = useState<
-		"notes" | "preview" | number
-	>(INITIAL_ITEM);
+	const [selectedItem, setSelectedItem] = useState<SelectedItemType>(INITIAL_ITEM);
 
 	const { control, errors } = useAppForm<PlanEditForm>({
 		defaultValues: activitiesMockData,
@@ -49,7 +47,7 @@ const PlanEdit: FC = () => {
 	const planPreviewKey = JSON.stringify(formValues);
 
 	const handleSelectItem = useCallback(
-		(item: "notes" | "preview" | number): void => {
+		(item: SelectedItemType): void => {
 			setSelectedItem(item);
 		},
 		[],
@@ -115,10 +113,15 @@ const PlanEdit: FC = () => {
 						/>
 					</div>
 
-					<div className={styles["right-panel"]}>
+					<div
+						className={
+							getClassNames("cluster", styles["right-panel"])
+						}
+					>
 						<PlanPreview
-							containerId="plan-preview-for-download"
+							containerId="plan-for-download"
 							days={formValues.days}
+							isForPrint={false}
 							key={planPreviewKey}
 							notes={formValues.notes}
 							theme="colourful" // This is the theme being applied hardcoded just for the moment
@@ -131,7 +134,7 @@ const PlanEdit: FC = () => {
 					<DownloadButton
 						fileName="my-personal-plan"
 						options={PDF_DOWNLOAD_OPTIONS}
-						targetId="plan-preview-for-download"
+						targetId="plan-for-download"
 					>
 						<Button
 							icon={<DecorativeImage src={Download} />}
@@ -143,19 +146,6 @@ const PlanEdit: FC = () => {
 						/>
 					</DownloadButton>
 				</footer>
-
-				<div
-					style={{ left: "-9999px", position: "absolute", top: 0, zIndex: -1 }}
-				>
-					<PlanPreview
-						containerId="plan-for-download"
-						days={formValues.days}
-						key={`${planPreviewKey}-print`}
-						notes={formValues.notes}
-						theme="colourful"
-						title="My Personal Plan"
-					/>
-				</div>
 			</main>
 		</>
 	);
