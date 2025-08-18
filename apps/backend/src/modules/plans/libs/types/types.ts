@@ -1,4 +1,5 @@
 export {
+	type GeneratedPlanDTO,
 	type PlanCreateRequestDto,
 	type PlanDayDto,
 	type PlanDaysTaskDto,
@@ -6,4 +7,6 @@ export {
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
 	type PlanUpdateRequestDto,
+	type QuizAnswer,
+	type QuizAnswersRequestDto,
 } from "shared";

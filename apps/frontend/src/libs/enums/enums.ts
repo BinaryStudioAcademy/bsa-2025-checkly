@@ -21,7 +21,6 @@ export {
 	HTTPRequestMethod,
 	PaperFormat,
 	PlanPdfExportApiPath,
-	QuizApiPath,
 	QuizIndexes,
 	QuizQuestionFormat,
 	ServerErrorType,

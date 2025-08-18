@@ -1,13 +1,13 @@
-import {
-	type QuizAnswersRequestDto,
-	type QuizCategoryType,
-} from "../types/types.js";
+import { DataStatus, QuizIndexes } from "~/libs/enums/enums.js";
+import { type QuizState } from "~/modules/quiz/slices/quiz.slice.js";
 
-const DEFAULT_CATEGORY: QuizCategoryType = "hobby";
-const DEFAULT_QUIZ_ANSWERS_PAYLOAD: QuizAnswersRequestDto = {
-	answers: [],
-	category: DEFAULT_CATEGORY,
+const DEFAULT_QUIZ_STATE: QuizState = {
+	answers: {},
+	currentQuestion: QuizIndexes.FIRST_INDEX,
+	dataStatus: DataStatus.IDLE,
 	notes: "",
+	questions: null,
+	selectedCategory: null,
 };
 
 const SlowTiming = {
@@ -30,7 +30,7 @@ const ProgressLimits = {
 const LOADING_DURATION_MS = 6000;
 
 export {
-	DEFAULT_QUIZ_ANSWERS_PAYLOAD,
+	DEFAULT_QUIZ_STATE,
 	FastTiming,
 	LOADING_DURATION_MS,
 	ProgressLimits,

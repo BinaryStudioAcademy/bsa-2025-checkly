@@ -11,6 +11,7 @@ import {
 	PlanGeneration,
 	PlanStyleOverview,
 	PlanStylePrint,
+	Profile,
 	QuestionFlow,
 	Quiz,
 } from "./pages/pages.js";
@@ -59,6 +60,11 @@ const routes: CustomRouteObject[] = [
 				element: <Dashboard />,
 				handle: { access: RouteAccess.AUTHENTICATED },
 				path: AppRoute.DASHBOARD,
+			},
+			{
+				element: <Profile />,
+				handle: { access: RouteAccess.AUTHENTICATED },
+				path: AppRoute.PROFILE,
 			},
 			{
 				element: <Plan />,
