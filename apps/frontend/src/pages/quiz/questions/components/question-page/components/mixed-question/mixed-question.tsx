@@ -8,6 +8,7 @@ import {
 	type MixedQuestionProperties,
 	type MultipleAnswers,
 } from "~/libs/types/types.js";
+import { AnswersAmount } from "~/pages/quiz/questions/libs/enums/enums.js";
 import {
 	isOptionSelected,
 	isOtherOption,
@@ -31,6 +32,11 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 	const isOthersSelected = selectedOptions.some(
 		(option) => typeof option === "string" && isOtherOption(option),
 	);
+
+	const hasFewOptions = question.options.length < AnswersAmount.FEW;
+	const containerClassName = hasFewOptions
+		? `${styles["options-container"] ?? ""} ${styles["options-container-few-options"] ?? ""}`
+		: (styles["options-container"] ?? "");
 
 	const handleOptionChange = useCallback(
 		(option: string, checked: boolean): void => {
@@ -69,9 +75,11 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 	);
 
 	return (
-		<div className={styles["mixed-question"]}>
+		<div
+			className={`${styles["mixed-question"] ?? ""} ${isOthersSelected ? (styles["has-text-input"] ?? "") : ""}`}
+		>
 			<div className={styles["checkbox-section"]}>
-				<div className={styles["options-container"]}>
+				<div className={containerClassName}>
 					{question.options.map((option) => (
 						<label className={styles["checkbox-option"]} key={option.text}>
 							<input

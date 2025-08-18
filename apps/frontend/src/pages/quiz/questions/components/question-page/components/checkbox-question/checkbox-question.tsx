@@ -2,6 +2,7 @@ import { logoIcon } from "~/assets/img/shared/shared.img.js";
 import { ElementTypes } from "~/libs/enums/enums.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { type CheckboxQuestionProperties } from "~/libs/types/types.js";
+import { AnswersAmount } from "~/pages/quiz/questions/libs/enums/answers-amount.enum.js";
 import {
 	isOptionSelected,
 	toggleOption,
@@ -31,9 +32,14 @@ const CheckboxQuestion: React.FC<CheckboxQuestionProperties> = ({
 		[handleOptionChange],
 	);
 
+	const hasFewOptions = question.options.length < AnswersAmount.FEW;
+	const containerClassName = hasFewOptions
+		? `${styles["options-container"] ?? ""} ${styles["options-container-few-options"] ?? ""}`
+		: (styles["options-container"] ?? "");
+
 	return (
 		<div className={styles["checkbox-question"]}>
-			<div className={styles["options-container"]}>
+			<div className={containerClassName}>
 				{question.options.map((option) => (
 					<label className={styles["checkbox-option"]} key={option.text}>
 						<input

@@ -60,10 +60,6 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 					/>
 				)}
 			</div>
-
-			<div className={styles["question-counter"]}>
-				Question {currentQuestion} of {totalQuestions}
-			</div>
 		</div>
 	);
 };

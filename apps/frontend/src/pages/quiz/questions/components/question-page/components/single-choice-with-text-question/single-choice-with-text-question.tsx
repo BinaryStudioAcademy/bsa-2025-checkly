@@ -5,6 +5,7 @@ import { ElementTypes, PlaceholderValues } from "~/libs/enums/enums.js";
 import { sanitizeTextInput } from "~/libs/helpers/helpers.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { type SingleChoiceWithTextQuestionProperties } from "~/libs/types/types.js";
+import { AnswersAmount } from "~/pages/quiz/questions/libs/enums/enums.js";
 import { isOtherOption } from "~/pages/quiz/questions/libs/utilities.js";
 
 import styles from "./styles.module.css";
@@ -25,6 +26,11 @@ const SingleChoiceWithTextQuestion: React.FC<
 
 	const isOtherSelected = selectedOption && isOtherOption(selectedOption);
 	const shouldClearUserInput = selectedOption && isOtherOption(selectedOption);
+
+	const hasFewOptions = question.options.length < AnswersAmount.FEW;
+	const containerClassName = hasFewOptions
+		? `${styles["options-container"] ?? ""} ${styles["options-container-few-options"] ?? ""}`
+		: (styles["options-container"] ?? "");
 
 	const handleOptionSelect = useCallback(
 		(option: string): void => {
@@ -62,9 +68,11 @@ const SingleChoiceWithTextQuestion: React.FC<
 	);
 
 	return (
-		<div className={styles["single-choice-with-text-question"]}>
+		<div
+			className={`${styles["single-choice-with-text-question"] ?? ""} ${isOtherSelected ? (styles["has-text-input"] ?? "") : ""}`}
+		>
 			<div className={styles["radio-section"]}>
-				<div className={styles["options-container"]}>
+				<div className={containerClassName}>
 					{question.options.map((option) => (
 						<label className={styles["radio-option"]} key={option.text}>
 							<input

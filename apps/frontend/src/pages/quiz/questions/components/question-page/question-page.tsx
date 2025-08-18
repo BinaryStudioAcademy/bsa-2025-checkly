@@ -167,7 +167,7 @@ const QuestionPage: React.FC<QuestionPageProperties> = ({
 		<div className={styles["question-page"]}>
 			{questionNumber && (
 				<div
-					className={getClassNames(styles["question-icons"], "show-tablet-up")}
+					className={getClassNames(styles["question-icons"], "show-desktop-up")}
 				>
 					{getQuestionIcons(questionNumber).map((iconData, index) => {
 						const questionIconClass = styles["question-icon"] ?? "";

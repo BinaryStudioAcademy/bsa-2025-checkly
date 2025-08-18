@@ -4,8 +4,8 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	min-height: 90vh;
-	padding: var(--space-xl);
+	min-height: 70vh;
+	padding: var(--space-s);
 }
 
 .notes-content {
@@ -17,7 +17,7 @@
 	z-index: 1;
 	width: 100%;
 	max-width: 600px;
-	padding: var(--space-2xl);
+	padding: var(--space-m);
 	background-color: var(--color-bg-white);
 	background-position: 1px 1px;
 	border: 2px solid var(--color-bg-dark);
@@ -26,15 +26,15 @@
 }
 
 .notes-title {
-	margin-bottom: var(--space-l);
-	font-size: var(--text-size-heading-2);
+	margin-bottom: var(--space-s);
+	font-size: var(--text-size-heading-3);
 	font-weight: var(--font-weight-bold);
 	color: var(--color-text-primary);
 	text-align: center;
 }
 
 .notes-description {
-	margin-bottom: var(--space-2xl);
+	margin-bottom: var(--space-m);
 	font-size: var(--text-size-body);
 	color: var(--color-text-secondary);
 	text-align: center;
@@ -42,8 +42,8 @@
 
 .notes-textarea {
 	width: 100%;
-	min-height: 200px;
-	padding: var(--space-l);
+	min-height: 150px;
+	padding: var(--space-m);
 	font-family: inherit;
 	font-size: var(--text-size-body);
 	resize: none;
@@ -59,4 +59,50 @@
 
 .notes-textarea::placeholder {
 	color: var(--color-text-tertiary);
+}
+
+@media (width <= 768px) {
+	.notes-content {
+		max-width: 500px;
+		padding: var(--space-m);
+	}
+
+	.notes-title {
+		margin-bottom: var(--space-s);
+		font-size: var(--text-size-heading-4);
+	}
+
+	.notes-description {
+		margin-bottom: var(--space-m);
+		font-size: var(--text-size-small);
+	}
+
+	.notes-textarea {
+		min-height: 120px;
+		padding: var(--space-s);
+		font-size: var(--text-size-small);
+	}
+}
+
+@media (width <= 320px) {
+	.notes-content {
+		max-width: 95%;
+		padding: var(--space-s);
+	}
+
+	.notes-title {
+		margin-bottom: var(--space-xs);
+		font-size: var(--text-size-heading-4);
+	}
+
+	.notes-description {
+		margin-bottom: var(--space-s);
+		font-size: var(--text-size-small);
+	}
+
+	.notes-textarea {
+		min-height: 100px;
+		padding: var(--space-xs);
+		font-size: var(--text-size-small);
+	}
 }
