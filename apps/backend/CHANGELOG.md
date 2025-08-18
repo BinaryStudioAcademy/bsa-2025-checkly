@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.6.0...backend-v1.7.0) (2025-08-18)
+
+
+### Features
+
+* add profile page cy-176 ([f090102](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f0901026904a8716bfccfdb9710ecedecf755525))
+
 ## [1.6.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.5.1...backend-v1.6.0) (2025-08-17)
 
 
