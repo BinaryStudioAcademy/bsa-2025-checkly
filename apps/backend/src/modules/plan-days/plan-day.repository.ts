@@ -1,3 +1,5 @@
+import { type Transaction } from "objection";
+
 import { type Repository } from "~/libs/types/types.js";
 import { PlanDayEntity } from "~/modules/plan-days/plan-day.entity.js";
 import { type PlanDayModel } from "~/modules/plan-days/plan-day.model.js";
@@ -8,11 +10,14 @@ class PlanDayRepository implements Repository {
 		this.planDayModel = planDayModel;
 	}
 
-	public async create(entity: PlanDayEntity): Promise<PlanDayEntity> {
+	public async create(
+		entity: PlanDayEntity,
+		trx?: Transaction,
+	): Promise<PlanDayEntity> {
 		const { dayNumber, planId } = entity.toNewObject();
 
 		const planDays = await this.planDayModel
-			.query()
+			.query(trx)
 			.insert({
 				dayNumber,
 				planId,

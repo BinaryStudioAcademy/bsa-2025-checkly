@@ -22,7 +22,7 @@ class PlanApi extends BaseHTTPApi {
 		payload: QuizAnswersRequestDto,
 	): Promise<PlanDaysTaskDto> {
 		const response = await this.load(
-			this.getFullEndpoint(PlansApiPath.PLAN_GENERATE, {}),
+			this.getFullEndpoint(PlansApiPath.GENERATE, {}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: false,

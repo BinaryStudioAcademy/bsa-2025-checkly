@@ -125,14 +125,20 @@ class PlanController extends BaseController {
 			handler: (options) =>
 				this.findWithRelations(options as IdParametersOption),
 			method: HTTPRequestMethod.GET,
-			path: PlansApiPath.PLAN,
+			path: PlansApiPath.$ID,
+		});
+
+		this.addRoute({
+			handler: (options) => this.regenerate(options as IdParametersOption),
+			method: HTTPRequestMethod.POST,
+			path: PlansApiPath.REGENERATE,
 		});
 
 		this.addRoute({
 			handler: (options) =>
 				this.create(options as APIBodyOptions<PlanCreateRequestDto>),
 			method: HTTPRequestMethod.POST,
-			path: PlansApiPath.PLAN_CREATE,
+			path: PlansApiPath.ROOT,
 			validation: {
 				body: planCreateValidationSchema,
 			},
@@ -222,6 +228,17 @@ class PlanController extends BaseController {
 
 		return {
 			payload: await this.planService.findWithRelations(id),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async regenerate(
+		options: IdParametersOption,
+	): Promise<APIHandlerResponse> {
+		const { id } = options.params;
+
+		return {
+			payload: await this.planService.regenerate(id),
 			status: HTTPCode.OK,
 		};
 	}

@@ -2,6 +2,8 @@ import { type Service } from "~/libs/types/types.js";
 import { PlanEntity } from "~/modules/plans/plan.entity.js";
 import { type PlanRepository } from "~/modules/plans/plan.repository.js";
 
+import { MOCK_GENERATED_PLAN } from "./libs/constants/constants.js";
+import { ErrorMessage, HTTPCode, HTTPError } from "./libs/enums/enums.js";
 import {
 	type PlanCreateRequestDto,
 	type PlanDaysTaskDto,
@@ -48,6 +50,41 @@ class PlanService implements Service {
 		const item = await this.planRepository.findWithRelations(id);
 
 		return item ? item.toObjectWithRelations() : null;
+	}
+
+	public async regenerate(id: number): Promise<null | PlanDaysTaskDto> {
+		const existingPlan = await this.planRepository.find(id);
+
+		if (!existingPlan) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		// TODO: Replace with actual quizId from plan when available
+		// const quizId = 1;
+		// const answers = await this.quizAnswerRepository.findAllWithOption(quizId);
+
+		// TODO: Replace mock with OpenAI service
+		// const prompt = createPrompt({ answers, category: "creativity", notes: "" });
+		// const generatedPlan = await this.openAIService.generatePlan(prompt);
+
+		const generatedPlan: PlanDaysTaskDto = MOCK_GENERATED_PLAN;
+		const planEntity = PlanEntity.initialize(generatedPlan);
+
+		const newPlanId = await this.planRepository.regenerate(planEntity);
+
+		if (!newPlanId) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_REGENERATION_FAILED,
+				status: HTTPCode.INTERNAL_SERVER_ERROR,
+			});
+		}
+
+		const newPlan = await this.planRepository.findWithRelations(newPlanId);
+
+		return newPlan ? newPlan.toObjectWithRelations() : null;
 	}
 
 	public async update(

@@ -29,6 +29,8 @@ class PlanModel extends AbstractModel {
 
 	public intensity!: string;
 
+	public quizId!: number;
+
 	public title!: string;
 
 	public userId!: number;

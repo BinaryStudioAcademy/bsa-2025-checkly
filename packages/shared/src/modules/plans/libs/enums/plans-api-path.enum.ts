@@ -1,7 +1,8 @@
 const PlansApiPath = {
-	PLAN: "/:id",
-	PLAN_CREATE: "/",
-	PLAN_GENERATE: "/generate",
+	$ID: "/:id",
+	GENERATE: "/generate",
+	REGENERATE: "/:id/regenerate",
+	ROOT: "/",
 } as const;
 
 export { PlansApiPath };

@@ -1,3 +1,5 @@
+import { type Transaction } from "objection";
+
 import { type Repository } from "~/libs/types/types.js";
 import { TaskEntity } from "~/modules/tasks/task.entity.js";
 import { type TaskModel } from "~/modules/tasks/task.model.js";
@@ -8,12 +10,15 @@ class TaskRepository implements Repository {
 		this.taskModel = taskModel;
 	}
 
-	public async create(entity: TaskEntity): Promise<TaskEntity> {
+	public async create(
+		entity: TaskEntity,
+		trx?: Transaction,
+	): Promise<TaskEntity> {
 		const { description, executionTimeType, order, planDayId, title } =
 			entity.toNewObject();
 
 		const task = await this.taskModel
-			.query()
+			.query(trx)
 			.insert({
 				description,
 				executionTimeType,
