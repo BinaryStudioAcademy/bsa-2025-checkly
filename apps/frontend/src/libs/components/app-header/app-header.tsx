@@ -21,8 +21,10 @@ const AppHeader: React.FC = () => {
 	const user = useAppSelector((state) => state.auth.user);
 
 	const { pathname } = useLocation();
-	const hasDivider =
-[AppRoute.DASHBOARD, AppRoute.PLAN, AppRoute.PROFILE].includes(pathname)
+
+	const hasDivider = (
+		[AppRoute.DASHBOARD, AppRoute.PLAN, AppRoute.PROFILE] as string[]
+	).includes(pathname);
 
 	const displayName = useMemo(() => user?.name ?? DEFAULT_USER_NAME, [user]);
 
