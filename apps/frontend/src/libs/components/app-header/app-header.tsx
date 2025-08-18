@@ -91,18 +91,18 @@ const AppHeader: React.FC = () => {
 								/>
 							</button>
 						</div>
+						<button
+							aria-label="Open user menu"
+							className={burgerMenuClassName}
+							onClick={handleMenuToggle}
+							type="button"
+						>
+							<div className={styles["burger-menu__line"]} />
+							<div className={styles["burger-menu__line"]} />
+							<div className={styles["burger-menu__line"]} />
+						</button>
 					</>
 				)}
-				<button
-					aria-label="Open user menu"
-					className={burgerMenuClassName}
-					onClick={handleMenuToggle}
-					type="button"
-				>
-					<div className={styles["burger-menu__line"]} />
-					<div className={styles["burger-menu__line"]} />
-					<div className={styles["burger-menu__line"]} />
-				</button>
 				{isMenuOpen && <UserMenu isOpen />}
 			</div>
 		</header>
