@@ -2,7 +2,10 @@ import { type Service } from "~/libs/types/types.js";
 import { PlanEntity } from "~/modules/plans/plan.entity.js";
 import { type PlanRepository } from "~/modules/plans/plan.repository.js";
 
+import { openAiService } from "../openai/openai.js";
+import { type OpenAIService } from "../openai/openai.service.js";
 import {
+	type GeneratedPlanDTO,
 	type PlanCreateRequestDto,
 	type PlanDaysTaskDto,
 	type PlanDto,
@@ -14,10 +17,12 @@ import {
 import { createPrompt } from "./libs/utilities/utilities.js";
 
 class PlanService implements Service {
+	private openAIService: OpenAIService;
 	private planRepository: PlanRepository;
 
 	public constructor(planRepository: PlanRepository) {
 		this.planRepository = planRepository;
+		this.openAIService = openAiService;
 	}
 
 	public async create(payload: PlanCreateRequestDto): Promise<PlanResponseDto> {
@@ -52,44 +57,14 @@ class PlanService implements Service {
 		return item ? item.toObjectWithRelations() : null;
 	}
 
-	public generate(payload: QuizAnswersRequestDto): PlanDaysTaskDto {
-		createPrompt(payload);
-		const mockedPlan = {
-			"days": [
-				{
-					"dayNumber": 3,
-					"id": 1,
-					"tasks": [],
-				},
-				{
-					"dayNumber": 3,
-					"id": 2,
-					"tasks": [],
-				},
-				{
-					"dayNumber": 3,
-					"id": 3,
-					"tasks": [
-						{
-							"completedAt": null,
-							"description": "Test description",
-							"executionTimeType": "",
-							"id": 2,
-							"isCompleted": false,
-							"order": 1,
-							"title": "do 1",
-						},
-					],
-				},
-			],
-			"duration": 2,
-			"id": 1,
-			"intensity": "2",
-			"title": "Test title",
-			"userId": 2,
-		};
+	public async generate(
+		payload: QuizAnswersRequestDto,
+	): Promise<GeneratedPlanDTO> {
+		const userPrompt = createPrompt(payload);
 
-		return mockedPlan;
+		const plan = await this.openAIService.generatePlan({ userPrompt });
+
+		return plan;
 	}
 
 	public async update(

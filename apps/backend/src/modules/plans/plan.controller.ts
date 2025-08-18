@@ -79,6 +79,48 @@ import { PlansApiPath } from "./libs/enums/enums.js";
  *               items:
  *                 $ref: '#/components/schemas/PlanDayDto'
  *
+ *     GeneratedTaskDto:
+ *       type: object
+ *       properties:
+ *         title:
+ *           type: string
+ *         description:
+ *           type: string
+ *         order:
+ *           type: number
+ *         executionTimeType:
+ *           type: string
+ *
+ *     GeneratedPlanDayDto:
+ *       type: object
+ *       properties:
+ *         dayNumber:
+ *           type: number
+ *         tasks:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/GeneratedTaskDto'
+ *
+ *     GeneratedPlanDto:
+ *       type: object
+ *       properties:
+ *         title:
+ *           type: string
+ *         duration:
+ *           type: number
+ *         intensity:
+ *           type: string
+ *
+ *     GeneratedPlanDaysTaskDto:
+ *       allOf:
+ *         - $ref: '#/components/schemas/GeneratedPlanDto'
+ *         - type: object
+ *           properties:
+ *             days:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/GeneratedPlanDayDto'
+ *
  *     PlanRequestDto:
  *       type: object
  *       required:
@@ -298,7 +340,7 @@ class PlanController extends BaseController {
 	 *         content:
 	 *           application/json:
 	 *             schema:
-	 *               $ref: '#/components/schemas/PlanDaysTaskDto'
+	 *               $ref: '#/components/schemas/GeneratedPlanDaysTaskDto'
 	 *       400:
 	 *         description: Invalid request data
 	 *         content:
@@ -314,11 +356,11 @@ class PlanController extends BaseController {
 	 *                   example: "At least one of the selected options or user input must be provided for a non-skipped question."
 	 */
 
-	private generate(
+	private async generate(
 		options: APIBodyOptions<QuizAnswersRequestDto>,
-	): APIHandlerResponse {
+	): Promise<APIHandlerResponse> {
 		return {
-			payload: this.planService.generate(options.body),
+			payload: await this.planService.generate(options.body),
 			status: HTTPCode.OK,
 		};
 	}
