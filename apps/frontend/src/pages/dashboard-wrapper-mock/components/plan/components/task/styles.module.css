@@ -21,7 +21,11 @@
 }
 
 .content__tasks-item p {
+	max-width: 100%;
 	font-size: var(--text-body-small);
+	word-break: normal;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 
 .color-1 {
