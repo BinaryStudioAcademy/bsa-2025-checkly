@@ -18,7 +18,11 @@ import {
 } from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm } from "~/libs/hooks/hooks.js";
-import { type PlanDay, type PlanEditForm, type SelectedItemType } from "~/libs/types/types.js";
+import {
+	type PlanDay,
+	type PlanEditForm,
+	type SelectedItemType,
+} from "~/libs/types/types.js";
 
 import { DownloadButton, EditingPanel } from "./components/components.js";
 import styles from "./styles.module.css";
@@ -26,7 +30,6 @@ import styles from "./styles.module.css";
 const mapDaysToNavItems = (
 	days: PlanDay[],
 ): { id: string; label: string }[] => {
-
 	return days.map((day) => ({
 		id: day.id,
 		label: `Day ${String(day.dayNumber)}`,
@@ -34,7 +37,8 @@ const mapDaysToNavItems = (
 };
 
 const PlanEdit: FC = () => {
-	const [selectedItem, setSelectedItem] = useState<SelectedItemType>(INITIAL_ITEM);
+	const [selectedItem, setSelectedItem] =
+		useState<SelectedItemType>(INITIAL_ITEM);
 
 	const { control, errors } = useAppForm<PlanEditForm>({
 		defaultValues: activitiesMockData,
@@ -46,12 +50,9 @@ const PlanEdit: FC = () => {
 
 	const planPreviewKey = JSON.stringify(formValues);
 
-	const handleSelectItem = useCallback(
-		(item: SelectedItemType): void => {
-			setSelectedItem(item);
-		},
-		[],
-	);
+	const handleSelectItem = useCallback((item: SelectedItemType): void => {
+		setSelectedItem(item);
+	}, []);
 
 	const handleSelectPreview = useCallback((): void => {
 		handleSelectItem("preview");
@@ -113,11 +114,7 @@ const PlanEdit: FC = () => {
 						/>
 					</div>
 
-					<div
-						className={
-							getClassNames("cluster", styles["right-panel"])
-						}
-					>
+					<div className={getClassNames("cluster", styles["right-panel"])}>
 						<PlanPreview
 							containerId="plan-for-download"
 							days={formValues.days}

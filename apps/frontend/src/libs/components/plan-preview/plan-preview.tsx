@@ -3,7 +3,7 @@ import React from "react";
 import themeStyles from "~/assets/mock-data/themes.mock.module.css";
 import { ONE } from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { useA4Scale } from "~/libs/hooks/use-a4-scale/use-a4-scale.hook.js";
+import { useA4Scale } from "~/libs/hooks/hooks.js";
 import { type PlanDay } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
@@ -20,9 +20,17 @@ type Properties = {
 const SEVEN = 7;
 
 const getWeekday = (dayNumber: number): string => {
-  const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-  
-  return weekdays[(dayNumber - ONE) % SEVEN] ?? "";
+	const weekdays = [
+		"Monday",
+		"Tuesday",
+		"Wednesday",
+		"Thursday",
+		"Friday",
+		"Saturday",
+		"Sunday",
+	];
+
+	return weekdays[(dayNumber - ONE) % SEVEN] ?? "";
 };
 
 const PlanPreview: React.FC<Properties> = ({
@@ -47,7 +55,8 @@ const PlanPreview: React.FC<Properties> = ({
 					return (
 						<div className={styles["day-block"]} key={day.id}>
 							<h2 className={styles["day-topic"]}>
-								Day {day.dayNumber} <span className={styles["day-weekday"]}>({weekday})</span>
+								Day {day.dayNumber}{" "}
+								<span className={styles["day-weekday"]}>({weekday})</span>
 							</h2>
 							<ul className={styles["activities-list"]}>
 								{day.tasks.map((task) => (

@@ -1,23 +1,19 @@
 const BASE_HEIGHT = 1123;
 const BASE_WIDTH = 794;
-const DAY_INDEX = 1;
 const EDITOR_ROWS = 10;
 const INCREMENT_VALUE = 1;
 const INITIAL_ITEM = 0;
 const LAST_INDEX = -1;
 const ONE = 1;
-const TWO = 2;
 const ZERO = 0;
 
 export {
 	BASE_HEIGHT,
 	BASE_WIDTH,
-	DAY_INDEX,
 	EDITOR_ROWS,
 	INCREMENT_VALUE,
 	INITIAL_ITEM,
 	LAST_INDEX,
 	ONE,
-	TWO,
 	ZERO,
 };

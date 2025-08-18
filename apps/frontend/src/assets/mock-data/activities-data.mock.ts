@@ -255,7 +255,8 @@ const activitiesMockData: PlanEditForm = {
 			],
 		},
 	],
-	notes: "Be flexible and kind to yourself. Consistency is the key to everything!",
+	notes:
+		"Be flexible and kind to yourself. Consistency is the key to everything!",
 };
 
 export { activitiesMockData };
