@@ -3,6 +3,7 @@ import { database } from "~/libs/modules/database/database.js";
 import { logger } from "~/libs/modules/logger/logger.js";
 import { authController } from "~/modules/auth/auth.js";
 import { planDayController } from "~/modules/plan-days/plan-days.js";
+import { planPdfExportController } from "~/modules/plan-pdf-export/plan-pdf-export.js";
 import { planController } from "~/modules/plans/plans.js";
 import { quizQuestionContolller } from "~/modules/quiz-questions/quiz-question.js";
 import { quizContolller } from "~/modules/quiz/quiz.js";
@@ -19,6 +20,7 @@ const apiV1 = new BaseServerApplicationApi(
 	...userController.routes,
 	...planController.routes,
 	...planDayController.routes,
+	...planPdfExportController.routes,
 	...taskController.routes,
 	...quizQuestionContolller.routes,
 	...quizContolller.routes,

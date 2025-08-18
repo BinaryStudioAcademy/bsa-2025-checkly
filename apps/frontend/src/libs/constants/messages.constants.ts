@@ -1,6 +1,7 @@
 const MESSAGES = {
 	AUTH: {
 		LOGOUT_FAILED: "Logout failed. Please try again.",
+		NOT_AUTHENTICATED: "You must be signed in to download the plan.",
 	},
 	DOWNLOAD: {
 		CLEANUP_FAILED: "Error restoring original state after download.",

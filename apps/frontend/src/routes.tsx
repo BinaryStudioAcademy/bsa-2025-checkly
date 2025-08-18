@@ -10,6 +10,7 @@ import {
 	NotFound,
 	PlanGeneration,
 	PlanStyleOverview,
+	PlanStylePrint,
 	QuestionFlow,
 	Quiz,
 } from "./pages/pages.js";
@@ -88,6 +89,11 @@ const routes: CustomRouteObject[] = [
 		element: <PlanGeneration />,
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.PLAN_GENERATION,
+	},
+	{
+		element: <PlanStylePrint />,
+		handle: { access: RouteAccess.AUTHENTICATED },
+		path: AppRoute.PLAN_STYLE_PRINT,
 	},
 ];
 

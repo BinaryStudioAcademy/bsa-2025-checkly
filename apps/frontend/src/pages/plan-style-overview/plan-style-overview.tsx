@@ -3,11 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { StarsYellow02 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { arrowBackIcon } from "~/assets/img/shared/shared.img.js";
-import {
-	AppHeader,
-	DecorativeImage,
-	PlanDisplay,
-} from "~/libs/components/components.js";
+import { AppHeader, DecorativeImage } from "~/libs/components/components.js";
+import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { getCategoryName, MESSAGES } from "~/libs/constants/constants.js";
 import { AppRoute, PlanCategoryId } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
@@ -15,7 +12,7 @@ import { usePlanCategory } from "~/libs/hooks/hooks.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 
 import { PlanActions, PlanStyleCategory } from "./components/components.js";
-import { downloadPlan } from "./lib/helpers.js";
+import { downloadPlan } from "./lib/services/pdf-export.service.js";
 import styles from "./styles.module.css";
 
 const CATEGORIES = [
@@ -70,35 +67,28 @@ const PlanStyleOverview: React.FC = () => {
 				/>
 			</div>
 			<div className={getClassNames(styles["container"], "grid-pattern")}>
-				{selectedCategory === PlanCategoryId.PDF && (
-					<div className={styles["plan-content"]}>
-						<PlanDisplay categoryId={selectedCategory} theme="with-remarks" />
-
-						<DecorativeImage
-							className={styles["yellow-stars"] ?? ""}
-							src={StarsYellow02}
-						/>
-
-						<DecorativeImage
-							className={styles["yellow-stars-reflection"] ?? ""}
-							src={StarsYellow02}
-						/>
-					</div>
-				)}{" "}
-				{selectedCategory !== PlanCategoryId.PDF && (
-					<div className={styles["plan-content"]}>
+				<div className={styles["plan-content"]}>
+					{selectedCategory === PlanCategoryId.PDF ? (
+						<>
+							<PlanStyle inputStyle="withremarks" />
+							<DecorativeImage
+								className={styles["yellow-stars-reflection"]}
+								src={StarsYellow02}
+							/>
+						</>
+					) : (
 						<div className={styles["coming-soon"]}>
 							<h2>Coming Soon</h2>
 							<p>
 								{selectedCategoryName} {MESSAGES.FEATURE.COMING_SOON}
 							</p>
 						</div>
-						<DecorativeImage
-							className={styles["yellow-stars"] ?? ""}
-							src={StarsYellow02}
-						/>
-					</div>
-				)}
+					)}
+					<DecorativeImage
+						className={styles["yellow-stars"]}
+						src={StarsYellow02}
+					/>
+				</div>
 			</div>
 
 			<div className={styles["actions-section"]}>

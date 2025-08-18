@@ -1,6 +1,7 @@
 export {
 	APIPath,
 	AppEnvironment,
+	ContentType,
 	ErrorConstants,
 	FastifyHook,
 	ServerErrorType,

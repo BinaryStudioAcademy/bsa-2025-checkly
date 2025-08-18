@@ -5,6 +5,7 @@ const AppRoute = {
 	OVERVIEW_PAGE: "/plan-style-overview",
 	PLAN: "/plan",
 	PLAN_GENERATION: "/plan/generation",
+	PLAN_STYLE_PRINT: "/plan-style-print",
 	PROFILE: "/profile",
 	QUIZ: "/quiz",
 	QUIZ_QUESTIONS: "/quiz/questions",

@@ -7,11 +7,6 @@ export { type ViewOptions } from "./plan/plan-view-option.type.js";
 export { type Plan } from "./plan/plan.type.js";
 export { type Task } from "./plan/task.type.js";
 export {
-	type ActivitiesMockData,
-	type Activity,
-	type Day,
-} from "./plan-display.types.js";
-export {
 	type CheckboxQuestionProperties,
 	type MixedAnswer,
 	type MixedQuestionProperties,
