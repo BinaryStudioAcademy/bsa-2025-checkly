@@ -1,5 +1,6 @@
-.wrapper {
+.feedback-wrapper {
 	position: relative;
+	min-width: 300px;
 	padding-block: var(--section-padding-block);
 }
 
@@ -19,30 +20,79 @@
 	--flow-space: var(--space-2xl);
 
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	width: 100%;
-	max-width: 1200px;
+	max-width: 100%;
 	margin: 0 auto;
 }
 
 .title {
+	z-index: 3;
 	font-size: var(--text-size-heading-2);
 	text-align: center;
+}
+
+.no-feedbacks-title {
+	font-size: var(--text-size-heading-3);
 }
 
 .grid {
 	position: relative;
 	display: flex;
-	flex-wrap: wrap;
-	gap: var(--step-2);
-	justify-content: center;
+	align-items: center;
 	width: 100%;
+	gap: var(--step-2);
 }
 
 .grid > * {
-	flex: 0 0 360px;
-	height: clamp(180px, 12vw + 120px, 240px);
+	flex: 0 0 clamp(250px, 25vw, 365px);
+	height: clamp(260px, 11.11vw + 220px, 410px);
 	padding: var(--space-m);
+	padding-top: 38px;
 	background-color: var(--color-bg-white);
+}
+
+.feedbacks-list {
+	padding-top: var(--space-2xs);
+	padding-bottom: var(--space-s-m);
+
+	max-width: 100%;
+	min-height: 300px;
+	overflow-x: auto;
+
+	scrollbar-color: #f7b6d2 #fde7f1;
+	scrollbar-width: thin;
+}
+
+.feedbacks-load-more-box {
+	background-color: transparent;
+}
+
+.feedbacks-list::-webkit-scrollbar {
+	width: 5px;
+	height: 10px;
+}
+
+.feedbacks-list::-webkit-scrollbar-track {
+	background: #fde7f1;
+	border-radius: 10px;
+}
+
+.feedbacks-list::-webkit-scrollbar-thumb {
+	background-color: #f7b6d2;
+	border: 2px solid #fde7f1;
+	border-radius: 10px;
+}
+
+.feedbacks-list::-webkit-scrollbar-thumb:hover {
+	background-color: #f28db5;
+}
+
+.loader-container {
+	min-height: 300px;
 }
 
 @media (width <= 1024px) {
@@ -50,18 +100,17 @@
 		gap: 16px;
 	}
 
-	.grid > * {
-		flex: 0 0 360px;
+	.landing-section {
+		--wrapper-max-width: 100%;
+	}
+
+	.feedbacks-list {
+		padding-bottom: 10px;
 	}
 }
 
 @media (width <= 768px) {
-	.grid > * {
-		flex: 0 1 360px;
-		height: clamp(180px, 12vw + 100px, 200px);
-	}
-
-	.wrapper {
+	.feedback-wrapper {
 		--grid-size: 12px;
 	}
 }

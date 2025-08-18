@@ -1,5 +1,5 @@
 const FeedbackValidationRegexRule = {
-	TEXT_VALID_CHARS: /^[A-Za-zА-Яа-яЇїІіЄєҐґ0-9\s-.,!?'"]+$/,
+	TEXT_VALID_CHARS: /^[A-Za-z0-9\s.,!?'"@#$%&*()_+\-=/<>:;`~[\]{}|]+$/,
 } as const;
 
 export { FeedbackValidationRegexRule };

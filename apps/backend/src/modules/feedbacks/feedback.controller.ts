@@ -1,6 +1,7 @@
 import { APIPath } from "~/libs/enums/enums.js";
 import {
 	type APIBodyOptions,
+	type APIHandlerOptions,
 	type APIHandlerResponse,
 	BaseController,
 	type IdParametersOption,
@@ -18,6 +19,7 @@ import {
 	feedbackCreateValidationSchema,
 	feedbackUpdateValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
+
 /**
  * @swagger
  * tags:
@@ -87,7 +89,12 @@ class FeedbackController extends BaseController {
 		this.feedbackService = feedbackService;
 
 		this.addRoute({
-			handler: () => this.findAll(),
+			handler: (request) =>
+				this.findAll(
+					request as APIHandlerOptions<{
+						query?: { limit?: number; offset?: number };
+					}>,
+				),
 			isPublic: true,
 			method: HTTPRequestMethod.GET,
 			path: FeedbackApiPath.ROOT,
@@ -136,8 +143,6 @@ class FeedbackController extends BaseController {
 	 *     tags:
 	 *       - feedbacks
 	 *     summary: Create a new feedback
-	 *     security:
-	 *       - bearerAuth: []
 	 *     requestBody:
 	 *       required: true
 	 *       content:
@@ -151,8 +156,6 @@ class FeedbackController extends BaseController {
 	 *           application/json:
 	 *             schema:
 	 *               $ref: '#/components/schemas/Feedback'
-	 *       '401':
-	 *         description: Unauthorized
 	 */
 
 	private async create(
@@ -229,13 +232,29 @@ class FeedbackController extends BaseController {
 	 *       '401':
 	 *         description: Unauthorized
 	 */
+	private async findAll(
+		request: APIHandlerOptions<{ query?: { limit?: number; offset?: number } }>,
+	): Promise<APIHandlerResponse> {
+		const { query = {} } = request;
+		const options: { limit?: number; offset?: number } = {};
 
-	private async findAll(): Promise<APIHandlerResponse> {
+		if (query.limit) {
+			options.limit = Number(query.limit);
+		}
+
+		if (query.offset) {
+			options.offset = Number(query.offset);
+		}
+
+		const feedbackData = await this.feedbackService.findAll(options);
+
 		return {
-			payload: await this.feedbackService.findAll(),
+			payload: feedbackData,
 			status: HTTPCode.OK,
 		};
-	} /**
+	}
+
+	/**
 	 * @swagger
 	 * /feedbacks/{id}:
 	 *   get:
@@ -248,7 +267,7 @@ class FeedbackController extends BaseController {
 	 *       - in: path
 	 *         name: id
 	 *         schema:
-	 *           type: number
+	 *           type: integer
 	 *         required: true
 	 *         description: Feedback ID
 	 *     responses:
@@ -286,36 +305,46 @@ class FeedbackController extends BaseController {
 	/**
 	 * @swagger
 	 * /feedbacks/{id}:
-	 *   put:
+	 *   patch:
 	 *     tags:
 	 *       - feedbacks
-	 *     summary: Update an existing feedback (only if created by the current user)
+	 *     summary: Update feedback by ID
+	 *     description: Updates an existing feedback. Only the owner can update it.
 	 *     security:
 	 *       - bearerAuth: []
 	 *     parameters:
 	 *       - in: path
 	 *         name: id
-	 *         schema:
-	 *           type: number
 	 *         required: true
+	 *         schema:
+	 *           type: string
 	 *         description: Feedback ID
 	 *     requestBody:
 	 *       required: true
 	 *       content:
 	 *         application/json:
 	 *           schema:
-	 *             $ref: '#/components/schemas/FeedbackUpdateRequestDto'
+	 *             type: object
+	 *             properties:
+	 *               message:
+	 *                 type: string
+	 *                 example: "Updated feedback text"
+	 *               rating:
+	 *                 type: integer
+	 *                 example: 5
 	 *     responses:
 	 *       '200':
-	 *         description: Feedback updated successfully
+	 *         description: Successfully updated feedback
 	 *         content:
 	 *           application/json:
 	 *             schema:
 	 *               $ref: '#/components/schemas/Feedback'
+	 *       '400':
+	 *         description: Invalid request
 	 *       '401':
 	 *         description: Unauthorized
 	 *       '404':
-	 *         description: Feedback not found or not owned by the user
+	 *         description: Feedback not found
 	 */
 
 	private async update(

@@ -55,6 +55,18 @@ class BaseHTTPApi implements HTTPApi {
 		return (await this.checkResponse(response)) as HTTPApiResponse;
 	}
 
+	protected getEndpointWithQuery(
+		endpoint: string,
+		queryOptions: Record<string, number | string | undefined>,
+	): string {
+		const query = Object.keys(queryOptions)
+			.filter((key) => queryOptions[key] !== undefined)
+			.map((key) => `${key}=${String(queryOptions[key])}`)
+			.join("&");
+
+		return query ? `${endpoint}?${query}` : endpoint;
+	}
+
 	protected getFullEndpoint(
 		...parameters: [...string[], Record<string, string>]
 	): string {
@@ -79,16 +91,17 @@ class BaseHTTPApi implements HTTPApi {
 	}
 
 	private async getHeaders(
-		contentType: ValueOf<typeof ContentType>,
-		hasAuth: boolean,
+		contentType?: ValueOf<typeof ContentType>,
+		hasAuth = false,
 	): Promise<Headers> {
 		const headers = new Headers();
 
-		headers.append(HTTPHeader.CONTENT_TYPE, contentType);
+		if (contentType) {
+			headers.append(HTTPHeader.CONTENT_TYPE, contentType);
+		}
 
 		if (hasAuth) {
 			const token = await this.storage.get<string>(StorageKey.TOKEN);
-
 			headers.append(HTTPHeader.AUTHORIZATION, `Bearer ${token ?? ""}`);
 		}
 

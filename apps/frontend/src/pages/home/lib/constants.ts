@@ -1,35 +1,13 @@
 import {
-	Avatar01,
-	Avatar02,
-	Avatar03,
-} from "~/assets/img/shared/avatars/avatars.img.js";
-import {
 	ExampleColourful,
 	ExampleMinimal,
 	ExampleMotivating,
 	ExampleWithRemarks,
 } from "~/assets/img/shared/illustrations/layouts/layouts.img.js";
 
-const FEEDBACKS = [
-	{
-		avatar: Avatar01,
-		id: 1,
-		name: "Roy",
-		text: "Lorem ipsum dolor amet, consectetur adipiscing elit. Cras sed dui sagittis, scelerisque lectus at, porttitor lectus. Sed libero est, tincidunt eget purus nec, dignissim consequat mauris",
-	},
-	{
-		avatar: Avatar02,
-		id: 2,
-		name: "Emma",
-		text: "Nulla et nulla pulvinar, congue justo id, cursus ligula. Nunc pharetra sapien libero, vel blandit orci rhoncus ut. Sed aliquam efficitur semper.",
-	},
-	{
-		avatar: Avatar03,
-		id: 3,
-		name: "Joan",
-		text: "Nullam tempus, elit non tempus molestie, tellus diam sagittis urna, vel viverra velit risus in nunc. Cras in quam leo. Nullam mattis at lacus eget pretium. Etiam quis pulvinar",
-	},
-] as const;
+const LIMIT = 6;
+const EMPTY_RESPONSE = 0;
+const SINGLE_PAGE = 1;
 
 const PAST_PLANS = [
 	{
@@ -74,4 +52,4 @@ const PAST_PLANS = [
 	},
 ] as const;
 
-export { FEEDBACKS, PAST_PLANS };
+export { EMPTY_RESPONSE, LIMIT, PAST_PLANS, SINGLE_PAGE };

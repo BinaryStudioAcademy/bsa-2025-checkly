@@ -3,17 +3,19 @@ import { type Service } from "~/libs/types/types.js";
 import { FeedbackEntity } from "~/modules/feedbacks/feedback.entity.js";
 import { type FeedbackRepository } from "~/modules/feedbacks/feedback.repository.js";
 
+import { FeedbackGetAllOptions } from "./libs/enums/enums.js";
 import {
 	type FeedbackCreateRequestDto,
 	type FeedbackDeleteResponseDto,
-	type FeedbackGetAllResponseDto,
+	type FeedbackDto,
 	type FeedbackUpdateRequestDto,
 	type FeedbackUpdateResponseDto,
 } from "./libs/types/types.js";
 
-type FeedbackServiceReturns = Promise<{
-	items: FeedbackGetAllResponseDto[];
-}>;
+interface FeedbackServiceReturns {
+	items: FeedbackDto[];
+	total: number;
+}
 
 class FeedbackService implements Service {
 	private feedbackRepository: FeedbackRepository;
@@ -22,9 +24,7 @@ class FeedbackService implements Service {
 		this.feedbackRepository = feedbackRepository;
 	}
 
-	public async create(
-		payload: FeedbackCreateRequestDto,
-	): Promise<FeedbackGetAllResponseDto> {
+	public async create(payload: FeedbackCreateRequestDto): Promise<FeedbackDto> {
 		const item = await this.feedbackRepository.create(
 			FeedbackEntity.initializeNew({
 				text: payload.text,
@@ -50,19 +50,30 @@ class FeedbackService implements Service {
 		return { isDeleted };
 	}
 
-	public find(): Promise<FeedbackGetAllResponseDto | null> {
+	public find(): Promise<FeedbackDto | null> {
 		return Promise.resolve(null);
 	}
 
-	public async findAll(): FeedbackServiceReturns {
-		const items = await this.feedbackRepository.findAll();
+	public async findAll(
+		options: { limit?: number; offset?: number } = {},
+	): Promise<FeedbackServiceReturns> {
+		const {
+			limit = FeedbackGetAllOptions.PAGE_SIZE,
+			offset = FeedbackGetAllOptions.DEFAULT_OFFSET,
+		} = options;
+
+		const { items, total } = await this.feedbackRepository.findAll({
+			limit,
+			offset,
+		});
 
 		return {
 			items: items.map((item) => item.toObjectWithRelations()),
+			total,
 		};
 	}
 
-	public async findById(id: number): Promise<FeedbackGetAllResponseDto | null> {
+	public async findById(id: number): Promise<FeedbackDto | null> {
 		const item = await this.feedbackRepository.findById(id);
 
 		return item ? item.toObjectWithRelations() : null;

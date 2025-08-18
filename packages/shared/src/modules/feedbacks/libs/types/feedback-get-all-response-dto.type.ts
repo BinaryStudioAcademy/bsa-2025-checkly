@@ -1,4 +1,4 @@
-type FeedbackGetAllResponseDto = {
+type FeedbackDto = {
 	createdAt: string;
 	id: number;
 	text: string;
@@ -7,10 +7,17 @@ type FeedbackGetAllResponseDto = {
 	userId: number;
 };
 
+type FeedbackServiceReturns = {
+	items: FeedbackDto[];
+	limit: number;
+	page: number;
+	total: number;
+};
+
 type UserDto = {
 	email: string;
 	id: number;
 	name: string;
 };
 
-export { type FeedbackGetAllResponseDto };
+export { type FeedbackDto, type FeedbackServiceReturns };

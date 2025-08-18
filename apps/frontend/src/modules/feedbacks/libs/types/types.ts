@@ -1,10 +1,7 @@
 export {
 	type FeedbackCreateRequestDto,
-	type FeedbackDeleteResponseDto,
 	type FeedbackDto,
-	type FeedbackPaginationOptions,
 	type feedbackPaginationParameters,
+	type FeedbackServiceReturns,
 	type FeedbackUpdateRequestDto,
-	type FeedbackUpdateResponseDto,
-	type UserProfileResponseDto,
 } from "shared";

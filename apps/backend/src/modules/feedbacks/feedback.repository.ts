@@ -3,8 +3,11 @@ import { FeedbackEntity } from "~/modules/feedbacks/feedback.entity.js";
 import { type FeedbackModel } from "~/modules/feedbacks/feedback.model.js";
 
 type FeedbackRepositoryReturn = Promise<FeedbackEntity | null>;
-type FeedbackRepositoryReturns = Promise<FeedbackEntity[]>;
 
+interface FeedbackRepositoryReturns {
+	items: FeedbackEntity[];
+	total: number;
+}
 const DELETED_COUNT_THRESHOLD = 0;
 
 class FeedbackRepository implements Repository<FeedbackEntity> {
@@ -44,18 +47,42 @@ class FeedbackRepository implements Repository<FeedbackEntity> {
 		return Promise.resolve(null);
 	}
 
-	public async findAll(): FeedbackRepositoryReturns {
-		const feedbacks = await this.feedbackModel
-			.query()
-			.withGraphFetched("user(shortInfo)")
-			.modifiers({
-				shortInfo(builder) {
-					builder.select("id", "name");
-				},
-			})
-			.execute();
+	public findAll(): Promise<FeedbackEntity[]>;
+	public findAll(options: {
+		limit: number;
+		offset: number;
+	}): Promise<FeedbackRepositoryReturns>;
+	public async findAll(options?: {
+		limit: number;
+		offset: number;
+	}): Promise<FeedbackEntity[] | FeedbackRepositoryReturns> {
+		if (options) {
+			const { limit, offset } = options;
 
-		return feedbacks.map((feedback) => FeedbackEntity.initialize(feedback));
+			const feedbacks = await this.feedbackModel
+				.query()
+				.withGraphFetched("user(shortInfo)")
+				.modifiers({
+					shortInfo(builder) {
+						builder.select("id", "name");
+					},
+				})
+				.orderBy("createdAt", "desc")
+				.limit(limit)
+				.offset(offset)
+				.execute();
+
+			const total = await this.feedbackModel.query().resultSize();
+
+			return {
+				items: feedbacks.map((feedback) => FeedbackEntity.initialize(feedback)),
+				total,
+			};
+		}
+
+		const allFeedbacks = await this.feedbackModel.query().execute();
+
+		return allFeedbacks.map((feedback) => FeedbackEntity.initialize(feedback));
 	}
 
 	public async findById(id: number): FeedbackRepositoryReturn {
