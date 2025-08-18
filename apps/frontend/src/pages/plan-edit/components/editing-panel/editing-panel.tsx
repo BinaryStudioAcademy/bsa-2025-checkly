@@ -1,7 +1,7 @@
 import { type FC } from "react";
 import { type Control, type FieldErrors } from "react-hook-form";
 
-import { type PlanEditForm } from "~/libs/types/types.js";
+import { type PlanEditForm, type SelectedItemType } from "~/libs/types/types.js";
 
 import { DayEditor, NotesEditor } from "../components.js";
 import styles from "./styles.module.css";
@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 type Properties = {
 	control: Control<PlanEditForm>;
 	errors: FieldErrors<PlanEditForm>;
-	selectedItem: "notes" | "preview" | number;
+	selectedItem: SelectedItemType;
 };
 
 const EditingPanel: FC<Properties> = ({ control, errors, selectedItem }) => {

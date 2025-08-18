@@ -2,6 +2,7 @@ import { type FC, useCallback } from "react";
 
 import { Button } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { type SelectedItemType } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
 
@@ -26,8 +27,6 @@ type Properties = {
 	showNotes?: boolean;
 	showPreviewButton?: boolean;
 };
-
-type SelectedItemType = "notes" | "preview" | number;
 
 const DaysNav: FC<Properties> = ({
 	className = "",
