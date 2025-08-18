@@ -4,7 +4,6 @@ import { Remove } from "~/assets/img/icons/icons.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { ButtonVariants } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
-import { useCallback } from "~/libs/hooks/hooks.js";
 
 import styles from "./styles.module.css";
 
@@ -21,36 +20,12 @@ const Modal: React.FC<Properties> = ({
 	onClose,
 	title,
 }: Properties) => {
-	const handleBackdropClick = useCallback(
-		(event: React.MouseEvent<HTMLButtonElement>): void => {
-			if (event.target === event.currentTarget) {
-				onClose();
-			}
-		},
-		[onClose],
-	);
-
-	const handleKeyDown = useCallback(
-		(event: React.KeyboardEvent<HTMLButtonElement>): void => {
-			if (event.key === "Escape") {
-				onClose();
-			}
-		},
-		[onClose],
-	);
-
 	if (!isOpen) {
 		return null;
 	}
 
 	return (
-		<button
-			aria-label="Modal backdrop"
-			className={styles["modal-overlay"]}
-			onClick={handleBackdropClick}
-			onKeyDown={handleKeyDown}
-			type="button"
-		>
+		<div aria-modal="true" className={styles["modal-overlay"]} role="dialog">
 			<div className={styles["modal-content"]}>
 				{title && (
 					<div className={styles["modal-header"]}>
@@ -67,7 +42,7 @@ const Modal: React.FC<Properties> = ({
 				)}
 				<div className={styles["modal-body"]}>{children}</div>
 			</div>
-		</button>
+		</div>
 	);
 };
 
