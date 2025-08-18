@@ -68,6 +68,11 @@ const SignInForm: React.FC<Properties> = ({
 		"wrapper grid-pattern flow-loose",
 	);
 	const cupClasses = getClassNames(styles["floating-image"], styles["cup"]);
+	const forgotPasswordLinkClasses = getClassNames(
+		sharedStyles["redirect-text__link"],
+		styles["forgot-password-link"],
+	);
+
 	const { control, errors, handleSubmit } = useAppForm<UserSignInRequestDto>({
 		defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
 		validationSchema: userSignInValidationSchema,
@@ -138,6 +143,13 @@ const SignInForm: React.FC<Properties> = ({
 						type="submit"
 					/>
 				</form>
+				<Link
+					aria-label="Go to forgot password page"
+					className={forgotPasswordLinkClasses}
+					to={AppRoute.FORGOT_PASSWORD}
+				>
+					Forgot password?
+				</Link>
 				<DecorativeImage className={pinkStarsClasses} src={StarsPink01} />
 				<DecorativeImage className={cupClasses} src={CupGreen} />
 			</main>

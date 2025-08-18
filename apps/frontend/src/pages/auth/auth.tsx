@@ -11,11 +11,13 @@ import {
 import { navigation } from "~/libs/modules/navigation/navigation.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import {
+	type ForgotPasswordRequestDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
 } from "~/modules/users/users.js";
 
 import { SignInForm, SignUpForm } from "./components/components.js";
+import { ForgotPassword } from "./components/forgot-password/forgot-password.js";
 
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -45,8 +47,24 @@ const Auth: React.FC = () => {
 		[dispatch],
 	);
 
+	const handleForgotPasswordSubmit = useCallback(
+		(payload: ForgotPasswordRequestDto): void => {
+			void dispatch(authActions.sendResetLink(payload));
+		},
+		[dispatch],
+	);
+
 	const getScreen = (screen: string): JSX.Element => {
 		switch (screen) {
+			case AppRoute.FORGOT_PASSWORD: {
+				return (
+					<ForgotPassword
+						isLoading={isLoading}
+						onSubmit={handleForgotPasswordSubmit}
+					/>
+				);
+			}
+
 			case AppRoute.SIGN_IN: {
 				return (
 					<SignInForm isLoading={isLoading} onSubmit={handleSignInSubmit} />

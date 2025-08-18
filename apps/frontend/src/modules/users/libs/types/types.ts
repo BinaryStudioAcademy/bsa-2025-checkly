@@ -1,4 +1,5 @@
 export {
+	type ForgotPasswordRequestDto,
 	type SignUpFormValidationSchema,
 	type UserDto,
 	type UserGetAllResponseDto,

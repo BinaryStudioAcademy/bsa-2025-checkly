@@ -40,3 +40,8 @@
 	display: inline-block;
 	width: clamp(120px, 20vw, 200px);
 }
+
+.forgot-password-link {
+	display: block;
+	text-align: center;
+}

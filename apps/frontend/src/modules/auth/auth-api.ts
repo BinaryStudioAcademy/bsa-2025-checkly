@@ -3,6 +3,7 @@ import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
 import {
+	type ForgotPasswordRequestDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -31,6 +32,17 @@ class AuthApi extends BaseHTTPApi {
 		});
 
 		return await response.json<UserDto>();
+	}
+
+	public async sendResetLink(payload: ForgotPasswordRequestDto): Promise<null> {
+		await this.load(this.getFullEndpoint(AuthApiPath.FORGOT_PASSWORD, {}), {
+			contentType: ContentType.JSON,
+			hasAuth: false,
+			method: HTTPRequestMethod.POST,
+			payload: JSON.stringify(payload),
+		});
+
+		return null;
 	}
 
 	public async signIn(

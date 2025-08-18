@@ -38,6 +38,11 @@ const routes: CustomRouteObject[] = [
 		path: AppRoute.SIGN_UP,
 	},
 	{
+		element: <Auth />,
+		handle: { access: RouteAccess.NOT_AUTHENTICATED },
+		path: AppRoute.FORGOT_PASSWORD,
+	},
+	{
 		element: <QuestionFlow />,
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.QUIZ_QUESTIONS,

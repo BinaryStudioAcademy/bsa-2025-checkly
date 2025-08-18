@@ -79,6 +79,8 @@ export {
 	type TaskUpdateRequestDto,
 } from "./modules/tasks/tasks.js";
 export {
+	type ForgotPasswordRequestDto,
+	forgotPasswordValidationSchema,
 	type SignUpFormValidationSchema,
 	type UserDto,
 	type UserGetAllResponseDto,

@@ -7,12 +7,14 @@ import { HTTPError } from "~/libs/modules/http/http.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
+	type ForgotPasswordRequestDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
 	type UserUpdateRequestDto,
 } from "~/modules/users/users.js";
 
+import { authApi } from "../auth.js";
 import {
 	actions as authSliceActions,
 	name as sliceName,
@@ -49,6 +51,14 @@ const signUp = createAsyncThunk<
 	await storage.set(StorageKey.TOKEN, token);
 
 	return user;
+});
+
+const sendResetLink = createAsyncThunk<
+	null,
+	ForgotPasswordRequestDto,
+	AsyncThunkConfig
+>(`${sliceName}/send-reset-link`, async (registerPayload) => {
+	return await authApi.sendResetLink(registerPayload);
 });
 
 const getCurrentUser = createAsyncThunk<
@@ -109,4 +119,4 @@ const logout = createAsyncThunk<null, LogoutThunkArgument, AsyncThunkConfig>(
 	},
 );
 
-export { getCurrentUser, logout, signIn, signUp, updateProfile };
+export { getCurrentUser, logout, sendResetLink, signIn, signUp, updateProfile };

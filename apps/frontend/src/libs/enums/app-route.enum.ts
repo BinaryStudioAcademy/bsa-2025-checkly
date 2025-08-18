@@ -1,6 +1,7 @@
 const AppRoute = {
 	CHOOSE_STYLE: "/choose-style",
 	DASHBOARD: "/dashboard",
+	FORGOT_PASSWORD: "/forgot-password",
 	NOT_FOUND: "*",
 	PLAN: "/plan",
 	PLAN_GENERATION: "/plan/generation",
