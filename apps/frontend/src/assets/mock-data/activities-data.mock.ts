@@ -3,190 +3,259 @@ import { type PlanEditForm } from "~/libs/types/plan-edit-form.type.js";
 const activitiesMockData: PlanEditForm = {
 	days: [
 		{
-			activities: [
-				{
-					id: "day-1-task-1",
-					text: "Start the day with a 10-minute guided meditation session.",
-				},
-				{
-					id: "day-1-task-2",
-					text: "Write down three things you are grateful for in a journal.",
-				},
-				{
-					id: "day-1-task-3",
-					text: "Practice mindful eating during lunch, focusing on each bite.",
-				},
-				{
-					id: "day-1-task-4",
-					text: "Set a clear intention for the week ahead.",
-				},
-				{
-					id: "day-1-task-5",
-					text: "Schedule a 1-hour digital detox before bed (no screens).",
-				},
-			],
+			dayNumber: 1,
 			id: "day-1",
-			topic: "Day 1: Mindfulness and Presence",
-		},
-		{
-			activities: [
+			tasks: [
 				{
-					id: "day-2-task-1",
-					text: "Engage in 30 minutes of physical activity (e.g., jogging, yoga, gym).",
+					description: "Set a calm tone every day.",
+					id: "day-1-task-1",
+					isCompleted: false,
+					title: "Start the day with guided meditation.",
 				},
 				{
-					id: "day-2-task-2",
-					text: "Prepare a healthy, nutrient-rich breakfast.",
+					description: "Practice gratitude in your journal.",
+					id: "day-1-task-2",
+					isCompleted: false,
+					title: "Write down three things you are grateful for.",
 				},
 				{
-					id: "day-2-task-3",
-					text: "Ensure you drink at least 8 glasses of water throughout the day.",
+					description: "Focus on every bite and flavor.",
+					id: "day-1-task-3",
+					isCompleted: false,
+					title: "Practice mindful eating at lunch.",
 				},
 				{
-					id: "day-2-task-4",
-					text: "Perform a 15-minute stretching routine to improve flexibility.",
+					description: "Know what you want to achieve.",
+					id: "day-1-task-4",
+					isCompleted: false,
+					title: "Set an intention for the week.",
 				},
 				{
-					id: "day-2-task-5",
-					text: "Go to bed 30 minutes earlier to ensure adequate rest.",
+					description: "Spend one hour without screens.",
+					id: "day-1-task-5",
+					isCompleted: false,
+					title: "Do a digital detox before bed.",
 				},
 			],
+		},
+		{
+			dayNumber: 2,
 			id: "day-2",
-			topic: "Day 2: Physical Wellness",
-		},
-		{
-			activities: [
+			tasks: [
 				{
-					id: "day-3-task-1",
-					text: "Read one chapter of a non-fiction book on a new subject.",
+					description: "Choose your favorite physical exercise.",
+					id: "day-2-task-1",
+					isCompleted: false,
+					title: "Do 30 minutes of physical activity.",
 				},
 				{
-					id: "day-3-task-2",
-					text: "Listen to an educational podcast during your commute or break.",
+					description: "Start the day with good energy.",
+					id: "day-2-task-2",
+					isCompleted: false,
+					title: "Prepare a healthy breakfast.",
 				},
 				{
-					id: "day-3-task-3",
-					text: "Spend 20 minutes learning a new skill online (e.g., a language, coding).",
+					description: "Hydration is essential for you.",
+					id: "day-2-task-3",
+					isCompleted: false,
+					title: "Drink at least 8 glasses of water.",
 				},
 				{
-					id: "day-3-task-4",
-					text: "Watch a documentary on a topic that sparks your curiosity.",
+					description: "Improve your body flexibility.",
+					id: "day-2-task-4",
+					isCompleted: false,
+					title: "Do a stretching routine.",
 				},
 				{
-					id: "day-3-task-5",
-					text: "Write down one new thing you learned today and how you can apply it.",
+					description: "Proper rest is very important.",
+					id: "day-2-task-5",
+					isCompleted: false,
+					title: "Go to bed 30 minutes earlier.",
 				},
 			],
+		},
+		{
+			dayNumber: 3,
 			id: "day-3",
-			topic: "Day 3: Mental Growth",
-		},
-		{
-			activities: [
+			tasks: [
 				{
-					id: "day-4-task-1",
-					text: "Practice active listening in a conversation without interrupting.",
+					description: "Choose a subject that interests you.",
+					id: "day-3-task-1",
+					isCompleted: false,
+					title: "Read a chapter of a book.",
 				},
 				{
-					id: "day-4-task-2",
-					text: "Reach out to a friend or family member just to check in.",
+					description: "Learn something new on your commute.",
+					id: "day-3-task-2",
+					isCompleted: false,
+					title: "Listen to an educational podcast today.",
 				},
 				{
-					id: "day-4-task-3",
-					text: "Perform a random act of kindness for a stranger or colleague.",
+					description: "It can be a language or programming.",
+					id: "day-3-task-3",
+					isCompleted: false,
+					title: "Learn a new skill online.",
 				},
 				{
-					id: "day-4-task-4",
-					text: "Journal about your emotions, identifying what you felt and why.",
+					description: "Explore a topic of your curiosity.",
+					id: "day-3-task-4",
+					isCompleted: false,
+					title: "Watch an interesting documentary.",
 				},
 				{
-					id: "day-4-task-5",
-					text: "Reflect on a recent challenge and acknowledge your resilience.",
+					description: "Reflect on your learning.",
+					id: "day-3-task-5",
+					isCompleted: false,
+					title: "Write down one new thing you learned.",
 				},
 			],
+		},
+		{
+			dayNumber: 4,
 			id: "day-4",
-			topic: "Day 4: Emotional Intelligence",
-		},
-		{
-			activities: [
+			tasks: [
 				{
-					id: "day-5-task-1",
-					text: "Dedicate 30 minutes to a creative hobby (drawing, writing, music).",
+					description: "Listen without interrupting the other person.",
+					id: "day-4-task-1",
+					isCompleted: false,
+					title: "Practice active listening today.",
 				},
 				{
-					id: "day-5-task-2",
-					text: "Declutter and organize one small area of your home or workspace.",
+					description: "Keep your social bonds strong.",
+					id: "day-4-task-2",
+					isCompleted: false,
+					title: "Connect with a friend or family member.",
 				},
 				{
-					id: "day-5-task-3",
-					text: "Plan a fun and relaxing activity for the weekend.",
+					description: "A small gesture can change a day.",
+					id: "day-4-task-3",
+					isCompleted: false,
+					title: "Do a random act of kindness.",
 				},
 				{
-					id: "day-5-task-4",
-					text: "Listen to an uplifting playlist and allow yourself to dance.",
+					description: "Identify what you felt and why.",
+					id: "day-4-task-4",
+					isCompleted: false,
+					title: "Write about your emotions.",
 				},
 				{
-					id: "day-5-task-5",
-					text: "Celebrate your accomplishments from the week, no matter how small.",
+					description: "Strengthen your personal connections.",
+					id: "day-4-task-5",
+					isCompleted: false,
+					title: "Express gratitude to a loved one.",
 				},
 			],
+		},
+		{
+			dayNumber: 5,
 			id: "day-5",
-			topic: "Day 5: Creativity and Celebration",
-		},
-		{
-			activities: [
+			tasks: [
 				{
-					id: "day-6-task-1",
-					text: "Spend at least one hour in nature (e.g., a park, hiking trail).",
+					description: "It can be drawing, writing, or playing music.",
+					id: "day-5-task-1",
+					isCompleted: false,
+					title: "Dedicate 30 minutes to a hobby.",
 				},
 				{
-					id: "day-6-task-2",
-					text: "Have a meaningful, device-free conversation with a loved one.",
+					description: "A clean environment helps you focus.",
+					id: "day-5-task-2",
+					isCompleted: false,
+					title: "Organize a small area of your home.",
 				},
 				{
-					id: "day-6-task-3",
-					text: "Try a new recipe and enjoy the process of cooking.",
+					description: "Think of something that relaxes you.",
+					id: "day-5-task-3",
+					isCompleted: false,
+					title: "Plan an activity for the weekend.",
 				},
 				{
-					id: "day-6-task-4",
-					text: "Visit a local place you've never been to before (e.g., museum, cafe).",
+					description: "Let the music take over you.",
+					id: "day-5-task-4",
+					isCompleted: false,
+					title: "Listen to a playlist and dance.",
 				},
 				{
-					id: "day-6-task-5",
-					text: "Engage in a hobby that brings you pure joy, without pressure.",
+					description: "Think about what you have achieved.",
+					id: "day-5-task-5",
+					isCompleted: false,
+					title: "Reflect on your achievements today.",
 				},
 			],
+		},
+		{
+			dayNumber: 6,
 			id: "day-6",
-			topic: "Day 6: Connection and Exploration",
-		},
-		{
-			activities: [
+			tasks: [
 				{
-					id: "day-7-task-1",
-					text: "Review the past week's highlights and challenges.",
+					description: "Go to a park or trail.",
+					id: "day-6-task-1",
+					isCompleted: false,
+					title: "Spend an hour in nature.",
 				},
 				{
-					id: "day-7-task-2",
-					text: "Plan your top 3 priorities for the upcoming week.",
+					description: "Be present in a conversation with someone.",
+					id: "day-6-task-2",
+					isCompleted: false,
+					title: "Have a conversation without your phone.",
 				},
 				{
-					id: "day-7-task-3",
-					text: "Prepare healthy snacks or meals for the next few days (meal prep).",
+					description: "Cooking can be very relaxing.",
+					id: "day-6-task-3",
+					isCompleted: false,
+					title: "Try a new recipe today.",
 				},
 				{
-					id: "day-7-task-4",
-					text: "Tidy your living space for a fresh and organized start to the week.",
+					description: "It can be a museum or a café.",
+					id: "day-6-task-4",
+					isCompleted: false,
+					title: "Visit a new place in the city.",
 				},
 				{
-					id: "day-7-task-5",
-					text: "Do a relaxing activity, such as taking a bath or reading a novel.",
+					description: "Appreciate the little things around you.",
+					id: "day-6-task-5",
+					isCompleted: false,
+					title: "Take photos of beautiful things.",
 				},
 			],
+		},
+		{
+			dayNumber: 7,
 			id: "day-7",
-			topic: "Day 7: Reflection and Planning",
+			tasks: [
+				{
+					description: "See what worked and what didn’t.",
+					id: "day-7-task-1",
+					isCompleted: false,
+					title: "Review the highlights of the week.",
+				},
+				{
+					description: "Set your focus for the coming days.",
+					id: "day-7-task-2",
+					isCompleted: false,
+					title: "Plan 3 priorities for the week.",
+				},
+				{
+					description: "Make your daily routine easier.",
+					id: "day-7-task-3",
+					isCompleted: false,
+					title: "Prepare healthy snacks for the days.",
+				},
+				{
+					description: "Start the week with everything organized.",
+					id: "day-7-task-4",
+					isCompleted: false,
+					title: "Tidy up your space for the week.",
+				},
+				{
+					description: "It can be a bath or reading.",
+					id: "day-7-task-5",
+					isCompleted: false,
+					title: "Do a relaxing activity today.",
+				},
+			],
 		},
 	],
-	notes:
-		"Remember to be flexible and kind to yourself. Consistency is the key!",
+	notes: "Be flexible and kind to yourself. Consistency is the key to everything!",
 };
 
 export { activitiesMockData };
