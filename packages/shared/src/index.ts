@@ -64,7 +64,9 @@ export {
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
 	PlansApiPath,
+	type PlanSearchQueryDto,
 	type PlanSearchQueryParameter,
+	planSearchQueryParametersValidationSchema,
 	type PlanUpdateRequestDto,
 	type PlanWithCategoryDto,
 } from "./modules/plans/plans.js";

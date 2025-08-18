@@ -20,5 +20,6 @@ export {
 } from "./libs/types/types.js";
 export {
 	planCreateValidationSchema,
+	planSearchQueryParametersValidationSchema,
 	quizAnswersValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";

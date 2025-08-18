@@ -12,4 +12,6 @@ export {
 export {
 	type PlanCreateRequestDto,
 	planCreate as planCreateValidationSchema,
+	type PlanSearchQueryDto,
+	planSearchQueryParameters as planSearchQueryParametersValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";

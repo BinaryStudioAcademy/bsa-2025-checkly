@@ -14,6 +14,7 @@ import {
 	type PlanCreateRequestDto,
 	planCreateValidationSchema,
 	type PlanSearchQueryParameter,
+	planSearchQueryParametersValidationSchema,
 	type QuizAnswersRequestDto,
 	quizAnswersValidationSchema,
 } from "~/modules/plans/plans.js";
@@ -275,6 +276,9 @@ class PlanController extends BaseController {
 				),
 			method: HTTPRequestMethod.GET,
 			path: PlansApiPath.SEARCH,
+			validation: {
+				queryString: planSearchQueryParametersValidationSchema,
+			},
 		});
 	}
 
