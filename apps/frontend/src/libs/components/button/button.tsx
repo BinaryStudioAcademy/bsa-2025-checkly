@@ -4,7 +4,7 @@ import { type ButtonVariant } from "~/libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	className?: string | undefined;
+	className?: string;
 	disabled?: boolean;
 	icon?: React.ReactNode;
 	iconOnlySize?: "large" | "medium" | "small";

@@ -1,6 +1,6 @@
 .aside {
 	width: var(--sidebar-width);
-	font-family: var(--font-family-primary);
+	font-family: var(--font-family-nunito);
 	font-size: var(--step-minus-1);
 	color: var(--color-text);
 	background-color: var(--color-bg-sidebar);

@@ -1,0 +1,16 @@
+@import url("./themes/regular//header/header.module.css");
+@import url("./themes/regular/day/day.module.css");
+@import url("./themes/regular/task/task.module.css");
+@import url("../../components/notes/styles.module.css");
+
+.container {
+	background-color: var(--color-bg-plan-style-with-remarks);
+}
+
+.day-list {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-auto-rows: 1fr;
+	padding: 0;
+	list-style: none;
+}
