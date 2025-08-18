@@ -16,21 +16,20 @@ const SidePanel: React.FC = () => {
 			<aside className={asideClasses}>
 				<nav className={styles["navigation"]}>
 					<ul className={styles["navigation__menu"]}>
-						{user ? (
+						{user && (
 							<NavigationItem
 								buttonText="Dashboard"
 								buttonType="side-panel"
 								icon={<Dashboard />}
 								navigateTo={AppRoute.DASHBOARD}
 							/>
-						) : (
-							<NavigationItem
-								buttonText="My plan"
-								buttonType="side-panel"
-								icon={<Plan />}
-								navigateTo={AppRoute.PLAN}
-							/>
 						)}
+						<NavigationItem
+							buttonText="My plan"
+							buttonType="side-panel"
+							icon={<Plan />}
+							navigateTo={AppRoute.PLAN}
+						/>
 					</ul>
 				</nav>
 			</aside>
