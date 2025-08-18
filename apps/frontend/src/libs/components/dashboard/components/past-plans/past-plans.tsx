@@ -94,7 +94,11 @@ const PastPlans: FC = () => {
 				) : (
 					userPlans.map((plan) => (
 						<div className={styles["plan-card"]} key={plan.id}>
-							<PlanStyle inputStyle="withremarks" view="selection" />
+							<PlanStyle
+								inputStyle="withremarks"
+								planTitle={plan.title}
+								view="selection"
+							/>
 						</div>
 					))
 				)}
