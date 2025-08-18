@@ -42,9 +42,9 @@
 .grid {
 	position: relative;
 	display: flex;
+	gap: var(--step-2);
 	align-items: center;
 	width: 100%;
-	gap: var(--step-2);
 }
 
 .grid > * {
@@ -56,13 +56,11 @@
 }
 
 .feedbacks-list {
-	padding-top: var(--space-2xs);
-	padding-bottom: var(--space-s-m);
-
 	max-width: 100%;
 	min-height: 300px;
+	padding-top: var(--space-2xs);
+	padding-bottom: var(--space-s-m);
 	overflow-x: auto;
-
 	scrollbar-color: #f7b6d2 #fde7f1;
 	scrollbar-width: thin;
 }

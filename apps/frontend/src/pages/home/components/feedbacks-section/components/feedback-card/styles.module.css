@@ -29,12 +29,12 @@
 	padding-right: var(--space-xs-s);
 	margin: 0 0 15px;
 	overflow-y: auto;
-	overflow-wrap: break-word;
-	word-break: break-all;
 	-webkit-line-clamp: 5;
 	line-clamp: 5;
-	-webkit-box-orient: vertical;
 	text-indent: 1em;
+	word-break: break-all;
+	overflow-wrap: break-word;
+	-webkit-box-orient: vertical;
 }
 
 .icon {
@@ -50,6 +50,6 @@
 
 .footer {
 	display: flex;
-	align-items: center;
 	gap: 12px;
+	align-items: center;
 }
