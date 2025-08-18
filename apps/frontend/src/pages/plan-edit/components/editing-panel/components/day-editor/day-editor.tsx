@@ -9,11 +9,11 @@ import styles from "./styles.module.css";
 
 const getFieldName = (
 	dayIndex: number,
-	activityIndex: number,
-): `days.${number}.activities.${number}.text` => {
-	return `days.${String(dayIndex)}.activities.${String(
-		activityIndex,
-	)}.text` as `days.${number}.activities.${number}.text`;
+	taskIndex: number,
+): `days.${number}.tasks.${number}.description` => {
+	return `days.${String(dayIndex)}.tasks.${String(
+		taskIndex,
+	)}.description` as `days.${number}.tasks.${number}.description`;
 };
 
 type Properties = {
@@ -25,7 +25,7 @@ type Properties = {
 const DayEditor: FC<Properties> = ({ control, dayIndex, errors }) => {
 	const fieldArrayName = `days.${String(
 		dayIndex,
-	)}.activities` as `days.${number}.activities`;
+	)}.tasks` as `days.${number}.tasks`;
 
 	const { fields, remove } = useFieldArray({
 		control,
@@ -42,13 +42,13 @@ const DayEditor: FC<Properties> = ({ control, dayIndex, errors }) => {
 	return (
 		<div className={styles["dayEditor"]}>
 			<div className={styles["activitiesList"]}>
-				{fields.map((field, activityIndex) => (
+				{fields.map((field, taskIndex) => (
 					<div className={styles["activityRow"]} key={field.id}>
 						<Textarea
 							control={control}
 							errors={errors}
-							label={`Task ${String(activityIndex + INCREMENT_VALUE)}`}
-							name={getFieldName(dayIndex, activityIndex)}
+							label={`Task ${String(taskIndex + INCREMENT_VALUE)}`}
+							name={getFieldName(dayIndex, taskIndex)}
 							rows={2}
 						/>
 						<Button
@@ -56,7 +56,7 @@ const DayEditor: FC<Properties> = ({ control, dayIndex, errors }) => {
 							iconOnlySize="small"
 							isIconOnly
 							label=""
-							onClick={handleRemoveActivity(activityIndex)}
+							onClick={handleRemoveActivity(taskIndex)}
 							variant="primary"
 						/>
 					</div>
