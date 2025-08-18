@@ -25,6 +25,7 @@ type TaskDto = {
 	id: number;
 	isCompleted: boolean;
 	order: number;
+	planDayId: number;
 	title: string;
 };
 

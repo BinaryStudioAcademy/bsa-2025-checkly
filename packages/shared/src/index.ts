@@ -83,6 +83,7 @@ export {
 	type TaskCreateRequestDto,
 	taskCreateValidationSchema,
 	type TaskGetAllResponseDto,
+	type TaskRegenerateRequestDto,
 	type TaskResponseDto,
 	TasksApiPath,
 	type TaskUpdateRequestDto,

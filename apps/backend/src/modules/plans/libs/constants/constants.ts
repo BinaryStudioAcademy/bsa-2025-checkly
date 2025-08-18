@@ -1,6 +1,7 @@
 import {
 	type PlanDayDto,
 	type PlanDaysTaskDto,
+	type TaskDto,
 } from "~/modules/plans/libs/types/types.js";
 
 const MOCK_GENERATED_PLAN: PlanDaysTaskDto = {
@@ -23,6 +24,7 @@ const MOCK_GENERATED_PLAN: PlanDaysTaskDto = {
 					id: 2,
 					isCompleted: false,
 					order: 1,
+					planDayId: 2,
 					title: "Meet a person in the cafe",
 				},
 				{
@@ -32,6 +34,7 @@ const MOCK_GENERATED_PLAN: PlanDaysTaskDto = {
 					id: 3,
 					isCompleted: false,
 					order: 2,
+					planDayId: 2,
 					title: "Meet a person in the cafe",
 				},
 			],
@@ -57,6 +60,7 @@ const MOCK_GENERATED_PLAN_DAY: PlanDayDto = {
 			id: 2,
 			isCompleted: false,
 			order: 1,
+			planDayId: 2,
 			title: "Meet a person in the cafe",
 		},
 		{
@@ -66,9 +70,21 @@ const MOCK_GENERATED_PLAN_DAY: PlanDayDto = {
 			id: 3,
 			isCompleted: false,
 			order: 2,
+			planDayId: 2,
 			title: "Meet a person in the cafe",
 		},
 	],
 };
 
-export { MOCK_GENERATED_PLAN, MOCK_GENERATED_PLAN_DAY };
+const MOCK_GENERATED_TASK: TaskDto = {
+	completedAt: null,
+	description: "Hello2-------------",
+	executionTimeType: "morning",
+	id: 2,
+	isCompleted: false,
+	order: 1,
+	planDayId: 1,
+	title: "Meet a person in the cafe",
+};
+
+export { MOCK_GENERATED_PLAN, MOCK_GENERATED_PLAN_DAY, MOCK_GENERATED_TASK };

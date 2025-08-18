@@ -12,7 +12,11 @@ const planRepository = new PlanRepository(
 	planDayRepository,
 	taskRepository,
 );
-const planService = new PlanService(planRepository, planDayRepository);
+const planService = new PlanService(
+	planRepository,
+	planDayRepository,
+	taskRepository,
+);
 const planController = new PlanController(logger, planService);
 
 export { planController };
@@ -21,5 +25,6 @@ export {
 	type PlanDayDto,
 	type PlanDayRegenerateRequestDto,
 	type PlanDaysTaskDto,
+	type TaskRegenerateRequestDto,
 } from "./libs/types/types.js";
 export { planCreateValidationSchema } from "./libs/validation-schemas/validation-schemas.js";

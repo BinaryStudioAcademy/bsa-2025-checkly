@@ -7,4 +7,6 @@ export {
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
 	type PlanUpdateRequestDto,
+	type TaskDto,
+	type TaskRegenerateRequestDto,
 } from "shared";

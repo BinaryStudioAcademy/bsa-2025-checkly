@@ -145,6 +145,7 @@ class PlanEntity implements Entity {
 					id: task.id,
 					isCompleted: task.isCompleted,
 					order: task.order,
+					planDayId: task.planDayId,
 					title: task.title,
 				})),
 			})),
