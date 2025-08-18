@@ -141,6 +141,30 @@
 	transform: scale(1.05);
 }
 
+.char-counter {
+	margin-top: var(--space-2xs);
+	margin-bottom: var(--space-xs);
+	font-size: var(--text-body-small);
+	color: var(--color-text-secondary);
+	text-align: right;
+}
+
+.delete-modal-content {
+	text-align: center;
+}
+
+.delete-modal-content p {
+	margin-bottom: var(--space-m);
+	font-size: var(--text-body-medium);
+	color: var(--color-text-primary);
+}
+
+.delete-modal-actions {
+	display: flex;
+	gap: var(--space-s);
+	justify-content: center;
+}
+
 @media (width <= 1024px) {
 	.item-actions {
 		flex-direction: column;

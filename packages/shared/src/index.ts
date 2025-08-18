@@ -80,6 +80,7 @@ export {
 	TasksApiPath,
 	type TaskUpdateRequestDto,
 	taskUpdateValidationSchema,
+	TaskValidationRule,
 } from "./modules/tasks/tasks.js";
 export {
 	type SignUpFormValidationSchema,

@@ -7,9 +7,14 @@ import {
 	Save,
 	Timer,
 } from "~/assets/img/icons/icons.js";
-import { Button, DecorativeImage } from "~/libs/components/components.js";
+import {
+	Button,
+	DecorativeImage,
+	Modal,
+} from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppDispatch, useCallback } from "~/libs/hooks/hooks.js";
+import { TaskValidationRule } from "~/modules/tasks/libs/enums/enums.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
 import styles from "./styles.module.css";
@@ -29,6 +34,7 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 	const [editedDescription, setEditedDescription] = useState<string>(
 		item.description,
 	);
+	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
 	const dispatch = useAppDispatch();
 
@@ -75,88 +81,130 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 	);
 
 	const handleDeleteClick = useCallback((): void => {
+		setIsDeleteModalOpen(true);
+	}, []);
+
+	const handleConfirmDelete = useCallback((): void => {
 		void dispatch(taskActions.deleteTask(item.id));
+		setIsDeleteModalOpen(false);
 	}, [dispatch, item.id]);
 
+	const handleCancelDelete = useCallback((): void => {
+		setIsDeleteModalOpen(false);
+	}, []);
+
 	return (
-		<div
-			className={getClassNames(
-				styles["content__tasks-item"],
-				"wrapper",
-				styles[`color-${String(indexItem)}`],
-			)}
-			key={indexItem}
-		>
-			<h3>{indexItem}</h3>
-			<div className={styles["description-wrapper"]}>
-				{isEditing ? (
-					<>
-						<input
-							className={getClassNames(
-								styles["edit-input"],
-								styles["edit-input-title"],
-							)}
-							onChange={handleTitleChange}
-							placeholder="Task title"
-							type="text"
-							value={editedTitle}
-						/>
-						<textarea
-							className={getClassNames(
-								styles["edit-input"],
-								styles["edit-input-description"],
-							)}
-							onChange={handleDescriptionChange}
-							placeholder="Task description"
-							value={editedDescription}
-						/>
-						<div className={styles["save-button-wrapper"]}>
-							<Button
-								className={getClassNames(styles["save-button"])}
-								icon={<DecorativeImage src={Save} />}
-								isIconOnly
-								label="Save"
-								onClick={handleSaveClick}
-								variant="primary"
-							/>
-						</div>
-					</>
-				) : (
-					<>
-						<h5>{item.title}</h5>
-						<p>{item.description}</p>
-					</>
+		<>
+			<div
+				className={getClassNames(
+					styles["content__tasks-item"],
+					"wrapper",
+					styles[`color-${String(indexItem)}`],
 				)}
-			</div>
-			<div className={styles["item-actions"]}>
-				<div className={styles["item-actions__time"]}>
-					<img alt="" src={Timer} />
-					<span>morning</span>
+				key={indexItem}
+			>
+				<h3>{indexItem}</h3>
+				<div className={styles["description-wrapper"]}>
+					{isEditing ? (
+						<>
+							<input
+								className={getClassNames(
+									styles["edit-input"],
+									styles["edit-input-title"],
+								)}
+								maxLength={TaskValidationRule.TITLE_MAX_LENGTH}
+								onChange={handleTitleChange}
+								placeholder="Task title"
+								type="text"
+								value={editedTitle}
+							/>
+							<div className={styles["char-counter"]}>
+								{editedTitle.length}/{TaskValidationRule.TITLE_MAX_LENGTH}{" "}
+								characters
+							</div>
+							<textarea
+								className={getClassNames(
+									styles["edit-input"],
+									styles["edit-input-description"],
+								)}
+								maxLength={TaskValidationRule.DESCRIPTION_MAX_LENGTH}
+								onChange={handleDescriptionChange}
+								placeholder="Task description"
+								value={editedDescription}
+							/>
+							<div className={styles["char-counter"]}>
+								{editedDescription.length}/
+								{TaskValidationRule.DESCRIPTION_MAX_LENGTH} characters
+							</div>
+							<div className={styles["save-button-wrapper"]}>
+								<Button
+									className={getClassNames(styles["save-button"])}
+									icon={<DecorativeImage src={Save} />}
+									isIconOnly
+									label="Save"
+									onClick={handleSaveClick}
+									variant="primary"
+								/>
+							</div>
+						</>
+					) : (
+						<>
+							<h5>{item.title}</h5>
+							<p>{item.description}</p>
+						</>
+					)}
 				</div>
-				<div className={styles["item-actions_buttons-wrapper"]}>
-					<Button
-						className={getClassNames(styles["item-actions_button"])}
-						icon={<DecorativeImage src={Edit} />}
-						isIconOnly
-						label=""
-						onClick={handleEditClick}
-					/>
-					<Button
-						className={getClassNames(styles["item-actions_button"])}
-						icon={<DecorativeImage src={Regenerate} />}
-						isIconOnly
-						label=""
-					/>
-					<Button
-						className={getClassNames(styles["item-actions_button"])}
-						icon={<DecorativeImage src={Remove} />}
-						isIconOnly
-						label=""
-						onClick={handleDeleteClick}
-					/>
+				<div className={styles["item-actions"]}>
+					<div className={styles["item-actions__time"]}>
+						<img alt="" src={Timer} />
+						<span>morning</span>
+					</div>
+					<div className={styles["item-actions_buttons-wrapper"]}>
+						<Button
+							className={getClassNames(styles["item-actions_button"])}
+							icon={<DecorativeImage src={Edit} />}
+							isIconOnly
+							label=""
+							onClick={handleEditClick}
+						/>
+						<Button
+							className={getClassNames(styles["item-actions_button"])}
+							icon={<DecorativeImage src={Regenerate} />}
+							isIconOnly
+							label=""
+						/>
+						<Button
+							className={getClassNames(styles["item-actions_button"])}
+							icon={<DecorativeImage src={Remove} />}
+							isIconOnly
+							label=""
+							onClick={handleDeleteClick}
+						/>
+					</div>
 				</div>
 			</div>
-		</div>
+			<Modal
+				isOpen={isDeleteModalOpen}
+				onClose={handleCancelDelete}
+				title="Delete Task"
+			>
+				<div className={styles["delete-modal-content"]}>
+					<p>Are you sure you want to delete &ldquo;{item.title}&rdquo;?</p>
+					<div className={styles["delete-modal-actions"]}>
+						<Button
+							label="Cancel"
+							onClick={handleCancelDelete}
+							variant="secondary"
+						/>
+						<Button
+							label="Delete"
+							onClick={handleConfirmDelete}
+							variant="primary"
+						/>
+					</div>
+				</div>
+			</Modal>
+		</>
 	);
 };
 

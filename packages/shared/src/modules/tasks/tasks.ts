@@ -2,6 +2,7 @@ export {
 	ExecutionTimeType,
 	TaskMessage,
 	TasksApiPath,
+	TaskValidationRule,
 } from "./libs/enums/enums.js";
 export {
 	type TaskDto,
