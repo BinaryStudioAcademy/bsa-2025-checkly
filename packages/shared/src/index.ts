@@ -1,3 +1,4 @@
+export { ONE, ZERO } from "./libs/constants/constants.js";
 export {
 	APIPath,
 	AppEnvironment,
@@ -35,6 +36,7 @@ export {
 	type ValueOf,
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
+export { type GeneratedPlanDTO } from "./modules/openai/openai.js";
 export {
 	type PlanDayCreateRequestDto,
 	planDayCreateValidationSchema,
@@ -86,7 +88,6 @@ export {
 	type SignUpFormValidationSchema,
 	type UserDto,
 	type UserGetAllResponseDto,
-	type UserProfileResponseDto,
 	UsersApiPath,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -96,6 +97,7 @@ export {
 	userSignUpValidationSchema,
 	userSignUpValidationSchemaExtended,
 	type UserUpdateRequestDto,
+	userUpdateValidationSchema,
 	UserValidationMessage,
 	UserValidationRule,
 } from "./modules/users/users.js";
