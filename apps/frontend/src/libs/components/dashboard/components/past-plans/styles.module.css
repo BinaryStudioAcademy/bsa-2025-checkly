@@ -64,3 +64,57 @@
 .plans-grid::-webkit-scrollbar-thumb:hover {
 	background-color: var(--color-bg-dark);
 }
+
+.plans-search-loader {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	padding-block: var(--space-l);
+}
+
+.plan-card-skeleton {
+	aspect-ratio: 210 / 297;
+	padding: var(--space-s);
+	background-color: var(--color-bg-plan-style-with-remarks);
+	border-radius: var(--radius-m);
+	animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton-title {
+	width: 80%;
+	height: var(--text-size-heading-5);
+	background-color: var(--color-border-grey);
+	border-radius: var(--radius-xs);
+}
+
+.skeleton-subtitle {
+	width: 60%;
+	height: var(--text-body);
+	background-color: var(--color-border-grey);
+	border-radius: var(--radius-xs);
+}
+
+.skeleton-line {
+	width: 100%;
+	height: var(--text-body-small);
+	background-color: var(--color-border-grey);
+	border-radius: var(--radius-xs);
+}
+
+.skeleton-line-short {
+	width: 70%;
+	height: var(--text-body-small);
+	background-color: var(--color-border-grey);
+	border-radius: var(--radius-xs);
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.6;
+	}
+}

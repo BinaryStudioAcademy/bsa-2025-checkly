@@ -1,7 +1,6 @@
-import React, { type FC, useCallback, useEffect } from "react";
+import React, { type FC, type JSX, useCallback, useEffect } from "react";
 import { type SingleValue } from "react-select";
 
-import { Loader } from "~/libs/components/components.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { ZERO } from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
@@ -19,6 +18,32 @@ import { PlansFoundBlock } from "./components/plans-found-block/plans-found-bloc
 import { defaultCategoryOption } from "./libs/enums/enums.js";
 import { type CategoryOption } from "./libs/types/types.js";
 import styles from "./styles.module.css";
+
+const PlanCardSkeleton: FC = () => (
+	<div className={getClassNames("flow", styles["plan-card-skeleton"])}>
+		<div className={styles["skeleton-title"]} />
+		<div className={styles["skeleton-subtitle"]} />
+		<div className={getClassNames("flow-tight", styles["skeleton-content"])}>
+			<div className={styles["skeleton-line"]} />
+			<div className={styles["skeleton-line-short"]} />
+			<div className={styles["skeleton-line"]} />
+			<div className={styles["skeleton-line-short"]} />
+			<div className={styles["skeleton-line"]} />
+			<div className={styles["skeleton-line-short"]} />
+			<div className={styles["skeleton-line"]} />
+			<div className={styles["skeleton-line-short"]} />
+			<div className={styles["skeleton-line"]} />
+		</div>
+	</div>
+);
+
+const renderSkeletonCards = (): JSX.Element => (
+	<>
+		{Array.from({ length: 6 }, (_, index) => (
+			<PlanCardSkeleton key={`skeleton-${String(index)}`} />
+		))}
+	</>
+);
 
 const PastPlans: FC = () => {
 	const dispatch = useAppDispatch();
@@ -67,6 +92,20 @@ const PastPlans: FC = () => {
 		setTitle("");
 	}, [setCategoryId, setTitle]);
 
+	const renderPlanCards = (): JSX.Element => (
+		<>
+			{userPlans.map((plan) => (
+				<div className={styles["plan-card"]} key={plan.id}>
+					<PlanStyle
+						inputStyle="withremarks"
+						planTitle={plan.title}
+						view="selection"
+					/>
+				</div>
+			))}
+		</>
+	);
+
 	return (
 		<div className={getClassNames("flow-loose", styles["container"])}>
 			<h2 className={styles["title"]}>Past plans</h2>
@@ -89,19 +128,7 @@ const PastPlans: FC = () => {
 				plansFoundAmount={plansFoundAmount}
 			/>
 			<div className={getClassNames("grid", styles["plans-grid"])}>
-				{isUserPlansLoading && userPlans.length === ZERO ? (
-					<Loader container="inline" />
-				) : (
-					userPlans.map((plan) => (
-						<div className={styles["plan-card"]} key={plan.id}>
-							<PlanStyle
-								inputStyle="withremarks"
-								planTitle={plan.title}
-								view="selection"
-							/>
-						</div>
-					))
-				)}
+				{isUserPlansLoading ? renderSkeletonCards() : renderPlanCards()}
 			</div>
 		</div>
 	);
