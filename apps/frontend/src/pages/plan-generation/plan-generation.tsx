@@ -20,7 +20,10 @@ import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import { type QuizState } from "~/modules/quiz/slices/quiz.slice.js";
-import { type QuizAnswersRequestDto, type QuizCategoryType } from "~/pages/plan-generation/libs/types/types.js";
+import {
+	type QuizAnswersRequestDto,
+	type QuizCategoryType,
+} from "~/pages/plan-generation/libs/types/types.js";
 
 import { ImageSlider } from "./components/slider/slider.js";
 import { DEFAULT_QUIZ_STATE } from "./libs/constants/constants.js";
