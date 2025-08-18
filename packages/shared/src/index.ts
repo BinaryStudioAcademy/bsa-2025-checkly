@@ -54,6 +54,14 @@ export {
 	type PlanUpdateRequestDto,
 } from "./modules/plans/plans.js";
 export {
+	QuizAnswerApiPath,
+	type QuizAnswerCreateRequestDto,
+	quizAnswerCreateValidationSchema,
+	type QuizAnswerGetAllResponseDto,
+	type QuizAnswerResponseDto,
+	type QuizAnswerUpdateRequestDto,
+} from "./modules/quiz-answers/quiz-answers.js";
+export {
 	type QuestionDto,
 	type QuestionOptionDto,
 	type QuestionType,
