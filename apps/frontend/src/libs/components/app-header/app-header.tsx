@@ -22,9 +22,7 @@ const AppHeader: React.FC = () => {
 
 	const { pathname } = useLocation();
 	const hasDivider =
-		pathname === AppRoute.DASHBOARD ||
-		pathname === AppRoute.PLAN ||
-		pathname === AppRoute.PROFILE;
+[AppRoute.DASHBOARD, AppRoute.PLAN, AppRoute.PROFILE].includes(pathname)
 
 	const displayName = useMemo(() => user?.name ?? DEFAULT_USER_NAME, [user]);
 
