@@ -1,9 +1,7 @@
 import React, { useCallback } from "react";
-import { FiLogOut, FiUser } from "react-icons/fi";
-import { MdDashboard } from "react-icons/md";
+import { FiLogOut } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
-import { Plan } from "~/assets/img/side-panel/side-panel.img.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppDispatch } from "~/libs/hooks/hooks.js";
@@ -31,25 +29,6 @@ const UserMenu: React.FC<Properties> = ({ isOpen }) => {
 	return (
 		<nav aria-label="User menu" className={menuDropdownClass}>
 			<ul className={styles["menu-dropdown__list"]}>
-				<NavigationItem
-					buttonText="Profile"
-					buttonType="user-menu"
-					icon={<FiUser />}
-					navigateTo={AppRoute.PROFILE}
-				/>
-				<NavigationItem
-					buttonText="Dashboard"
-					buttonType="user-menu"
-					icon={<MdDashboard />}
-					navigateTo={AppRoute.DASHBOARD}
-				/>
-				<NavigationItem
-					buttonText="My plan"
-					buttonType="user-menu"
-					className="hide-desktop-up"
-					icon={<Plan />}
-					navigateTo={AppRoute.PLAN}
-				/>
 				<NavigationItem
 					buttonText="Log out"
 					buttonType="logout"
