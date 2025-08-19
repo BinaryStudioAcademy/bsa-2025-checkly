@@ -11,4 +11,5 @@ export { Loader } from "./loader/loader.js";
 export { Logo } from "./logo/logo.js";
 export { ProtectedRoute } from "./protected-route/protected-route.js";
 export { RouterProvider } from "./router-provider/router-provider.js";
+export { Textarea } from "./textarea/textarea.js";
 export { Provider as StoreProvider } from "react-redux";
