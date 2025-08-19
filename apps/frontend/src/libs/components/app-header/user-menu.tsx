@@ -53,7 +53,7 @@ const UserMenu: React.FC<Properties> = ({ isOpen }) => {
 					buttonText="Log out"
 					buttonType="logout"
 					icon={<FiLogOut />}
-					navigateTo={AppRoute.SIGN_IN}
+					navigateTo={AppRoute.LOGOUT}
 					onClick={handleLogout}
 				/>
 			</ul>
