@@ -13,6 +13,8 @@ import {
 	type PlanCreateRequestDto,
 	planCreateValidationSchema,
 	type PlanDayRegenerateRequestDto,
+	type QuizAnswersRequestDto,
+	quizAnswersValidationSchema,
 	type TaskRegenerateRequestDto,
 } from "~/modules/plans/plans.js";
 
@@ -80,6 +82,48 @@ import { PlansApiPath } from "./libs/enums/enums.js";
  *               items:
  *                 $ref: '#/components/schemas/PlanDayDto'
  *
+ *     GeneratedTaskDto:
+ *       type: object
+ *       properties:
+ *         title:
+ *           type: string
+ *         description:
+ *           type: string
+ *         order:
+ *           type: number
+ *         executionTimeType:
+ *           type: string
+ *
+ *     GeneratedPlanDayDto:
+ *       type: object
+ *       properties:
+ *         dayNumber:
+ *           type: number
+ *         tasks:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/GeneratedTaskDto'
+ *
+ *     GeneratedPlanDto:
+ *       type: object
+ *       properties:
+ *         title:
+ *           type: string
+ *         duration:
+ *           type: number
+ *         intensity:
+ *           type: string
+ *
+ *     GeneratedPlanDaysTaskDto:
+ *       allOf:
+ *         - $ref: '#/components/schemas/GeneratedPlanDto'
+ *         - type: object
+ *           properties:
+ *             days:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/GeneratedPlanDayDto'
+ *
  *     PlanRequestDto:
  *       type: object
  *       required:
@@ -115,6 +159,32 @@ import { PlansApiPath } from "./libs/enums/enums.js";
  *         userId:
  *           type: number
  *           example: 1
+ *
+ *     QuizAnswersRequestDto:
+ *       type: object
+ *       required:
+ *         - answers
+ *         - category
+ *         - notes
+ *       properties:
+ *         answers:
+ *           type: array
+ *           items:
+ *             $ref: "#/components/schemas/QuizAnswer"
+ *         category:
+ *           type: string
+ *           enum:
+ *             - "creativity"
+ *             - "hobby"
+ *             - "money"
+ *             - "personal_development"
+ *             - "spirituality"
+ *             - "sport"
+ *           example: "sport"
+ *         notes:
+ *           type: string
+ *           example: "Some additional notes"
+ *           description: Additional user notes
  */
 class PlanController extends BaseController {
 	private planService: PlanService;
@@ -175,6 +245,17 @@ class PlanController extends BaseController {
 			path: PlansApiPath.ROOT,
 			validation: {
 				body: planCreateValidationSchema,
+			},
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.generate(options as APIBodyOptions<QuizAnswersRequestDto>),
+			isPublic: true,
+			method: HTTPRequestMethod.POST,
+			path: PlansApiPath.GENERATE,
+			validation: {
+				body: quizAnswersValidationSchema,
 			},
 		});
 	}
@@ -277,6 +358,15 @@ class PlanController extends BaseController {
 		};
 	}
 
+	private async generate(
+		options: APIBodyOptions<QuizAnswersRequestDto>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.planService.generate(options.body),
+			status: HTTPCode.OK,
+		};
+	}
+
 	private async regenerate(
 		options: IdParametersOption,
 	): Promise<APIHandlerResponse> {
@@ -298,6 +388,55 @@ class PlanController extends BaseController {
 			status: HTTPCode.OK,
 		};
 	}
+
+	/**
+	 * @swagger
+	 * /plans/generate:
+	 *   post:
+	 *     tags:
+	 *       - plans
+	 *     summary: Generate a new plan
+	 *     requestBody:
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             $ref: '#/components/schemas/QuizAnswersRequestDto'
+	 *           example:
+	 *             answers:
+	 *               - questionId: 1
+	 *                 questionText: "What motivates you the most?"
+	 *                 isSkipped: false
+	 *                 selectedOptions: [1, "Achieving goals"]
+	 *                 userInput: "I want to be successful"
+	 *               - questionId: 2
+	 *                 questionText: "How much time can you dedicate daily?"
+	 *                 isSkipped: false
+	 *                 selectedOptions: ["30 minutes"]
+	 *                 userInput: ""
+	 *             category: "sport"
+	 *             notes: "Looking for a beginner plan"
+	 *     responses:
+	 *       200:
+	 *         description: Plan generated successfully
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/GeneratedPlanDaysTaskDto'
+	 *       400:
+	 *         description: Invalid request data
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 errorType:
+	 *                   type: string
+	 *                   example: "VALIDATION"
+	 *                 message:
+	 *                   type: string
+	 *                   example: "At least one of the selected options or user input must be provided for a non-skipped question."
+	 */
 
 	private async regenerateTask(options: {
 		params: TaskRegenerateRequestDto;

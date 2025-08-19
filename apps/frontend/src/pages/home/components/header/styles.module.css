@@ -1,5 +1,7 @@
 .header {
 	--repel-wrap: nowrap;
+	--cluster-horizontal-alignment: flex-end;
+	--gutter: var(--space-s);
 
 	position: fixed;
 	z-index: 999;

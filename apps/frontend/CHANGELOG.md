@@ -1,5 +1,40 @@
 # Changelog
 
+## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.14.0...frontend-v1.15.0) (2025-08-17)
+
+
+### Features
+
+* - remove submit-quiz method from quiz-api and quiz slice cy-229 ([bd34640](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bd3464003c8fed3ce1ff978ce91078fc8776c4ca))
+* * update button styles cy-229 ([3ef754b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3ef754baa17968526bfbc092b2db64c461ccf1d8))
+* * update components to fix linter warning cy-273 ([caaf85d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/caaf85d31c24608434f873c97145cb7a0ac16f3c))
+* * update method name in plan module cy-229 ([67ebc89](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/67ebc89ec8089dfa04204af086f76432fcf74e59))
+* * update plan module to add "/generate" endpoint cy-229 ([45b7684](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/45b768467eed3786ca47f312ae7b2af41ee3b440))
+* * update quiz-api cy-229 ([e7f7b5b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e7f7b5b06f7ed85083542fd2b427493439a4dcca))
+* * update quiz-api cy-229 ([af0e982](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/af0e98205e88cbc585d913525f5e82006b316eca))
+* * update quiz-api path cy-229 ([70d068f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/70d068fedb5e8cba9634d33280b008df987c959a))
+* * update shared imports in quiz-api cy-229 ([ffda008](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ffda0080e67d3391ee7717546def2658b9446af0))
+* * update styles cy-229 ([1cc9e24](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1cc9e24b0b9ec9a04ef80773e2a392697f2a9e0d))
+* + add app-route type cy-229 ([e56cc00](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e56cc0001f7090d89e50c37ca9a7eb2bf49320f5))
+* + add plan-generation app route cy-229 ([9bbed22](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9bbed22db047d8519afab60fc664ce443ec49779))
+* + merge with main cy-229 ([b00ee09](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b00ee098c528bf22865c60007f6231a9a175af30))
+* Add 3 more plans styles cy-160 ([631e4ee](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/631e4eeb0ce5456758e184f9ec2daf296e7a13e7))
+* remove exact-optional-property-types from ts-config cy-273 ([6c03684](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6c036848bf2a2a360bd349d7e5a0179e81895e57))
+* update plan module to add "/generate" endpoint cy-229 ([8b34607](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8b346078be5e53ef6af2961f13ba0b7df8f848a7))
+
+
+### Bug Fixes
+
+* change homepage header button cy-267 ([8c5c24e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8c5c24e82c1c3f33ea607b155a701c3ab69dc6b3))
+* rename header button, update styles cy-267 ([5ce1aa3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5ce1aa3f0883531f5c93f6a82fab4eb24de4a5c5))
+
+## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.13.1...frontend-v1.14.0) (2025-08-15)
+
+
+### Features
+
+* dashboard header Logout button does not log out user cy-169 ([cf7a651](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cf7a65149fbdbd4644c6eb219db6b72d52eb34cc))
+
 ## [1.13.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.13.0...frontend-v1.13.1) (2025-08-15)
 
 

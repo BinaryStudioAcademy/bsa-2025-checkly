@@ -2,6 +2,8 @@ import { type Service, type ValueOf } from "~/libs/types/types.js";
 import { PlanEntity } from "~/modules/plans/plan.entity.js";
 import { type PlanRepository } from "~/modules/plans/plan.repository.js";
 
+import { openAiService } from "../openai/openai.js";
+import { type OpenAIService } from "../openai/openai.service.js";
 import { PlanDayEntity } from "../plan-days/plan-day.entity.js";
 import { type PlanDayRepository } from "../plan-days/plan-day.repository.js";
 import { TaskEntity } from "../tasks/task.entity.js";
@@ -18,6 +20,7 @@ import {
 	HTTPError,
 } from "./libs/enums/enums.js";
 import {
+	type GeneratedPlanDTO,
 	type PlanCreateRequestDto,
 	type PlanDayDto,
 	type PlanDaysTaskDto,
@@ -25,10 +28,13 @@ import {
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
 	type PlanUpdateRequestDto,
+	type QuizAnswersRequestDto,
 	type TaskDto,
 } from "./libs/types/types.js";
+import { createPrompt } from "./libs/utilities/utilities.js";
 
 class PlanService implements Service {
+	private openAIService: OpenAIService;
 	private planDayRepository: PlanDayRepository;
 	private planRepository: PlanRepository;
 	private taskRepository: TaskRepository;
@@ -41,6 +47,7 @@ class PlanService implements Service {
 		this.planRepository = planRepository;
 		this.planDayRepository = planDayRepository;
 		this.taskRepository = taskRepository;
+		this.openAIService = openAiService;
 	}
 
 	public async create(payload: PlanCreateRequestDto): Promise<PlanResponseDto> {
@@ -81,6 +88,16 @@ class PlanService implements Service {
 		const item = await this.planRepository.findWithRelations(id);
 
 		return item ? item.toObjectWithRelations() : null;
+	}
+
+	public async generate(
+		payload: QuizAnswersRequestDto,
+	): Promise<GeneratedPlanDTO> {
+		const userPrompt = createPrompt(payload);
+
+		const plan = await this.openAIService.generatePlan({ userPrompt });
+
+		return plan;
 	}
 
 	public async regenerate(id: number): Promise<null | PlanDaysTaskDto> {

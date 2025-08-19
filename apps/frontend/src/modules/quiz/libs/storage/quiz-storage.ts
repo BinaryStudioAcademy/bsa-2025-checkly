@@ -1,6 +1,6 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
-import { QuizStateValidationSchema } from "~/modules/quiz/libs/validation-schemas/quiz.validation-schema.js";
+import { quizStateValidationSchema } from "~/modules/quiz/libs/validation-schemas/quiz.validation-schema.js";
 import { type QuizState } from "~/modules/quiz/slices/quiz.slice.js";
 
 const saveQuizState = async (state: Partial<QuizState>): Promise<void> => {
@@ -20,7 +20,7 @@ const loadQuizState = async (): Promise<null | Partial<QuizState>> => {
 		}
 
 		const parsedData = JSON.parse(storedState) as Partial<QuizState>;
-		const validatedData = QuizStateValidationSchema.partial().parse(parsedData);
+		const validatedData = quizStateValidationSchema.partial().parse(parsedData);
 
 		return validatedData as Partial<QuizState>;
 	} catch {
