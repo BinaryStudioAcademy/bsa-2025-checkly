@@ -1,12 +1,23 @@
-import { getCurrentUser, logout, signIn, signUp } from "./actions.js";
-import { actions } from "./auth.slice.js";
-
-const allActions = {
-	...actions,
+import {
+	avatarRemove,
+	avatarUpload,
 	getCurrentUser,
 	logout,
 	signIn,
 	signUp,
+	updateProfile,
+} from "./actions.js";
+import { actions } from "./auth.slice.js";
+
+const allActions = {
+	...actions,
+	avatarRemove,
+	avatarUpload,
+	getCurrentUser,
+	logout,
+	signIn,
+	signUp,
+	updateProfile,
 };
 
 export { allActions as actions };

@@ -5,6 +5,8 @@ export { type Service } from "./service.type.js";
 export { type FastifyReply, type FastifyRequest } from "fastify";
 export {
 	type EnumValue,
+	type Nullable,
+	type RouteParametersWithId,
 	type ServerCommonErrorResponse,
 	type ServerErrorDetail,
 	type ServerValidationErrorResponse,
