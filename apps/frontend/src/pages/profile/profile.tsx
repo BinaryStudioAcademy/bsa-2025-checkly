@@ -1,6 +1,11 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 
-import { Button, Input, Loader } from "~/libs/components/components.js";
+import {
+	AvatarEdit,
+	Button,
+	Input,
+	Loader,
+} from "~/libs/components/components.js";
 import { formatDateForInput } from "~/libs/helpers/date-helpers.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import {
@@ -67,6 +72,7 @@ const Profile: React.FC = () => {
 	return (
 		<div className={contentClasses}>
 			<div className={styles["profile-container"]}>
+				<AvatarEdit />
 				<header className="flow">
 					<h1 className={getClassNames(styles["title"])} id="profile-title">
 						Profile

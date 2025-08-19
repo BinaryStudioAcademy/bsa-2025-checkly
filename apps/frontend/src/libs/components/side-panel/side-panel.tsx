@@ -9,9 +9,8 @@ import { NavigationItem } from "../navigation-item/navigation-item.js";
 import styles from "./styles.module.css";
 
 const SidePanel: React.FC = () => {
-	const user = useAppSelector((state) => state.auth.user);
-
 	const asideClasses = getClassNames(styles["aside"], "show-desktop-up");
+	const user = useAppSelector((state) => state.auth.user);
 
 	return (
 		<>
