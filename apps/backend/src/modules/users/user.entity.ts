@@ -80,6 +80,10 @@ class UserEntity implements Entity {
 		});
 	}
 
+	public getId(): number {
+		return this.id as number;
+	}
+
 	public getPasswordData(): {
 		passwordHash: string;
 		passwordSalt: string;

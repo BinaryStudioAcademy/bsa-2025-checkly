@@ -13,6 +13,10 @@ type EnvironmentSchema = {
 		POOL_MAX: number;
 		POOL_MIN: number;
 	};
+	EMAIL_SERVICE: {
+		EMAIL_API_KEY: string;
+		RESET_PASSWORD_LINK: string;
+	};
 	ENCRYPTOR: {
 		SALT_SIZE: number;
 	};

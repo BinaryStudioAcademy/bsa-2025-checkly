@@ -7,6 +7,7 @@ import {
 import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
+	type ForgotPasswordRequestDto,
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
 	type UserSignUpRequestDto,
@@ -89,6 +90,18 @@ class AuthController extends BaseController {
 			method: HTTPRequestMethod.GET,
 			path: AuthApiPath.ME,
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.sendResetLink(
+					options as APIHandlerOptions<{
+						body: ForgotPasswordRequestDto;
+					}>,
+				),
+			isPublic: true,
+			method: HTTPRequestMethod.POST,
+			path: AuthApiPath.FORGOT_PASSWORD,
+		});
 	}
 
 	/**
@@ -116,6 +129,19 @@ class AuthController extends BaseController {
 	private getAuthenticatedUser(options: APIHandlerOptions): APIHandlerResponse {
 		return {
 			payload: options.user,
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async sendResetLink(
+		options: APIHandlerOptions<{
+			body: ForgotPasswordRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		await this.authService.sendResetLink(options.body);
+
+		return {
+			payload: null,
 			status: HTTPCode.OK,
 		};
 	}
