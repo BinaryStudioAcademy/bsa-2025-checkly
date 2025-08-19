@@ -7,6 +7,7 @@ import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 import {
 	generatePlan,
 	getPlan,
+	regeneratePlan,
 	regeneratePlanDay,
 	regenerateTask,
 } from "./actions.js";
@@ -29,6 +30,7 @@ const { actions, name, reducer } = createSlice({
 				getPlan.pending,
 				regenerateTask.pending,
 				regeneratePlanDay.pending,
+				regeneratePlan.pending,
 			),
 			(state) => {
 				state.dataStatus = DataStatus.PENDING;
@@ -40,6 +42,7 @@ const { actions, name, reducer } = createSlice({
 				getPlan.fulfilled,
 				regenerateTask.fulfilled,
 				regeneratePlanDay.fulfilled,
+				regeneratePlan.fulfilled,
 			),
 			(state, action) => {
 				state.dataStatus = DataStatus.FULFILLED;
@@ -52,6 +55,7 @@ const { actions, name, reducer } = createSlice({
 				getPlan.rejected,
 				regenerateTask.rejected,
 				regeneratePlanDay.rejected,
+				regeneratePlan.rejected,
 			),
 			(state) => {
 				state.dataStatus = DataStatus.REJECTED;

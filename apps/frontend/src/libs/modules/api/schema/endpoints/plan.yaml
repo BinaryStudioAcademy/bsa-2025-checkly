@@ -164,7 +164,7 @@ getActivePlan:
 
 regenerateTask:
   post:
-    summary: Get active plan by userId
+    summary: Regenerate plan task
     parameters:
       - in: path
         name: planId
@@ -191,7 +191,7 @@ regenerateTask:
 
 regeneratePlanDay:
   post:
-    summary: Get active plan by userId
+    summary: Regenerate plan day
     parameters:
       - in: path
         name: planId
@@ -206,6 +206,23 @@ regeneratePlanDay:
     responses:
       "200":
         description: Plan day regenerated successfully
+        content:
+          application/json:
+            schema:
+              $ref: "#/schemas/PlanDaysTaskDto"
+
+regeneratePlan:
+  post:
+    summary: Regenerate plan
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+    responses:
+      "200":
+        description: Plan regenerated successfully
         content:
           application/json:
             schema:

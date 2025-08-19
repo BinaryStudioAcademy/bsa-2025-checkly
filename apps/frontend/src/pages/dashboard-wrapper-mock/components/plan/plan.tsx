@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { toast } from "react-toastify";
 
 import { Download, Save } from "~/assets/img/icons/icons.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { ONE, ZERO } from "~/libs/constants/constants.js";
-import { AppRoute } from "~/libs/enums/enums.js";
+import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
-import { actions } from "~/modules/plans/plans.js";
+import { actions as authActions } from "~/modules/auth/auth.js";
+import { actions as planActions } from "~/modules/plans/plans.js";
 
 import { Day, Task } from "./components/components.js";
 import styles from "./styles.module.css";
@@ -17,21 +17,23 @@ const Plan: React.FC = () => {
 	const [selectedDay, setSelectedDay] = useState<number>(ZERO);
 	const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
 
-	const user = useAppSelector((state) => state.auth.user);
-
-	const plan = useAppSelector((state) => state.plan.plan);
-
 	const dispatch = useAppDispatch();
 
+	const user = useAppSelector((state) => state.auth.user);
+	const userStatus = useAppSelector((state) => state.auth.dataStatus);
+	const plan = useAppSelector((state) => state.plan.plan);
+
 	useEffect(() => {
-		const userId = 2;
+		if (userStatus === DataStatus.IDLE) {
+			void dispatch(authActions.getCurrentUser());
+		}
+	}, [dispatch, userStatus]);
 
-		const getPlan = async (): Promise<void> => {
-			await dispatch(actions.getPlan(userId));
-		};
-
-		void getPlan();
-	}, [dispatch]);
+	useEffect(() => {
+		if (userStatus === DataStatus.FULFILLED && user) {
+			void dispatch(planActions.getPlan(user.id));
+		}
+	}, [dispatch, userStatus, user]);
 
 	const toggleSelect = useCallback((): void => {
 		setIsSelectOpen((previous) => !previous);
@@ -43,36 +45,45 @@ const Plan: React.FC = () => {
 			const dayId = plan?.days[selectedDay]?.id;
 
 			if (!planId || !dayId) {
-				toast("Missing planId or dayId");
-
 				return;
 			}
 
-			void dispatch(actions.regenerateTask({ dayId, planId, taskId }));
+			void dispatch(planActions.regenerateTask({ dayId, planId, taskId }));
 		},
 		[plan, selectedDay, dispatch],
 	);
 
 	const handleDayRegenerate = useCallback(
 		(dayId: number) => {
-			const planId = plan?.id;
-
-			if (!planId) {
-				toast("Missing planId");
-
+			if (!plan) {
 				return;
 			}
 
-			void dispatch(actions.regeneratePlanDay({ dayId, planId }));
+			void dispatch(planActions.regeneratePlanDay({ dayId, planId: plan.id }));
 		},
 
 		[plan, dispatch],
 	);
 
+	const handlePlanRegenerate = useCallback((): void => {
+		if (!plan) {
+			return;
+		}
+
+		void dispatch(planActions.regeneratePlan(plan.id));
+	}, [dispatch, plan]);
+
 	return (
 		<div className={styles["plan"]}>
 			<div className={styles["nav"]}>
 				<p>Here’s your plan!</p>
+				<Button
+					label="Regenerate plan"
+					onClick={handlePlanRegenerate}
+					size="small"
+					type="button"
+					variant="secondary"
+				/>
 				<Button
 					className={getClassNames(styles["select-day"])}
 					label={`Day ${String(selectedDay + ONE)}`}
