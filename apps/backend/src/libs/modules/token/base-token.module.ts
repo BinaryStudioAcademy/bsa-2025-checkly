@@ -22,7 +22,7 @@ class BaseToken {
 		this.secret = secret;
 	}
 
-	async decodeToken(token: string): Promise<JwtPayload> {
+	async decode(token: string): Promise<JwtPayload> {
 		const { payload } = await jwtVerify(token, this.secret);
 
 		return {
@@ -36,7 +36,7 @@ class BaseToken {
 		};
 	}
 
-	async generateToken(userId: number): Promise<string> {
+	async generate(userId: number): Promise<string> {
 		return await new SignJWT({ userId })
 			.setProtectedHeader({ alg: this.encryption })
 			.setIssuedAt()

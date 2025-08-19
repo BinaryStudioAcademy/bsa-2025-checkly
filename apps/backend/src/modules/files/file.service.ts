@@ -36,7 +36,7 @@ class BaseFileService {
 		});
 	}
 
-	public async deleteFile(fileUrl: string): Promise<void> {
+	public async delete(fileUrl: string): Promise<void> {
 		const key = this.extractKeyFromUrl(fileUrl);
 
 		if (!key) {
