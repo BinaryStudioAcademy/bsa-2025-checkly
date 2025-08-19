@@ -1,4 +1,5 @@
 import { APIPath, ContentType, HTTPRequestMethod } from "~/libs/enums/enums.js";
+import { sanitizeFilename } from "~/libs/helpers/helpers.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
@@ -34,6 +35,16 @@ class UserApi extends BaseHTTPApi {
 		return await response.json<UserGetAllResponseDto>();
 	}
 
+	public async removeAvatar(userId: number): Promise<Response> {
+		return await this.load(
+			this.getFullEndpoint(UsersApiPath.AVATAR, { id: String(userId) }),
+			{
+				hasAuth: true,
+				method: "DELETE",
+			},
+		);
+	}
+
 	public async updateMe(payload: UserUpdateRequestDto): Promise<UserDto> {
 		const response = await this.load(
 			this.getFullEndpoint(UsersApiPath.ME, {}),
@@ -46,6 +57,21 @@ class UserApi extends BaseHTTPApi {
 		);
 
 		return await response.json<UserDto>();
+	}
+
+	public async uploadAvatar(userId: number, file: File): Promise<Response> {
+		const formData = new FormData();
+		const safeName = sanitizeFilename(file.name);
+		formData.append("avatar", file, safeName);
+
+		return await this.load(
+			this.getFullEndpoint(UsersApiPath.AVATAR, { id: String(userId) }),
+			{
+				hasAuth: true,
+				method: "POST",
+				payload: formData,
+			},
+		);
 	}
 }
 

@@ -2,6 +2,7 @@ import { config } from "~/libs/modules/config/config.js";
 import { database } from "~/libs/modules/database/database.js";
 import { logger } from "~/libs/modules/logger/logger.js";
 import { authController } from "~/modules/auth/auth.js";
+import { planCategoryController } from "~/modules/plan-categories/plan-categories.js";
 import { planDayController } from "~/modules/plan-days/plan-days.js";
 import { planController } from "~/modules/plans/plans.js";
 import { quizQuestionController } from "~/modules/quiz-questions/quiz-question.js";
@@ -20,6 +21,7 @@ const apiV1 = new BaseServerApplicationApi(
 	...planDayController.routes,
 	...taskController.routes,
 	...quizQuestionController.routes,
+	...planCategoryController.routes,
 );
 const serverApplication = new BaseServerApplication({
 	apis: [apiV1],

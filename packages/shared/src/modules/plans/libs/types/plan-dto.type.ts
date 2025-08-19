@@ -1,3 +1,5 @@
+import { type PlanCategoryDto } from "../../../plan-categories/plan-categories.js";
+
 type PlanDayDto = {
 	dayNumber: number;
 	id: number;
@@ -9,11 +11,16 @@ type PlanDaysTaskDto = PlanDto & {
 };
 
 type PlanDto = {
+	categoryId: number;
 	duration: number;
 	id: number;
 	intensity: string;
 	title: string;
 	userId: number;
+};
+
+type PlanWithCategoryDto = PlanDaysTaskDto & {
+	category?: PlanCategoryDto;
 };
 
 type TaskDto = {
@@ -26,4 +33,9 @@ type TaskDto = {
 	title: string;
 };
 
-export { type PlanDayDto, type PlanDaysTaskDto, type PlanDto };
+export {
+	type PlanDayDto,
+	type PlanDaysTaskDto,
+	type PlanDto,
+	type PlanWithCategoryDto,
+};

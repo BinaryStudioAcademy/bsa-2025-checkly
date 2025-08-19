@@ -5,8 +5,6 @@ export {
 	INCREMENT_VALUE,
 	INITIAL_ITEM,
 	LAST_INDEX,
-	ONE,
-	ZERO,
 } from "./numbers.js";
 export {
 	DownloadError,
@@ -15,3 +13,4 @@ export {
 	PAPER_IN_HALF,
 	PDF_DOWNLOAD_OPTIONS,
 } from "./pdf.constants.js";
+export { ONE, UPLOAD_MAX_FILE_SIZE_BYTES, ZERO } from "shared";

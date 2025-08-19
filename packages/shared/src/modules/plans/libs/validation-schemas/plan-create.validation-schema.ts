@@ -3,6 +3,9 @@ import { z } from "zod";
 import { PlanValidationMessage, PlanValidationRule } from "../enums/enums.js";
 
 const planCreate = z.object({
+	categoryId: z.number({
+		required_error: PlanValidationMessage.FIELD_REQUIRED,
+	}),
 	duration: z
 		.number({
 			required_error: PlanValidationMessage.FIELD_REQUIRED,

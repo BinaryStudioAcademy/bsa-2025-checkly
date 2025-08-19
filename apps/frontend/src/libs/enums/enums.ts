@@ -14,10 +14,12 @@ export { RouteAccess } from "./route-access.js";
 export {
 	APIPath,
 	AppEnvironment,
+	AvatarTypes,
 	ContentType,
 	DataStatus,
 	HTTPRequestMethod,
 	QuizIndexes,
 	QuizQuestionFormat,
 	ServerErrorType,
+	ErrorMessage as SharedErrorMessage,
 } from "shared";
