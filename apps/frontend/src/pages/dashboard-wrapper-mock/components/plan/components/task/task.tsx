@@ -29,7 +29,7 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 			</div>
 			<div className={styles["item-actions"]}>
 				<div className={styles["item-actions__time"]}>
-					<img alt="" src={Timer} />
+					<img alt="Timer" src={Timer} />
 					<span>morning</span>
 				</div>
 				<div className={styles["item-actions_buttons-wrapper"]}>
