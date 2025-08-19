@@ -1,10 +1,14 @@
-import { APIPath, ContentType } from "~/libs/enums/enums.js";
+import { APIPath, ContentType, HTTPRequestMethod } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
-import { type UserGetAllResponseDto } from "./libs/types/types.js";
+import {
+	type UserDto,
+	type UserGetAllResponseDto,
+	type UserUpdateRequestDto,
+} from "./libs/types/types.js";
 
 type Constructor = {
 	baseUrl: string;
@@ -23,11 +27,25 @@ class UserApi extends BaseHTTPApi {
 			{
 				contentType: ContentType.JSON,
 				hasAuth: false,
-				method: "GET",
+				method: HTTPRequestMethod.GET,
 			},
 		);
 
 		return await response.json<UserGetAllResponseDto>();
+	}
+
+	public async updateMe(payload: UserUpdateRequestDto): Promise<UserDto> {
+		const response = await this.load(
+			this.getFullEndpoint(UsersApiPath.ME, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: HTTPRequestMethod.POST,
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<UserDto>();
 	}
 }
 

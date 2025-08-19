@@ -122,21 +122,13 @@
 	transition: box-shadow 0.2s ease-in-out;
 }
 
-.card-image {
-	display: block;
-	width: 100%;
-	height: 80%;
-	object-fit: cover;
-	border-radius: 0.75rem;
-}
-
 .card-text {
 	display: flex;
 	flex-grow: 1;
 	align-items: center;
 	justify-content: center;
 	padding: 0.25rem;
-	font: var(--font-family-primary);
+	font: var(--font-family-nunito);
 	font-size: 1.4rem;
 	font-weight: var(--font-weight-heading);
 	text-align: center;

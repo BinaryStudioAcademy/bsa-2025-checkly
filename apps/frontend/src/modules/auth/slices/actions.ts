@@ -1,15 +1,22 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { MESSAGES } from "~/libs/constants/messages.constants.js";
+import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { ErrorMessage } from "~/libs/enums/enums.js";
+import { HTTPError } from "~/libs/modules/http/http.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
+	type UserUpdateRequestDto,
 } from "~/modules/users/users.js";
 
-import { name as sliceName } from "./auth.slice.js";
+import {
+	actions as authSliceActions,
+	name as sliceName,
+} from "./auth.slice.js";
 
 const signIn = createAsyncThunk<
 	UserDto,
@@ -60,4 +67,46 @@ const getCurrentUser = createAsyncThunk<
 	return await authApi.getCurrentUser();
 });
 
-export { getCurrentUser, signIn, signUp };
+const updateProfile = createAsyncThunk<
+	UserDto,
+	UserUpdateRequestDto,
+	AsyncThunkConfig
+>(
+	`${sliceName}/update-profile`,
+	async (payload, { extra, rejectWithValue }) => {
+		const { userApi } = extra;
+
+		try {
+			return await userApi.updateMe(payload);
+		} catch (error) {
+			if (error instanceof HTTPError) {
+				return rejectWithValue(error.message);
+			}
+
+			return rejectWithValue(ErrorMessage.DEFAULT_ERROR_MESSAGE);
+		}
+	},
+);
+
+type LogoutThunkArgument = { navigate: (path: string) => Promise<void> | void };
+
+const logout = createAsyncThunk<null, LogoutThunkArgument, AsyncThunkConfig>(
+	`${sliceName}/logout`,
+	async ({ navigate }, { dispatch, extra }) => {
+		const { notifications, storage } = extra;
+
+		try {
+			await storage.drop(StorageKey.TOKEN);
+		} catch {
+			notifications.error(MESSAGES.AUTH.LOGOUT_FAILED);
+		}
+
+		dispatch(authSliceActions.resetAuthState());
+
+		await navigate(AppRoute.ROOT);
+
+		return null;
+	},
+);
+
+export { getCurrentUser, logout, signIn, signUp, updateProfile };

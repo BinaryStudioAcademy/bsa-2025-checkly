@@ -1,0 +1,52 @@
+@import url("../../styles.module.css");
+
+.container {
+	background-color: var(--color-bg-white);
+}
+
+/* Header styles */
+
+.plan-title {
+	color: var(--color-header-pink);
+}
+
+/* Day styles */
+
+.day-of-week {
+	color: var(--color-remark-purple);
+}
+
+.day-item {
+	border-block-color: var(--color-border-light-blue);
+}
+
+.day-item:nth-child(odd) {
+	border-right-color: var(--color-border-purple);
+	border-left-color: var(--color-border-light-blue);
+}
+
+.day-item:nth-child(even) {
+	border-right-color: var(--color-border-light-blue);
+}
+
+/* Task styles */
+
+.task-checkbox {
+	background-color: var(--color-bg-task-checkbox-purple);
+}
+
+.task-text {
+	color: var(--color-colourful-task-text);
+}
+
+/* Notes styles */
+
+li.notes:nth-child(odd) {
+	border-right-color: var(--color-border-light-blue);
+	border-bottom-color: var(--color-border-light-blue);
+	border-left-color: var(--color-border-light-blue);
+}
+
+p.notes-text {
+	text-decoration-color: var(--color-border-light-blue);
+}

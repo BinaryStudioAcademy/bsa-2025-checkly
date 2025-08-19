@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.7.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.6.0...backend-v1.7.0) (2025-08-18)
+
+
+### Features
+
+* add profile page cy-176 ([f090102](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f0901026904a8716bfccfdb9710ecedecf755525))
+
+## [1.6.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.5.1...backend-v1.6.0) (2025-08-17)
+
+
+### Features
+
+* * update method name in plan module cy-229 ([67ebc89](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/67ebc89ec8089dfa04204af086f76432fcf74e59))
+* * update plan controller swagger docs cy-229 ([b691441](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b6914410a2764d4258fd2683bfcfba48f868bd60))
+* * update plan module to add "/generate" endpoint cy-229 ([45b7684](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/45b768467eed3786ca47f312ae7b2af41ee3b440))
+* + merge with main cy-229 ([b00ee09](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b00ee098c528bf22865c60007f6231a9a175af30))
+* update plan module to add "/generate" endpoint cy-229 ([8b34607](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8b346078be5e53ef6af2961f13ba0b7df8f848a7))
+
+## [1.5.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.5.0...backend-v1.5.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* **backend:** changed seed for questions cy-251 ([1d83e82](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1d83e8288b097d9b183b972dbbca8e123c834aef))
+* changed seed for questions cy-251 ([cd9cc8e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cd9cc8e2c5ed37f86f0789e5321e1ce0795c86e2))
+* **frontend:** fix conflicts with main branch cy-169 ([7f9d38d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7f9d38dbbbc0f78c9c3add19d269ef773653b751))
+
 ## [1.5.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.4.1...backend-v1.5.0) (2025-08-13)
 
 
