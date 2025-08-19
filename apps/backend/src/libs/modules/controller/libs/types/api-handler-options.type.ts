@@ -26,4 +26,13 @@ type IdParameter = {
 
 type IdParametersOption = APIHandlerOptions<{ params: IdParameter }>;
 
-export { type APIBodyOptions, type APIHandlerOptions, type IdParametersOption };
+type SearchQueryParametersOption<T> = APIHandlerOptions<{
+	query: T;
+}>;
+
+export {
+	type APIBodyOptions,
+	type APIHandlerOptions,
+	type IdParametersOption,
+	type SearchQueryParametersOption,
+};

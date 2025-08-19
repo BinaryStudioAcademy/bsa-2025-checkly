@@ -7,7 +7,6 @@
 	max-width: calc(595px * var(--coefficient));
 	min-height: calc(842px * var(--coefficient));
 	padding: calc(24px * var(--coefficient));
-	margin: 0 auto;
 }
 
 .homepage-container {
