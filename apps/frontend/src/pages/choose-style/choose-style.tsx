@@ -66,15 +66,15 @@ const ChooseStyle: React.FC = () => {
 						size="small"
 					/>
 					<Button
-						disabled
 						icon={<SmartphoneIcon aria-hidden="true" />}
 						iconOnlySize="large"
+						isDisabled
 						label="Mobile Wallpaper"
 						size="small"
 					/>
 					<Button
-						disabled
 						icon={<MonitorIcon aria-hidden="true" />}
+						isDisabled
 						label="Desktop Wallpaper"
 						size="small"
 					/>

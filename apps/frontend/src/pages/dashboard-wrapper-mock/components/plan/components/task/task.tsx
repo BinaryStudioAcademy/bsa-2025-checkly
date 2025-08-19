@@ -37,19 +37,19 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 						className={getClassNames(styles["item-actions_button"])}
 						icon={<DecorativeImage src={Edit} />}
 						isIconOnly
-						label=""
+						label="Edit task"
 					/>
 					<Button
 						className={getClassNames(styles["item-actions_button"])}
 						icon={<DecorativeImage src={Regenerate} />}
 						isIconOnly
-						label=""
+						label="Regenerate task"
 					/>
 					<Button
 						className={getClassNames(styles["item-actions_button"])}
 						icon={<DecorativeImage src={Remove} />}
 						isIconOnly
-						label=""
+						label="Remove task"
 					/>
 				</div>
 			</div>

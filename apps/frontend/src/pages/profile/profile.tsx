@@ -81,17 +81,17 @@ const Profile: React.FC = () => {
 						<Input
 							control={control}
 							errors={errors}
+							isRequired
 							label="Name"
 							name="name"
-							required
 							type="text"
 						/>
 						<Input
 							control={control}
 							errors={errors}
+							isRequired
 							label="Email"
 							name="email"
-							required
 							type="email"
 						/>
 						<Input
@@ -117,7 +117,7 @@ const Profile: React.FC = () => {
 						/>
 					</div>
 					<Button
-						disabled={isSubmitting || !isDirty}
+						isDisabled={isSubmitting || !isDirty}
 						label="Save changes"
 						loader={
 							<Loader

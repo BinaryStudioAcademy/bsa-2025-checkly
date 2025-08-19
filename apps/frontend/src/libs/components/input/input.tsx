@@ -15,20 +15,20 @@ import styles from "./styles.module.css";
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
+	isRequired?: boolean;
 	label: string;
 	name: FieldPath<T>;
 	placeholder?: string;
-	required?: boolean;
 	type?: "date" | "email" | "password" | "text";
 };
 
 const Input = <T extends FieldValues>({
 	control,
 	errors,
+	isRequired,
 	label,
 	name,
 	placeholder = "",
-	required,
 	type = "text",
 }: Properties<T>): JSX.Element => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -66,7 +66,7 @@ const Input = <T extends FieldValues>({
 					id={inputId}
 					name={name}
 					placeholder={placeholder}
-					required={required}
+					required={isRequired}
 					type={inputType}
 				/>
 				{isPasswordField && (

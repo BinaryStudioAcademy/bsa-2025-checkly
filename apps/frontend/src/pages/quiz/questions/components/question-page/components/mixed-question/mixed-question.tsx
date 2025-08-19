@@ -33,9 +33,13 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 	);
 
 	const handleOptionChange = useCallback(
-		(option: string, checked: boolean): void => {
-			const newSelectedOptions = toggleOption(option, selectedOptions, checked);
-			const isSwitchingFromOther = isOtherOption(option) && !checked;
+		(option: string, isChecked: boolean): void => {
+			const newSelectedOptions = toggleOption(
+				option,
+				selectedOptions,
+				isChecked,
+			);
+			const isSwitchingFromOther = isOtherOption(option) && !isChecked;
 			const newUserInput = isSwitchingFromOther ? "" : userInput;
 
 			setSelectedOptions(newSelectedOptions);

@@ -44,7 +44,7 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 				)}
 
 				<Button
-					disabled={isNextDisabled}
+					isDisabled={isNextDisabled}
 					label={nextButtonLabel}
 					onClick={onNext}
 					size={ButtonSizes.LARGE}
