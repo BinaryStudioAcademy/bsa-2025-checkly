@@ -2,6 +2,8 @@ import { type Repository } from "~/libs/types/types.js";
 import { PlanEntity } from "~/modules/plans/plan.entity.js";
 import { type PlanModel } from "~/modules/plans/plan.model.js";
 
+import { type SearchProperties } from "./libs/types/types.js";
+
 class PlanRepository implements Repository {
 	private planModel: typeof PlanModel;
 
@@ -68,11 +70,7 @@ class PlanRepository implements Repository {
 		categoryId,
 		title,
 		userId,
-	}: {
-		categoryId?: number;
-		title?: string;
-		userId: number;
-	}): Promise<PlanEntity[]> {
+	}: SearchProperties): Promise<PlanEntity[]> {
 		let query = this.planModel
 			.query()
 			.where({ userId })

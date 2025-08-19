@@ -8,6 +8,7 @@ import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
 import { PlansApiPath } from "./libs/enums/enums.js";
 import {
+	type PlanSearchQueryParameter,
 	type PlanWithCategoryDto,
 	type QuizAnswersRequestDto,
 } from "./libs/types/types.js";
@@ -55,10 +56,7 @@ class PlanApi extends BaseHTTPApi {
 	public async search({
 		categoryId,
 		title,
-	}: {
-		categoryId?: number;
-		title?: string;
-	}): Promise<PlanWithCategoryDto[]> {
+	}: PlanSearchQueryParameter): Promise<PlanWithCategoryDto[]> {
 		const queryParameters: Record<string, string> = {};
 
 		if (title) {

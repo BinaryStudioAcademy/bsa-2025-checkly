@@ -1,6 +1,6 @@
 type PlanSearchQueryParameter = {
-	categoryId?: number;
-	title?: string;
+	categoryId: null | number;
+	title: null | string;
 };
 
 export { type PlanSearchQueryParameter };

@@ -4,6 +4,7 @@ import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
 import {
+	type PlanSearchQueryParameter,
 	type PlanWithCategoryDto,
 	type QuizAnswersRequestDto,
 } from "../libs/types/types.js";
@@ -22,10 +23,7 @@ const generatePlan = createAsyncThunk<
 
 const searchPlan = createAsyncThunk<
 	PlanWithCategoryDto[],
-	{
-		categoryId?: number;
-		title?: string;
-	},
+	PlanSearchQueryParameter,
 	AsyncThunkConfig
 >(`${sliceName}/search`, async (payload, { extra }) => {
 	const { planApi } = extra;

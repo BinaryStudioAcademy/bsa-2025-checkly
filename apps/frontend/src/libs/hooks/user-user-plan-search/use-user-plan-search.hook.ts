@@ -10,11 +10,12 @@ import {
 } from "./libs/types/types.js";
 
 const prepareSearchPayload = (
-	categoryId?: number,
-	title?: string,
+	categoryId: null | number,
+	title: null | string,
 ): PlanSearchQueryParameter => ({
-	categoryId: categoryId === ZERO_CATEGORY_ID ? undefined : categoryId,
-	title: title?.trim() || undefined,
+	categoryId:
+		categoryId === ZERO_CATEGORY_ID || !categoryId ? null : categoryId,
+	title: title?.trim() || null,
 });
 
 const useUserPlanSearch = (): {
