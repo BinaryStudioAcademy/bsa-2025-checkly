@@ -30,7 +30,7 @@ import { DEFAULT_QUIZ_STATE } from "./libs/constants/constants.js";
 import { useProgress } from "./libs/hooks/hooks.js";
 import styles from "./styles.module.css";
 
-const slides = [
+const SLIDES = [
 	Teddy,
 	Book,
 	Croissant,
@@ -85,7 +85,7 @@ const PlanGeneration: React.FC = () => {
 
 	return (
 		<main className={containerClasses}>
-			<ImageSlider slides={slides} />
+			<ImageSlider slides={SLIDES} />
 			<h1 className={styles["progress"]}>
 				Analyzing{" "}
 				<span className={styles["progress-number"]}>

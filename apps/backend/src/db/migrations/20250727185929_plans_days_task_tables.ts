@@ -45,7 +45,7 @@ const ENUM_TYPE_NAME = {
 
 const EXECUTION_TYPE = ["morning", "afternoon", "evening"];
 
-const COLUMN_LENGTH = {
+const ColumnLength = {
 	INTENSITY: 50,
 	TASK_TITLE: 200,
 	TITLE: 100,
@@ -62,7 +62,7 @@ async function down(knex: Knex): Promise<void> {
 async function up(knex: Knex): Promise<void> {
 	await knex.schema.createTable(TABLE_NAMES.PLAN, (table) => {
 		table.increments(PlanColumnName.ID).primary();
-		table.string(PlanColumnName.TITLE, COLUMN_LENGTH.TITLE).notNullable();
+		table.string(PlanColumnName.TITLE, ColumnLength.TITLE).notNullable();
 		table
 			.integer(PlanColumnName.USER_ID)
 			.notNullable()
@@ -71,7 +71,7 @@ async function up(knex: Knex): Promise<void> {
 			.onDelete("CASCADE");
 		table.integer(PlanColumnName.DURATION).notNullable().checkPositive();
 		table
-			.string(PlanColumnName.INTENSITY, COLUMN_LENGTH.INTENSITY)
+			.string(PlanColumnName.INTENSITY, ColumnLength.INTENSITY)
 			.notNullable();
 		table
 			.timestamp(PlanColumnName.CREATED_AT, { useTz: true })
@@ -104,7 +104,7 @@ async function up(knex: Knex): Promise<void> {
 
 	await knex.schema.createTable(TABLE_NAMES.TASK, (table) => {
 		table.increments(TaskColumnName.ID).primary();
-		table.string(TaskColumnName.TITLE, COLUMN_LENGTH.TASK_TITLE).notNullable();
+		table.string(TaskColumnName.TITLE, ColumnLength.TASK_TITLE).notNullable();
 		table.text(TaskColumnName.DESCRIPTION).notNullable();
 		table.integer(TaskColumnName.ORDER).notNullable().checkPositive();
 		table

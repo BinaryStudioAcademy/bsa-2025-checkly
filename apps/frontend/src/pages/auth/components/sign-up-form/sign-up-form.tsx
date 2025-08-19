@@ -105,7 +105,7 @@ const SignUpForm: React.FC<Properties> = ({
 							errors={errors}
 							label="Name"
 							name="name"
-							placeholder={AUTH_PLACEHOLDERS.name}
+							placeholder={AUTH_PLACEHOLDERS.NAME}
 							required
 							type="text"
 						/>
@@ -114,7 +114,7 @@ const SignUpForm: React.FC<Properties> = ({
 							errors={errors}
 							label="Email"
 							name="email"
-							placeholder={AUTH_PLACEHOLDERS.email}
+							placeholder={AUTH_PLACEHOLDERS.EMAIL}
 							required
 							type="text"
 						/>
@@ -123,7 +123,7 @@ const SignUpForm: React.FC<Properties> = ({
 							errors={errors}
 							label="Password"
 							name="password"
-							placeholder={AUTH_PLACEHOLDERS.password}
+							placeholder={AUTH_PLACEHOLDERS.PASSWORD}
 							required
 							type="password"
 						/>
@@ -132,7 +132,7 @@ const SignUpForm: React.FC<Properties> = ({
 							errors={errors}
 							label="Confirm password"
 							name="confirmPassword"
-							placeholder={AUTH_PLACEHOLDERS.password}
+							placeholder={AUTH_PLACEHOLDERS.PASSWORD}
 							required
 							type="password"
 						/>

@@ -111,7 +111,7 @@ const SignInForm: React.FC<Properties> = ({
 							errors={errors}
 							label="Email"
 							name="email"
-							placeholder={AUTH_PLACEHOLDERS.email}
+							placeholder={AUTH_PLACEHOLDERS.EMAIL}
 							required
 							type="email"
 						/>
@@ -120,7 +120,7 @@ const SignInForm: React.FC<Properties> = ({
 							errors={errors}
 							label="Password"
 							name="password"
-							placeholder={AUTH_PLACEHOLDERS.password}
+							placeholder={AUTH_PLACEHOLDERS.PASSWORD}
 							required
 							type="password"
 						/>

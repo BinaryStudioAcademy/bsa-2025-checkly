@@ -1,5 +1,6 @@
-import { planStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
+import { PlanStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
+import { useStyleKey } from "~/libs/hooks/hooks.js";
 import { type PlanStyleOption } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
@@ -15,19 +16,21 @@ const Task: React.FC<Properties> = ({
 	inputStyle,
 	taskText,
 }: Properties) => {
+	const { getStyleKey } = useStyleKey();
+	const styleKey = getStyleKey(inputStyle);
 	const taskClasses = getClassNames(
 		styles["task"],
-		planStyleModules[inputStyle]["task"],
+		PlanStyleModules[styleKey]["task"],
 	);
 
 	const taskCheckboxClasses = getClassNames(
 		styles["task-checkbox"],
-		planStyleModules[inputStyle]["task-checkbox"],
+		PlanStyleModules[styleKey]["task-checkbox"],
 	);
 
 	const taskTextClasses = getClassNames(
 		styles["task-text"],
-		planStyleModules[inputStyle]["task-text"],
+		PlanStyleModules[styleKey]["task-text"],
 	);
 
 	return (

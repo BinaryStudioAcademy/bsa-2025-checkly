@@ -9,7 +9,7 @@ import {
 
 import { type CategoryData } from "./types/category-data.js";
 
-const categories: CategoryData[] = [
+const CATEGORIES: CategoryData[] = [
 	{
 		id: "personal-dev",
 		image: TeddyBear,
@@ -30,4 +30,4 @@ const categories: CategoryData[] = [
 	{ id: "hobby", image: RollerSkate, name: "hobby" },
 ];
 
-export { categories };
+export { CATEGORIES };

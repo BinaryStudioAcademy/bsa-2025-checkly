@@ -5,12 +5,12 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import styles from "./styles.module.css";
 
-const yellowStarsClasses = getClassNames(
+const YELLOW_STARS_CLASSES = getClassNames(
 	styles["image-position"],
 	styles["yellow-stars"],
 );
 
-const yellowTwinklesClasses = getClassNames(
+const YELLOW_TWINKLES_CLASSES = getClassNames(
 	styles["image-position"],
 	styles["yellow-twinkles"],
 );
@@ -42,9 +42,9 @@ const NotFound: React.FC = () => {
 						Back to Home
 					</Link>
 				</div>
-				<DecorativeImage className={yellowStarsClasses} src={yellowStars} />
+				<DecorativeImage className={YELLOW_STARS_CLASSES} src={yellowStars} />
 				<DecorativeImage
-					className={yellowTwinklesClasses}
+					className={YELLOW_TWINKLES_CLASSES}
 					src={yellowTwinkles}
 				/>
 			</main>
