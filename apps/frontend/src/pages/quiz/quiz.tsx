@@ -41,7 +41,7 @@ const Quiz: React.FC = (): React.ReactElement => {
 		void redirect();
 	}, [selectedCategory, navigate]);
 
-	const createHandleSelect = useCallback(
+	const handleSelect = useCallback(
 		(category: QuizCategoryValue): (() => void) => {
 			return (): void => {
 				handleCategorySelect(category);
@@ -97,7 +97,7 @@ const Quiz: React.FC = (): React.ReactElement => {
 									color={category.color}
 									icon={category.icon}
 									key={category.category}
-									onSelect={createHandleSelect(category.category)}
+									onSelect={handleSelect(category.category)}
 									selected={selectedCategory === category.category}
 								/>
 							))}
