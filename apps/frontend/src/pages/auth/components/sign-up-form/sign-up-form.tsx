@@ -24,7 +24,7 @@ import {
 	userSignUpValidationSchemaExtended,
 } from "~/modules/users/users.js";
 
-import { AuthPlaceholder } from "../../libs/constants.js";
+import { AUTH_PLACEHOLDERS } from "../../libs/constants.js";
 import sharedStyles from "../shared/shared.module.css";
 import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
 import styles from "./sign-up-form.module.css";
@@ -103,37 +103,37 @@ const SignUpForm: React.FC<Properties> = ({
 						<Input
 							control={control}
 							errors={errors}
+							isRequired
 							label="Name"
 							name="name"
-							placeholder={AuthPlaceholder.name}
-							required
+							placeholder={AUTH_PLACEHOLDERS.NAME}
 							type="text"
 						/>
 						<Input
 							control={control}
 							errors={errors}
+							isRequired
 							label="Email"
 							name="email"
-							placeholder={AuthPlaceholder.email}
-							required
+							placeholder={AUTH_PLACEHOLDERS.EMAIL}
 							type="text"
 						/>
 						<Input
 							control={control}
 							errors={errors}
+							isRequired
 							label="Password"
 							name="password"
-							placeholder={AuthPlaceholder.password}
-							required
+							placeholder={AUTH_PLACEHOLDERS.PASSWORD}
 							type="password"
 						/>
 						<Input
 							control={control}
 							errors={errors}
+							isRequired
 							label="Confirm password"
 							name="confirmPassword"
-							placeholder={AuthPlaceholder.password}
-							required
+							placeholder={AUTH_PLACEHOLDERS.PASSWORD}
 							type="password"
 						/>
 					</div>

@@ -105,7 +105,7 @@ const Quiz: React.FC = (): React.ReactElement => {
 
 						<div className={getClassNames("cluster", styles["actions"])}>
 							<Button
-								disabled={!selectedCategory}
+								isDisabled={!selectedCategory}
 								label={ButtonLabels.NEXT}
 								onClick={handleNext}
 								variant={ButtonVariants.PRIMARY}

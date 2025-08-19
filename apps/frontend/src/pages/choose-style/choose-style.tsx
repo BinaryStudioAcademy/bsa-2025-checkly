@@ -30,12 +30,12 @@ const PLAN_VIEW_OPTION: ViewOptions = "selection";
 
 const ChooseStyle: React.FC = () => {
 	const [selectedCard, setSelectedCard] = useState<null | string>(
-		styleCards[PRESELECTED_ELEMENT]?.id || null,
+		styleCards[PRESELECTED_ELEMENT]?.id ?? null,
 	);
 
 	const handleCardClick = useCallback(
 		(event: React.MouseEvent<HTMLButtonElement>): void => {
-			setSelectedCard(event.currentTarget.dataset["card"] || null);
+			setSelectedCard(event.currentTarget.dataset["card"] ?? null);
 		},
 		[],
 	);
@@ -66,15 +66,15 @@ const ChooseStyle: React.FC = () => {
 						size="small"
 					/>
 					<Button
-						disabled
 						icon={<SmartphoneIcon aria-hidden="true" />}
 						iconOnlySize="large"
+						isDisabled
 						label="Mobile Wallpaper"
 						size="small"
 					/>
 					<Button
-						disabled
 						icon={<MonitorIcon aria-hidden="true" />}
+						isDisabled
 						label="Desktop Wallpaper"
 						size="small"
 					/>

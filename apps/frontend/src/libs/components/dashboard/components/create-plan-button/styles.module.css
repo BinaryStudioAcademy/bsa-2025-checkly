@@ -27,7 +27,7 @@
 	display: none;
 }
 
-.button span {
+.button .button-text {
 	max-width: 100%;
 	overflow-wrap: anywhere;
 }
@@ -38,7 +38,7 @@
 	}
 }
 
-.button:not(:disabled):hover span[class*="button-icon"] {
+.button:not(:disabled):hover .button-icon {
 	transform: none;
 }
 

@@ -52,7 +52,7 @@ const Day: React.FC<Properties> = ({
 				variant="transparent"
 			/>
 			<div className={styles["selectedDay-icon"]}>
-				{selectedDay === indexDay && <img alt="" src={ArrowBold} />}
+				{selectedDay === indexDay && <img alt="Arrow" src={ArrowBold} />}
 			</div>
 		</div>
 	);

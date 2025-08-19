@@ -22,14 +22,14 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 			)}
 			key={indexItem}
 		>
-			<h3>{indexItem}</h3>
+			<h3 className={styles["task-title"]}>{indexItem}</h3>
 			<div className={styles["description-wrapper"]}>
 				<h5>{item.title}</h5>
-				<p>{item.description}</p>
+				<p className={styles["task-description"]}>{item.description}</p>
 			</div>
 			<div className={styles["item-actions"]}>
 				<div className={styles["item-actions__time"]}>
-					<img alt="" src={Timer} />
+					<img alt="Timer" src={Timer} />
 					<span>morning</span>
 				</div>
 				<div className={styles["item-actions_buttons-wrapper"]}>
@@ -37,19 +37,19 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 						className={getClassNames(styles["item-actions_button"])}
 						icon={<DecorativeImage src={Edit} />}
 						isIconOnly
-						label=""
+						label="Edit task"
 					/>
 					<Button
 						className={getClassNames(styles["item-actions_button"])}
 						icon={<DecorativeImage src={Regenerate} />}
 						isIconOnly
-						label=""
+						label="Regenerate task"
 					/>
 					<Button
 						className={getClassNames(styles["item-actions_button"])}
 						icon={<DecorativeImage src={Remove} />}
 						isIconOnly
-						label=""
+						label="Remove task"
 					/>
 				</div>
 			</div>

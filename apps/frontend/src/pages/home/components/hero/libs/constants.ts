@@ -12,7 +12,7 @@ type DecorativeImageItem = {
 	src: string;
 };
 
-const decorativeImages: DecorativeImageItem[] = [
+const DECORATIVE_IMAGES_LIST: DecorativeImageItem[] = [
 	{
 		className: "green-flower",
 		id: 1,
@@ -40,4 +40,4 @@ const decorativeImages: DecorativeImageItem[] = [
 	},
 ];
 
-export { decorativeImages };
+export { DECORATIVE_IMAGES_LIST };

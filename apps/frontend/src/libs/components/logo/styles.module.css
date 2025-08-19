@@ -8,10 +8,10 @@
 	text-decoration: none;
 }
 
-.container img {
+.container .logo-image {
 	width: clamp(18px, 2vw, 27px);
 }
 
-.container h1 {
+.container .logo-title {
 	font-size: var(--text-size-heading-3);
 }

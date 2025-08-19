@@ -18,7 +18,7 @@ type Properties = {
 	onClose: () => void;
 };
 
-function getNextIndex({
+const getNextIndex = ({
 	activeElement,
 	items,
 	step,
@@ -26,17 +26,17 @@ function getNextIndex({
 	activeElement: Element | null;
 	items: Element[];
 	step: number;
-}): number {
+}): number => {
 	const index = items.indexOf(activeElement as Element);
 
 	return (index + step + items.length) % items.length;
-}
+};
 
-function useDropdownMenu({
+const useDropdownMenu = ({
 	isMenuOpen,
 	menuReference,
 	onClose,
-}: Properties): void {
+}: Properties): void => {
 	const handleClickOutside = (event: MouseEvent): void => {
 		if (
 			menuReference.current &&
@@ -83,6 +83,6 @@ function useDropdownMenu({
 			document.removeEventListener("keydown", handleKeyDown);
 		};
 	}, [isMenuOpen, menuReference, onClose]);
-}
+};
 
 export { useDropdownMenu };

@@ -9,7 +9,7 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppSelector } from "~/libs/hooks/hooks.js";
 
 import { Day, Task } from "./components/components.js";
-import { DAYS_TASKS_MOCK } from "./mock-data/days-tasks-mock.js";
+import { DAYS_TASKS_MOCK_DATA } from "./mock-data/days-tasks-mock.js";
 import styles from "./styles.module.css";
 
 const Plan: React.FC = () => {
@@ -27,7 +27,7 @@ const Plan: React.FC = () => {
 	return (
 		<div className={styles["plan"]}>
 			<div className={styles["nav"]}>
-				<p>Here’s your plan!</p>
+				<p className={styles["nav-text"]}>Here’s your plan!</p>
 				<Button
 					className={getClassNames(styles["select-day"])}
 					label={`Day ${String(selectedDay + ONE)}`}
@@ -43,7 +43,7 @@ const Plan: React.FC = () => {
 							isSelectOpen ? styles["content__days__open"] : "",
 						)}
 					>
-						{DAYS_TASKS_MOCK.map((_, index) => {
+						{DAYS_TASKS_MOCK_DATA.map((_, index) => {
 							return (
 								<Day
 									indexDay={index}
@@ -63,7 +63,7 @@ const Plan: React.FC = () => {
 						"cluster grid-pattern flow",
 					)}
 				>
-					{DAYS_TASKS_MOCK[selectedDay]?.map((item, index) => {
+					{DAYS_TASKS_MOCK_DATA[selectedDay]?.map((item, index) => {
 						return <Task indexItem={index + ONE} item={item} key={index} />;
 					})}
 					<NavLink className={navLink} to={AppRoute.CHOOSE_STYLE}>
