@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.22.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.22.0...v1.22.1) (2025-08-19)
+
+
+### Bug Fixes
+
+* enhance code to meet quality criteria cy-289 ([96b90ba](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/96b90ba02f39d6eeed8f24294146cdd2c4afb550))
+
 ## [1.22.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.21.0...v1.22.0) (2025-08-19)
 
 
