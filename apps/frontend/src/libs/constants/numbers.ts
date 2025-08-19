@@ -1,3 +1,15 @@
+const BASE_HEIGHT = 1123;
+const BASE_WIDTH = 794;
+const EDITOR_ROWS = 10;
+const INCREMENT_VALUE = 1;
+const INITIAL_ITEM = 0;
 const LAST_INDEX = -1;
 
-export { LAST_INDEX };
+export {
+	BASE_HEIGHT,
+	BASE_WIDTH,
+	EDITOR_ROWS,
+	INCREMENT_VALUE,
+	INITIAL_ITEM,
+	LAST_INDEX,
+};
