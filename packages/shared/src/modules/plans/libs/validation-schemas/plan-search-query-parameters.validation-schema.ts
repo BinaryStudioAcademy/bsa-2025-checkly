@@ -10,7 +10,7 @@ const planSearchQueryParameters = z.object({
 		.string()
 		.optional()
 		.transform((value) => {
-			if (!value || value === "0" || value === "") {
+			if (!value || value === "0") {
 				return ZERO_CATEGORY_ID;
 			}
 
