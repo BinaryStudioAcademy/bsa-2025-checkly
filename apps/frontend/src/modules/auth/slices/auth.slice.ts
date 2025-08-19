@@ -69,6 +69,7 @@ const { actions, name, reducer } = createSlice({
 		resetAuthState: (state) => {
 			state.dataStatus = DataStatus.IDLE;
 			state.user = null;
+			state.isPreparing = false;
 		},
 	},
 });

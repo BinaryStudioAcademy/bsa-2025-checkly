@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { MESSAGES } from "~/libs/constants/messages.constants.js";
-import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { HTTPError } from "~/libs/modules/http/http.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
@@ -88,11 +87,9 @@ const updateProfile = createAsyncThunk<
 	},
 );
 
-type LogoutThunkArgument = { navigate: (path: string) => Promise<void> | void };
-
-const logout = createAsyncThunk<null, LogoutThunkArgument, AsyncThunkConfig>(
+const logout = createAsyncThunk<null, undefined, AsyncThunkConfig>(
 	`${sliceName}/logout`,
-	async ({ navigate }, { dispatch, extra }) => {
+	async (_payload, { dispatch, extra }) => {
 		const { notifications, storage } = extra;
 
 		try {
@@ -102,8 +99,6 @@ const logout = createAsyncThunk<null, LogoutThunkArgument, AsyncThunkConfig>(
 		}
 
 		dispatch(authSliceActions.resetAuthState());
-
-		await navigate(AppRoute.ROOT);
 
 		return null;
 	},
