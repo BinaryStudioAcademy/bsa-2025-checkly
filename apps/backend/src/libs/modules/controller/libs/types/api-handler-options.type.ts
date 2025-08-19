@@ -1,3 +1,5 @@
+import { type FastifyRequest } from "fastify";
+
 import { type UserDto } from "~/libs/types/types.js";
 
 type APIBodyOptions<T> = APIHandlerOptions<{ body: T }>;
@@ -6,6 +8,7 @@ type APIHandlerOptions<
 	T extends DefaultApiHandlerOptions = DefaultApiHandlerOptions,
 > = {
 	body: T["body"];
+	originalRequest?: FastifyRequest;
 	params: T["params"];
 	query: T["query"];
 	user?: UserDto;

@@ -1,5 +1,6 @@
 export { AppHeader } from "./app-header/app-header.js";
 export { App } from "./app/app.js";
+export { AvatarEdit } from "./avatar-edit/avatar-edit.js";
 export { Button } from "./button/button.js";
 export { DashboardWrapper } from "./dashboard-wrapper/dashboard-wrapper.js";
 export { Dashboard } from "./dashboard/dashboard.js";

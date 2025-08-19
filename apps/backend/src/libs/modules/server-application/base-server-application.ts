@@ -1,3 +1,4 @@
+import multipart from "@fastify/multipart";
 import fastifyStatic from "@fastify/static";
 import swagger, { type StaticDocumentSpec } from "@fastify/swagger";
 import swaggerUi from "@fastify/swagger-ui";
@@ -5,6 +6,7 @@ import Fastify, { type FastifyError, type FastifyInstance } from "fastify";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { UPLOAD_MAX_FILE_SIZE_BYTES as UPLOAD_MAX_FILE_SIZE } from "~/libs/constants/constants.js";
 import { FastifyHook, ServerErrorType } from "~/libs/enums/enums.js";
 import { type ValidationError } from "~/libs/exceptions/exceptions.js";
 import { type Config } from "~/libs/modules/config/config.js";
@@ -213,6 +215,10 @@ class BaseServerApplication implements ServerApplication {
 	}
 
 	private async initPlugins(): Promise<void> {
+		await this.app.register(multipart, {
+			limits: { fileSize: UPLOAD_MAX_FILE_SIZE },
+		});
+
 		await this.app.register(authorizationPlugin, {
 			userService,
 			whiteRoutes: this.getWhiteRoutes(),
