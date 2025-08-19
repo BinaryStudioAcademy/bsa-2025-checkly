@@ -2,7 +2,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
-import { TaskConstants } from "~/modules/tasks/libs/enums/enums.js";
+import { TaskConstants } from "~/modules/tasks/libs/constants/constants.js";
 import { type TaskDto } from "~/modules/tasks/libs/types/types.js";
 
 import { deleteTask, updateTask } from "./actions.js";

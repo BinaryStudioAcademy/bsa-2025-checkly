@@ -1,6 +1,6 @@
 import { http } from "msw";
 import { HTTPCode, TaskMessage } from "../libs/enums/enums.js";
-import { TaskConstants } from "~/modules/tasks/libs/enums/enums.js";
+import { TaskConstants } from "~/modules/tasks/libs/constants/constants.js";
 import { MOCK_TASKS } from "../libs/constants/constants.js";
 import { type TaskUpdateRequestDto } from "~/modules/tasks/libs/types/types.js";
 
