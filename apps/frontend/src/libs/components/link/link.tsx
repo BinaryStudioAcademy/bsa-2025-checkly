@@ -9,6 +9,8 @@ import {
 	type ValueOf,
 } from "~/libs/types/types.js";
 
+import styles from "./styles.module.css";
+
 type Properties = {
 	asButtonSize?: ButtonSize;
 	asButtonVariant?: ButtonVariant;
@@ -36,7 +38,7 @@ const Link: React.FC<Properties> = ({
 	);
 
 	return (
-		<NavLink className={linkClasses} to={to}>
+		<NavLink className={getClassNames(linkClasses, className)} to={to}>
 			{asButtonVariant ? children : <span>{children}</span>}
 		</NavLink>
 	);

@@ -10,6 +10,7 @@ type ControllerRouteParameters = {
 	path: string;
 	validation?: {
 		body?: ValidationSchema;
+		queryString?: ValidationSchema;
 	};
 };
 

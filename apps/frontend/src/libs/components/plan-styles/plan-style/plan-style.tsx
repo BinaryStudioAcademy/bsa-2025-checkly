@@ -8,11 +8,13 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	inputStyle: PlanStyleOption;
+	planTitle?: string;
 	view?: ViewOptions;
 };
 
 const PlanStyle: React.FC<Properties> = ({
 	inputStyle,
+	planTitle = "Plan title",
 	view = "regular",
 }: Properties) => {
 	const containerClasses = getClassNames(
@@ -35,7 +37,7 @@ const PlanStyle: React.FC<Properties> = ({
 
 	return (
 		<section className={containerClasses}>
-			<PlanHeader inputStyle={inputStyle} title={PLAN.title} />
+			<PlanHeader inputStyle={inputStyle} title={planTitle} />
 			<div className={planBodyClasses}>
 				<ul className={dayListClasses}>
 					{PLAN.days.map((day) => {
