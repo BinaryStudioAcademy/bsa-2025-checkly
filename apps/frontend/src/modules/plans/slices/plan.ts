@@ -1,9 +1,11 @@
-import { generatePlan } from "./actions.js";
+import { generatePlan, getPlan, regenerateTask } from "./actions.js";
 import { actions } from "./plan.slice.js";
 
 const allActions = {
 	...actions,
 	generatePlan,
+	getPlan,
+	regenerateTask,
 };
 
 export { allActions as actions };

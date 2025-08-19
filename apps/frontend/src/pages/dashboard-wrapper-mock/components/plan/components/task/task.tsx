@@ -1,18 +1,27 @@
+import { useCallback } from "react";
+
 import { Edit, Regenerate, Remove, Timer } from "~/assets/img/icons/icons.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 
+import { type TaskDto } from "../libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
 	indexItem: number;
-	item: {
-		description: string;
-		title: string;
-	};
+	item: TaskDto;
+	onRegenerate: (index: number) => void;
 };
 
-const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
+const Task: React.FC<Properties> = ({
+	indexItem,
+	item,
+	onRegenerate,
+}: Properties) => {
+	const handleRegenerate = useCallback(() => {
+		onRegenerate(item.id);
+	}, [item, onRegenerate]);
+
 	return (
 		<div
 			className={getClassNames(
@@ -30,7 +39,7 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 			<div className={styles["item-actions"]}>
 				<div className={styles["item-actions__time"]}>
 					<img alt="" src={Timer} />
-					<span>morning</span>
+					<span>{item.executionTimeType}</span>
 				</div>
 				<div className={styles["item-actions_buttons-wrapper"]}>
 					<Button
@@ -44,6 +53,7 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 						icon={<DecorativeImage src={Regenerate} />}
 						isIconOnly
 						label=""
+						onClick={handleRegenerate}
 					/>
 					<Button
 						className={getClassNames(styles["item-actions_button"])}

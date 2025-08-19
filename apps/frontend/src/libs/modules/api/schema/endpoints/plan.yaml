@@ -147,3 +147,44 @@ generate:
             $ref: "#/schemas/PlanDaysTaskDto"
     "400":
       $ref: "../shared/responses.yaml#/BadRequestError"
+
+getActivePlan:
+  get:
+    summary: Get active plan by userId
+    parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: integer
+        description: ID of the user
+    responses:
+      "200":
+        description: Active plan for the user
+
+regenerateTask:
+  post:
+    summary: Get active plan by userId
+    parameters:
+      - in: path
+        name: planId
+        required: true
+        schema:
+          type: integer
+      - in: path
+        name: dayId
+        required: true
+        schema:
+          type: integer
+      - in: taskId
+        name: dayId
+        required: true
+        schema:
+          type: integer
+    responses:
+      "200":
+        description: Task regenerated successfully
+        content:
+          application/json:
+            schema:
+              $ref: "#/schemas/PlanDaysTaskDto"

@@ -1,5 +1,6 @@
 const PlansApiPath = {
 	$ID: "/:id",
+	$USER_ID: "/:userId",
 	GENERATE: "/generate",
 	REGENERATE: "/:id/regenerate",
 	REGENERATE_DAY: "/:planId/days/:dayId/regenerate",

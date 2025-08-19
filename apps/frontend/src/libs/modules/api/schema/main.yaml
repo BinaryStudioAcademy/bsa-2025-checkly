@@ -27,3 +27,11 @@ paths:
   /plans/generate:
     post:
       $ref: "./endpoints/plan.yaml#/generate"
+
+  /plans/:userId:
+    get:
+      $ref: "./endpoints/plan.yaml#/getActivePlan"
+
+  /plans/:planId/days/:dayId/tasks/:taskId/regenerate:
+    post:
+      $ref: "./endpoints/plan.yaml#/regenerateTask"
