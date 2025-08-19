@@ -25,15 +25,13 @@ const Link: React.FC<Properties> = ({
 	to,
 }: Properties) => {
 	const linkClasses = getClassNames(
-		asButtonVariant
-			? getClassNames(
-					buttonStyles["button"],
-					buttonStyles[`button-${asButtonVariant}`],
-					buttonStyles[`button-${asButtonSize}`],
-					buttonStyles["button-cluster"],
-					"cluster",
-				)
-			: "",
+		asButtonVariant && [
+			buttonStyles["button"],
+			buttonStyles[`button-${asButtonVariant}`],
+			buttonStyles[`button-${asButtonSize}`],
+			buttonStyles["button-cluster"],
+			"cluster",
+		],
 		className,
 	);
 
