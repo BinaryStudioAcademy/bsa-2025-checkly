@@ -66,6 +66,20 @@ class BaseConfig implements Config {
 					format: Number,
 				},
 			},
+			OPEN_AI: {
+				OPEN_AI_KEY: {
+					default: null,
+					doc: "OpenAI API key",
+					env: "OPEN_AI_KEY",
+					format: String,
+				},
+				TEXT_GENERATION_MODEL: {
+					default: null,
+					doc: "OpenAI text generation model",
+					env: "TEXT_GENERATION_MODEL",
+					format: String,
+				},
+			},
 			S3: {
 				ACCESS_KEY_ID: {
 					default: null,
