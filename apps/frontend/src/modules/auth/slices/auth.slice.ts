@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
@@ -70,6 +70,9 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.IDLE;
 			state.user = null;
 			state.isPreparing = false;
+		},
+		setUser(state, action: PayloadAction<null | UserDto>) {
+			state.user = action.payload;
 		},
 	},
 });

@@ -87,6 +87,28 @@ const updateProfile = createAsyncThunk<
 	},
 );
 
+const avatarRemove = createAsyncThunk<
+	UserDto,
+	{ userId: number },
+	AsyncThunkConfig
+>(`${sliceName}/avatar-remove`, async ({ userId }, { extra }) => {
+	const { userApi } = extra;
+	const response = await userApi.removeAvatar(userId);
+
+	return (await response.json()) as UserDto;
+});
+
+const avatarUpload = createAsyncThunk<
+	UserDto,
+	{ file: File; userId: number },
+	AsyncThunkConfig
+>(`${sliceName}/avatar-upload`, async ({ file, userId }, { extra }) => {
+	const { userApi } = extra;
+	const response = await userApi.uploadAvatar(userId, file);
+
+	return (await response.json()) as UserDto;
+});
+
 const logout = createAsyncThunk<null, undefined, AsyncThunkConfig>(
 	`${sliceName}/logout`,
 	async (_payload, { dispatch, extra }) => {
@@ -104,4 +126,12 @@ const logout = createAsyncThunk<null, undefined, AsyncThunkConfig>(
 	},
 );
 
-export { getCurrentUser, logout, signIn, signUp, updateProfile };
+export {
+	avatarRemove,
+	avatarUpload,
+	getCurrentUser,
+	logout,
+	signIn,
+	signUp,
+	updateProfile,
+};
