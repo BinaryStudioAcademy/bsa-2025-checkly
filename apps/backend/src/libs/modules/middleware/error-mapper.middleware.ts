@@ -46,12 +46,12 @@ function initErrorMapperMiddleware() {
 						? details[ErrorConstants.FIRST_DETAIL_INDEX]?.message
 						: errorPayload.message) ?? ErrorConstants.DEFAULT_ERROR_MESSAGE;
 
-				const GeneralError = {
+				const generalError = {
 					errorType,
 					message,
 				};
 
-				return originalSend(GeneralError);
+				return originalSend(generalError);
 			}
 
 			return originalSend(payload);

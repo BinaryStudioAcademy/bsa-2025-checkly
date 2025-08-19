@@ -25,7 +25,7 @@ type AuthPluginOptions = {
 	whiteRoutes: string[];
 };
 
-const AuthStrategy = "Bearer ";
+const authStrategy = "Bearer ";
 
 const extractUserFromRequest = async (
 	request: FastifyRequest,
@@ -34,13 +34,13 @@ const extractUserFromRequest = async (
 	try {
 		const { authorization } = request.headers;
 
-		if (!authorization?.startsWith(AuthStrategy)) {
+		if (!authorization?.startsWith(authStrategy)) {
 			throw new AuthorizationError({
 				message: ErrorMessage.AUTHORIZATION_HEADER_MISSING,
 			});
 		}
 
-		const tokenValue = authorization.replace(AuthStrategy, "");
+		const tokenValue = authorization.replace(authStrategy, "");
 
 		const payload = (await token.decodeToken(tokenValue)) as { userId: number };
 
