@@ -9,7 +9,7 @@ import {
 } from "~/modules/quiz/libs/types/types.js";
 import { fetchQuestions } from "~/modules/quiz/slices/actions.js";
 
-interface QuizState {
+type QuizState = {
 	answers: Record<number, QuizAnswer>;
 	currentQuestion: number;
 	dataStatus: ValueOf<typeof DataStatus>;

@@ -1,4 +1,4 @@
-interface CategoryData {
+type CategoryData = {
 	id: string;
 	image: string;
 	name: string;

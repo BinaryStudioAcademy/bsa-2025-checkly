@@ -17,7 +17,7 @@ import { TestPage } from "./pages/test-page/test-page.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
 
-interface RouteHandle {
+type RouteHandle = {
 	access: (typeof RouteAccess)[keyof typeof RouteAccess];
 }
 
