@@ -44,7 +44,7 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 
 	useQuizSaved();
 
-	const safeNavigate = useCallback(
+	const handleSafeNavigate = useCallback(
 		async (path: AppRouteType): Promise<void> => {
 			try {
 				await navigate(path);
@@ -64,12 +64,12 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 			const hasSavedState = await storage.has(StorageKey.QUIZ_STATE);
 
 			if (shouldRedirectToQuiz(selectedCategory, hasSavedState)) {
-				void safeNavigate(AppRoute.QUIZ);
+				void handleSafeNavigate(AppRoute.QUIZ);
 			}
 		};
 
 		void initializeQuiz();
-	}, [dataStatus, dispatch, questions, selectedCategory, safeNavigate]);
+	}, [dataStatus, dispatch, questions, selectedCategory, handleSafeNavigate]);
 
 	const handleQuizComplete = useCallback(async (): Promise<void> => {
 		if (!canSubmitQuiz(selectedCategory, questions)) {
@@ -80,8 +80,8 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 			return;
 		}
 
-		await safeNavigate(AppRoute.PLAN_GENERATION);
-	}, [safeNavigate, questions, selectedCategory]);
+		await handleSafeNavigate(AppRoute.PLAN_GENERATION);
+	}, [handleSafeNavigate, questions, selectedCategory]);
 
 	const handleNext = useCallback((): void => {
 		if (shouldMoveToNext(questions, currentQuestion)) {
