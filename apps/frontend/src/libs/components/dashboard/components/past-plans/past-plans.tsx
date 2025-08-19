@@ -37,9 +37,11 @@ const PlanCardSkeleton: FC = () => (
 	</div>
 );
 
+const SKELETON_ELEMETS_COUNT = 6;
+
 const renderSkeletonCards = (): JSX.Element => (
 	<>
-		{Array.from({ length: 6 }, (_, index) => (
+		{Array.from({ length: SKELETON_ELEMETS_COUNT }, (_, index) => (
 			<PlanCardSkeleton key={`skeleton-${String(index)}`} />
 		))}
 	</>
