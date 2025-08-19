@@ -47,6 +47,7 @@ const ChooseStyle: React.FC = () => {
 			<AppHeader />
 			<section
 				className={getClassNames(
+					styles["choose-style-wrapper"],
 					styles["choose-style-section"],
 					"grid-pattern",
 				)}
