@@ -44,6 +44,11 @@ export {
 export { AuthApiPath } from "./modules/auth/auth.js";
 export { type GeneratedPlanDTO } from "./modules/openai/openai.js";
 export {
+	PlanCategoriesApiPath,
+	type PlanCategoryDto,
+	ZERO_CATEGORY_ID,
+} from "./modules/plan-categories/plan-categories.js";
+export {
 	type PlanDayCreateRequestDto,
 	planDayCreateValidationSchema,
 	type PlanDayGetAllResponseDto,
@@ -59,7 +64,11 @@ export {
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
 	PlansApiPath,
+	type PlanSearchQueryDto,
+	type PlanSearchQueryParameter,
+	planSearchQueryParametersValidationSchema,
 	type PlanUpdateRequestDto,
+	type PlanWithCategoryDto,
 } from "./modules/plans/plans.js";
 export {
 	type QuestionDto,
