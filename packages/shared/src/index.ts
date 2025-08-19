@@ -1,5 +1,9 @@
 export { ONE, ZERO } from "./libs/constants/constants.js";
 export {
+	UPLOAD_MAX_FILE_SIZE_BYTES,
+	UPLOAD_MAX_FILE_SIZE_MB,
+} from "./libs/constants/upload.constants.js";
+export {
 	APIPath,
 	AppEnvironment,
 	ContentType,
@@ -28,6 +32,8 @@ export {
 export { type Storage } from "./libs/modules/storage/storage.js";
 export {
 	type EnumValue,
+	type Nullable,
+	type RouteParametersWithId,
 	type ServerCommonErrorResponse,
 	type ServerErrorDetail,
 	type ServerErrorResponse,
@@ -51,6 +57,11 @@ export {
 } from "./modules/feedbacks/feedbacks.js";
 export { type GeneratedPlanDTO } from "./modules/openai/openai.js";
 export {
+	PlanCategoriesApiPath,
+	type PlanCategoryDto,
+	ZERO_CATEGORY_ID,
+} from "./modules/plan-categories/plan-categories.js";
+export {
 	type PlanDayCreateRequestDto,
 	planDayCreateValidationSchema,
 	type PlanDayGetAllResponseDto,
@@ -66,7 +77,11 @@ export {
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
 	PlansApiPath,
+	type PlanSearchQueryDto,
+	type PlanSearchQueryParameter,
+	planSearchQueryParametersValidationSchema,
 	type PlanUpdateRequestDto,
+	type PlanWithCategoryDto,
 } from "./modules/plans/plans.js";
 export {
 	type QuestionDto,
@@ -94,6 +109,8 @@ export {
 	type TaskUpdateRequestDto,
 } from "./modules/tasks/tasks.js";
 export {
+	AvatarTypes,
+	S3BucketIndex,
 	type SignUpFormValidationSchema,
 	type UserDto,
 	type UserGetAllResponseDto,

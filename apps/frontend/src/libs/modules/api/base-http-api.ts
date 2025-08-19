@@ -91,8 +91,8 @@ class BaseHTTPApi implements HTTPApi {
 	}
 
 	private async getHeaders(
-		contentType?: ValueOf<typeof ContentType>,
-		hasAuth = false,
+		contentType: undefined | ValueOf<typeof ContentType>,
+		hasAuth: boolean,
 	): Promise<Headers> {
 		const headers = new Headers();
 

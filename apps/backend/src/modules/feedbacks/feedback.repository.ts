@@ -64,7 +64,7 @@ class FeedbackRepository implements Repository<FeedbackEntity> {
 				.withGraphFetched("user(shortInfo)")
 				.modifiers({
 					shortInfo(builder) {
-						builder.select("id", "name");
+						builder.select("id", "name", "avatarUrl");
 					},
 				})
 				.orderBy("createdAt", "desc")

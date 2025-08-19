@@ -1,19 +1,16 @@
 import { type Entity, type UserDto } from "~/libs/types/types.js";
 
 class UserEntity implements Entity {
+	private avatarUrl: null | string;
 	private dob: null | string;
-
 	private email: string;
-
 	private id: null | number;
-
 	private name: string;
-
 	private passwordHash: string;
-
 	private passwordSalt: string;
 
 	private constructor({
+		avatarUrl = null,
 		dob,
 		email,
 		id,
@@ -21,6 +18,7 @@ class UserEntity implements Entity {
 		passwordHash,
 		passwordSalt,
 	}: {
+		avatarUrl: null | string;
 		dob: null | string;
 		email: string;
 		id: null | number;
@@ -34,9 +32,11 @@ class UserEntity implements Entity {
 		this.name = name;
 		this.passwordHash = passwordHash;
 		this.passwordSalt = passwordSalt;
+		this.avatarUrl = avatarUrl;
 	}
 
 	public static initialize({
+		avatarUrl,
 		dob,
 		email,
 		id,
@@ -48,6 +48,7 @@ class UserEntity implements Entity {
 		passwordSalt: string;
 	}): UserEntity {
 		return new UserEntity({
+			avatarUrl: avatarUrl ?? null,
 			dob,
 			email,
 			id,
@@ -57,13 +58,8 @@ class UserEntity implements Entity {
 		});
 	}
 
-	public static initializeNew({
-		dob,
-		email,
-		name,
-		passwordHash,
-		passwordSalt,
-	}: {
+	public static initializeNew(properties: {
+		avatarUrl?: null | string;
 		dob: null | string;
 		email: string;
 		name: string;
@@ -71,25 +67,29 @@ class UserEntity implements Entity {
 		passwordSalt: string;
 	}): UserEntity {
 		return new UserEntity({
-			dob,
-			email,
+			avatarUrl: properties.avatarUrl ?? null,
+			dob: properties.dob,
+			email: properties.email,
 			id: null,
-			name,
-			passwordHash,
-			passwordSalt,
+			name: properties.name,
+			passwordHash: properties.passwordHash,
+			passwordSalt: properties.passwordSalt,
 		});
 	}
 
 	public static initializeWithShortInfo({
+		avatarUrl,
 		email,
 		id,
 		name,
 	}: {
+		avatarUrl: null | string;
 		email: string;
 		id: number;
 		name: string;
 	}): UserEntity {
 		return new UserEntity({
+			avatarUrl,
 			dob: null,
 			email,
 			id,
@@ -99,10 +99,7 @@ class UserEntity implements Entity {
 		});
 	}
 
-	public getPasswordData(): {
-		passwordHash: string;
-		passwordSalt: string;
-	} {
+	public getPasswordData(): { passwordHash: string; passwordSalt: string } {
 		return {
 			passwordHash: this.passwordHash,
 			passwordSalt: this.passwordSalt,
@@ -110,6 +107,7 @@ class UserEntity implements Entity {
 	}
 
 	public toNewObject(): {
+		avatarUrl: null | string;
 		dob: null | string;
 		email: string;
 		name: string;
@@ -117,6 +115,7 @@ class UserEntity implements Entity {
 		passwordSalt: string;
 	} {
 		return {
+			avatarUrl: this.avatarUrl,
 			dob: this.dob,
 			email: this.email,
 			name: this.name,
@@ -127,6 +126,7 @@ class UserEntity implements Entity {
 
 	public toObject(): UserDto {
 		return {
+			avatarUrl: this.avatarUrl,
 			dob: this.dob,
 			email: this.email,
 			id: this.id as number,

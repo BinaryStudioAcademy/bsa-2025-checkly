@@ -48,7 +48,12 @@ class FeedbackEntity implements Entity {
 		id: number;
 		text: string;
 		updatedAt: string;
-		user?: null | { email: string; id: number; name: string };
+		user?: null | {
+			avatarUrl: null | string;
+			email: string;
+			id: number;
+			name: string;
+		};
 		userId: number;
 	}): FeedbackEntity {
 		const userInstance = user ? UserEntity.initializeWithShortInfo(user) : null;
