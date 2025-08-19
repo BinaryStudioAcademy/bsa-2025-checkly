@@ -1,3 +1,5 @@
+export { type Nullable } from "./nullable.type.js";
+export { type RouteParametersWithId } from "./route-parameters-with-id.type.js";
 export { type ServerErrorDetail } from "./server-error-detail.type.js";
 export {
 	type ServerCommonErrorResponse,

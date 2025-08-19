@@ -9,11 +9,7 @@ import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { SuccessMessage } from "~/libs/enums/success-messages.enum.js";
 import { getErrorMessage } from "~/libs/helpers/get-error-message.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
-import {
-	signIn,
-	signUp,
-	updateProfile,
-} from "~/modules/auth/slices/actions.js";
+import { actions as authActions } from "~/modules/auth/auth.js";
 
 import { navigation } from "../../navigation/navigation.js";
 
@@ -30,21 +26,35 @@ listenerMiddleware.startListening({
 	async effect() {
 		await navigation.navigateTo(AppRoute.ROOT);
 	},
-	matcher: isAnyOf(signIn.fulfilled, signUp.fulfilled),
+	matcher: isAnyOf(authActions.signIn.fulfilled, authActions.signUp.fulfilled),
 });
 
 listenerMiddleware.startListening({
 	effect: () => {
 		notifications.success(SuccessMessage.SIGN_UP);
 	},
-	matcher: isFulfilled(signUp),
+	matcher: isFulfilled(authActions.signUp),
 });
 
 listenerMiddleware.startListening({
 	effect: () => {
 		notifications.success(SuccessMessage.PROFILE_UPDATE);
 	},
-	matcher: isFulfilled(updateProfile),
+	matcher: isFulfilled(authActions.updateProfile),
+});
+
+listenerMiddleware.startListening({
+	effect: () => {
+		notifications.success(SuccessMessage.AVATAR_UPDATE);
+	},
+	matcher: isFulfilled(authActions.avatarUpload),
+});
+
+listenerMiddleware.startListening({
+	effect: () => {
+		notifications.success(SuccessMessage.AVATAR_REMOVE);
+	},
+	matcher: isFulfilled(authActions.avatarRemove),
 });
 
 export { listenerMiddleware };

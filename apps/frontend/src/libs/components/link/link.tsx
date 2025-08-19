@@ -9,6 +9,8 @@ import {
 	type ValueOf,
 } from "~/libs/types/types.js";
 
+import styles from "./styles.module.css";
+
 type Properties = {
 	asButtonSize?: ButtonSize;
 	asButtonVariant?: ButtonVariant;
@@ -24,19 +26,17 @@ const Link: React.FC<Properties> = ({
 	className,
 	to,
 }: Properties) => {
-	const linkClasses = getClassNames(
-		asButtonVariant && [
-			buttonStyles["button"],
-			buttonStyles[`button-${asButtonVariant}`],
-			buttonStyles[`button-${asButtonSize}`],
-			buttonStyles["button-cluster"],
-			"cluster",
-		],
-		className,
-	);
+	const linkClasses = asButtonVariant
+		? getClassNames(
+				buttonStyles["button"],
+				buttonStyles[`button-${asButtonVariant}`],
+				buttonStyles[`button-${asButtonSize}`],
+				styles["link"],
+			)
+		: "";
 
 	return (
-		<NavLink className={linkClasses} to={to}>
+		<NavLink className={getClassNames(linkClasses, className)} to={to}>
 			{asButtonVariant ? children : <span>{children}</span>}
 		</NavLink>
 	);
