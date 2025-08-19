@@ -1,6 +1,5 @@
 import { PlanStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { useStyleKey } from "~/libs/hooks/hooks.js";
 import { type PlanStyleOption } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
@@ -16,23 +15,21 @@ const NotesText = {
 } as const;
 
 const Notes: React.FC<Properties> = ({ inputStyle }: Properties) => {
-	const { getStyleKey } = useStyleKey();
-	const styleKey = getStyleKey(inputStyle);
 	const notesClasses = getClassNames(
 		styles["notes"],
-		PlanStyleModules[styleKey]["notes"],
+		PlanStyleModules[inputStyle]["notes"],
 	);
 	const notesTitleClasses = getClassNames(
 		styles["notes-title"],
-		PlanStyleModules[styleKey]["notes-title"],
+		PlanStyleModules[inputStyle]["notes-title"],
 	);
 	const notesHintClasses = getClassNames(
 		styles["notes-hint"],
-		PlanStyleModules[styleKey]["notes-hint"],
+		PlanStyleModules[inputStyle]["notes-hint"],
 	);
 	const notesTextClasses = getClassNames(
 		styles["notes-text"],
-		PlanStyleModules[styleKey]["notes-text"],
+		PlanStyleModules[inputStyle]["notes-text"],
 	);
 
 	return (
