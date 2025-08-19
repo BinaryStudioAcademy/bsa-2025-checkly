@@ -1,7 +1,7 @@
-const AUTH_PLACEHOLDERS = {
+const AuthPlaceholder = {
 	email: "Enter your email",
 	name: "Enter your name",
 	password: "Enter your password",
 };
 
-export { AUTH_PLACEHOLDERS };
+export { AuthPlaceholder };

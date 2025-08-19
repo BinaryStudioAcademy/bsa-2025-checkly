@@ -24,7 +24,7 @@ import {
 	userSignInValidationSchema,
 } from "~/modules/users/users.js";
 
-import { AUTH_PLACEHOLDERS } from "../../libs/constants.js";
+import { AuthPlaceholder } from "../../libs/constants.js";
 import sharedStyles from "../shared/shared.module.css";
 import { DEFAULT_SIGN_IN_PAYLOAD } from "../sign-in-form/libs/constants.js";
 import styles from "./styles.module.css";
@@ -111,7 +111,7 @@ const SignInForm: React.FC<Properties> = ({
 							errors={errors}
 							label="Email"
 							name="email"
-							placeholder={AUTH_PLACEHOLDERS.email}
+							placeholder={AuthPlaceholder.email}
 							required
 							type="email"
 						/>
@@ -120,7 +120,7 @@ const SignInForm: React.FC<Properties> = ({
 							errors={errors}
 							label="Password"
 							name="password"
-							placeholder={AUTH_PLACEHOLDERS.password}
+							placeholder={AuthPlaceholder.password}
 							required
 							type="password"
 						/>
