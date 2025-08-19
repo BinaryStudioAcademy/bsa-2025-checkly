@@ -32,19 +32,19 @@ import {
  *       type: object
  *       properties:
  *         id:
- *           type: number
+ *           type: integer
  *           example: 1
  *         text:
  *           type: string
  *           example: "Great service!"
  *         userId:
- *           type: number
+ *           type: integer
  *           example: 1
  *         user:
  *           type: object
  *           properties:
  *             id:
- *               type: number
+ *               type: integer
  *               example: 1
  *             email:
  *               type: string
@@ -63,7 +63,7 @@ import {
  *           type: string
  *           example: "New feedback text."
  *         userId:
- *           type: number
+ *           type: integer
  *           example: 1
  *
  *     FeedbackUpdateRequestDto:
@@ -76,7 +76,7 @@ import {
  *           type: string
  *           example: "Updated feedback text."
  *         userId:
- *           type: number
+ *           type: integer
  *           example: 1
  */
 
@@ -181,7 +181,7 @@ class FeedbackController extends BaseController {
 	 *       - in: path
 	 *         name: id
 	 *         schema:
-	 *           type: number
+	 *           type: integer
 	 *         required: true
 	 *         description: Feedback ID
 	 *     responses:
@@ -317,7 +317,7 @@ class FeedbackController extends BaseController {
 	 *         name: id
 	 *         required: true
 	 *         schema:
-	 *           type: string
+	 *           type: integer
 	 *         description: Feedback ID
 	 *     requestBody:
 	 *       required: true
