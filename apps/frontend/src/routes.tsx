@@ -7,6 +7,7 @@ import {
 	Auth,
 	ChooseStyle,
 	Home,
+	LogoutPage,
 	NotFound,
 	PlanGeneration,
 	Profile,
@@ -36,6 +37,11 @@ const routes: CustomRouteObject[] = [
 		element: <Auth />,
 		handle: { access: RouteAccess.NOT_AUTHENTICATED },
 		path: AppRoute.SIGN_UP,
+	},
+	{
+		element: <LogoutPage />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.LOGOUT,
 	},
 	{
 		element: <QuestionFlow />,
