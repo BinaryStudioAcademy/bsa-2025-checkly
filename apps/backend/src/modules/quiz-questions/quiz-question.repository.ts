@@ -1,8 +1,8 @@
+import { OPTIONS } from "./libs/constants/constants.js";
 import {
 	QuestionEntity,
 	QuestionOptionEntity,
 } from "./libs/entities/entities.js";
-import { OPTIONS } from "./libs/enums/enums.js";
 import { type QuestionModel } from "./libs/models/models.js";
 
 class QuizQuestionRepository {
