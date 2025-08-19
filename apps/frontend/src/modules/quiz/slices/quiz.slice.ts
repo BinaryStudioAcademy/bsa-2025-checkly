@@ -16,7 +16,7 @@ type QuizState = {
 	notes: string;
 	questions: null | QuizQuestionsResponseDto;
 	selectedCategory: null | QuizCategoryValue;
-}
+};
 
 const initialState: QuizState = {
 	answers: {},

@@ -19,7 +19,7 @@ type CustomRouteObject = RouteObject & { handle: RouteHandle };
 
 type RouteHandle = {
 	access: (typeof RouteAccess)[keyof typeof RouteAccess];
-}
+};
 
 const routes: CustomRouteObject[] = [
 	{
