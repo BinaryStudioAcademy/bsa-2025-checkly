@@ -10,7 +10,6 @@ export { ErrorMessage } from "./error-messages.enum.js";
 export { IconsPositions } from "./icons-positions.enum.js";
 export { KeyboardKeys } from "./keyboard-keys.enum.js";
 export { PlaceholderValues } from "./placeholder-values.enum.js";
-export { PlanStyleModules } from "./plan-style-modules.enum.js";
 export { RouteAccess } from "./route-access.js";
 export {
 	APIPath,
