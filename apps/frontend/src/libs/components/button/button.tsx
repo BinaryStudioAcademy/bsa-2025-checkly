@@ -54,7 +54,7 @@ const Button: React.FC<Properties> = ({
 					{icon}
 				</span>
 			)}
-			{!isIconOnly && <span>{label}</span>}
+			{!isIconOnly && <span className={styles["button-text"]}>{label}</span>}
 			{loader}
 		</button>
 	);

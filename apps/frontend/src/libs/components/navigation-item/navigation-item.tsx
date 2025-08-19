@@ -47,6 +47,7 @@ const NavigationItem: React.FC<Properties> = ({
 				<button
 					aria-label={buttonText}
 					className={itemClass}
+					data-dropdown-button="true"
 					onClick={onClick}
 					role="menuitem"
 					tabIndex={ZERO}
@@ -56,10 +57,11 @@ const NavigationItem: React.FC<Properties> = ({
 					{buttonText}
 				</button>
 			) : (
-				<Link to={navigateTo}>
+				<Link className={styles["menu-item__link"]} to={navigateTo}>
 					<button
 						aria-label={buttonText}
 						className={itemClass}
+						data-dropdown-button="true"
 						role="menuitem"
 						tabIndex={ZERO}
 						type="button"

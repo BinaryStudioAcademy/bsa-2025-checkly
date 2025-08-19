@@ -22,10 +22,10 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 			)}
 			key={indexItem}
 		>
-			<h3>{indexItem}</h3>
+			<h3 className={styles["task-title"]}>{indexItem}</h3>
 			<div className={styles["description-wrapper"]}>
 				<h5>{item.title}</h5>
-				<p>{item.description}</p>
+				<p className={styles["task-description"]}>{item.description}</p>
 			</div>
 			<div className={styles["item-actions"]}>
 				<div className={styles["item-actions__time"]}>

@@ -27,7 +27,7 @@ const Plan: React.FC = () => {
 	return (
 		<div className={styles["plan"]}>
 			<div className={styles["nav"]}>
-				<p>Here’s your plan!</p>
+				<p className={styles["nav-text"]}>Here’s your plan!</p>
 				<Button
 					className={getClassNames(styles["select-day"])}
 					label={`Day ${String(selectedDay + ONE)}`}

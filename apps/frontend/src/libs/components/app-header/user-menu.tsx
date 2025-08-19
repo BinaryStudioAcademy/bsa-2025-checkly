@@ -30,7 +30,7 @@ const UserMenu: React.FC<Properties> = ({ isOpen }) => {
 
 	return (
 		<nav aria-label="User menu" className={menuDropdownClass}>
-			<ul>
+			<ul className={styles["menu-dropdown__list"]}>
 				<NavigationItem
 					buttonText="Profile"
 					buttonType="user-menu"
