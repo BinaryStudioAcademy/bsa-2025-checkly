@@ -22,10 +22,10 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 	question,
 }: MixedQuestionProperties): React.ReactElement => {
 	const [selectedOptions, setSelectedOptions] = useState<MultipleAnswers[]>(
-		currentAnswer?.selectedOptions || [],
+		currentAnswer?.selectedOptions ?? [],
 	);
 	const [userInput, setUserInput] = useState<string>(
-		currentAnswer?.userInput || "",
+		currentAnswer?.userInput ?? "",
 	);
 
 	const isOthersSelected = selectedOptions.some(

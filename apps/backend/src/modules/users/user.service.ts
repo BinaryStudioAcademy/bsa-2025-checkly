@@ -77,7 +77,7 @@ class UserService implements Service {
 		}
 
 		const updateData = {
-			dob: payload.dob || null,
+			dob: payload.dob ?? null,
 			email: payload.email.trim(),
 			name: payload.name.trim(),
 		};

@@ -18,7 +18,7 @@ type ErrorPayload = {
 
 type ServerErrorTypeValue = EnumValue<typeof ServerErrorType>;
 
-function initErrorMapperMiddleware() {
+const initErrorMapperMiddleware = () => {
 	return async (
 		request: FastifyRequest,
 		reply: FastifyReply,
@@ -57,6 +57,6 @@ function initErrorMapperMiddleware() {
 			return originalSend(payload);
 		};
 	};
-}
+};
 
 export { initErrorMapperMiddleware };

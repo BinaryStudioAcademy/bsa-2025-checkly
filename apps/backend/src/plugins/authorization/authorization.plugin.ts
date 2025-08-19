@@ -87,7 +87,7 @@ const authorization = fp<AuthPluginOptions>(
 		});
 
 		fastify.addHook("preHandler", async (request: FastifyRequest) => {
-			const routeUrl = request.routeOptions.url || request.url;
+			const routeUrl = request.routeOptions.url ?? request.url;
 
 			const isWhiteRoute = checkIsWhiteRoute(routeUrl, whiteRoutes);
 
