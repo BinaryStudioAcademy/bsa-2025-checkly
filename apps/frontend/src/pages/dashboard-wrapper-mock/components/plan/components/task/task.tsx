@@ -29,7 +29,6 @@ const Task: React.FC<Properties> = ({
 				"wrapper",
 				styles[`color-${String(indexItem)}`],
 			)}
-			key={indexItem}
 		>
 			<h3>{indexItem}</h3>
 			<div className={styles["description-wrapper"]}>

@@ -11,7 +11,6 @@ import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { actions } from "~/modules/plans/plans.js";
 
 import { Day, Task } from "./components/components.js";
-import { daysTasksMockData } from "./mock-data/days-tasks-mock.js";
 import styles from "./styles.module.css";
 
 const Plan: React.FC = () => {
@@ -54,6 +53,22 @@ const Plan: React.FC = () => {
 		[plan, selectedDay, dispatch],
 	);
 
+	const handleDayRegenerate = useCallback(
+		(dayId: number) => {
+			const planId = plan?.id;
+
+			if (!planId) {
+				toast("Missing planId");
+
+				return;
+			}
+
+			void dispatch(actions.regeneratePlanDay({ dayId, planId }));
+		},
+
+		[plan, dispatch],
+	);
+
 	return (
 		<div className={styles["plan"]}>
 			<div className={styles["nav"]}>
@@ -73,18 +88,18 @@ const Plan: React.FC = () => {
 							isSelectOpen ? styles["content__days__open"] : "",
 						)}
 					>
-						{daysTasksMockData.map((_, index) => {
-							return (
-								<Day
-									indexDay={index}
-									isOpen={isSelectOpen}
-									key={index}
-									selectedDay={selectedDay}
-									setIsOpen={setIsSelectOpen}
-									setSelectedDay={setSelectedDay}
-								/>
-							);
-						})}
+						{plan?.days.map((item, index) => (
+							<Day
+								index={index}
+								isOpen={isSelectOpen}
+								item={item}
+								key={item.id}
+								onRegenerate={handleDayRegenerate}
+								selectedDay={selectedDay}
+								setIsOpen={setIsSelectOpen}
+								setSelectedDay={setSelectedDay}
+							/>
+						))}
 					</div>
 				</div>
 				<div

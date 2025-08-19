@@ -59,6 +59,31 @@ const MOCK_REGENERATED_TASK: ApiSchemas["TaskDto"] = {
 	completedAt: null,
 };
 
+const MOCK_REGENERATED_PLAN_DAY: ApiSchemas["PlanDayDto"] = {
+	id: 101,
+	dayNumber: 1,
+	tasks: [
+		{
+			id: 1001,
+			title: "Programming with Knut",
+			description: "Run 3 km at a moderate pace",
+			order: 1,
+			isCompleted: false,
+			executionTimeType: "morning",
+			completedAt: null,
+		},
+		{
+			id: 1002,
+			title: "Reading session",
+			description: "15 minutes full-body stretching",
+			order: 2,
+			isCompleted: false,
+			executionTimeType: "morning",
+			completedAt: null,
+		},
+	],
+};
+
 const MIN_DELAY_MS = 1000;
 const MAX_DELAY_MS = 10000;
 
@@ -73,6 +98,7 @@ const ErrorMessage = {
 export {
 	MOCK_PLAN,
 	ErrorMessage,
+	MOCK_REGENERATED_PLAN_DAY,
 	MOCK_REGENERATED_TASK,
 	NOT_FOUND_INDEX,
 	MIN_DELAY_MS,
