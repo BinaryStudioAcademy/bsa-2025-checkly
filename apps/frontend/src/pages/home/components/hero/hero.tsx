@@ -2,12 +2,12 @@ import { DecorativeImage, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
-import { decorativeImagesList } from "./libs/constants.js";
+import { decorativeImages } from "./libs/constants.js";
 import styles from "./styles.module.css";
 
 const Hero: React.FC = () => {
 	const renderDecorativeImages = (): React.ReactNode =>
-		decorativeImagesList.map((image) => (
+		decorativeImages.map((image) => (
 			<DecorativeImage
 				className={getClassNames(
 					styles["floating-image"],

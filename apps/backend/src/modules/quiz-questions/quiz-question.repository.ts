@@ -12,7 +12,7 @@ class QuizQuestionRepository {
 		this.questionModel = questionModel;
 	}
 
-	public async findAllQuestionsWithOptions(): Promise<QuestionEntity[]> {
+	public async findAllWithOptions(): Promise<QuestionEntity[]> {
 		const data = await this.questionModel
 			.query()
 			.orderBy("order")

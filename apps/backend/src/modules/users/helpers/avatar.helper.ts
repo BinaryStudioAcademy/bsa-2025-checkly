@@ -33,7 +33,7 @@ const handleAvatarRemove = async (
 
 	if (previousUrl) {
 		try {
-			await fileService.deleteFile(previousUrl);
+			await fileService.delete(previousUrl);
 		} catch (error) {
 			logger.warn(ErrorMessage.FAILED_TO_DELETE_PREVIOUS_AVATAR, {
 				error,
@@ -113,7 +113,7 @@ const handleAvatarUpload = async (
 
 	if (previousUrl) {
 		try {
-			await fileService.deleteFile(previousUrl);
+			await fileService.delete(previousUrl);
 		} catch (error) {
 			logger.warn(ErrorMessage.FAILED_TO_DELETE_PREVIOUS_AVATAR, {
 				error,

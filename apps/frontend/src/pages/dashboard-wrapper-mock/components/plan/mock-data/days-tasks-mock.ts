@@ -1,4 +1,4 @@
-const daysTasksMockData = [
+const DAYS_TASKS_MOCK = [
 	[
 		{
 			description:
@@ -75,4 +75,4 @@ const daysTasksMockData = [
 	],
 ];
 
-export { daysTasksMockData };
+export { DAYS_TASKS_MOCK };

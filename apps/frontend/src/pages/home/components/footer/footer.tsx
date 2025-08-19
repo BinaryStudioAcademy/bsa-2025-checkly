@@ -1,4 +1,4 @@
-import { FbIcon, IgIcon, YtIcon } from "~/assets/img/footer/index.js";
+import { FbIcon, IgIcon, YtIcon } from "~/assets/img/footer/footer.img.js";
 import { Link, Logo } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
