@@ -24,8 +24,7 @@ const Auth: React.FC = () => {
 
 	const { dataStatus } = useAppSelector(({ auth }) => auth);
 
-	const isLoading =
-		dataStatus === DataStatus.PENDING || dataStatus === DataStatus.IDLE;
+	const isLoading = dataStatus === DataStatus.PENDING;
 
 	useEffect(() => {
 		navigation.setNavigate(navigate);

@@ -49,9 +49,9 @@ const Plan: React.FC = () => {
 									indexDay={index}
 									isOpen={isSelectOpen}
 									key={index}
+									onChangeIsOpen={setIsSelectOpen}
+									onChangeSelectedDay={setSelectedDay}
 									selectedDay={selectedDay}
-									setIsOpen={setIsSelectOpen}
-									setSelectedDay={setSelectedDay}
 								/>
 							);
 						})}

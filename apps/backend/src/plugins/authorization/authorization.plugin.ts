@@ -42,7 +42,7 @@ const extractUserFromRequest = async (
 
 		const tokenValue = authorization.replace(authStrategy, "");
 
-		const payload = (await token.decodeToken(tokenValue)) as { userId: number };
+		const payload = (await token.decode(tokenValue)) as { userId: number };
 
 		const user = await userService.find(payload.userId);
 

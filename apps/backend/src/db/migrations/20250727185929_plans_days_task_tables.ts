@@ -1,6 +1,6 @@
 import { type Knex } from "knex";
 
-const TABLE_NAMES = {
+const TableNames = {
 	PLAN: "plans",
 	PLAN_DAY: "plan_days",
 	TASK: "tasks",
@@ -39,7 +39,7 @@ const UserColumnName = {
 	ID: "id",
 } as const;
 
-const ENUM_TYPE_NAME = {
+const EnumTypeName = {
 	EXECUTION_TIME: "execution_time",
 };
 
@@ -52,22 +52,22 @@ const ColumnLength = {
 } as const;
 
 async function down(knex: Knex): Promise<void> {
-	await knex.schema.dropTableIfExists(TABLE_NAMES.TASK);
-	await knex.schema.dropTableIfExists(TABLE_NAMES.PLAN_DAY);
-	await knex.schema.dropTableIfExists(TABLE_NAMES.PLAN);
+	await knex.schema.dropTableIfExists(TableNames.TASK);
+	await knex.schema.dropTableIfExists(TableNames.PLAN_DAY);
+	await knex.schema.dropTableIfExists(TableNames.PLAN);
 
-	await knex.raw(`DROP TYPE IF EXISTS "${ENUM_TYPE_NAME.EXECUTION_TIME}"`);
+	await knex.raw(`DROP TYPE IF EXISTS "${EnumTypeName.EXECUTION_TIME}"`);
 }
 
 async function up(knex: Knex): Promise<void> {
-	await knex.schema.createTable(TABLE_NAMES.PLAN, (table) => {
+	await knex.schema.createTable(TableNames.PLAN, (table) => {
 		table.increments(PlanColumnName.ID).primary();
 		table.string(PlanColumnName.TITLE, ColumnLength.TITLE).notNullable();
 		table
 			.integer(PlanColumnName.USER_ID)
 			.notNullable()
 			.references(UserColumnName.ID)
-			.inTable(TABLE_NAMES.USERS)
+			.inTable(TableNames.USERS)
 			.onDelete("CASCADE");
 		table.integer(PlanColumnName.DURATION).notNullable().checkPositive();
 		table
@@ -83,14 +83,14 @@ async function up(knex: Knex): Promise<void> {
 			.defaultTo(knex.fn.now());
 	});
 
-	await knex.schema.createTable(TABLE_NAMES.PLAN_DAY, (table) => {
+	await knex.schema.createTable(TableNames.PLAN_DAY, (table) => {
 		table.increments(PlanDayColumnName.ID).primary();
 		table.integer(PlanDayColumnName.DAY_NUMBER).notNullable().checkPositive();
 		table
 			.integer(PlanDayColumnName.PLAN_ID)
 			.notNullable()
 			.references(PlanColumnName.ID)
-			.inTable(TABLE_NAMES.PLAN)
+			.inTable(TableNames.PLAN)
 			.onDelete("CASCADE");
 		table
 			.timestamp(PlanColumnName.CREATED_AT, { useTz: true })
@@ -102,7 +102,7 @@ async function up(knex: Knex): Promise<void> {
 			.defaultTo(knex.fn.now());
 	});
 
-	await knex.schema.createTable(TABLE_NAMES.TASK, (table) => {
+	await knex.schema.createTable(TableNames.TASK, (table) => {
 		table.increments(TaskColumnName.ID).primary();
 		table.string(TaskColumnName.TITLE, ColumnLength.TASK_TITLE).notNullable();
 		table.text(TaskColumnName.DESCRIPTION).notNullable();
@@ -111,11 +111,11 @@ async function up(knex: Knex): Promise<void> {
 			.integer(TaskColumnName.PLAN_DAY_ID)
 			.notNullable()
 			.references(PlanDayColumnName.ID)
-			.inTable(TABLE_NAMES.PLAN_DAY)
+			.inTable(TableNames.PLAN_DAY)
 			.onDelete("CASCADE");
 		table.boolean(TaskColumnName.IS_COMPLETED).notNullable().defaultTo(false);
 		table.enu(TaskColumnName.EXECUTION_TIME_TYPE, EXECUTION_TYPE, {
-			enumName: ENUM_TYPE_NAME.EXECUTION_TIME,
+			enumName: EnumTypeName.EXECUTION_TIME,
 			useNative: true,
 		});
 		table

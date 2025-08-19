@@ -11,25 +11,25 @@ import styles from "./styles.module.css";
 type Properties = {
 	indexDay: number;
 	isOpen: boolean;
+	onChangeIsOpen: (index: boolean) => void;
+	onChangeSelectedDay: (index: number) => void;
 	selectedDay: number;
-	setIsOpen: (index: boolean) => void;
-	setSelectedDay: (index: number) => void;
 };
 
 const Day: React.FC<Properties> = ({
 	indexDay,
 	isOpen,
+	onChangeIsOpen,
+	onChangeSelectedDay,
 	selectedDay,
-	setIsOpen,
-	setSelectedDay,
 }: Properties) => {
 	const handleDay = useCallback((): void => {
-		setSelectedDay(indexDay);
+		onChangeSelectedDay(indexDay);
 
 		if (isOpen) {
-			setIsOpen(false);
+			onChangeIsOpen(false);
 		}
-	}, [indexDay, isOpen, setIsOpen, setSelectedDay]);
+	}, [indexDay, isOpen, onChangeIsOpen, onChangeSelectedDay]);
 
 	return (
 		<div className={styles["content__days-item"]} key={indexDay}>
