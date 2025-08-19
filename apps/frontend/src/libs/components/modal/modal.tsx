@@ -25,7 +25,7 @@ const Modal: React.FC<Properties> = ({
 	}
 
 	return (
-		<div aria-modal="true" className={styles["modal-overlay"]} role="dialog">
+		<dialog className={styles["modal-overlay"]} open>
 			<div className={styles["modal-content"]}>
 				{title && (
 					<div className={styles["modal-header"]}>
@@ -42,7 +42,7 @@ const Modal: React.FC<Properties> = ({
 				)}
 				<div className={styles["modal-body"]}>{children}</div>
 			</div>
-		</div>
+		</dialog>
 	);
 };
 

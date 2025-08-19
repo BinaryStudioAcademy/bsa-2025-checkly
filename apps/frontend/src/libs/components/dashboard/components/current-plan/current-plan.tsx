@@ -12,7 +12,7 @@ const CurrentPlan: FC = () => {
 		<div className={getClassNames("flow-loose", styles["container"])}>
 			<h2 className={styles["title"]}>Current active plan</h2>
 			<div className={styles["plan-card"]}>
-				<PlanStyle inputStyle="withremarks" />
+				<PlanStyle inputStyle="WITH_REMARKS" />
 			</div>
 			<div className={styles["button-wrapper"]}>
 				<Link asButtonSize="small" asButtonVariant="primary" to={AppRoute.PLAN}>

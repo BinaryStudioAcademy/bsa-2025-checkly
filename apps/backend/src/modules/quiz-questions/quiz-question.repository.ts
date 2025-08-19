@@ -1,8 +1,8 @@
+import { OPTIONS } from "./libs/constants/constants.js";
 import {
 	QuestionEntity,
 	QuestionOptionEntity,
 } from "./libs/entities/entities.js";
-import { OPTIONS } from "./libs/enums/enums.js";
 import { type QuestionModel } from "./libs/models/models.js";
 
 class QuizQuestionRepository {
@@ -12,7 +12,7 @@ class QuizQuestionRepository {
 		this.questionModel = questionModel;
 	}
 
-	public async findAllQuestionsWithOptions(): Promise<QuestionEntity[]> {
+	public async findAllWithOptions(): Promise<QuestionEntity[]> {
 		const data = await this.questionModel
 			.query()
 			.orderBy("order")

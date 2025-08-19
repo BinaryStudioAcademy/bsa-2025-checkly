@@ -12,11 +12,11 @@ import {
 } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
-import { TaskConstants } from "~/modules/tasks/libs/constants/constants.js";
+import { TASK_INDEXES } from "~/modules/tasks/libs/constants/constants.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
 import { Day, Task } from "./components/components.js";
-import { daysTasksMockData } from "./mock-data/days-tasks-mock.js";
+import { DAYS_TASKS_MOCK_DATA } from "./mock-data/days-tasks-mock.js";
 import styles from "./styles.module.css";
 
 const Plan: React.FC = () => {
@@ -28,7 +28,7 @@ const Plan: React.FC = () => {
 	const plan = useAppSelector((state) => state.plan.plan);
 	const tasks = useAppSelector((state) => state.task.tasks);
 
-	const planDays = plan?.days || daysTasksMockData;
+	const planDays = plan?.days ?? DAYS_TASKS_MOCK_DATA;
 
 	const currentDay = plan?.days[selectedDay];
 	const selectedDayTasks = currentDay
@@ -44,7 +44,7 @@ const Plan: React.FC = () => {
 				})),
 			) ?? [];
 
-		if (allTasks.length > TaskConstants.TASK_ZERO_INDEX) {
+		if (allTasks.length > TASK_INDEXES.TASK_ZERO_INDEX) {
 			dispatch(taskActions.setTasks(allTasks));
 		}
 	}, [plan, dispatch]);
@@ -58,7 +58,7 @@ const Plan: React.FC = () => {
 	return (
 		<div className={styles["plan"]}>
 			<div className={styles["nav"]}>
-				<p>Here’s your plan!</p>
+				<p className={styles["nav-text"]}>Here’s your plan!</p>
 				<Button
 					className={getClassNames(styles["select-day"])}
 					label={`Day ${String(selectedDay + ONE)}`}
@@ -80,9 +80,9 @@ const Plan: React.FC = () => {
 									indexDay={index}
 									isOpen={isSelectOpen}
 									key={index}
+									onChangeIsOpen={setIsSelectOpen}
+									onChangeSelectedDay={setSelectedDay}
 									selectedDay={selectedDay}
-									setIsOpen={setIsSelectOpen}
-									setSelectedDay={setSelectedDay}
 								/>
 							);
 						})}

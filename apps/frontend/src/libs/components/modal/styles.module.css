@@ -3,8 +3,9 @@
 	inset: 0;
 	z-index: 1000;
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
+	padding-top: 100px;
 	cursor: default;
 	background-color: rgb(255 255 255 / 80%);
 	border: none;
@@ -57,8 +58,8 @@
 }
 
 .modal-body .modal-button {
-	min-width: 80px;
-	padding: var(--space-xs) var(--space-s);
+	min-width: 60px;
+	padding: var(--space-2xs) var(--space-2xs);
 	font-size: var(--text-body-small);
 }
 

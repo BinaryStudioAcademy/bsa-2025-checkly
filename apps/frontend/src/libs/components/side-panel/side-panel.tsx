@@ -13,36 +13,34 @@ const SidePanel: React.FC = () => {
 	const user = useAppSelector((state) => state.auth.user);
 
 	return (
-		<>
-			<aside className={asideClasses}>
-				<nav className={styles["navigation"]}>
-					<ul className={styles["navigation__menu"]}>
-						{user && (
-							<NavigationItem
-								buttonText="Dashboard"
-								buttonType="side-panel"
-								icon={<Dashboard />}
-								navigateTo={AppRoute.DASHBOARD}
-							/>
-						)}
+		<aside className={asideClasses}>
+			<nav className={styles["navigation"]}>
+				<ul className={styles["navigation__menu"]}>
+					{user && (
 						<NavigationItem
-							buttonText="My plan"
+							buttonText="Dashboard"
 							buttonType="side-panel"
-							icon={<Plan />}
-							navigateTo={AppRoute.PLAN}
+							icon={<Dashboard />}
+							navigateTo={AppRoute.DASHBOARD}
 						/>
-						{user && (
-							<NavigationItem
-								buttonText="Profile"
-								buttonType="side-panel"
-								icon={<FiUser />}
-								navigateTo={AppRoute.PROFILE}
-							/>
-						)}
-					</ul>
-				</nav>
-			</aside>
-		</>
+					)}
+					<NavigationItem
+						buttonText="My plan"
+						buttonType="side-panel"
+						icon={<Plan />}
+						navigateTo={AppRoute.PLAN}
+					/>
+					{user && (
+						<NavigationItem
+							buttonText="Profile"
+							buttonType="side-panel"
+							icon={<FiUser />}
+							navigateTo={AppRoute.PROFILE}
+						/>
+					)}
+				</ul>
+			</nav>
+		</aside>
 	);
 };
 

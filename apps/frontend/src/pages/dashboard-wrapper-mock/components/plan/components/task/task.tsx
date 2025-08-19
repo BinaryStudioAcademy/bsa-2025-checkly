@@ -103,7 +103,7 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 				)}
 				key={indexItem}
 			>
-				<h3>{indexItem}</h3>
+				<h3 className={styles["task-title"]}>{indexItem}</h3>
 				<div className={styles["description-wrapper"]}>
 					{isEditing ? (
 						<>
@@ -156,7 +156,7 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 				</div>
 				<div className={styles["item-actions"]}>
 					<div className={styles["item-actions__time"]}>
-						<img alt="" src={Timer} />
+						<img alt="Timer" src={Timer} />
 						<span>morning</span>
 					</div>
 					<div className={styles["item-actions_buttons-wrapper"]}>
@@ -164,20 +164,20 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 							className={getClassNames(styles["item-actions_button"])}
 							icon={<DecorativeImage src={Edit} />}
 							isIconOnly
-							label=""
+							label="Edit task"
 							onClick={handleEditClick}
 						/>
 						<Button
 							className={getClassNames(styles["item-actions_button"])}
 							icon={<DecorativeImage src={Regenerate} />}
 							isIconOnly
-							label=""
+							label="Regenerate task"
 						/>
 						<Button
 							className={getClassNames(styles["item-actions_button"])}
 							icon={<DecorativeImage src={Remove} />}
 							isIconOnly
-							label=""
+							label="Remove task"
 							onClick={handleDeleteClick}
 						/>
 					</div>
@@ -192,11 +192,13 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 					<p>Are you sure you want to delete &ldquo;{item.title}&rdquo;?</p>
 					<div className={styles["delete-modal-actions"]}>
 						<Button
+							className={getClassNames(styles["modal-actions-button"])}
 							label="Cancel"
 							onClick={handleCancelDelete}
 							variant="secondary"
 						/>
 						<Button
+							className={getClassNames(styles["modal-actions-button"])}
 							label="Delete"
 							onClick={handleConfirmDelete}
 							variant="primary"

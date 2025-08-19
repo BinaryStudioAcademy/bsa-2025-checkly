@@ -64,14 +64,14 @@
 	transition: all 0.15s ease;
 }
 
-.password-toggle-button span {
+.password-toggle-button .toggle-icon {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	transition: transform 0.15s ease;
 }
 
-.password-toggle-button:hover span {
+.password-toggle-button:hover .toggle-icon {
 	transform: scale(1.1) rotate(5deg);
 }
 

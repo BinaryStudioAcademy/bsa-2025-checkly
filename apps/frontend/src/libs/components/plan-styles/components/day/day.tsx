@@ -1,4 +1,4 @@
-import { planStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
+import { PlanStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { getWeekday } from "~/libs/helpers/get-weekday.js";
 import { type PlanStyleOption, type Task } from "~/libs/types/types.js";
@@ -21,17 +21,17 @@ const Day: React.FC<Properties> = ({
 }: Properties) => {
 	const dayItemClasses = getClassNames(
 		styles["day-item"],
-		planStyleModules[inputStyle]["day-item"],
+		PlanStyleModules[inputStyle]["day-item"],
 	);
 
 	const dayTitleClasses = getClassNames(
 		styles["day-title"],
-		planStyleModules[inputStyle]["day-title"],
+		PlanStyleModules[inputStyle]["day-title"],
 	);
 
 	const taskListClasses = getClassNames(
 		styles["task-list"],
-		planStyleModules[inputStyle]["task-list"],
+		PlanStyleModules[inputStyle]["task-list"],
 	);
 
 	const weekday = getWeekday(firstDayDate as string, dayNumber);
@@ -40,7 +40,7 @@ const Day: React.FC<Properties> = ({
 		<li className={dayItemClasses} key={dayNumber}>
 			<h2 className={dayTitleClasses}>
 				{`Day ${dayNumber.toString()}`}&nbsp;
-				<span className={planStyleModules[inputStyle]["day-of-week"]}>
+				<span className={PlanStyleModules[inputStyle]["day-of-week"]}>
 					({weekday})
 				</span>
 			</h2>

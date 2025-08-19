@@ -51,7 +51,7 @@ class AuthService {
 		}
 
 		const userDto = user.toObject();
-		const newToken = await token.generateToken(userDto.id);
+		const newToken = await token.generate(userDto.id);
 
 		return { token: newToken, user: userDto };
 	}
@@ -71,7 +71,7 @@ class AuthService {
 		}
 
 		const userDto = await this.userService.create(userRequestDto);
-		const newToken = await token.generateToken(userDto.id);
+		const newToken = await token.generate(userDto.id);
 
 		return { token: newToken, user: userDto };
 	}

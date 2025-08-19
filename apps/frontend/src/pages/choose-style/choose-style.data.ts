@@ -7,16 +7,16 @@ type StyleCard = {
 };
 
 const styleCards: StyleCard[] = [
-	{ id: "box-1", label: "Minimal", planStyle: "minimal" },
+	{ id: "box-1", label: "Minimal", planStyle: "MINIMAL" },
 	{
 		id: "box-2",
 		label: "With Remarks",
-		planStyle: "withremarks",
+		planStyle: "WITH_REMARKS",
 	},
 	{
 		id: "box-3",
 		label: "Colourful",
-		planStyle: "colourful",
+		planStyle: "COLOURFUL",
 	},
 ];
 
