@@ -4,6 +4,13 @@
 	--gutter: var(--space-xl);
 }
 
+.form {
+	--cluster-vertical-alignment: space-between;
+
+	gap: 30px;
+	height: 100%;
+}
+
 .button-group {
 	--cluster-direction: row;
 }

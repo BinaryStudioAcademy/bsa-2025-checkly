@@ -1,20 +1,10 @@
-.modal-backdrop {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 1000;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100vw;
-	height: 100vh;
-	background-color: rgb(0 0 0 / 50%);
+.modal-backdrop::backdrop {
+	background-color: var(--color-backdrop-primary);
 }
 
-.modal-container {
+.modal-backdrop {
 	--cluster-horizontal-alignment: center;
 
-	position: relative;
 	min-width: 300px;
 	max-width: 90%;
 	min-height: 350px;
@@ -22,18 +12,31 @@
 	padding-block: var(--space-xl) var(--space-2xl);
 	padding-inline: var(--space-xl);
 	overflow-y: auto;
-	background-color: var(--color-bg-white);
+	border: none;
 	border-radius: var(--radius-s);
 	box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+}
+
+.modal-content {
+	--cluster-horizontal-alignment: center;
+
+	width: 100%;
+	min-height: 250px;
 }
 
 .modal-close-button {
 	position: absolute;
 	top: 10px;
 	right: 10px;
-	font-size: 24px;
-	line-height: 1;
-	cursor: pointer;
-	background: none;
-	border: none;
+}
+
+.modal-close-icon {
+	width: 35px;
+	height: 35px;
+}
+
+@media (width >= 768px) {
+	.modal-backdrop {
+		min-width: 600px;
+	}
 }

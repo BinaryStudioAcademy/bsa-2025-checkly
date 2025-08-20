@@ -12,7 +12,7 @@ import { FeedbackSectionDecoration } from "./components/feedback-decoration/feed
 import { FeedbackList } from "./components/feedback-list/feedback-list.js";
 import { AddFeedbackModal } from "./components/feedback-modals/add-feedback.modal.js";
 import { DeleteFeedbackModal } from "./components/feedback-modals/delete-feedback.modal.js";
-import { EditFeedbackModal } from "./components/feedback-modals/edit-feedback.modat.js";
+import { EditFeedbackModal } from "./components/feedback-modals/edit-feedback.modal.js";
 import styles from "./styles.module.css";
 
 type ModalTypeUnion = "CREATE" | "DELETE" | "EDIT";

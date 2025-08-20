@@ -1,7 +1,7 @@
 import { type FC } from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
 
-import { Avatar01 } from "~/assets/img/shared/avatars/avatars.img.js";
+import { type UserDto } from "~/libs/types/user/types.js";
 
 import { UserAvatar } from "../user-avatar/user-avatar.js";
 import styles from "./styles.module.css";
@@ -14,10 +14,7 @@ type FeedbackCardProperties = {
 	userId: number | undefined;
 };
 
-type User = null | {
-	id: number;
-	name: string;
-};
+type User = null | Pick<UserDto, "avatarUrl" | "id" | "name">;
 
 const FeedbackCard: FC<FeedbackCardProperties> = ({
 	onDeleteClick,
@@ -37,7 +34,7 @@ const FeedbackCard: FC<FeedbackCardProperties> = ({
 
 			<p className={styles["text"]}>{text}</p>
 			<div className={styles["footer"]}>
-				<UserAvatar alt={user?.name ?? "User"} src={Avatar01} />
+				<UserAvatar alt={user?.name ?? "User"} src={user?.avatarUrl} />
 				<span className={styles["name"]}>{user?.name ?? "Anonymous"}</span>
 			</div>
 		</div>

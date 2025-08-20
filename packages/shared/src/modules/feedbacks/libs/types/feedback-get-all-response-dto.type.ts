@@ -3,7 +3,7 @@ type FeedbackDto = {
 	id: number;
 	text: string;
 	updatedAt: string;
-	user: null | UserDto;
+	user: null | UserPartialDto;
 	userId: number;
 };
 
@@ -21,8 +21,8 @@ type FeedbackServiceReturns = {
 	total: number;
 };
 
-type UserDto = {
-	email: string;
+type UserPartialDto = {
+	avatarUrl: null | string;
 	id: number;
 	name: string;
 };

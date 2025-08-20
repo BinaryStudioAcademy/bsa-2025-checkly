@@ -32,7 +32,6 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 
 	const loaderReference = useRef<HTMLDivElement>(null);
 	const containerReference = useRef<HTMLDivElement>(null);
-
 	const filterNewFeedbackItems = useCallback(
 		(
 			previousFeedbacks: FeedbackDto[],
@@ -159,7 +158,8 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 					key={item.id}
 					onDeleteClick={onOpenModal("DELETE", item.id)}
 					onEditClick={onOpenModal("EDIT", item.id)}
-					{...item}
+					text={item.text}
+					user={item.user}
 					userId={user?.id}
 				/>
 			))}

@@ -1,7 +1,10 @@
-import { type FC, type ReactNode, useEffect } from "react";
+import { type FC, type ReactNode, useEffect, useRef } from "react";
+import { FiX } from "react-icons/fi";
 
+import { eventsNames } from "~/libs/constants/events-names.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
+import { Button } from "../components.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -11,40 +14,56 @@ type Properties = {
 };
 
 const Modal: FC<Properties> = ({ children, isOpen, onClose }) => {
+	const dialogReference = useRef<HTMLDialogElement>(null);
+
 	useEffect(() => {
-		const handleKeyDown = (event: KeyboardEvent): void => {
-			if (event.key === "Escape") {
-				onClose();
-			}
+		const openModal = (): void => {
+			dialogReference.current?.showModal();
+		};
+
+		const closeModal = (): void => {
+			dialogReference.current?.close();
 		};
 
 		if (isOpen) {
-			document.addEventListener("keydown", handleKeyDown);
+			openModal();
+		} else {
+			closeModal();
 		}
+	}, [isOpen]);
+
+	useEffect(() => {
+		const handleClose = (): void => {
+			onClose();
+		};
+
+		const dialogElement = dialogReference.current;
+		dialogElement?.addEventListener(eventsNames.CLOSE, handleClose);
 
 		return (): void => {
-			document.removeEventListener("keydown", handleKeyDown);
+			dialogElement?.removeEventListener(eventsNames.CLOSE, handleClose);
 		};
-	}, [isOpen, onClose]);
-
-	if (!isOpen) {
-		return null;
-	}
+	}, [onClose]);
 
 	return (
-		<div aria-modal="true" className={styles["modal-backdrop"]} role="dialog">
-			<div className={getClassNames(styles["modal-container"], "cluster")}>
-				<button
-					aria-label="Close modal"
-					className={styles["modal-close-button"]}
-					onClick={onClose}
-					type="button"
-				>
-					&times;
-				</button>
+		<dialog
+			aria-modal="true"
+			className={getClassNames("cluster", styles["modal-backdrop"])}
+			ref={dialogReference}
+		>
+			<Button
+				className={styles["modal-close-button"]}
+				icon={<FiX className={styles["modal-close-icon"]} />}
+				isIconOnly
+				label=""
+				onClick={onClose}
+				type="button"
+				variant="transparent"
+			/>
+			<div className={getClassNames(styles["modal-content"], "cluster")}>
 				{children}
 			</div>
-		</div>
+		</dialog>
 	);
 };
 

@@ -4,6 +4,7 @@ import { FeedbackEntity } from "~/modules/feedbacks/feedback.entity.js";
 import { type FeedbackRepository } from "~/modules/feedbacks/feedback.repository.js";
 
 import { FeedbackGetAllOptions } from "./libs/enums/enums.js";
+import { sanitizeFeedbackInput } from "./libs/helpers/helpers.js";
 import {
 	type FeedbackCreateRequestDto,
 	type FeedbackDeleteResponseDto,
@@ -25,9 +26,10 @@ class FeedbackService implements Service {
 	}
 
 	public async create(payload: FeedbackCreateRequestDto): Promise<FeedbackDto> {
+		const sanitizedText = sanitizeFeedbackInput(payload.text);
 		const item = await this.feedbackRepository.create(
 			FeedbackEntity.initializeNew({
-				text: payload.text,
+				text: sanitizedText,
 				userId: payload.userId,
 			}),
 		);
