@@ -15,7 +15,7 @@ const INVALID_ID_RESPONSE: APIHandlerResponse = {
 
 const FORBIDDEN_RESPONSE: APIHandlerResponse = {
 	payload: { message: ErrorMessage.FORBIDDEN },
-	status: HTTPCode.UNAUTHORIZED,
+	status: HTTPCode.FORBIDDEN,
 };
 
 const removeAvatarController = async (
