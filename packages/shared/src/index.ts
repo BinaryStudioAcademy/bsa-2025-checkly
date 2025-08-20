@@ -90,10 +90,14 @@ export {
 	ExecutionTimeType,
 	type TaskCreateRequestDto,
 	taskCreateValidationSchema,
+	type TaskDto,
 	type TaskGetAllResponseDto,
+	TaskMessage,
 	type TaskResponseDto,
 	TasksApiPath,
 	type TaskUpdateRequestDto,
+	taskUpdateValidationSchema,
+	TaskValidationRule,
 } from "./modules/tasks/tasks.js";
 export {
 	AvatarTypes,

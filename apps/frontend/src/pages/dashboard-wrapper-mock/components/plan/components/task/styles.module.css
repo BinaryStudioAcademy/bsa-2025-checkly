@@ -22,6 +22,9 @@
 
 .content__tasks-item .task-description {
 	font-size: var(--text-body-small);
+	word-break: normal;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 
 .color-1 {
@@ -87,6 +90,100 @@
 	background: white;
 }
 
+.description-wrapper {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	width: 100%;
+	max-width: 100%;
+}
+
+.edit-input {
+	width: 100%;
+	min-width: 100px;
+	max-width: 100%;
+	padding: var(--space-2xs) var(--space-xs);
+	font-family: inherit;
+	font-size: inherit;
+	background: rgb(255 255 255 / 90%);
+	border: 2px solid rgb(0 0 0 / 20%);
+	border-radius: var(--radius-s);
+	transition: all 0.2s ease;
+}
+
+.edit-input:focus {
+	outline: none;
+	background: rgb(255 255 255 / 95%);
+	border-color: rgb(0 0 0 / 50%);
+	box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+}
+
+.edit-input-title {
+	margin-bottom: var(--space-2xs);
+	font-size: var(--text-body-large);
+	font-weight: var(--font-weight-semi-bold);
+}
+
+.edit-input-description {
+	min-height: 60px;
+	max-height: 120px;
+	font-size: var(--text-body-small);
+	resize: vertical;
+}
+
+.save-button-wrapper {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	padding-top: 0;
+	margin-top: 0;
+	margin-left: var(--space-xs);
+}
+
+.save-button {
+	flex-shrink: 0;
+	padding: var(--space-2xs);
+	background: var(--color-primary);
+	border: none;
+	border-radius: var(--radius-full);
+	transition: all 0.2s ease;
+}
+
+.save-button:not(:disabled):hover {
+	background-color: var(--color-primary);
+	transform: scale(1.05);
+}
+
+.char-counter {
+	margin-top: var(--space-2xs);
+	margin-bottom: var(--space-xs);
+	font-size: var(--text-body-small);
+	color: var(--color-text-secondary);
+	text-align: right;
+}
+
+.delete-modal-content {
+	text-align: center;
+}
+
+.delete-modal-content p {
+	margin-bottom: var(--space-m);
+	font-size: var(--text-body-medium);
+	color: var(--color-text-primary);
+}
+
+.delete-modal-actions {
+	display: flex;
+	gap: var(--space-s);
+	justify-content: center;
+}
+
+.modal-actions-button {
+	min-width: 100px;
+	padding: var(--space-2xs) var(--space-xs);
+	font-size: var(--text-body-small);
+}
+
 @media (width <= 1024px) {
 	.item-actions {
 		flex-direction: column;
@@ -109,22 +206,34 @@
 @media (width <= 500px) {
 	.content__tasks-item {
 		flex-wrap: wrap;
+		gap: var(--space-xs);
 	}
 
 	.content__tasks-item h3 {
 		width: 10%;
 	}
 
+	.description-wrapper {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		width: 100%;
+		min-width: 100px;
+	}
+
+	.edit-input {
+		width: 100%;
+		min-width: 100px;
+	}
+
 	.item-actions {
-		flex-direction: row;
+		display: flex;
+		flex-flow: row wrap;
+		gap: var(--space-xs);
 		align-items: center;
 		justify-content: center;
 		height: auto;
 		margin: auto;
-	}
-
-	.description-wrapper {
-		width: 74%;
 	}
 
 	.item-actions__time {
