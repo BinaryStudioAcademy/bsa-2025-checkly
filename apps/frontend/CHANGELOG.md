@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.17.1...frontend-v1.18.0) (2025-08-20)
+
+
+### Features
+
+* fix choose style page cy-250 ([3119e91](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3119e914b7c65dc49005eeb8b40b7ff6a9cbead6))
+* **frontend/backend/shared:** add task editing, deletion, and day deletion cy-253 ([09c8569](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/09c8569c4dfec5a6db2e5672abe940efb58c20a1))
+* **frontend:** add plan style overview page cy-65 ([8d67e95](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8d67e95e55b45ffb62dd64cf1eb637c898ed7b58))
+
+
+### Bug Fixes
+
+* fixed route cy-304 ([d1cc425](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d1cc4250b28303d7bf31622ebd15945d24409771))
+* **frontend/backend/shared:** fix code to meet requirements cy-288 ([24fbfba](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/24fbfba70b4bcc18c93b13f3ba57fd65662495a3))
+* **frontend:** fix conflicts with main branch cy-65 ([bd96b98](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bd96b9850d7e3b4edb78e1fd1d7cfa53f12dd50a))
+* **frontend:** return dropdown buttons for tablets/phones cy-304 ([21f1e87](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/21f1e871e9fcdc85e90ff0b8c7019f30eb1585a5))
+* improve code quality cy-65 ([f2e9c5d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f2e9c5d59ad4ca0cf9a5aca623c95f226122d31b))
+* merge main into local branch cy-288 ([32fd807](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/32fd80783ee9271da9fd59780076731f32137b07))
+* no mutated imports, dialog instead of div cy-253 ([b0de517](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b0de5179f70e14e889fc4f84559d179b5e5ecbd4))
+* returned buttons only for tablets, phones cy-304 ([7ff255b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7ff255bdb38f1b53491f459011b9fe92686d9da5))
+* style conflicts cy-250 ([496cab7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/496cab71c7c7559bb9c41c4fbe2f7ce5b66f629c))
+
 ## [1.17.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.17.0...frontend-v1.17.1) (2025-08-19)
 
 
