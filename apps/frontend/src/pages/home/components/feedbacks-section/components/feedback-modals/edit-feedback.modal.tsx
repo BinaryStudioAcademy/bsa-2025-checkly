@@ -97,14 +97,14 @@ const EditFeedbackModal: React.FC<Properties> = ({
 			<Input
 				control={control}
 				errors={errors}
+				isRequired
 				label="Testimonial"
 				name="text"
 				placeholder="Enter a testimonial"
-				required
 				type="text"
 			/>
 			<Button
-				disabled={isUpdating || isFetching}
+				isDisabled={isUpdating || isFetching}
 				label="Save Changes"
 				loader={
 					<Loader

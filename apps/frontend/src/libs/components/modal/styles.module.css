@@ -1,42 +1,76 @@
-.modal-backdrop::backdrop {
-	background-color: var(--color-backdrop-primary);
-}
-
-.modal-backdrop {
-	--cluster-horizontal-alignment: center;
-
-	min-width: 300px;
-	max-width: 90%;
-	min-height: 350px;
-	max-height: 90%;
-	padding-block: var(--space-xl) var(--space-2xl);
-	padding-inline: var(--space-xl);
-	overflow-y: auto;
+.modal-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	padding-top: 100px;
+	cursor: default;
+	background-color: rgb(255 255 255 / 80%);
 	border: none;
-	border-radius: var(--radius-s);
-	box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
 }
 
 .modal-content {
-	--cluster-horizontal-alignment: center;
-
-	width: 100%;
-	min-height: 250px;
+	width: 90%;
+	max-width: 500px;
+	max-height: 80vh;
+	overflow: hidden;
+	background: var(--color-bg-light);
+	border-radius: var(--radius-m);
+	box-shadow: 0 4px 20px rgb(0 0 0 / 20%);
+	animation: modal-slide-in 0.3s ease-out;
 }
 
-.modal-close-button {
-	position: absolute;
-	top: 10px;
-	right: 10px;
+.modal-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--space-s) var(--space-m);
+	border-bottom: 1px solid var(--color-border);
 }
 
-.modal-close-icon {
-	width: 35px;
-	height: 35px;
+.modal-title {
+	margin: 0;
+	font-size: var(--text-body-large);
+	font-weight: var(--font-weight-semi-bold);
 }
 
-@media (width >= 768px) {
-	.modal-backdrop {
-		min-width: 600px;
+.modal-close {
+	padding: var(--space-2xs);
+	font-size: 24px;
+	font-weight: var(--font-weight-bold);
+	color: var(--color-text-secondary);
+	cursor: pointer;
+	background: none;
+	border: none;
+	border-radius: var(--radius-full);
+	transition: all 0.2s ease;
+}
+
+.modal-header .modal-close:not(:disabled):hover {
+	color: var(--color-text-secondary);
+	background-color: var(--color-bg-light);
+}
+
+.modal-body {
+	padding: var(--space-m);
+}
+
+.modal-body .modal-button {
+	min-width: 60px;
+	padding: var(--space-2xs) var(--space-2xs);
+	font-size: var(--text-body-small);
+}
+
+@keyframes modal-slide-in {
+	from {
+		opacity: 0;
+		transform: translateY(-20px) scale(0.95);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
 	}
 }

@@ -7,6 +7,7 @@ import {
 	Auth,
 	ChooseStyle,
 	Home,
+	LogoutPage,
 	NotFound,
 	PlanGeneration,
 	Profile,
@@ -17,9 +18,9 @@ import { TestPage } from "./pages/test-page/test-page.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
 
-interface RouteHandle {
+type RouteHandle = {
 	access: (typeof RouteAccess)[keyof typeof RouteAccess];
-}
+};
 
 const routes: CustomRouteObject[] = [
 	{
@@ -36,6 +37,11 @@ const routes: CustomRouteObject[] = [
 		element: <Auth />,
 		handle: { access: RouteAccess.NOT_AUTHENTICATED },
 		path: AppRoute.SIGN_UP,
+	},
+	{
+		element: <LogoutPage />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.LOGOUT,
 	},
 	{
 		element: <QuestionFlow />,

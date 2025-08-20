@@ -77,6 +77,7 @@ const DeleteFeedbackModal: React.FC<Properties> = ({
 			<p className={styles["feedback-text"]}>{feedbackToDelete.text}</p>
 			<div className={getClassNames(styles["button-group"], "cluster")}>
 				<Button
+					isDisabled={isDeleting}
 					label="Delete"
 					loader={
 						<Loader

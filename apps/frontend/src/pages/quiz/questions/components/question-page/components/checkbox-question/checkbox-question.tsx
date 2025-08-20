@@ -15,9 +15,9 @@ const CheckboxQuestion: React.FC<CheckboxQuestionProperties> = ({
 	question,
 }: CheckboxQuestionProperties): React.ReactElement => {
 	const handleOptionChange = useCallback(
-		(option: string, checked: boolean): void => {
-			const currentSelections = currentAnswer || [];
-			const newSelections = toggleOption(option, currentSelections, checked);
+		(option: string, isChecked: boolean): void => {
+			const currentSelections = currentAnswer ?? [];
+			const newSelections = toggleOption(option, currentSelections, isChecked);
 			onAnswer(newSelections);
 		},
 		[currentAnswer, onAnswer],

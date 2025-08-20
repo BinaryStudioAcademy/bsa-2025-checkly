@@ -65,14 +65,14 @@ const AddFeedbackModal: React.FC<Properties> = ({
 			<Input
 				control={control}
 				errors={errors}
+				isRequired
 				label="Testimonial"
 				name="text"
 				placeholder="Enter a testimonial"
-				required
 				type="text"
 			/>
 			<Button
-				disabled={isLoading}
+				isDisabled={isLoading}
 				label="Add"
 				loader={
 					<Loader
