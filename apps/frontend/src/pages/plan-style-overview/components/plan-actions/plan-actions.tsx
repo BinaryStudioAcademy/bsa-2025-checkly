@@ -14,36 +14,36 @@ import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	isAuthenticated?: boolean;
-	isDownloading?: boolean;
-	onChooseStyle?: () => void;
-	onDownload?: () => void;
-	onEdit?: () => void;
-	onGoToDashboard?: () => void;
+	isAuthenticated: boolean;
+	isDownloading: boolean;
+	onChooseStyle: () => void;
+	onDownload: () => void;
+	onEdit: () => void;
+	onGoToDashboard: () => void;
 };
 
 const PlanActions: React.FC<Properties> = ({
-	isAuthenticated = true,
-	isDownloading = false,
+	isAuthenticated,
+	isDownloading,
 	onChooseStyle,
 	onDownload,
 	onEdit,
 	onGoToDashboard,
 }: Properties) => {
 	const handleEditClick = useCallback((): void => {
-		onEdit?.();
+		onEdit();
 	}, [onEdit]);
 
 	const handleDownloadClick = useCallback((): void => {
-		onDownload?.();
+		onDownload();
 	}, [onDownload]);
 
 	const handleGoToDashboardClick = useCallback((): void => {
-		onGoToDashboard?.();
+		onGoToDashboard();
 	}, [onGoToDashboard]);
 
 	const handleChooseStyleClick = useCallback((): void => {
-		onChooseStyle?.();
+		onChooseStyle();
 	}, [onChooseStyle]);
 
 	return (

@@ -1,9 +1,9 @@
 const PaperFormat = {
 	A4: "A4",
-	Ledger: "Ledger",
-	Legal: "Legal",
-	Letter: "Letter",
-	Tabloid: "Tabloid",
+	LEDGER: "Ledger",
+	LEGAL: "Legal",
+	LETTER: "Letter",
+	TABLOID: "Tabloid",
 } as const;
 
 export { PaperFormat };

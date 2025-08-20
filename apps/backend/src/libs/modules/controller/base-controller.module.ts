@@ -61,7 +61,6 @@ class BaseController implements Controller {
 			body,
 			params,
 			query,
-			request,
 			user,
 		};
 	}

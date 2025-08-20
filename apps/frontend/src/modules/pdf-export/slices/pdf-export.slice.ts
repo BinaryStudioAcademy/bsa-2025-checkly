@@ -6,10 +6,10 @@ import { PlanName } from "~/pages/plan-style-overview/lib/enums/enums.js";
 
 import { exportPdf } from "./actions.js";
 
-interface PdfExportState {
+type PdfExportState = {
 	dataStatus: ValueOf<typeof DataStatus>;
 	fileName: string;
-}
+};
 
 const initialState: PdfExportState = {
 	dataStatus: DataStatus.IDLE,

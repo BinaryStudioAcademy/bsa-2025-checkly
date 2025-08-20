@@ -1,7 +1,7 @@
-import { type PaperFormatType } from "./paper-format.type.js";
+import { type PaperFormatValue } from "./paper-format.type.js";
 
 type ExportPlanPdfDto = {
-	format: PaperFormatType;
+	format: PaperFormatValue;
 	html: string;
 };
 

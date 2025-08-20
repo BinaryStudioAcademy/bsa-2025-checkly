@@ -11,7 +11,6 @@ type APIHandlerOptions<
 	originalRequest?: FastifyRequest;
 	params: T["params"];
 	query: T["query"];
-	request?: FastifyRequest;
 	user?: UserDto;
 };
 
