@@ -1,4 +1,4 @@
-import { type Service, type ValueOf } from "~/libs/types/types.js";
+import { type Service } from "~/libs/types/types.js";
 import { PlanEntity } from "~/modules/plans/plan.entity.js";
 import { type PlanRepository } from "~/modules/plans/plan.repository.js";
 
@@ -13,12 +13,7 @@ import {
 	MOCK_GENERATED_PLAN_DAY,
 	MOCK_GENERATED_TASK,
 } from "./libs/constants/constants.js";
-import {
-	ErrorMessage,
-	type ExecutionTimeType,
-	HTTPCode,
-	HTTPError,
-} from "./libs/enums/enums.js";
+import { ErrorMessage, HTTPCode, HTTPError } from "./libs/enums/enums.js";
 import {
 	type GeneratedPlanDTO,
 	type PlanCreateRequestDto,
@@ -111,32 +106,43 @@ class PlanService implements Service {
 		}
 
 		// TODO: Replace with actual quizId from plan when available
-		// const quizId = 1;
+		// const { quizId } = existingPlan.toObject();
 		// const answers = await this.quizAnswerRepository.findAllWithOption(quizId);
-
-		// TODO: Replace mock with OpenAI service
-		// const prompt = createPrompt({ answers, category: "creativity", notes: "" });
-		// const generatedPlan = await this.openAIService.generatePlan(prompt);
+		// if (!answers.length) {
+		// 	throw new HTTPError({
+		// 		message: ErrorMessage.ANSWERS_NOT_FOUND,
+		// 		status: HTTPCode.NOT_FOUND,
+		// 	});
+		// }
+		// const category = await this.categoryRepository.find(categoryId);
+		// if (!category) {
+		// 	throw new HTTPError({
+		// 		message: ErrorMessage.CATEGORY_NOT_FOUND,
+		// 		status: HTTPCode.NOT_FOUND,
+		// 	});
+		// }
+		// const { name } = category.toObject();
+		// const notes = "";
+		// const generatedPlan = await this.generate({
+		// 	answers,
+		// 	category: name,
+		// 	notes,
+		// });
 
 		const generatedPlan: PlanDaysTaskDto = MOCK_GENERATED_PLAN;
 		const planEntity = PlanEntity.initialize(generatedPlan);
+		await this.planRepository.regenerate(id, planEntity);
 
-		const newPlanId = await this.planRepository.regenerate(planEntity);
-
-		if (!newPlanId) {
-			throw new HTTPError({
-				message: ErrorMessage.PLAN_REGENERATION_FAILED,
-				status: HTTPCode.INTERNAL_SERVER_ERROR,
-			});
-		}
-
-		const newPlan = await this.planRepository.findWithRelations(newPlanId);
+		const newPlan = await this.planRepository.findWithRelations(id);
 
 		return newPlan ? newPlan.toObjectWithRelations() : null;
 	}
 
-	public async regenerateDay(id: number): Promise<null | PlanDaysTaskDto> {
-		const existingPlan = await this.planRepository.find(id);
+	public async regenerateDay(
+		planId: number,
+		dayId: number,
+	): Promise<null | PlanDaysTaskDto> {
+		const existingPlan = await this.planRepository.find(planId);
 
 		if (!existingPlan) {
 			throw new HTTPError({
@@ -145,33 +151,62 @@ class PlanService implements Service {
 			});
 		}
 
-		// TODO: Replace with actual quizId from plan when available
-		// const quizId = 1;
-		// const answers = await this.quizAnswerRepository.findAllWithOptionExceptId(quizId, planDayId);
-		// const summaryOfOtherDayTasks = await this.openAIService.summaryOfOtherDayTasks(answers);
+		const existingPlanDay = await this.planDayRepository.find(dayId);
 
-		// TODO: Replace mock with OpenAI service
-		// const prompt = createPrompt({ answers, category: "creativity", notes: "", additional: summaryOfOtherDayTasks });
-		// const generatedPlan = await this.openAIService.generatePlan(prompt);
+		if (!existingPlanDay) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_DAY_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { planId: planDayPlanId } = existingPlanDay.toObject();
+
+		if (Number(planId) !== Number(planDayPlanId)) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_DAY_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		// TODO: Replace with actual quizId from plan when available
+		// const { quizId } = existingPlan.toObject();
+		// const answers = await this.quizAnswerRepository.findAllWithOption(quizId);
+		// if (!answers.length) {
+		// 	throw new HTTPError({
+		// 		message: ErrorMessage.ANSWERS_NOT_FOUND,
+		// 		status: HTTPCode.NOT_FOUND,
+		// 	});
+		// }
+		// const category = await this.categoryRepository.find(categoryId);
+		// if (!category) {
+		// 	throw new HTTPError({
+		// 		message: ErrorMessage.CATEGORY_NOT_FOUND,
+		// 		status: HTTPCode.NOT_FOUND,
+		// 	});
+		// }
+		// const { name } = category.toObject();
+		// const notes = "";
+		// const generatedPlanDay = await this.generate({
+		// 	answers,
+		// 	category: name,
+		// 	notes,
+		// });
 
 		const generatedPlanDay: PlanDayDto = MOCK_GENERATED_PLAN_DAY;
 		const planDayEntity = PlanDayEntity.initialize(generatedPlanDay);
+		await this.planDayRepository.regenerate(dayId, planDayEntity);
 
-		const newPlanDayId = await this.planDayRepository.regenerate(planDayEntity);
-
-		if (!newPlanDayId) {
-			throw new HTTPError({
-				message: ErrorMessage.PLAN_DAY_REGENERATION_FAILED,
-				status: HTTPCode.INTERNAL_SERVER_ERROR,
-			});
-		}
-
-		const newPlan = await this.planRepository.findWithRelations(id);
+		const newPlan = await this.planRepository.findWithRelations(planId);
 
 		return newPlan ? newPlan.toObjectWithRelations() : null;
 	}
 
-	public async regenerateTask(id: number): Promise<null | PlanDaysTaskDto> {
+	public async regenerateTask(
+		id: number,
+		dayId: number,
+		taskId: number,
+	): Promise<null | PlanDaysTaskDto> {
 		const existingPlan = await this.planRepository.find(id);
 
 		if (!existingPlan) {
@@ -181,33 +216,71 @@ class PlanService implements Service {
 			});
 		}
 
-		// TODO: Replace with actual quizId from plan when available
-		// const quizId = 1;
-		// const answers = await this.quizAnswerRepository.findAllWithOptionExceptId(quizId, planDayId);
-		// const summaryOfOtherDayTasks = await this.openAIService.summaryOfOtherDayTasks(answers);
+		const existingPlanDay = await this.planDayRepository.find(dayId);
 
-		// TODO: Replace mock with OpenAI service
-		// const prompt = createPrompt({ answers, category: "creativity", notes: "", additional: summaryOfOtherDayTasks });
-		// const generatedPlan = await this.openAIService.generatePlan(prompt);
+		if (!existingPlanDay) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_DAY_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { planId } = existingPlanDay.toObject();
+
+		if (Number(id) !== Number(planId)) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_DAY_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const existingTask = await this.taskRepository.find(taskId);
+
+		if (!existingTask) {
+			throw new HTTPError({
+				message: ErrorMessage.TASK_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { planDayId } = existingTask.toObject();
+
+		if (Number(dayId) !== Number(planDayId)) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_DAY_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		// TODO: Replace with actual quizId from plan when available
+		// const { quizId } = existingPlan.toObject();
+		// const answers = await this.quizAnswerRepository.findAllWithOption(quizId);
+		// if (!answers.length) {
+		// 	throw new HTTPError({
+		// 		message: ErrorMessage.ANSWERS_NOT_FOUND,
+		// 		status: HTTPCode.NOT_FOUND,
+		// 	});
+		// }
+		// const category = await this.categoryRepository.find(categoryId);
+		// if (!category) {
+		// 	throw new HTTPError({
+		// 		message: ErrorMessage.CATEGORY_NOT_FOUND,
+		// 		status: HTTPCode.NOT_FOUND,
+		// 	});
+		// }
+		// const { name } = category.toObject();
+		// const notes = "";
+		// const generatedTask = await this.generate({
+		// 	answers,
+		// 	category: name,
+		// 	notes,
+		// });
 
 		const generatedTask: TaskDto = MOCK_GENERATED_TASK;
+		const taskEntity = TaskEntity.initialize(generatedTask);
+		await this.taskRepository.regenerate(taskId, taskEntity);
 
-		const taskEntity = TaskEntity.initialize({
-			completedAt: generatedTask.completedAt,
-			description: generatedTask.description,
-			executionTimeType: generatedTask.executionTimeType as null | ValueOf<
-				typeof ExecutionTimeType
-			>,
-			id: generatedTask.id,
-			isCompleted: generatedTask.isCompleted,
-			order: generatedTask.order,
-			planDayId: generatedTask.planDayId,
-			title: generatedTask.title,
-		});
-
-		await this.taskRepository.create(taskEntity);
-
-		const newPlan = await this.planRepository.findWithRelations(id);
+		const newPlan = await this.planRepository.findWithRelations(planId);
 
 		return newPlan ? newPlan.toObjectWithRelations() : null;
 	}

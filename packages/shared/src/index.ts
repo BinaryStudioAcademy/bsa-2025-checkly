@@ -41,7 +41,7 @@ export {
 	type PlanDayCreateRequestDto,
 	planDayCreateValidationSchema,
 	type PlanDayGetAllResponseDto,
-	type PlanDayRegenerateRequestDto,
+	type PlanDayRegenerationRequestDto,
 	type PlanDayResponseDto,
 	PlanDaysApiPath,
 } from "./modules/plan-days/plan-days.js";
@@ -83,10 +83,11 @@ export {
 } from "./modules/quiz/quiz.js";
 export {
 	ExecutionTimeType,
+	type ExecutionTimeTypeValue,
 	type TaskCreateRequestDto,
 	taskCreateValidationSchema,
 	type TaskGetAllResponseDto,
-	type TaskRegenerateRequestDto,
+	type TaskRegenerationRequestDto,
 	type TaskResponseDto,
 	TasksApiPath,
 	type TaskUpdateRequestDto,

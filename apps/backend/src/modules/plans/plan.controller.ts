@@ -12,10 +12,10 @@ import { type PlanService } from "~/modules/plans/plan.service.js";
 import {
 	type PlanCreateRequestDto,
 	planCreateValidationSchema,
-	type PlanDayRegenerateRequestDto,
+	type PlanDayRegenerationRequestDto,
 	type QuizAnswersRequestDto,
 	quizAnswersValidationSchema,
-	type TaskRegenerateRequestDto,
+	type TaskRegenerationRequestDto,
 } from "~/modules/plans/plans.js";
 
 import { PlansApiPath } from "./libs/enums/enums.js";
@@ -220,7 +220,7 @@ class PlanController extends BaseController {
 			handler: (options) =>
 				this.regenerateDay(
 					options as APIHandlerOptions<{
-						params: PlanDayRegenerateRequestDto;
+						params: PlanDayRegenerationRequestDto;
 					}>,
 				),
 			method: HTTPRequestMethod.POST,
@@ -231,7 +231,7 @@ class PlanController extends BaseController {
 			handler: (options) =>
 				this.regenerateTask(
 					options as APIHandlerOptions<{
-						params: TaskRegenerateRequestDto;
+						params: TaskRegenerationRequestDto;
 					}>,
 				),
 			method: HTTPRequestMethod.POST,
@@ -358,37 +358,6 @@ class PlanController extends BaseController {
 		};
 	}
 
-	private async generate(
-		options: APIBodyOptions<QuizAnswersRequestDto>,
-	): Promise<APIHandlerResponse> {
-		return {
-			payload: await this.planService.generate(options.body),
-			status: HTTPCode.OK,
-		};
-	}
-
-	private async regenerate(
-		options: IdParametersOption,
-	): Promise<APIHandlerResponse> {
-		const { id } = options.params;
-
-		return {
-			payload: await this.planService.regenerate(id),
-			status: HTTPCode.OK,
-		};
-	}
-
-	private async regenerateDay(options: {
-		params: PlanDayRegenerateRequestDto;
-	}): Promise<APIHandlerResponse> {
-		const { planId } = options.params;
-
-		return {
-			payload: await this.planService.regenerateDay(planId),
-			status: HTTPCode.OK,
-		};
-	}
-
 	/**
 	 * @swagger
 	 * /plans/generate:
@@ -437,14 +406,44 @@ class PlanController extends BaseController {
 	 *                   type: string
 	 *                   example: "At least one of the selected options or user input must be provided for a non-skipped question."
 	 */
+	private async generate(
+		options: APIBodyOptions<QuizAnswersRequestDto>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.planService.generate(options.body),
+			status: HTTPCode.OK,
+		};
+	}
 
-	private async regenerateTask(options: {
-		params: TaskRegenerateRequestDto;
-	}): Promise<APIHandlerResponse> {
-		const { planId } = options.params;
+	private async regenerate(
+		options: IdParametersOption,
+	): Promise<APIHandlerResponse> {
+		const { id } = options.params;
 
 		return {
-			payload: await this.planService.regenerateTask(planId),
+			payload: await this.planService.regenerate(id),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async regenerateDay(options: {
+		params: PlanDayRegenerationRequestDto;
+	}): Promise<APIHandlerResponse> {
+		const { dayId, planId } = options.params;
+
+		return {
+			payload: await this.planService.regenerateDay(planId, dayId),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async regenerateTask(options: {
+		params: TaskRegenerationRequestDto;
+	}): Promise<APIHandlerResponse> {
+		const { dayId, planId, taskId } = options.params;
+
+		return {
+			payload: await this.planService.regenerateTask(planId, dayId, taskId),
 			status: HTTPCode.OK,
 		};
 	}

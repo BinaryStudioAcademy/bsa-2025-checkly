@@ -1,4 +1,5 @@
 import { type Transaction } from "objection";
+import { type ExecutionTimeType } from "shared";
 
 import { type Repository, type ValueOf } from "~/libs/types/types.js";
 import { PlanDayEntity } from "~/modules/plan-days/plan-day.entity.js";
@@ -7,8 +8,6 @@ import { PlanEntity } from "~/modules/plans/plan.entity.js";
 import { type PlanModel } from "~/modules/plans/plan.model.js";
 import { TaskEntity } from "~/modules/tasks/task.entity.js";
 import { type TaskRepository } from "~/modules/tasks/task.repository.js";
-
-import { type ExecutionTimeType } from "./libs/enums/enums.js";
 
 class PlanRepository implements Repository {
 	private planDayRepository: PlanDayRepository;
@@ -46,8 +45,8 @@ class PlanRepository implements Repository {
 		return PlanEntity.initialize(plan);
 	}
 
-	public async delete(id: number): Promise<boolean> {
-		const deletedPlan = await this.planModel.query().deleteById(id);
+	public async delete(id: number, trx?: Transaction): Promise<boolean> {
+		const deletedPlan = await this.planModel.query(trx).deleteById(id);
 
 		return Boolean(deletedPlan);
 	}
@@ -89,26 +88,39 @@ class PlanRepository implements Repository {
 		return plan ? PlanEntity.initialize(plan) : null;
 	}
 
-	public async regenerate(plan: PlanEntity): Promise<null | number> {
-		return await this.planModel.transaction(async (trx) => {
-			const createdPlan = await this.create(plan, trx);
-			const planId = createdPlan.toObject().id;
+	public async regenerate(planId: number, plan: PlanEntity): Promise<void> {
+		await this.planModel.transaction(async (trx) => {
+			const { days, duration, intensity, quizId, title, userId } =
+				plan.toObjectWithRelations();
 
-			for (const day of plan.toObjectWithRelations().days) {
-				const planDayEntity = PlanDayEntity.initializeNew({
+			const payload = { duration, intensity, quizId, title, userId };
+			await this.update(planId, payload);
+
+			await this.taskRepository.deleteByPlanId(planId, trx);
+			await this.planDayRepository.deleteByPlanId(planId, trx);
+
+			const dayEntities = days.map((day) =>
+				PlanDayEntity.initializeNew({
 					dayNumber: day.dayNumber,
 					planId,
-				});
+				}).toNewObject(),
+			);
 
-				const createdDay = await this.planDayRepository.create(
-					planDayEntity,
-					trx,
-				);
+			const insertedDays = await this.planDayRepository.bulkCreate(
+				dayEntities,
+				trx,
+			);
 
-				const planDayId = createdDay.toObject().id;
+			const taskEntities = insertedDays.flatMap((day, index) => {
+				const { id: planDayId } = day.toObject();
+				const relatedDay = days[index];
 
-				for (const task of day.tasks) {
-					const taskEntity = TaskEntity.initializeNew({
+				if (!relatedDay) {
+					return [];
+				}
+
+				return relatedDay.tasks.map((task) =>
+					TaskEntity.initializeNew({
 						completedAt: task.completedAt,
 						description: task.description,
 						executionTimeType: task.executionTimeType as null | ValueOf<
@@ -118,22 +130,21 @@ class PlanRepository implements Repository {
 						order: task.order,
 						planDayId,
 						title: task.title,
-					});
+					}).toNewObject(),
+				);
+			});
 
-					await this.taskRepository.create(taskEntity, trx);
-				}
-			}
-
-			return planId;
+			await this.taskRepository.bulkCreate(taskEntities, trx);
 		});
 	}
 
 	public async update(
 		id: number,
 		payload: Partial<PlanModel>,
+		trx?: Transaction,
 	): Promise<null | PlanEntity> {
 		const updatedPlan = await this.planModel
-			.query()
+			.query(trx)
 			.patchAndFetchById(id, payload);
 
 		return PlanEntity.initialize(updatedPlan);

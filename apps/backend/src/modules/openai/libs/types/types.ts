@@ -1,1 +1,1 @@
-export { ExecutionTimeType, type GeneratedPlanDTO } from "shared";
+export { ExecutionTimeType } from "shared";

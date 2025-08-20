@@ -1,3 +1,5 @@
+import { type ExecutionTimeTypeValue } from "../../../../modules/tasks/tasks.js";
+
 type PlanDayDto = {
 	dayNumber: number;
 	id: number;
@@ -21,7 +23,7 @@ type PlanDto = {
 type TaskDto = {
 	completedAt: null | string;
 	description: string;
-	executionTimeType: string;
+	executionTimeType: ExecutionTimeTypeValue;
 	id: number;
 	isCompleted: boolean;
 	order: number;

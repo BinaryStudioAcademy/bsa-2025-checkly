@@ -1,3 +1,5 @@
+import { type GeneratedPlanDTO } from "shared";
+
 import { config } from "~/libs/modules/config/config.js";
 
 import {
@@ -14,7 +16,6 @@ import {
 	PlanErrorMessage,
 	ResponseFormat,
 } from "./libs/enums/enums.js";
-import { type GeneratedPlanDTO } from "./libs/types/types.js";
 import { delay, PromptBuilder } from "./libs/utilities/utilities.js";
 import {
 	planCreateValidationSchema,

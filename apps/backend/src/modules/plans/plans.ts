@@ -23,10 +23,10 @@ export { planController };
 export {
 	type PlanCreateRequestDto,
 	type PlanDayDto,
-	type PlanDayRegenerateRequestDto,
+	type PlanDayRegenerationRequestDto,
 	type PlanDaysTaskDto,
 	type QuizAnswersRequestDto,
-	type TaskRegenerateRequestDto,
+	type TaskRegenerationRequestDto,
 } from "./libs/types/types.js";
 export {
 	planCreateValidationSchema,

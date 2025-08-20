@@ -7,9 +7,9 @@ import {
 const MOCK_GENERATED_PLAN: PlanDaysTaskDto = {
 	days: [
 		{
-			dayNumber: 1,
-			id: 1,
-			planId: 1,
+			dayNumber: 22,
+			id: 12,
+			planId: 21,
 			tasks: [],
 		},
 		{
@@ -35,7 +35,7 @@ const MOCK_GENERATED_PLAN: PlanDaysTaskDto = {
 					isCompleted: false,
 					order: 2,
 					planDayId: 2,
-					title: "Meet a person in the cafe",
+					title: "2222222",
 				},
 			],
 		},
@@ -44,7 +44,7 @@ const MOCK_GENERATED_PLAN: PlanDaysTaskDto = {
 	id: 1,
 	intensity: "high",
 	quizId: 1,
-	title: "Some plan",
+	title: "S222222222n",
 	userId: 2,
 };
 
@@ -55,7 +55,7 @@ const MOCK_GENERATED_PLAN_DAY: PlanDayDto = {
 	tasks: [
 		{
 			completedAt: null,
-			description: "Hello",
+			description: "__________________",
 			executionTimeType: "morning",
 			id: 2,
 			isCompleted: false,
@@ -65,7 +65,7 @@ const MOCK_GENERATED_PLAN_DAY: PlanDayDto = {
 		},
 		{
 			completedAt: null,
-			description: "Meet a person in the cafe multiple times...",
+			description: "__________________...",
 			executionTimeType: "evening",
 			id: 3,
 			isCompleted: false,
@@ -78,7 +78,7 @@ const MOCK_GENERATED_PLAN_DAY: PlanDayDto = {
 
 const MOCK_GENERATED_TASK: TaskDto = {
 	completedAt: null,
-	description: "Hello2-------------",
+	description: "Hello",
 	executionTimeType: "morning",
 	id: 2,
 	isCompleted: false,

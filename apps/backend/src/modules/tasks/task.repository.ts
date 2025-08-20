@@ -4,10 +4,28 @@ import { type Repository } from "~/libs/types/types.js";
 import { TaskEntity } from "~/modules/tasks/task.entity.js";
 import { type TaskModel } from "~/modules/tasks/task.model.js";
 
+import { ZERO } from "./libs/constants/constants.js";
+
 class TaskRepository implements Repository {
 	private taskModel: typeof TaskModel;
 	public constructor(taskModel: typeof TaskModel) {
 		this.taskModel = taskModel;
+	}
+
+	public async bulkCreate(
+		entities: Array<ReturnType<TaskEntity["toNewObject"]>>,
+		trx?: Transaction,
+	): Promise<TaskEntity[]> {
+		if (entities.length === ZERO) {
+			return [];
+		}
+
+		const tasks = await this.taskModel
+			.query(trx)
+			.insert(entities)
+			.returning("*");
+
+		return tasks.map((task) => TaskEntity.initialize(task));
 	}
 
 	public async create(
@@ -38,6 +56,36 @@ class TaskRepository implements Repository {
 		return Boolean(deletedTask);
 	}
 
+	public async deleteByPlanDayId(
+		planDayId: number,
+		trx?: Transaction,
+	): Promise<number> {
+		const deletedCount = await this.taskModel
+			.query(trx)
+			.delete()
+			.where({ planDayId });
+
+		return deletedCount;
+	}
+
+	public async deleteByPlanId(
+		planId: number,
+		trx?: Transaction,
+	): Promise<number> {
+		const deletedCount = await this.taskModel
+			.query(trx)
+			.delete()
+			.whereIn(
+				"planDayId",
+				this.taskModel
+					.relatedQuery("planDay", trx)
+					.select("id")
+					.where("planId", planId),
+			);
+
+		return deletedCount;
+	}
+
 	public async find(id: number): Promise<null | TaskEntity> {
 		const task = await this.taskModel.query().findById(id);
 
@@ -50,10 +98,28 @@ class TaskRepository implements Repository {
 		return tasks.map((task) => TaskEntity.initialize(task));
 	}
 
+	public async regenerate(
+		taskId: number,
+		task: TaskEntity,
+	): Promise<TaskEntity> {
+		const { description, executionTimeType, isCompleted, order, title } =
+			task.toObject();
+
+		const payload = {
+			description,
+			executionTimeType,
+			isCompleted,
+			order,
+			title,
+		};
+
+		return await this.update(taskId, payload);
+	}
+
 	public async update(
 		id: number,
 		payload: Partial<TaskModel>,
-	): Promise<null | TaskEntity> {
+	): Promise<TaskEntity> {
 		const updatedTask = await this.taskModel
 			.query()
 			.patchAndFetchById(id, payload);

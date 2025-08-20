@@ -1,7 +1,8 @@
 export { ExecutionTimeType, TasksApiPath } from "./libs/enums/enums.js";
 export {
+	type ExecutionTimeTypeValue,
 	type TaskGetAllResponseDto,
-	type TaskRegenerateRequestDto,
+	type TaskRegenerationRequestDto,
 	type TaskResponseDto,
 	type TaskUpdateRequestDto,
 } from "./libs/types/types.js";
