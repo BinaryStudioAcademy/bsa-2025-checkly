@@ -206,13 +206,15 @@
 }
 
 @media (width <= 430px) {
-	.header-buttons button {
-		font-size: 0%;
-	}
-
 	.header-buttons button svg {
 		margin-top: auto;
 		margin-bottom: auto;
+	}
+
+	.header-buttons button {
+		width: 10rem;
+		padding: 0.3rem 1rem;
+		font-size: 0.7rem;
 	}
 }
 

@@ -62,11 +62,13 @@ const ChooseStyle: React.FC = () => {
 				</div>
 				<div className={styles["header-buttons"]}>
 					<Button
+						className={styles["header-buttons-button"]}
 						icon={<FileIcon aria-hidden="true" />}
 						label="PDF"
 						size="small"
 					/>
 					<Button
+						className={styles["header-buttons-button"]}
 						icon={<SmartphoneIcon aria-hidden="true" />}
 						iconOnlySize="large"
 						isDisabled
@@ -74,6 +76,7 @@ const ChooseStyle: React.FC = () => {
 						size="small"
 					/>
 					<Button
+						className={styles["header-buttons-button"]}
 						icon={<MonitorIcon aria-hidden="true" />}
 						isDisabled
 						label="Desktop Wallpaper"
