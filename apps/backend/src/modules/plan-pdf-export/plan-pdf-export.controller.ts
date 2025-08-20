@@ -5,10 +5,12 @@ import {
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
-import { type ValueOf } from "~/libs/types/types.js";
 
 import { PlanPdfExportApiPath } from "./libs/enums/enums.js";
-import { type ExportPlanPdfDto } from "./libs/types/types.js";
+import {
+	type ExportPdfResponse,
+	type ExportPlanPdfDto,
+} from "./libs/types/types.js";
 import { planPdfExportValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 import { type PlanPdfExportService } from "./plan-pdf-export.service.js";
 /**
@@ -65,11 +67,9 @@ class PlanPdfExportController extends BaseController {
 		});
 	}
 
-	private async exportPdf(options: APIBodyOptions<ExportPlanPdfDto>): Promise<{
-		headers: { [key: string]: string };
-		payload: Buffer;
-		status: ValueOf<typeof HTTPCode>;
-	}> {
+	private async exportPdf(
+		options: APIBodyOptions<ExportPlanPdfDto>,
+	): Promise<ExportPdfResponse> {
 		const pdfBuffer = await this.planPdfExportService.generatePdf(options.body);
 
 		return {

@@ -3,6 +3,7 @@ import puppeteer from "puppeteer";
 import { ErrorConstants } from "~/libs/enums/enums.js";
 import { config } from "~/libs/modules/config/config.js";
 
+import { NETWORK_IDLE_0 } from "./libs/constants/constants.js";
 import { type ExportPlanPdfDto } from "./libs/types/types.js";
 
 class PlanPdfExportService {
@@ -12,11 +13,11 @@ class PlanPdfExportService {
 
 		const printUrl = config.ENV.FRONTEND.PLAN_PRINT_URL;
 
-		if (typeof printUrl !== "string" || !printUrl) {
+		if (!printUrl) {
 			throw new Error(ErrorConstants.DEFAULT_ERROR_MESSAGE);
 		}
 
-		await page.goto(printUrl, { waitUntil: "networkidle0" });
+		await page.goto(printUrl, { waitUntil: NETWORK_IDLE_0 });
 
 		const pdfBuffer = await page.pdf({
 			format: dto.format,
