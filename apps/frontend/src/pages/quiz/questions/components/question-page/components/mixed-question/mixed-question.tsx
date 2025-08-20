@@ -8,7 +8,6 @@ import {
 	type MixedQuestionProperties,
 	type MultipleAnswers,
 } from "~/libs/types/types.js";
-import { AnswersAmount } from "~/pages/quiz/questions/libs/enums/enums.js";
 import {
 	isOptionSelected,
 	isOtherOption,
@@ -23,25 +22,24 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 	question,
 }: MixedQuestionProperties): React.ReactElement => {
 	const [selectedOptions, setSelectedOptions] = useState<MultipleAnswers[]>(
-		currentAnswer?.selectedOptions || [],
+		currentAnswer?.selectedOptions ?? [],
 	);
 	const [userInput, setUserInput] = useState<string>(
-		currentAnswer?.userInput || "",
+		currentAnswer?.userInput ?? "",
 	);
 
 	const isOthersSelected = selectedOptions.some(
 		(option) => typeof option === "string" && isOtherOption(option),
 	);
 
-	const hasFewOptions = question.options.length < AnswersAmount.FEW;
-	const containerClassName = hasFewOptions
-		? `${styles["options-container"] ?? ""} ${styles["options-container-few-options"] ?? ""}`
-		: (styles["options-container"] ?? "");
-
 	const handleOptionChange = useCallback(
-		(option: string, checked: boolean): void => {
-			const newSelectedOptions = toggleOption(option, selectedOptions, checked);
-			const isSwitchingFromOther = isOtherOption(option) && !checked;
+		(option: string, isChecked: boolean): void => {
+			const newSelectedOptions = toggleOption(
+				option,
+				selectedOptions,
+				isChecked,
+			);
+			const isSwitchingFromOther = isOtherOption(option) && !isChecked;
 			const newUserInput = isSwitchingFromOther ? "" : userInput;
 
 			setSelectedOptions(newSelectedOptions);
@@ -67,19 +65,25 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 
 	const handleTextChange = useCallback(
 		(event_: React.ChangeEvent<HTMLInputElement>): void => {
-			const newUserInput = sanitizeTextInput(event_.target.value);
+			const newUserInput = event_.target.value;
 			setUserInput(newUserInput);
 			onAnswer({ selectedOptions, userInput: newUserInput });
 		},
 		[onAnswer, selectedOptions],
 	);
 
+	const handleTextBlur = useCallback((): void => {
+		const sanitizedValue = sanitizeTextInput(userInput);
+		setUserInput(sanitizedValue);
+		onAnswer({ selectedOptions, userInput: sanitizedValue });
+	}, [onAnswer, selectedOptions, userInput]);
+
 	return (
 		<div
 			className={`${styles["mixed-question"] ?? ""} ${isOthersSelected ? (styles["has-text-input"] ?? "") : ""}`}
 		>
 			<div className={styles["checkbox-section"]}>
-				<div className={containerClassName}>
+				<div className={styles["options-container"]}>
 					{question.options.map((option) => (
 						<label className={styles["checkbox-option"]} key={option.text}>
 							<input
@@ -90,7 +94,11 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 							/>
 							<div className={styles["checkbox-custom"]}>
 								{isOptionSelected(option.text, selectedOptions) && (
-									<img alt="Selected" src={logoIcon} />
+									<img
+										alt="Selected"
+										className={styles["checkbox-icon"]}
+										src={logoIcon}
+									/>
 								)}
 							</div>
 							<span className={styles["option-text"]}>{option.text}</span>
@@ -107,6 +115,7 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 					<input
 						className={styles["text-input"]}
 						id="mixed-text-answer"
+						onBlur={handleTextBlur}
 						onChange={handleTextChange}
 						placeholder={PlaceholderValues.ENTER_YOUR_ADDITIONAL_OPTIONS}
 						type={ElementTypes.TEXT}

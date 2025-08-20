@@ -1,8 +1,16 @@
+import { type FastifyRequest } from "fastify";
+import { UserValidationMessage } from "shared";
+
 import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
+import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
 import { type Service } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 
+import {
+	handleAvatarRemove,
+	handleAvatarUpload,
+} from "./helpers/avatar.helper.js";
 import {
 	type UserDto,
 	type UserGetAllResponseDto,
@@ -24,6 +32,7 @@ class UserService implements Service {
 
 		const item = await this.userRepository.create(
 			UserEntity.initializeNew({
+				dob: null,
 				email: payload.email,
 				name: payload.name,
 				passwordHash: hash,
@@ -56,13 +65,51 @@ class UserService implements Service {
 		return await this.userRepository.findByField("email", email);
 	}
 
+	public async removeAvatar(
+		userId: number,
+	): Promise<ReturnType<typeof handleAvatarRemove>> {
+		return await handleAvatarRemove(this.userRepository, userId);
+	}
+
 	public async update(
 		id: number,
 		payload: UserUpdateRequestDto,
 	): Promise<null | UserDto> {
-		const item = await this.userRepository.update(id, payload);
+		const userWithSameEmail = await this.userRepository.findByField(
+			"email",
+			payload.email,
+		);
 
-		return item ? item.toObject() : null;
+		if (userWithSameEmail && userWithSameEmail.toObject().id !== id) {
+			throw new HTTPError({
+				message: UserValidationMessage.EMAIL_ALREADY_EXISTS,
+				status: HTTPCode.CONFLICT,
+			});
+		}
+
+		const updateData = {
+			dob: payload.dob ?? null,
+			email: payload.email.trim(),
+			name: payload.name.trim(),
+		};
+
+		if (payload.password?.trim()) {
+			const { hash, salt } = await this.encryptor.encrypt(payload.password);
+			Object.assign(updateData, {
+				passwordHash: hash,
+				passwordSalt: salt,
+			});
+		}
+
+		const updatedUser = await this.userRepository.update(id, updateData);
+
+		return updatedUser ? updatedUser.toObject() : null;
+	}
+
+	public async uploadAvatar(
+		request: FastifyRequest,
+	): Promise<ReturnType<typeof handleAvatarUpload>> {
+		return await handleAvatarUpload(this.userRepository, request);
 	}
 }
 

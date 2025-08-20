@@ -4,7 +4,7 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	min-height: 70vh;
+	min-height: 60vh;
 	padding: var(--space-s);
 }
 
@@ -16,7 +16,7 @@
 	position: relative;
 	z-index: 1;
 	width: 100%;
-	max-width: 600px;
+	max-width: 800px;
 	padding: var(--space-m);
 	background-color: var(--color-bg-white);
 	background-position: 1px 1px;
@@ -42,7 +42,7 @@
 
 .notes-textarea {
 	width: 100%;
-	min-height: 150px;
+	min-height: 200px;
 	padding: var(--space-m);
 	font-family: inherit;
 	font-size: var(--text-size-body);
@@ -63,7 +63,7 @@
 
 @media (width <= 768px) {
 	.notes-content {
-		max-width: 500px;
+		max-width: 650px;
 		padding: var(--space-m);
 	}
 
@@ -78,7 +78,7 @@
 	}
 
 	.notes-textarea {
-		min-height: 120px;
+		min-height: 150px;
 		padding: var(--space-s);
 		font-size: var(--text-size-small);
 	}
@@ -101,7 +101,7 @@
 	}
 
 	.notes-textarea {
-		min-height: 100px;
+		min-height: 120px;
 		padding: var(--space-xs);
 		font-size: var(--text-size-small);
 	}

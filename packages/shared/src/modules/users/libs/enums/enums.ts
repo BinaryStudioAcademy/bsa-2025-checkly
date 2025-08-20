@@ -1,3 +1,5 @@
+export { AvatarTypes } from "./avatar-allowed-types.enum.js";
+export { S3BucketIndex } from "./s3-bucket-index.enum.js";
 export { UserValidationMessage } from "./user-validation-message.enum.js";
 export { UserValidationRegexRule } from "./user-validation-regex-rule.enum.js";
 export { UserValidationRule } from "./user-validation-rule.enum.js";

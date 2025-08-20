@@ -34,7 +34,7 @@
 		--gutter: var(--space-m);
 	}
 
-	.navigation-buttons button {
+	.navigation-buttons .navigation-button {
 		min-width: 100px;
 		padding: var(--space-s) var(--space-m);
 		font-size: var(--font-size-s);
@@ -46,7 +46,7 @@
 		--gutter: var(--space-s);
 	}
 
-	.navigation-buttons button {
+	.navigation-buttons .navigation-button {
 		min-width: 80px;
 		padding: var(--space-xs) var(--space-s);
 		font-size: var(--font-size-xs);

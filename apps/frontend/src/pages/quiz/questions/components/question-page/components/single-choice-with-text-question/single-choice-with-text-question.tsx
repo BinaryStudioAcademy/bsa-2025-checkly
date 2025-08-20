@@ -5,7 +5,6 @@ import { ElementTypes, PlaceholderValues } from "~/libs/enums/enums.js";
 import { sanitizeTextInput } from "~/libs/helpers/helpers.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { type SingleChoiceWithTextQuestionProperties } from "~/libs/types/types.js";
-import { AnswersAmount } from "~/pages/quiz/questions/libs/enums/enums.js";
 import { isOtherOption } from "~/pages/quiz/questions/libs/utilities.js";
 
 import styles from "./styles.module.css";
@@ -26,11 +25,6 @@ const SingleChoiceWithTextQuestion: React.FC<
 
 	const isOtherSelected = selectedOption && isOtherOption(selectedOption);
 	const shouldClearUserInput = selectedOption && isOtherOption(selectedOption);
-
-	const hasFewOptions = question.options.length < AnswersAmount.FEW;
-	const containerClassName = hasFewOptions
-		? `${styles["options-container"] ?? ""} ${styles["options-container-few-options"] ?? ""}`
-		: (styles["options-container"] ?? "");
 
 	const handleOptionSelect = useCallback(
 		(option: string): void => {
@@ -53,12 +47,18 @@ const SingleChoiceWithTextQuestion: React.FC<
 
 	const handleTextChange = useCallback(
 		(event_: React.ChangeEvent<HTMLInputElement>): void => {
-			const newUserInput = sanitizeTextInput(event_.target.value);
+			const newUserInput = event_.target.value;
 			setUserInput(newUserInput);
 			onAnswer({ selectedOption, userInput: newUserInput });
 		},
 		[onAnswer, selectedOption],
 	);
+
+	const handleTextBlur = useCallback((): void => {
+		const sanitizedValue = sanitizeTextInput(userInput);
+		setUserInput(sanitizedValue);
+		onAnswer({ selectedOption, userInput: sanitizedValue });
+	}, [onAnswer, selectedOption, userInput]);
 
 	const handleOptionChange = useCallback(
 		(optionText: string) => (): void => {
@@ -72,7 +72,7 @@ const SingleChoiceWithTextQuestion: React.FC<
 			className={`${styles["single-choice-with-text-question"] ?? ""} ${isOtherSelected ? (styles["has-text-input"] ?? "") : ""}`}
 		>
 			<div className={styles["radio-section"]}>
-				<div className={containerClassName}>
+				<div className={styles["options-container"]}>
 					{question.options.map((option) => (
 						<label className={styles["radio-option"]} key={option.text}>
 							<input
@@ -105,6 +105,7 @@ const SingleChoiceWithTextQuestion: React.FC<
 					<input
 						className={styles["text-input"]}
 						id="single-choice-text-answer"
+						onBlur={handleTextBlur}
 						onChange={handleTextChange}
 						placeholder={PlaceholderValues.ENTER_YOUR_ADDITIONAL_OPTIONS}
 						type={ElementTypes.TEXT}

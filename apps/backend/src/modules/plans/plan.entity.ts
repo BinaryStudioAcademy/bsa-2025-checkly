@@ -1,10 +1,17 @@
+import { type PlanCategoryDto } from "shared";
+
 import { type Entity } from "~/libs/types/types.js";
 import {
 	type PlanDayDto,
 	type PlanDaysTaskDto,
+	type PlanWithCategoryDto,
 } from "~/modules/plans/plans.js";
 
 class PlanEntity implements Entity {
+	private category?: PlanCategoryDto;
+
+	private categoryId: number;
+
 	private days: PlanDayDto[];
 
 	private duration: number;
@@ -18,6 +25,8 @@ class PlanEntity implements Entity {
 	private userId: number;
 
 	private constructor({
+		category,
+		categoryId,
 		days = [],
 		duration,
 		id,
@@ -25,6 +34,8 @@ class PlanEntity implements Entity {
 		title,
 		userId,
 	}: {
+		category?: PlanCategoryDto;
+		categoryId: number;
 		days?: PlanDayDto[];
 		duration: number;
 		id: null | number;
@@ -38,9 +49,13 @@ class PlanEntity implements Entity {
 		this.duration = duration;
 		this.intensity = intensity;
 		this.days = days;
+		this.categoryId = categoryId;
+		this.category = category;
 	}
 
 	public static initialize({
+		category,
+		categoryId,
 		days = [],
 		duration,
 		id,
@@ -48,6 +63,8 @@ class PlanEntity implements Entity {
 		title,
 		userId,
 	}: {
+		category?: PlanCategoryDto;
+		categoryId: number;
 		days?: PlanDayDto[];
 		duration: number;
 		id: number;
@@ -56,6 +73,8 @@ class PlanEntity implements Entity {
 		userId: number;
 	}): PlanEntity {
 		return new PlanEntity({
+			category,
+			categoryId,
 			days,
 			duration,
 			id,
@@ -66,17 +85,20 @@ class PlanEntity implements Entity {
 	}
 
 	public static initializeNew({
+		categoryId,
 		duration,
 		intensity,
 		title,
 		userId,
 	}: {
+		categoryId: number;
 		duration: number;
 		intensity: string;
 		title: string;
 		userId: number;
 	}): PlanEntity {
 		return new PlanEntity({
+			categoryId,
 			days: [],
 			duration,
 			id: null,
@@ -87,12 +109,14 @@ class PlanEntity implements Entity {
 	}
 
 	public toNewObject(): {
+		categoryId: number;
 		duration: number;
 		intensity: string;
 		title: string;
 		userId: number;
 	} {
 		return {
+			categoryId: this.categoryId,
 			duration: this.duration,
 			intensity: this.intensity,
 			title: this.title,
@@ -101,6 +125,7 @@ class PlanEntity implements Entity {
 	}
 
 	public toObject(): {
+		categoryId: number;
 		duration: number;
 		id: number;
 		intensity: string;
@@ -108,11 +133,19 @@ class PlanEntity implements Entity {
 		userId: number;
 	} {
 		return {
+			categoryId: this.categoryId,
 			duration: this.duration,
 			id: this.id as number,
 			intensity: this.intensity,
 			title: this.title,
 			userId: this.userId,
+		};
+	}
+
+	public toObjectWithCategory(): PlanWithCategoryDto {
+		return {
+			...this.toObjectWithRelations(),
+			category: this.category,
 		};
 	}
 

@@ -7,8 +7,10 @@ import {
 	Auth,
 	ChooseStyle,
 	Home,
+	LogoutPage,
 	NotFound,
 	PlanGeneration,
+	Profile,
 	QuestionFlow,
 	Quiz,
 } from "./pages/pages.js";
@@ -16,9 +18,9 @@ import { TestPage } from "./pages/test-page/test-page.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
 
-interface RouteHandle {
+type RouteHandle = {
 	access: (typeof RouteAccess)[keyof typeof RouteAccess];
-}
+};
 
 const routes: CustomRouteObject[] = [
 	{
@@ -37,6 +39,11 @@ const routes: CustomRouteObject[] = [
 		path: AppRoute.SIGN_UP,
 	},
 	{
+		element: <LogoutPage />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.LOGOUT,
+	},
+	{
 		element: <QuestionFlow />,
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.QUIZ_QUESTIONS,
@@ -52,6 +59,11 @@ const routes: CustomRouteObject[] = [
 				element: <Dashboard />,
 				handle: { access: RouteAccess.AUTHENTICATED },
 				path: AppRoute.DASHBOARD,
+			},
+			{
+				element: <Profile />,
+				handle: { access: RouteAccess.AUTHENTICATED },
+				path: AppRoute.PROFILE,
 			},
 			{
 				element: <Plan />,

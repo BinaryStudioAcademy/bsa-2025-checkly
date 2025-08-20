@@ -1,4 +1,6 @@
 export {
+	AvatarTypes,
+	S3BucketIndex,
 	UsersApiPath,
 	UserValidationMessage,
 	UserValidationRule,
@@ -6,7 +8,6 @@ export {
 export {
 	type UserDto,
 	type UserGetAllResponseDto,
-	type UserProfileResponseDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
@@ -18,4 +19,5 @@ export {
 	userSignIn as userSignInValidationSchema,
 	userSignUp as userSignUpValidationSchema,
 	userSignUpExtended as userSignUpValidationSchemaExtended,
+	userUpdate as userUpdateValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";

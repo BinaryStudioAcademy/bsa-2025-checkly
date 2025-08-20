@@ -2,7 +2,6 @@ import { logoIcon } from "~/assets/img/shared/shared.img.js";
 import { ElementTypes } from "~/libs/enums/enums.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { type CheckboxQuestionProperties } from "~/libs/types/types.js";
-import { AnswersAmount } from "~/pages/quiz/questions/libs/enums/answers-amount.enum.js";
 import {
 	isOptionSelected,
 	toggleOption,
@@ -16,9 +15,9 @@ const CheckboxQuestion: React.FC<CheckboxQuestionProperties> = ({
 	question,
 }: CheckboxQuestionProperties): React.ReactElement => {
 	const handleOptionChange = useCallback(
-		(option: string, checked: boolean): void => {
-			const currentSelections = currentAnswer || [];
-			const newSelections = toggleOption(option, currentSelections, checked);
+		(option: string, isChecked: boolean): void => {
+			const currentSelections = currentAnswer ?? [];
+			const newSelections = toggleOption(option, currentSelections, isChecked);
 			onAnswer(newSelections);
 		},
 		[currentAnswer, onAnswer],
@@ -32,14 +31,9 @@ const CheckboxQuestion: React.FC<CheckboxQuestionProperties> = ({
 		[handleOptionChange],
 	);
 
-	const hasFewOptions = question.options.length < AnswersAmount.FEW;
-	const containerClassName = hasFewOptions
-		? `${styles["options-container"] ?? ""} ${styles["options-container-few-options"] ?? ""}`
-		: (styles["options-container"] ?? "");
-
 	return (
 		<div className={styles["checkbox-question"]}>
-			<div className={containerClassName}>
+			<div className={styles["options-container"]}>
 				{question.options.map((option) => (
 					<label className={styles["checkbox-option"]} key={option.text}>
 						<input
@@ -50,7 +44,11 @@ const CheckboxQuestion: React.FC<CheckboxQuestionProperties> = ({
 						/>
 						<div className={styles["checkbox-custom"]}>
 							{isOptionSelected(option.text, currentAnswer) && (
-								<img alt="Selected" src={logoIcon} />
+								<img
+									alt="Selected"
+									className={styles["checkbox-icon"]}
+									src={logoIcon}
+								/>
 							)}
 						</div>
 						<span className={styles["option-text"]}>{option.text}</span>

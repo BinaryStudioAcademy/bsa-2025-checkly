@@ -1,9 +1,9 @@
 .radio-question {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	gap: var(--space-s);
+	gap: var(--space-m);
 	width: 100%;
-	max-width: 800px;
+	max-width: 600px;
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -16,8 +16,7 @@
 .radio-option {
 	position: relative;
 	display: flex;
-	flex-direction: row;
-	gap: var(--space-xs);
+	gap: var(--space-m);
 	align-items: center;
 	padding: var(--space-s);
 	cursor: pointer;
@@ -52,8 +51,8 @@
 	flex-shrink: 0;
 	align-items: center;
 	justify-content: center;
-	width: 1.25rem;
-	height: 1.25rem;
+	width: 2rem;
+	height: 2rem;
 	background: var(--color-white);
 	border: 2px solid var(--color-text-primary);
 	border-radius: 50%;
@@ -66,19 +65,17 @@
 	transition: none;
 }
 
-.radio-input:checked + .radio-custom img {
-	width: 100%;
-	height: 100%;
-	object-fit: contain;
+.radio-custom .radio-icon {
+	width: 1.75rem;
+	height: 1.75rem;
 }
 
 .radio-text {
-	font-size: var(--text-size-heading-4);
+	flex: 1;
+	font-size: var(--text-size-heading-3);
 	font-weight: var(--font-weight-semibold);
 	color: var(--color-text-primary);
-	hyphens: auto;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
+	word-break: keep-all;
 	cursor: pointer;
 }
 
@@ -92,6 +89,11 @@
 		justify-content: center;
 		max-width: 400px;
 		margin: 0 auto;
+	}
+
+	.radio-custom {
+		width: 1rem;
+		height: 1rem;
 	}
 
 	.radio-option {
@@ -125,13 +127,26 @@
 		grid-template-columns: 1fr;
 		gap: var(--space-xs);
 		justify-content: center;
+		max-width: 100%;
+		margin: 0;
 	}
 
 	.radio-option {
+		gap: var(--space-xs);
 		padding: var(--space-xs);
 	}
 
 	.radio-text {
 		font-size: var(--text-size-small);
+	}
+
+	.radio-custom {
+		width: 0.875rem;
+		height: 0.875rem;
+	}
+
+	.radio-custom .radio-icon {
+		width: 0.75rem;
+		height: 0.75rem;
 	}
 }

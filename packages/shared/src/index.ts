@@ -1,3 +1,8 @@
+export { ONE, ZERO } from "./libs/constants/constants.js";
+export {
+	UPLOAD_MAX_FILE_SIZE_BYTES,
+	UPLOAD_MAX_FILE_SIZE_MB,
+} from "./libs/constants/upload.constants.js";
 export {
 	APIPath,
 	AppEnvironment,
@@ -27,6 +32,8 @@ export {
 export { type Storage } from "./libs/modules/storage/storage.js";
 export {
 	type EnumValue,
+	type Nullable,
+	type RouteParametersWithId,
 	type ServerCommonErrorResponse,
 	type ServerErrorDetail,
 	type ServerErrorResponse,
@@ -35,6 +42,12 @@ export {
 	type ValueOf,
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
+export { type GeneratedPlanDTO } from "./modules/openai/openai.js";
+export {
+	PlanCategoriesApiPath,
+	type PlanCategoryDto,
+	ZERO_CATEGORY_ID,
+} from "./modules/plan-categories/plan-categories.js";
 export {
 	type PlanDayCreateRequestDto,
 	planDayCreateValidationSchema,
@@ -51,7 +64,11 @@ export {
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
 	PlansApiPath,
+	type PlanSearchQueryDto,
+	type PlanSearchQueryParameter,
+	planSearchQueryParametersValidationSchema,
 	type PlanUpdateRequestDto,
+	type PlanWithCategoryDto,
 } from "./modules/plans/plans.js";
 export {
 	type QuestionDto,
@@ -73,16 +90,21 @@ export {
 	ExecutionTimeType,
 	type TaskCreateRequestDto,
 	taskCreateValidationSchema,
+	type TaskDto,
 	type TaskGetAllResponseDto,
+	TaskMessage,
 	type TaskResponseDto,
 	TasksApiPath,
 	type TaskUpdateRequestDto,
+	taskUpdateValidationSchema,
+	TaskValidationRule,
 } from "./modules/tasks/tasks.js";
 export {
+	AvatarTypes,
+	S3BucketIndex,
 	type SignUpFormValidationSchema,
 	type UserDto,
 	type UserGetAllResponseDto,
-	type UserProfileResponseDto,
 	UsersApiPath,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -92,6 +114,7 @@ export {
 	userSignUpValidationSchema,
 	userSignUpValidationSchemaExtended,
 	type UserUpdateRequestDto,
+	userUpdateValidationSchema,
 	UserValidationMessage,
 	UserValidationRule,
 } from "./modules/users/users.js";

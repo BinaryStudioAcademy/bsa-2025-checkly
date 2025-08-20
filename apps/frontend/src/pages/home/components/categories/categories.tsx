@@ -5,7 +5,7 @@ import { DecorativeImage } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { CategoryItem } from "~/pages/home/components/categories/category-item/category-item.js";
-import { categories } from "~/pages/home/components/categories/libs/constants.js";
+import { CATEGORIES } from "~/pages/home/components/categories/libs/constants.js";
 
 import styles from "./styles.module.css";
 
@@ -30,7 +30,7 @@ const Categories: React.FC = () => {
 				<h2 className={styles["title"]}>Categories</h2>
 				<div>
 					<ul className="cluster" data-list>
-						{categories.map((category) => (
+						{CATEGORIES.map((category) => (
 							<CategoryItem
 								activeCategoryId={activeCategory}
 								category={category}

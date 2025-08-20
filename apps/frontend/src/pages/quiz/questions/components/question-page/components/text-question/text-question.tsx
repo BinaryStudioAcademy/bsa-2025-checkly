@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { ElementTypes, PlaceholderValues } from "~/libs/enums/enums.js";
 import { sanitizeTextInput } from "~/libs/helpers/helpers.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
@@ -11,12 +13,24 @@ const TextQuestion: React.FC<TextQuestionProperties> = ({
 	onAnswer,
 	question,
 }: TextQuestionProperties): React.ReactElement => {
+	const [rawValue, setRawValue] = useState<string>(
+		getTextAnswerValue(currentAnswer),
+	);
+
 	const handleChange = useCallback(
 		(event_: React.ChangeEvent<HTMLInputElement>): void => {
-			onAnswer(sanitizeTextInput(event_.target.value));
+			const newValue = event_.target.value;
+			setRawValue(newValue);
+			onAnswer(newValue);
 		},
 		[onAnswer],
 	);
+
+	const handleBlur = useCallback((): void => {
+		const sanitizedValue = sanitizeTextInput(rawValue);
+		setRawValue(sanitizedValue);
+		onAnswer(sanitizedValue);
+	}, [onAnswer, rawValue]);
 
 	return (
 		<div className={styles["text-question"]}>
@@ -26,6 +40,7 @@ const TextQuestion: React.FC<TextQuestionProperties> = ({
 			<input
 				className={styles["text-input"]}
 				id="text-answer"
+				onBlur={handleBlur}
 				onChange={handleChange}
 				placeholder={PlaceholderValues.ENTER_YOUR_ANSWER}
 				type={ElementTypes.TEXT}
