@@ -82,6 +82,8 @@ export {
 	type PlanWithCategoryDto,
 } from "./modules/plans/plans.js";
 export {
+	type QuestionCategoryDto,
+	questionCategoryValidationSchema,
 	type QuestionDto,
 	type QuestionOptionDto,
 	type QuestionType,

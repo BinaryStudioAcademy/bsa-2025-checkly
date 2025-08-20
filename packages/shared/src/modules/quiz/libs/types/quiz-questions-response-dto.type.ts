@@ -1,7 +1,7 @@
-import { type QuestionDto } from "./question.dto.js";
+import { type QuestionCategoryDto } from "./question-category.dto.js";
 
 type QuizQuestionsResponseDto = {
-	items: QuestionDto[];
+	items: QuestionCategoryDto[];
 };
 
 export { type QuizQuestionsResponseDto };
