@@ -11,7 +11,6 @@ import styles from "./styles.module.css";
 const TextQuestion: React.FC<TextQuestionProperties> = ({
 	currentAnswer,
 	onAnswer,
-	question,
 }: TextQuestionProperties): React.ReactElement => {
 	const [rawValue, setRawValue] = useState<string>(
 		getTextAnswerValue(currentAnswer),
@@ -34,9 +33,6 @@ const TextQuestion: React.FC<TextQuestionProperties> = ({
 
 	return (
 		<div className={styles["text-question"]}>
-			<label className={styles["label"]} htmlFor="text-answer">
-				{question.text}
-			</label>
 			<input
 				className={styles["text-input"]}
 				id="text-answer"
