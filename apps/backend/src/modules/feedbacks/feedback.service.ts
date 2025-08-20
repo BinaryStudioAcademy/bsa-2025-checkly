@@ -81,10 +81,6 @@ class FeedbackService implements Service {
 		return item ? item.toObjectWithRelations() : null;
 	}
 
-	public update(): ReturnType<Service["update"]> {
-		return Promise.resolve(null);
-	}
-
 	public async updateById(
 		id: number,
 		payload: FeedbackUpdateRequestDto,
