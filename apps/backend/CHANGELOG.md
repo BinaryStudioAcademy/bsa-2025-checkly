@@ -1,5 +1,90 @@
 # Changelog
 
+## [1.8.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.8.0...backend-v1.8.1) (2025-08-19)
+
+
+### Bug Fixes
+
+* enhance code to meet quality criteria cy-289 ([96b90ba](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/96b90ba02f39d6eeed8f24294146cdd2c4afb550))
+
+## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.7.0...backend-v1.8.0) (2025-08-19)
+
+
+### Features
+
+* * update add-plans seed cy-171 ([abb3730](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/abb3730328a0ce5bdef9e2e560ec8620617df2e8))
+* * update base-server-app to add query-string validation option cy-171 ([c117aca](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c117aca3ee935bab99ea6c4f682f55ff25647613))
+* * update plan controller swagger docs cy-171 ([24f0cfe](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/24f0cfe2f8aa41177a6c22295a879a11feff65be))
+* * update plan search query params type cy-171 ([eeeb289](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eeeb289bc8486d7c79a6e605ad2316f65a0e8afa))
+* * update plan-search-qeury param type cy-171 ([30ff49c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/30ff49c952b7208caca537387baa83f0c828732f))
+* * update swagger docs for quiz-questions cy-171 ([96a5bcc](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/96a5bcc3180a146a6fd32fde53d59f7d315d2e46))
+* + add api handler option cy-171 ([710e3f2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/710e3f2aa0c2a2a971b76dc169c596a779dbd764))
+* + add db table name cy-171 ([c0185dd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c0185dd01cb44768e42b39d6c1764589742053e7))
+* + add missing quiz-answer type export cy-171 ([7a938b7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7a938b71598b96c425f1b690a6effdfb14cfbb4a))
+* + add plan category service cy-171 ([e9d6824](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e9d682409e2a040ece6b73578089bd946d534aad))
+* + add plan module entry cy-171 ([5cdf939](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5cdf939549fc9725e2ffcb78643122e39f7c209b))
+* + add plan-categories table cy-171 ([50396b1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/50396b180092ce6951e63c00995e40c4e03b1ec9))
+* + add plan-category controller cy-171 ([14368c1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/14368c16dd8d0e95d269950c0b55170b3d7e7e6b))
+* + add plan-category entity cy-171 ([14cb246](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/14cb24662ab886a9ebc29589984c20c35567151b))
+* + add plan-category model cy-171 ([cb58fd4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cb58fd4f2217c0e9ec6c09bba88f6cf56023816c))
+* + add plan-category repo cy-171 ([563d6f1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/563d6f1355054ad3c255cd8d0e8eace2ee06f7d3))
+* + add plan-search-query validation schema cy-171 ([a562d08](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a562d08dcf4cd014aae78d30c747f72859f31def))
+* + add seeds cy-171 ([108a586](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/108a586fad5c645291fedc41df84b807915cfbb3))
+* + add swagger docs to plan-categories cy-171 ([7127252](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/71272528f3c04604f2e6af8fb345529990349c8b))
+* + register plan-controller cy-171 ([ad0e3e8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ad0e3e8316e0532e73bdb9357e497e301786917c))
+* + update plan controller cy-171 ([b508e26](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b508e2695c514c7283b4e13b638329ccd8e1b476))
+* + update plan entity cy-171 ([1900765](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/19007650a133b525bb6fb80a60069ab99f6e5ab1))
+* + update plan module to add category cy-171 ([1b18391](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1b183917f878db32f85f75ccc5400933344c3386))
+* + update plan-categories table to add icon-href and oreder fields cy-171 ([d6d736f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d6d736f04105a94aef9c13f7c0eea56b2f8e541e))
+* + update plans module to add search cy-171 ([0cbd394](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0cbd394c511593f01b624098fb9d9068a1dbb765))
+* add user avatar cy-178 ([88da678](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/88da67800ef81f6bf30d2023a1cf15e2f0244bcb))
+* plan generation cy-55 ([6bae8b3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6bae8b38f18378cb02e401d1799bff8b8809ca90))
+* plan search cy-171 ([46f0259](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/46f0259d1d2d073a619b11f5eef5886781bb541b))
+
+
+### Bug Fixes
+
+* linting issue cy-178 ([d15bce2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d15bce22e762844683b64a9e97eb908303d0a24a))
+
+## [1.7.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.6.0...backend-v1.7.0) (2025-08-18)
+
+
+### Features
+
+* add profile page cy-176 ([f090102](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f0901026904a8716bfccfdb9710ecedecf755525))
+
+## [1.6.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.5.1...backend-v1.6.0) (2025-08-17)
+
+
+### Features
+
+* * update method name in plan module cy-229 ([67ebc89](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/67ebc89ec8089dfa04204af086f76432fcf74e59))
+* * update plan controller swagger docs cy-229 ([b691441](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b6914410a2764d4258fd2683bfcfba48f868bd60))
+* * update plan module to add "/generate" endpoint cy-229 ([45b7684](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/45b768467eed3786ca47f312ae7b2af41ee3b440))
+* + merge with main cy-229 ([b00ee09](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b00ee098c528bf22865c60007f6231a9a175af30))
+* update plan module to add "/generate" endpoint cy-229 ([8b34607](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8b346078be5e53ef6af2961f13ba0b7df8f848a7))
+
+## [1.5.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.5.0...backend-v1.5.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* **backend:** changed seed for questions cy-251 ([1d83e82](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1d83e8288b097d9b183b972dbbca8e123c834aef))
+* changed seed for questions cy-251 ([cd9cc8e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cd9cc8e2c5ed37f86f0789e5321e1ce0795c86e2))
+* **frontend:** fix conflicts with main branch cy-169 ([7f9d38d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7f9d38dbbbc0f78c9c3add19d269ef773653b751))
+
+## [1.5.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.4.1...backend-v1.5.0) (2025-08-13)
+
+
+### Features
+
+* **frontend:** quiz frontend implementation cy-15 ([e535ae4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e535ae4e1afa514869821dc0f344615f8275b102))
+
+
+### Bug Fixes
+
+* merge conflicts with main cy-15 ([f11ad8f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f11ad8fc6c0f5c0b639efdf77813e2fb64700e01))
+
 ## [1.4.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.4.0...backend-v1.4.1) (2025-08-12)
 
 

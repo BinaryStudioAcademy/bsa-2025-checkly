@@ -3,7 +3,7 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	className?: string | undefined;
+	className?: string;
 	src: string;
 };
 
@@ -12,7 +12,7 @@ const DecorativeImage: React.FC<Properties> = ({
 	src,
 }: Properties) => (
 	<img
-		alt=""
+		alt="Decorative image"
 		aria-hidden="true"
 		className={getClassNames(styles["decorative-image"], className)}
 		draggable="false"

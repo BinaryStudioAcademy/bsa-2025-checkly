@@ -12,8 +12,12 @@ const Logo: React.FC = () => {
 			className={getClassNames("cluster", styles["container"])}
 			to={AppRoute.ROOT}
 		>
-			<img alt="Binary Checkly web-application logo" src={logoIcon} />
-			Checkly
+			<img
+				alt="Binary Checkly web-application logo"
+				className={styles["logo-image"]}
+				src={logoIcon}
+			/>
+			<h1 className={styles["logo-title"]}>Checkly</h1>
 		</Link>
 	);
 };

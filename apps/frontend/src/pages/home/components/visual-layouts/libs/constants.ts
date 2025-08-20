@@ -1,24 +1,43 @@
-import {
-	ExampleColourful,
-	ExampleMinimal,
-	ExampleMotivating,
-	ExampleWithRemarks,
-} from "~/assets/img/shared/illustrations/layouts/layouts.img.js";
+import { type PlanStyleOption } from "~/libs/types/types.js";
 
 type LayoutExample = {
 	id: number;
-	img: string;
+	planStyle: PlanStyleOption;
 	title: string;
 };
 
 const layoutExamples: LayoutExample[] = [
-	{ id: 1, img: ExampleWithRemarks, title: "With Remarks" },
-	{ id: 2, img: ExampleMinimal, title: "Minimal" },
-	{ id: 3, img: ExampleColourful, title: "Colourful" },
-	{ id: 4, img: ExampleMotivating, title: "Motivating" },
-	{ id: 5, img: ExampleWithRemarks, title: "With Remarks" },
-	{ id: 6, img: ExampleWithRemarks, title: "With Remarks" },
-	{ id: 7, img: ExampleMinimal, title: "Minimal" },
+	{
+		id: 1,
+		planStyle: "WITH_REMARKS",
+		title: "With Remarks",
+	},
+	{ id: 2, planStyle: "COLOURFUL", title: "Colourful" },
+	{
+		id: 3,
+		planStyle: "MINIMAL",
+		title: "Minimal",
+	},
+	{
+		id: 4,
+		planStyle: "WITH_REMARKS",
+		title: "With Remarks",
+	},
+	{
+		id: 5,
+		planStyle: "COLOURFUL",
+		title: "Colourful",
+	},
+	{
+		id: 6,
+		planStyle: "MINIMAL",
+		title: "Minimal",
+	},
+	{
+		id: 7,
+		planStyle: "WITH_REMARKS",
+		title: "With Remarks",
+	},
 ];
 
 export { layoutExamples };

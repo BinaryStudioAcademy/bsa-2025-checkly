@@ -1,0 +1,151 @@
+schemas:
+  QuizAnswer:
+    type: object
+    required:
+      - isSkipped
+      - questionId
+      - questionText
+      - selectedOptions
+      - userInput
+    properties:
+      isSkipped:
+        type: boolean
+      questionId:
+        type: number
+      questionText:
+        type: string
+      selectedOptions:
+        type: array
+        items:
+          oneOf:
+            - type: string
+            - type: number
+      userInput:
+        type: string
+
+  QuizAnswersRequestDto:
+    type: object
+    required:
+      - answers
+      - category
+      - notes
+    properties:
+      answers:
+        type: array
+        items:
+          $ref: "#/schemas/QuizAnswer"
+      category:
+        type: string
+        enum:
+          - creativity
+          - fitness
+          - health
+          - nutrition
+      notes:
+        type: string
+
+  TaskDto:
+    type: object
+    properties:
+      id:
+        type: number
+      title:
+        type: string
+      description:
+        type: string
+      order:
+        type: number
+      isCompleted:
+        type: boolean
+      executionTimeType:
+        type: string
+      planDayId:
+        type: number
+      completedAt:
+        type: string
+        nullable: true
+
+  PlanDayDto:
+    type: object
+    properties:
+      id:
+        type: number
+      dayNumber:
+        type: number
+      tasks:
+        type: array
+        items:
+          $ref: "#/schemas/TaskDto"
+
+  PlanDto:
+    type: object
+    properties:
+      id:
+        type: number
+      title:
+        type: string
+      duration:
+        type: number
+      intensity:
+        type: string
+      userId:
+        type: number
+
+  PlanDaysTaskDto:
+    allOf:
+      - $ref: "#/schemas/PlanDto"
+      - type: object
+        properties:
+          days:
+            type: array
+            items:
+              $ref: "#/schemas/PlanDayDto"
+
+  PlanRequestDto:
+    type: object
+    required:
+      - title
+      - userId
+      - duration
+      - intensity
+    properties:
+      title:
+        type: string
+      userId:
+        type: number
+      duration:
+        type: number
+      intensity:
+        type: string
+
+  PlanResponseDto:
+    type: object
+    properties:
+      id:
+        type: number
+      title:
+        type: string
+      duration:
+        type: number
+      intensity:
+        type: string
+      userId:
+        type: number
+
+generate:
+  summary: Generate a plan based on quiz answers
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "#/schemas/QuizAnswersRequestDto"
+  responses:
+    "200":
+      description: Plan generated successfully
+      content:
+        application/json:
+          schema:
+            $ref: "#/schemas/PlanDaysTaskDto"
+    "400":
+      $ref: "../shared/responses.yaml#/BadRequestError"

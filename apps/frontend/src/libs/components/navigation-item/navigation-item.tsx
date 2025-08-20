@@ -1,6 +1,7 @@
 import { type ReactNode, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
+import { ZERO } from "~/libs/constants/constants.js";
 import { type AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { type ValueOf } from "~/libs/types/types.js";
@@ -16,6 +17,7 @@ type Properties = {
 	className?: string;
 	icon: ReactNode;
 	navigateTo: ValueOf<typeof AppRoute>;
+	onClick?: () => void;
 };
 
 const NavigationItem: React.FC<Properties> = ({
@@ -24,6 +26,7 @@ const NavigationItem: React.FC<Properties> = ({
 	className,
 	icon,
 	navigateTo,
+	onClick,
 }: Properties) => {
 	const itemClass = getClassNames(
 		styles["menu-item"],
@@ -40,18 +43,34 @@ const NavigationItem: React.FC<Properties> = ({
 
 	return (
 		<li className={liClassNames} ref={navReference}>
-			<Link to={navigateTo}>
+			{buttonType === "logout" ? (
 				<button
 					aria-label={buttonText}
 					className={itemClass}
+					data-dropdown-button="true"
+					onClick={onClick}
 					role="menuitem"
-					tabIndex={0}
+					tabIndex={ZERO}
 					type="button"
 				>
 					{icon}
 					{buttonText}
 				</button>
-			</Link>
+			) : (
+				<Link className={styles["menu-item__link"]} to={navigateTo}>
+					<button
+						aria-label={buttonText}
+						className={itemClass}
+						data-dropdown-button="true"
+						role="menuitem"
+						tabIndex={ZERO}
+						type="button"
+					>
+						{icon}
+						{buttonText}
+					</button>
+				</Link>
+			)}
 		</li>
 	);
 };

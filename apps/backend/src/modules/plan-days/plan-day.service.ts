@@ -1,4 +1,4 @@
-import { type Repository, type Service } from "~/libs/types/types.js";
+import { type Service } from "~/libs/types/types.js";
 import { PlanDayEntity } from "~/modules/plan-days/plan-day.entity.js";
 import { type PlanDayRepository } from "~/modules/plan-days/plan-day.repository.js";
 
@@ -41,10 +41,6 @@ class PlanDayService implements Service {
 		return {
 			items: items.map((item) => item.toObject()),
 		};
-	}
-
-	public update(): ReturnType<Repository["update"]> {
-		return Promise.resolve(null);
 	}
 }
 

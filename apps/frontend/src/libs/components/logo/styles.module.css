@@ -5,10 +5,13 @@
 	--gutter: 0;
 
 	width: max-content;
-	font-size: var(--text-size-heading-3);
 	text-decoration: none;
 }
 
-.container img {
-	width: clamp(15px, 2vw, 25px);
+.container .logo-image {
+	width: clamp(18px, 2vw, 27px);
+}
+
+.container .logo-title {
+	font-size: var(--text-size-heading-3);
 }

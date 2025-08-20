@@ -1,0 +1,40 @@
+.notes {
+	padding: calc(12px * var(--coefficient));
+	font-family: var(--font-family-avenir);
+	line-height: 1.4;
+	color: var(--color-text-deep-blue);
+}
+
+.notes-title {
+	font-family: var(--font-family-avenir);
+	font-size: calc(12px * var(--coefficient));
+	font-weight: var(--font-weight-extra-bold);
+}
+
+.notes-hint {
+	margin-bottom: calc(12px * var(--coefficient));
+	font-size: calc(10px * var(--coefficient));
+	font-weight: var(--font-weight-regular);
+}
+
+.notes:nth-child(even) {
+	border: none;
+}
+
+.notes:nth-child(odd) {
+	grid-column: span 2;
+	border: none;
+	border-right: 1px solid var(--color-border-soft-pink);
+	border-bottom: 1px solid var(--color-border-soft-pink);
+	border-left: 1px solid var(--color-border-soft-pink);
+}
+
+.notes-text {
+	font-size: calc(10px * var(--coefficient));
+	font-weight: var(--font-weight-regular);
+	line-height: 2;
+	text-align: justify;
+	text-decoration: underline;
+	text-decoration-color: var(--color-border-soft-pink);
+	text-underline-offset: calc(5px * var(--coefficient));
+}

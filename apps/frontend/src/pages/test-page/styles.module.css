@@ -1,0 +1,23 @@
+.test-main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100vh;
+	padding-top: 64px;
+}
+
+.test-panel {
+	height: 64px;
+	background-color: #f1f1f1;
+	border-bottom: 1px solid #000000;
+}
+
+.test-body {
+	flex: 1 1 auto;
+	overflow-y: auto;
+}
+
+.test-panel:last-child {
+	border-top: 1px solid #000000;
+	border-bottom: none;
+}

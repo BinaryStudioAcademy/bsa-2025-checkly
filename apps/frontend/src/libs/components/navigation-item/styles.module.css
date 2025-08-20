@@ -103,3 +103,8 @@
 	text-decoration-thickness: 2px;
 	text-underline-offset: 6px;
 }
+
+.menu-item__link {
+	color: inherit;
+	text-decoration: none;
+}

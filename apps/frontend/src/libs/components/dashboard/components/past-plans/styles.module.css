@@ -1,54 +1,120 @@
 .container {
-	padding: var(--space-s) var(--space-l);
+	padding: var(--space-m);
 	background-color: var(--color-bg-light);
 	border: 2px solid var(--color-card-gray);
-	border-radius: var(--radius-s);
-	transition: all 0.3s ease-in-out;
+	border-radius: var(--base-radius);
+}
+
+.search-plans-container {
+	padding-block: var(--space-s) var(--space-m);
+	padding-inline: var(--space-s);
+	background-color: var(--color-card-darkblue);
+	border: 2px solid var(--color-bg-dark);
+	border-radius: var(--radius-m);
+}
+
+.search-plans-container label {
+	font-size: var(--text-body);
+	font-weight: var(--font-weight-body);
+	color: var(--color-bg-dark);
 }
 
 .title {
-	font-family: var(--font-family-primary);
+	font-family: var(--font-family-nunito);
 	font-size: var(--text-size-heading-3);
-	font-weight: var(--font-weight-semi-bold);
-	color: var(--color-text-primary);
-	transition: font-size 0.3s ease-in-out;
+}
+
+.search-plans-item {
+	--flow-space: var(--space-2xs);
 }
 
 .plans-grid {
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: var(--space-m);
-	padding: var(--space-l) var(--space-xs);
-	transition: gap 0.3s ease-in-out;
+	--grid-min-item-size: 10rem;
+	--gutter: var(--space-s);
+
+	max-height: 650px;
+	overflow-y: auto;
+	scrollbar-color: var(--color-border-grey) transparent;
+	scrollbar-width: thin;
 }
 
 .plan-card {
-	overflow: hidden;
-	border: 2px solid var(--color-text-primary);
+	display: grid;
+	place-content: center;
+	padding: var(--space-s);
+	background-color: var(--color-bg-plan-style-with-remarks);
 	border-radius: var(--radius-m);
-	transition: all 0.3s ease-in-out;
 }
 
-.plan-card:hover {
-	cursor: pointer;
-	box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
-	transform: translateY(-2px);
+.plans-grid::-webkit-scrollbar {
+	width: 6px;
 }
 
-.plan-image {
-	display: block;
+.plans-grid::-webkit-scrollbar-track {
+	background: transparent;
+	border-radius: 3px;
+}
+
+.plans-grid::-webkit-scrollbar-thumb {
+	background-color: var(--color-border-grey);
+	border-radius: 3px;
+	transition: background-color 0.2s ease;
+}
+
+.plans-grid::-webkit-scrollbar-thumb:hover {
+	background-color: var(--color-bg-dark);
+}
+
+.plans-search-loader {
+	display: flex;
+	justify-content: center;
 	width: 100%;
-	height: auto;
+	padding-block: var(--space-l);
 }
 
-@media (width >= 480px) {
-	.plans-grid {
-		grid-template-columns: repeat(2, 1fr);
+.plan-card-skeleton {
+	aspect-ratio: 210 / 297;
+	padding: var(--space-s);
+	background-color: var(--color-bg-plan-style-with-remarks);
+	border-radius: var(--radius-m);
+	animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton-title {
+	width: 80%;
+	height: var(--text-size-heading-5);
+	background-color: var(--color-border-grey);
+	border-radius: var(--radius-xs);
+}
+
+.skeleton-subtitle {
+	width: 60%;
+	height: var(--text-body);
+	background-color: var(--color-border-grey);
+	border-radius: var(--radius-xs);
+}
+
+.skeleton-line {
+	width: 100%;
+	height: var(--text-body-small);
+	background-color: var(--color-border-grey);
+	border-radius: var(--radius-xs);
+}
+
+.skeleton-line-short {
+	width: 70%;
+	height: var(--text-body-small);
+	background-color: var(--color-border-grey);
+	border-radius: var(--radius-xs);
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 1;
 	}
-}
 
-@media (width >= 768px) {
-	.plans-grid {
-		grid-template-columns: repeat(3, 1fr);
+	50% {
+		opacity: 0.6;
 	}
 }

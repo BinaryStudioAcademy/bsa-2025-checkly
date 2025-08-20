@@ -1,5 +1,176 @@
 # Changelog
 
+## [1.17.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.17.0...frontend-v1.17.1) (2025-08-19)
+
+
+### Bug Fixes
+
+* enhance code to meet quality criteria cy-289 ([96b90ba](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/96b90ba02f39d6eeed8f24294146cdd2c4afb550))
+
+## [1.17.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.16.0...frontend-v1.17.0) (2025-08-19)
+
+
+### Features
+
+* - remove root css vars redeclarations from choose-style cy-171 ([0f3a074](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0f3a07443a74036c6015efcfd1b7e61bab02ea66))
+* - remove unused mocked plans list cy-171 ([5e58db7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5e58db7f6126853e8bdd57f98455540b09b554ff))
+* * add plan-category-select component cy-171 ([b90b00f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b90b00f246d87a25b516b8ab1bbe48cfc177c92a))
+* * fix linter warnings cy-171 ([c37b4e2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c37b4e20ce68f5aa9577d2f879cdb651d8115cb9))
+* * replace loader with skeleton cy-171 ([32f4c8f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/32f4c8fccb8b0d92de28df2a24ec4f44c9400aeb))
+* * replace style enums related to plan-category-select cy-171 ([c9918a1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c9918a116f7526f55d3b7a0af3248857a4c12a9c))
+* * update current plan styles cy-171 ([3806f5d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3806f5de9452d10d9e98287cd3f0ade0818db9f4))
+* * update current-plan markup and styles cy-171 ([7fc337f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7fc337f662577e36d4f1b459dcb9cc151dc08083))
+* * update dashboard layout styles cy-171 ([145cdb9](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/145cdb903ed3d627899de04b15c39c67f264a6ef))
+* * update dashboard styles cy-171 ([cb8fa2b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cb8fa2beeeaf085afe3b2bbb4b73bdb48516a8b2))
+* * update dashboard wrapper styles cy-171 ([f06988b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f06988b46f1f110446312617154006c08830cbac))
+* * update link component cy-171 ([52a28ef](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/52a28ef04d5ffa83ec58ed61052a04c5f7c57942))
+* * update past-plans cy-171 ([a7a0ed4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a7a0ed45a817aab83a88506f67d94eb6658d91a6))
+* * update past-plans cy-171 ([1e09cb2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1e09cb2dd7122723cb518d51728f96ee187a1fbd))
+* * update plan slice cy-171 ([b593a47](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b593a471d44bca407d7844fa4835a4298733f5cb))
+* * update plan-categories exports cy-171 ([4805b00](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/4805b00997bdc9b2fdea93948181f7ca9412ded5))
+* * update plan-category-select style enum cy-171 ([3669e7d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3669e7d6b85091f40094630ded2e825e998f0a24))
+* * update plan-search-qeury param type cy-171 ([30ff49c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/30ff49c952b7208caca537387baa83f0c828732f))
+* * update plan-styles to add plan-title prop cy-171 ([4cedd48](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/4cedd48cb35f4e22f114bf79c2267bb177520a56))
+* * update search border cy-171 ([108a972](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/108a972d7f4a6ef8c4e6b68fa64e28c40fab501d))
+* * update search icon styles cy-171 ([640993f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/640993ffbfefe6ec860cf7b2f95ac883fd4281ba))
+* * update styles cy-171 ([f43ae23](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f43ae234400b35f542eb730e07f332c4e78051d1))
+* * update user-plan serach hook cy-171 ([820cd3d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/820cd3d9e3c6a36e61fd360cb336091eb1f3d41b))
+* + add grid composition util cy-171 ([af58bcf](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/af58bcfbfccea90327caeaf1288c7ea537977c35))
+* + add new past-plans sub-components cy-171 ([a511a3e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a511a3e863a42ab4c6a04ba0aeb51fa3b92e21c3))
+* + add plan-categories api and slice cy-171 ([21afe44](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/21afe44be9378a766b14bf68198e746befc695c8))
+* + add plan-category-select folder cy-171 ([d939fbd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d939fbd642cba6ee2e647d7d2be4494664d7a180))
+* + add plan-styles to past-plans component cy-171 ([61856e4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/61856e4a2480647b450c1750e22a6e1adfb3c019))
+* + add search icon cy-171 ([4caf088](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/4caf088448ab089b2aa21bd3014482864b146829))
+* + add skeleton-elements-amount const cy-171 ([bdb6091](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bdb6091fdd9b8aa557e6279f935105c943727f97))
+* + add use-debounce hook cy-171 ([529137e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/529137e1af37a0d485f5db468e215cb71e268893))
+* + add use-user-plan-search hook cy-171 ([577a9fb](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/577a9fb318ce19d6a9939ad2013441b665405051))
+* + add zero-category-order const cy-171 ([3ca84b6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3ca84b636d7b2238fb14814c6619a634fc7013b1))
+* + install react-select cy-171 ([fe110a3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/fe110a323146868b02372ca787c6813b4d13b18b))
+* + replace vanilla select with react-select cy-171 ([e89c760](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e89c76035bc420338d56c2a4ada3b0373b2f9360))
+* + update past-plans component cy-171 ([29cf0ac](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/29cf0ac1adb7e32bf81ad4b59277dbc5e3a54f60))
+* + update plan-api cy-171 ([79d40df](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/79d40df4c0face3e5d537ddb79f03a3beb3f30ea))
+* + update plan-categories table to add icon-href and oreder fields cy-171 ([d6d736f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d6d736f04105a94aef9c13f7c0eea56b2f8e541e))
+* add user avatar cy-178 ([88da678](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/88da67800ef81f6bf30d2023a1cf15e2f0244bcb))
+* plan generation cy-55 ([6bae8b3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6bae8b38f18378cb02e401d1799bff8b8809ca90))
+* plan search cy-171 ([46f0259](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/46f0259d1d2d073a619b11f5eef5886781bb541b))
+
+
+### Bug Fixes
+
+* linting issue cy-178 ([d15bce2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d15bce22e762844683b64a9e97eb908303d0a24a))
+* update generate plan request cy-55 ([28630f2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/28630f2563076a903e4e6d3be644817f04681501))
+
+## [1.16.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.15.0...frontend-v1.16.0) (2025-08-18)
+
+
+### Features
+
+* add profile page cy-176 ([f090102](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f0901026904a8716bfccfdb9710ecedecf755525))
+
+
+### Bug Fixes
+
+* remove user menu for not authenticated users cy-271 ([0217f11](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0217f11e08a82cb072bb8e19b60f335663f81d57))
+* Sidebar displays only Dashboard cy-271 ([26803aa](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/26803aa356a1e47decb0e472fff7e96c02f8ef32))
+* update sidebar page display condition cy-271 ([f08960e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f08960efb65f6991347f55188e036fefc694ac62))
+
+## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.14.0...frontend-v1.15.0) (2025-08-17)
+
+
+### Features
+
+* - remove submit-quiz method from quiz-api and quiz slice cy-229 ([bd34640](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bd3464003c8fed3ce1ff978ce91078fc8776c4ca))
+* * update button styles cy-229 ([3ef754b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3ef754baa17968526bfbc092b2db64c461ccf1d8))
+* * update components to fix linter warning cy-273 ([caaf85d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/caaf85d31c24608434f873c97145cb7a0ac16f3c))
+* * update method name in plan module cy-229 ([67ebc89](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/67ebc89ec8089dfa04204af086f76432fcf74e59))
+* * update plan module to add "/generate" endpoint cy-229 ([45b7684](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/45b768467eed3786ca47f312ae7b2af41ee3b440))
+* * update quiz-api cy-229 ([e7f7b5b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e7f7b5b06f7ed85083542fd2b427493439a4dcca))
+* * update quiz-api cy-229 ([af0e982](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/af0e98205e88cbc585d913525f5e82006b316eca))
+* * update quiz-api path cy-229 ([70d068f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/70d068fedb5e8cba9634d33280b008df987c959a))
+* * update shared imports in quiz-api cy-229 ([ffda008](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ffda0080e67d3391ee7717546def2658b9446af0))
+* * update styles cy-229 ([1cc9e24](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1cc9e24b0b9ec9a04ef80773e2a392697f2a9e0d))
+* + add app-route type cy-229 ([e56cc00](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e56cc0001f7090d89e50c37ca9a7eb2bf49320f5))
+* + add plan-generation app route cy-229 ([9bbed22](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9bbed22db047d8519afab60fc664ce443ec49779))
+* + merge with main cy-229 ([b00ee09](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b00ee098c528bf22865c60007f6231a9a175af30))
+* Add 3 more plans styles cy-160 ([631e4ee](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/631e4eeb0ce5456758e184f9ec2daf296e7a13e7))
+* remove exact-optional-property-types from ts-config cy-273 ([6c03684](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6c036848bf2a2a360bd349d7e5a0179e81895e57))
+* update plan module to add "/generate" endpoint cy-229 ([8b34607](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8b346078be5e53ef6af2961f13ba0b7df8f848a7))
+
+
+### Bug Fixes
+
+* change homepage header button cy-267 ([8c5c24e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8c5c24e82c1c3f33ea607b155a701c3ab69dc6b3))
+* rename header button, update styles cy-267 ([5ce1aa3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5ce1aa3f0883531f5c93f6a82fab4eb24de4a5c5))
+
+## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.13.1...frontend-v1.14.0) (2025-08-15)
+
+
+### Features
+
+* dashboard header Logout button does not log out user cy-169 ([cf7a651](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cf7a65149fbdbd4644c6eb219db6b72d52eb34cc))
+
+## [1.13.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.13.0...frontend-v1.13.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* replace await with promise enableMocking cy-259 ([1fe0513](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1fe0513c23c10cc94b03898b2848f6b38a742884))
+* replace await with promise enableMocking cy-259 ([ca08b97](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ca08b97962b4ab1bc532566e768b69f77d3d5bf7))
+
+## [1.13.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.12.2...frontend-v1.13.0) (2025-08-15)
+
+
+### Features
+
+* add delay before loader finishes, speed up img slider cy-56 ([4a2e5bd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/4a2e5bd134ec1a8cd4078fa0be6db34339dcf6e9))
+* add plan generation loader cy-56 ([82aee53](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/82aee533b605d39e2056a27f2694b75b3a601c2e))
+
+
+### Bug Fixes
+
+* add random artificial delay cy-56 ([aee99f7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/aee99f726dc0dd30d2624c07c4ae5ceb628a6fb8))
+
+## [1.12.2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.12.1...frontend-v1.12.2) (2025-08-14)
+
+
+### Bug Fixes
+
+* add plan page to divider rendering condition cy-235 ([ca9e1e0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ca9e1e0cc98179cceccd9e5751a2991691211d69))
+* Dashboard and My Plan sections stretch to fill the browser cy-232 ([55f2bb2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/55f2bb2eab8e45b2bef3c586d0c6d1674bac890e))
+* Header has incorrect background color and visible divider cy-235 ([3093a43](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3093a439099789ebf7ed1a9e6f17f47f642cf39b))
+* remove sections stretch cy-232 ([3560864](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/35608646019c60d605e9c89da98d23abe90b3280))
+
+## [1.12.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.12.0...frontend-v1.12.1) (2025-08-13)
+
+
+### Bug Fixes
+
+* change borders styles cy-234 ([7cb2eb1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7cb2eb1db953589b8aa70048499f99691c668f21))
+* Checkly logo incorrect font in Landing, Sign-in, and Sign-up pages cy-236 ([db3dc3e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/db3dc3e07acea484fbae4a0484ab17984f51b6c8))
+* Header has incorrect background color and visible divider cy-235 ([b5095ed](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b5095ed5d8f380173604c6ccdd1885d885160f9b))
+* plan overview container minimum height and task control hover contrast cy-231 ([c24a825](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c24a825f8a33cd4b83824c6fe9d58e4e81b1f1fd))
+* remove unused exports cy-236 ([940911d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/940911dc1174cdb1ab636c9a8b860af26847f564))
+* render divider if on dashboard page cy-235 ([ed8cf28](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ed8cf289db2caebf4202e66079d626f908bd347a))
+* Side Panel's border width is too big and uneven cy-234 ([bd13523](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bd13523923e166013b49a49da1d3d0c88cc0c35e))
+* update checkly logo font cy-236 ([c7ecabe](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c7ecabeb45d2b3c8248e262f8cb07f81c276081e))
+
+## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.11.0...frontend-v1.12.0) (2025-08-13)
+
+
+### Features
+
+* **frontend:** quiz frontend implementation cy-15 ([e535ae4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e535ae4e1afa514869821dc0f344615f8275b102))
+* implmented single choice with text component cy-15 ([a41b66c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a41b66cf00f324f1aa367d4687d71ca97860d56a))
+
+
+### Bug Fixes
+
+* fix navigation cy-15 ([19fe446](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/19fe446b2af491415b6cad29ac60da2dedea8ae0))
+* merge conflicts with main cy-15 ([f11ad8f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f11ad8fc6c0f5c0b639efdf77813e2fb64700e01))
+* quiz category page styles cy-15 ([488eeab](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/488eeab1cdbfc601e6c8abd2ec0d1b4ff5642b22))
+* remove blank white at the bootom cy-230 ([1988df8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1988df8c5f5ed8c42d350662b5b841dab55ea4ae))
+* remove blank white at the bootom cy-230 ([c32b0dd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c32b0dd46d99f6a43c0e5894519c208b6d73572f))
+
 ## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.10.0...frontend-v1.11.0) (2025-08-12)
 
 

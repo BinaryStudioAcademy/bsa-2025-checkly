@@ -4,10 +4,10 @@ import { type ButtonVariant } from "~/libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	className?: string | undefined;
-	disabled?: boolean;
+	className?: string;
 	icon?: React.ReactNode;
 	iconOnlySize?: "large" | "medium" | "small";
+	isDisabled?: boolean;
 	isIconOnly?: boolean;
 	label: string;
 	loader?: React.ReactNode;
@@ -19,9 +19,9 @@ type Properties = {
 
 const Button: React.FC<Properties> = ({
 	className = "",
-	disabled = false,
 	icon,
 	iconOnlySize = "large",
+	isDisabled = false,
 	isIconOnly = false,
 	label,
 	loader,
@@ -45,7 +45,7 @@ const Button: React.FC<Properties> = ({
 		<button
 			aria-label={isIconOnly ? label : undefined}
 			className={buttonClasses}
-			disabled={disabled}
+			disabled={isDisabled}
 			onClick={onClick}
 			type={type}
 		>
@@ -54,7 +54,7 @@ const Button: React.FC<Properties> = ({
 					{icon}
 				</span>
 			)}
-			{!isIconOnly && <span>{label}</span>}
+			{!isIconOnly && <span className={styles["button-text"]}>{label}</span>}
 			{loader}
 		</button>
 	);

@@ -5,16 +5,16 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	className?: string;
-	disabled?: boolean;
 	icon?: React.ReactNode;
+	isDisabled?: boolean;
 	label: string;
 	onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const CreatePlanButton: React.FC<Properties> = ({
 	className,
-	disabled = false,
 	icon,
+	isDisabled = false,
 	label,
 	onClick,
 }: Properties) => {
@@ -23,8 +23,8 @@ const CreatePlanButton: React.FC<Properties> = ({
 	return (
 		<Button
 			className={buttonClasses}
-			disabled={disabled}
 			icon={icon}
+			isDisabled={isDisabled}
 			label={label}
 			onClick={onClick}
 			size="large"

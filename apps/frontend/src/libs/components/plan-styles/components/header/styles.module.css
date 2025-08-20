@@ -1,0 +1,6 @@
+.plan-title {
+	font-family: var(--font-family-onest);
+	font-size: calc(42px * var(--coefficient));
+	font-weight: var(--font-weight-bold);
+	text-wrap: balance;
+}

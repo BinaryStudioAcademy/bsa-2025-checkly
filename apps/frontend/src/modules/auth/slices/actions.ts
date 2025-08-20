@@ -1,15 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { MESSAGES } from "~/libs/constants/messages.constants.js";
 import { ErrorMessage } from "~/libs/enums/enums.js";
+import { HTTPError } from "~/libs/modules/http/http.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
+	type UserUpdateRequestDto,
 } from "~/modules/users/users.js";
 
-import { name as sliceName } from "./auth.slice.js";
+import {
+	actions as authSliceActions,
+	name as sliceName,
+} from "./auth.slice.js";
 
 const signIn = createAsyncThunk<
 	UserDto,
@@ -60,4 +66,72 @@ const getCurrentUser = createAsyncThunk<
 	return await authApi.getCurrentUser();
 });
 
-export { getCurrentUser, signIn, signUp };
+const updateProfile = createAsyncThunk<
+	UserDto,
+	UserUpdateRequestDto,
+	AsyncThunkConfig
+>(
+	`${sliceName}/update-profile`,
+	async (payload, { extra, rejectWithValue }) => {
+		const { userApi } = extra;
+
+		try {
+			return await userApi.updateMe(payload);
+		} catch (error) {
+			if (error instanceof HTTPError) {
+				return rejectWithValue(error.message);
+			}
+
+			return rejectWithValue(ErrorMessage.DEFAULT_ERROR_MESSAGE);
+		}
+	},
+);
+
+const avatarRemove = createAsyncThunk<
+	UserDto,
+	{ userId: number },
+	AsyncThunkConfig
+>(`${sliceName}/avatar-remove`, async ({ userId }, { extra }) => {
+	const { userApi } = extra;
+	const response = await userApi.removeAvatar(userId);
+
+	return (await response.json()) as UserDto;
+});
+
+const avatarUpload = createAsyncThunk<
+	UserDto,
+	{ file: File; userId: number },
+	AsyncThunkConfig
+>(`${sliceName}/avatar-upload`, async ({ file, userId }, { extra }) => {
+	const { userApi } = extra;
+	const response = await userApi.uploadAvatar(userId, file);
+
+	return (await response.json()) as UserDto;
+});
+
+const logout = createAsyncThunk<null, undefined, AsyncThunkConfig>(
+	`${sliceName}/logout`,
+	async (_payload, { dispatch, extra }) => {
+		const { notifications, storage } = extra;
+
+		try {
+			await storage.drop(StorageKey.TOKEN);
+		} catch {
+			notifications.error(MESSAGES.AUTH.LOGOUT_FAILED);
+		}
+
+		dispatch(authSliceActions.resetAuthState());
+
+		return null;
+	},
+);
+
+export {
+	avatarRemove,
+	avatarUpload,
+	getCurrentUser,
+	logout,
+	signIn,
+	signUp,
+	updateProfile,
+};

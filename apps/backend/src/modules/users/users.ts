@@ -15,3 +15,4 @@ export { type UserSignInRequestDto } from "./libs/types/types.js";
 export { type UserSignUpRequestDto } from "./libs/types/types.js";
 export { userSignInValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 export { userSignUpValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+export { userUpdateValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
