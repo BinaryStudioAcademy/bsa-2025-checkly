@@ -109,19 +109,19 @@ const SignInForm: React.FC<Properties> = ({
 						<Input
 							control={control}
 							errors={errors}
+							isRequired
 							label="Email"
 							name="email"
-							placeholder={AUTH_PLACEHOLDERS.email}
-							required
+							placeholder={AUTH_PLACEHOLDERS.EMAIL}
 							type="email"
 						/>
 						<Input
 							control={control}
 							errors={errors}
+							isRequired
 							label="Password"
 							name="password"
-							placeholder={AUTH_PLACEHOLDERS.password}
-							required
+							placeholder={AUTH_PLACEHOLDERS.PASSWORD}
 							type="password"
 						/>
 					</div>

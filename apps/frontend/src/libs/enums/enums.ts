@@ -15,6 +15,7 @@ export { RouteAccess } from "./route-access.js";
 export {
 	APIPath,
 	AppEnvironment,
+	AvatarTypes,
 	ContentType,
 	DataStatus,
 	FileExtension,
@@ -24,4 +25,5 @@ export {
 	QuizIndexes,
 	QuizQuestionFormat,
 	ServerErrorType,
+	ErrorMessage as SharedErrorMessage,
 } from "shared";

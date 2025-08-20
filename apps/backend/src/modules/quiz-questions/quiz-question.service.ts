@@ -8,9 +8,8 @@ class QuizQuestionService {
 		this.quizQuestionRepository = quizQuestionRepository;
 	}
 
-	public async findAllQuestions(): Promise<QuizQuestionsResponseDto> {
-		const questions =
-			await this.quizQuestionRepository.findAllQuestionsWithOptions();
+	public async findAll(): Promise<QuizQuestionsResponseDto> {
+		const questions = await this.quizQuestionRepository.findAllWithOptions();
 
 		return {
 			items: questions.map((question) => question.toObject()),

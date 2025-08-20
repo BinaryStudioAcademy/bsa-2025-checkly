@@ -88,7 +88,7 @@
 	transform: scale(1.2);
 }
 
-.button-icon svg {
+.button-icon [viewBox] {
 	width: 1.25lh;
 	height: 1.25lh;
 	transition: transform 0.3s ease;
@@ -106,7 +106,7 @@
 	transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.button-icon-only svg {
+.button-icon-only [viewBox] {
 	--icon-size: 1.5lh;
 
 	width: var(--icon-size);
@@ -122,7 +122,7 @@
 	--button-icon-only-padding: var(--space-2xs);
 }
 
-.button-icon-only-small svg {
+.button-icon-only-small [viewBox] {
 	--icon-size: 1.2lh;
 }
 
@@ -134,7 +134,7 @@
 	--button-icon-only-padding: var(--space-s);
 }
 
-.button-icon-only-large svg {
+.button-icon-only-large [viewBox] {
 	--icon-size: 2lh;
 }
 

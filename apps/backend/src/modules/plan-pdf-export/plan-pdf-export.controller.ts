@@ -1,4 +1,4 @@
-import { APIPath, ContentType, ErrorConstants } from "~/libs/enums/enums.js";
+import { APIPath, ContentType } from "~/libs/enums/enums.js";
 import {
 	type APIBodyOptions,
 	BaseController,
@@ -70,24 +70,12 @@ class PlanPdfExportController extends BaseController {
 		payload: Buffer;
 		status: ValueOf<typeof HTTPCode>;
 	}> {
-		const token = options.request?.headers["authorization"]?.replace(
-			"Bearer ",
-			"",
-		);
-
-		if (!token) {
-			throw new Error(ErrorConstants.DEFAULT_ERROR_MESSAGE);
-		}
-
-		const pdfBuffer = await this.planPdfExportService.generatePdf(
-			options.body,
-			token,
-		);
+		const pdfBuffer = await this.planPdfExportService.generatePdf(options.body);
 
 		return {
 			headers: { "Content-Type": ContentType.PDF },
 			payload: pdfBuffer,
-			status: HTTPCode.OK as (typeof HTTPCode)[keyof typeof HTTPCode],
+			status: HTTPCode.OK,
 		};
 	}
 }

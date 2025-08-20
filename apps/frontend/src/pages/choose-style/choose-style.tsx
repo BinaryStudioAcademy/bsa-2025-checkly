@@ -25,17 +25,17 @@ import { type ViewOptions } from "~/libs/types/types.js";
 import { styleCards } from "./choose-style.data.js";
 import styles from "./style.module.css";
 
-const preselectedElement = 1;
+const PRESELECTED_ELEMENT = 1;
 const PLAN_VIEW_OPTION: ViewOptions = "selection";
 
 const ChooseStyle: React.FC = () => {
 	const [selectedCard, setSelectedCard] = useState<null | string>(
-		styleCards[preselectedElement]?.id || null,
+		styleCards[PRESELECTED_ELEMENT]?.id ?? null,
 	);
 
 	const handleCardClick = useCallback(
 		(event: React.MouseEvent<HTMLButtonElement>): void => {
-			setSelectedCard(event.currentTarget.dataset["card"] || null);
+			setSelectedCard(event.currentTarget.dataset["card"] ?? null);
 		},
 		[],
 	);
@@ -47,6 +47,7 @@ const ChooseStyle: React.FC = () => {
 			<AppHeader />
 			<section
 				className={getClassNames(
+					styles["choose-style-wrapper"],
 					styles["choose-style-section"],
 					"grid-pattern",
 				)}
@@ -66,15 +67,15 @@ const ChooseStyle: React.FC = () => {
 						size="small"
 					/>
 					<Button
-						disabled
 						icon={<SmartphoneIcon aria-hidden="true" />}
 						iconOnlySize="large"
+						isDisabled
 						label="Mobile Wallpaper"
 						size="small"
 					/>
 					<Button
-						disabled
 						icon={<MonitorIcon aria-hidden="true" />}
+						isDisabled
 						label="Desktop Wallpaper"
 						size="small"
 					/>

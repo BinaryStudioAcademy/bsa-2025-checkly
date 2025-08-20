@@ -1,6 +1,7 @@
 const AppRoute = {
 	CHOOSE_STYLE: "/choose-style",
 	DASHBOARD: "/dashboard",
+	LOGOUT: "/logout",
 	NOT_FOUND: "*",
 	OVERVIEW_PAGE: "/plan-style-overview",
 	PLAN: "/plan",

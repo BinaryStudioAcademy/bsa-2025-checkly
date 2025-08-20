@@ -23,6 +23,12 @@ type EnvironmentSchema = {
 		OPEN_AI_KEY: string;
 		TEXT_GENERATION_MODEL: string;
 	};
+	S3: {
+		ACCESS_KEY_ID: string;
+		BUCKET: string;
+		REGION: string;
+		SECRET_ACCESS_KEY: string;
+	};
 	TOKEN: {
 		ENCRYPTION: string;
 		EXPIRATION: string;

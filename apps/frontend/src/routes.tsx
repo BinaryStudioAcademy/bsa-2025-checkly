@@ -7,6 +7,7 @@ import {
 	Auth,
 	ChooseStyle,
 	Home,
+	LogoutPage,
 	NotFound,
 	PlanGeneration,
 	PlanStyleOverview,
@@ -19,9 +20,9 @@ import { TestPage } from "./pages/test-page/test-page.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
 
-interface RouteHandle {
+type RouteHandle = {
 	access: (typeof RouteAccess)[keyof typeof RouteAccess];
-}
+};
 
 const routes: CustomRouteObject[] = [
 	{
@@ -43,6 +44,11 @@ const routes: CustomRouteObject[] = [
 		element: <PlanStyleOverview />,
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.OVERVIEW_PAGE,
+	},
+	{
+		element: <LogoutPage />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.LOGOUT,
 	},
 	{
 		element: <QuestionFlow />,
@@ -98,7 +104,7 @@ const routes: CustomRouteObject[] = [
 	},
 	{
 		element: <PlanStylePrint />,
-		handle: { access: RouteAccess.AUTHENTICATED },
+		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.PLAN_STYLE_PRINT,
 	},
 ];

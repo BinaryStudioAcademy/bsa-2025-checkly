@@ -102,7 +102,7 @@ class QuizQuestionController extends BaseController {
 		this.quizQuestionService = quizQuestionService;
 
 		this.addRoute({
-			handler: () => this.findAllQuestions(),
+			handler: () => this.findAll(),
 			isPublic: true,
 			method: HTTPRequestMethod.GET,
 			path: QuizApiPath.ROOT,
@@ -122,11 +122,13 @@ class QuizQuestionController extends BaseController {
 	 *         content:
 	 *           application/json:
 	 *             schema:
-	 *               $ref: '#/components/schemas/QuizQuestionsResponseDto'
+	 *               type: array
+	 *               items:
+	 *                 $ref: '#/components/schemas/QuizQuestionsResponseDto'
 	 */
-	private async findAllQuestions(): Promise<APIHandlerResponse> {
+	private async findAll(): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.quizQuestionService.findAllQuestions(),
+			payload: await this.quizQuestionService.findAll(),
 			status: HTTPCode.OK,
 		};
 	}

@@ -8,6 +8,7 @@ type APIHandlerOptions<
 	T extends DefaultApiHandlerOptions = DefaultApiHandlerOptions,
 > = {
 	body: T["body"];
+	originalRequest?: FastifyRequest;
 	params: T["params"];
 	query: T["query"];
 	request?: FastifyRequest;
@@ -26,4 +27,13 @@ type IdParameter = {
 
 type IdParametersOption = APIHandlerOptions<{ params: IdParameter }>;
 
-export { type APIBodyOptions, type APIHandlerOptions, type IdParametersOption };
+type SearchQueryParametersOption<T> = APIHandlerOptions<{
+	query: T;
+}>;
+
+export {
+	type APIBodyOptions,
+	type APIHandlerOptions,
+	type IdParametersOption,
+	type SearchQueryParametersOption,
+};

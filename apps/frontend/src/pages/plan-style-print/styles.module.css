@@ -1,5 +1,8 @@
 .print-container {
 	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	width: 210mm;
 	min-height: 297mm;
 	margin: 0 auto;
@@ -8,6 +11,9 @@
 
 @media print {
 	.print-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		width: 210mm;
 		min-height: 297mm;
 		margin: 0;

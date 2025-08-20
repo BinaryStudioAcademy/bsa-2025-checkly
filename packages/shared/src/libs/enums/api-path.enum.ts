@@ -1,5 +1,6 @@
 const APIPath = {
 	AUTH: "/auth",
+	PLAN_CATEGORIES: "/plan-categories",
 	PLAN_DAYS: "/plan-days",
 	PLAN_EXPORT_ROOT: "/plan-export",
 	PLANS: "/plans",

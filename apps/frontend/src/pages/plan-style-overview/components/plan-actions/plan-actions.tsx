@@ -50,24 +50,24 @@ const PlanActions: React.FC<Properties> = ({
 		<div className={styles["footer-container"]}>
 			<div className={styles["actions-container"]}>
 				<Button
-					disabled={!isAuthenticated}
 					icon={<Palette aria-hidden="true" />}
+					isDisabled={!isAuthenticated}
 					label="CHOOSE STYLE"
 					onClick={handleChooseStyleClick}
 					size="small"
 					variant="secondary"
 				/>
 				<Button
-					disabled={!isAuthenticated}
 					icon={<EditIcon aria-hidden="true" />}
+					isDisabled={!isAuthenticated}
 					label="EDIT"
 					onClick={handleEditClick}
 					size="small"
 					variant="secondary"
 				/>
 				<Button
-					disabled={!isAuthenticated || isDownloading}
 					icon={<DownloadIcon aria-hidden="true" />}
+					isDisabled={!isAuthenticated || isDownloading}
 					label="DOWNLOAD"
 					loader={
 						isDownloading ? (
@@ -79,8 +79,8 @@ const PlanActions: React.FC<Properties> = ({
 					variant="primary"
 				/>
 				<Button
-					disabled={!isAuthenticated}
 					icon={<Dashboard aria-hidden="true" />}
+					isDisabled={!isAuthenticated}
 					label="GO TO DASHBOARD"
 					onClick={handleGoToDashboardClick}
 					size="small"

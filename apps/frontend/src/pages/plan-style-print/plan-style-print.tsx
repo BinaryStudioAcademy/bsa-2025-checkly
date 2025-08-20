@@ -6,7 +6,7 @@ import { type PlanStyleOption } from "~/libs/types/types.js";
 import styles from "./styles.module.css";
 
 const PlanStylePrint: React.FC = () => {
-	const inputStyle: PlanStyleOption = "withremarks";
+	const inputStyle: PlanStyleOption = "WITH_REMARKS";
 
 	return (
 		<div className={styles["print-container"]} id="print-container">

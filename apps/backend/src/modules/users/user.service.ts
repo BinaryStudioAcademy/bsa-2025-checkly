@@ -1,3 +1,4 @@
+import { type FastifyRequest } from "fastify";
 import { UserValidationMessage } from "shared";
 
 import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
@@ -6,6 +7,10 @@ import { type Service } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 
+import {
+	handleAvatarRemove,
+	handleAvatarUpload,
+} from "./helpers/avatar.helper.js";
 import {
 	type UserDto,
 	type UserGetAllResponseDto,
@@ -60,6 +65,12 @@ class UserService implements Service {
 		return await this.userRepository.findByField("email", email);
 	}
 
+	public async removeAvatar(
+		userId: number,
+	): Promise<ReturnType<typeof handleAvatarRemove>> {
+		return await handleAvatarRemove(this.userRepository, userId);
+	}
+
 	public async update(
 		id: number,
 		payload: UserUpdateRequestDto,
@@ -77,7 +88,7 @@ class UserService implements Service {
 		}
 
 		const updateData = {
-			dob: payload.dob || null,
+			dob: payload.dob ?? null,
 			email: payload.email.trim(),
 			name: payload.name.trim(),
 		};
@@ -90,9 +101,15 @@ class UserService implements Service {
 			});
 		}
 
-		const item = await this.userRepository.update(id, updateData);
+		const updatedUser = await this.userRepository.update(id, updateData);
 
-		return item ? item.toObject() : null;
+		return updatedUser ? updatedUser.toObject() : null;
+	}
+
+	public async uploadAvatar(
+		request: FastifyRequest,
+	): Promise<ReturnType<typeof handleAvatarUpload>> {
+		return await handleAvatarUpload(this.userRepository, request);
 	}
 }
 

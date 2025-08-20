@@ -1,5 +1,6 @@
 export { AppHeader } from "./app-header/app-header.js";
 export { App } from "./app/app.js";
+export { AvatarEdit } from "./avatar-edit/avatar-edit.js";
 export { Button } from "./button/button.js";
 export { DashboardWrapper } from "./dashboard-wrapper/dashboard-wrapper.js";
 export { Dashboard } from "./dashboard/dashboard.js";
@@ -8,6 +9,7 @@ export { Input } from "./input/input.js";
 export { Link } from "./link/link.js";
 export { Loader } from "./loader/loader.js";
 export { Logo } from "./logo/logo.js";
+export { Modal } from "./modal/modal.js";
 export { ProtectedRoute } from "./protected-route/protected-route.js";
 export { RouterProvider } from "./router-provider/router-provider.js";
 export { Provider as StoreProvider } from "react-redux";

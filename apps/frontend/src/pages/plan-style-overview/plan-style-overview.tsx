@@ -67,7 +67,7 @@ const PlanStyleOverview: React.FC = () => {
 				<div className={styles["plan-content"]}>
 					{selectedCategory === PlanCategoryId.PDF ? (
 						<>
-							<PlanStyle inputStyle="withremarks" />
+							<PlanStyle inputStyle="WITH_REMARKS" />
 							<DecorativeImage
 								className={styles["yellow-stars-reflection"]}
 								src={StarsYellow02}

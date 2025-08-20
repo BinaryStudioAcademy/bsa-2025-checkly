@@ -6,10 +6,7 @@ import { config } from "~/libs/modules/config/config.js";
 import { type ExportPlanPdfDto } from "./libs/types/types.js";
 
 class PlanPdfExportService {
-	public async generatePdf(
-		dto: ExportPlanPdfDto,
-		token: string,
-	): Promise<Buffer> {
+	public async generatePdf(dto: ExportPlanPdfDto): Promise<Buffer> {
 		const browser = await puppeteer.launch();
 		const page = await browser.newPage();
 
@@ -18,10 +15,6 @@ class PlanPdfExportService {
 		if (typeof printUrl !== "string" || !printUrl) {
 			throw new Error(ErrorConstants.DEFAULT_ERROR_MESSAGE);
 		}
-
-		await page.evaluateOnNewDocument((tk) => {
-			globalThis.localStorage.setItem("token", tk);
-		}, token);
 
 		await page.goto(printUrl, { waitUntil: "networkidle0" });
 

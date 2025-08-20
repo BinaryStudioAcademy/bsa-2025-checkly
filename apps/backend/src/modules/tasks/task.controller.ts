@@ -11,9 +11,11 @@ import { type TaskService } from "~/modules/tasks/task.service.js";
 import {
 	type TaskCreateRequestDto,
 	taskCreateValidationSchema,
+	type TaskUpdateRequestDto,
+	taskUpdateValidationSchema,
 } from "~/modules/tasks/tasks.js";
 
-import { TasksApiPath } from "./libs/enums/enums.js";
+import { TaskMessage, TasksApiPath } from "./libs/enums/enums.js";
 
 /**
  * @swagger
@@ -50,6 +52,16 @@ import { TasksApiPath } from "./libs/enums/enums.js";
  *         planDayId:
  *           type: number
  *           example: 5
+ *
+ *     TaskUpdateRequestDto:
+ *       type: object
+ *       properties:
+ *         title:
+ *           type: string
+ *           example: "Task Example"
+ *         description:
+ *           type: string
+ *           example: "Task Description"
  *
  *     TaskResponseDto:
  *       type: object
@@ -104,6 +116,24 @@ class TaskController extends BaseController {
 				body: taskCreateValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.update(
+					options as APIBodyOptions<TaskUpdateRequestDto> & IdParametersOption,
+				),
+			method: HTTPRequestMethod.PATCH,
+			path: TasksApiPath.TASK_UPDATE,
+			validation: {
+				body: taskUpdateValidationSchema,
+			},
+		});
+
+		this.addRoute({
+			handler: (options) => this.delete(options as IdParametersOption),
+			method: HTTPRequestMethod.DELETE,
+			path: TasksApiPath.TASK_DELETE,
+		});
 	}
 
 	/**
@@ -151,6 +181,69 @@ class TaskController extends BaseController {
 	/**
 	 * @swagger
 	 * /tasks/{id}:
+	 *   delete:
+	 *     tags:
+	 *       - tasks
+	 *     summary: Delete task by ID
+	 *     security:
+	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - in: path
+	 *         name: id
+	 *         schema:
+	 *           type: number
+	 *         required: true
+	 *         description: ID of the task
+	 *     responses:
+	 *       200:
+	 *         description: Task deleted successfully
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 success:
+	 *                   type: boolean
+	 *                   example: true
+	 *       401:
+	 *         description: Unauthorized - Invalid or missing authentication token
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 message:
+	 *                   type: string
+	 *                   example: "Unauthorized"
+	 *       404:
+	 *         description: Task not found
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 message:
+	 *                   type: string
+	 *                   example: "Task not found"
+	 */
+	private async delete(
+		options: IdParametersOption,
+	): Promise<APIHandlerResponse> {
+		const { id } = options.params;
+
+		const isDeleted = await this.taskService.delete(id);
+
+		return isDeleted
+			? { payload: { message: TaskMessage.TASK_DELETED }, status: HTTPCode.OK }
+			: {
+					payload: { message: TaskMessage.TASK_NOT_FOUND },
+					status: HTTPCode.NOT_FOUND,
+				};
+	}
+
+	/**
+	 * @swagger
+	 * /tasks/{id}:
 	 *   get:
 	 *     tags:
 	 *       - tasks
@@ -191,6 +284,71 @@ class TaskController extends BaseController {
 			payload: await this.taskService.find(id),
 			status: HTTPCode.OK,
 		};
+	}
+
+	/**
+	 * @swagger
+	 * /tasks/{id}:
+	 *   patch:
+	 *     tags:
+	 *       - tasks
+	 *     summary: Update task by ID
+	 *     security:
+	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - in: path
+	 *         name: id
+	 *         schema:
+	 *           type: number
+	 *         required: true
+	 *         description: ID of the task
+	 *     requestBody:
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             $ref: '#/components/schemas/TaskUpdateRequestDto'
+	 *     responses:
+	 *       200:
+	 *         description: Task updated successfully
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/TaskResponseDto'
+	 *       401:
+	 *         description: Unauthorized - Invalid or missing authentication token
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 message:
+	 *                   type: string
+	 *                   example: "Unauthorized"
+	 *       404:
+	 *         description: Task not found
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 message:
+	 *                   type: string
+	 *                   example: "Task not found"
+	 */
+	private async update(
+		options: APIBodyOptions<TaskUpdateRequestDto> & IdParametersOption,
+	): Promise<APIHandlerResponse> {
+		const { id } = options.params;
+
+		const updatedTask = await this.taskService.update(id, options.body);
+
+		return updatedTask
+			? { payload: updatedTask, status: HTTPCode.OK }
+			: {
+					payload: { message: TaskMessage.TASK_NOT_FOUND },
+					status: HTTPCode.NOT_FOUND,
+				};
 	}
 }
 
