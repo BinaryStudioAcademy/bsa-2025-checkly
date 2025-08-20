@@ -1,1 +1,7 @@
-export { ErrorMessage, HTTPCode, HTTPError, PlansApiPath } from "shared";
+export {
+	ErrorMessage,
+	HTTPCode,
+	HTTPError,
+	PlanAction,
+	PlansApiPath,
+} from "shared";

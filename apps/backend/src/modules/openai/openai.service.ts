@@ -1,5 +1,3 @@
-import { type GeneratedPlanDTO } from "shared";
-
 import { config } from "~/libs/modules/config/config.js";
 
 import {
@@ -8,7 +6,7 @@ import {
 	MILLISECONDS_IN_SECOND,
 	MODEL_TEMPERATURE,
 	ONE,
-	SYSTEM_PROMPT as systemPrompt,
+	SYSTEM_PROMPTS,
 	ZERO,
 } from "./libs/constants/constants.js";
 import {
@@ -16,6 +14,11 @@ import {
 	PlanErrorMessage,
 	ResponseFormat,
 } from "./libs/enums/enums.js";
+import {
+	type GeneratedDayDTO,
+	type GeneratedPlanDTO,
+	type GeneratedTaskDTO,
+} from "./libs/types/types.js";
 import { delay, PromptBuilder } from "./libs/utilities/utilities.js";
 import {
 	planCreateValidationSchema,
@@ -23,38 +26,60 @@ import {
 } from "./libs/validation-schemas/validation-schemas.js";
 import { type OpenAIModule } from "./openai.module.js";
 
+type ActionType = keyof ActionTypeMap;
+
+type ActionTypeMap = {
+	day: GeneratedDayDTO;
+	plan: GeneratedPlanDTO;
+	task: GeneratedTaskDTO;
+};
+
 class OpenAIService {
 	private maxAttempts: number;
 	private openAiModule: OpenAIModule;
+
+	private validationHandlers = {
+		day: (data: unknown): void => {
+			this.validateDay(data as GeneratedDayDTO, ZERO);
+		},
+		plan: (data: unknown): void => {
+			this.validatePlan(data as GeneratedPlanDTO);
+		},
+		task: (data: unknown): void => {
+			this.validateTask(data as GeneratedTaskDTO);
+		},
+	};
 
 	public constructor(openAiModule: OpenAIModule) {
 		this.openAiModule = openAiModule;
 		this.maxAttempts = MAX_ATTEMPTS;
 	}
 
-	public async generatePlan({
+	public async generate<T extends ActionType>({
+		actionType = "plan" as T,
 		assistantPrompt,
 		attempts = ZERO,
 		userPrompt,
 	}: {
+		actionType: T;
 		assistantPrompt?: string;
 		attempts?: number;
 		userPrompt: string;
-	}): Promise<GeneratedPlanDTO> {
+	}): Promise<ActionTypeMap[T]> {
 		let answer = "";
 
 		try {
 			answer = await this.callAPI({
 				assistantPrompt,
-				systemPrompt,
+				systemPrompt: SYSTEM_PROMPTS[actionType] as string,
 				userPrompt,
 			});
 
-			const planData = JSON.parse(answer) as GeneratedPlanDTO;
+			const data = JSON.parse(answer) as ActionTypeMap[T];
 
-			this.validatePlan(planData);
+			this.validationHandlers[actionType](data);
 
-			return planData;
+			return data;
 		} catch (error) {
 			const { status: errorStatus } = error as { status: number };
 
@@ -80,7 +105,8 @@ class OpenAIService {
 			const errorMessage =
 				error instanceof Error ? error.message : String(error);
 
-			return await this.generatePlan({
+			return await this.generate({
+				actionType,
 				assistantPrompt: PromptBuilder.create()
 					.addError(errorMessage)
 					.addPreviousResponse(answer)
@@ -116,46 +142,50 @@ class OpenAIService {
 		return response.choices[ZERO]?.message.content || "{}";
 	}
 
-	private validatePlan(generetedPlan: GeneratedPlanDTO): void {
-		const planResults = planCreateValidationSchema
-			.pick({ duration: true, intensity: true, title: true })
-			.safeParse(generetedPlan);
+	private validateDay(day: GeneratedDayDTO, dayIndex: number): void {
+		if (
+			!Array.isArray(day.tasks) ||
+			day.tasks.length === ZERO ||
+			day.dayNumber !== dayIndex + ONE
+		) {
+			throw new Error(PlanErrorMessage.TASKS_FAILED);
+		}
 
-		if (!planResults.success) {
+		for (const task of day.tasks) {
+			this.validateTask(task);
+		}
+	}
+
+	private validatePlan(plan: GeneratedPlanDTO): void {
+		const result = planCreateValidationSchema
+			.pick({ duration: true, intensity: true, title: true })
+			.safeParse(plan);
+
+		if (!result.success) {
 			throw new Error(PlanErrorMessage.PLAN_FAILED);
 		}
 
-		const isDaysValid =
-			!Array.isArray(generetedPlan.days) || generetedPlan.days.length === ZERO;
-
-		if (isDaysValid) {
+		if (!Array.isArray(plan.days) || plan.days.length === ZERO) {
 			throw new Error(PlanErrorMessage.DAYS_FAILED);
 		}
 
-		for (const [dayIndex, day] of generetedPlan.days.entries()) {
-			const isDayValid =
-				!Array.isArray(day.tasks) ||
-				day.tasks.length === ZERO ||
-				day.dayNumber !== dayIndex + ONE;
+		for (const [index, day] of plan.days.entries()) {
+			this.validateDay(day, index);
+		}
+	}
 
-			if (isDayValid) {
-				throw new Error(PlanErrorMessage.TASKS_FAILED);
-			}
+	private validateTask(task: GeneratedTaskDTO): void {
+		const result = taskCreateValidationSchema
+			.pick({
+				description: true,
+				executionTimeType: true,
+				order: true,
+				title: true,
+			})
+			.safeParse(task);
 
-			for (const task of day.tasks) {
-				const taskResult = taskCreateValidationSchema
-					.pick({
-						description: true,
-						executionTimeType: true,
-						order: true,
-						title: true,
-					})
-					.safeParse(task);
-
-				if (!taskResult.success) {
-					throw new Error(PlanErrorMessage.TASK_FAILED);
-				}
-			}
+		if (!result.success) {
+			throw new Error(PlanErrorMessage.TASK_FAILED);
 		}
 	}
 }

@@ -1,12 +1,16 @@
+import {
+	type GeneratedDayDTO,
+	type GeneratedTaskDTO,
+	type PlanActionType,
+} from "shared";
+
 import { type Service } from "~/libs/types/types.js";
 import { PlanEntity } from "~/modules/plans/plan.entity.js";
 import { type PlanRepository } from "~/modules/plans/plan.repository.js";
 
 import { openAiService } from "../openai/openai.js";
 import { type OpenAIService } from "../openai/openai.service.js";
-import { PlanDayEntity } from "../plan-days/plan-day.entity.js";
 import { type PlanDayRepository } from "../plan-days/plan-day.repository.js";
-import { TaskEntity } from "../tasks/task.entity.js";
 import { type TaskRepository } from "../tasks/task.repository.js";
 import {
 	MOCK_GENERATED_PLAN,
@@ -27,6 +31,14 @@ import {
 	type TaskDto,
 } from "./libs/types/types.js";
 import { createPrompt } from "./libs/utilities/utilities.js";
+
+type ActionType = keyof ActionTypeMap;
+
+type ActionTypeMap = {
+	day: GeneratedDayDTO;
+	plan: GeneratedPlanDTO;
+	task: GeneratedTaskDTO;
+};
 
 class PlanService implements Service {
 	private openAIService: OpenAIService;
@@ -85,14 +97,18 @@ class PlanService implements Service {
 		return item ? item.toObjectWithRelations() : null;
 	}
 
-	public async generate(
+	public async generate<T extends ActionType>(
 		payload: QuizAnswersRequestDto,
-	): Promise<GeneratedPlanDTO> {
+		actionType: PlanActionType,
+	): Promise<ActionTypeMap[T]> {
 		const userPrompt = createPrompt(payload);
 
-		const plan = await this.openAIService.generatePlan({ userPrompt });
+		const result = await this.openAIService.generate({
+			actionType,
+			userPrompt,
+		});
 
-		return plan;
+		return result as ActionTypeMap[T];
 	}
 
 	public async regenerate(id: number): Promise<null | PlanDaysTaskDto> {
@@ -123,15 +139,17 @@ class PlanService implements Service {
 		// }
 		// const { name } = category.toObject();
 		// const notes = "";
-		// const generatedPlan = await this.generate({
-		// 	answers,
-		// 	category: name,
-		// 	notes,
-		// });
+		// const generatedPlan = (await this.generate(
+		// 	{
+		// 		answers,
+		// 		category: name,
+		// 		notes,
+		// 	},
+		// 	PlanAction.PLAN,
+		// )) as GeneratedPlanDTO;
 
 		const generatedPlan: PlanDaysTaskDto = MOCK_GENERATED_PLAN;
-		const planEntity = PlanEntity.initialize(generatedPlan);
-		await this.planRepository.regenerate(id, planEntity);
+		await this.planRepository.regenerate(id, generatedPlan);
 
 		const newPlan = await this.planRepository.findWithRelations(id);
 
@@ -187,15 +205,17 @@ class PlanService implements Service {
 		// }
 		// const { name } = category.toObject();
 		// const notes = "";
-		// const generatedPlanDay = await this.generate({
-		// 	answers,
-		// 	category: name,
-		// 	notes,
-		// });
+		// const generatedPlanDay = (await this.generate(
+		// 	{
+		// 		answers,
+		// 		category: name,
+		// 		notes,
+		// 	},
+		// 	PlanAction.DAY,
+		// )) as GeneratedDayDTO;
 
 		const generatedPlanDay: PlanDayDto = MOCK_GENERATED_PLAN_DAY;
-		const planDayEntity = PlanDayEntity.initialize(generatedPlanDay);
-		await this.planDayRepository.regenerate(dayId, planDayEntity);
+		await this.planDayRepository.regenerate(dayId, generatedPlanDay);
 
 		const newPlan = await this.planRepository.findWithRelations(planId);
 
@@ -270,15 +290,17 @@ class PlanService implements Service {
 		// }
 		// const { name } = category.toObject();
 		// const notes = "";
-		// const generatedTask = await this.generate({
-		// 	answers,
-		// 	category: name,
-		// 	notes,
-		// });
+		// const generatedTask = await this.generate(
+		// 	{
+		// 		answers,
+		// 		category: name,
+		// 		notes,
+		// 	},
+		// 	PlanAction.TASK,
+		// ) as GeneratedTaskDTO;
 
 		const generatedTask: TaskDto = MOCK_GENERATED_TASK;
-		const taskEntity = TaskEntity.initialize(generatedTask);
-		await this.taskRepository.regenerate(taskId, taskEntity);
+		await this.taskRepository.regenerate(taskId, generatedTask);
 
 		const newPlan = await this.planRepository.findWithRelations(planId);
 

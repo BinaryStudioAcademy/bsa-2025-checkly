@@ -21,4 +21,4 @@ type GeneratedTaskDTO = {
 	title: string;
 };
 
-export { type GeneratedPlanDTO };
+export { type GeneratedDayDTO, type GeneratedPlanDTO, type GeneratedTaskDTO };

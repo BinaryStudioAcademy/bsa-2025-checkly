@@ -5,6 +5,7 @@ import { TaskEntity } from "~/modules/tasks/task.entity.js";
 import { type TaskModel } from "~/modules/tasks/task.model.js";
 
 import { ZERO } from "./libs/constants/constants.js";
+import { type GeneratedTaskDTO } from "./libs/types/types.js";
 
 class TaskRepository implements Repository {
 	private taskModel: typeof TaskModel;
@@ -100,15 +101,13 @@ class TaskRepository implements Repository {
 
 	public async regenerate(
 		taskId: number,
-		task: TaskEntity,
+		task: GeneratedTaskDTO,
 	): Promise<TaskEntity> {
-		const { description, executionTimeType, isCompleted, order, title } =
-			task.toObject();
+		const { description, executionTimeType, order, title } = task;
 
 		const payload = {
 			description,
 			executionTimeType,
-			isCompleted,
 			order,
 			title,
 		};

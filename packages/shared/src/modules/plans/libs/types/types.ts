@@ -1,3 +1,4 @@
+export { type PlanActionType } from "./plan-action.type.js";
 export {
 	type PlanDayDto,
 	type PlanDaysTaskDto,

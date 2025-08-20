@@ -36,7 +36,11 @@ export {
 	type ValueOf,
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
-export { type GeneratedPlanDTO } from "./modules/openai/openai.js";
+export {
+	type GeneratedDayDTO,
+	type GeneratedPlanDTO,
+	type GeneratedTaskDTO,
+} from "./modules/openai/openai.js";
 export {
 	type PlanDayCreateRequestDto,
 	planDayCreateValidationSchema,
@@ -46,6 +50,8 @@ export {
 	PlanDaysApiPath,
 } from "./modules/plan-days/plan-days.js";
 export {
+	PlanAction,
+	type PlanActionType,
 	type PlanCreateRequestDto,
 	planCreateValidationSchema,
 	type PlanDayDto,

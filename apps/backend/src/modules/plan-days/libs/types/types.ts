@@ -1,4 +1,5 @@
 export {
+	type GeneratedDayDTO,
 	type PlanDayCreateRequestDto,
 	type PlanDayDto,
 	type PlanDayGetAllResponseDto,

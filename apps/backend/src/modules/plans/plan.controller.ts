@@ -18,7 +18,7 @@ import {
 	type TaskRegenerationRequestDto,
 } from "~/modules/plans/plans.js";
 
-import { PlansApiPath } from "./libs/enums/enums.js";
+import { PlanAction, PlansApiPath } from "./libs/enums/enums.js";
 /**
  * @swagger
  * tags:
@@ -410,7 +410,7 @@ class PlanController extends BaseController {
 		options: APIBodyOptions<QuizAnswersRequestDto>,
 	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.planService.generate(options.body),
+			payload: await this.planService.generate(options.body, PlanAction.PLAN),
 			status: HTTPCode.OK,
 		};
 	}
