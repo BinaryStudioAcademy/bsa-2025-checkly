@@ -1,6 +1,7 @@
 import puppeteer from "puppeteer";
 
 import { ErrorConstants } from "~/libs/enums/enums.js";
+import { config } from "~/libs/modules/config/config.js";
 
 import { type ExportPlanPdfDto } from "./libs/types/types.js";
 
@@ -12,7 +13,7 @@ class PlanPdfExportService {
 		const browser = await puppeteer.launch();
 		const page = await browser.newPage();
 
-		const printUrl = process.env["FRONTEND_PLAN_PRINT_URL"];
+		const printUrl = config.ENV.FRONTEND.PLAN_PRINT_URL;
 
 		if (typeof printUrl !== "string" || !printUrl) {
 			throw new Error(ErrorConstants.DEFAULT_ERROR_MESSAGE);

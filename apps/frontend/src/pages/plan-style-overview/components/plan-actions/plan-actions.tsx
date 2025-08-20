@@ -1,17 +1,28 @@
 import React, { useCallback } from "react";
 
-import DownloadIcon from "~/assets/img/icons/download.svg";
-import EditIcon from "~/assets/img/icons/edit.svg";
-import { getClassNames } from "~/libs/helpers/helpers.js";
+import {
+	Dashboard,
+	DownloadIcon,
+	EditIcon,
+	Palette,
+} from "~/assets/img/icons/icons.js";
+import { Button } from "~/libs/components/button/button.js";
 
 import styles from "./styles.module.css";
 
 type Properties = {
+	onChooseStyle?: () => void;
 	onDownload?: () => void;
 	onEdit?: () => void;
+	onGoToDashboard?: () => void;
 };
 
-const PlanActions: React.FC<Properties> = ({ onDownload, onEdit }) => {
+const PlanActions: React.FC<Properties> = ({
+	onChooseStyle,
+	onDownload,
+	onEdit,
+	onGoToDashboard,
+}) => {
 	const handleEditClick = useCallback((): void => {
 		onEdit?.();
 	}, [onEdit]);
@@ -20,37 +31,44 @@ const PlanActions: React.FC<Properties> = ({ onDownload, onEdit }) => {
 		onDownload?.();
 	}, [onDownload]);
 
+	const handleGoToDashboardClick = useCallback((): void => {
+		onGoToDashboard?.();
+	}, [onGoToDashboard]);
+
+	const handleChooseStyleClick = useCallback((): void => {
+		onChooseStyle?.();
+	}, [onChooseStyle]);
+
 	return (
 		<div className={styles["actions-container"]}>
-			<button
-				aria-label="Edit plan"
-				className={getClassNames(
-					styles["action-button"],
-					styles["edit-button"],
-				)}
+			<Button
+				icon={<Palette aria-hidden="true" />}
+				label="CHOOSE STYLE"
+				onClick={handleChooseStyleClick}
+				size="small"
+				variant="secondary"
+			/>
+			<Button
+				icon={<EditIcon aria-hidden="true" />}
+				label="EDIT"
 				onClick={handleEditClick}
-				type="button"
-			>
-				<img alt="Edit" className={styles["button-icon"]} src={EditIcon} />
-				EDIT
-			</button>
-
-			<button
-				aria-label="Download plan"
-				className={getClassNames(
-					styles["action-button"],
-					styles["download-button"],
-				)}
+				size="small"
+				variant="secondary"
+			/>
+			<Button
+				icon={<DownloadIcon aria-hidden="true" />}
+				label="DOWNLOAD"
 				onClick={handleDownloadClick}
-				type="button"
-			>
-				<img
-					alt="Download"
-					className={styles["button-icon"]}
-					src={DownloadIcon}
-				/>
-				DOWNLOAD
-			</button>
+				size="small"
+				variant="primary"
+			/>
+			<Button
+				icon={<Dashboard aria-hidden="true" />}
+				label="GO TO DASHBOARD"
+				onClick={handleGoToDashboardClick}
+				size="small"
+				variant="secondary"
+			/>
 		</div>
 	);
 };

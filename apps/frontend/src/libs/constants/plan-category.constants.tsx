@@ -6,14 +6,15 @@ import {
 	SmartphoneIcon,
 } from "~/assets/img/icons/icons.js";
 import { PlanCategoryId } from "~/libs/enums/enums.js";
+import { type ValueOf } from "~/libs/types/types.js";
 
-interface CategoryConfig {
+type CategoryConfig = {
 	icon: React.ReactElement;
 	id: CategoryId;
 	name: string;
-}
+};
 
-type CategoryId = "DESKTOP" | "MOBILE" | "PDF";
+type CategoryId = ValueOf<typeof PlanCategoryId>;
 
 const PLAN_CATEGORIES: Record<CategoryId, CategoryConfig> = {
 	[PlanCategoryId.DESKTOP]: {
@@ -42,13 +43,7 @@ const getCategoryName = (categoryId: CategoryId): string => {
 };
 
 const getCategoryShortName = (categoryId: CategoryId): string => {
-	const shortNames = {
-		[PlanCategoryId.DESKTOP]: "DESKTOP",
-		[PlanCategoryId.MOBILE]: "MOBILE",
-		[PlanCategoryId.PDF]: "PDF",
-	};
-
-	return shortNames[categoryId];
+	return PLAN_CATEGORIES[categoryId].id;
 };
 
 export {

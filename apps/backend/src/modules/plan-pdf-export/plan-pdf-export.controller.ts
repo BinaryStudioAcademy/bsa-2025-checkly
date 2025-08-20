@@ -5,6 +5,7 @@ import {
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
+import { type ValueOf } from "~/libs/types/types.js";
 
 import { PlanPdfExportApiPath } from "./libs/enums/enums.js";
 import { type ExportPlanPdfDto } from "./libs/types/types.js";
@@ -67,15 +68,16 @@ class PlanPdfExportController extends BaseController {
 	private async exportPdf(options: APIBodyOptions<ExportPlanPdfDto>): Promise<{
 		headers: { [key: string]: string };
 		payload: Buffer;
-		status: (typeof HTTPCode)[keyof typeof HTTPCode];
+		status: ValueOf<typeof HTTPCode>;
 	}> {
-		const authHeader = options.request?.headers["authorization"];
+		const token = options.request?.headers["authorization"]?.replace(
+			"Bearer ",
+			"",
+		);
 
-		if (typeof authHeader !== "string" || !authHeader.startsWith("Bearer ")) {
+		if (!token) {
 			throw new Error(ErrorConstants.DEFAULT_ERROR_MESSAGE);
 		}
-
-		const token: string = authHeader.replace("Bearer ", "");
 
 		const pdfBuffer = await this.planPdfExportService.generatePdf(
 			options.body,

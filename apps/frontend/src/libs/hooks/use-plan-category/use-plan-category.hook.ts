@@ -3,14 +3,14 @@ import { useCallback, useState } from "react";
 import { type CategoryId } from "~/libs/constants/constants.js";
 import { PlanCategoryId } from "~/libs/enums/enums.js";
 
-type UsePlanCategoryReturn = {
+type UsePlanCategory = {
 	handleCategorySelect: (categoryId: CategoryId) => void;
 	selectedCategory: CategoryId;
 };
 
 const usePlanCategory = (
 	initialCategory: CategoryId = PlanCategoryId.PDF,
-): UsePlanCategoryReturn => {
+): UsePlanCategory => {
 	const [selectedCategory, setSelectedCategory] =
 		useState<CategoryId>(initialCategory);
 

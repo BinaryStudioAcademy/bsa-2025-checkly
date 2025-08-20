@@ -11,7 +11,7 @@ import { getClassNames } from "~/libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	categories: readonly CategoryId[];
+	categories: CategoryId[];
 	onCategorySelect?: (categoryId: CategoryId) => void;
 	selectedCategory: CategoryId;
 };
