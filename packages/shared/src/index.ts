@@ -11,6 +11,7 @@ export {
 	ErrorConstants,
 	ErrorMessage,
 	FastifyHook,
+	FileExtension,
 	QuizCategory,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
@@ -55,6 +56,12 @@ export {
 	type PlanDayResponseDto,
 	PlanDaysApiPath,
 } from "./modules/plan-days/plan-days.js";
+export {
+	type ExportPlanPdfDto,
+	PaperFormat,
+	PlanPdfExportApiPath,
+	planPdfExportValidationSchema,
+} from "./modules/plan-pdf-export/plan-pdf-export.js";
 export {
 	type PlanCreateRequestDto,
 	planCreateValidationSchema,

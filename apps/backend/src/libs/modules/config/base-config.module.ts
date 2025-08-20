@@ -66,6 +66,14 @@ class BaseConfig implements Config {
 					format: Number,
 				},
 			},
+			FRONTEND: {
+				PLAN_PRINT_URL: {
+					default: null,
+					doc: "Frontend plan print URL",
+					env: "FRONTEND_PLAN_PRINT_URL",
+					format: String,
+				},
+			},
 			OPEN_AI: {
 				OPEN_AI_KEY: {
 					default: null,

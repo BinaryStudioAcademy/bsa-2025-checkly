@@ -4,6 +4,8 @@ export { Home } from "./home/home.js";
 export { LogoutPage } from "./logout/logout.js";
 export { NotFound } from "./not-found-page/not-found-page.js";
 export { PlanGeneration } from "./plan-generation/plan-generation.js";
+export { PlanStyleOverview } from "./plan-style-overview/plan-style-overview.js";
+export { PlanStylePrint } from "./plan-style-print/plan-style-print.js";
 export { Profile } from "./profile/profile.js";
 export { QuestionFlow } from "./quiz/questions/question-flow.js";
 export { Quiz } from "./quiz/quiz.js";

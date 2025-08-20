@@ -10,6 +10,7 @@ export { ErrorMessage } from "./error-messages.enum.js";
 export { IconsPositions } from "./icons-positions.enum.js";
 export { KeyboardKeys } from "./keyboard-keys.enum.js";
 export { PlaceholderValues } from "./placeholder-values.enum.js";
+export { PlanCategoryId } from "./plan-category-id.enum.js";
 export { RouteAccess } from "./route-access.js";
 export {
 	APIPath,
@@ -17,7 +18,10 @@ export {
 	AvatarTypes,
 	ContentType,
 	DataStatus,
+	FileExtension,
 	HTTPRequestMethod,
+	PaperFormat,
+	PlanPdfExportApiPath,
 	QuizIndexes,
 	QuizQuestionFormat,
 	ServerErrorType,
