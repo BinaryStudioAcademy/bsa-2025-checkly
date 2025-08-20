@@ -1,22 +1,24 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { StarsYellow02 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { AppHeader, DecorativeImage } from "~/libs/components/components.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { getCategoryName, MESSAGES } from "~/libs/constants/constants.js";
-import { AppRoute, PlanCategoryId } from "~/libs/enums/enums.js";
+import { AppRoute, DataStatus, PlanCategoryId } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { usePlanCategory } from "~/libs/hooks/hooks.js";
 import { useAppDispatch } from "~/libs/hooks/use-app-dispatch/use-app-dispatch.hook.js";
+import { useAppSelector } from "~/libs/hooks/use-app-selector/use-app-selector.hook.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { actions } from "~/modules/pdf-export/slices/pdf-export.js";
-import { downloadFile } from "~/pages/plan-style-overview/lib/utils/download-file.utility.js";
 
 import { PlanActions, PlanStyleCategory } from "./components/components.js";
 import styles from "./styles.module.css";
 
 const PlanStyleOverview: React.FC = () => {
+	const user = useAppSelector((state) => state.auth.user);
+	const isAuthenticated = Boolean(user);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const { handleCategorySelect, selectedCategory } = usePlanCategory(
@@ -29,13 +31,11 @@ const PlanStyleOverview: React.FC = () => {
 		notifications.info(MESSAGES.FEATURE.NOT_IMPLEMENTED);
 	}, []);
 
+	const pdfExportStatus = useAppSelector((state) => state.pdfExport.dataStatus);
+
 	const handleDownloadPlan = useCallback(async (): Promise<void> => {
 		try {
-			const result = await dispatch(
-				actions.exportPdf({ category: selectedCategory }),
-			).unwrap();
-
-			downloadFile(result.blob, result.fileName);
+			await dispatch(actions.exportPdf({ category: selectedCategory }));
 		} catch {
 			notifications.error(MESSAGES.DOWNLOAD.FAILED);
 		}
@@ -90,6 +90,8 @@ const PlanStyleOverview: React.FC = () => {
 
 			<div className={styles["actions-section"]}>
 				<PlanActions
+					isAuthenticated={isAuthenticated}
+					isDownloading={pdfExportStatus === DataStatus.PENDING}
 					onChooseStyle={handleChooseStyle}
 					onDownload={handleDownload}
 					onEdit={handleEditPlan}

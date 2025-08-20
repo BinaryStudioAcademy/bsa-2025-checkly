@@ -9,13 +9,11 @@ import { exportPdf } from "./actions.js";
 interface PdfExportState {
 	dataStatus: ValueOf<typeof DataStatus>;
 	fileName: string;
-	pdfBlob: Blob;
 }
 
 const initialState: PdfExportState = {
 	dataStatus: DataStatus.IDLE,
 	fileName: `${PlanName.PLAN_1}.${FileExtension.PDF}`,
-	pdfBlob: new Blob(),
 };
 
 const { actions, name, reducer } = createSlice({
@@ -25,13 +23,11 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(exportPdf.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
-			state.pdfBlob = action.payload.blob;
 			state.fileName = action.payload.fileName;
 		});
 		builder.addCase(exportPdf.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 			state.fileName = `${PlanName.PLAN_1}.${FileExtension.PDF}`;
-			state.pdfBlob = new Blob();
 		});
 	},
 	initialState,

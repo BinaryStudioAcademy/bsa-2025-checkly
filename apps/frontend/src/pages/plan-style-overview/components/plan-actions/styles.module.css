@@ -1,3 +1,33 @@
+/* Footer container for actions and message */
+.footer-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+
+.footer-message {
+	margin-top: 1rem;
+	font-size: 1rem;
+	color: var(--color-text-primary);
+	text-align: center;
+	background: none;
+}
+
+.login-link {
+	font-weight: 800;
+	color: var(--color-primary-blue, #007bff);
+	text-decoration: none;
+	cursor: pointer;
+}
+
+@media (width <= 480px) {
+	.footer-message {
+		margin-top: 0.7rem;
+		font-size: 0.95rem;
+	}
+}
+
 .actions-container {
 	display: flex;
 	gap: var(--space-m);
@@ -22,7 +52,7 @@
 @media (width <= 480px) {
 	.actions-container {
 		flex-direction: column;
-		gap: var(--space-xs);
+		gap: var(--space-l);
 		align-items: center;
 	}
 
