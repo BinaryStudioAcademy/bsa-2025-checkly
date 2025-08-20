@@ -10,7 +10,7 @@ import styles from "./styles.module.css";
 type Properties = {
 	containerId?: string;
 	days: PlanDay[];
-    firstDayDate: string; 
+	firstDayDate: string;
 	isForPrint?: boolean;
 	notes?: string;
 	theme?: PlanStyleOption;
@@ -20,14 +20,14 @@ type Properties = {
 const PlanPreview: React.FC<Properties> = ({
 	containerId = "plan-preview",
 	days,
-    firstDayDate, 
+	firstDayDate,
 	isForPrint = false,
 	notes,
 	theme = "colourful",
 	title = "My Personal Plan",
 }) => {
 	const themeClass = planStyleModules[theme]["plan"];
-	
+
 	const { scale, viewportReference } = useA4Scale();
 
 	const content = (

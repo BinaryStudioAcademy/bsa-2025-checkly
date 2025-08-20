@@ -1,4 +1,4 @@
-import { type PlanEditForm } from "~/libs/types/plan-edit-form.type.js";
+import { type PlanEditForm } from "~/libs/types/types.js";
 
 const activitiesMockData: PlanEditForm = {
 	days: [
