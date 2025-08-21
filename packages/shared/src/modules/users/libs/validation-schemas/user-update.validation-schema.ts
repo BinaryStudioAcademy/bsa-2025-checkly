@@ -6,6 +6,8 @@ import {
 	UserValidationRule,
 } from "../enums/enums.js";
 
+const MAX_AGE = 150;
+
 const userUpdate = z
 	.object({
 		confirmPassword: z.string().trim().optional().or(z.literal("").optional()),
@@ -19,6 +21,35 @@ const userUpdate = z
 				{
 					message: UserValidationMessage.DATE_INVALID,
 				},
+			)
+			.refine(
+				(value) => {
+					if (!value) {
+						return true;
+					}
+
+					const date = new Date(value);
+					const today = new Date();
+
+					return date <= today;
+				},
+				{
+					message: UserValidationMessage.DATE_OF_BIRTH_CANNOT_BE_IN_THE_FUTURE,
+				},
+			)
+			.refine(
+				(value) => {
+					if (!value) {
+						return true;
+					}
+
+					const date = new Date(value);
+					const maxAge = new Date();
+					maxAge.setFullYear(maxAge.getFullYear() - MAX_AGE);
+
+					return date >= maxAge;
+				},
+				{ message: UserValidationMessage.ENTER_VALID_DATE_OF_BIRTH },
 			)
 			.nullable()
 			.optional(),
