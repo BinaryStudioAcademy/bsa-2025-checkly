@@ -128,11 +128,6 @@ const PlanEdit: FC = () => {
 				</div>
 
 				<footer className={getClassNames("cluster", styles["page-footer"])}>
-					{/* <DownloadButton
-						fileName="my-personal-plan"
-						options={PDF_DOWNLOAD_OPTIONS}
-						targetId="plan-for-download"
-					> */}
 					<Button
 						icon={<DecorativeImage src={Save} />}
 						iconOnlySize="medium"
@@ -142,7 +137,6 @@ const PlanEdit: FC = () => {
 						type="button"
 						variant="primary"
 					/>
-					{/* </DownloadButton> */}
 				</footer>
 			</main>
 		</>
