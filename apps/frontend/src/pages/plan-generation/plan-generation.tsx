@@ -46,6 +46,7 @@ const SLIDES = [
 const PlanGeneration: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const status = useAppSelector((state) => state.plan.dataStatus);
+	const user = useAppSelector((state) => state.auth.user);
 
 	const navigate = useNavigate();
 
@@ -62,11 +63,11 @@ const PlanGeneration: React.FC = () => {
 				notes: quizState.notes,
 			};
 
-			await dispatch(planActions.generatePlan(quizAnswers));
+			await dispatch(planActions.generatePlan({ quizAnswers, user }));
 		};
 
 		void generatePlan();
-	}, [dispatch]);
+	}, [dispatch, user]);
 
 	const progress = useProgress({
 		onComplete: (): void => {

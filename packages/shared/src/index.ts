@@ -43,7 +43,11 @@ export {
 	type ValueOf,
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
-export { type GeneratedPlanDTO } from "./modules/openai/openai.js";
+export {
+	type GeneratedPlanDTO,
+	type GeneratePlanRequestDto,
+	generatePlanValidationSchema,
+} from "./modules/openai/openai.js";
 export {
 	PlanCategoriesApiPath,
 	type PlanCategoryDto,
@@ -124,4 +128,5 @@ export {
 	userUpdateValidationSchema,
 	UserValidationMessage,
 	UserValidationRule,
+	userValidationSchema,
 } from "./modules/users/users.js";

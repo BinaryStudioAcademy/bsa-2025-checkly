@@ -1,4 +1,5 @@
 export {
+	generatePlanValidationSchema,
 	planCreateValidationSchema,
 	planSearchQueryParametersValidationSchema,
 	quizAnswersValidationSchema,

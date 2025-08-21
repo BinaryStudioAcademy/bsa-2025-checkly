@@ -5,15 +5,15 @@ import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
 import {
+	type GeneratePlanRequestDto,
 	type PlanSearchQueryParameter,
 	type PlanWithCategoryDto,
-	type QuizAnswersRequestDto,
 } from "../libs/types/types.js";
 import { name as sliceName } from "./plan.slice.js";
 
 const generatePlan = createAsyncThunk<
 	PlanDaysTaskDto,
-	QuizAnswersRequestDto,
+	GeneratePlanRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/generate`, async (payload, { extra }) => {
 	const { planApi, storage } = extra;

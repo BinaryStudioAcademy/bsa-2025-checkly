@@ -12,7 +12,7 @@ import {
 
 declare module "fastify" {
 	interface FastifyInstance {
-		authenticate: (request: FastifyRequest, isPublic: boolean) => Promise<void>;
+		authenticate: (request: FastifyRequest) => Promise<void>;
 	}
 
 	interface FastifyRequest {
@@ -30,26 +30,23 @@ const authStrategy = "Bearer ";
 const extractUserFromRequest = async (
 	request: FastifyRequest,
 	userService: UserService,
-	isPublic: boolean,
-): Promise<null | UserDto> => {
+): Promise<UserDto> => {
 	try {
 		const { authorization } = request.headers;
 
-		if (!authorization?.startsWith(authStrategy) && !isPublic) {
+		if (!authorization?.startsWith(authStrategy)) {
 			throw new AuthorizationError({
 				message: ErrorMessage.AUTHORIZATION_HEADER_MISSING,
 			});
 		}
 
-		const tokenValue = authorization?.replace(authStrategy, "");
+		const tokenValue = authorization.replace(authStrategy, "");
 
-		const payload = tokenValue
-			? ((await token.decode(tokenValue)) as { userId: number })
-			: { userId: null };
+		const payload = (await token.decode(tokenValue)) as { userId: number };
 
-		const user = payload.userId ? await userService.find(payload.userId) : null;
+		const user = await userService.find(payload.userId);
 
-		if (!user && !isPublic) {
+		if (!user) {
 			throw new AuthorizationError({
 				message: ErrorMessage.USER_NOT_FOUND,
 			});
@@ -85,29 +82,20 @@ const checkIsWhiteRoute = (url: string, whiteRoutes: string[]): boolean => {
 
 const authorization = fp<AuthPluginOptions>(
 	(fastify, { userService, whiteRoutes }, done) => {
-		fastify.decorate(
-			"authenticate",
-			async function (request: FastifyRequest, isPublic: boolean) {
-				const user = await extractUserFromRequest(
-					request,
-					userService,
-					isPublic,
-				);
-
-				if (user) {
-					request.user = user;
-				}
-			},
-		);
+		fastify.decorate("authenticate", async function (request: FastifyRequest) {
+			request.user = await extractUserFromRequest(request, userService);
+		});
 
 		fastify.addHook("preHandler", async (request: FastifyRequest) => {
 			const routeUrl = request.routeOptions.url ?? request.url;
 
 			const isWhiteRoute = checkIsWhiteRoute(routeUrl, whiteRoutes);
 
-			await (isWhiteRoute
-				? request.server.authenticate(request, true)
-				: request.server.authenticate(request, false));
+			if (isWhiteRoute) {
+				return;
+			}
+
+			await request.server.authenticate(request);
 		});
 
 		done();

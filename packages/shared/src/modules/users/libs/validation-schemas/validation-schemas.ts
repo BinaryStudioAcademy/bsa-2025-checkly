@@ -5,3 +5,4 @@ export {
 } from "./user-sign-up.validation-schema-extended.js";
 export { userSignUp } from "./user-sign-up.validation-schema.js";
 export { userUpdate } from "./user-update.validation-schema.js";
+export { user } from "./user.validation-schema.js";

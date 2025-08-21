@@ -1,6 +1,7 @@
 export { type SearchProperties } from "./search-properties.type.js";
 export {
 	type GeneratedPlanDTO,
+	type GeneratePlanRequestDto,
 	type PlanCategoryDto,
 	type PlanCreateRequestDto,
 	type PlanDayCreateRequestDto,

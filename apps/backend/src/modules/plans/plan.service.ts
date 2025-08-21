@@ -1,4 +1,4 @@
-import { type Service, type UserDto } from "~/libs/types/types.js";
+import { type Service } from "~/libs/types/types.js";
 import { PlanEntity } from "~/modules/plans/plan.entity.js";
 import { type PlanRepository } from "~/modules/plans/plan.repository.js";
 
@@ -13,6 +13,7 @@ import { taskService } from "../tasks/tasks.js";
 import { LAST_INDEX } from "./libs/constants/constants.js";
 import {
 	type GeneratedPlanDTO,
+	type GeneratePlanRequestDto,
 	type PlanCategoryDto,
 	type PlanCreateRequestDto,
 	type PlanDayCreateRequestDto,
@@ -24,11 +25,11 @@ import {
 	type PlanSearchQueryParameter,
 	type PlanUpdateRequestDto,
 	type PlanWithCategoryDto,
-	type QuizAnswersRequestDto,
 	type TaskCreateRequestDto,
 	type TaskDto,
 } from "./libs/types/types.js";
 import { createPrompt } from "./libs/utilities/utilities.js";
+import { quizAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
 class PlanService implements Service {
 	private openAIService: OpenAIService;
@@ -87,20 +88,18 @@ class PlanService implements Service {
 		return item ? item.toObjectWithCategory() : null;
 	}
 
-	public async generate({
-		payload,
-		user,
-	}: {
-		payload: QuizAnswersRequestDto;
-		user: null | UserDto;
-	}): Promise<PlanDaysTaskDto> {
-		const userPrompt = createPrompt(payload);
+	public async generate(
+		payload: GeneratePlanRequestDto,
+	): Promise<PlanDaysTaskDto> {
+		const quizAnswers = quizAnswersValidationSchema.parse(payload.quizAnswers);
+
+		const userPrompt = createPrompt(quizAnswers);
 		const plan = await this.openAIService.generatePlan({ userPrompt });
 
 		const savedPlan = await this.saveToDB({
-			category: payload.category,
+			category: quizAnswers.category,
 			plan,
-			userId: user?.id ?? null,
+			userId: payload.user?.id ?? null,
 		});
 
 		return savedPlan;
