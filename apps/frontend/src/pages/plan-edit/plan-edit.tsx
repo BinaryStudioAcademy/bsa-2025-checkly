@@ -19,11 +19,7 @@ import {
 	type SelectedItemType,
 } from "~/libs/types/types.js";
 
-import {
-	DaysNav,
-	EditingPanel,
-	PlanPreview,
-} from "./components/components.js";
+import { DaysNav, EditingPanel, PlanPreview } from "./components/components.js";
 import styles from "./styles.module.css";
 
 const mapDaysToNavItems = (
