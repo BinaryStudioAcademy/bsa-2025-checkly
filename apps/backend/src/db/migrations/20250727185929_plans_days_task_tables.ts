@@ -65,6 +65,7 @@ async function up(knex: Knex): Promise<void> {
 		table.string(PlanColumnName.TITLE, ColumnLength.TITLE).notNullable();
 		table
 			.integer(PlanColumnName.USER_ID)
+			.notNullable()
 			.references(UserColumnName.ID)
 			.inTable(TableNames.USERS)
 			.onDelete("CASCADE");
