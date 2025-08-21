@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.24.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.23.0...v1.24.0) (2025-08-21)
+
+
+### Features
+
+* add choose styles flow cy-299 ([820eaa1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/820eaa1ba3accf1d75d322b121bc6f81241dc441))
+* **frontend:** add choose styles flow cy-299 ([d035773](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d035773174aed6180626916732e748f5d7e814fc))
+
+
+### Bug Fixes
+
+* button sizing cy-250 ([54fb38a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/54fb38a01e9f640cea81398e74c3eb14c8c71475))
+* fix button sizes for lower width cy-250 ([fd352d9](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/fd352d90b68138920d371787ed3383d74e7d53ac))
+* fix no visible content in buttons cy-250 ([f0ce864](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f0ce864ef4b0a576e2e70b0324271b2cba804764))
+* fix package lock file cy-250 ([eed91b3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eed91b32eae63155111efb1548ef0ecf7116cdaf))
+* **frontend:** fix no visible content in buttons cy-250 ([277bb46](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/277bb460369363bada4fa0b4c785b7fe86c8431d))
+* **frontend:** fix quiz styles across viewports cy-281 ([40e18c2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/40e18c2110390cc50e75161f2a64aaeb1e4503f7))
+* **frontend:** merge main into local branch cy-250 ([2c20efc](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2c20efc429efb1ecf34169eea78d39e4330cb77b))
+* merge main into local branch cy-299 ([bea08cd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bea08cd78bb913f8caaf2c12e530f0c2f56df895))
+* remove text question label cy-281 ([282e325](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/282e325df2f788c46b0cdd38a2d9e5f354fe18bf))
+* rename enum cy-299 ([0f9c312](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0f9c312758bf7108f5e6951bbc6ca4dd13f5fee9))
+* small fixed, reduce spacing and gap cy-281 ([1add471](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1add4713c2fc50ae1be9bd3bce1a7867f01d1550))
+
 ## [1.23.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.22.1...v1.23.0) (2025-08-20)
 
 
