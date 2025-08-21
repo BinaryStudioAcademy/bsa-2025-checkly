@@ -1,8 +1,5 @@
 import { type QuestionDto } from "~/libs/types/types.js";
-import {
-	type QuizAnswer,
-	type QuizCategoryValue,
-} from "~/modules/quiz/quiz.js";
+import { type QuizAnswer } from "~/modules/quiz/quiz.js";
 
 type CheckboxQuestionProperties = {
 	currentAnswer?: MultipleAnswers[];
@@ -50,9 +47,9 @@ type QuizCategoryCardProperties = QuizCategoryProperties & {
 };
 
 type QuizCategoryProperties = {
-	category: QuizCategoryValue;
+	categoryTitle: string;
 	color: string;
-	icon: string;
+	iconHref: string;
 	selected: boolean;
 };
 
@@ -90,7 +87,6 @@ export {
 	type QuestionNavigationProperties,
 	type QuestionPageProperties,
 	type QuizCategoryCardProperties,
-	type QuizCategoryProperties,
 	type RadioQuestionProperties,
 	type SingleAnswer,
 	type SingleChoiceWithTextAnswer,

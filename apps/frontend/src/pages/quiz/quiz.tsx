@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { type JSX, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -8,13 +8,20 @@ import {
 	TwinklesYellow,
 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
-import { AppRoute, ButtonLabels, ButtonVariants } from "~/libs/enums/enums.js";
+import {
+	AppRoute,
+	ButtonLabels,
+	ButtonVariants,
+	ZERO,
+} from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
-import { type QuizCategoryValue } from "~/modules/quiz/libs/types/types.js";
+import {
+	actions as planActions,
+	type PlanCategoryDto,
+} from "~/modules/plan-categories/plan-categories.js";
 import { actions } from "~/modules/quiz/quiz.js";
 import { QuizCategoryCard } from "~/pages/quiz/components/quiz-category-card/quiz-category-card.js";
-import { QUIZ_CATEGORIES } from "~/pages/quiz/mock-data/mock-data.js";
 
 import styles from "./styles.module.css";
 
@@ -22,10 +29,15 @@ const Quiz: React.FC = (): React.ReactElement => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
+	useEffect(() => {
+		void dispatch(planActions.getAll());
+	}, [dispatch]);
+
+	const { planCategories } = useAppSelector((state) => state.planCategory);
 	const { selectedCategory } = useAppSelector((state) => state.quiz);
 
 	const handleCategorySelect = useCallback(
-		(category: QuizCategoryValue): void => {
+		(category: string): void => {
 			dispatch(actions.setCategory(category));
 		},
 		[dispatch],
@@ -42,13 +54,28 @@ const Quiz: React.FC = (): React.ReactElement => {
 	}, [selectedCategory, navigate]);
 
 	const handleSelect = useCallback(
-		(category: QuizCategoryValue): (() => void) => {
+		(category: string): (() => void) => {
 			return (): void => {
 				handleCategorySelect(category);
 			};
 		},
 		[handleCategorySelect],
 	);
+
+	const renderCategories = (
+		categories: (PlanCategoryDto & { color: string })[],
+	): JSX.Element[] => {
+		return categories.map((category) => (
+			<QuizCategoryCard
+				categoryTitle={category.title}
+				color={category.color}
+				iconHref={category.iconHref}
+				key={category.id}
+				onSelect={handleSelect(category.key)}
+				selected={selectedCategory === category.key}
+			/>
+		));
+	};
 
 	return (
 		<div
@@ -91,16 +118,7 @@ const Quiz: React.FC = (): React.ReactElement => {
 						</h1>
 
 						<div className={getClassNames("cluster", styles["container"])}>
-							{QUIZ_CATEGORIES.map((category) => (
-								<QuizCategoryCard
-									category={category.category}
-									color={category.color}
-									icon={category.icon}
-									key={category.category}
-									onSelect={handleSelect(category.category)}
-									selected={selectedCategory === category.category}
-								/>
-							))}
+							{planCategories.length > ZERO && renderCategories(planCategories)}
 						</div>
 
 						<div className={getClassNames("cluster", styles["actions"])}>

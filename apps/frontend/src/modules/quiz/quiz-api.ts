@@ -17,15 +17,17 @@ class QuizApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.QUIZ_QUESTIONS, storage });
 	}
 
-	public async getQuestions(): Promise<QuizQuestionsResponseDto> {
-		const response = await this.load(
-			this.getFullEndpoint(QuizApiPath.ROOT, {}),
-			{
-				contentType: ContentType.JSON,
-				hasAuth: false,
-				method: HTTPRequestMethod.GET,
-			},
-		);
+	public async getQuestionsByCategoryId(
+		categoryId: number,
+	): Promise<QuizQuestionsResponseDto> {
+		const endpointWithQuery =
+			this.getFullEndpoint(QuizApiPath.ROOT, {}) +
+			`?categoryId=${String(categoryId)}`;
+		const response = await this.load(endpointWithQuery, {
+			contentType: ContentType.JSON,
+			hasAuth: false,
+			method: HTTPRequestMethod.GET,
+		});
 
 		return await response.json<QuizQuestionsResponseDto>();
 	}

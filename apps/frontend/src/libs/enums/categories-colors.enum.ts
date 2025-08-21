@@ -9,4 +9,4 @@ const CategoriesColors = {
 
 const colorValues = Object.values(CategoriesColors);
 
-export { CategoriesColors, colorValues };
+export { colorValues };

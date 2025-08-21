@@ -1,11 +1,7 @@
 import { DataStatus } from "shared";
 import { z } from "zod";
 
-import {
-	QuizCategory,
-	QuizIndexes,
-	QuizQuestionFormat,
-} from "../enums/enums.js";
+import { QuizIndexes, QuizQuestionFormat } from "../enums/enums.js";
 import { quizAnswerSchema } from "./quiz-shared.validation-schema.js";
 
 const questionOptionSchema = z.object({
@@ -34,7 +30,7 @@ const quizStateSchema = z.object({
 	dataStatus: z.nativeEnum(DataStatus).default(DataStatus.IDLE),
 	notes: z.string().default(""),
 	questions: quizQuestionsResponseSchema.nullable().default(null),
-	selectedCategory: z.nativeEnum(QuizCategory).nullable().default(null),
+	selectedCategory: z.string().nullable().default(null),
 });
 
 export { quizStateSchema };

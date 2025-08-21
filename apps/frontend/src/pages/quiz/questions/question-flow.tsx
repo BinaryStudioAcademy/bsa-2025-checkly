@@ -29,7 +29,6 @@ import {
 	isNextDisabled,
 	isNotesPage,
 	isQuestionNotFound,
-	shouldFetchQuestions,
 	shouldMoveToNext,
 	shouldRedirectToQuiz,
 } from "./libs/utilities.js";
@@ -41,6 +40,7 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 
 	const { answers, currentQuestion, dataStatus, questions, selectedCategory } =
 		useAppSelector((state) => state.quiz);
+	const { planCategories } = useAppSelector((state) => state.planCategory);
 
 	useQuizSaved();
 
@@ -54,13 +54,18 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 		},
 		[navigate],
 	);
+	const categoryId = planCategories.find(
+		(category) => category.key === selectedCategory,
+	)?.id;
+
+	useEffect(() => {
+		if (categoryId) {
+			void dispatch(actions.fetchQuestions({ categoryId }));
+		}
+	}, [categoryId, dispatch]);
 
 	useEffect(() => {
 		const initializeQuiz = async (): Promise<void> => {
-			if (shouldFetchQuestions(selectedCategory, questions, dataStatus)) {
-				void dispatch(actions.fetchQuestions());
-			}
-
 			const hasSavedState = await storage.has(StorageKey.QUIZ_STATE);
 
 			if (shouldRedirectToQuiz(selectedCategory, hasSavedState)) {
@@ -69,7 +74,7 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 		};
 
 		void initializeQuiz();
-	}, [dataStatus, dispatch, questions, selectedCategory, handleSafeNavigate]);
+	}, [selectedCategory, handleSafeNavigate]);
 
 	const handleQuizComplete = useCallback(async (): Promise<void> => {
 		if (!canSubmitQuiz(selectedCategory, questions)) {

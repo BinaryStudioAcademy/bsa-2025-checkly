@@ -1,14 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { DataStatus } from "~/libs/enums/enums.js";
+import { colorValues, DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
 import { type PlanCategoryDto } from "../libs/types/types.js";
 import { getAll } from "./actions.js";
 
+const assignColor = (id: number, colorValues: string[]): string =>
+	colorValues[id % colorValues.length] as string;
+
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
-	planCategories: PlanCategoryDto[];
+	planCategories: (PlanCategoryDto & { color: string })[];
 };
 
 const initialState: State = {
@@ -23,7 +26,10 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getAll.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
-			state.planCategories = action.payload;
+			state.planCategories = action.payload.map((category) => ({
+				...category,
+				color: assignColor(category.id, colorValues),
+			}));
 		});
 		builder.addCase(getAll.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
