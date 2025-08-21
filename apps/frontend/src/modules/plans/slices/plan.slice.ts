@@ -45,7 +45,7 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getAllUserPlans.fulfilled, (state, action) => {
 			state.userPlansDataStatus = DataStatus.FULFILLED;
 			state.userPlans = action.payload;
-			state.plan = action.payload.at(LAST_INDEX) || null;
+			state.plan = action.payload.at(LAST_INDEX) ?? null;
 		});
 		builder.addCase(getAllUserPlans.rejected, (state) => {
 			state.userPlansDataStatus = DataStatus.REJECTED;

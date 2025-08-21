@@ -56,17 +56,15 @@ const Plan: React.FC = () => {
 		};
 
 		const getUnauthenticatedUserPlan = async (): Promise<void> => {
-			if (!plan) {
-				const planId = await storage.get<number>(StorageKey.PLAN_ID);
+			const planId = await storage.get<number>(StorageKey.PLAN_ID);
 
-				if (planId) {
-					await dispatch(planActions.findPlan(planId));
-				}
+			if (planId) {
+				await dispatch(planActions.findPlan(planId));
 			}
 		};
 
 		void (user ? getAllUserPlans() : getUnauthenticatedUserPlan());
-	}, [dispatch, user, plan]);
+	}, [user, dispatch]);
 
 	const toggleSelect = useCallback((): void => {
 		setIsSelectOpen((previous) => !previous);
