@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { PLAN_NAME_DEFAULT } from "~/libs/constants/constants.js";
 import { DataStatus, FileExtension } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
-import { PlanName } from "~/pages/plan-style-overview/lib/enums/enums.js";
 
 import { exportPdf } from "./actions.js";
 
@@ -13,7 +13,7 @@ type PdfExportState = {
 
 const initialState: PdfExportState = {
 	dataStatus: DataStatus.IDLE,
-	fileName: `${PlanName.PLAN_1}.${FileExtension.PDF}`,
+	fileName: `${PLAN_NAME_DEFAULT}.${FileExtension.PDF}`,
 };
 
 const { actions, name, reducer } = createSlice({
@@ -27,7 +27,7 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(exportPdf.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
-			state.fileName = `${PlanName.PLAN_1}.${FileExtension.PDF}`;
+			state.fileName = `${PLAN_NAME_DEFAULT}.${FileExtension.PDF}`;
 		});
 	},
 	initialState,

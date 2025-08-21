@@ -10,7 +10,7 @@ type Properties = {
 
 const NotesText = {
 	HINT: "Use this space to reflect on any patterns, surprises, or small wins from the week. Honor your progress.",
-	TEXT: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere reprehenderit dignissimos non cumque tenetur porro quod.",
+	TEXT: "Morning workouts gave me energy. Healthy meals were easier to prepare. I enjoyed meditation and felt good about my progress. Taking time to reflect helped me notice small improvements each day.",
 	TITLE: "Notes:",
 } as const;
 
