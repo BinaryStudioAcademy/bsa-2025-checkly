@@ -29,7 +29,6 @@ import {
 	type TaskDto,
 } from "./libs/types/types.js";
 import { createPrompt } from "./libs/utilities/utilities.js";
-import { quizAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
 class PlanService implements Service {
 	private openAIService: OpenAIService;
@@ -91,15 +90,13 @@ class PlanService implements Service {
 	public async generate(
 		payload: GeneratePlanRequestDto,
 	): Promise<PlanDaysTaskDto> {
-		const quizAnswers = quizAnswersValidationSchema.parse(payload.quizAnswers);
-
-		const userPrompt = createPrompt(quizAnswers);
+		const userPrompt = createPrompt(payload.quizAnswers);
 		const plan = await this.openAIService.generatePlan({ userPrompt });
 
 		const savedPlan = await this.saveToDB({
-			category: quizAnswers.category,
+			category: payload.quizAnswers.category,
 			plan,
-			userId: payload.user?.id ?? null,
+			userId: payload.userId,
 		});
 
 		return savedPlan;

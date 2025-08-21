@@ -1,11 +1,10 @@
 import { z } from "zod";
 
 import { quizAnswersValidationSchema } from "../../../quiz/quiz.js";
-import { userValidationSchema } from "../../../users/users.js";
 
 const generatePlanSchema = z.object({
 	quizAnswers: quizAnswersValidationSchema,
-	user: z.union([userValidationSchema, z.null()]),
+	userId: z.union([z.number().positive(), z.null()]),
 });
 
 export { generatePlanSchema };

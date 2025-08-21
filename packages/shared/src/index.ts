@@ -128,5 +128,4 @@ export {
 	userUpdateValidationSchema,
 	UserValidationMessage,
 	UserValidationRule,
-	userValidationSchema,
 } from "./modules/users/users.js";
