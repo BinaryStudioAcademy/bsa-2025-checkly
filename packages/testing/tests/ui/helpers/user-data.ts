@@ -1,20 +1,27 @@
 import { faker } from "@faker-js/faker";
 
-export const uniqueEmail = () => faker.internet.email().toLowerCase();
+/** Build fixed-length strings (internal, used by helpers). */
+const repeat = (ch: string, n: number) => ch.repeat(n);
 
-export const validPassword = (length = 12) => {
-	// Guard length between 8 and 32 as per policy
-	const len = Math.min(32, Math.max(8, length));
+/** prevents duplicate emails across local runs. */
+const runId = `${Date.now()}-${Math.round(Math.random() * 1e6)}`;
 
-	const lower = faker.string.alpha({ length: 1, casing: "lower" });
-	const upper = faker.string.alpha({ length: 1, casing: "upper" });
-	const digit = faker.string.numeric({ length: 1 });
+/** Make per-run unique strings (internal). */
+const makeUnique = (base: string) => `${base}.${runId}`;
 
-	const remaining = faker.string.alphanumeric({ length: len - 3 });
+/* =========================
+ * NAME (3..32)
+ * =======================*/
+export const validName = (): string => faker.person.firstName();
 
-	const chars = (lower + upper + digit + remaining).split("");
-	return faker.helpers.shuffle(chars).join("");
-};
+/* =========================
+ * EMAIL
+ * =======================*/
+export const uniqueEmail = (prefix = "user"): string =>
+	`${makeUnique(prefix)}@${faker.internet.domainName()}`;
 
-export const randomName = () =>
-	faker.person.firstName() + " " + faker.person.lastName();
+/* =========================
+ * PASSWORD (8..32, 1U/1l/1d)
+ * =======================*/
+export const validPassword = (n = 12): string =>
+	"A" + repeat("a", Math.max(0, n - 3)) + "1";

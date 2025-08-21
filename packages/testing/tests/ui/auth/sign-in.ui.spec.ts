@@ -2,6 +2,7 @@ import { test as base, expect as baseExpect } from "@playwright/test";
 import { test, expect } from "@ui/fixtures/user.fixture";
 import { SignInPage } from "@tests/ui/controllers/signin-page";
 import { signUpUser } from "@ui/helpers/auth";
+import { DashboardPage } from "@ui/controllers/dashboard-page";
 
 test.describe("[Sign in - UI] Consolidated suite", () => {
 	test.afterEach(async ({ page }) => {
@@ -44,7 +45,7 @@ test.describe("[Sign in - UI] Consolidated suite", () => {
 			const signInPage = new SignInPage(page);
 			await signInPage.submit();
 
-			const invalidInputs = signInPage.page.locator("input:invalid");
+			const invalidInputs = signInPage.invalidInputs;
 			await expect(invalidInputs).toHaveCount(2);
 		});
 
@@ -55,7 +56,7 @@ test.describe("[Sign in - UI] Consolidated suite", () => {
 			await signInPage.passwordInput.fill("SomePassword123");
 			await signInPage.submit();
 
-			const invalidInputs = signInPage.page.locator("input:invalid");
+			const invalidInputs = signInPage.invalidInputs;
 			await expect(invalidInputs).toHaveCount(1);
 			await expect(invalidInputs.first()).toHaveAttribute("name", "email");
 		});
@@ -67,7 +68,7 @@ test.describe("[Sign in - UI] Consolidated suite", () => {
 			await signInPage.emailInput.fill("user@example.com");
 			await signInPage.submit();
 
-			const invalidInputs = signInPage.page.locator("input:invalid");
+			const invalidInputs = signInPage.invalidInputs;
 			await expect(invalidInputs).toHaveCount(1);
 			await expect(invalidInputs.first()).toHaveAttribute("name", "password");
 		});
@@ -78,27 +79,32 @@ test.describe("[Sign in - UI] Consolidated suite", () => {
 			"emoji😊@invalid-characters.com",
 			"测试电子邮件@invalid-characters.com",
 			"invalid-format.com",
-			".localstartswithdot@test.com",
-			"localendswithdot.@test.com",
-			"repeated..dots@test.com",
-			"valid@-domainstartswithhyphen.com",
-			"valid@domainendswithhyphen-.com",
-			"valid@.domainstartswithdot.com",
-			"valid@domainendswithdot.com.",
+			"missing-at-symbol.com",
+			"missing-domain@",
+			".startdot@test.com",
+			"enddot.@test.com",
+			"do..uble@test.com",
+			"user@-domain.com",
+			"user@domain-.com",
+			"user@.domain.com",
+			"user@domain.com.",
 		];
 
+		test.beforeEach(async ({ page }) => {
+			const signInPage = new SignInPage(page);
+			await signInPage.goto();
+		});
+
 		for (const email of invalidEmails) {
-			test(`Should show backend error for invalid email: ${email}`, async ({
+			test(`Displays error for invalid email format: "${email}"`, async ({
 				page,
 			}) => {
 				const signInPage = new SignInPage(page);
-				await signInPage.goto();
-
 				await signInPage.fillForm(email, "ValidPassword123");
 				await signInPage.submit();
 
 				// Retry-safe backend error validation
-				await expect(signInPage.emailErrorMessage).toBeVisible({
+				await expect(signInPage.emailFormatError).toBeVisible({
 					timeout: 10000,
 				});
 
@@ -127,22 +133,19 @@ test.describe("[Sign in - UI] Consolidated suite", () => {
 		});
 
 		for (const { password, reason } of invalidPasswords) {
-			test(`Should show backend error for password with issue: ${reason}`, async ({
+			test(`Displays error for invalid password: ${reason}`, async ({
 				page,
 			}) => {
 				const signInPage = new SignInPage(page);
 				await signInPage.fillForm("user@example.com", password);
 				await signInPage.submit();
 
-				const error = signInPage.page.getByText(
-					/Password should contain between 8 to 32 characters, at least one lowercase letter, one uppercase letter and one digit/i,
-				);
-				await expect(error).toBeVisible({ timeout: 5000 });
+				await expect(signInPage.passwordPolicyError).toBeVisible();
 			});
 		}
 	});
 
-	test.describe("[Sign In - UI] Shows error for invalid credentials", () => {
+	test.describe("[Sign In - UI] Unsuccessful login - invalid credentials", () => {
 		test.beforeEach(async ({ page }) => {
 			const signInPage = new SignInPage(page);
 			await signInPage.goto();
@@ -153,7 +156,7 @@ test.describe("[Sign in - UI] Consolidated suite", () => {
 			await signInPage.fillForm("sadasdas@asdasd.com", "WrongPassword123");
 			await signInPage.submit();
 
-			await expect(signInPage.errorMessage).toBeVisible();
+			await expect(signInPage.invalidCredentialsError).toBeVisible();
 		});
 	});
 
@@ -175,7 +178,7 @@ test.describe("[Sign in - UI] Consolidated suite", () => {
 			await signIn.submit();
 
 			// Assert: toast/banner should show the generic error
-			await expect(signIn.errorMessage).toBeVisible();
+			await expect(signIn.invalidCredentialsError).toBeVisible();
 		});
 	});
 
@@ -184,32 +187,29 @@ test.describe("[Sign in - UI] Consolidated suite", () => {
 			page,
 			testUser,
 		}) => {
-			// Act: perform sign in with valid credentials
+			// Arrange
 			const signIn = new SignInPage(page);
+			const dashboard = new DashboardPage(page);
+
+			// Act
 			await signIn.goto();
 			await signIn.fillForm(testUser.email, testUser.password);
 			await signIn.submit();
 
 			// Assert #1: user is redirected to /dashboard
-			await expect(page).toHaveURL(/\/dashboard\/?$/);
+			await dashboard.expectLoaded();
 
 			// Assert #2: dashboard-specific content is visible
-			await expect(
-				page.getByRole("navigation").getByRole("link", { name: /^Dashboard$/ }),
-			).toBeVisible();
-			await expect(
-				page.getByRole("navigation").getByRole("link", { name: /My plan/i }),
-			).toBeVisible();
+			await expect(dashboard.linkDashboard).toBeVisible();
+			await expect(dashboard.linkMyPlan).toBeVisible();
 
 			// Assert #3 (optional): sign-in form is no longer present
-			await expect(page.getByRole("button", { name: /sign in/i })).toHaveCount(
-				0,
-			);
+			await expect(signIn.submitButton).toHaveCount(0);
 		});
 	});
 
-	test.describe("[Sign in - UI] Deep link protection", () => {
-		test("Redirects unauthenticated users to sign-in and back to intended route after login", async ({
+	test.describe("[Sign In - UI] Redirect to intended route after login", () => {
+		test("Navigates to protected route after successful login", async ({
 			page,
 			testUser,
 		}) => {

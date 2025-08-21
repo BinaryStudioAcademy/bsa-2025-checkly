@@ -5,7 +5,7 @@ import { SignUpPage } from "@tests/ui/controllers/sign-up-page";
 import {
 	uniqueEmail,
 	validPassword,
-	randomName,
+	validName,
 } from "@tests/ui/helpers/user-data";
 
 test.describe("[Sign up - UI] Consolidated suite", () => {
@@ -34,38 +34,38 @@ test.describe("[Sign up - UI] Consolidated suite", () => {
 			const signUp = new SignUpPage(page);
 			await signUp.submit();
 			await signUp.expectOnRegisterUrl();
-			await expect(page.locator("input:invalid").first()).toBeVisible();
+			await expect(signUp.invalidInputs.first()).toBeVisible(); // <- POM locator
 		});
 
 		test("Blocks submission when only Name is filled", async ({ page }) => {
 			const signUp = new SignUpPage(page);
-			await signUp.fillName(randomName());
+			await signUp.fillName(validName());
 			await signUp.submit();
 			await signUp.expectOnRegisterUrl();
-			await expect(page.locator("input:invalid").first()).toBeVisible();
+			await expect(signUp.invalidInputs.first()).toBeVisible(); // <- POM locator
 		});
 
 		test("Blocks submission when Email is filled but Password empty", async ({
 			page,
 		}) => {
 			const signUp = new SignUpPage(page);
-			await signUp.fillName(randomName());
+			await signUp.fillName(validName());
 			await signUp.fillEmail(uniqueEmail());
 			await signUp.submit();
 			await signUp.expectOnRegisterUrl();
-			await expect(page.locator("input:invalid").first()).toBeVisible();
+			await expect(signUp.invalidInputs.first()).toBeVisible(); // <- POM locator
 		});
 
 		test("Blocks submission when Password is filled but Confirm Password empty", async ({
 			page,
 		}) => {
 			const signUp = new SignUpPage(page);
-			await signUp.fillName(randomName());
+			await signUp.fillName(validName());
 			await signUp.fillEmail(uniqueEmail());
 			await signUp.fillPassword("Password123");
 			await signUp.submit();
 			await signUp.expectOnRegisterUrl();
-			await expect(page.locator("input:invalid").first()).toBeVisible();
+			await expect(signUp.invalidInputs.first()).toBeVisible(); // <- POM locator
 		});
 	});
 
@@ -79,7 +79,7 @@ test.describe("[Sign up - UI] Consolidated suite", () => {
 				const signUp = new SignUpPage(page);
 				await signUp.goto();
 
-				const name = randomName();
+				const name = validName();
 				const email = uniqueEmail();
 				const password = validPassword();
 
@@ -101,7 +101,7 @@ test.describe("[Sign up - UI] Consolidated suite", () => {
 	}) => {
 		const email = uniqueEmail();
 		const password = validPassword();
-		const name = randomName();
+		const name = validName();
 
 		// Pre-create the account through API; tolerate existing to keep test idempotent
 		await signUpUser(email, password, name, { tolerateExisting: true });
@@ -123,7 +123,7 @@ test.describe("[Sign up - UI] Consolidated suite", () => {
 		await signUp.goto();
 
 		await signUp.fillForm({
-			name: randomName(),
+			name: validName(),
 			email: uniqueEmail(),
 			password: "Password123",
 			confirmPassword: "Password456",
@@ -157,7 +157,7 @@ test.describe("[Sign up - UI] Consolidated suite", () => {
 				await signUp.goto();
 
 				await signUp.fillForm({
-					name: randomName(),
+					name: validName(),
 					email: badEmail,
 					password: "Password123",
 					confirmPassword: "Password123",
@@ -186,7 +186,7 @@ test.describe("[Sign up - UI] Consolidated suite", () => {
 				await signUp.goto();
 
 				await signUp.fillForm({
-					name: randomName(),
+					name: validName(),
 					email: uniqueEmail(),
 					password: pwd,
 					confirmPassword: pwd,

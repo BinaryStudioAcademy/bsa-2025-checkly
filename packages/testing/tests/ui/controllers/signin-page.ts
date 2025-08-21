@@ -1,4 +1,4 @@
-import { Page, Locator } from "@playwright/test";
+import { Page, Locator, expect } from "@playwright/test";
 
 export class SignInPage {
 	readonly page: Page;
@@ -6,7 +6,6 @@ export class SignInPage {
 	readonly passwordInput: Locator;
 	readonly submitButton: Locator;
 	readonly linkToSignUp: Locator;
-	readonly emailErrorMessage: Locator;
 
 	constructor(page: Page) {
 		this.page = page;
@@ -14,15 +13,27 @@ export class SignInPage {
 		this.passwordInput = page.getByPlaceholder("Enter your password");
 		this.submitButton = page.getByRole("button", { name: /sign in/i });
 		this.linkToSignUp = page.getByRole("link", { name: /create an account/i });
-		this.emailErrorMessage = page.getByText(/invalid email format/i);
 	}
 
 	async goto() {
-		await this.page.goto("/sign-in");
+		await this.page.goto("/sign-in", { waitUntil: "domcontentloaded" });
+		await expect(this.page).toHaveURL(/\/sign-in\/?$/);
+		await expect(this.submitButton).toBeVisible();
 	}
 
-	get errorMessage() {
+	get invalidInputs() {
+		return this.page.locator("input:invalid");
+	}
+	get invalidCredentialsError() {
 		return this.page.getByText(/invalid credentials/i);
+	}
+	get emailFormatError() {
+		return this.page.getByText(/email is not in a valid format|invalid email/i);
+	}
+	get passwordPolicyError() {
+		return this.page.getByText(
+			/password should contain between 8 to 32 characters/i,
+		);
 	}
 
 	async fillForm(email: string, password: string) {

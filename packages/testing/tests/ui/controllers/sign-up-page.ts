@@ -154,4 +154,7 @@ export class SignUpPage {
 		// Submit button
 		await expect(this.submitButton).toBeVisible();
 	}
+	get invalidInputs(): Locator {
+		return this.page.locator("input:invalid");
+	}
 }
