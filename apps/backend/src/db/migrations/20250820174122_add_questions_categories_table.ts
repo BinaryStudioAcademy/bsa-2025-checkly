@@ -25,6 +25,10 @@ const QuestionsCategoriesColumnName = {
 } as const;
 
 async function down(knex: Knex): Promise<void> {
+	await knex.schema.alterTable(TableNames.QUESTIONS, (table) => {
+		table.integer(QuestionsColumnName.ORDER).unique().notNullable();
+	});
+
 	await knex.schema.dropTable(TableNames.QUESTIONS_CATEGORIES);
 
 	await knex.schema.alterTable(TableNames.PLAN_CATEGORIES, (table) => {
