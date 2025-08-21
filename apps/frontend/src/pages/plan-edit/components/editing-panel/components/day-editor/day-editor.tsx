@@ -1,7 +1,13 @@
 import { type FC, useCallback } from "react";
 import { type Control, type FieldErrors, useFieldArray } from "react-hook-form";
+import { toast } from "react-toastify";
 
-import { Button, Textarea } from "~/libs/components/components.js";
+import { Regenerate, Timer } from "~/assets/img/icons/icons.js";
+import {
+	Button,
+	DecorativeImage,
+	Input,
+} from "~/libs/components/components.js";
 import { INCREMENT_VALUE } from "~/libs/constants/constants.js";
 import { type PlanEditForm } from "~/libs/types/types.js";
 
@@ -27,37 +33,60 @@ const DayEditor: FC<Properties> = ({ control, dayIndex, errors }) => {
 		dayIndex,
 	)}.tasks` as `days.${number}.tasks`;
 
-	const { fields, remove } = useFieldArray({
+	const { fields } = useFieldArray({
 		control,
 		name: fieldArrayName,
 	});
 
-	const handleRemoveActivity = useCallback(
-		(index: number) => (): void => {
-			remove(index);
-		},
-		[remove],
-	);
+	const handleRegenerateTask = useCallback((): void => {
+		toast.success("Regenerate task");
+	}, []);
+
+	const handleSetTaskTime = useCallback((): void => {
+		toast.info("Set time for task");
+	}, []);
 
 	return (
 		<div className={styles["dayEditor"]}>
 			<div className={styles["activitiesList"]}>
 				{fields.map((field, taskIndex) => (
 					<div className={styles["activityRow"]} key={field.id}>
-						<Textarea
+						<div className={styles["activityHeader"]}>
+							<span className={styles["activityLabel"]}>
+								{`Task ${String(taskIndex + INCREMENT_VALUE)}`}
+							</span>
+
+							<div className={styles["actionButtons"]}>
+								<div className={styles["timerButtonWrapper"]}>
+									<Button
+										className={styles["timerButton"]}
+										icon={<DecorativeImage src={Timer} />}
+										iconOnlySize="small"
+										isIconOnly
+										label="morning"
+										onClick={handleSetTaskTime}
+										variant="transparent"
+									/>
+									<span>morning</span>
+								</div>
+
+								<Button
+									className={styles["actionButton"]}
+									icon={<DecorativeImage src={Regenerate} />}
+									iconOnlySize="small"
+									isIconOnly
+									label=""
+									onClick={handleRegenerateTask}
+									variant="transparent"
+								/>
+							</div>
+						</div>
+
+						<Input
 							control={control}
 							errors={errors}
-							label={`Task ${String(taskIndex + INCREMENT_VALUE)}`}
-							name={getFieldName(dayIndex, taskIndex)}
-							rows={2}
-						/>
-						<Button
-							icon={<>&times;</>}
-							iconOnlySize="small"
-							isIconOnly
 							label=""
-							onClick={handleRemoveActivity(taskIndex)}
-							variant="primary"
+							name={getFieldName(dayIndex, taskIndex)}
 						/>
 					</div>
 				))}
