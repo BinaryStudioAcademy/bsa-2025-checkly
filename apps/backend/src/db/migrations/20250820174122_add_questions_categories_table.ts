@@ -7,6 +7,10 @@ const TableNames = {
 	QUESTIONS_CATEGORIES: "questions_categories",
 };
 
+const CategoriesColumnName = {
+	SLUG: "slug",
+};
+
 const QuestionsColumnName = {
 	ORDER: "order",
 };
@@ -22,6 +26,10 @@ const QuestionsCategoriesColumnName = {
 
 async function down(knex: Knex): Promise<void> {
 	await knex.schema.dropTable(TableNames.QUESTIONS_CATEGORIES);
+
+	await knex.schema.alterTable(TableNames.PLAN_CATEGORIES, (table) => {
+		table.dropColumn(CategoriesColumnName.SLUG);
+	});
 }
 
 async function up(knex: Knex): Promise<void> {
@@ -57,6 +65,10 @@ async function up(knex: Knex): Promise<void> {
 			QuestionsCategoriesColumnName.QUESTION_ID,
 			QuestionsCategoriesColumnName.CATEGORY_ID,
 		]);
+	});
+
+	await knex.schema.alterTable(TableNames.PLAN_CATEGORIES, (table) => {
+		table.string(CategoriesColumnName.SLUG).notNullable();
 	});
 }
 

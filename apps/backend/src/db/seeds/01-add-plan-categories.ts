@@ -12,6 +12,7 @@ async function seed(knex: Knex): Promise<void> {
 				"https://res.cloudinary.com/dezfqozcv/image/upload/v1755447659/personal-dev_qopczl.png",
 			id: 1,
 			order: 1,
+			slug: "personal_development",
 			title: "Personal development",
 		},
 		{
@@ -19,6 +20,7 @@ async function seed(knex: Knex): Promise<void> {
 				"https://res.cloudinary.com/dezfqozcv/image/upload/v1755447659/spirituality_zae43g.png",
 			id: 2,
 			order: 2,
+			slug: "spirituality",
 			title: "Spirituality",
 		},
 		{
@@ -26,6 +28,7 @@ async function seed(knex: Knex): Promise<void> {
 				"https://res.cloudinary.com/dezfqozcv/image/upload/v1755447659/sport_tfegpz.png",
 			id: 3,
 			order: 3,
+			slug: "sport",
 			title: "Sport",
 		},
 		{
@@ -33,6 +36,7 @@ async function seed(knex: Knex): Promise<void> {
 				"https://res.cloudinary.com/dezfqozcv/image/upload/v1755447659/money_mebx58.png",
 			id: 4,
 			order: 4,
+			slug: "money",
 			title: "Money",
 		},
 		{
@@ -40,6 +44,7 @@ async function seed(knex: Knex): Promise<void> {
 				"https://res.cloudinary.com/dezfqozcv/image/upload/v1755447659/creativity_lgykq1.png",
 			id: 5,
 			order: 5,
+			slug: "creativity",
 			title: "Creativity",
 		},
 		{
@@ -47,6 +52,7 @@ async function seed(knex: Knex): Promise<void> {
 				"https://res.cloudinary.com/dezfqozcv/image/upload/v1755447659/hobby_iz6zym.png",
 			id: 6,
 			order: 6,
+			slug: "hobby",
 			title: "Hobby",
 		},
 	]);
