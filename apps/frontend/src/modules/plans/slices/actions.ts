@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
@@ -15,8 +16,12 @@ const generatePlan = createAsyncThunk<
 	QuizAnswersRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/generate`, async (payload, { extra }) => {
-	const { planApi } = extra;
+	const { planApi, storage } = extra;
 	const plan = await planApi.generate(payload);
+
+	if (!plan.userId) {
+		await storage.set(StorageKey.PLAN_ID, String(plan.id));
+	}
 
 	return plan;
 });
@@ -43,4 +48,14 @@ const getAllUserPlans = createAsyncThunk<
 	return plan;
 });
 
-export { generatePlan, getAllUserPlans, searchPlan };
+const findPlan = createAsyncThunk<PlanDaysTaskDto, number, AsyncThunkConfig>(
+	`${sliceName}/:id`,
+	async (payload, { extra }) => {
+		const { planApi } = extra;
+		const plan = await planApi.findWithRelations(payload);
+
+		return plan;
+	},
+);
+
+export { findPlan, generatePlan, getAllUserPlans, searchPlan };

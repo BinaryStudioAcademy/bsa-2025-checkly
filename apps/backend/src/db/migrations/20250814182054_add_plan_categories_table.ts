@@ -13,6 +13,7 @@ const CategoriesColumnName = {
 	CREATED_AT: "created_at",
 	ICON_HREF: "icon_href",
 	ID: "id",
+	KEY: "key",
 	ORDER: "order",
 	TITLE: "title",
 	UPDATED_AT: "updated_at",
@@ -30,6 +31,7 @@ async function up(knex: Knex): Promise<void> {
 	await knex.schema.createTable(TABLE_NAMES.PLAN_CATEGORIES, (table) => {
 		table.increments(CategoriesColumnName.ID).primary();
 		table.string(CategoriesColumnName.TITLE).notNullable();
+		table.string(CategoriesColumnName.KEY).notNullable();
 		table.string(CategoriesColumnName.ICON_HREF).notNullable();
 		table.integer(CategoriesColumnName.ORDER).unique().notNullable();
 		table

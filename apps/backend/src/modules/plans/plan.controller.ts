@@ -238,6 +238,7 @@ class PlanController extends BaseController {
 		this.addRoute({
 			handler: (options) =>
 				this.findWithRelations(options as IdParametersOption),
+			isPublic: true,
 			method: HTTPRequestMethod.GET,
 			path: PlansApiPath.PLAN,
 		});
@@ -470,7 +471,10 @@ class PlanController extends BaseController {
 		options: APIBodyOptions<QuizAnswersRequestDto>,
 	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.planService.generate(options.body),
+			payload: await this.planService.generate({
+				payload: options.body,
+				user: options.user ?? null,
+			}),
 			status: HTTPCode.OK,
 		};
 	}

@@ -1,10 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { LAST_INDEX } from "~/libs/constants/constants.js";
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
-import { generatePlan, getAllUserPlans, searchPlan } from "./actions.js";
+import {
+	findPlan,
+	generatePlan,
+	getAllUserPlans,
+	searchPlan,
+} from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
@@ -39,6 +45,7 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getAllUserPlans.fulfilled, (state, action) => {
 			state.userPlansDataStatus = DataStatus.FULFILLED;
 			state.userPlans = action.payload;
+			state.plan = action.payload.at(LAST_INDEX) || null;
 		});
 		builder.addCase(getAllUserPlans.rejected, (state) => {
 			state.userPlansDataStatus = DataStatus.REJECTED;
@@ -54,6 +61,17 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(searchPlan.rejected, (state) => {
 			state.userPlansDataStatus = DataStatus.REJECTED;
 			state.userPlans = [];
+		});
+		builder.addCase(findPlan.pending, (state) => {
+			state.userPlansDataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(findPlan.fulfilled, (state, action) => {
+			state.userPlansDataStatus = DataStatus.FULFILLED;
+			state.plan = action.payload;
+		});
+		builder.addCase(findPlan.rejected, (state) => {
+			state.userPlansDataStatus = DataStatus.REJECTED;
+			state.plan = null;
 		});
 	},
 	initialState,

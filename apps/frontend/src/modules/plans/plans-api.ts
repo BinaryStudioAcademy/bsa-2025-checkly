@@ -24,6 +24,19 @@ class PlanApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.PLANS, storage });
 	}
 
+	public async findWithRelations(planId: number): Promise<PlanDaysTaskDto> {
+		const response = await this.load(
+			this.getFullEndpoint(PlansApiPath.PLAN, { id: String(planId) }),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: false,
+				method: HTTPRequestMethod.GET,
+			},
+		);
+
+		return await response.json<PlanDaysTaskDto>();
+	}
+
 	public async generate(
 		payload: QuizAnswersRequestDto,
 	): Promise<PlanDaysTaskDto> {
@@ -31,7 +44,7 @@ class PlanApi extends BaseHTTPApi {
 			this.getFullEndpoint(PlansApiPath.PLAN_GENERATE, {}),
 			{
 				contentType: ContentType.JSON,
-				hasAuth: false,
+				hasAuth: true,
 				method: HTTPRequestMethod.POST,
 				payload: JSON.stringify(payload),
 			},
