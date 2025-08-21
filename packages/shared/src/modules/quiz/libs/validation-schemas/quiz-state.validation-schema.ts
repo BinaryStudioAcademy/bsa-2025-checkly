@@ -18,7 +18,6 @@ const questionSchema = z.object({
 	id: z.number().int().positive(),
 	isOptional: z.boolean(),
 	options: z.array(questionOptionSchema),
-	order: z.number().int().positive(),
 	text: z.string().min(QuizIndexes.FIRST_INDEX),
 	type: z.nativeEnum(QuizQuestionFormat),
 });
