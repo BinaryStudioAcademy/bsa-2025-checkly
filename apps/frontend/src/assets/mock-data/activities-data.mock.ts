@@ -258,7 +258,7 @@ const activitiesMockData: PlanEditForm = {
 	notes:
 		"Be flexible and kind to yourself. Consistency is the key to everything!",
 	startDate: "2024-01-01",
-	theme: "colourful",
+	theme: "COLOURFUL",
 	title: "7-Day Mindfulness Challenge",
 };
 

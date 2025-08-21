@@ -24,8 +24,8 @@ type Properties = {
 	) => React.ReactNode;
 	renderSelectedIcon?: (itemIndex: number) => React.ReactNode;
 	selectedItem: SelectedItemType;
-	showNotes?: boolean;
-	showPreviewButton?: boolean;
+	shouldShowNotes?: boolean;
+	shouldShowPreviewButton?: boolean;
 };
 
 const DaysNav: FC<Properties> = ({
@@ -38,8 +38,8 @@ const DaysNav: FC<Properties> = ({
 	renderExtraAction,
 	renderSelectedIcon,
 	selectedItem,
-	showNotes = false,
-	showPreviewButton = false,
+	shouldShowNotes = false,
+	shouldShowPreviewButton = false,
 }) => {
 	const handleSelectItem = useCallback(
 		(index: SelectedItemType) => (): void => {
@@ -76,7 +76,7 @@ const DaysNav: FC<Properties> = ({
 					);
 				})}
 
-				{showNotes && (
+				{shouldShowNotes && (
 					<li>
 						<Button
 							className={getClassNames(
@@ -90,7 +90,7 @@ const DaysNav: FC<Properties> = ({
 					</li>
 				)}
 
-				{showPreviewButton && onSelectPreview && (
+				{shouldShowPreviewButton && onSelectPreview && (
 					<li className={styles["mobile-only"]}>
 						<Button
 							className={getClassNames(

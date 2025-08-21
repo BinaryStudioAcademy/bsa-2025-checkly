@@ -5,7 +5,7 @@ import {
 	Notes,
 	PlanHeader,
 } from "~/libs/components/plan-styles/components/components.js";
-import { planStyleModules } from "~/libs/enums/enums.js";
+import { PlanStyleModules } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useA4Scale } from "~/libs/hooks/hooks.js";
 import { type PlanDay, type PlanStyleOption } from "~/libs/types/types.js";
@@ -28,10 +28,13 @@ const PlanPreview: React.FC<Properties> = ({
 	firstDayDate,
 	isForPrint = false,
 	notes,
-	theme = "colourful",
+	theme = "COLOURFUL",
 	title = "My Personal Plan",
 }) => {
-	const themeClasses = planStyleModules[theme];
+	const themeClasses = 
+		PlanStyleModules[
+			theme.toUpperCase() as keyof typeof PlanStyleModules
+		];
 
 	const { scale, viewportReference } = useA4Scale();
 

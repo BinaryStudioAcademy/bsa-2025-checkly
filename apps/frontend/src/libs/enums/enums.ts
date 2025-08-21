@@ -10,8 +10,8 @@ export { ErrorMessage } from "./error-messages.enum.js";
 export { IconsPositions } from "./icons-positions.enum.js";
 export { KeyboardKeys } from "./keyboard-keys.enum.js";
 export { PlaceholderValues } from "./placeholder-values.enum.js";
-export { planStyleModules } from "./plan-style-modules.enum.js";
 export { PlanCategoryId } from "./plan-category-id.enum.js";
+export { PlanStyleModules } from "./plan-style-modules.enum.js";
 export { PlanStyle } from "./plan-style-options.enum.js";
 export { RouteAccess } from "./route-access.js";
 export {
