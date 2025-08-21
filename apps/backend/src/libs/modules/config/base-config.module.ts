@@ -70,7 +70,7 @@ class BaseConfig implements Config {
 				PLAN_PRINT_URL: {
 					default: null,
 					doc: "Frontend plan print URL",
-					env: "PLAN_PRINT_URL",
+					env: "FRONTEND_PLAN_PRINT_URL",
 					format: String,
 				},
 			},
