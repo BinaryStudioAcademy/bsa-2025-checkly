@@ -18,6 +18,7 @@ import styles from "./styles.module.css";
 
 const PlanStyleOverview: React.FC = () => {
 	const user = useAppSelector((state) => state.auth.user);
+	const selectedStyle = useAppSelector((state) => state.plan.selectedStyle);
 	const isAuthenticated = Boolean(user);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
@@ -67,7 +68,7 @@ const PlanStyleOverview: React.FC = () => {
 				<div className={styles["plan-content"]}>
 					{selectedCategory === PlanCategoryId.PDF ? (
 						<>
-							<PlanStyle inputStyle="WITH_REMARKS" />
+							<PlanStyle inputStyle={selectedStyle} />
 							<DecorativeImage
 								className={styles["yellow-stars-reflection"]}
 								src={StarsYellow02}

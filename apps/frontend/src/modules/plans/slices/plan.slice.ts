@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-import { DataStatus } from "~/libs/enums/enums.js";
-import { type ValueOf } from "~/libs/types/types.js";
+import { DataStatus, PlanStyle } from "~/libs/enums/enums.js";
+import { type PlanStyleOption, type ValueOf } from "~/libs/types/types.js";
 import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
 import { generatePlan, getAllUserPlans, searchPlan } from "./actions.js";
@@ -9,6 +9,7 @@ import { generatePlan, getAllUserPlans, searchPlan } from "./actions.js";
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
 	plan: null | PlanDaysTaskDto;
+	selectedStyle: PlanStyleOption;
 	userPlans: PlanDaysTaskDto[];
 	userPlansDataStatus: ValueOf<typeof DataStatus>;
 };
@@ -16,6 +17,7 @@ type State = {
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
 	plan: null,
+	selectedStyle: PlanStyle.WITH_REMARKS,
 	userPlans: [],
 	userPlansDataStatus: DataStatus.IDLE,
 };
@@ -58,7 +60,11 @@ const { actions, name, reducer } = createSlice({
 	},
 	initialState,
 	name: "plan",
-	reducers: {},
+	reducers: {
+		setSelectedStyle: (state, action: PayloadAction<PlanStyleOption>) => {
+			state.selectedStyle = action.payload;
+		},
+	},
 });
 
 export { actions, name, reducer };
