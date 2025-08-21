@@ -31,10 +31,8 @@ const PlanPreview: React.FC<Properties> = ({
 	theme = "COLOURFUL",
 	title = "My Personal Plan",
 }) => {
-	const themeClasses = 
-		PlanStyleModules[
-			theme.toUpperCase() as keyof typeof PlanStyleModules
-		];
+	const themeClasses =
+		PlanStyleModules[theme.toUpperCase() as keyof typeof PlanStyleModules];
 
 	const { scale, viewportReference } = useA4Scale();
 

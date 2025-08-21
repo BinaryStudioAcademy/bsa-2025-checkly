@@ -80,7 +80,9 @@ const Textarea = <T extends FieldValues>({
 				)}
 			</div>
 			{hasError && (
-				<p className={styles["textarea-field__error"]}>{errorMessage as string}</p>
+				<p className={styles["textarea-field__error"]}>
+					{errorMessage as string}
+				</p>
 			)}
 		</div>
 	);
