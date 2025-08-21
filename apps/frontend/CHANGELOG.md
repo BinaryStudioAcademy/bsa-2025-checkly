@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.20.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.19.1...frontend-v1.20.0) (2025-08-21)
+
+
+### Features
+
+* saving generated plan to db automatically cy-309 ([23a7320](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/23a7320cdc7712f881e66c083b8d2bb1822b8b65))
+
+
+### Bug Fixes
+
+* update user in generate plan payload cy-309 ([f1a620b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f1a620b69c1393f4a545f9a0a7ee467824f08631))
+
 ## [1.19.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.19.0...frontend-v1.19.1) (2025-08-21)
 
 
