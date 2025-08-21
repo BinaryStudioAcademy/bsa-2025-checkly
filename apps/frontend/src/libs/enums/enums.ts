@@ -4,7 +4,7 @@ export {
 	ButtonSizes,
 	ButtonVariants,
 } from "./button-properties.enum.js";
-export { CategoriesColors } from "./categories-colors.enum.js";
+export { CategoriesColors, colorValues } from "./categories-colors.enum.js";
 export { ElementTypes } from "./element-types.enum.js";
 export { ErrorMessage } from "./error-messages.enum.js";
 export { IconsPositions } from "./icons-positions.enum.js";
@@ -27,4 +27,5 @@ export {
 	QuizQuestionFormat,
 	ServerErrorType,
 	ErrorMessage as SharedErrorMessage,
+	ZERO,
 } from "shared";

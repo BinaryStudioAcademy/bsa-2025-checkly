@@ -7,4 +7,6 @@ const CategoriesColors = {
 	CARD_YELLOW: "card-yellow",
 } as const;
 
-export { CategoriesColors };
+const colorValues = Object.values(CategoriesColors);
+
+export { CategoriesColors, colorValues };
