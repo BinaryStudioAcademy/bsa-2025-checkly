@@ -1,7 +1,8 @@
 import { type FC, useCallback, useState } from "react";
 import { useWatch } from "react-hook-form";
+import { toast } from "react-toastify";
 
-import { ArrowLeft, Download } from "~/assets/img/icons/icons.js";
+import { ArrowLeft, Save } from "~/assets/img/icons/icons.js";
 import { activitiesMockData } from "~/assets/mock-data/activities-data.mock.js";
 import {
 	AppHeader,
@@ -9,10 +10,7 @@ import {
 	DecorativeImage,
 	Loader,
 } from "~/libs/components/components.js";
-import {
-	INITIAL_ITEM,
-	PDF_DOWNLOAD_OPTIONS,
-} from "~/libs/constants/constants.js";
+import { INITIAL_ITEM } from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm } from "~/libs/hooks/hooks.js";
 import {
@@ -23,7 +21,6 @@ import {
 
 import {
 	DaysNav,
-	DownloadButton,
 	EditingPanel,
 	PlanPreview,
 } from "./components/components.js";
@@ -59,6 +56,10 @@ const PlanEdit: FC = () => {
 	const handleSelectPreview = useCallback((): void => {
 		handleSelectItem("preview");
 	}, [handleSelectItem]);
+
+	const handleSave = useCallback((): void => {
+		toast.success("Plan saved successfully");
+	}, []);
 
 	if (formValues.days.length === INITIAL_ITEM) {
 		return <Loader />;
@@ -131,20 +132,21 @@ const PlanEdit: FC = () => {
 				</div>
 
 				<footer className={getClassNames("cluster", styles["page-footer"])}>
-					<DownloadButton
+					{/* <DownloadButton
 						fileName="my-personal-plan"
 						options={PDF_DOWNLOAD_OPTIONS}
 						targetId="plan-for-download"
-					>
-						<Button
-							icon={<DecorativeImage src={Download} />}
-							iconOnlySize="medium"
-							label="Download PDF"
-							size="small"
-							type="button"
-							variant="primary"
-						/>
-					</DownloadButton>
+					> */}
+					<Button
+						icon={<DecorativeImage src={Save} />}
+						iconOnlySize="medium"
+						label="Save Plan"
+						onClick={handleSave}
+						size="small"
+						type="button"
+						variant="primary"
+					/>
+					{/* </DownloadButton> */}
 				</footer>
 			</main>
 		</>
