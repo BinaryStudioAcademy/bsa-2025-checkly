@@ -1,17 +1,11 @@
 import { z } from "zod";
 
-import { MAX_AGE, MIN_AGE } from "../../../../libs/constants/numbers.js";
+import { MAX_AGE } from "../../../../libs/constants/numbers.js";
 import {
 	UserValidationMessage,
 	UserValidationRegexRule,
 	UserValidationRule,
 } from "../enums/enums.js";
-
-const minAgeDate = new Date();
-minAgeDate.setFullYear(minAgeDate.getFullYear() - MIN_AGE);
-
-const maxAgeDate = new Date();
-maxAgeDate.setFullYear(maxAgeDate.getFullYear() - MAX_AGE);
 
 const userUpdate = z
 	.object({
@@ -33,13 +27,28 @@ const userUpdate = z
 						return true;
 					}
 
-					const inputDate = new Date(value);
+					const date = new Date(value);
+					const today = new Date();
 
-					return inputDate <= minAgeDate && inputDate >= maxAgeDate;
+					return date <= today;
 				},
 				{
-					message: UserValidationMessage.AGE_INVALID,
+					message: UserValidationMessage.DATE_OF_BIRTH_CANNOT_BE_IN_THE_FUTURE,
 				},
+			)
+			.refine(
+				(value) => {
+					if (!value) {
+						return true;
+					}
+
+					const date = new Date(value);
+					const maxAge = new Date();
+					maxAge.setFullYear(maxAge.getFullYear() - MAX_AGE);
+
+					return date >= maxAge;
+				},
+				{ message: UserValidationMessage.ENTER_VALID_DATE_OF_BIRTH },
 			)
 			.nullable()
 			.optional(),

@@ -4,8 +4,11 @@ const UserValidationMessage = {
 	CURRENT_PASSWORD_INVALID: "Current password is incorrect",
 	CURRENT_PASSWORD_REQUIRED: "Current password is required to change password",
 	DATE_INVALID: "Date must be in format YYYY-MM-DD",
+	DATE_OF_BIRTH_CANNOT_BE_IN_THE_FUTURE:
+		"Date of birth cannot be in the future",
 	EMAIL_ALREADY_EXISTS: "Email already in use",
 	EMAIL_INVALID: "Invalid email format",
+	ENTER_VALID_DATE_OF_BIRTH: "Please enter a valid date of birth",
 	FAILED_TO_UPDATE_PROFILE: "Failed to update user profile",
 	FIELD_REQUIRED: "Field is required",
 	LINK_HAS_EXPIRED: "Link has expired",
