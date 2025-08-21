@@ -33,7 +33,9 @@ const Plan: React.FC = () => {
 
 	const currentDay = plan?.days[selectedDay];
 	const selectedDayTasks = currentDay
-		? tasks.filter((task) => task.planDayId === currentDay.id)
+		? tasks
+				.filter((task) => task.planDayId === currentDay.id)
+				.toSorted((first, second) => first.order - second.order)
 		: [];
 
 	useEffect(() => {
@@ -111,11 +113,9 @@ const Plan: React.FC = () => {
 						"cluster grid-pattern flow",
 					)}
 				>
-					{selectedDayTasks
-						.toSorted((first, second) => first.order - second.order)
-						.map((item, index) => {
-							return <Task indexItem={index + ONE} item={item} key={index} />;
-						})}
+					{selectedDayTasks.map((item, index) => {
+						return <Task indexItem={index + ONE} item={item} key={index} />;
+					})}
 					{plan && (
 						<NavLink className={navLink} to={AppRoute.CHOOSE_STYLE}>
 							<Button
