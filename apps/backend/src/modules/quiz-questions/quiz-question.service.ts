@@ -11,13 +11,15 @@ class QuizQuestionService {
 	public async findAllByCategoryId(
 		categoryId: number,
 	): Promise<QuizQuestionsResponseDto> {
-		const questions =
+		const questionsCategories =
 			await this.quizQuestionRepository.findAllWithOptionsByCategoryId(
 				categoryId,
 			);
 
 		return {
-			items: questions.map((question) => question.toObjectWithQuestion()),
+			items: questionsCategories.map(
+				(questionCategory) => questionCategory.toObjectWithQuestion().question,
+			),
 		};
 	}
 }
