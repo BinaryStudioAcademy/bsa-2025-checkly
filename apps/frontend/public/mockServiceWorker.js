@@ -21,7 +21,7 @@ addEventListener("activate", function (event) {
 });
 
 addEventListener("message", async function (event) {
-	const clientId = Reflect.get(event.source || {}, "id");
+	const clientId = Reflect.get(event.source ?? {}, "id");
 
 	if (!clientId || !self.clients) {
 		return;

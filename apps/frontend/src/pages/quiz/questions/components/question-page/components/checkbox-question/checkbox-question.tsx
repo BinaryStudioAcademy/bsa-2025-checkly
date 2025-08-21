@@ -15,9 +15,9 @@ const CheckboxQuestion: React.FC<CheckboxQuestionProperties> = ({
 	question,
 }: CheckboxQuestionProperties): React.ReactElement => {
 	const handleOptionChange = useCallback(
-		(option: string, checked: boolean): void => {
-			const currentSelections = currentAnswer || [];
-			const newSelections = toggleOption(option, currentSelections, checked);
+		(option: string, isChecked: boolean): void => {
+			const currentSelections = currentAnswer ?? [];
+			const newSelections = toggleOption(option, currentSelections, isChecked);
 			onAnswer(newSelections);
 		},
 		[currentAnswer, onAnswer],
@@ -44,7 +44,11 @@ const CheckboxQuestion: React.FC<CheckboxQuestionProperties> = ({
 						/>
 						<div className={styles["checkbox-custom"]}>
 							{isOptionSelected(option.text, currentAnswer) && (
-								<img alt="Selected" src={logoIcon} />
+								<img
+									alt="Selected"
+									className={styles["checkbox-icon"]}
+									src={logoIcon}
+								/>
 							)}
 						</div>
 						<span className={styles["option-text"]}>{option.text}</span>

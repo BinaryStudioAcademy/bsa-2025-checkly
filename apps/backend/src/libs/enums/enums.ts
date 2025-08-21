@@ -2,6 +2,7 @@ export {
 	APIPath,
 	AppEnvironment,
 	AvatarTypes,
+	ContentType,
 	ErrorConstants,
 	FastifyHook,
 	S3BucketIndex,

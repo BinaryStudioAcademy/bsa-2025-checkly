@@ -1,16 +1,16 @@
 .progress-bar {
 	width: 100%;
-	padding: var(--space-l) 0;
-	margin-bottom: var(--space-xl);
+	padding: var(--space-m) 0;
+	margin-bottom: var(--space-m);
 }
 
 .progress-container {
 	position: relative;
 	display: flex;
-	gap: var(--space-s);
+	gap: var(--space-xs);
 	align-items: center;
 	justify-content: center;
-	max-width: 600px;
+	max-width: 500px;
 	margin: 0 auto;
 }
 
@@ -19,7 +19,7 @@
 	top: 50%;
 	left: 50%;
 	z-index: 1;
-	width: calc(100% - 80px);
+	width: calc(100% - 60px);
 	height: 2px;
 	content: "";
 	background-color: var(--color-text-primary);
@@ -32,8 +32,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 32px;
-	height: 32px;
+	width: 24px;
+	height: 24px;
 	background-color: white;
 	border: 2px solid var(--color-text-primary);
 	border-radius: 50%;
@@ -41,9 +41,9 @@
 }
 
 .progress-circle.current {
-	color: white;
-	background-color: var(--color-text-primary);
-	border-color: var(--color-text-primary);
+	color: var(--color-text-primary);
+	background-color: var(--color-bg-white);
+	border-color: var(--color-brand-primary);
 }
 
 .progress-circle.completed {
@@ -53,13 +53,37 @@
 }
 
 .progress-circle .number {
-	font-size: var(--text-size-body);
+	font-size: var(--text-size-small);
 	font-weight: var(--font-weight-semi-bold);
 	color: var(--color-text-primary);
 }
 
 .progress-circle .checkmark {
-	font-size: var(--text-size-body);
+	font-size: var(--text-size-small);
 	font-weight: var(--font-weight-bold);
 	color: white;
+}
+
+@media (width <= 768px) {
+	.progress-container {
+		gap: var(--space-xs);
+		max-width: 250px;
+	}
+
+	.progress-container::before {
+		width: calc(100% - 10px);
+	}
+
+	.progress-circle {
+		flex-shrink: 0;
+		width: 20px;
+		min-width: 20px;
+		height: 20px;
+		min-height: 20px;
+	}
+
+	.progress-circle .number,
+	.progress-circle .checkmark {
+		font-size: var(--text-size-small);
+	}
 }

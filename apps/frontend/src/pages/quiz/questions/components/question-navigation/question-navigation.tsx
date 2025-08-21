@@ -36,6 +36,7 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 			<div className={getClassNames("cluster", styles["navigation-buttons"])}>
 				{!isFirst && (
 					<Button
+						className={styles["navigation-button"]}
 						label={ButtonLabels.BACK}
 						onClick={onBack}
 						size={ButtonSizes.LARGE}
@@ -44,7 +45,8 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 				)}
 
 				<Button
-					disabled={isNextDisabled}
+					className={styles["navigation-button"]}
+					isDisabled={isNextDisabled}
 					label={nextButtonLabel}
 					onClick={onNext}
 					size={ButtonSizes.LARGE}
@@ -53,16 +55,13 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 
 				{showSkip && (
 					<Button
+						className={styles["navigation-button"]}
 						label={ButtonLabels.SKIP}
 						onClick={onSkip}
 						size={ButtonSizes.LARGE}
 						variant={ButtonVariants.TRANSPARENT}
 					/>
 				)}
-			</div>
-
-			<div className={styles["question-counter"]}>
-				Question {currentQuestion} of {totalQuestions}
 			</div>
 		</div>
 	);

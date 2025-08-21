@@ -89,7 +89,7 @@ const QuestionPage: React.FC<QuestionPageProperties> = ({
 		[onAnswer, question],
 	);
 
-	function renderQuestion(): React.ReactElement {
+	const renderQuestion = (): React.ReactElement => {
 		switch (question.type) {
 			case QuizQuestionFormat.MULTIPLE_CHOICE: {
 				return (
@@ -161,13 +161,13 @@ const QuestionPage: React.FC<QuestionPageProperties> = ({
 				);
 			}
 		}
-	}
+	};
 
 	return (
 		<div className={styles["question-page"]}>
 			{questionNumber && (
 				<div
-					className={getClassNames(styles["question-icons"], "show-tablet-up")}
+					className={getClassNames(styles["question-icons"], "show-desktop-up")}
 				>
 					{getQuestionIcons(questionNumber).map((iconData, index) => {
 						const questionIconClass = styles["question-icon"] ?? "";

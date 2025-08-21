@@ -59,6 +59,8 @@ schemas:
         type: boolean
       executionTimeType:
         type: string
+      planDayId:
+        type: number
       completedAt:
         type: string
         nullable: true

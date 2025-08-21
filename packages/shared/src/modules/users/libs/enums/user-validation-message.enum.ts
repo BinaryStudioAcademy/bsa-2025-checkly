@@ -14,6 +14,6 @@ const UserValidationMessage = {
 	PASSWORD_INVALID: `Password should contain between ${String(UserValidationRule.PASSWORD_MIN_LENGTH)} to ${String(UserValidationRule.PASSWORD_MAX_LENGTH)} characters, at least one lowercase letter, one uppercase letter and one digit`,
 	USER_NOT_FOUND: "User not found",
 	WRONG_PASSWORD: "Wrong password",
-};
+} as const;
 
 export { UserValidationMessage };

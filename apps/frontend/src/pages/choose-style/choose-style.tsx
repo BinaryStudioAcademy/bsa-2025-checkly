@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import {
 	ArrowLeftIcon,
@@ -20,25 +20,40 @@ import {
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { useAppDispatch } from "~/libs/hooks/use-app-dispatch/use-app-dispatch.hook.js";
 import { type ViewOptions } from "~/libs/types/types.js";
+import { actions } from "~/modules/plans/slices/plan.slice.js";
 
 import { styleCards } from "./choose-style.data.js";
 import styles from "./style.module.css";
 
-const preselectedElement = 1;
+const PRESELECTED_ELEMENT = 1;
 const PLAN_VIEW_OPTION: ViewOptions = "selection";
 
 const ChooseStyle: React.FC = () => {
 	const [selectedCard, setSelectedCard] = useState<null | string>(
-		styleCards[preselectedElement]?.id || null,
+		styleCards[PRESELECTED_ELEMENT]?.id ?? null,
 	);
+	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 
 	const handleCardClick = useCallback(
 		(event: React.MouseEvent<HTMLButtonElement>): void => {
-			setSelectedCard(event.currentTarget.dataset["card"] || null);
+			setSelectedCard(event.currentTarget.dataset["card"] ?? null);
 		},
 		[],
 	);
+
+	const handleSaveStyle = useCallback((): void => {
+		const selectedStyleCard = styleCards.find(
+			(card) => card.id === selectedCard,
+		);
+
+		if (selectedStyleCard) {
+			dispatch(actions.setSelectedStyle(selectedStyleCard.planStyle));
+			void navigate(AppRoute.OVERVIEW_PAGE);
+		}
+	}, [selectedCard, dispatch, navigate]);
 
 	const navLink = getClassNames(styles["nav-link"]);
 
@@ -47,34 +62,38 @@ const ChooseStyle: React.FC = () => {
 			<AppHeader />
 			<section
 				className={getClassNames(
+					styles["choose-style-wrapper"],
 					styles["choose-style-section"],
 					"grid-pattern",
 				)}
 			>
 				<div className={styles["nav"]}>
-					<NavLink className={navLink} to={AppRoute.PLAN}>
-						<button aria-label="Go back">
+					<NavLink className={navLink} to={AppRoute.OVERVIEW_PAGE}>
+						<button aria-label="Go back" className={styles["nav-back-button"]}>
 							<ArrowLeftIcon aria-hidden="true" />
 						</button>
 					</NavLink>
-					<p>Choose the style</p>
+					<p className={styles["nav-title"]}>Choose the style</p>
 				</div>
 				<div className={styles["header-buttons"]}>
 					<Button
+						className={styles["header-buttons-button"]}
 						icon={<FileIcon aria-hidden="true" />}
 						label="PDF"
 						size="small"
 					/>
 					<Button
-						disabled
+						className={styles["header-buttons-button"]}
 						icon={<SmartphoneIcon aria-hidden="true" />}
 						iconOnlySize="large"
+						isDisabled
 						label="Mobile Wallpaper"
 						size="small"
 					/>
 					<Button
-						disabled
+						className={styles["header-buttons-button"]}
 						icon={<MonitorIcon aria-hidden="true" />}
+						isDisabled
 						label="Desktop Wallpaper"
 						size="small"
 					/>
@@ -104,19 +123,12 @@ const ChooseStyle: React.FC = () => {
 					))}
 				</div>
 				<div className={styles["bottom-buttons"]}>
-					<NavLink className={navLink} to={AppRoute.ROOT}>
-						<Button
-							icon={<DownloadIcon aria-hidden="true" />}
-							label="Download"
-						/>
-					</NavLink>
-					<NavLink className={navLink} to={AppRoute.PLAN}>
-						<Button
-							icon={<ArrowLeftIcon aria-hidden="true" />}
-							label="Back"
-							variant="secondary"
-						/>
-					</NavLink>
+					<Button
+						icon={<DownloadIcon aria-hidden="true" />}
+						label="Save"
+						onClick={handleSaveStyle}
+						variant="primary"
+					/>
 				</div>
 				<DecorativeImage className={styles["flower"]} src={FlowerPink} />
 				<DecorativeImage className={styles["stars"]} src={StarsYellow02} />

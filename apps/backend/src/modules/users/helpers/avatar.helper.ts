@@ -33,7 +33,7 @@ const handleAvatarRemove = async (
 
 	if (previousUrl) {
 		try {
-			await fileService.deleteFile(previousUrl);
+			await fileService.delete(previousUrl);
 		} catch (error) {
 			logger.warn(ErrorMessage.FAILED_TO_DELETE_PREVIOUS_AVATAR, {
 				error,
@@ -87,6 +87,17 @@ const handleAvatarUpload = async (
 		chunks.push(current);
 	}
 
+	const isTruncated = Boolean(
+		(multipartFile.file as unknown as { truncated?: boolean }).truncated,
+	);
+
+	if (isTruncated) {
+		throw new HTTPError({
+			message: ErrorMessage.FILE_TOO_LARGE,
+			status: HTTPCode.BAD_REQUEST,
+		});
+	}
+
 	const buffer = Buffer.concat(chunks);
 
 	const parameters = request.params as Record<string, unknown> | undefined;
@@ -109,11 +120,11 @@ const handleAvatarUpload = async (
 		});
 	}
 
-	const previousUrl = existing.toObject().avatarUrl;
+	const previousUrl = (existing.toObject() as UserPlainObject).avatarUrl;
 
 	if (previousUrl) {
 		try {
-			await fileService.deleteFile(previousUrl);
+			await fileService.delete(previousUrl);
 		} catch (error) {
 			logger.warn(ErrorMessage.FAILED_TO_DELETE_PREVIOUS_AVATAR, {
 				error,

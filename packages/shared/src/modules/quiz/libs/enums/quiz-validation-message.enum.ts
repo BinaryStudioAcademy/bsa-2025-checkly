@@ -7,6 +7,6 @@ const QuizValidationMessage = {
 	QUESTION_TEXT_REQUIRED: "Question text is required.",
 	SKIPPED_QUESTIONS:
 		"Answers list should containt at least one non-skipped question.",
-};
+} as const;
 
 export { QuizValidationMessage };

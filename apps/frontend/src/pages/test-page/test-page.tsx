@@ -4,7 +4,7 @@ import { type PlanStyleOption } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
 
-const SELECTED_STYLE: PlanStyleOption = "minimal";
+const SELECTED_STYLE: PlanStyleOption = "MINIMAL";
 
 const TestPage: React.FC = () => {
 	return (

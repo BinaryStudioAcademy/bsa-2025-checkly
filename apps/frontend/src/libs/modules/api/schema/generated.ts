@@ -163,6 +163,146 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
+	"/tasks": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/** Create a new task */
+		post: {
+			parameters: {
+				query?: never;
+				header?: never;
+				path?: never;
+				cookie?: never;
+			};
+			requestBody: {
+				content: {
+					"application/json": components["schemas"]["TaskRequestDto"];
+				};
+			};
+			responses: {
+				/** @description Task created successfully */
+				201: {
+					headers: {
+						[name: string]: unknown;
+					};
+					content: {
+						"application/json": components["schemas"]["TaskResponseDto"];
+					};
+				};
+				400: components["responses"]["BadRequestError"];
+				401: components["responses"]["UnauthorizedError"];
+			};
+		};
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/tasks/{id}": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get task by ID */
+		get: {
+			parameters: {
+				query?: never;
+				header?: never;
+				path: {
+					/** @description ID of the task */
+					id: number;
+				};
+				cookie?: never;
+			};
+			requestBody?: never;
+			responses: {
+				/** @description Task retrieved successfully */
+				200: {
+					headers: {
+						[name: string]: unknown;
+					};
+					content: {
+						"application/json": components["schemas"]["TaskResponseDto"];
+					};
+				};
+				401: components["responses"]["UnauthorizedError"];
+				404: components["responses"]["NotFoundError"];
+			};
+		};
+		put?: never;
+		post?: never;
+		/** Delete task by ID */
+		delete: {
+			parameters: {
+				query?: never;
+				header?: never;
+				path: {
+					/** @description ID of the task */
+					id: number;
+				};
+				cookie?: never;
+			};
+			requestBody?: never;
+			responses: {
+				/** @description Task deleted successfully */
+				200: {
+					headers: {
+						[name: string]: unknown;
+					};
+					content: {
+						"application/json": {
+							/** @example Task deleted successfully */
+							message?: string;
+						};
+					};
+				};
+				401: components["responses"]["UnauthorizedError"];
+				404: components["responses"]["NotFoundError"];
+			};
+		};
+		options?: never;
+		head?: never;
+		/** Update task by ID */
+		patch: {
+			parameters: {
+				query?: never;
+				header?: never;
+				path: {
+					/** @description ID of the task */
+					id: number;
+				};
+				cookie?: never;
+			};
+			requestBody: {
+				content: {
+					"application/json": components["schemas"]["TaskUpdateRequestDto"];
+				};
+			};
+			responses: {
+				/** @description Task updated successfully */
+				200: {
+					headers: {
+						[name: string]: unknown;
+					};
+					content: {
+						"application/json": components["schemas"]["TaskResponseDto"];
+					};
+				};
+				401: components["responses"]["UnauthorizedError"];
+				404: components["responses"]["NotFoundError"];
+			};
+		};
+		trace?: never;
+	};
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -220,6 +360,7 @@ export interface components {
 			order?: number;
 			isCompleted?: boolean;
 			executionTimeType?: string;
+			planDayId?: number;
 			completedAt?: string | null;
 		};
 		PlanDayDto: {
@@ -229,6 +370,44 @@ export interface components {
 		};
 		PlanDaysTaskDto: components["schemas"]["PlanDto"] & {
 			days?: components["schemas"]["PlanDayDto"][];
+		};
+		TaskRequestDto: {
+			/** @example Warm-up */
+			title: string;
+			/** @example 10-minute stretching routine */
+			description: string;
+			/** @example morning */
+			executionTimeType?: string | null;
+			/** @example false */
+			isCompleted?: boolean;
+			/** @example 1 */
+			order: number;
+			/** @example 5 */
+			planDayId: number;
+		};
+		TaskResponseDto: {
+			/** @example 10 */
+			id?: number;
+			/** @example Warm-up */
+			title?: string;
+			/** @example 10-minute stretching routine */
+			description?: string;
+			/** @example morning */
+			executionTimeType?: string | null;
+			/** @example false */
+			isCompleted?: boolean;
+			/** @example 1 */
+			order?: number;
+			/** @example 5 */
+			planDayId?: number;
+			/** @example null */
+			completedAt?: string | null;
+		};
+		TaskUpdateRequestDto: {
+			/** @example Task Example */
+			title?: string;
+			/** @example Task Description */
+			description?: string;
 		};
 	};
 	responses: {
@@ -243,6 +422,15 @@ export interface components {
 		};
 		/** @description Bad request */
 		BadRequestError: {
+			headers: {
+				[name: string]: unknown;
+			};
+			content: {
+				"application/json": components["schemas"]["Error"];
+			};
+		};
+		/** @description Resource not found */
+		NotFoundError: {
 			headers: {
 				[name: string]: unknown;
 			};

@@ -14,6 +14,13 @@ const NotesPage: React.FC = (): React.ReactElement => {
 
 	const handleNotesChange = useCallback(
 		(event: React.ChangeEvent<HTMLTextAreaElement>): void => {
+			dispatch(actions.setNotes(event.target.value));
+		},
+		[dispatch],
+	);
+
+	const handleNotesBlur = useCallback(
+		(event: React.FocusEvent<HTMLTextAreaElement>): void => {
 			dispatch(actions.setNotes(sanitizeTextInput(event.target.value)));
 		},
 		[dispatch],
@@ -23,15 +30,17 @@ const NotesPage: React.FC = (): React.ReactElement => {
 		<div className={styles["notes-page"]}>
 			<div className={getClassNames(styles["notes-content"], "grid-pattern")}>
 				<h2 className={styles["notes-title"]}>
-					Want to add any personal notes for your plan?
+					Want to add any personal notes?
 				</h2>
 				<p className={styles["notes-description"]}>
 					Feel free to add any additional thoughts, comments, or notes about
-					your experience with this quiz.
+					your experience with this quiz. Those are not going to be used for
+					plan.
 				</p>
 
 				<textarea
 					className={styles["notes-textarea"]}
+					onBlur={handleNotesBlur}
 					onChange={handleNotesChange}
 					placeholder={PlaceholderValues.WRITE_YOUR_NOTES_HERE}
 					value={notes}
