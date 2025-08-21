@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-import { DataStatus, PlanStyleOptions } from "~/libs/enums/enums.js";
+import { DataStatus, PlanStyle } from "~/libs/enums/enums.js";
 import { type PlanStyleOption, type ValueOf } from "~/libs/types/types.js";
 import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
@@ -17,7 +17,7 @@ type State = {
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
 	plan: null,
-	selectedStyle: PlanStyleOptions.WITH_REMARKS,
+	selectedStyle: PlanStyle.WITH_REMARKS,
 	userPlans: [],
 	userPlansDataStatus: DataStatus.IDLE,
 };
