@@ -29,6 +29,7 @@ import styles from "./styles.module.css";
 
 const getDefaultValues = (user: UserDto): UserUpdateRequestDto => ({
 	confirmPassword: "",
+	currentPassword: "",
 	dob: formatDateForInput(user.dob),
 	email: user.email,
 	name: user.name,
@@ -36,7 +37,9 @@ const getDefaultValues = (user: UserDto): UserUpdateRequestDto => ({
 });
 
 const Profile: React.FC = () => {
-	const [activeTab, setActiveTab] = useState<ProfileTabType>(ProfileTab.PERSONAL);
+	const [activeTab, setActiveTab] = useState<ProfileTabType>(
+		ProfileTab.PERSONAL,
+	);
 
 	const personalTabReference = React.useRef<HTMLButtonElement>(null);
 	const passwordTabReference = React.useRef<HTMLButtonElement>(null);
@@ -99,7 +102,10 @@ const Profile: React.FC = () => {
 		(event: React.KeyboardEvent<HTMLButtonElement>): void => {
 			if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
 				event.preventDefault();
-				const nextTab = activeTab === ProfileTab.PERSONAL ? ProfileTab.PASSWORD : ProfileTab.PERSONAL;
+				const nextTab =
+					activeTab === ProfileTab.PERSONAL
+						? ProfileTab.PASSWORD
+						: ProfileTab.PERSONAL;
 				setActiveTab(nextTab);
 
 				if (nextTab === ProfileTab.PERSONAL) {
@@ -132,7 +138,8 @@ const Profile: React.FC = () => {
 							aria-selected={activeTab === ProfileTab.PERSONAL}
 							className={getClassNames(
 								styles["tab-button"],
-								activeTab === ProfileTab.PERSONAL && styles["tab-button--active"],
+								activeTab === ProfileTab.PERSONAL &&
+									styles["tab-button--active"],
 							)}
 							id="personal-tab"
 							onClick={handlePersonalTabClick}
@@ -149,7 +156,8 @@ const Profile: React.FC = () => {
 							aria-selected={activeTab === ProfileTab.PASSWORD}
 							className={getClassNames(
 								styles["tab-button"],
-								activeTab === ProfileTab.PASSWORD && styles["tab-button--active"],
+								activeTab === ProfileTab.PASSWORD &&
+									styles["tab-button--active"],
 							)}
 							id="password-tab"
 							onClick={handlePasswordTabClick}
@@ -211,6 +219,14 @@ const Profile: React.FC = () => {
 								id="password-panel"
 								role="tabpanel"
 							>
+								<Input
+									control={control}
+									errors={errors}
+									label="Current password"
+									name="currentPassword"
+									placeholder="Enter your current password"
+									type="password"
+								/>
 
 								<Input
 									control={control}

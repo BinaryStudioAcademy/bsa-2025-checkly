@@ -16,6 +16,7 @@ maxAgeDate.setFullYear(maxAgeDate.getFullYear() - MAX_AGE);
 const userUpdate = z
 	.object({
 		confirmPassword: z.string().trim().optional().or(z.literal("").optional()),
+		currentPassword: z.string().trim().optional().or(z.literal("").optional()),
 		dob: z
 			.string()
 			.trim()
@@ -83,6 +84,18 @@ const userUpdate = z
 	.refine((data) => (data.password ?? "") === (data.confirmPassword ?? ""), {
 		message: UserValidationMessage.PASSWORD_DOES_NOT_MATCH,
 		path: ["confirmPassword"],
-	});
+	})
+	.refine(
+		(data) => {
+			const hasPassword = (data.password ?? "").trim() !== "";
+			const hasCurrentPassword = (data.currentPassword ?? "").trim() !== "";
+
+			return !hasPassword || hasCurrentPassword;
+		},
+		{
+			message: UserValidationMessage.CURRENT_PASSWORD_REQUIRED,
+			path: ["currentPassword"],
+		},
+	);
 
 export { userUpdate };
