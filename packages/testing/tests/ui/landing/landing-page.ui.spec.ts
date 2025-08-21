@@ -1,12 +1,12 @@
-import { test } from "@ui/controllers/landing-navigation";
+import { test } from "@ui/fixtures/landing-sections.fixture";
 import { expect } from "@playwright/test";
 
 test.describe("Page Title", async () => {
 	test("Landing page has Checkly Title", async ({ page }) => {
 		await expect(page).toHaveTitle("Checkly");
 	});
-	// Optional, check the presence of a favicon
-	test.skip("Landing page has a favicon", async ({ page }) => {
+
+	test("Landing page has a favicon", async ({ page }) => {
 		const favicon = page.locator(
 			'link[rel="icon"][type="image/x-icon"][href="/favicon.ico"]',
 		);
@@ -41,12 +41,9 @@ test.describe("Header", async () => {
 		await expect(heading).toBeVisible();
 	});
 
-	//Skipping until this function gets implemented.
-	test.skip("Star Quiz button navigates to the sign-up page", async ({
-		page,
-	}) => {
+	test("Star Quiz button navigates to the sign-up page", async ({ page }) => {
 		await page.getByRole("link", { name: "Sign in" }).click();
-		const heading = page.getByRole("heading", { name: "Sign Up" });
+		const heading = page.getByRole("heading", { name: "Sign In" });
 		await expect(heading).toBeVisible();
 	});
 });
@@ -73,13 +70,17 @@ test.describe("Hero", async () => {
 	});
 
 	test("Hero section has decorative images", async ({ heroSection }) => {
-		const images = heroSection.locator("img"); //[class^="_icons-wrapper"] can be used for I rather avoid it
+		const images = heroSection.locator("img");
 		await expect(images).toHaveCount(5);
-		// await expect(images.nth(0)).toHaveAttribute('alt', ''); Optional for alt attribute
 	});
 
-	//Skipping until behavior is defined and implemented
-	test.skip("Star button redirects to - page", async ({ heroSection }) => {});
+	test("Start button redirects to Quiz page", async ({ heroSection }) => {
+		await heroSection.getByRole("link", { name: "Start" }).click();
+		const start = heroSection.getByRole("heading", {
+			name: /^pick the field you'd like to improve$/i,
+		});
+		await expect(heroSection).toBeVisible();
+	});
 });
 
 test.describe("How it Works", async () => {
@@ -99,20 +100,6 @@ test.describe("How it Works", async () => {
 		expect(stepsText).toContain("Get your plan");
 		expect(stepsText).toContain("3");
 		expect(stepsText).toContain("Download PDF or customize it");
-
-		//Alternatively:
-		// const steps = [
-		//   { number: '1', title: 'Take the quiz' },
-		//   { number: '2', title: 'Get your plan' },
-		//   { number: '3', title: 'Download PDF or customize it' },
-		// ];
-
-		// for (const { number, title } of steps) {
-		//   const stepNumber = page.locator(`text="${number}"`);
-		//   const stepTitle = page.getByText(title, { exact: true });
-		//   await expect(stepNumber).toBeVisible();
-		//   await expect(stepTitle).toBeVisible();
-		// }
 	});
 
 	test("How it Works has decorative images", async ({ howItWorksSection }) => {
@@ -161,8 +148,8 @@ test.describe("Categories", async () => {
 
 			const title = categoriesTitles[i]!;
 			await expect(h2).toHaveText(title);
-			await expect(img).toBeVisible(); //If alt is added and matches the category, it might be better to instead .toHaveAttribute('alt', categoriesTitles[i]);
-			await expect(button).toHaveAttribute("aria-pressed", /true|false/); //Check if buttons are clickable (optional)
+			await expect(img).toBeVisible();
+			await expect(button).toHaveAttribute("aria-pressed", /true|false/); //Check if buttons are clickable
 		}
 	});
 });
@@ -176,7 +163,7 @@ test.describe("Layouts", async () => {
 	});
 
 	test("Layouts has example cards", async ({ layoutsSection }) => {
-		const layoutsCards = layoutsSection.locator("li"); //Alternatively ('[role="listitem"]') could be used if they change the attribute
+		const layoutsCards = layoutsSection.locator("li");
 		const count = await layoutsCards.count();
 		expect(count).toBeGreaterThan(5);
 	});
@@ -191,24 +178,6 @@ test.describe("Layouts", async () => {
 			await expect(img).toBeVisible();
 			await expect(card.locator("h5")).toBeVisible();
 		}
-
-		// Optionals: Compare img with alt; aria-label check; match img alt with title. (add to the for loop)
-
-		// await expect(img).toHaveAttribute('alt', /Preview of the/i);
-		// await expect(card).toHaveAttribute('aria-label', /Visual layout option:/i); Optional
-		// await expect(img).toHaveAttribute('alt', /Preview of the/i); Check img alt matches card title
-
-		// Optional: Check each card title by matching their aria-label
-
-		// for (let i = 0; i < count; i++) {
-		//   const card = layoutsCards.nth(i);
-		//   const ariaLabel = await card.getAttribute('aria-label');
-		//   const expectedTitle = ariaLabel?.replace('Visual layout option: ', '').trim();
-		//   const actualTitle = await card.locator('h5').textContent();
-		//   const trimmedTitle = actualTitle?.trim();
-
-		//   expect(trimmedTitle).toBe(expectedTitle);
-		// }
 	});
 });
 
@@ -239,9 +208,7 @@ test.describe("Testimonials", async () => {
 
 			const avatar = card.locator("img");
 			await expect(avatar).toBeVisible();
-			// Optional check for alt names (because these images aren't highlighted):
-			// await expect(avatar).toHaveAttribute('alt', /Roy|Emma|Joan/);
-
+			await expect(avatar).toHaveAttribute("alt", /Roy|Emma|Joan/);
 			const userName = card.locator("span");
 			await expect(userName).toBeVisible();
 		}
@@ -292,7 +259,7 @@ test.describe("Footer", async () => {
 
 		for (let i = 0; i < count; i++) {
 			const link = socialLinks.nth(i);
-			await expect(link).toBeVisible(); //This might be redundant
+			await expect(link).toBeVisible();
 			await expect(link).toHaveAttribute("href", "/");
 		}
 	});
