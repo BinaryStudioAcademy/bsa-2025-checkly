@@ -1,7 +1,12 @@
 import React from "react";
 
+import {
+	Day,
+	Notes,
+	PlanHeader,
+} from "~/libs/components/plan-styles/components/components.js";
 import { planStyleModules } from "~/libs/enums/enums.js";
-import { getClassNames, getWeekday } from "~/libs/helpers/helpers.js";
+import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useA4Scale } from "~/libs/hooks/hooks.js";
 import { type PlanDay, type PlanStyleOption } from "~/libs/types/types.js";
 
@@ -26,61 +31,48 @@ const PlanPreview: React.FC<Properties> = ({
 	theme = "colourful",
 	title = "My Personal Plan",
 }) => {
-	const themeClass = planStyleModules[theme]["plan"];
+	const themeClasses = planStyleModules[theme];
 
 	const { scale, viewportReference } = useA4Scale();
 
 	const content = (
-		<div className={styles["plan-preview"]}>
-			<h1 className={styles["plan-title"]}>{title}</h1>
+		<>
+			<PlanHeader inputStyle={theme} title={title} />
 
-			<div className={styles["days-grid-container"]}>
-				{days.map((day) => {
-					const weekday = getWeekday(firstDayDate, day.dayNumber);
-
-					return (
-						<div className={styles["day-block"]} key={day.id}>
-							<h2 className={styles["day-topic"]}>
-								Day {day.dayNumber}{" "}
-								<span className={styles["day-weekday"]}>({weekday})</span>
-							</h2>
-							<ul className={styles["activities-list"]}>
-								{day.tasks.map((task) => (
-									<li className={styles["activity-item"]} key={task.id}>
-										<span>{task.description}</span>
-									</li>
-								))}
-							</ul>
-						</div>
-					);
-				})}
-
-				{notes && (
-					<div className={styles["notes-section"]}>
-						<h3>Notes</h3>
-						<div className={styles["notes-lines"]}>
-							<p>{notes}</p>
-						</div>
-					</div>
-				)}
+			<div className={themeClasses["plan-body"]}>
+				<ul className={themeClasses["day-list"]}>
+					{days.map((day) => (
+						<Day
+							dayNumber={day.dayNumber}
+							firstDayDate={firstDayDate}
+							inputStyle={theme}
+							key={day.id}
+							tasks={day.tasks}
+						/>
+					))}
+					{notes && <Notes inputStyle={theme} />}
+				</ul>
 			</div>
-		</div>
+		</>
 	);
 
 	return isForPrint ? (
 		<div
-			className={getClassNames(styles["plan-container"], themeClass)}
+			className={getClassNames(
+				styles["plan-container"],
+				themeClasses["container"],
+			)}
 			id={containerId}
 		>
 			{content}
 		</div>
 	) : (
-		<div
-			className={getClassNames(styles["a4-viewport"], themeClass)}
-			ref={viewportReference}
-		>
+		<div className={styles["a4-viewport"]} ref={viewportReference}>
 			<div
-				className={getClassNames(styles["plan-preview"], themeClass)}
+				className={getClassNames(
+					styles["plan-preview"],
+					themeClasses["container"],
+				)}
 				id={containerId}
 				style={{ transform: `scale(${scale.toString()})` }}
 			>
