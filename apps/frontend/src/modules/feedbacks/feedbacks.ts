@@ -11,12 +11,14 @@ const feedbackApi = new FeedbackApi({
 });
 
 export { feedbackApi };
+export { getIdParameter } from "./libs/helpers/helpers.js";
 export {
 	type FeedbackCreateRequestDto,
 	type FeedbackDto,
 	type feedbackPaginationParameters,
 	type FeedbackServiceReturns,
 	type FeedbackUpdateRequestDto,
+	type IdParameter,
 } from "./libs/types/types.js";
 export {
 	feedbackCreateValidationSchema,

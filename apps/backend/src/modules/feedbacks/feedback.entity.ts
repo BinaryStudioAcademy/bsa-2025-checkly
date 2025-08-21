@@ -48,7 +48,7 @@ class FeedbackEntity implements Entity {
 		id: number;
 		text: string;
 		updatedAt: string;
-		user?: null | {
+		user: null | {
 			avatarUrl: null | string;
 			email: string;
 			id: number;
@@ -119,7 +119,7 @@ class FeedbackEntity implements Entity {
 		user: UserProfileResponseDto;
 		userId: number;
 	} {
-		if (this.id === null) {
+		if (!this.id) {
 			throw new Error("Cannot serialize a new object.");
 		}
 

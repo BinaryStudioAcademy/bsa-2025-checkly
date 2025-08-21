@@ -20,7 +20,12 @@ import { FeedbackCard } from "../feedback-card/feedback-card.js";
 type Properties = {
 	onOpenModal: (type: "DELETE" | "EDIT", id: number) => () => void;
 	reloadTrigger: number;
-	user: null | { id: number; name: string };
+	user: null | User;
+};
+
+type User = {
+	id: number;
+	name: string;
 };
 
 const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {

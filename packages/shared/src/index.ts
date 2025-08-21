@@ -21,6 +21,7 @@ export {
 } from "./libs/exceptions/exceptions.js";
 export {
 	configureString,
+	getIdParameter,
 	sanitizeFeedbackInput,
 	sanitizeTextInput,
 } from "./libs/helpers/helpers.js";
@@ -53,11 +54,13 @@ export {
 	type FeedbackDeleteResponseDto,
 	type FeedbackDto,
 	FeedbackGetAllOptions,
+	type FeedbackPaginationOptions,
 	type feedbackPaginationParameters,
 	type FeedbackServiceReturns,
 	type FeedbackUpdateRequestDto,
 	type FeedbackUpdateResponseDto,
 	feedbackUpdateValidationSchema,
+	type IdParameter,
 } from "./modules/feedbacks/feedbacks.js";
 export { type GeneratedPlanDTO } from "./modules/openai/openai.js";
 export {

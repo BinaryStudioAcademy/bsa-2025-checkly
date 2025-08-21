@@ -4,4 +4,5 @@ export {
 	type feedbackPaginationParameters,
 	type FeedbackServiceReturns,
 	type FeedbackUpdateRequestDto,
+	type IdParameter,
 } from "shared";

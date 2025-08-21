@@ -7,7 +7,7 @@ import styles from "./styles.module.css";
 
 type AvatarProperties = {
 	alt: string;
-	src: null | string | undefined;
+	src: null | string;
 };
 
 const UserAvatar: FC<AvatarProperties> = ({ alt, src }) => {

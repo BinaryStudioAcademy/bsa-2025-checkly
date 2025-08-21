@@ -15,7 +15,7 @@ import styles from "./styles.module.css";
 type Properties = {
 	id: number;
 	onClose: () => void;
-	userId: number | undefined;
+	userId?: number;
 };
 
 const EditFeedbackModal: React.FC<Properties> = ({

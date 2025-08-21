@@ -3,6 +3,7 @@ import {
 	type APIBodyOptions,
 	type APIHandlerOptions,
 	type APIHandlerResponse,
+	type AuthIdParametersOption,
 	BaseController,
 	type IdParametersOption,
 } from "~/libs/modules/controller/controller.js";
@@ -13,6 +14,7 @@ import { type FeedbackService } from "~/modules/feedbacks/feedback.service.js";
 import { FeedbackApiPath } from "./libs/enums/enums.js";
 import {
 	type FeedbackCreateRequestDto,
+	type FeedbackPaginationOptions,
 	type FeedbackUpdateRequestDto,
 } from "./libs/types/types.js";
 import {
@@ -92,7 +94,7 @@ class FeedbackController extends BaseController {
 			handler: (request) =>
 				this.findAll(
 					request as APIHandlerOptions<{
-						query?: { limit?: number; offset?: number };
+						query?: FeedbackPaginationOptions;
 					}>,
 				),
 			isPublic: true,
@@ -120,7 +122,7 @@ class FeedbackController extends BaseController {
 			handler: (options) =>
 				this.update(
 					options as APIBodyOptions<FeedbackUpdateRequestDto> &
-						IdParametersOption & { user: { id: number } },
+						AuthIdParametersOption,
 				),
 			method: HTTPRequestMethod.PUT,
 			path: FeedbackApiPath.FEEDBACK,
@@ -194,7 +196,7 @@ class FeedbackController extends BaseController {
 	 */
 
 	private async delete(
-		options: IdParametersOption & { user: { id: number } },
+		options: AuthIdParametersOption,
 	): Promise<APIHandlerResponse> {
 		const { id } = options.params;
 		const { id: userId } = options.user;
@@ -233,10 +235,10 @@ class FeedbackController extends BaseController {
 	 *         description: Unauthorized
 	 */
 	private async findAll(
-		request: APIHandlerOptions<{ query?: { limit?: number; offset?: number } }>,
+		request: APIHandlerOptions<{ query?: FeedbackPaginationOptions }>,
 	): Promise<APIHandlerResponse> {
 		const { query = {} } = request;
-		const options: { limit?: number; offset?: number } = {};
+		const options: FeedbackPaginationOptions = {};
 
 		if (query.limit) {
 			options.limit = Number(query.limit);
@@ -348,8 +350,7 @@ class FeedbackController extends BaseController {
 	 */
 
 	private async update(
-		options: APIBodyOptions<FeedbackUpdateRequestDto> &
-			IdParametersOption & { user: { id: number } },
+		options: APIBodyOptions<FeedbackUpdateRequestDto> & AuthIdParametersOption,
 	): Promise<APIHandlerResponse> {
 		const { id } = options.params;
 		const { id: userId } = options.user;

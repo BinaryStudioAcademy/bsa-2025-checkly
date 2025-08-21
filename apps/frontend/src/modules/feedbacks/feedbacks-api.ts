@@ -7,6 +7,7 @@ import {
 	type FeedbackDto,
 	type feedbackPaginationParameters,
 	type FeedbackUpdateRequestDto,
+	getIdParameter,
 } from "~/modules/feedbacks/feedbacks.js";
 import {
 	FeedbackApiPath,
@@ -45,7 +46,7 @@ class FeedbackApi extends BaseHTTPApi {
 
 	public async delete(id: number): Promise<boolean> {
 		const response = await this.load(
-			this.getFullEndpoint(FeedbackApiPath.FEEDBACK, { id: String(id) }),
+			this.getFullEndpoint(FeedbackApiPath.FEEDBACK, getIdParameter(id)),
 			{
 				hasAuth: true,
 				method: HTTPRequestMethod.DELETE,
@@ -84,7 +85,7 @@ class FeedbackApi extends BaseHTTPApi {
 
 	public async findById(id: number): Promise<FeedbackDto | null> {
 		const response = await this.load(
-			this.getFullEndpoint(FeedbackApiPath.FEEDBACK, { id: String(id) }),
+			this.getFullEndpoint(FeedbackApiPath.FEEDBACK, getIdParameter(id)),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,
@@ -104,7 +105,7 @@ class FeedbackApi extends BaseHTTPApi {
 		payload: FeedbackUpdateRequestDto,
 	): Promise<FeedbackDto | null> {
 		const response = await this.load(
-			this.getFullEndpoint(FeedbackApiPath.FEEDBACK, { id: String(id) }),
+			this.getFullEndpoint(FeedbackApiPath.FEEDBACK, getIdParameter(id)),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,

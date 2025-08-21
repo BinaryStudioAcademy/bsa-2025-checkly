@@ -11,7 +11,7 @@ type FeedbackCardProperties = {
 	onEditClick: () => void;
 	text: string;
 	user: User;
-	userId: number | undefined;
+	userId?: number;
 };
 
 type User = null | Pick<UserDto, "avatarUrl" | "id" | "name">;
@@ -34,7 +34,7 @@ const FeedbackCard: FC<FeedbackCardProperties> = ({
 
 			<p className={styles["text"]}>{text}</p>
 			<div className={styles["footer"]}>
-				<UserAvatar alt={user?.name ?? "User"} src={user?.avatarUrl} />
+				<UserAvatar alt={user?.name ?? "User"} src={user?.avatarUrl ?? null} />
 				<span className={styles["name"]}>{user?.name ?? "Anonymous"}</span>
 			</div>
 		</div>
