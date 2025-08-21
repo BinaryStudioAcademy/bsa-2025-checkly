@@ -39,8 +39,8 @@ const Textarea = <T extends FieldValues>({
 }: Properties<T>): JSX.Element => {
 	const textareaId = useId();
 	const { field } = useFormController({ control, name });
-	const error = errors[name]?.message;
-	const hasError = Boolean(error);
+	const errorMessage = errors[name]?.message;
+	const hasError = Boolean(errorMessage);
 
 	const textareaContainerClass = getClassNames(
 		"cluster",
@@ -80,7 +80,7 @@ const Textarea = <T extends FieldValues>({
 				)}
 			</div>
 			{hasError && (
-				<p className={styles["textarea-field__error"]}>{error as string}</p>
+				<p className={styles["textarea-field__error"]}>{errorMessage as string}</p>
 			)}
 		</div>
 	);
