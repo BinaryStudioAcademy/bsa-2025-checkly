@@ -87,6 +87,38 @@ class UserService implements Service {
 			});
 		}
 
+		if (payload.password?.trim()) {
+			if (!payload.currentPassword?.trim()) {
+				throw new HTTPError({
+					message: UserValidationMessage.CURRENT_PASSWORD_REQUIRED,
+					status: HTTPCode.BAD_REQUEST,
+				});
+			}
+
+			const currentUser = await this.userRepository.find(id);
+
+			if (!currentUser) {
+				throw new HTTPError({
+					message: UserValidationMessage.USER_NOT_FOUND,
+					status: HTTPCode.NOT_FOUND,
+				});
+			}
+
+			const { passwordHash, passwordSalt } = currentUser.getPasswordData();
+			const isCurrentPasswordValid = await this.encryptor.compare(
+				payload.currentPassword,
+				passwordHash,
+				passwordSalt,
+			);
+
+			if (!isCurrentPasswordValid) {
+				throw new HTTPError({
+					message: UserValidationMessage.CURRENT_PASSWORD_INVALID,
+					status: HTTPCode.UNPROCESSED_ENTITY,
+				});
+			}
+		}
+
 		const updateData = {
 			dob: payload.dob ?? null,
 			email: payload.email.trim(),
@@ -101,9 +133,16 @@ class UserService implements Service {
 			});
 		}
 
-		const updatedUser = await this.userRepository.update(id, updateData);
+		try {
+			const updatedUser = await this.userRepository.update(id, updateData);
 
-		return updatedUser ? updatedUser.toObject() : null;
+			return updatedUser ? updatedUser.toObject() : null;
+		} catch {
+			throw new HTTPError({
+				message: UserValidationMessage.FAILED_TO_UPDATE_PROFILE,
+				status: HTTPCode.INTERNAL_SERVER_ERROR,
+			});
+		}
 	}
 
 	public async uploadAvatar(

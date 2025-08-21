@@ -1,9 +1,12 @@
 import { UserValidationRule } from "./user-validation-rule.enum.js";
 
 const UserValidationMessage = {
+	CURRENT_PASSWORD_INVALID: "Current password is incorrect",
+	CURRENT_PASSWORD_REQUIRED: "Current password is required to change password",
 	DATE_INVALID: "Date must be in format YYYY-MM-DD",
 	EMAIL_ALREADY_EXISTS: "Email already in use",
 	EMAIL_INVALID: "Invalid email format",
+	FAILED_TO_UPDATE_PROFILE: "Failed to update user profile",
 	FIELD_REQUIRED: "Field is required",
 	NAME_INVALID: `Name must be between ${String(UserValidationRule.NAME_MIN_LENGTH)} and ${String(UserValidationRule.NAME_MAX_LENGTH)} characters`,
 	NAME_LENGTH: `Name must have at least ${String(UserValidationRule.NAME_MIN_LENGTH)} characters and maximum of ${String(UserValidationRule.NAME_MAX_LENGTH)} characters`,
