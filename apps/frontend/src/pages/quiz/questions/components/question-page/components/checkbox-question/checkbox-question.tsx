@@ -44,7 +44,11 @@ const CheckboxQuestion: React.FC<CheckboxQuestionProperties> = ({
 						/>
 						<div className={styles["checkbox-custom"]}>
 							{isOptionSelected(option.text, currentAnswer) && (
-								<img alt="Selected" src={logoIcon} />
+								<img
+									alt="Selected"
+									className={styles["checkbox-icon"]}
+									src={logoIcon}
+								/>
 							)}
 						</div>
 						<span className={styles["option-text"]}>{option.text}</span>

@@ -1,22 +1,22 @@
 .text-question {
 	display: flex;
 	flex-direction: column;
-	gap: var(--space-m);
+	gap: var(--space-s);
 	width: 100%;
-	max-width: 600px;
+	max-width: 500px;
 	margin-right: auto;
 	margin-left: auto;
 }
 
 .label {
-	font-size: var(--text-size-heading-3);
+	font-size: var(--text-size-heading-4);
 	font-weight: var(--font-weight-bold);
 	color: var(--color-text-primary);
 }
 
 .text-input {
 	width: 100%;
-	padding: var(--space-l);
+	padding: var(--space-m);
 	font-family: inherit;
 	font-size: var(--text-size-body);
 	background-color: var(--color-bg-white);
