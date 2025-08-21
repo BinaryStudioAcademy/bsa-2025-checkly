@@ -11,48 +11,48 @@ async function seed(knex: Knex): Promise<void> {
 			icon_href:
 				"https://res.cloudinary.com/dezfqozcv/image/upload/v1755447659/personal-dev_qopczl.png",
 			id: 1,
+			key: "personal_development",
 			order: 1,
-			slug: "personal_development",
 			title: "Personal development",
 		},
 		{
 			icon_href:
 				"https://res.cloudinary.com/dezfqozcv/image/upload/v1755447659/spirituality_zae43g.png",
 			id: 2,
+			key: "spirituality",
 			order: 2,
-			slug: "spirituality",
 			title: "Spirituality",
 		},
 		{
 			icon_href:
 				"https://res.cloudinary.com/dezfqozcv/image/upload/v1755447659/sport_tfegpz.png",
 			id: 3,
+			key: "sport",
 			order: 3,
-			slug: "sport",
 			title: "Sport",
 		},
 		{
 			icon_href:
 				"https://res.cloudinary.com/dezfqozcv/image/upload/v1755447659/money_mebx58.png",
 			id: 4,
+			key: "money",
 			order: 4,
-			slug: "money",
 			title: "Money",
 		},
 		{
 			icon_href:
 				"https://res.cloudinary.com/dezfqozcv/image/upload/v1755447659/creativity_lgykq1.png",
 			id: 5,
+			key: "creativity",
 			order: 5,
-			slug: "creativity",
 			title: "Creativity",
 		},
 		{
 			icon_href:
 				"https://res.cloudinary.com/dezfqozcv/image/upload/v1755447659/hobby_iz6zym.png",
 			id: 6,
+			key: "hobby",
 			order: 6,
-			slug: "hobby",
 			title: "Hobby",
 		},
 	]);
