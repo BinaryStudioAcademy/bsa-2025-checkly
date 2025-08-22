@@ -47,10 +47,10 @@ type QuizCategoryCardProperties = QuizCategoryProperties & {
 };
 
 type QuizCategoryProperties = {
-	categoryTitle: string;
 	color: string;
 	iconHref: string;
 	selected: boolean;
+	title: string;
 };
 
 type RadioQuestionProperties = {

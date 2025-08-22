@@ -8,11 +8,11 @@ import { type QuizCategoryCardProperties } from "~/libs/types/types.js";
 import styles from "./styles.module.css";
 
 const QuizCategoryCard: React.FC<QuizCategoryCardProperties> = ({
-	categoryTitle,
 	color,
 	iconHref,
 	onSelect,
 	selected,
+	title,
 }: QuizCategoryCardProperties): React.ReactElement => {
 	const handleChange = useCallback((): void => {
 		onSelect();
@@ -33,7 +33,7 @@ const QuizCategoryCard: React.FC<QuizCategoryCardProperties> = ({
 
 	return (
 		<div
-			aria-label={`Select ${categoryTitle} category`}
+			aria-label={`Select ${title} category`}
 			aria-pressed={selected}
 			className={getClassNames(
 				"flow",
@@ -52,15 +52,15 @@ const QuizCategoryCard: React.FC<QuizCategoryCardProperties> = ({
 					src={iconHref}
 				/>
 			</div>
-			<h2 className={styles["quiz-category-card-title"]}>{categoryTitle}</h2>
+			<h2 className={styles["quiz-category-card-title"]}>{title}</h2>
 			<input
 				checked={selected}
 				className={styles["quiz-category-card-input"]}
-				id={`quiz-category-${categoryTitle}`}
+				id={`quiz-category-${title}`}
 				name="quiz-category"
 				onChange={handleChange}
 				type={ElementTypes.RADIO}
-				value={categoryTitle}
+				value={title}
 			/>
 			{selected && (
 				<div className={styles["quiz-category-card-tick"]}>

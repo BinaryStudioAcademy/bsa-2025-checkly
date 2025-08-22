@@ -67,12 +67,12 @@ const Quiz: React.FC = (): React.ReactElement => {
 	): JSX.Element[] => {
 		return categories.map((category) => (
 			<QuizCategoryCard
-				categoryTitle={category.title}
 				color={category.color}
 				iconHref={category.iconHref}
 				key={category.id}
 				onSelect={handleSelect(category.key)}
 				selected={selectedCategory === category.key}
+				title={category.title}
 			/>
 		));
 	};
