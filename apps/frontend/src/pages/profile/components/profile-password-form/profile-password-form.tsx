@@ -1,4 +1,9 @@
-import React, { useCallback } from "react";
+import React, {
+	forwardRef,
+	useCallback,
+	useImperativeHandle,
+	useRef,
+} from "react";
 
 import { Button, Input, Loader } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
@@ -11,6 +16,11 @@ import {
 import sharedStyles from "~/pages/auth/components/shared/shared.module.css";
 
 import styles from "../styles.module.css";
+
+type ProfilePasswordFormReference = {
+	hasUnsavedChanges: () => boolean;
+	submitForm: () => void;
+};
 
 type Properties = {
 	isLoading?: boolean;
@@ -26,15 +36,27 @@ const getDefaultValues = (): UserUpdateRequestDto => {
 	};
 };
 
-const ProfilePasswordForm: React.FC<Properties> = ({
-	isLoading = false,
-	onSubmit,
-}) => {
+const ProfilePasswordForm = forwardRef<
+	ProfilePasswordFormReference,
+	Properties
+>(({ isLoading = false, onSubmit }, reference) => {
 	const { control, errors, handleSubmit, isDirty, isSubmitting, reset } =
 		useAppForm<UserUpdateRequestDto>({
 			defaultValues: getDefaultValues(),
 			validationSchema: userUpdateValidationSchema,
 		});
+
+	const formReference = useRef<HTMLFormElement>(null);
+
+	useImperativeHandle(reference, () => ({
+		hasUnsavedChanges: (): boolean => isDirty,
+		submitForm: (): void => {
+			void handleSubmit((formData: UserUpdateRequestDto) => {
+				onSubmit(formData);
+				reset(getDefaultValues());
+			})();
+		},
+	}));
 
 	const onFormSubmit = useCallback(
 		(event: React.FormEvent<HTMLFormElement>): void => {
@@ -51,6 +73,7 @@ const ProfilePasswordForm: React.FC<Properties> = ({
 		<form
 			className={getClassNames(sharedStyles["form"], "cluster", styles["form"])}
 			onSubmit={onFormSubmit}
+			ref={formReference}
 		>
 			<Input
 				control={control}
@@ -95,6 +118,9 @@ const ProfilePasswordForm: React.FC<Properties> = ({
 			/>
 		</form>
 	);
-};
+});
+
+ProfilePasswordForm.displayName = "ProfilePasswordForm";
 
 export { ProfilePasswordForm };
+export { type ProfilePasswordFormReference };

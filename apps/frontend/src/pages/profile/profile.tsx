@@ -1,20 +1,33 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 
-import { AvatarEdit, Loader, Tabs } from "~/libs/components/components.js";
+import {
+	AvatarEdit,
+	Loader,
+	TabsWithConfirmation,
+} from "~/libs/components/components.js";
 import { type Tab } from "~/libs/components/tabs/types/tab.type.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { updateProfile } from "~/modules/auth/slices/actions.js";
 import { type UserUpdateRequestDto } from "~/modules/users/users.js";
 
-import { ProfilePasswordForm } from "./components/profile-password-form/profile-password-form.js";
-import { ProfilePersonalForm } from "./components/profile-personal-form/profile-personal-form.js";
+import {
+	ProfilePasswordForm,
+	type ProfilePasswordFormReference,
+} from "./components/profile-password-form/profile-password-form.js";
+import {
+	ProfilePersonalForm,
+	type ProfilePersonalFormReference,
+} from "./components/profile-personal-form/profile-personal-form.js";
 import { ProfileTab } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 const Profile: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { user } = useAppSelector(({ auth }) => auth);
+
+	const personalFormReference = useRef<ProfilePersonalFormReference>(null);
+	const passwordFormReference = useRef<ProfilePasswordFormReference>(null);
 
 	const handleSubmit = useCallback(
 		(data: UserUpdateRequestDto) => {
@@ -23,18 +36,48 @@ const Profile: React.FC = () => {
 		[dispatch],
 	);
 
+	const handleBeforeTabChange = useCallback((currentTabId: string): boolean => {
+		const currentFormReference =
+			currentTabId === ProfileTab.PERSONAL
+				? personalFormReference.current
+				: passwordFormReference.current;
+
+		return !currentFormReference?.hasUnsavedChanges();
+	}, []);
+
+	const handleSaveChanges = useCallback((currentTabId: string): void => {
+		const currentFormReference =
+			currentTabId === ProfileTab.PERSONAL
+				? personalFormReference.current
+				: passwordFormReference.current;
+
+		currentFormReference?.submitForm();
+	}, []);
+
 	if (!user) {
 		return <Loader />;
 	}
 
 	const tabs: Tab[] = [
 		{
-			content: <ProfilePersonalForm onSubmit={handleSubmit} user={user} />,
+			content: (
+				<ProfilePersonalForm
+					onSubmit={handleSubmit}
+					ref={personalFormReference}
+					user={user}
+				/>
+			),
 			id: ProfileTab.PERSONAL,
 			label: "Personal Information",
 		},
 		{
-			content: <ProfilePasswordForm onSubmit={handleSubmit} user={user} />,
+			content: (
+				<ProfilePasswordForm
+					onSubmit={handleSubmit}
+					ref={passwordFormReference}
+					user={user}
+				/>
+			),
 			id: ProfileTab.PASSWORD,
 			label: "Change Password",
 		},
@@ -51,7 +94,12 @@ const Profile: React.FC = () => {
 			<div className={styles["profile-container"]}>
 				<AvatarEdit />
 				<h1 className={styles["title"]}>Profile</h1>
-				<Tabs defaultActiveTab={ProfileTab.PERSONAL} tabs={tabs} />
+				<TabsWithConfirmation
+					defaultActiveTab={ProfileTab.PERSONAL}
+					onBeforeTabChange={handleBeforeTabChange}
+					onSaveChanges={handleSaveChanges}
+					tabs={tabs}
+				/>
 			</div>
 		</div>
 	);

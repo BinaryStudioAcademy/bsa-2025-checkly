@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect } from "react";
+import React, {
+	forwardRef,
+	useCallback,
+	useEffect,
+	useImperativeHandle,
+	useRef,
+} from "react";
 
 import { Button, Input, Loader } from "~/libs/components/components.js";
 import { formatDateForInput } from "~/libs/helpers/date-helpers.js";
@@ -12,6 +18,11 @@ import {
 import sharedStyles from "~/pages/auth/components/shared/shared.module.css";
 
 import styles from "../styles.module.css";
+
+type ProfilePersonalFormReference = {
+	hasUnsavedChanges: () => boolean;
+	submitForm: () => void;
+};
 
 type Properties = {
 	isLoading?: boolean;
@@ -27,20 +38,30 @@ const getDefaultValues = (user: UserDto): UserUpdateRequestDto => {
 	};
 };
 
-const ProfilePersonalForm: React.FC<Properties> = ({
-	isLoading = false,
-	onSubmit,
-	user,
-}) => {
+const ProfilePersonalForm = forwardRef<
+	ProfilePersonalFormReference,
+	Properties
+>(({ isLoading = false, onSubmit, user }, reference) => {
 	const { control, errors, handleSubmit, isDirty, isSubmitting, reset } =
 		useAppForm<UserUpdateRequestDto>({
 			defaultValues: getDefaultValues(user),
 			validationSchema: userUpdateValidationSchema,
 		});
 
+	const formReference = useRef<HTMLFormElement>(null);
+
 	useEffect(() => {
 		reset(getDefaultValues(user));
 	}, [reset, user]);
+
+	useImperativeHandle(reference, () => ({
+		hasUnsavedChanges: (): boolean => isDirty,
+		submitForm: (): void => {
+			void handleSubmit((formData: UserUpdateRequestDto) => {
+				onSubmit(formData);
+			})();
+		},
+	}));
 
 	const onFormSubmit = useCallback(
 		(event: React.FormEvent<HTMLFormElement>): void => {
@@ -56,6 +77,7 @@ const ProfilePersonalForm: React.FC<Properties> = ({
 		<form
 			className={getClassNames(sharedStyles["form"], "cluster", styles["form"])}
 			onSubmit={onFormSubmit}
+			ref={formReference}
 		>
 			<Input
 				control={control}
@@ -99,6 +121,9 @@ const ProfilePersonalForm: React.FC<Properties> = ({
 			/>
 		</form>
 	);
-};
+});
+
+ProfilePersonalForm.displayName = "ProfilePersonalForm";
 
 export { ProfilePersonalForm };
+export { type ProfilePersonalFormReference };
