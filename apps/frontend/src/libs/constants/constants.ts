@@ -5,5 +5,6 @@ export {
 	getCategoryIcon,
 	getCategoryName,
 	getCategoryShortName,
+	getCategoryStyle,
 } from "./plan-category.constants.js";
 export { ONE, UPLOAD_MAX_FILE_SIZE_BYTES, ZERO } from "shared";

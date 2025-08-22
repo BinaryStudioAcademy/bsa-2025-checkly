@@ -41,6 +41,8 @@ export {
 	type ServerValidationErrorResponse,
 	type ValidationSchema,
 	type ValueOf,
+	VIEW_OPTIONS,
+	type ViewOptions,
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
 export { type GeneratedPlanDTO } from "./modules/openai/openai.js";

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { StarsYellow02 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { AppHeader, DecorativeImage } from "~/libs/components/components.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
-import { getCategoryName, MESSAGES } from "~/libs/constants/constants.js";
+import { getCategoryStyle, MESSAGES } from "~/libs/constants/constants.js";
 import { AppRoute, DataStatus, PlanCategoryId } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { usePlanCategory } from "~/libs/hooks/hooks.js";
@@ -25,7 +25,7 @@ const PlanStyleOverview: React.FC = () => {
 		PlanCategoryId.PDF,
 	);
 
-	const selectedCategoryName = getCategoryName(selectedCategory);
+	const planView = getCategoryStyle(selectedCategory);
 
 	const handleEditPlan = useCallback((): void => {
 		notifications.info(MESSAGES.FEATURE.NOT_IMPLEMENTED);
@@ -35,7 +35,21 @@ const PlanStyleOverview: React.FC = () => {
 
 	const handleDownloadPlan = useCallback(async (): Promise<void> => {
 		try {
-			await dispatch(actions.exportPdf({ category: selectedCategory }));
+			switch (selectedCategory) {
+				case PlanCategoryId.DESKTOP: {
+					await dispatch(actions.exportDesktopPng());
+					break;
+				}
+
+				case PlanCategoryId.MOBILE: {
+					await dispatch(actions.exportMobilePng());
+					break;
+				}
+
+				default: {
+					await dispatch(actions.exportPdf({ category: selectedCategory }));
+				}
+			}
 		} catch {
 			notifications.error(MESSAGES.DOWNLOAD.FAILED);
 		}
@@ -65,22 +79,11 @@ const PlanStyleOverview: React.FC = () => {
 			</div>
 			<div className={getClassNames(styles["container"], "grid-pattern")}>
 				<div className={styles["plan-content"]}>
-					{selectedCategory === PlanCategoryId.PDF ? (
-						<>
-							<PlanStyle inputStyle="WITH_REMARKS" />
-							<DecorativeImage
-								className={styles["yellow-stars-reflection"]}
-								src={StarsYellow02}
-							/>
-						</>
-					) : (
-						<div className={styles["coming-soon"]}>
-							<h2>Coming Soon</h2>
-							<p>
-								{selectedCategoryName} {MESSAGES.FEATURE.COMING_SOON}
-							</p>
-						</div>
-					)}
+					<PlanStyle inputStyle="WITH_REMARKS" view={planView} />
+					<DecorativeImage
+						className={styles["yellow-stars-reflection"]}
+						src={StarsYellow02}
+					/>
 					<DecorativeImage
 						className={styles["yellow-stars"]}
 						src={StarsYellow02}

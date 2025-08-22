@@ -46,3 +46,11 @@
 .selection-view {
 	--coefficient: 0.37;
 }
+
+.desktop-view.container {
+	background-color: blue;
+}
+
+.mobile-view.container {
+	background-color: red;
+}

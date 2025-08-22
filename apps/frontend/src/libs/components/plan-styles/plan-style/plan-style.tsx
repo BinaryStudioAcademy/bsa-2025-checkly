@@ -22,6 +22,8 @@ const PlanStyle: React.FC<Properties> = ({
 		styles[`${view}-view`],
 		view === "homepage" && styles[`${view}-container`],
 		view === "selection" && styles[`${view}-container`],
+		view === "desktop" && styles[`${view}-container`],
+		view === "mobile" && styles[`${view}-container`],
 		PlanStyleModules[inputStyle]["container"],
 	);
 
