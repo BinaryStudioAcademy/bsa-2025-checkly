@@ -4,7 +4,7 @@
 }
 
 .forgot-password {
-	padding-block: var(--space-xl) var(--space-xl);
+	padding-block: var(--space-xl);
 	padding-inline: var(--space-m-3xl);
 	margin-inline: var(--space-s);
 }
