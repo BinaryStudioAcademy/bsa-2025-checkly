@@ -6,6 +6,7 @@ import { type UserDto } from "~/modules/users/users.js";
 
 import {
 	getCurrentUser,
+	resetPassword,
 	sendResetLink,
 	signIn,
 	signUp,
@@ -92,6 +93,17 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(verifyToken.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 			state.isPreparing = !initialState.isPreparing;
+		});
+
+		builder.addCase(resetPassword.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+			state.isPreparing = !initialState.isPreparing;
+		});
+		builder.addCase(resetPassword.fulfilled, (state) => {
+			state.dataStatus = DataStatus.FULFILLED;
+		});
+		builder.addCase(resetPassword.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
 		});
 	},
 	initialState,

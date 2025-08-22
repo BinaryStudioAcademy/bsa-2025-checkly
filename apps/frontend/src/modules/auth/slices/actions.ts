@@ -94,7 +94,7 @@ const resetPassword = createAsyncThunk<
 	ResetPasswordRequestDto,
 	AsyncThunkConfig
 >(
-	`${sliceName}/verify-token`,
+	`${sliceName}/reset-password`,
 	async ({ password, userId }, { rejectWithValue }) => {
 		try {
 			await authApi.resetPassword({ password, userId });

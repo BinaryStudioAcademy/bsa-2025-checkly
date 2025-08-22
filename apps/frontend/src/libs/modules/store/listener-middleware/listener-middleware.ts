@@ -10,6 +10,7 @@ import { SuccessMessage } from "~/libs/enums/success-messages.enum.js";
 import { getErrorMessage } from "~/libs/helpers/get-error-message.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 import {
+	resetPassword,
 	sendResetLink,
 	signIn,
 	signUp,
@@ -28,7 +29,7 @@ listenerMiddleware.startListening({
 });
 
 listenerMiddleware.startListening({
-	async effect() {
+	effect: async () => {
 		await navigation.navigateTo(AppRoute.ROOT);
 	},
 	matcher: isAnyOf(signIn.fulfilled, signUp.fulfilled),
@@ -54,6 +55,14 @@ listenerMiddleware.startListening({
 		await navigation.navigateTo(AppRoute.SIGN_IN);
 	},
 	matcher: isAnyOf(sendResetLink.fulfilled, sendResetLink.rejected),
+});
+
+listenerMiddleware.startListening({
+	effect: async () => {
+		notifications.success(SuccessMessage.PASSWORD_CHANGED);
+		await navigation.navigateTo(AppRoute.SIGN_IN);
+	},
+	matcher: isFulfilled(resetPassword),
 });
 
 export { listenerMiddleware };
