@@ -1,18 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { colorValues, DataStatus } from "~/libs/enums/enums.js";
-import { type ValueOf } from "~/libs/types/types.js";
 
-import { type PlanCategoryDto } from "../libs/types/types.js";
+import { PLAN_CATEGORY } from "../libs/enums/enums.js";
+import { assignColor } from "../libs/helpers/helpers.js";
+import { type PlanCategoryState as State } from "../libs/types/types.js";
 import { getAll } from "./actions.js";
-
-const assignColor = (id: number, colorValues: string[]): string =>
-	colorValues[id % colorValues.length] as string;
-
-type State = {
-	dataStatus: ValueOf<typeof DataStatus>;
-	planCategories: (PlanCategoryDto & { color: string })[];
-};
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
@@ -37,7 +30,7 @@ const { actions, name, reducer } = createSlice({
 		});
 	},
 	initialState,
-	name: "plan-category",
+	name: PLAN_CATEGORY,
 	reducers: {},
 });
 
