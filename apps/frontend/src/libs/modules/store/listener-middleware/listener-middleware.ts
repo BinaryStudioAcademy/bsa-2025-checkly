@@ -10,6 +10,7 @@ import { SuccessMessage } from "~/libs/enums/success-messages.enum.js";
 import { getErrorMessage } from "~/libs/helpers/get-error-message.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 import {
+	sendResetLink,
 	signIn,
 	signUp,
 	updateProfile,
@@ -45,6 +46,14 @@ listenerMiddleware.startListening({
 		notifications.success(SuccessMessage.PROFILE_UPDATE);
 	},
 	matcher: isFulfilled(updateProfile),
+});
+
+listenerMiddleware.startListening({
+	effect: async () => {
+		notifications.success(SuccessMessage.EMAIL_SENT);
+		await navigation.navigateTo(AppRoute.SIGN_IN);
+	},
+	matcher: isAnyOf(sendResetLink.fulfilled, sendResetLink.rejected),
 });
 
 export { listenerMiddleware };
