@@ -42,7 +42,7 @@ const planTaskRegenerationHandlers = [
 				);
 			}
 
-			await delay(200);
+			await delay(500);
 
 			const updatedPlan = structuredClone(MOCK_PLAN);
 			const regeneratedTask = { ...MOCK_REGENERATED_TASK, id: taskId };

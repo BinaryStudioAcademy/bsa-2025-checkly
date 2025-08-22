@@ -4,8 +4,8 @@ import { Edit, Regenerate, Remove, Timer } from "~/assets/img/icons/icons.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 
-import { type TaskDto } from "../libs/types/types.js";
-import styles from "./styles.module.css";
+import { type TaskDto } from "../../libs/types/types.js";
+import styles from "../../shared/task/shared.module.css";
 
 type Properties = {
 	indexItem: number;

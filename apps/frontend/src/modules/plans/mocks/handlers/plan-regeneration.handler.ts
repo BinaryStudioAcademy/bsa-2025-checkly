@@ -19,7 +19,7 @@ const planRegenerationHandlers = [
 			);
 		}
 
-		await delay(200);
+		await delay(2000);
 
 		const updatedPlan = structuredClone(MOCK_PLAN);
 

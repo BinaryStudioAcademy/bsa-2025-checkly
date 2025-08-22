@@ -33,7 +33,7 @@ const planDayRegenerationHandlers = [
 			);
 		}
 
-		await delay(200);
+		await delay(1000);
 
 		const updatedPlan = structuredClone(MOCK_PLAN);
 

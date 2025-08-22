@@ -9,6 +9,5 @@ export { default as FileIcon } from "./file.svg?react";
 export { default as MonitorIcon } from "./monitor.svg?react";
 export { default as Regenerate } from "./regenerate.svg";
 export { default as Remove } from "./remove.svg";
-export { default as Save } from "./save.svg";
 export { default as SmartphoneIcon } from "./smartphone.svg?react";
 export { default as Timer } from "./timer.svg";

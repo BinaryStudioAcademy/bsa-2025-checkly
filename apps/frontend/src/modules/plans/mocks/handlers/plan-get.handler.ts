@@ -7,7 +7,7 @@ const planGetHandlers = [
 	http.get("/plans/:userId", async ({ request, params }) => {
 		const { userId } = params;
 
-		await delay(200);
+		await delay(1000);
 
 		if (userId) {
 			return new Response(JSON.stringify(MOCK_PLAN), {

@@ -139,7 +139,7 @@ const MOCK_REGENERATED_PLAN_DAY: ApiSchemas["PlanDayDto"] = {
 	tasks: [
 		{
 			id: 1001,
-			title: "Programming with Knut",
+			title: "Programming with Knuth",
 			description: "Run 3 km at a moderate pace",
 			order: 1,
 			isCompleted: false,
@@ -148,7 +148,7 @@ const MOCK_REGENERATED_PLAN_DAY: ApiSchemas["PlanDayDto"] = {
 		},
 		{
 			id: 1002,
-			title: "Reading session",
+			title: "Back training",
 			description: "15 minutes full-body stretching",
 			order: 2,
 			isCompleted: false,

@@ -28,7 +28,6 @@ const { actions, name, reducer } = createSlice({
 			isAnyOf(
 				generatePlan.pending,
 				getPlan.pending,
-				regenerateTask.pending,
 				regeneratePlanDay.pending,
 				regeneratePlan.pending,
 			),
@@ -50,22 +49,31 @@ const { actions, name, reducer } = createSlice({
 			},
 		);
 		builder.addMatcher(
+			isAnyOf(generatePlan.rejected, getPlan.rejected),
+			(state) => {
+				state.dataStatus = DataStatus.REJECTED;
+				state.plan = null;
+			},
+		);
+		builder.addMatcher(
 			isAnyOf(
-				generatePlan.rejected,
-				getPlan.rejected,
 				regenerateTask.rejected,
 				regeneratePlanDay.rejected,
 				regeneratePlan.rejected,
 			),
 			(state) => {
 				state.dataStatus = DataStatus.REJECTED;
-				state.plan = null;
 			},
 		);
 	},
 	initialState,
 	name: "plan",
-	reducers: {},
+	reducers: {
+		clearPlan(state) {
+			state.plan = null;
+			state.dataStatus = DataStatus.IDLE;
+		},
+	},
 });
 
 export { actions, name, reducer };
