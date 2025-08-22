@@ -1,10 +1,6 @@
 import React, { useCallback, useRef } from "react";
 
-import {
-	AvatarEdit,
-	Loader,
-	TabsWithConfirmation,
-} from "~/libs/components/components.js";
+import { AvatarEdit, Loader, Tabs } from "~/libs/components/components.js";
 import { type Tab } from "~/libs/components/tabs/types/tab.type.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
@@ -94,7 +90,7 @@ const Profile: React.FC = () => {
 			<div className={styles["profile-container"]}>
 				<AvatarEdit />
 				<h1 className={styles["title"]}>Profile</h1>
-				<TabsWithConfirmation
+				<Tabs
 					defaultActiveTab={ProfileTab.PERSONAL}
 					onBeforeTabChange={handleBeforeTabChange}
 					onSaveChanges={handleSaveChanges}
