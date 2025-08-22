@@ -5,6 +5,7 @@ import { type Storage } from "~/libs/modules/storage/storage.js";
 import { type QuizQuestionsResponseDto } from "~/modules/quiz/libs/types/types.js";
 
 import { QuizApiPath } from "./libs/enums/enums.js";
+import { buildQueryString } from "./libs/helpers/helpers.js";
 
 type Constructor = {
 	baseUrl: string;
@@ -20,9 +21,9 @@ class QuizApi extends BaseHTTPApi {
 	public async getQuestionsByCategoryId(
 		categoryId: number,
 	): Promise<QuizQuestionsResponseDto> {
+		const queryString = buildQueryString({ categoryId });
 		const endpointWithQuery =
-			this.getFullEndpoint(QuizApiPath.ROOT, {}) +
-			`?categoryId=${String(categoryId)}`;
+			this.getFullEndpoint(QuizApiPath.ROOT, {}) + `?${queryString}`;
 		const response = await this.load(endpointWithQuery, {
 			contentType: ContentType.JSON,
 			hasAuth: false,
