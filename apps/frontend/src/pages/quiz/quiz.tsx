@@ -18,7 +18,7 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import {
 	actions as planActions,
-	type PlanCategoryDto,
+	type PlanCategoryWithColorDto,
 } from "~/modules/plan-categories/plan-categories.js";
 import { actions } from "~/modules/quiz/quiz.js";
 import { QuizCategoryCard } from "~/pages/quiz/components/quiz-category-card/quiz-category-card.js";
@@ -63,7 +63,7 @@ const Quiz: React.FC = (): React.ReactElement => {
 	);
 
 	const renderCategories = (
-		categories: (PlanCategoryDto & { color: string })[],
+		categories: PlanCategoryWithColorDto[],
 	): JSX.Element[] => {
 		return categories.map((category) => (
 			<QuizCategoryCard
