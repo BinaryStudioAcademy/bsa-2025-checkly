@@ -1,7 +1,9 @@
+export { type SearchProperties } from "./search-properties.type.js";
 export {
 	type GeneratedPlanDTO,
 	type PlanActionType,
 	type PlanActionTypeMap,
+	type PlanCategoryDto,
 	type PlanCreateRequestDto,
 	type PlanDayDto,
 	type PlanDayRegenerationRequestDto,
@@ -10,7 +12,9 @@ export {
 	type PlanGetAllResponseDto,
 	type PlanRegenerationRequestDto,
 	type PlanResponseDto,
+	type PlanSearchQueryParameter,
 	type PlanUpdateRequestDto,
+	type PlanWithCategoryDto,
 	type QuizAnswer,
 	type QuizAnswersRequestDto,
 	type TaskDto,

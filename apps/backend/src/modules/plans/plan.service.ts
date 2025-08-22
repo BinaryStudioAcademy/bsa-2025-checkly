@@ -22,7 +22,9 @@ import {
 	type PlanDto,
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
+	type PlanSearchQueryParameter,
 	type PlanUpdateRequestDto,
+	type PlanWithCategoryDto,
 	type QuizAnswersRequestDto,
 	type TaskDto,
 	type TaskRegenerationRequestDto,
@@ -80,10 +82,20 @@ class PlanService implements Service {
 		};
 	}
 
-	public async findWithRelations(id: number): Promise<null | PlanDaysTaskDto> {
+	public async findAllUserPlans(
+		userId: number,
+	): Promise<PlanWithCategoryDto[]> {
+		return await this.planRepository
+			.findAllUserPlans(userId)
+			.then((plan) => plan.map((item) => item.toObjectWithCategory()));
+	}
+
+	public async findWithRelations(
+		id: number,
+	): Promise<null | PlanWithCategoryDto> {
 		const item = await this.planRepository.findWithRelations(id);
 
-		return item ? item.toObjectWithRelations() : null;
+		return item ? item.toObjectWithCategory() : null;
 	}
 
 	public async generate<T extends PlanActionType>(
@@ -320,6 +332,18 @@ class PlanService implements Service {
 		const newPlan = await this.planRepository.findWithRelations(planId);
 
 		return newPlan ? newPlan.toObjectWithRelations() : null;
+	}
+
+	public async search(
+		userId: number,
+		filters: PlanSearchQueryParameter,
+	): Promise<PlanWithCategoryDto[]> {
+		return await this.planRepository
+			.search({
+				userId,
+				...filters,
+			})
+			.then((plans) => plans.map((plan) => plan.toObjectWithCategory()));
 	}
 
 	public async update(

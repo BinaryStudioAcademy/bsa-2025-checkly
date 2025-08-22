@@ -5,6 +5,7 @@ import {
 } from "~/modules/plans/libs/types/types.js";
 
 const MOCK_GENERATED_PLAN: PlanDaysTaskDto = {
+	categoryId: 1,
 	days: [
 		{
 			dayNumber: 22,

@@ -8,7 +8,10 @@ import { type PlanModel } from "~/modules/plans/plan.model.js";
 import { TaskEntity } from "~/modules/tasks/task.entity.js";
 import { type TaskRepository } from "~/modules/tasks/task.repository.js";
 
-import { type GeneratedPlanDTO } from "./libs/types/types.js";
+import {
+	type GeneratedPlanDTO,
+	type SearchProperties,
+} from "./libs/types/types.js";
 
 class PlanRepository implements Repository {
 	private planDayRepository: PlanDayRepository;
@@ -29,11 +32,13 @@ class PlanRepository implements Repository {
 		entity: PlanEntity,
 		trx?: Transaction,
 	): Promise<PlanEntity> {
-		const { duration, intensity, quizId, title, userId } = entity.toNewObject();
+		const { categoryId, duration, intensity, quizId, title, userId } =
+			entity.toNewObject();
 
 		const plan = await this.planModel
 			.query(trx)
 			.insert({
+				categoryId,
 				duration,
 				intensity,
 				quizId,
@@ -78,6 +83,15 @@ class PlanRepository implements Repository {
 		const plans = await this.planModel.query().execute();
 
 		return plans.map((plan) => PlanEntity.initialize(plan));
+	}
+
+	public async findAllUserPlans(userId: number): Promise<PlanEntity[]> {
+		return await this.planModel
+			.query()
+			.where({ userId })
+			.withGraphFetched("days.tasks")
+			.withGraphFetched("category")
+			.then((plans) => plans.map((plan) => PlanEntity.initialize(plan)));
 	}
 
 	public async findWithRelations(id: number): Promise<null | PlanEntity> {
@@ -135,6 +149,30 @@ class PlanRepository implements Repository {
 
 			await this.taskRepository.bulkCreate(taskEntities, trx);
 		});
+	}
+
+	public async search({
+		categoryId,
+		title,
+		userId,
+	}: SearchProperties): Promise<PlanEntity[]> {
+		let query = this.planModel
+			.query()
+			.where({ userId })
+			.withGraphFetched("days.tasks")
+			.withGraphFetched("category");
+
+		if (title) {
+			query = query.whereILike("title", `%${title}%`);
+		}
+
+		if (categoryId) {
+			query = query.where({ categoryId });
+		}
+
+		const foundPlans = await query;
+
+		return foundPlans.map((plan) => PlanEntity.initialize(plan));
 	}
 
 	public async update(

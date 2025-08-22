@@ -21,15 +21,19 @@ const planController = new PlanController(logger, planService);
 
 export { planController };
 export {
+	type PlanCategoryDto,
 	type PlanCreateRequestDto,
 	type PlanDayDto,
 	type PlanDayRegenerationRequestDto,
 	type PlanDaysTaskDto,
 	type PlanRegenerationRequestDto,
+	type PlanSearchQueryParameter,
+	type PlanWithCategoryDto,
 	type QuizAnswersRequestDto,
 	type TaskRegenerationRequestDto,
 } from "./libs/types/types.js";
 export {
 	planCreateValidationSchema,
+	planSearchQueryParametersValidationSchema,
 	quizAnswersValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";

@@ -122,7 +122,9 @@ class QuizQuestionController extends BaseController {
 	 *         content:
 	 *           application/json:
 	 *             schema:
-	 *               $ref: '#/components/schemas/QuizQuestionsResponseDto'
+	 *               type: array
+	 *               items:
+	 *                 $ref: '#/components/schemas/QuizQuestionsResponseDto'
 	 */
 	private async findAllQuestions(): Promise<APIHandlerResponse> {
 		return {

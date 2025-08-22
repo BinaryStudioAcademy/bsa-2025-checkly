@@ -6,6 +6,8 @@ import {
 	type PlanDayRegenerationRequestDto,
 	type PlanDaysTaskDto,
 	type PlanRegenerationRequestDto,
+	type PlanSearchQueryParameter,
+	type PlanWithCategoryDto,
 	type QuizAnswersRequestDto,
 	type TaskRegenerationRequestDto,
 } from "../libs/types/types.js";
@@ -47,6 +49,17 @@ const regenerateTask = createAsyncThunk<
 	return plan;
 });
 
+const searchPlan = createAsyncThunk<
+	PlanWithCategoryDto[],
+	PlanSearchQueryParameter,
+	AsyncThunkConfig
+>(`${sliceName}/search`, async (payload, { extra }) => {
+	const { planApi } = extra;
+	const plan = await planApi.search(payload);
+
+	return plan;
+});
+
 const regeneratePlanDay = createAsyncThunk<
 	PlanDaysTaskDto,
 	PlanDayRegenerationRequestDto,
@@ -55,6 +68,17 @@ const regeneratePlanDay = createAsyncThunk<
 	const { planApi } = extra;
 
 	const plan = await planApi.regeneratePlanDay(payload);
+
+	return plan;
+});
+
+const getAllUserPlans = createAsyncThunk<
+	PlanDaysTaskDto[],
+	undefined,
+	AsyncThunkConfig
+>(`${sliceName}/getAllUserPlans`, async (_, { extra }) => {
+	const { planApi } = extra;
+	const plan = await planApi.getAllUserPlans();
 
 	return plan;
 });
@@ -73,8 +97,10 @@ const regeneratePlan = createAsyncThunk<
 
 export {
 	generatePlan,
+	getAllUserPlans,
 	getPlan,
 	regeneratePlan,
 	regeneratePlanDay,
 	regenerateTask,
+	searchPlan,
 };
