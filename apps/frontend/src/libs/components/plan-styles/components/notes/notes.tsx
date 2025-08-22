@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	inputStyle: PlanStyleOption;
-    notes?: string;
+	notes?: string;
 };
 
 const NotesText = {
@@ -14,10 +14,7 @@ const NotesText = {
 	TITLE: "Notes:",
 } as const;
 
-const Notes: React.FC<Properties> = ({
-	inputStyle,
-	notes,
-}: Properties) => {
+const Notes: React.FC<Properties> = ({ inputStyle, notes }: Properties) => {
 	const notesClasses = getClassNames(
 		styles["notes"],
 		PlanStyleModules[inputStyle]["notes"],

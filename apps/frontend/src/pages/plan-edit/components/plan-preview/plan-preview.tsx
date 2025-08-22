@@ -51,9 +51,7 @@ const PlanPreview: React.FC<Properties> = ({
 							tasks={day.tasks}
 						/>
 					))}
-					{notes && (
-						<Notes inputStyle={theme} notes={notes} />
-					)}
+					{notes && <Notes inputStyle={theme} notes={notes} />}
 				</ul>
 			</div>
 		</>
