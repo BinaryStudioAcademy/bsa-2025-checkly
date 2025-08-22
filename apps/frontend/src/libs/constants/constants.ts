@@ -1,7 +1,6 @@
 export { MESSAGES } from "./messages.constants.js";
 export {
-	BASE_HEIGHT,
-	BASE_WIDTH,
+	BASE_DIMENSIONS,
 	EDITOR_ROWS,
 	INCREMENT_VALUE,
 	INITIAL_ITEM,

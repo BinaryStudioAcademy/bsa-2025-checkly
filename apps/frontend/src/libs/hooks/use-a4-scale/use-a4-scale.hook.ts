@@ -1,8 +1,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 
 import {
-	BASE_HEIGHT,
-	BASE_WIDTH,
+	BASE_DIMENSIONS,
 	ONE,
 	ZERO,
 } from "~/libs/constants/constants.js";
@@ -22,7 +21,7 @@ function useA4Scale(): {
 		}
 
 		const resize = (rect: DOMRectReadOnly): void => {
-			const size = Math.min(rect.width / BASE_WIDTH, rect.height / BASE_HEIGHT);
+			const size = Math.min(rect.width / BASE_DIMENSIONS.WIDTH, rect.height / BASE_DIMENSIONS.HEIGHT);
 			setScale(size);
 		};
 
