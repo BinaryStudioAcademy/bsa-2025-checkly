@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.19.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.19.0...frontend-v1.19.1) (2025-08-21)
+
+
+### Bug Fixes
+
+* **frontend:** notes page sanitizer cy-15 ([d06acff](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d06acff3a2c76e59924e480f9afa90725e8ce761))
+* notes page sanitizer cy-15 ([028565a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/028565a0f6d9ed243f0a0688398985775b56b10f))
+
 ## [1.19.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.18.0...frontend-v1.19.0) (2025-08-21)
 
 

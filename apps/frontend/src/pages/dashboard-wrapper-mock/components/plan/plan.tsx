@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import { Download, Save } from "~/assets/img/icons/icons.js";
+import { Download } from "~/assets/img/icons/icons.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { ONE, ZERO } from "~/libs/constants/constants.js";
 import {
@@ -12,11 +12,12 @@ import {
 } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
+import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
+import { actions as planActions } from "~/modules/plans/plans.js";
 import { TASK_INDEXES } from "~/modules/tasks/libs/constants/constants.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
 import { Day, Task } from "./components/components.js";
-import { DAYS_TASKS_MOCK_DATA } from "./mock-data/days-tasks-mock.js";
 import styles from "./styles.module.css";
 
 const Plan: React.FC = () => {
@@ -28,11 +29,13 @@ const Plan: React.FC = () => {
 	const plan = useAppSelector((state) => state.plan.plan);
 	const tasks = useAppSelector((state) => state.task.tasks);
 
-	const planDays = plan?.days ?? DAYS_TASKS_MOCK_DATA;
+	const planDays = plan?.days ?? [];
 
 	const currentDay = plan?.days[selectedDay];
 	const selectedDayTasks = currentDay
-		? tasks.filter((task) => task.planDayId === currentDay.id)
+		? tasks
+				.filter((task) => task.planDayId === currentDay.id)
+				.toSorted((first, second) => first.order - second.order)
 		: [];
 
 	useEffect(() => {
@@ -48,6 +51,22 @@ const Plan: React.FC = () => {
 			dispatch(taskActions.setTasks(allTasks));
 		}
 	}, [plan, dispatch]);
+
+	useEffect(() => {
+		const getAllUserPlans = async (): Promise<void> => {
+			await dispatch(planActions.getAllUserPlans());
+		};
+
+		const getUnauthenticatedUserPlan = async (): Promise<void> => {
+			const planId = await storage.get<number>(StorageKey.PLAN_ID);
+
+			if (planId) {
+				await dispatch(planActions.findPlan(planId));
+			}
+		};
+
+		void (user ? getAllUserPlans() : getUnauthenticatedUserPlan());
+	}, [user, dispatch]);
 
 	const toggleSelect = useCallback((): void => {
 		setIsSelectOpen((previous) => !previous);
@@ -97,25 +116,17 @@ const Plan: React.FC = () => {
 					{selectedDayTasks.map((item, index) => {
 						return <Task indexItem={index + ONE} item={item} key={index} />;
 					})}
-					<NavLink className={navLink} to={AppRoute.CHOOSE_STYLE}>
-						<Button
-							icon={<DecorativeImage src={Download} />}
-							iconOnlySize="medium"
-							label="Download PDF"
-							size={ButtonSizes.LARGE}
-							type={ElementTypes.BUTTON}
-							variant={ButtonVariants.PRIMARY}
-						/>
-					</NavLink>
-					{user && (
-						<Button
-							icon={<DecorativeImage src={Save} />}
-							iconOnlySize="medium"
-							label="Save to profile"
-							size={ButtonSizes.LARGE}
-							type={ElementTypes.BUTTON}
-							variant={ButtonVariants.SECONDARY}
-						/>
+					{plan && (
+						<NavLink className={navLink} to={AppRoute.CHOOSE_STYLE}>
+							<Button
+								icon={<DecorativeImage src={Download} />}
+								iconOnlySize="medium"
+								label="Download PDF"
+								size={ButtonSizes.LARGE}
+								type={ElementTypes.BUTTON}
+								variant={ButtonVariants.PRIMARY}
+							/>
+						</NavLink>
 					)}
 				</div>
 			</div>

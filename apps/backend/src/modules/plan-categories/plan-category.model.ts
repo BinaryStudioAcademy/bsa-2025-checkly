@@ -9,6 +9,7 @@ class PlanCategoryModel extends AbstractModel {
 	}
 
 	public iconHref!: string;
+	public key!: string;
 	public order!: number;
 	public title!: string;
 }

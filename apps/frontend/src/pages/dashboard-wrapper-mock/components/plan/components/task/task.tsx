@@ -23,6 +23,7 @@ type Properties = {
 	indexItem: number;
 	item: {
 		description: string;
+		executionTimeType: string;
 		id: number;
 		title: string;
 	};
@@ -157,7 +158,7 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 				<div className={styles["item-actions"]}>
 					<div className={styles["item-actions__time"]}>
 						<img alt="Timer" src={Timer} />
-						<span>morning</span>
+						<span>{item.executionTimeType}</span>
 					</div>
 					<div className={styles["item-actions_buttons-wrapper"]}>
 						<Button

@@ -1,1 +1,1 @@
-export { ONE, ZERO } from "./numbers.js";
+export { LAST_INDEX, ONE, ZERO } from "./numbers.js";

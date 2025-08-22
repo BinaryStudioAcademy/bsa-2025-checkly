@@ -8,9 +8,9 @@ import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
 import { PlansApiPath } from "./libs/enums/enums.js";
 import {
+	type GeneratePlanRequestDto,
 	type PlanSearchQueryParameter,
 	type PlanWithCategoryDto,
-	type QuizAnswersRequestDto,
 } from "./libs/types/types.js";
 
 type Constructor = {
@@ -24,8 +24,21 @@ class PlanApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.PLANS, storage });
 	}
 
+	public async findWithRelations(planId: number): Promise<PlanDaysTaskDto> {
+		const response = await this.load(
+			this.getFullEndpoint(PlansApiPath.PLAN, { id: String(planId) }),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: false,
+				method: HTTPRequestMethod.GET,
+			},
+		);
+
+		return await response.json<PlanDaysTaskDto>();
+	}
+
 	public async generate(
-		payload: QuizAnswersRequestDto,
+		payload: GeneratePlanRequestDto,
 	): Promise<PlanDaysTaskDto> {
 		const response = await this.load(
 			this.getFullEndpoint(PlansApiPath.PLAN_GENERATE, {}),
