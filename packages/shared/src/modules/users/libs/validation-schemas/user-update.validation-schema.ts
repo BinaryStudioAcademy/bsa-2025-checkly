@@ -9,8 +9,8 @@ import {
 
 const userUpdate = z
 	.object({
-		confirmPassword: z.string().trim().optional().or(z.literal("").optional()),
-		currentPassword: z.string().trim().optional().or(z.literal("").optional()),
+		confirmPassword: z.string().trim().optional(),
+		currentPassword: z.string().trim().optional(),
 		dob: z
 			.string()
 			.trim()
@@ -60,7 +60,8 @@ const userUpdate = z
 			})
 			.regex(UserValidationRegexRule.EMAIL_VALID_CHARS_MIN_MAX, {
 				message: UserValidationMessage.EMAIL_INVALID,
-			}),
+			})
+			.optional(),
 		name: z
 			.string()
 			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
@@ -80,15 +81,15 @@ const userUpdate = z
 			)
 			.refine((value) => UserValidationRegexRule.NAME_VALID_CHARS.test(value), {
 				message: UserValidationMessage.NAME_ONLY_ALLOWED_CHARS,
-			}),
+			})
+			.optional(),
 		password: z
 			.string()
 			.trim()
 			.regex(UserValidationRegexRule.PASSWORD_VALID_CHARS_MIN_MAX, {
 				message: UserValidationMessage.PASSWORD_INVALID,
 			})
-			.optional()
-			.or(z.literal("").optional()),
+			.optional(),
 	})
 	.refine((data) => (data.password ?? "") === (data.confirmPassword ?? ""), {
 		message: UserValidationMessage.PASSWORD_DOES_NOT_MATCH,
@@ -96,14 +97,54 @@ const userUpdate = z
 	})
 	.refine(
 		(data) => {
-			const hasPassword = (data.password ?? "").trim() !== "";
-			const hasCurrentPassword = (data.currentPassword ?? "").trim() !== "";
+			const hasPassword = !!data.password?.trim();
+			const hasCurrentPassword = !!data.currentPassword?.trim();
 
 			return !hasPassword || hasCurrentPassword;
 		},
 		{
 			message: UserValidationMessage.CURRENT_PASSWORD_REQUIRED,
 			path: ["currentPassword"],
+		},
+	)
+	.refine(
+		(data) => {
+			const hasCurrentPassword = !!data.currentPassword?.trim();
+			const hasPassword = !!data.password?.trim();
+
+			return !hasCurrentPassword || hasPassword;
+		},
+		{
+			message: UserValidationMessage.FIELD_REQUIRED,
+			path: ["password"],
+		},
+	)
+	.refine(
+		(data) => {
+			const hasCurrentPassword = !!data.currentPassword?.trim();
+			const hasConfirmPassword = !!data.confirmPassword?.trim();
+
+			return !hasCurrentPassword || hasConfirmPassword;
+		},
+		{
+			message: UserValidationMessage.FIELD_REQUIRED,
+			path: ["confirmPassword"],
+		},
+	)
+	.refine(
+		(data) => {
+			const newPassword = data.password?.trim();
+			const currentPassword = data.currentPassword?.trim();
+
+			if (newPassword && currentPassword) {
+				return newPassword !== currentPassword;
+			}
+
+			return true;
+		},
+		{
+			message: UserValidationMessage.NEW_PASSWORD_MUST_DIFFER,
+			path: ["password"],
 		},
 	);
 

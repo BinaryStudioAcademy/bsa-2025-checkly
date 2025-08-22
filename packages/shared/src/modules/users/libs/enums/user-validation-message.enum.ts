@@ -17,6 +17,8 @@ const UserValidationMessage = {
 	NAME_ONLY_ALLOWED_CHARS: "Digits and special characters are not allowed",
 	NAME_SURROUNDING_RULE:
 		"Spaces and hyphens are allowed, as long as they are surrounded by letters",
+	NEW_PASSWORD_MUST_DIFFER:
+		"Your new password needs to be different from the current one",
 	PASSWORD_DOES_NOT_MATCH: "Passwords don't match",
 	PASSWORD_INVALID: `Password should contain between ${String(UserValidationRule.PASSWORD_MIN_LENGTH)} to ${String(UserValidationRule.PASSWORD_MAX_LENGTH)} characters, at least one lowercase letter, one uppercase letter and one digit`,
 	USER_NOT_FOUND: "User not found",
