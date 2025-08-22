@@ -11,6 +11,7 @@ export {
 	ErrorConstants,
 	ErrorMessage,
 	FastifyHook,
+	FileExtension,
 	QuizCategory,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
@@ -55,12 +56,12 @@ export {
 	type FeedbackDto,
 	FeedbackGetAllOptions,
 	type FeedbackPaginationOptions,
-	type feedbackPaginationParameters,
-	type FeedbackServiceReturns,
 	type FeedbackUpdateRequestDto,
 	type FeedbackUpdateResponseDto,
 	feedbackUpdateValidationSchema,
+	FeedbackValidationRule,
 	type IdParameter,
+	type Pagination,
 } from "./modules/feedbacks/feedbacks.js";
 export { type GeneratedPlanDTO } from "./modules/openai/openai.js";
 export {
@@ -75,6 +76,12 @@ export {
 	type PlanDayResponseDto,
 	PlanDaysApiPath,
 } from "./modules/plan-days/plan-days.js";
+export {
+	type ExportPlanPdfDto,
+	PaperFormat,
+	PlanPdfExportApiPath,
+	planPdfExportValidationSchema,
+} from "./modules/plan-pdf-export/plan-pdf-export.js";
 export {
 	type PlanCreateRequestDto,
 	planCreateValidationSchema,

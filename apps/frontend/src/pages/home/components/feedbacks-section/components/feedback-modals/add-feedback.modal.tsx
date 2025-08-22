@@ -8,6 +8,7 @@ import {
 	feedbackApi,
 	type FeedbackCreateRequestDto,
 	feedbackCreateValidationSchema,
+	FeedbackValidationRule,
 } from "~/modules/feedbacks/feedbacks.js";
 
 import styles from "./styles.module.css";
@@ -22,12 +23,15 @@ const AddFeedbackModal: React.FC<Properties> = ({
 	userId,
 }: Properties) => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-
-	const { control, errors, handleSubmit } =
+	const { control, errors, handleSubmit, watch } =
 		useAppForm<FeedbackCreateRequestDto>({
 			defaultValues: { text: "", userId: Number(userId) },
 			validationSchema: feedbackCreateValidationSchema,
 		});
+
+	const textValue = watch?.("text") ?? "";
+	const characterCount = textValue.length;
+	const maxCharacters = FeedbackValidationRule.TEXT_MAX_LENGTH;
 
 	const handleFormSubmit = useCallback(
 		async (payload: FeedbackCreateRequestDto): Promise<void> => {
@@ -45,6 +49,7 @@ const AddFeedbackModal: React.FC<Properties> = ({
 		},
 		[onClose],
 	);
+
 	const onSubmitHandler = useCallback(
 		(event: React.FormEvent<HTMLFormElement>) => {
 			void handleSubmit(handleFormSubmit)(event);
@@ -66,11 +71,15 @@ const AddFeedbackModal: React.FC<Properties> = ({
 				control={control}
 				errors={errors}
 				isRequired
+				isTextArea
 				label="Testimonial"
 				name="text"
-				placeholder="Enter a testimonial"
+				placeholder="Enter your testimonial"
 				type="text"
 			/>
+			<div className={styles["character-counter"]}>
+				{characterCount}/{maxCharacters}
+			</div>
 			<Button
 				isDisabled={isLoading}
 				label="Add"

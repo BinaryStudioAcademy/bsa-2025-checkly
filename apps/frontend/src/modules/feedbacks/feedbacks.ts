@@ -11,14 +11,13 @@ const feedbackApi = new FeedbackApi({
 });
 
 export { feedbackApi };
+export { FeedbackValidationRule } from "./libs/enums/enums.js";
 export { getIdParameter } from "./libs/helpers/helpers.js";
 export {
 	type FeedbackCreateRequestDto,
 	type FeedbackDto,
-	type feedbackPaginationParameters,
-	type FeedbackServiceReturns,
 	type FeedbackUpdateRequestDto,
-	type IdParameter,
+	type Pagination,
 } from "./libs/types/types.js";
 export {
 	feedbackCreateValidationSchema,

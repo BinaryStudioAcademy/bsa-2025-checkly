@@ -5,9 +5,9 @@ import { type Storage } from "~/libs/modules/storage/storage.js";
 import {
 	type FeedbackCreateRequestDto,
 	type FeedbackDto,
-	type feedbackPaginationParameters,
 	type FeedbackUpdateRequestDto,
 	getIdParameter,
+	type Pagination,
 } from "~/modules/feedbacks/feedbacks.js";
 import {
 	FeedbackApiPath,
@@ -58,7 +58,7 @@ class FeedbackApi extends BaseHTTPApi {
 
 	public async findAll(
 		options: FeedbackFindAllOptions = {},
-	): Promise<feedbackPaginationParameters> {
+	): Promise<Pagination<FeedbackDto>> {
 		const {
 			limit = FeedbackGetAllOptions.PAGE_SIZE,
 			page = FeedbackGetAllOptions.SINGLE_PAGE,
@@ -78,7 +78,7 @@ class FeedbackApi extends BaseHTTPApi {
 			method: HTTPRequestMethod.GET,
 		});
 
-		const data = await response.json<feedbackPaginationParameters>();
+		const data = (await response.json()) as Pagination<FeedbackDto>;
 
 		return data;
 	}

@@ -1,1 +1,5 @@
-export { FeedbackApiPath, FeedbackGetAllOptions } from "shared";
+export {
+	FeedbackApiPath,
+	FeedbackGetAllOptions,
+	FeedbackValidationRule,
+} from "shared";

@@ -6,6 +6,7 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { feedbackApi } from "~/modules/feedbacks/feedbacks.js";
 import { type FeedbackDto } from "~/modules/feedbacks/libs/types/types.js";
 
+import { FeedbackLoaderContainer } from "../../feedback-loader-container/feedback-loader-container.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -59,11 +60,7 @@ const DeleteFeedbackModal: React.FC<Properties> = ({
 	}, [handleDeleteClick]);
 
 	if (isFetching || !feedbackToDelete) {
-		return (
-			<div className={styles["loader-container"]}>
-				<Loader container="inline" size="large" />
-			</div>
-		);
+		return <FeedbackLoaderContainer />;
 	}
 
 	return (

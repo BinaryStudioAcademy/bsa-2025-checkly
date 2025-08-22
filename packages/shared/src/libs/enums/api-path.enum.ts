@@ -3,6 +3,7 @@ const APIPath = {
 	FEEDBACKS: "/feedbacks",
 	PLAN_CATEGORIES: "/plan-categories",
 	PLAN_DAYS: "/plan-days",
+	PLAN_EXPORT_ROOT: "/plan-export",
 	PLANS: "/plans",
 	QUIZ_QUESTIONS: "/quiz-questions",
 	TASKS: "/tasks",

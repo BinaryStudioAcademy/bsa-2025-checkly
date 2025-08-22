@@ -10,6 +10,7 @@ import {
 	feedbackUpdateValidationSchema,
 } from "~/modules/feedbacks/feedbacks.js";
 
+import { FeedbackLoaderContainer } from "../../feedback-loader-container/feedback-loader-container.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -77,11 +78,7 @@ const EditFeedbackModal: React.FC<Properties> = ({
 	);
 
 	if (isFetching) {
-		return (
-			<div className={styles["loader-container"]}>
-				<Loader container="inline" size="large" />
-			</div>
-		);
+		return <FeedbackLoaderContainer />;
 	}
 
 	return (
@@ -98,6 +95,7 @@ const EditFeedbackModal: React.FC<Properties> = ({
 				control={control}
 				errors={errors}
 				isRequired
+				isTextArea
 				label="Testimonial"
 				name="text"
 				placeholder="Enter a testimonial"

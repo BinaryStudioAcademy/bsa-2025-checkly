@@ -6,7 +6,7 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { feedbackApi } from "~/modules/feedbacks/feedbacks.js";
 import {
 	type FeedbackDto,
-	type FeedbackServiceReturns,
+	type Pagination,
 } from "~/modules/feedbacks/feedbacks.js";
 import {
 	EMPTY_RESPONSE,
@@ -14,6 +14,7 @@ import {
 	SINGLE_PAGE,
 } from "~/pages/home/lib/constants.js";
 
+import { FeedbackLoaderContainer } from "../../feedback-loader-container/feedback-loader-container.js";
 import styles from "../../styles.module.css";
 import { FeedbackCard } from "../feedback-card/feedback-card.js";
 
@@ -51,14 +52,12 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 
 	const fetchFeedbacks = useCallback(
 		async (page: number, limit: number): Promise<void> => {
-			if (page === SINGLE_PAGE) {
-				setIsLoadingInitial(true);
-			} else {
-				setIsLoadingMore(true);
-			}
+			const setLoading =
+				page === SINGLE_PAGE ? setIsLoadingInitial : setIsLoadingMore;
+			setLoading(true);
 
 			try {
-				const fetchedData: FeedbackServiceReturns = await feedbackApi.findAll({
+				const fetchedData: Pagination<FeedbackDto> = await feedbackApi.findAll({
 					limit,
 					page,
 				});
@@ -80,11 +79,7 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 			} catch {
 				toast.error("Failed to load feedbacks. Please try again later.");
 			} finally {
-				if (page === SINGLE_PAGE) {
-					setIsLoadingInitial(false);
-				} else {
-					setIsLoadingMore(false);
-				}
+				setLoading(false);
 			}
 		},
 		[filterNewFeedbackItems],
@@ -138,11 +133,7 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 	}, [fetchFeedbacks, reloadTrigger]);
 
 	if (isLoadingInitial) {
-		return (
-			<div className={styles["loader-container"]}>
-				<Loader container="inline" size="large" />
-			</div>
-		);
+		return <FeedbackLoaderContainer />;
 	}
 
 	if (feedbacks.length === EMPTY_RESPONSE) {
@@ -173,7 +164,6 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 					<div
 						className={styles["feedbacks-load-more-box"]}
 						ref={loaderReference}
-						style={{ flexShrink: 0, height: "20px", width: "20px" }}
 					>
 						{isLoadingMore && <Loader container="inline" size="large" />}
 					</div>

@@ -10,6 +10,8 @@ import {
 	LogoutPage,
 	NotFound,
 	PlanGeneration,
+	PlanStyleOverview,
+	PlanStylePrint,
 	Profile,
 	QuestionFlow,
 	Quiz,
@@ -37,6 +39,11 @@ const routes: CustomRouteObject[] = [
 		element: <Auth />,
 		handle: { access: RouteAccess.NOT_AUTHENTICATED },
 		path: AppRoute.SIGN_UP,
+	},
+	{
+		element: <PlanStyleOverview />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.OVERVIEW_PAGE,
 	},
 	{
 		element: <LogoutPage />,
@@ -94,6 +101,11 @@ const routes: CustomRouteObject[] = [
 		element: <PlanGeneration />,
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.PLAN_GENERATION,
+	},
+	{
+		element: <PlanStylePrint />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.PLAN_STYLE_PRINT,
 	},
 ];
 

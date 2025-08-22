@@ -8,6 +8,7 @@
 	--cluster-vertical-alignment: space-between;
 
 	gap: 30px;
+	max-width: 320px;
 	height: 100%;
 }
 
@@ -16,6 +17,7 @@
 }
 
 .feedback-title {
+	max-width: 80%;
 	text-align: center;
 }
 

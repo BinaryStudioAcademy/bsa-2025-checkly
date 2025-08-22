@@ -1,14 +1,17 @@
-export { FeedbackApiPath, FeedbackGetAllOptions } from "./libs/emums/enums.js";
+export {
+	FeedbackApiPath,
+	FeedbackGetAllOptions,
+	FeedbackValidationRule,
+} from "./libs/emums/enums.js";
 export {
 	type FeedbackCreateRequestDto,
 	type FeedbackDeleteResponseDto,
 	type FeedbackDto,
 	type FeedbackPaginationOptions,
-	type feedbackPaginationParameters,
-	type FeedbackServiceReturns,
 	type FeedbackUpdateRequestDto,
 	type FeedbackUpdateResponseDto,
 	type IdParameter,
+	type Pagination,
 } from "./libs/types/types.js";
 export {
 	feedbackCreateValidationSchema,

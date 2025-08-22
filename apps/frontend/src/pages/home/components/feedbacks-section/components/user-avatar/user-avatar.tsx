@@ -1,7 +1,6 @@
-import { type FC } from "react";
-import { FiUser } from "react-icons/fi";
+import { type FC, useMemo } from "react";
 
-import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { AvatarDefault } from "~/assets/img/shared/avatars/avatars.img.js";
 
 import styles from "./styles.module.css";
 
@@ -11,28 +10,18 @@ type AvatarProperties = {
 };
 
 const UserAvatar: FC<AvatarProperties> = ({ alt, src }) => {
+	const displayAvatar = useMemo(() => src ?? AvatarDefault, [src]);
+
 	return (
 		<>
-			{src ? (
-				<div className={styles["wrapper"]}>
-					<img
-						alt={alt}
-						className={styles["image"]}
-						draggable="false"
-						src={src}
-					/>
-				</div>
-			) : (
-				<div
-					className={getClassNames(
-						"cluster",
-						styles["wrapper"],
-						styles["default-icon-wrapper"],
-					)}
-				>
-					<FiUser className={styles["default-icon"]} />
-				</div>
-			)}
+			<div className={styles["wrapper"]}>
+				<img
+					alt={alt}
+					className={styles["image"]}
+					draggable="false"
+					src={displayAvatar}
+				/>
+			</div>
 		</>
 	);
 };

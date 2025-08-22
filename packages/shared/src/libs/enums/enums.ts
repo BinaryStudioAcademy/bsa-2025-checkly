@@ -5,7 +5,7 @@ export { DataStatus } from "./data-status.enum.js";
 export { ErrorConstants } from "./error-constants.enum.js";
 export { ErrorMessage } from "./error-message.enum.js";
 export { FastifyHook } from "./fastify-hook.enum.js";
-export { FeedbackSize } from "./feedback-size.js";
+export { FileExtension } from "./file-extension.enum.js";
 export { InputSize } from "./input-size.enum.js";
 export { QuizCategory } from "./quiz-category.enum.js";
 export { ServerErrorType } from "./server-error-type.enum.js";

@@ -3,7 +3,6 @@ export {
 	type FeedbackDeleteResponseDto,
 	type FeedbackDto,
 	type FeedbackPaginationOptions,
-	type IdParameter,
 	type FeedbackUpdateRequestDto,
 	type FeedbackUpdateResponseDto,
 	type UserDto,

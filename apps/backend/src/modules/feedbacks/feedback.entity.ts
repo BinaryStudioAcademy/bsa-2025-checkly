@@ -48,7 +48,7 @@ class FeedbackEntity implements Entity {
 		id: number;
 		text: string;
 		updatedAt: string;
-		user: null | {
+		user?: null | {
 			avatarUrl: null | string;
 			email: string;
 			id: number;

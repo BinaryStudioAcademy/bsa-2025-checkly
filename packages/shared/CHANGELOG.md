@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.9.0...shared-v1.10.0) (2025-08-20)
+
+
+### Features
+
+* **frontend/backend/shared:** add task editing, deletion, and day deletion cy-253 ([09c8569](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/09c8569c4dfec5a6db2e5672abe940efb58c20a1))
+* **frontend:** add plan style overview page cy-65 ([8d67e95](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8d67e95e55b45ffb62dd64cf1eb637c898ed7b58))
+
+
+### Bug Fixes
+
+* fixed link.tsx cy-288 ([f8e2122](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f8e2122a406970f5d28a0969076b7fd60cd14f7b))
+* **frontend/backend/shared:** fix code to meet requirements cy-288 ([24fbfba](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/24fbfba70b4bcc18c93b13f3ba57fd65662495a3))
+* **frontend:** fix conflicts with main branch cy-65 ([bd96b98](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bd96b9850d7e3b4edb78e1fd1d7cfa53f12dd50a))
+* **frontend:** merge remote branch into local cy-253 ([7bdeb2c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7bdeb2c85981a6df9aa7477f755923f6fb595649))
+* improve code quality cy-65 ([f2e9c5d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f2e9c5d59ad4ca0cf9a5aca623c95f226122d31b))
+* merge main into fix/code-quality-criteria cy-288 ([8f54769](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8f54769a445183093253790460be32fd3db34c2a))
+* no mutated imports, dialog instead of div cy-253 ([b0de517](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b0de5179f70e14e889fc4f84559d179b5e5ecbd4))
+* wrong status code, api accepting oversized file cy-303 ([380a863](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/380a863d715c3d1eb8a32fe20ce3cb08b59e5b89))
+* wrong status code, api accepting oversized file cy-303 ([ac3f103](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ac3f103905f9b204ac81e5275451c4c7440afbb2))
+
 ## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.8.0...shared-v1.9.0) (2025-08-19)
 
 
