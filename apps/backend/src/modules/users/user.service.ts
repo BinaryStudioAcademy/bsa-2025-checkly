@@ -1,5 +1,4 @@
 import { type FastifyRequest } from "fastify";
-import { UserValidationMessage } from "shared";
 
 import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
 import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
@@ -11,6 +10,8 @@ import {
 	handleAvatarRemove,
 	handleAvatarUpload,
 } from "./helpers/avatar.helper.js";
+import { validateAndPrepareUpdateData } from "./helpers/user-validation.helper.js";
+import { UserValidationMessage } from "./libs/enums/enums.js";
 import {
 	type UserDto,
 	type UserGetAllResponseDto,
@@ -75,63 +76,12 @@ class UserService implements Service {
 		id: number,
 		payload: UserUpdateRequestDto,
 	): Promise<null | UserDto> {
-		const userWithSameEmail = await this.userRepository.findByField(
-			"email",
-			payload.email,
-		);
-
-		if (userWithSameEmail && userWithSameEmail.toObject().id !== id) {
-			throw new HTTPError({
-				message: UserValidationMessage.EMAIL_ALREADY_EXISTS,
-				status: HTTPCode.CONFLICT,
-			});
-		}
-
-		if (payload.password?.trim()) {
-			if (!payload.currentPassword?.trim()) {
-				throw new HTTPError({
-					message: UserValidationMessage.CURRENT_PASSWORD_REQUIRED,
-					status: HTTPCode.BAD_REQUEST,
-				});
-			}
-
-			const currentUser = await this.userRepository.find(id);
-
-			if (!currentUser) {
-				throw new HTTPError({
-					message: UserValidationMessage.USER_NOT_FOUND,
-					status: HTTPCode.NOT_FOUND,
-				});
-			}
-
-			const { passwordHash, passwordSalt } = currentUser.getPasswordData();
-			const isCurrentPasswordValid = await this.encryptor.compare(
-				payload.currentPassword,
-				passwordHash,
-				passwordSalt,
-			);
-
-			if (!isCurrentPasswordValid) {
-				throw new HTTPError({
-					message: UserValidationMessage.CURRENT_PASSWORD_INVALID,
-					status: HTTPCode.UNPROCESSED_ENTITY,
-				});
-			}
-		}
-
-		const updateData = {
-			dob: payload.dob ?? null,
-			email: payload.email.trim(),
-			name: payload.name.trim(),
-		};
-
-		if (payload.password?.trim()) {
-			const { hash, salt } = await this.encryptor.encrypt(payload.password);
-			Object.assign(updateData, {
-				passwordHash: hash,
-				passwordSalt: salt,
-			});
-		}
+		const updateData = await validateAndPrepareUpdateData({
+			encryptor: this.encryptor,
+			id,
+			payload,
+			userRepository: this.userRepository,
+		});
 
 		try {
 			const updatedUser = await this.userRepository.update(id, updateData);

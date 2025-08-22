@@ -1,106 +1,44 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback } from "react";
 
-import {
-	AvatarEdit,
-	Button,
-	Input,
-	Loader,
-} from "~/libs/components/components.js";
-import { ONE, ZERO } from "~/libs/constants/constants.js";
-import { formatDateForInput } from "~/libs/helpers/date-helpers.js";
+import { AvatarEdit, Loader, Tabs } from "~/libs/components/components.js";
+import { type Tab } from "~/libs/components/tabs/types/tab.type.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import {
-	useAppDispatch,
-	useAppForm,
-	useAppSelector,
-} from "~/libs/hooks/hooks.js";
+import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { updateProfile } from "~/modules/auth/slices/actions.js";
-import {
-	type UserDto,
-	type UserUpdateRequestDto,
-	userUpdateValidationSchema,
-} from "~/modules/users/users.js";
+import { type UserUpdateRequestDto } from "~/modules/users/users.js";
 
-import sharedStyles from "../auth/components/shared/shared.module.css";
+import { ProfilePasswordForm } from "./components/profile-password-form/profile-password-form.js";
+import { ProfilePersonalForm } from "./components/profile-personal-form/profile-personal-form.js";
 import { ProfileTab } from "./libs/enums/enums.js";
-import { type ProfileTabType } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
-const getDefaultValues = (user: UserDto): UserUpdateRequestDto => ({
-	confirmPassword: "",
-	currentPassword: "",
-	dob: formatDateForInput(user.dob),
-	email: user.email,
-	name: user.name,
-	password: "",
-});
-
 const Profile: React.FC = () => {
-	const [activeTab, setActiveTab] = useState<ProfileTabType>(
-		ProfileTab.PERSONAL,
-	);
-
-	const personalTabReference = React.useRef<HTMLButtonElement>(null);
-	const passwordTabReference = React.useRef<HTMLButtonElement>(null);
-
 	const dispatch = useAppDispatch();
 	const { user } = useAppSelector(({ auth }) => auth);
 
-	const defaultValues = useMemo<UserUpdateRequestDto>(
-		() => getDefaultValues(user as UserDto),
-		[user],
-	);
-
-	const { control, errors, handleSubmit, isDirty, isSubmitting, reset } =
-		useAppForm<UserUpdateRequestDto>({
-			defaultValues,
-			validationSchema: userUpdateValidationSchema,
-		});
-
-	useEffect(() => {
-		reset(defaultValues);
-	}, [defaultValues, reset]);
-
-	const handleFormSubmit = useCallback(
-		(event: React.BaseSyntheticEvent): void => {
-			void handleSubmit((data) => {
-				if (!isDirty) {
-					return;
-				}
-
-				void dispatch(updateProfile(data));
-			})(event);
+	const handleSubmit = useCallback(
+		(data: UserUpdateRequestDto) => {
+			void dispatch(updateProfile(data));
 		},
-		[dispatch, handleSubmit, isDirty],
+		[dispatch],
 	);
 
-	const handlePasswordTabClick = useCallback(() => {
-		setActiveTab(ProfileTab.PASSWORD);
-	}, []);
+	if (!user) {
+		return <Loader />;
+	}
 
-	const handlePersonalTabClick = useCallback(() => {
-		setActiveTab(ProfileTab.PERSONAL);
-	}, []);
-
-	const handleTabKeyDown = useCallback(
-		(event: React.KeyboardEvent<HTMLButtonElement>): void => {
-			if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-				event.preventDefault();
-				const nextTab =
-					activeTab === ProfileTab.PERSONAL
-						? ProfileTab.PASSWORD
-						: ProfileTab.PERSONAL;
-				setActiveTab(nextTab);
-
-				if (nextTab === ProfileTab.PERSONAL) {
-					personalTabReference.current?.focus();
-				} else {
-					passwordTabReference.current?.focus();
-				}
-			}
+	const tabs: Tab[] = [
+		{
+			content: <ProfilePersonalForm onSubmit={handleSubmit} user={user} />,
+			id: ProfileTab.PERSONAL,
+			label: "Personal Information",
 		},
-		[activeTab],
-	);
+		{
+			content: <ProfilePasswordForm onSubmit={handleSubmit} user={user} />,
+			id: ProfileTab.PASSWORD,
+			label: "Change Password",
+		},
+	];
 
 	const contentClasses = getClassNames(
 		"grid-pattern",
@@ -112,140 +50,8 @@ const Profile: React.FC = () => {
 		<div className={contentClasses}>
 			<div className={styles["profile-container"]}>
 				<AvatarEdit />
-				<header className="flow">
-					<h1 className={getClassNames(styles["title"])} id="profile-title">
-						Profile
-					</h1>
-					<div className={styles["tabs"]} role="tablist">
-						<button
-							aria-controls="personal-panel"
-							aria-selected={activeTab === ProfileTab.PERSONAL}
-							className={getClassNames(
-								styles["tab-button"],
-								activeTab === ProfileTab.PERSONAL &&
-									styles["tab-button--active"],
-							)}
-							id="personal-tab"
-							onClick={handlePersonalTabClick}
-							onKeyDown={handleTabKeyDown}
-							ref={personalTabReference}
-							role="tab"
-							tabIndex={activeTab === ProfileTab.PERSONAL ? ZERO : -ONE}
-							type="button"
-						>
-							Personal Information
-						</button>
-						<button
-							aria-controls="password-panel"
-							aria-selected={activeTab === ProfileTab.PASSWORD}
-							className={getClassNames(
-								styles["tab-button"],
-								activeTab === ProfileTab.PASSWORD &&
-									styles["tab-button--active"],
-							)}
-							id="password-tab"
-							onClick={handlePasswordTabClick}
-							onKeyDown={handleTabKeyDown}
-							ref={passwordTabReference}
-							role="tab"
-							tabIndex={activeTab === ProfileTab.PASSWORD ? ZERO : -ONE}
-							type="button"
-						>
-							Change Password
-						</button>
-					</div>
-				</header>
-
-				<form
-					aria-labelledby="profile-title"
-					className={getClassNames(sharedStyles["form"], "cluster")}
-					onSubmit={handleFormSubmit}
-				>
-					<div className="flow-loose">
-						{activeTab === ProfileTab.PERSONAL && (
-							<div
-								aria-labelledby="personal-tab"
-								className="flow"
-								id="personal-panel"
-								role="tabpanel"
-							>
-								<Input
-									control={control}
-									errors={errors}
-									isRequired
-									label="Name"
-									name="name"
-									type="text"
-								/>
-
-								<Input
-									control={control}
-									errors={errors}
-									isRequired
-									label="Email"
-									name="email"
-									type="email"
-								/>
-
-								<Input
-									control={control}
-									errors={errors}
-									label="Date of birth"
-									name="dob"
-									type="date"
-								/>
-							</div>
-						)}
-						{activeTab === ProfileTab.PASSWORD && (
-							<div
-								aria-labelledby="password-tab"
-								className="flow"
-								id="password-panel"
-								role="tabpanel"
-							>
-								<Input
-									control={control}
-									errors={errors}
-									label="Current password"
-									name="currentPassword"
-									placeholder="Enter your current password"
-									type="password"
-								/>
-
-								<Input
-									control={control}
-									errors={errors}
-									label="New password"
-									name="password"
-									placeholder="Enter new password"
-									type="password"
-								/>
-
-								<Input
-									control={control}
-									errors={errors}
-									label="Confirm password"
-									name="confirmPassword"
-									placeholder="Confirm new password"
-									type="password"
-								/>
-							</div>
-						)}
-					</div>
-					<Button
-						isDisabled={isSubmitting || !isDirty}
-						label="Save changes"
-						loader={
-							<Loader
-								container="inline"
-								isLoading={isSubmitting}
-								size="small"
-								theme="accent"
-							/>
-						}
-						type="submit"
-					/>
-				</form>
+				<h1 className={styles["title"]}>Profile</h1>
+				<Tabs defaultActiveTab={ProfileTab.PERSONAL} tabs={tabs} />
 			</div>
 		</div>
 	);
