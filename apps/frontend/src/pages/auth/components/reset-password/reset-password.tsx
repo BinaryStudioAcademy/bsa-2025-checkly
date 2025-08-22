@@ -12,7 +12,7 @@ import {
 
 import { AUTH_PLACEHOLDERS } from "../../libs/constants.js";
 import sharedStyles from "../shared/shared.module.css";
-import { getDefaultResetPasswordValues } from "./libs/helpers/get-default-reset-password-values.helper.js";
+import { DEFAULT_RESET_PASSWORD_VALUES } from "./libs/constants/default-reset-password-values.js";
 import styles from "./styles.module.css";
 
 const TOKEN = "token";
@@ -50,7 +50,7 @@ const ResetPassword: React.FC<Properties> = ({
 	const { control, errors, handleSubmit } = useAppForm<
 		ResetPasswordFormValidationSchema & ResetPasswordRequestDto
 	>({
-		defaultValues: getDefaultResetPasswordValues(userId),
+		defaultValues: { ...DEFAULT_RESET_PASSWORD_VALUES, confirmPassword: "" },
 		validationSchema: resetPasswordValidationSchema,
 	});
 

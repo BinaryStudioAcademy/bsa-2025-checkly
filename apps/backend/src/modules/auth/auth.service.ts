@@ -16,8 +16,8 @@ import {
 } from "~/modules/users/libs/types/types.js";
 import { type UserService } from "~/modules/users/user.service.js";
 
-import { DEFAULT_EXPIRATION_DATE } from "../password-token/libs/constants/default-expiration-date.js";
 import { checkExpirationDate } from "../password-token/libs/helpers/check-expiration-date.helper.js";
+import { getDefaultExpirationDate } from "../password-token/libs/helpers/get-default-expiration-date.helper.js";
 import { type PasswordTokenService } from "../password-token/password-token.service.js";
 import { UserValidationMessage } from "./libs/enums/enums.js";
 import { AuthorizationError } from "./libs/exceptions/exceptions.js";
@@ -67,10 +67,9 @@ class AuthService {
 			const token = this.passwordTokenService.generateToken();
 			const link = config.ENV.EMAIL_SERVICE.RESET_PASSWORD_LINK;
 			const userId = user.getId();
+			const fullUrl = `${link}?token=${token}&userId=${userId.toString()}`;
 
-			const message = getHtmlMessage(
-				`${link}?token=${token}&userId=${userId.toString()}`,
-			);
+			const message = getHtmlMessage(fullUrl);
 			const emailOptions: EmailOptions = this.emailService.setEmailOptions(
 				message,
 				email,
@@ -79,7 +78,7 @@ class AuthService {
 
 			if (emailId) {
 				await this.passwordTokenService.create({
-					expirationDate: DEFAULT_EXPIRATION_DATE,
+					expirationDate: getDefaultExpirationDate(),
 					token,
 					userId,
 				});
