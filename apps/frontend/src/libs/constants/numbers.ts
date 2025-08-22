@@ -4,8 +4,8 @@ const INITIAL_ITEM = 0;
 const LAST_INDEX = -1;
 
 const BASE_DIMENSIONS = {
-  HEIGHT: 1123,
-  WIDTH: 794,
+	HEIGHT: 1123,
+	WIDTH: 794,
 };
 
 export {
