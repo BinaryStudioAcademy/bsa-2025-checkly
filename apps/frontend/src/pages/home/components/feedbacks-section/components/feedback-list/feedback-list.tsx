@@ -1,8 +1,10 @@
-import { type FC, useCallback, useEffect, useRef, useState } from "react";
+import { type FC, useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import "swiper/css";
+import { Mousewheel, Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Loader } from "~/libs/components/components.js";
-import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { feedbackApi } from "~/modules/feedbacks/feedbacks.js";
 import {
 	type FeedbackDto,
@@ -10,6 +12,7 @@ import {
 } from "~/modules/feedbacks/feedbacks.js";
 import {
 	EMPTY_RESPONSE,
+	FEEDBACKS_SWIPER_BREAKPOINTS,
 	LIMIT,
 	SINGLE_PAGE,
 } from "~/pages/home/lib/constants.js";
@@ -36,8 +39,6 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 	const [currentPage, setCurrentPage] = useState<number>(SINGLE_PAGE);
 	const [totalFeedbacks, setTotalFeedbacks] = useState<number>(EMPTY_RESPONSE);
 
-	const loaderReference = useRef<HTMLDivElement>(null);
-	const containerReference = useRef<HTMLDivElement>(null);
 	const filterNewFeedbackItems = useCallback(
 		(
 			previousFeedbacks: FeedbackDto[],
@@ -64,6 +65,8 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 
 				setFeedbacks((previousFeedbacks) => {
 					if (page === SINGLE_PAGE) {
+						setTotalFeedbacks(fetchedData.total);
+
 						return fetchedData.items;
 					}
 
@@ -74,8 +77,6 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 
 					return [...previousFeedbacks, ...newItems];
 				});
-
-				setTotalFeedbacks(fetchedData.total);
 			} catch {
 				toast.error("Failed to load feedbacks. Please try again later.");
 			} finally {
@@ -85,45 +86,17 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 		[filterNewFeedbackItems],
 	);
 
+	const handleReachEnd = useCallback(() => {
+		const hasMoreData = feedbacks.length < totalFeedbacks;
+
+		if (hasMoreData && !isLoadingMore) {
+			setCurrentPage((previousPage) => previousPage + SINGLE_PAGE);
+		}
+	}, [feedbacks.length, totalFeedbacks, isLoadingMore]);
+
 	useEffect(() => {
 		void fetchFeedbacks(currentPage, LIMIT);
 	}, [fetchFeedbacks, currentPage]);
-
-	useEffect(() => {
-		const currentLoader = loaderReference.current;
-		const rootElement = containerReference.current;
-
-		if (!currentLoader) {
-			return;
-		}
-
-		const hasMoreData = feedbacks.length < totalFeedbacks;
-
-		if (!hasMoreData || isLoadingMore || isLoadingInitial) {
-			return;
-		}
-
-		const observer = new IntersectionObserver(
-			(entries) => {
-				const [entry] = entries;
-
-				if (entry && entry.isIntersecting) {
-					setCurrentPage((previousPage) => previousPage + SINGLE_PAGE);
-				}
-			},
-			{
-				root: rootElement,
-				rootMargin: "20px",
-				threshold: 0,
-			},
-		);
-
-		observer.observe(currentLoader);
-
-		return (): void => {
-			observer.unobserve(currentLoader);
-		};
-	}, [feedbacks.length, totalFeedbacks, isLoadingMore, isLoadingInitial]);
 
 	useEffect(() => {
 		if (reloadTrigger > EMPTY_RESPONSE) {
@@ -145,29 +118,34 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 	}
 
 	return (
-		<div
-			className={getClassNames(styles["grid"], styles["feedbacks-list"])}
-			ref={containerReference}
-		>
-			{feedbacks.map((item) => (
-				<FeedbackCard
-					key={item.id}
-					onDeleteClick={onOpenModal("DELETE", item.id)}
-					onEditClick={onOpenModal("EDIT", item.id)}
-					text={item.text}
-					user={item.user}
-					userId={user?.id}
-				/>
-			))}
-			{feedbacks.length > EMPTY_RESPONSE &&
-				feedbacks.length < totalFeedbacks && (
-					<div
-						className={styles["feedbacks-load-more-box"]}
-						ref={loaderReference}
-					>
-						{isLoadingMore && <Loader container="inline" size="large" />}
+		<div className={styles["feedbacks-list-wrapper"]}>
+			<Swiper
+				breakpoints={FEEDBACKS_SWIPER_BREAKPOINTS}
+				className={styles["feedbacks-swiper"]}
+				modules={[Navigation, Mousewheel]}
+				mousewheel
+				navigation
+				onReachEnd={handleReachEnd}
+				slidesPerView={1}
+				spaceBetween={50}
+			>
+				{feedbacks.map((item) => (
+					<SwiperSlide className={styles["custom-slide"]} key={item.id}>
+						<FeedbackCard
+							onDeleteClick={onOpenModal("DELETE", item.id)}
+							onEditClick={onOpenModal("EDIT", item.id)}
+							text={item.text}
+							user={item.user}
+							userId={user?.id}
+						/>
+					</SwiperSlide>
+				))}
+				{isLoadingMore && (
+					<div className={styles["feedbacks-load-more-box"]}>
+						<Loader container="inline" size="large" />
 					</div>
 				)}
+			</Swiper>
 		</div>
 	);
 };

@@ -2,11 +2,9 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	height: clamp(260px, 11.11vw + 220px, 410px);
 	font-size: var(--text-size-heading-5);
 	cursor: pointer;
-	background: var(--color-bg-white);
-	border: 2px solid var(--color-bg-dark);
-	border-radius: var(--radius-m);
 	transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -24,9 +22,7 @@
 }
 
 .text {
-	display: -webkit-box;
 	flex-grow: 1;
-	max-height: clamp(300px, 10vh, 350px);
 	padding-right: var(--space-xs-s);
 	margin: 0 0 15px;
 	overflow-y: auto;

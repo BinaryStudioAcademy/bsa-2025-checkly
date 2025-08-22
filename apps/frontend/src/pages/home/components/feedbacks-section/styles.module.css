@@ -43,20 +43,17 @@
 	font-size: var(--text-size-heading-3);
 }
 
-.grid {
-	position: relative;
-	display: flex;
-	gap: var(--step-2);
-	align-items: center;
+.feedbacks-list-wrapper {
 	width: 100%;
 }
 
-.grid > * {
-	flex: 0 0 clamp(250px, 25vw, 365px);
-	height: clamp(260px, 11.11vw + 220px, 410px);
+.custom-slide {
+	width: clamp(250px, 25vw, 360px);
 	padding: var(--space-m);
 	padding-top: 38px;
 	background-color: var(--color-bg-white);
+	border: 2px solid var(--color-bg-dark);
+	border-radius: var(--radius-m);
 }
 
 .feedbacks-list {
@@ -67,13 +64,6 @@
 	overflow-x: auto;
 	scrollbar-color: #f7b6d2 #fde7f1;
 	scrollbar-width: thin;
-}
-
-.feedbacks-load-more-box {
-	flex-shrink: 0;
-	width: 20px;
-	height: 20px;
-	background-color: transparent;
 }
 
 .feedbacks-list::-webkit-scrollbar {
