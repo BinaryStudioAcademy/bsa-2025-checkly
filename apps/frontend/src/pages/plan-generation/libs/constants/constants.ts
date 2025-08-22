@@ -11,13 +11,13 @@ const DEFAULT_QUIZ_STATE: QuizState = {
 };
 
 const SlowTiming = {
-	INCREMENT_DIVISOR: 2000,
+	INCREMENT_DIVISOR: 20,
 	INCREMENT_MAX: 0.2,
 	INTERVAL_MS: 100,
 } as const;
 
 const FastTiming = {
-	INCREMENT: 1,
+	INCREMENT: 1.5,
 	INTERVAL_MS: 100,
 } as const;
 
