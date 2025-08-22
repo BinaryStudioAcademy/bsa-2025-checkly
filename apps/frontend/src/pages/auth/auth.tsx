@@ -1,6 +1,7 @@
 import React, { type JSX, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { REDIRECT_PARAM } from "~/libs/constants/constants.js";
 import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
@@ -19,7 +20,8 @@ import { SignInForm, SignUpForm } from "./components/components.js";
 
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { pathname } = useLocation();
+	const location = useLocation();
+	const { pathname } = location;
 	const navigate = useNavigate();
 
 	const { dataStatus } = useAppSelector(({ auth }) => auth);
@@ -30,18 +32,31 @@ const Auth: React.FC = () => {
 		navigation.setNavigate(navigate);
 	}, [navigate]);
 
+	const getRedirectPath = useCallback((): null | string => {
+		const parameters = new URLSearchParams(location.search);
+		const redirect = parameters.get(REDIRECT_PARAM);
+
+		return redirect && redirect.startsWith("/") ? redirect : null;
+	}, [location.search]);
+
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
-			void dispatch(authActions.signIn(payload));
+			void dispatch(authActions.signIn(payload)).then(() => {
+				const redirectPath = getRedirectPath();
+				void navigate(redirectPath ?? AppRoute.DASHBOARD, { replace: true });
+			});
 		},
-		[dispatch],
+		[dispatch, navigate, getRedirectPath],
 	);
 
 	const handleSignUpSubmit = useCallback(
 		(payload: UserSignUpRequestDto): void => {
-			void dispatch(authActions.signUp(payload));
+			void dispatch(authActions.signUp(payload)).then(() => {
+				const redirectPath = getRedirectPath();
+				void navigate(redirectPath ?? AppRoute.DASHBOARD, { replace: true });
+			});
 		},
-		[dispatch],
+		[dispatch, navigate, getRedirectPath],
 	);
 
 	const getScreen = (screen: string): JSX.Element => {

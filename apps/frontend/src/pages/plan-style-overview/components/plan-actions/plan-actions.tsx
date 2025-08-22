@@ -9,7 +9,9 @@ import {
 } from "~/assets/img/icons/icons.js";
 import { Button } from "~/libs/components/button/button.js";
 import { Loader } from "~/libs/components/loader/loader.js";
+import { REDIRECT_PARAM } from "~/libs/constants/constants.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
+import { useLocation } from "~/libs/hooks/hooks.js";
 
 import styles from "./styles.module.css";
 
@@ -30,6 +32,7 @@ const PlanActions: React.FC<Properties> = ({
 	onEdit,
 	onGoToDashboard,
 }: Properties) => {
+	const location = useLocation();
 	const handleEditClick = useCallback((): void => {
 		onEdit();
 	}, [onEdit]);
@@ -90,7 +93,10 @@ const PlanActions: React.FC<Properties> = ({
 			{!isAuthenticated && (
 				<div className={styles["footer-message"]}>
 					Customize and Download your Plan by{" "}
-					<Link className={styles["login-link"]} to={AppRoute.SIGN_IN}>
+					<Link
+						className={styles["login-link"]}
+						to={`${AppRoute.SIGN_IN}?${REDIRECT_PARAM}=${encodeURIComponent(location.pathname)}`}
+					>
 						Logging in
 					</Link>
 				</div>
