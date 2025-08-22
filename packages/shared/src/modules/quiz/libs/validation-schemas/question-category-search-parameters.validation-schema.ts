@@ -1,8 +1,6 @@
 import z from "zod";
 
-import { QuestionValidationMessage } from "../enums/enums.js";
-
-const ZERO = 0;
+import { QuestionValidationMessage, ZERO } from "../enums/enums.js";
 
 const questionCategorySchema = z.object({
 	categoryId: z
