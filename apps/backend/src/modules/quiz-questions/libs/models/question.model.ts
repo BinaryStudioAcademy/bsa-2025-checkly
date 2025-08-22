@@ -5,7 +5,7 @@ import {
 	DatabaseTableName,
 } from "~/libs/modules/database/database.js";
 
-import { OPTIONS } from "../enums/enums.js";
+import { OPTIONS } from "../constants/constants.js";
 import { type QuestionType } from "../types/types.js";
 import { QuestionOptionModel } from "./models.js";
 

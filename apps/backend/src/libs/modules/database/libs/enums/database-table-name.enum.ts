@@ -1,6 +1,7 @@
 const DatabaseTableName = {
 	MIGRATIONS: "migrations",
 	PASSWORD_TOKENS: "password_tokens",
+	PLAN_CATEGORIES: "plan_categories",
 	PLAN_DAYS: "plan_days",
 	PLANS: "plans",
 	QUESTION_OPTIONS: "question_options",

@@ -1,11 +1,20 @@
+export { type SearchProperties } from "./search-properties.type.js";
 export {
+	type GeneratedPlanDTO,
+	type GeneratePlanRequestDto,
+	type PlanCategoryDto,
 	type PlanCreateRequestDto,
+	type PlanDayCreateRequestDto,
 	type PlanDayDto,
 	type PlanDaysTaskDto,
 	type PlanDto,
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
+	type PlanSearchQueryParameter,
 	type PlanUpdateRequestDto,
+	type PlanWithCategoryDto,
 	type QuizAnswer,
 	type QuizAnswersRequestDto,
+	type TaskCreateRequestDto,
+	type TaskDto,
 } from "shared";

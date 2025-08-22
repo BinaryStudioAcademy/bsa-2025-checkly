@@ -91,19 +91,19 @@ const ResetPassword: React.FC<Properties> = ({
 						<Input
 							control={control}
 							errors={errors}
+							isRequired
 							label="New password"
 							name="password"
-							placeholder={AUTH_PLACEHOLDERS.password}
-							required
+							placeholder={AUTH_PLACEHOLDERS.PASSWORD}
 							type="password"
 						/>
 						<Input
 							control={control}
 							errors={errors}
+							isRequired
 							label="Confirm password"
 							name="confirmPassword"
-							placeholder={AUTH_PLACEHOLDERS.password}
-							required
+							placeholder={AUTH_PLACEHOLDERS.PASSWORD}
 							type="password"
 						/>
 					</div>

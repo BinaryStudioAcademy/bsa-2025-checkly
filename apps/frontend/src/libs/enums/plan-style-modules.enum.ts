@@ -2,10 +2,10 @@ import withRemarksStyles from "../components/plan-styles/styles/with-remarks/sty
 import colourfulStyles from "../components/plan-styles/styles/with-remarks/themes/colourful/styles.module.css";
 import minimalStyles from "../components/plan-styles/styles/with-remarks/themes/minimal/styles.module.css";
 
-const planStyleModules = {
-	colourful: colourfulStyles,
-	minimal: minimalStyles,
-	withremarks: withRemarksStyles,
+const PlanStyleModules = {
+	COLOURFUL: colourfulStyles,
+	MINIMAL: minimalStyles,
+	WITH_REMARKS: withRemarksStyles,
 } as const;
 
-export { planStyleModules };
+export { PlanStyleModules };

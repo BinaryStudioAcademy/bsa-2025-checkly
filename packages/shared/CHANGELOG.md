@@ -1,5 +1,63 @@
 # Changelog
 
+## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.9.0...shared-v1.10.0) (2025-08-20)
+
+
+### Features
+
+* **frontend/backend/shared:** add task editing, deletion, and day deletion cy-253 ([09c8569](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/09c8569c4dfec5a6db2e5672abe940efb58c20a1))
+* **frontend:** add plan style overview page cy-65 ([8d67e95](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8d67e95e55b45ffb62dd64cf1eb637c898ed7b58))
+
+
+### Bug Fixes
+
+* fixed link.tsx cy-288 ([f8e2122](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f8e2122a406970f5d28a0969076b7fd60cd14f7b))
+* **frontend/backend/shared:** fix code to meet requirements cy-288 ([24fbfba](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/24fbfba70b4bcc18c93b13f3ba57fd65662495a3))
+* **frontend:** fix conflicts with main branch cy-65 ([bd96b98](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bd96b9850d7e3b4edb78e1fd1d7cfa53f12dd50a))
+* **frontend:** merge remote branch into local cy-253 ([7bdeb2c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7bdeb2c85981a6df9aa7477f755923f6fb595649))
+* improve code quality cy-65 ([f2e9c5d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f2e9c5d59ad4ca0cf9a5aca623c95f226122d31b))
+* merge main into fix/code-quality-criteria cy-288 ([8f54769](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8f54769a445183093253790460be32fd3db34c2a))
+* no mutated imports, dialog instead of div cy-253 ([b0de517](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b0de5179f70e14e889fc4f84559d179b5e5ecbd4))
+* wrong status code, api accepting oversized file cy-303 ([380a863](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/380a863d715c3d1eb8a32fe20ce3cb08b59e5b89))
+* wrong status code, api accepting oversized file cy-303 ([ac3f103](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ac3f103905f9b204ac81e5275451c4c7440afbb2))
+
+## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.8.0...shared-v1.9.0) (2025-08-19)
+
+
+### Features
+
+* - remove undefined from optional type fields cy-171 ([4f29da6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/4f29da6200f8433397a5328cd7cc36acd6378552))
+* * update plan search query params type cy-171 ([eeeb289](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eeeb289bc8486d7c79a6e605ad2316f65a0e8afa))
+* * update plan types cy-171 ([49fb5ad](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/49fb5ad6e45e68d70c0719caeb76b9387eac3baa))
+* * update plan-search-qeury param type cy-171 ([30ff49c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/30ff49c952b7208caca537387baa83f0c828732f))
+* * update plan-search-query validation schema cy-171 ([d766e5b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d766e5b73a1789fece9e498291e2f15760659a1f))
+* * update plan-with-category dto cy-171 ([fef5acd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/fef5acd53640221efca7a0a6b3f676ed78f531ec))
+* + add api-path cy-171 ([c2183b8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c2183b836bfd8debe53d60cfedbeb0024ab245a9))
+* + add build-query-string helper cy-171 ([3d8b921](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3d8b9216d352b1d4bc9043ece723f9dd8f9bd2d4))
+* + add export from plan-categories shared cy-171 ([b8b8d75](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b8b8d757ff368e81279e3cfbe3a425d87b3b9c50))
+* + add plan-category api path enum cy-171 ([5ba7062](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5ba7062eaa4002a0c8813168acfec3fd6cf3516c))
+* + add plan-category dto to shared cy-171 ([c11f18b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c11f18b8059a5c482a69e1abcb061a753efbc5cd))
+* + add plan-search-query validation schema cy-171 ([a562d08](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a562d08dcf4cd014aae78d30c747f72859f31def))
+* + add zero-category-id enum cy-171 ([1a80207](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1a802072d89551c8d6580596b3ca05c01ecd82aa))
+* + update plan-categories table to add icon-href and oreder fields cy-171 ([d6d736f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d6d736f04105a94aef9c13f7c0eea56b2f8e541e))
+* + update plans module to add search cy-171 ([0cbd394](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0cbd394c511593f01b624098fb9d9068a1dbb765))
+* + update plans shared folder cy-171 ([cb94d52](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cb94d527b1e055bf5d9fb0aaca9459a207ef39b2))
+* add user avatar cy-178 ([88da678](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/88da67800ef81f6bf30d2023a1cf15e2f0244bcb))
+* plan generation cy-55 ([6bae8b3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6bae8b38f18378cb02e401d1799bff8b8809ca90))
+* plan search cy-171 ([46f0259](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/46f0259d1d2d073a619b11f5eef5886781bb541b))
+
+
+### Bug Fixes
+
+* linting issue cy-178 ([d15bce2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d15bce22e762844683b64a9e97eb908303d0a24a))
+
+## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.7.0...shared-v1.8.0) (2025-08-18)
+
+
+### Features
+
+* add profile page cy-176 ([f090102](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f0901026904a8716bfccfdb9710ecedecf755525))
+
 ## [1.7.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.6.0...shared-v1.7.0) (2025-08-17)
 
 

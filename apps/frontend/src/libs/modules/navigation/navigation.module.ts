@@ -3,17 +3,17 @@ import { type NavigateFunction } from "react-router-dom";
 class Navigation {
 	private navigate: NavigateFunction | null = null;
 
-	public async navigateTo(path: string): Promise<void> {
+	public navigateTo = async (path: string): Promise<void> => {
 		if (!this.navigate) {
 			return;
 		}
 
 		await this.navigate(path);
-	}
+	};
 
-	public setNavigate(navigateFunction: NavigateFunction): void {
-		this.navigate = navigateFunction;
-	}
+	public setNavigate = (navigate: NavigateFunction): void => {
+		this.navigate = navigate;
+	};
 }
 
 export { Navigation };

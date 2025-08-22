@@ -71,10 +71,10 @@ const ForgotPassword: React.FC<Properties> = ({
 						<Input
 							control={control}
 							errors={errors}
+							isRequired
 							label="Email"
 							name="email"
-							placeholder={AUTH_PLACEHOLDERS.email}
-							required
+							placeholder={AUTH_PLACEHOLDERS.EMAIL}
 							type="email"
 						/>
 					</div>

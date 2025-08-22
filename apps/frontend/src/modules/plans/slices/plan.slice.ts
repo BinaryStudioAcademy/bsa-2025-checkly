@@ -1,19 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-import { DataStatus } from "~/libs/enums/enums.js";
-import { type ValueOf } from "~/libs/types/types.js";
+import { LAST_INDEX } from "~/libs/constants/constants.js";
+import { DataStatus, PlanStyle } from "~/libs/enums/enums.js";
+import { type PlanStyleOption, type ValueOf } from "~/libs/types/types.js";
 import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
-import { generatePlan } from "./actions.js";
+import {
+	findPlan,
+	generatePlan,
+	getAllUserPlans,
+	searchPlan,
+} from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
 	plan: null | PlanDaysTaskDto;
+	selectedStyle: PlanStyleOption;
+	userPlans: PlanDaysTaskDto[];
+	userPlansDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
 	plan: null,
+	selectedStyle: PlanStyle.WITH_REMARKS,
+	userPlans: [],
+	userPlansDataStatus: DataStatus.IDLE,
 };
 
 const { actions, name, reducer } = createSlice({
@@ -29,10 +41,48 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.REJECTED;
 			state.plan = null;
 		});
+		builder.addCase(getAllUserPlans.pending, (state) => {
+			state.userPlansDataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(getAllUserPlans.fulfilled, (state, action) => {
+			state.userPlansDataStatus = DataStatus.FULFILLED;
+			state.userPlans = action.payload;
+			state.plan = action.payload.at(LAST_INDEX) ?? null;
+		});
+		builder.addCase(getAllUserPlans.rejected, (state) => {
+			state.userPlansDataStatus = DataStatus.REJECTED;
+			state.userPlans = [];
+		});
+		builder.addCase(searchPlan.pending, (state) => {
+			state.userPlansDataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(searchPlan.fulfilled, (state, action) => {
+			state.userPlansDataStatus = DataStatus.FULFILLED;
+			state.userPlans = action.payload;
+		});
+		builder.addCase(searchPlan.rejected, (state) => {
+			state.userPlansDataStatus = DataStatus.REJECTED;
+			state.userPlans = [];
+		});
+		builder.addCase(findPlan.pending, (state) => {
+			state.userPlansDataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(findPlan.fulfilled, (state, action) => {
+			state.userPlansDataStatus = DataStatus.FULFILLED;
+			state.plan = action.payload;
+		});
+		builder.addCase(findPlan.rejected, (state) => {
+			state.userPlansDataStatus = DataStatus.REJECTED;
+			state.plan = null;
+		});
 	},
 	initialState,
 	name: "plan",
-	reducers: {},
+	reducers: {
+		setSelectedStyle: (state, action: PayloadAction<PlanStyleOption>) => {
+			state.selectedStyle = action.payload;
+		},
+	},
 });
 
 export { actions, name, reducer };

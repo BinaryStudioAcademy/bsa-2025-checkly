@@ -1,1 +1,1 @@
-export { ZERO } from "shared";
+export { UPLOAD_MAX_FILE_SIZE_BYTES, ZERO } from "shared";

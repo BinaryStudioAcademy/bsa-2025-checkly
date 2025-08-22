@@ -9,33 +9,33 @@ type LayoutExample = {
 const layoutExamples: LayoutExample[] = [
 	{
 		id: 1,
-		planStyle: "withremarks",
+		planStyle: "WITH_REMARKS",
 		title: "With Remarks",
 	},
-	{ id: 2, planStyle: "colourful", title: "Colourful" },
+	{ id: 2, planStyle: "COLOURFUL", title: "Colourful" },
 	{
 		id: 3,
-		planStyle: "minimal",
+		planStyle: "MINIMAL",
 		title: "Minimal",
 	},
 	{
 		id: 4,
-		planStyle: "withremarks",
+		planStyle: "WITH_REMARKS",
 		title: "With Remarks",
 	},
 	{
 		id: 5,
-		planStyle: "colourful",
+		planStyle: "COLOURFUL",
 		title: "Colourful",
 	},
 	{
 		id: 6,
-		planStyle: "minimal",
+		planStyle: "MINIMAL",
 		title: "Minimal",
 	},
 	{
 		id: 7,
-		planStyle: "withremarks",
+		planStyle: "WITH_REMARKS",
 		title: "With Remarks",
 	},
 ];

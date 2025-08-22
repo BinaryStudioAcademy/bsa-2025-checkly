@@ -103,37 +103,37 @@ const SignUpForm: React.FC<Properties> = ({
 						<Input
 							control={control}
 							errors={errors}
+							isRequired
 							label="Name"
 							name="name"
-							placeholder={AUTH_PLACEHOLDERS.name}
-							required
+							placeholder={AUTH_PLACEHOLDERS.NAME}
 							type="text"
 						/>
 						<Input
 							control={control}
 							errors={errors}
+							isRequired
 							label="Email"
 							name="email"
-							placeholder={AUTH_PLACEHOLDERS.email}
-							required
+							placeholder={AUTH_PLACEHOLDERS.EMAIL}
 							type="text"
 						/>
 						<Input
 							control={control}
 							errors={errors}
+							isRequired
 							label="Password"
 							name="password"
-							placeholder={AUTH_PLACEHOLDERS.password}
-							required
+							placeholder={AUTH_PLACEHOLDERS.PASSWORD}
 							type="password"
 						/>
 						<Input
 							control={control}
 							errors={errors}
+							isRequired
 							label="Confirm password"
 							name="confirmPassword"
-							placeholder={AUTH_PLACEHOLDERS.password}
-							required
+							placeholder={AUTH_PLACEHOLDERS.PASSWORD}
 							type="password"
 						/>
 					</div>

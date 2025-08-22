@@ -1,4 +1,5 @@
 export {
+	generatePlanValidationSchema,
 	planCreateValidationSchema,
-	quizAnswersValidationSchema,
+	planSearchQueryParametersValidationSchema,
 } from "shared";
