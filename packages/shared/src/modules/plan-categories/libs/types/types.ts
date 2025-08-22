@@ -1,1 +1,4 @@
-export { type PlanCategoryDto } from "./plan-category-dto.type.js";
+export {
+	type PlanCategoryDto,
+	type PlanCategoryWithColorDto,
+} from "./plan-category-dto.type.js";

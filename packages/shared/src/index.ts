@@ -51,6 +51,7 @@ export {
 export {
 	PlanCategoriesApiPath,
 	type PlanCategoryDto,
+	type PlanCategoryWithColorDto,
 	ZERO_CATEGORY_ID,
 } from "./modules/plan-categories/plan-categories.js";
 export {
