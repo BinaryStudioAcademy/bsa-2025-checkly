@@ -3,4 +3,5 @@ export {
 	type GeneratedPlanDTO,
 	type GeneratedTaskDTO,
 	type PlanActionType,
+	type PlanActionTypeMap,
 } from "shared";

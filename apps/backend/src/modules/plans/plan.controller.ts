@@ -13,12 +13,14 @@ import {
 	type PlanCreateRequestDto,
 	planCreateValidationSchema,
 	type PlanDayRegenerationRequestDto,
+	type PlanRegenerationRequestDto,
 	type QuizAnswersRequestDto,
 	quizAnswersValidationSchema,
 	type TaskRegenerationRequestDto,
 } from "~/modules/plans/plans.js";
 
 import { PlanAction, PlansApiPath } from "./libs/enums/enums.js";
+
 /**
  * @swagger
  * tags:
@@ -202,7 +204,12 @@ class PlanController extends BaseController {
 		});
 
 		this.addRoute({
-			handler: (options) => this.regenerate(options as IdParametersOption),
+			handler: (options) =>
+				this.regenerate(
+					options as APIHandlerOptions<{
+						params: PlanRegenerationRequestDto;
+					}>,
+				),
 			method: HTTPRequestMethod.POST,
 			path: PlansApiPath.REGENERATE,
 		});
@@ -416,34 +423,41 @@ class PlanController extends BaseController {
 	}
 
 	private async regenerate(
-		options: IdParametersOption,
+		options: APIHandlerOptions<{
+			params: PlanRegenerationRequestDto;
+		}>,
 	): Promise<APIHandlerResponse> {
 		const { id } = options.params;
+		const userId = options.user?.id;
 
 		return {
-			payload: await this.planService.regenerate(id),
+			payload: await this.planService.regenerate(id, userId),
 			status: HTTPCode.OK,
 		};
 	}
 
-	private async regenerateDay(options: {
-		params: PlanDayRegenerationRequestDto;
-	}): Promise<APIHandlerResponse> {
-		const { dayId, planId } = options.params;
+	private async regenerateDay(
+		options: APIHandlerOptions<{
+			params: PlanDayRegenerationRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		const userId = options.user?.id;
 
 		return {
-			payload: await this.planService.regenerateDay(planId, dayId),
+			payload: await this.planService.regenerateDay(options.params, userId),
 			status: HTTPCode.OK,
 		};
 	}
 
-	private async regenerateTask(options: {
-		params: TaskRegenerationRequestDto;
-	}): Promise<APIHandlerResponse> {
-		const { dayId, planId, taskId } = options.params;
+	private async regenerateTask(
+		options: APIHandlerOptions<{
+			params: TaskRegenerationRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		const userId = options.user?.id;
 
 		return {
-			payload: await this.planService.regenerateTask(planId, dayId, taskId),
+			payload: await this.planService.regenerateTask(options.params, userId),
 			status: HTTPCode.OK,
 		};
 	}

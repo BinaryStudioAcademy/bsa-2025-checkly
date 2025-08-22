@@ -40,6 +40,7 @@ export {
 	type GeneratedDayDTO,
 	type GeneratedPlanDTO,
 	type GeneratedTaskDTO,
+	type PlanActionTypeMap,
 } from "./modules/openai/openai.js";
 export {
 	type PlanDayCreateRequestDto,
@@ -58,6 +59,7 @@ export {
 	type PlanDaysTaskDto,
 	type PlanDto,
 	type PlanGetAllResponseDto,
+	type PlanRegenerationRequestDto,
 	type PlanResponseDto,
 	PlansApiPath,
 	type PlanUpdateRequestDto,

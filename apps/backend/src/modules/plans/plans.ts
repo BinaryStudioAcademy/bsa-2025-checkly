@@ -25,6 +25,7 @@ export {
 	type PlanDayDto,
 	type PlanDayRegenerationRequestDto,
 	type PlanDaysTaskDto,
+	type PlanRegenerationRequestDto,
 	type QuizAnswersRequestDto,
 	type TaskRegenerationRequestDto,
 } from "./libs/types/types.js";

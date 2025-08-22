@@ -4,10 +4,9 @@ import { NavLink } from "react-router-dom";
 import { Download } from "~/assets/img/icons/icons.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { ONE, ZERO } from "~/libs/constants/constants.js";
-import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
+import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
-import { actions as authActions } from "~/modules/auth/auth.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
 
 import { DayList, TaskList } from "./components/components.js";
@@ -22,21 +21,11 @@ const Plan: React.FC = () => {
 
 	const dispatch = useAppDispatch();
 
-	const user = useAppSelector((state) => state.auth.user);
-	const userStatus = useAppSelector((state) => state.auth.dataStatus);
 	const plan = useAppSelector((state) => state.plan.plan);
 
 	useEffect(() => {
-		if (userStatus === DataStatus.IDLE) {
-			void dispatch(authActions.getCurrentUser());
-		}
-	}, [dispatch, userStatus]);
-
-	useEffect(() => {
-		if (userStatus === DataStatus.FULFILLED && user) {
-			void dispatch(planActions.getPlan(user.id));
-		}
-	}, [dispatch, userStatus, user]);
+		void dispatch(planActions.getPlan());
+	}, [dispatch]);
 
 	const toggleSelect = useCallback((): void => {
 		setIsSelectOpen((previous) => !previous);
@@ -44,17 +33,20 @@ const Plan: React.FC = () => {
 
 	const handleTaskRegenerate = useCallback(
 		(taskId: number) => {
-			const planId = plan?.id;
-			const dayId = plan?.days[selectedDay]?.id;
+			const planDay = plan?.days[selectedDay];
 
-			if (!planId || !dayId) {
+			if (!planDay) {
 				return;
 			}
 
+			const taskPayload = {
+				dayId: planDay.id,
+				planId: plan.id,
+				taskId,
+			};
+
 			tasksLoading.add(taskId);
-			void dispatch(
-				planActions.regenerateTask({ dayId, planId, taskId }),
-			).finally(() => {
+			void dispatch(planActions.regenerateTask(taskPayload)).finally(() => {
 				tasksLoading.remove(taskId);
 			});
 		},
@@ -67,10 +59,10 @@ const Plan: React.FC = () => {
 				return;
 			}
 
+			const planPayload = { dayId, planId: plan.id };
+
 			daysLoading.add(dayId);
-			void dispatch(
-				planActions.regeneratePlanDay({ dayId, planId: plan.id }),
-			).finally(() => {
+			void dispatch(planActions.regeneratePlanDay(planPayload)).finally(() => {
 				daysLoading.remove(dayId);
 			});
 		},
@@ -83,8 +75,7 @@ const Plan: React.FC = () => {
 		}
 
 		dispatch(planActions.clearPlan());
-
-		void dispatch(planActions.regeneratePlan(plan.id));
+		void dispatch(planActions.regeneratePlan({ id: plan.id }));
 	}, [dispatch, plan]);
 
 	return (

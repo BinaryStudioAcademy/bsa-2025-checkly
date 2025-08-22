@@ -1,9 +1,3 @@
-import {
-	type GeneratedDayDTO,
-	type GeneratedTaskDTO,
-	type PlanActionType,
-} from "shared";
-
 import { type Service } from "~/libs/types/types.js";
 import { PlanEntity } from "~/modules/plans/plan.entity.js";
 import { type PlanRepository } from "~/modules/plans/plan.repository.js";
@@ -19,9 +13,11 @@ import {
 } from "./libs/constants/constants.js";
 import { ErrorMessage, HTTPCode, HTTPError } from "./libs/enums/enums.js";
 import {
-	type GeneratedPlanDTO,
+	type PlanActionType,
+	type PlanActionTypeMap,
 	type PlanCreateRequestDto,
 	type PlanDayDto,
+	type PlanDayRegenerationRequestDto,
 	type PlanDaysTaskDto,
 	type PlanDto,
 	type PlanGetAllResponseDto,
@@ -29,16 +25,9 @@ import {
 	type PlanUpdateRequestDto,
 	type QuizAnswersRequestDto,
 	type TaskDto,
+	type TaskRegenerationRequestDto,
 } from "./libs/types/types.js";
 import { createPrompt } from "./libs/utilities/utilities.js";
-
-type ActionType = keyof ActionTypeMap;
-
-type ActionTypeMap = {
-	day: GeneratedDayDTO;
-	plan: GeneratedPlanDTO;
-	task: GeneratedTaskDTO;
-};
 
 class PlanService implements Service {
 	private openAIService: OpenAIService;
@@ -97,10 +86,10 @@ class PlanService implements Service {
 		return item ? item.toObjectWithRelations() : null;
 	}
 
-	public async generate<T extends ActionType>(
+	public async generate<T extends PlanActionType>(
 		payload: QuizAnswersRequestDto,
 		actionType: PlanActionType,
-	): Promise<ActionTypeMap[T]> {
+	): Promise<PlanActionTypeMap[T]> {
 		const userPrompt = createPrompt(payload);
 
 		const result = await this.openAIService.generate({
@@ -108,10 +97,20 @@ class PlanService implements Service {
 			userPrompt,
 		});
 
-		return result as ActionTypeMap[T];
+		return result as PlanActionTypeMap[T];
 	}
 
-	public async regenerate(id: number): Promise<null | PlanDaysTaskDto> {
+	public async regenerate(
+		id: number,
+		userId?: number,
+	): Promise<null | PlanDaysTaskDto> {
+		if (!userId) {
+			throw new HTTPError({
+				message: ErrorMessage.USER_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
 		const existingPlan = await this.planRepository.find(id);
 
 		if (!existingPlan) {
@@ -157,9 +156,18 @@ class PlanService implements Service {
 	}
 
 	public async regenerateDay(
-		planId: number,
-		dayId: number,
+		plan: PlanDayRegenerationRequestDto,
+		userId?: number,
 	): Promise<null | PlanDaysTaskDto> {
+		if (!userId) {
+			throw new HTTPError({
+				message: ErrorMessage.USER_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { dayId, planId } = plan;
+
 		const existingPlan = await this.planRepository.find(planId);
 
 		if (!existingPlan) {
@@ -223,11 +231,18 @@ class PlanService implements Service {
 	}
 
 	public async regenerateTask(
-		id: number,
-		dayId: number,
-		taskId: number,
+		plan: TaskRegenerationRequestDto,
+		userId?: number,
 	): Promise<null | PlanDaysTaskDto> {
-		const existingPlan = await this.planRepository.find(id);
+		if (!userId) {
+			throw new HTTPError({
+				message: ErrorMessage.USER_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { dayId, planId, taskId } = plan;
+		const existingPlan = await this.planRepository.find(planId);
 
 		if (!existingPlan) {
 			throw new HTTPError({
@@ -245,9 +260,9 @@ class PlanService implements Service {
 			});
 		}
 
-		const { planId } = existingPlanDay.toObject();
+		const { planId: planDayPlanId } = existingPlanDay.toObject();
 
-		if (Number(id) !== Number(planId)) {
+		if (Number(planDayPlanId) !== Number(planId)) {
 			throw new HTTPError({
 				message: ErrorMessage.PLAN_DAY_NOT_FOUND,
 				status: HTTPCode.NOT_FOUND,
