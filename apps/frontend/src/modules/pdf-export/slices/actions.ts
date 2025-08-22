@@ -44,8 +44,6 @@ const exportPdf = createAsyncThunk<
 
 	downloadFile(blob, fileName);
 
-	notifications.success(MESSAGES.DOWNLOAD.SUCCESS);
-
 	return { fileName };
 });
 
