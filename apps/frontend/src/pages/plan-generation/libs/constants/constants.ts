@@ -29,10 +29,18 @@ const ProgressLimits = {
 
 const LOADING_DURATION_MS = 6000;
 
+const LOADING_MESSAGES = [
+	{ max: 30, min: 0, text: "Checking out your answers..." },
+	{ max: 50, min: 30, text: "Figuring out what will work best..." },
+	{ max: 91, min: 50, text: "Getting your plan ready..." },
+	{ max: 100, min: 91, text: "Almost done!" },
+] as const;
+
 export {
 	DEFAULT_QUIZ_STATE,
 	FastTiming,
 	LOADING_DURATION_MS,
+	LOADING_MESSAGES,
 	ProgressLimits,
 	SlowTiming,
 };
