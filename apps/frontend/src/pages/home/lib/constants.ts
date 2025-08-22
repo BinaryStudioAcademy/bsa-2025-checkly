@@ -5,7 +5,7 @@ const SINGLE_PAGE = 1;
 const FEEDBACKS_SWIPER_BREAKPOINTS = {
 	480: {
 		slidesPerView: "auto",
-		spaceBetween: 20,
+		spaceBetween: 15,
 	},
 	640: {
 		slidesPerView: "auto",
