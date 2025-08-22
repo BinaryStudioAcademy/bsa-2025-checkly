@@ -1,7 +1,8 @@
-const now = new Date();
-const ZERO = 0; //move to shared
+import { ZERO } from "~/libs/constants/constants.js";
 
 const checkExpirationDate = (expirationDate: Date): boolean => {
+	const now = new Date();
+
 	return expirationDate.getTime() - now.getTime() <= ZERO;
 };
 

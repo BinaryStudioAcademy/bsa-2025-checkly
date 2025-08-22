@@ -1,3 +1,4 @@
+export { LAST_INDEX, ONE, ZERO } from "./libs/constants/constants.js";
 export {
 	APIPath,
 	AppEnvironment,
