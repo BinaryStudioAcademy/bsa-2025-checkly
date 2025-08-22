@@ -73,6 +73,14 @@ class PasswordTokenEntity implements Entity {
 		});
 	}
 
+	public getExpirationDate(): Date {
+		return this.expirationDate;
+	}
+
+	public getToken(): { tokenHash: string; tokenSalt: string } {
+		return { tokenHash: this.tokenHash, tokenSalt: this.tokenSalt };
+	}
+
 	public toNewObject(): {
 		expirationDate: Date;
 		tokenHash: string;

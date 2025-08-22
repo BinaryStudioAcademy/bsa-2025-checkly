@@ -12,12 +12,14 @@ import { navigation } from "~/libs/modules/navigation/navigation.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import {
 	type ForgotPasswordRequestDto,
+	type ResetPasswordRequestDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
 } from "~/modules/users/users.js";
 
 import { SignInForm, SignUpForm } from "./components/components.js";
 import { ForgotPassword } from "./components/forgot-password/forgot-password.js";
+import { ResetPassword } from "./components/reset-password/reset-password.js";
 
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -54,6 +56,13 @@ const Auth: React.FC = () => {
 		[dispatch],
 	);
 
+	const handleResetPasswordSubmit = useCallback(
+		(payload: ResetPasswordRequestDto): void => {
+			void dispatch(authActions.resetPassword(payload));
+		},
+		[dispatch],
+	);
+
 	const getScreen = (screen: string): JSX.Element => {
 		switch (screen) {
 			case AppRoute.FORGOT_PASSWORD: {
@@ -61,6 +70,15 @@ const Auth: React.FC = () => {
 					<ForgotPassword
 						isLoading={isLoading}
 						onSubmit={handleForgotPasswordSubmit}
+					/>
+				);
+			}
+
+			case AppRoute.RESET_PASSWORD: {
+				return (
+					<ResetPassword
+						isLoading={isLoading}
+						onSubmit={handleResetPasswordSubmit}
 					/>
 				);
 			}

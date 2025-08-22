@@ -4,11 +4,13 @@ import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
 import {
 	type ForgotPasswordRequestDto,
+	type ResetPasswordRequestDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	type VerifyTokenRequestDto,
 } from "~/modules/users/users.js";
 
 import { AuthApiPath } from "./libs/enums/enums.js";
@@ -32,6 +34,17 @@ class AuthApi extends BaseHTTPApi {
 		});
 
 		return await response.json<UserDto>();
+	}
+
+	public async resetPassword(payload: ResetPasswordRequestDto): Promise<null> {
+		await this.load(this.getFullEndpoint(AuthApiPath.RESET_PASSWORD, {}), {
+			contentType: ContentType.JSON,
+			hasAuth: false,
+			method: HTTPRequestMethod.POST,
+			payload: JSON.stringify(payload),
+		});
+
+		return null;
 	}
 
 	public async sendResetLink(payload: ForgotPasswordRequestDto): Promise<null> {
@@ -75,6 +88,17 @@ class AuthApi extends BaseHTTPApi {
 		);
 
 		return await response.json<UserSignUpResponseDto>();
+	}
+
+	public async verifyToken(payload: VerifyTokenRequestDto): Promise<null> {
+		await this.load(this.getFullEndpoint(AuthApiPath.VERIFY_TOKEN, {}), {
+			contentType: ContentType.JSON,
+			hasAuth: false,
+			method: HTTPRequestMethod.POST,
+			payload: JSON.stringify(payload),
+		});
+
+		return null;
 	}
 }
 

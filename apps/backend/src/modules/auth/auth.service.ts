@@ -7,14 +7,17 @@ import { HTTPCode } from "~/libs/modules/http/http.js";
 import { token } from "~/libs/modules/token/token.js";
 import {
 	type ForgotPasswordRequestDto,
+	type ResetPasswordRequestDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	type VerifyTokenRequestDto,
 } from "~/modules/users/libs/types/types.js";
 import { type UserService } from "~/modules/users/user.service.js";
 
 import { DEFAULT_EXPIRATION_DATE } from "../password-token/libs/constants/default-expiration-date.js";
+import { checkExpirationDate } from "../password-token/libs/helpers/check-expiration-date.helper.js";
 import { type PasswordTokenService } from "../password-token/password-token.service.js";
 import { UserValidationMessage } from "./libs/enums/enums.js";
 import { AuthorizationError } from "./libs/exceptions/exceptions.js";
@@ -41,6 +44,18 @@ class AuthService {
 		this.passwordTokenService = passwordTokenService;
 	}
 
+	public async resetPassword({
+		password,
+		userId,
+	}: ResetPasswordRequestDto): Promise<void> {
+		const user = await this.userService.find(userId);
+
+		if (user) {
+			const { email, name } = user;
+			await this.userService.update(userId, { email, name, password });
+		}
+	}
+
 	public async sendResetLink(
 		forgotPasswordRequestDto: ForgotPasswordRequestDto,
 	): Promise<void> {
@@ -50,20 +65,25 @@ class AuthService {
 
 		if (user) {
 			const token = this.passwordTokenService.generateToken();
-			await this.passwordTokenService.create({
-				expirationDate: DEFAULT_EXPIRATION_DATE,
-				token,
-				userId: user.getId(),
-			});
-
 			const link = config.ENV.EMAIL_SERVICE.RESET_PASSWORD_LINK;
+			const userId = user.getId();
 
-			const message = getHtmlMessage(`${link}?token=${token}`);
+			const message = getHtmlMessage(
+				`${link}?token=${token}&userId=${userId.toString()}`,
+			);
 			const emailOptions: EmailOptions = this.emailService.setEmailOptions(
 				message,
 				email,
 			);
-			await this.emailService.sendEmail(emailOptions);
+			const emailId = await this.emailService.sendEmail(emailOptions);
+
+			if (emailId) {
+				await this.passwordTokenService.create({
+					expirationDate: DEFAULT_EXPIRATION_DATE,
+					token,
+					userId,
+				});
+			}
 		}
 	}
 
@@ -120,6 +140,44 @@ class AuthService {
 		const newToken = await token.generateToken(userDto.id);
 
 		return { token: newToken, user: userDto };
+	}
+
+	public async verifyToken({
+		token,
+		userId,
+	}: VerifyTokenRequestDto): Promise<void> {
+		const existingToken = await this.passwordTokenService.findByUserId(userId);
+
+		if (!existingToken) {
+			throw new AuthorizationError({
+				message: UserValidationMessage.LINK_HAS_EXPIRED,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { tokenHash, tokenSalt } = existingToken.getToken();
+		const isValidToken = await this.encryptor.compare(
+			token,
+			tokenHash,
+			tokenSalt,
+		);
+
+		if (!isValidToken) {
+			throw new AuthorizationError({
+				message: UserValidationMessage.LINK_HAS_EXPIRED,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const expirationDate = existingToken.getExpirationDate();
+		const hasExpired = checkExpirationDate(expirationDate);
+
+		if (hasExpired) {
+			throw new AuthorizationError({
+				message: UserValidationMessage.LINK_HAS_EXPIRED,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
 	}
 }
 

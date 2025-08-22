@@ -56,13 +56,13 @@ const ForgotPassword: React.FC<Properties> = ({
 			<main className={authFormContainerClasses}>
 				<Logo />
 				<header className="flow">
-					<h1 className={sharedStyles["title"]} id="sign-in-title">
+					<h1 className={sharedStyles["title"]} id="forgot-password-title">
 						Forgot password?
 					</h1>
 					<p>Please, enter your email to reset the password</p>
 				</header>
 				<form
-					aria-labelledby="sign-in-title"
+					aria-labelledby="forgot-password-title"
 					className={getClassNames(sharedStyles["form"], "cluster")}
 					noValidate
 					onSubmit={handleFormSubmit}

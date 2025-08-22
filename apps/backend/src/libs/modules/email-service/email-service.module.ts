@@ -13,14 +13,18 @@ class EmailService {
 		this.resend = resend;
 	}
 
-	public async sendEmail(emailOptions: EmailOptions): Promise<void> {
+	public async sendEmail(emailOptions: EmailOptions): Promise<string> {
 		const { data, error } = await this.resend.emails.send(emailOptions);
+
+		const emailId = data?.id as string;
 
 		if (error) {
 			this.logger.error(error.message);
+		} else {
+			this.logger.info("Email was sent. Id: " + emailId);
 		}
 
-		this.logger.info("Email was sent. Id: " + (data?.id as string));
+		return emailId;
 	}
 
 	public setEmailOptions(html: string, to: string): EmailOptions {

@@ -56,8 +56,14 @@ class PasswordTokenService implements Service {
 		};
 	}
 
+	public async findByUserId(
+		userId: number,
+	): Promise<null | PasswordTokenEntity> {
+		return await this.passwordTokenRepository.findByUserId("userId", userId);
+	}
+
 	public generateToken(): string {
-		return crypto.randomBytes(KEY_SIZE).toString();
+		return crypto.randomBytes(KEY_SIZE).toString("hex");
 	}
 
 	public async update(

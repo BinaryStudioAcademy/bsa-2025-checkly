@@ -8,6 +8,7 @@ import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
 	type ForgotPasswordRequestDto,
+	type ResetPasswordRequestDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
@@ -15,6 +16,10 @@ import {
 } from "~/modules/users/users.js";
 
 import { authApi } from "../auth.js";
+import {
+	type LogoutThunkArgument,
+	type VerifyTokenThunkArgument,
+} from "../libs/types/types.js";
 import {
 	actions as authSliceActions,
 	name as sliceName,
@@ -61,6 +66,51 @@ const sendResetLink = createAsyncThunk<
 	return await authApi.sendResetLink(registerPayload);
 });
 
+const verifyToken = createAsyncThunk<
+	null,
+	VerifyTokenThunkArgument,
+	AsyncThunkConfig
+>(
+	`${sliceName}/verify-token`,
+	async ({ navigate, token, userId }, { rejectWithValue }) => {
+		try {
+			await authApi.verifyToken({ token, userId });
+		} catch (error) {
+			const errorMessage =
+				error instanceof HTTPError
+					? error.message
+					: ErrorMessage.DEFAULT_ERROR_MESSAGE;
+			await navigate(AppRoute.ROOT);
+
+			return rejectWithValue(errorMessage);
+		}
+
+		return null;
+	},
+);
+
+const resetPassword = createAsyncThunk<
+	null,
+	ResetPasswordRequestDto,
+	AsyncThunkConfig
+>(
+	`${sliceName}/verify-token`,
+	async ({ password, userId }, { rejectWithValue }) => {
+		try {
+			await authApi.resetPassword({ password, userId });
+		} catch (error) {
+			const errorMessage =
+				error instanceof HTTPError
+					? error.message
+					: ErrorMessage.DEFAULT_ERROR_MESSAGE;
+
+			return rejectWithValue(errorMessage);
+		}
+
+		return null;
+	},
+);
+
 const getCurrentUser = createAsyncThunk<
 	null | UserDto,
 	undefined,
@@ -98,8 +148,6 @@ const updateProfile = createAsyncThunk<
 	},
 );
 
-type LogoutThunkArgument = { navigate: (path: string) => Promise<void> | void };
-
 const logout = createAsyncThunk<null, LogoutThunkArgument, AsyncThunkConfig>(
 	`${sliceName}/logout`,
 	async ({ navigate }, { dispatch, extra }) => {
@@ -119,4 +167,13 @@ const logout = createAsyncThunk<null, LogoutThunkArgument, AsyncThunkConfig>(
 	},
 );
 
-export { getCurrentUser, logout, sendResetLink, signIn, signUp, updateProfile };
+export {
+	getCurrentUser,
+	logout,
+	resetPassword,
+	sendResetLink,
+	signIn,
+	signUp,
+	updateProfile,
+	verifyToken,
+};

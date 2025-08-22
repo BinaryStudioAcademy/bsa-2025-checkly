@@ -51,6 +51,19 @@ class PasswordTokenRepository implements Repository {
 		);
 	}
 
+	public async findByUserId(
+		field: "userId",
+		value: number,
+	): Promise<null | PasswordTokenEntity> {
+		const existingToken = await this.passwordTokenModel
+			.query()
+			.where(field, value)
+			.orderBy("created_at", "desc")
+			.first();
+
+		return existingToken ? PasswordTokenEntity.initialize(existingToken) : null;
+	}
+
 	public async update(
 		id: number,
 		payload: Partial<PasswordTokenModel>,

@@ -1,4 +1,8 @@
 export { forgotPassword } from "./forgot-password.validation-schema.js";
+export {
+	resetPassword,
+	type ResetPasswordFormValidationSchema,
+} from "./reset-password.validation-schema.js";
 export { userSignIn } from "./user-sign-in.validation-schema.js";
 export {
 	type SignUpFormValidationSchema,

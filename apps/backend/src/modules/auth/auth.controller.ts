@@ -8,10 +8,12 @@ import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
 	type ForgotPasswordRequestDto,
+	type ResetPasswordRequestDto,
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
+	type VerifyTokenRequestDto,
 } from "~/modules/users/users.js";
 
 import { type AuthService } from "./auth.service.js";
@@ -102,6 +104,30 @@ class AuthController extends BaseController {
 			method: HTTPRequestMethod.POST,
 			path: AuthApiPath.FORGOT_PASSWORD,
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.verifyToken(
+					options as APIHandlerOptions<{
+						body: VerifyTokenRequestDto;
+					}>,
+				),
+			isPublic: true,
+			method: HTTPRequestMethod.POST,
+			path: AuthApiPath.VERIFY_TOKEN,
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.resetPassword(
+					options as APIHandlerOptions<{
+						body: ResetPasswordRequestDto;
+					}>,
+				),
+			isPublic: true,
+			method: HTTPRequestMethod.POST,
+			path: AuthApiPath.RESET_PASSWORD,
+		});
 	}
 
 	/**
@@ -129,6 +155,19 @@ class AuthController extends BaseController {
 	private getAuthenticatedUser(options: APIHandlerOptions): APIHandlerResponse {
 		return {
 			payload: options.user,
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async resetPassword(
+		options: APIHandlerOptions<{
+			body: ResetPasswordRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		await this.authService.resetPassword(options.body);
+
+		return {
+			payload: null,
 			status: HTTPCode.OK,
 		};
 	}
@@ -260,6 +299,19 @@ class AuthController extends BaseController {
 		return {
 			payload: await this.authService.signUp(options.body),
 			status: HTTPCode.CREATED,
+		};
+	}
+
+	private async verifyToken(
+		options: APIHandlerOptions<{
+			body: VerifyTokenRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		await this.authService.verifyToken(options.body);
+
+		return {
+			payload: null,
+			status: HTTPCode.OK,
 		};
 	}
 }

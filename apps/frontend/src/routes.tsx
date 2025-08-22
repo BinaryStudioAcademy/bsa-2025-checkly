@@ -43,6 +43,11 @@ const routes: CustomRouteObject[] = [
 		path: AppRoute.FORGOT_PASSWORD,
 	},
 	{
+		element: <Auth />,
+		handle: { access: RouteAccess.NOT_AUTHENTICATED },
+		path: AppRoute.RESET_PASSWORD,
+	},
+	{
 		element: <QuestionFlow />,
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.QUIZ_QUESTIONS,

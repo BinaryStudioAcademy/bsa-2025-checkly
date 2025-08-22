@@ -81,6 +81,9 @@ export {
 export {
 	type ForgotPasswordRequestDto,
 	forgotPasswordValidationSchema,
+	type ResetPasswordFormValidationSchema,
+	type ResetPasswordRequestDto,
+	resetPasswordValidationSchema,
 	type SignUpFormValidationSchema,
 	type UserDto,
 	type UserGetAllResponseDto,
@@ -96,4 +99,5 @@ export {
 	userUpdateValidationSchema,
 	UserValidationMessage,
 	UserValidationRule,
+	type VerifyTokenRequestDto,
 } from "./modules/users/users.js";
