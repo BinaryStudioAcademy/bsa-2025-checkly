@@ -1,7 +1,6 @@
 import { ONE, ZERO } from "~/libs/constants/constants.js";
-import { type Plan, type PlanDay, type Task } from "~/libs/types/types.js";
+import { type Plan, type PlanDay } from "~/libs/types/types.js";
 
-const DAY_NUM = 7;
 const PLAN_TITLE = "Wellness Week";
 
 const DAY_ACTIVITIES: string[][] = [
@@ -56,30 +55,16 @@ const DAY_ACTIVITIES: string[][] = [
 	],
 ];
 
-const days: PlanDay[] = [];
-
-for (let dayIndex = ZERO; dayIndex < DAY_NUM; dayIndex++) {
-	const activities = DAY_ACTIVITIES[dayIndex] as string[];
-
-	const tasks: Task[] = [];
-
-	for (let taskIndex = ZERO; taskIndex < activities.length; taskIndex++) {
-		const activity = activities[taskIndex] as string;
-
-		tasks.push({
-			description: activity,
-			id: `${String(dayIndex)}-${String(taskIndex)}`,
-			isCompleted: false,
-			title: activity,
-		});
-	}
-
-	days.push({
-		dayNumber: dayIndex + ONE,
-		id: String(dayIndex),
-		tasks,
-	});
-}
+const days: PlanDay[] = DAY_ACTIVITIES.map((activities, dayIndex) => ({
+	dayNumber: dayIndex + ONE,
+	id: String(dayIndex),
+	tasks: activities.map((activity, taskIndex) => ({
+		description: activity,
+		id: `${String(dayIndex)}-${String(taskIndex)}`,
+		isCompleted: false,
+		title: activity,
+	})),
+}));
 
 const PLAN: Plan = {
 	createdAt: "2025-08-30",

@@ -70,8 +70,6 @@ const PlanStyleOverview: React.FC = () => {
 		void navigate(AppRoute.CHOOSE_STYLE);
 	}, [navigate]);
 
-	// ...existing code...
-
 	return (
 		<>
 			<AppHeader />
