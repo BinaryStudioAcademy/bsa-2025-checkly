@@ -7,6 +7,8 @@
 }
 
 .content__days__day {
+	min-width: var(--space-3xl);
+	max-width: var(--space-3xl);
 	padding: var(--space-2xs) var(--space-m);
 	text-transform: none;
 	white-space: nowrap;
