@@ -49,6 +49,8 @@ schemas:
     properties:
       id:
         type: number
+      planDayId:
+        type: number
       title:
         type: string
       description:
@@ -69,6 +71,8 @@ schemas:
       id:
         type: number
       dayNumber:
+        type: number
+      planId:
         type: number
       tasks:
         type: array
@@ -163,7 +167,7 @@ getActivePlan:
         description: Active plan for the user
 
 regenerateTask:
-  post:
+  patch:
     summary: Regenerate plan task
     parameters:
       - in: path
@@ -190,7 +194,7 @@ regenerateTask:
               $ref: "#/schemas/PlanDaysTaskDto"
 
 regeneratePlanDay:
-  post:
+  patch:
     summary: Regenerate plan day
     parameters:
       - in: path
@@ -212,7 +216,7 @@ regeneratePlanDay:
               $ref: "#/schemas/PlanDaysTaskDto"
 
 regeneratePlan:
-  post:
+  put:
     summary: Regenerate plan
     parameters:
       - in: path

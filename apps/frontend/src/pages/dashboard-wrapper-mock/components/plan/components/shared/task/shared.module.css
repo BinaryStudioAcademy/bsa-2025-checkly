@@ -64,6 +64,8 @@
 	display: flex;
 	gap: var(--space-3xs);
 	align-items: center;
+	justify-content: center;
+	width: 12ch;
 	padding: 0 var(--gutter);
 	background: #ffffff80;
 	border-radius: var(--radius-full);

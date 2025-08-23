@@ -12,6 +12,7 @@ export {
 	type QuizAnswersRequestDto,
 	type QuizAnswersResponseDto,
 	type QuizCategoryType,
+	type QuizContext,
 	type QuizQuestionsResponseDto,
 } from "./libs/types/types.js";
 export {

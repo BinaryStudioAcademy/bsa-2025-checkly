@@ -30,6 +30,28 @@ const initialState: State = {
 
 const { actions, name, reducer } = createSlice({
 	extraReducers(builder) {
+		builder.addCase(getAllUserPlans.pending, (state) => {
+			state.userPlansDataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(getAllUserPlans.fulfilled, (state, action) => {
+			state.userPlansDataStatus = DataStatus.FULFILLED;
+			state.userPlans = action.payload;
+		});
+		builder.addCase(getAllUserPlans.rejected, (state) => {
+			state.userPlansDataStatus = DataStatus.REJECTED;
+			state.userPlans = [];
+		});
+		builder.addCase(searchPlan.pending, (state) => {
+			state.userPlansDataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(searchPlan.fulfilled, (state, action) => {
+			state.userPlansDataStatus = DataStatus.FULFILLED;
+			state.userPlans = action.payload;
+		});
+		builder.addCase(searchPlan.rejected, (state) => {
+			state.userPlansDataStatus = DataStatus.REJECTED;
+			state.userPlans = [];
+		});
 		builder.addMatcher(
 			isAnyOf(
 				generatePlan.pending,
@@ -71,28 +93,6 @@ const { actions, name, reducer } = createSlice({
 				state.dataStatus = DataStatus.REJECTED;
 			},
 		);
-		builder.addCase(getAllUserPlans.pending, (state) => {
-			state.userPlansDataStatus = DataStatus.PENDING;
-		});
-		builder.addCase(getAllUserPlans.fulfilled, (state, action) => {
-			state.userPlansDataStatus = DataStatus.FULFILLED;
-			state.userPlans = action.payload;
-		});
-		builder.addCase(getAllUserPlans.rejected, (state) => {
-			state.userPlansDataStatus = DataStatus.REJECTED;
-			state.userPlans = [];
-		});
-		builder.addCase(searchPlan.pending, (state) => {
-			state.userPlansDataStatus = DataStatus.PENDING;
-		});
-		builder.addCase(searchPlan.fulfilled, (state, action) => {
-			state.userPlansDataStatus = DataStatus.FULFILLED;
-			state.userPlans = action.payload;
-		});
-		builder.addCase(searchPlan.rejected, (state) => {
-			state.userPlansDataStatus = DataStatus.REJECTED;
-			state.userPlans = [];
-		});
 	},
 	initialState,
 	name: "plan",

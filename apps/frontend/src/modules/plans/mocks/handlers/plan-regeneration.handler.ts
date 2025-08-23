@@ -4,12 +4,13 @@ import { HTTPCode } from "../libs/enums/enums.js";
 import {
 	ErrorMessage,
 	MOCK_PLAN,
-	MOCK_REGENERATED_PLAN_DAY,
+	MOCK_GENERATED_PLAN,
+	MOCK_ANSWERS,
+	MOCK_CATEGORY,
 } from "../libs/constants/constants.js";
 
 const planRegenerationHandlers = [
-	http.post("/plans/:id/regenerate", async ({ params }) => {
-		console.log("asldfjlask");
+	http.put("/plans/:id/regenerate", async ({ params }) => {
 		const { id } = params;
 
 		if (!id) {
@@ -21,14 +22,37 @@ const planRegenerationHandlers = [
 
 		await delay(2000);
 
-		const updatedPlan = structuredClone(MOCK_PLAN);
+		const existingPlan = MOCK_PLAN.id?.toString() === id ? MOCK_PLAN : null;
+		if (!existingPlan) {
+			return Response.json(
+				{ error: ErrorMessage.PLAN_NOT_FOUND },
+				{ status: HTTPCode.NOT_FOUND },
+			);
+		}
 
-		const regeneratedPlan = {
-			...MOCK_REGENERATED_PLAN_DAY,
-			title: "Regenerated plan",
+		if (!MOCK_ANSWERS.length) {
+			return Response.json(
+				{ error: ErrorMessage.ANSWERS_NOT_FOUND },
+				{ status: HTTPCode.NOT_FOUND },
+			);
+		}
+
+		if (!MOCK_CATEGORY) {
+			return Response.json(
+				{ error: ErrorMessage.CATEGORY_NOT_FOUND },
+				{ status: HTTPCode.NOT_FOUND },
+			);
+		}
+
+		const generatedPlan = {
+			...MOCK_GENERATED_PLAN,
+			title: `${MOCK_CATEGORY.title} - Regenerated`,
 		};
 
-		Object.assign(updatedPlan, regeneratedPlan);
+		const updatedPlan = {
+			...existingPlan,
+			...generatedPlan,
+		};
 
 		return Response.json(updatedPlan, { status: HTTPCode.OK });
 	}),

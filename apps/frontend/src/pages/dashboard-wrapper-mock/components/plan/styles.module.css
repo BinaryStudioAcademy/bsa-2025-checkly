@@ -96,4 +96,8 @@
 		height: auto;
 		overflow-x: auto;
 	}
+
+	.nav p {
+		display: none;
+	}
 }

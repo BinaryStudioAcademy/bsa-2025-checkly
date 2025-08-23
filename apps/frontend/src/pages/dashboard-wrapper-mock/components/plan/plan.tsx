@@ -75,7 +75,7 @@ const Plan: React.FC = () => {
 		}
 
 		dispatch(planActions.clearPlan());
-		void dispatch(planActions.regeneratePlan({ id: plan.id }));
+		void dispatch(planActions.regeneratePlan(plan.id));
 	}, [dispatch, plan]);
 
 	return (

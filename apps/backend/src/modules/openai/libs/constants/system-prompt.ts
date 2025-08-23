@@ -9,7 +9,7 @@ Rules:
 - No explanations, no markdown, no extra text.
 - "title" (plan root): string up to 100 characters.
 - "title" (task): string up to 200 characters.
-- "description" (task): must be detailed and expanded. Limit "description" to max 500 characters. Be concise.
+- "description" (task): must be detailed and expanded. Limit "description" to max 160 characters. Be concise.
 - Each "tasks" array must contain exactly 5 elements.
 - Refresh all content when regenerating.
 - Do NOT rephrase existing descriptions.

@@ -5,10 +5,12 @@ import {
 	ErrorMessage,
 	MOCK_PLAN,
 	MOCK_REGENERATED_PLAN_DAY,
+	MOCK_ANSWERS,
+	MOCK_CATEGORY,
 	NOT_FOUND_INDEX,
 } from "../libs/constants/constants.js";
 
-const updateDay = (
+const regenerateDayTasks = (
 	plan: typeof MOCK_PLAN,
 	dayId: string,
 	regeneratedDay: typeof MOCK_REGENERATED_PLAN_DAY,
@@ -19,11 +21,12 @@ const updateDay = (
 	if (index === NOT_FOUND_INDEX) return false;
 
 	plan.days[index] = regeneratedDay;
+
 	return true;
 };
 
 const planDayRegenerationHandlers = [
-	http.post("/plans/:planId/days/:dayId/regenerate", async ({ params }) => {
+	http.patch("/plans/:planId/days/:dayId/regenerate", async ({ params }) => {
 		const { planId, dayId } = params;
 
 		if (!planId || !dayId) {
@@ -33,30 +36,50 @@ const planDayRegenerationHandlers = [
 			);
 		}
 
-		await delay(1000);
+		await delay(800);
 
-		const updatedPlan = structuredClone(MOCK_PLAN);
-
-		const originalDay = updatedPlan.days?.find(
-			(day) => String(day.id) === String(dayId),
-		);
-
-		if (!originalDay) {
+		const existingPlan = MOCK_PLAN.id?.toString() === planId ? MOCK_PLAN : null;
+		if (!existingPlan) {
 			return Response.json(
-				{ error: ErrorMessage.TASK_NOT_FOUND },
+				{ error: ErrorMessage.PLAN_NOT_FOUND },
+				{ status: HTTPCode.NOT_FOUND },
+			);
+		}
+
+		const existingDay = existingPlan.days?.find((d) => String(d.id) === dayId);
+		if (!existingDay || Number(existingDay.planId) !== Number(planId)) {
+			return Response.json(
+				{ error: ErrorMessage.PLAN_DAY_NOT_FOUND },
+				{ status: HTTPCode.NOT_FOUND },
+			);
+		}
+
+		if (!MOCK_ANSWERS.length) {
+			return Response.json(
+				{ error: ErrorMessage.ANSWERS_NOT_FOUND },
+				{ status: HTTPCode.NOT_FOUND },
+			);
+		}
+
+		if (!MOCK_CATEGORY) {
+			return Response.json(
+				{ error: ErrorMessage.CATEGORY_NOT_FOUND },
 				{ status: HTTPCode.NOT_FOUND },
 			);
 		}
 
 		const regeneratedDay = {
 			...MOCK_REGENERATED_PLAN_DAY,
-			id: dayId,
-			dayNumber: originalDay.dayNumber!,
+			id: Number(dayId),
+			dayNumber: existingDay.dayNumber,
 		};
 
-		if (!updateDay(updatedPlan, dayId, regeneratedDay)) {
+		const updatedPlan = structuredClone(MOCK_PLAN);
+		const replaced = regenerateDayTasks(updatedPlan, dayId, regeneratedDay);
+
+		if (!replaced) {
 			return Response.json(
-				{ error: ErrorMessage.TASK_NOT_FOUND },
+				{ error: ErrorMessage.PLAN_DAY_NOT_FOUND },
 				{ status: HTTPCode.NOT_FOUND },
 			);
 		}

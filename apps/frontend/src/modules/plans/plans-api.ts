@@ -9,10 +9,10 @@ import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 import { PlansApiPath } from "./libs/enums/enums.js";
 import {
 	type PlanDayRegenerationRequestDto,
-	type PlanRegenerationRequestDto,
 	type PlanSearchQueryParameter,
 	type PlanWithCategoryDto,
 	type QuizAnswersRequestDto,
+	type TaskRegenerationRequestDto,
 } from "./libs/types/types.js";
 
 type Constructor = {
@@ -55,12 +55,12 @@ class PlanApi extends BaseHTTPApi {
 		return await response.json<PlanDaysTaskDto[]>();
 	}
 
-	public async getByUserId(userId: number): Promise<PlanDaysTaskDto> {
+	public async getByUserId(): Promise<PlanDaysTaskDto> {
 		const response = await this.load(
-			this.getFullEndpoint(PlansApiPath.$USER_ID, { userId }),
+			this.getFullEndpoint(PlansApiPath.ACTIVE, {}),
 			{
 				contentType: ContentType.JSON,
-				hasAuth: false,
+				hasAuth: true,
 				method: HTTPRequestMethod.GET,
 			},
 		);
@@ -68,19 +68,16 @@ class PlanApi extends BaseHTTPApi {
 		return await response.json<PlanDaysTaskDto>();
 	}
 
-	public async regeneratePlan(
-		payload: PlanRegenerationRequestDto,
-	): Promise<PlanDaysTaskDto> {
-		const { id } = payload;
-
+	public async regeneratePlan(payload: number): Promise<PlanDaysTaskDto> {
 		const response = await this.load(
 			this.getFullEndpoint(PlansApiPath.REGENERATE, {
-				id,
+				id: payload,
 			}),
 			{
 				contentType: ContentType.JSON,
-				hasAuth: false,
-				method: HTTPRequestMethod.POST,
+				hasAuth: true,
+				method: HTTPRequestMethod.PUT,
+				payload: JSON.stringify({}),
 			},
 		);
 
@@ -99,19 +96,18 @@ class PlanApi extends BaseHTTPApi {
 			}),
 			{
 				contentType: ContentType.JSON,
-				hasAuth: false,
-				method: HTTPRequestMethod.POST,
+				hasAuth: true,
+				method: HTTPRequestMethod.PATCH,
+				payload: JSON.stringify({}),
 			},
 		);
 
 		return await response.json<PlanDaysTaskDto>();
 	}
 
-	public async regenerateTask(payload: {
-		dayId: number;
-		planId: number;
-		taskId: number;
-	}): Promise<PlanDaysTaskDto> {
+	public async regenerateTask(
+		payload: TaskRegenerationRequestDto,
+	): Promise<PlanDaysTaskDto> {
 		const { dayId, planId, taskId } = payload;
 
 		const response = await this.load(
@@ -122,8 +118,9 @@ class PlanApi extends BaseHTTPApi {
 			}),
 			{
 				contentType: ContentType.JSON,
-				hasAuth: false,
-				method: HTTPRequestMethod.POST,
+				hasAuth: true,
+				method: HTTPRequestMethod.PATCH,
+				payload: JSON.stringify({}),
 			},
 		);
 

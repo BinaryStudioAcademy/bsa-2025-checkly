@@ -5,7 +5,6 @@ import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
 	type PlanDayRegenerationRequestDto,
 	type PlanDaysTaskDto,
-	type PlanRegenerationRequestDto,
 	type PlanSearchQueryParameter,
 	type PlanWithCategoryDto,
 	type QuizAnswersRequestDto,
@@ -28,10 +27,9 @@ const generatePlan = createAsyncThunk<
 const getPlan = createAsyncThunk<PlanDaysTaskDto, undefined, AsyncThunkConfig>(
 	`${sliceName}/get`,
 	async (_, { extra }) => {
-		const { authApi, planApi } = extra;
+		const { planApi } = extra;
 
-		const user = await authApi.getCurrentUser();
-		const plan = await planApi.getByUserId(user.id);
+		const plan = await planApi.getByUserId();
 
 		return plan;
 	},
@@ -85,7 +83,7 @@ const getAllUserPlans = createAsyncThunk<
 
 const regeneratePlan = createAsyncThunk<
 	PlanDaysTaskDto,
-	PlanRegenerationRequestDto,
+	number,
 	AsyncThunkConfig
 >(`${sliceName}/regenerate-plan`, async (payload, { extra }) => {
 	const { planApi } = extra;

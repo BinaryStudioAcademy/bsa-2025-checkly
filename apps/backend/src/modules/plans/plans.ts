@@ -2,6 +2,8 @@ import { logger } from "~/libs/modules/logger/logger.js";
 import { planDayRepository } from "~/modules/plan-days/plan-days.js";
 import { taskRepository } from "~/modules/tasks/tasks.js";
 
+import { planCategoryRepository } from "../plan-categories/plan-categories.js";
+import { quizAnswerRepository } from "../quiz-answers/quiz-answers.js";
 import { PlanController } from "./plan.controller.js";
 import { PlanModel } from "./plan.model.js";
 import { PlanRepository } from "./plan.repository.js";
@@ -12,11 +14,13 @@ const planRepository = new PlanRepository(
 	planDayRepository,
 	taskRepository,
 );
-const planService = new PlanService(
-	planRepository,
+const planService = new PlanService({
+	planCategoryRepository,
 	planDayRepository,
+	planRepository,
+	quizAnswerRepository,
 	taskRepository,
-);
+});
 const planController = new PlanController(logger, planService);
 
 export { planController };
@@ -26,7 +30,6 @@ export {
 	type PlanDayDto,
 	type PlanDayRegenerationRequestDto,
 	type PlanDaysTaskDto,
-	type PlanRegenerationRequestDto,
 	type PlanSearchQueryParameter,
 	type PlanWithCategoryDto,
 	type QuizAnswersRequestDto,

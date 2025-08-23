@@ -8,6 +8,12 @@ class PlanCategoryRepository {
 		this.planCategoryModel = planCategoryModel;
 	}
 
+	public async find(id: number): Promise<null | PlanCategoryEntity> {
+		const category = await this.planCategoryModel.query().findById(id);
+
+		return category ? PlanCategoryEntity.initialize(category) : null;
+	}
+
 	public async findAll(): Promise<PlanCategoryEntity[]> {
 		return await this.planCategoryModel
 			.query()

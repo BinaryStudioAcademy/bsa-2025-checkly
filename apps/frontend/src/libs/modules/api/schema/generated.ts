@@ -197,7 +197,11 @@ export interface paths {
 		};
 		get?: never;
 		put?: never;
-		post: {
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch: {
 			parameters: {
 				query?: never;
 				header?: never;
@@ -207,10 +211,6 @@ export interface paths {
 			requestBody?: never;
 			responses: never;
 		};
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
 		trace?: never;
 	};
 	"/plans/:planId/days/:dayId/regenerate": {
@@ -222,7 +222,11 @@ export interface paths {
 		};
 		get?: never;
 		put?: never;
-		post: {
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch: {
 			parameters: {
 				query?: never;
 				header?: never;
@@ -232,10 +236,6 @@ export interface paths {
 			requestBody?: never;
 			responses: never;
 		};
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
 		trace?: never;
 	};
 	"/plans/:id/regenerate": {
@@ -246,8 +246,7 @@ export interface paths {
 			cookie?: never;
 		};
 		get?: never;
-		put?: never;
-		post: {
+		put: {
 			parameters: {
 				query?: never;
 				header?: never;
@@ -257,6 +256,7 @@ export interface paths {
 			requestBody?: never;
 			responses: never;
 		};
+		post?: never;
 		delete?: never;
 		options?: never;
 		head?: never;
@@ -315,6 +315,7 @@ export interface components {
 		};
 		TaskDto: {
 			id?: number;
+			planDayId?: number;
 			title?: string;
 			description?: string;
 			order?: number;
@@ -325,6 +326,7 @@ export interface components {
 		PlanDayDto: {
 			id?: number;
 			dayNumber?: number;
+			planId?: number;
 			tasks?: components["schemas"]["TaskDto"][];
 		};
 		PlanDaysTaskDto: components["schemas"]["PlanDto"] & {

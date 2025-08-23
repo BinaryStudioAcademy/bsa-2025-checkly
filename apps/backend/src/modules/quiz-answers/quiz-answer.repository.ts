@@ -57,7 +57,7 @@ class QuizAnswerRepository implements Repository {
 				"questions.id as questionId",
 				"questions.text as questionText",
 				this.quizAnswerModel.raw(
-					"json_agg(question_options.text) as selectedOptions",
+					'json_agg(question_options.text) as "selectedOptions"',
 				),
 			)
 			.leftJoin("questions", "answers.question_id", "questions.id")

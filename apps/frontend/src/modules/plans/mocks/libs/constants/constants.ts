@@ -1,122 +1,116 @@
 import { ApiSchemas } from "~/libs/modules/api/schema/schema.js";
 
 const MOCK_PLAN: ApiSchemas["PlanDaysTaskDto"] = {
-	duration: 7,
 	id: 32,
-	intensity: "low",
+	userId: 2,
 	title:
 		"30-Minute Daily Beginner Sport Improvement Plan for Low Activity Level",
-	userId: 2,
+	duration: 7,
+	intensity: "low",
 	days: [
 		{
-			dayNumber: 1,
 			id: 134,
+			dayNumber: 1,
+			planId: 32,
 			tasks: [
 				{
-					completedAt: null,
+					id: 181,
+					planDayId: 134,
+					title: "Warm-Up: Gentle Full-Body Stretching",
 					description:
 						"Start with 5 minutes of gentle stretching focusing on all major muscle groups to prepare your body for exercise and reduce injury risk.",
-					executionTimeType: "morning",
-					id: 181,
-					isCompleted: false,
 					order: 1,
-					title: "Warm-Up: Gentle Full-Body Stretching",
+					executionTimeType: "morning",
+					isCompleted: false,
+					completedAt: null,
 				},
 				{
-					completedAt: null,
+					id: 182,
+					planDayId: 134,
+					title: "Brisk Walking or Marching in Place",
 					description:
 						"Engage in 10 minutes of brisk walking outdoors or marching in place to gradually raise your heart rate and improve cardiovascular fitness.",
-					executionTimeType: "morning",
-					id: 182,
-					isCompleted: false,
 					order: 2,
-					title: "Brisk Walking or Marching in Place",
+					executionTimeType: "morning",
+					isCompleted: false,
+					completedAt: null,
 				},
 				{
-					completedAt: null,
+					id: 183,
+					planDayId: 134,
+					title: "Bodyweight Squats for Lower Body Strength",
 					description:
 						"Perform 10 bodyweight squats focusing on proper form to build foundational leg strength and enhance mobility.",
-					executionTimeType: "morning",
-					id: 183,
-					isCompleted: false,
 					order: 3,
-					title: "Bodyweight Squats for Lower Body Strength",
-				},
-				{
-					completedAt: null,
-					description:
-						"Do 10 wall push-ups to gently strengthen your chest, shoulders, and arms without overstraining your muscles.",
 					executionTimeType: "morning",
-					id: 184,
 					isCompleted: false,
-					order: 4,
-					title: "Wall Push-Ups to Build Upper Body Strength",
-				},
-				{
 					completedAt: null,
-					description:
-						"Finish with 5 minutes of deep breathing exercises and light stretching to relax your muscles and normalize your heart rate.",
-					executionTimeType: "morning",
-					id: 185,
-					isCompleted: false,
-					order: 5,
-					title: "Cool-Down: Deep Breathing and Light Stretching",
 				},
 			],
 		},
 		{
-			dayNumber: 2,
 			id: 135,
+			dayNumber: 2,
+			planId: 32,
 			tasks: [
 				{
-					completedAt: null,
+					id: 186,
+					planDayId: 135,
+					title: "Warm-Up: Neck and Shoulder Rolls",
 					description:
 						"Spend 5 minutes performing gentle neck and shoulder rolls to loosen tension and prepare for activity.",
-					executionTimeType: "evening",
-					id: 186,
-					isCompleted: false,
 					order: 1,
-					title: "Warm-Up: Neck and Shoulder Rolls",
+					executionTimeType: "evening",
+					isCompleted: false,
+					completedAt: null,
+				},
+			],
+		},
+	],
+};
+
+const MOCK_GENERATED_PLAN: ApiSchemas["PlanDaysTaskDto"] = {
+	id: 32,
+	userId: 2,
+	title: "Strength Training Plan",
+	duration: 6,
+	intensity: "high",
+	days: [
+		{
+			id: 134,
+			dayNumber: 1,
+			planId: 32,
+			tasks: [
+				{
+					id: 201,
+					planDayId: 134,
+					title: "Push-ups Advanced",
+					description: "Do 40 push-ups",
+					order: 1,
+					executionTimeType: "short",
 				},
 				{
-					completedAt: null,
-					description:
-						"Do 10 minutes of side-to-side step touch movements to increase heart rate while minimizing joint stress.",
-					executionTimeType: "evening",
-					id: 187,
-					isCompleted: false,
+					id: 202,
+					planDayId: 134,
+					title: "Burpees",
+					description: "Do 20 burpees",
 					order: 2,
-					title: "Low-Impact Cardio: Step Touch Side to Side",
+					executionTimeType: "short",
 				},
+			],
+		},
+		{
+			id: 135,
+			dayNumber: 2,
+			planId: 32,
+			tasks: [
 				{
-					completedAt: null,
-					description:
-						"Perform 10 slow leg raises while seated to strengthen the front thigh muscles and improve knee support.",
-					executionTimeType: "evening",
-					id: 188,
-					isCompleted: false,
-					order: 3,
-					title: "Seated Leg Raises to Activate Quadriceps",
-				},
-				{
-					completedAt: null,
-					description:
-						"Complete 10 forward and 10 backward arm circles while seated to enhance shoulder flexibility and circulation.",
-					executionTimeType: "evening",
-					id: 189,
-					isCompleted: false,
-					order: 4,
-					title: "Seated Arm Circles for Shoulder Mobility",
-				},
-				{
-					completedAt: null,
-					description:
-						"End with 5 minutes of full-body gentle stretching to increase flexibility and relaxation.",
-					executionTimeType: "evening",
-					id: 190,
-					isCompleted: false,
-					order: 5,
-					title: "Cool-Down: Gentle Full-Body Stretching",
+					id: 203,
+					planDayId: 135,
+					title: "Running",
+					description: "Run 3km",
+					order: 1,
+					executionTimeType: "long",
 				},
 			],
 		},
@@ -124,9 +118,9 @@ const MOCK_PLAN: ApiSchemas["PlanDaysTaskDto"] = {
 };
 
 const MOCK_REGENERATED_TASK: ApiSchemas["TaskDto"] = {
-	id: 101,
-	title: "Task regenerated",
-	description: "Just regenerated",
+	id: 181,
+	title: "Task Regenerated",
+	description: "This task has been regenerated",
 	order: 1,
 	isCompleted: false,
 	executionTimeType: "morning",
@@ -134,7 +128,7 @@ const MOCK_REGENERATED_TASK: ApiSchemas["TaskDto"] = {
 };
 
 const MOCK_REGENERATED_PLAN_DAY: ApiSchemas["PlanDayDto"] = {
-	id: 101,
+	id: 134,
 	dayNumber: 1,
 	tasks: [
 		{
@@ -148,7 +142,7 @@ const MOCK_REGENERATED_PLAN_DAY: ApiSchemas["PlanDayDto"] = {
 		},
 		{
 			id: 1002,
-			title: "Back training",
+			title: "Back Training",
 			description: "15 minutes full-body stretching",
 			order: 2,
 			isCompleted: false,
@@ -156,6 +150,16 @@ const MOCK_REGENERATED_PLAN_DAY: ApiSchemas["PlanDayDto"] = {
 			completedAt: null,
 		},
 	],
+};
+
+const MOCK_ANSWERS = [
+	{ id: 1, quizId: 100, option: "Option A" },
+	{ id: 2, quizId: 100, option: "Option B" },
+];
+
+const MOCK_CATEGORY = {
+	id: 10,
+	title: "Strength Training",
 };
 
 const MIN_DELAY_MS = 1000;
@@ -167,6 +171,10 @@ const ErrorMessage = {
 	MISSING_PARAMS: "Missing required parameters",
 	DAY_OR_TASKS_NOT_FOUND: "Target day or tasks not found",
 	TASK_NOT_FOUND: "Task not found",
+	PLAN_NOT_FOUND: "Plan not found",
+	PLAN_DAY_NOT_FOUND: "Plan day not found",
+	ANSWERS_NOT_FOUND: "Answers not found",
+	CATEGORY_NOT_FOUND: "Category not found",
 } as const;
 
 export {
@@ -176,5 +184,8 @@ export {
 	MOCK_REGENERATED_TASK,
 	NOT_FOUND_INDEX,
 	MIN_DELAY_MS,
+	MOCK_GENERATED_PLAN,
+	MOCK_CATEGORY,
+	MOCK_ANSWERS,
 	MAX_DELAY_MS,
 };
