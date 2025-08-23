@@ -21,7 +21,7 @@ async function seed(knex: Knex): Promise<void> {
 			id: 1,
 			is_optional: false,
 			text: "What aspect of your personal growth are you most interested in improving right now?",
-			type: QuizQuestionFormat.SINGLE_CHOICE,
+			type: QuizQuestionFormat.SINGLE_CHOICE_WITH_TEXT_INPUT,
 		},
 		{
 			id: 2,
@@ -34,7 +34,7 @@ async function seed(knex: Knex): Promise<void> {
 			id: 3,
 			is_optional: false,
 			text: "In your spiritual journey, what is your primary area of focus right now?",
-			type: QuizQuestionFormat.SINGLE_CHOICE,
+			type: QuizQuestionFormat.SINGLE_CHOICE_WITH_TEXT_INPUT,
 		},
 		{
 			id: 4,
@@ -53,14 +53,14 @@ async function seed(knex: Knex): Promise<void> {
 			id: 6,
 			is_optional: false,
 			text: "What is your primary goal within that activity?",
-			type: QuizQuestionFormat.SINGLE_CHOICE,
+			type: QuizQuestionFormat.SINGLE_CHOICE_WITH_TEXT_INPUT,
 		},
 		// Money Questions (Category 4)
 		{
 			id: 7,
 			is_optional: false,
 			text: "When it comes to your finances, what area are you most focused on improving right now?",
-			type: QuizQuestionFormat.SINGLE_CHOICE,
+			type: QuizQuestionFormat.SINGLE_CHOICE_WITH_TEXT_INPUT,
 		},
 		{
 			id: 8,
@@ -73,7 +73,7 @@ async function seed(knex: Knex): Promise<void> {
 			id: 9,
 			is_optional: false,
 			text: "What aspect of your creative journey are you most eager to explore or develop?",
-			type: QuizQuestionFormat.SINGLE_CHOICE,
+			type: QuizQuestionFormat.SINGLE_CHOICE_WITH_TEXT_INPUT,
 		},
 		{
 			id: 10,
@@ -184,6 +184,7 @@ async function seed(knex: Knex): Promise<void> {
 			question_id: 1,
 			text: "✨ Cultivating a positive mindset and self-confidence",
 		},
+		{ order: 6, question_id: 1, text: "✍️ Other" },
 
 		// Personal Development Question 2 Options
 		{
@@ -238,6 +239,7 @@ async function seed(knex: Knex): Promise<void> {
 			question_id: 3,
 			text: "☮️ Developing a greater sense of inner peace and presence",
 		},
+		{ order: 6, question_id: 3, text: "✍️ Other" },
 
 		// Spirituality Question 2 Options
 		{
@@ -292,6 +294,7 @@ async function seed(knex: Knex): Promise<void> {
 			question_id: 6,
 			text: "🏆 Training for a specific event or competition",
 		},
+		{ order: 6, question_id: 6, text: "✍️ Other" },
 
 		// Money Question 1 Options
 		{
@@ -319,6 +322,7 @@ async function seed(knex: Knex): Promise<void> {
 			question_id: 7,
 			text: "💰 Increasing my income or finding new revenue streams",
 		},
+		{ order: 6, question_id: 7, text: "✍️ Other" },
 
 		// Money Question 2 Options
 		{
@@ -373,6 +377,7 @@ async function seed(knex: Knex): Promise<void> {
 			question_id: 9,
 			text: "🎨 Experimenting with new styles and pushing my artistic boundaries",
 		},
+		{ order: 6, question_id: 9, text: "✍️ Other" },
 
 		// Creativity Question 2 Options
 		{
