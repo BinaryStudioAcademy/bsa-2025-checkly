@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.26.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.25.0...v1.26.0) (2025-08-23)
+
+
+### Features
+
+* my plan overview post quiz flow cy-302 ([f8fc599](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f8fc599b9c9019820c4b4e8a3610dd3586f66182))
+
+## [1.25.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.24.1...v1.25.0) (2025-08-21)
+
+
+### Features
+
+* saving generated plan to db automatically cy-309 ([23a7320](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/23a7320cdc7712f881e66c083b8d2bb1822b8b65))
+
+
+### Bug Fixes
+
+* update user in generate plan payload cy-309 ([f1a620b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f1a620b69c1393f4a545f9a0a7ee467824f08631))
+
 ## [1.24.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.24.0...v1.24.1) (2025-08-21)
 
 
