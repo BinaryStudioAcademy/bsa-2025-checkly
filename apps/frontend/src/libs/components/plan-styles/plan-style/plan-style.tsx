@@ -35,6 +35,7 @@ const PlanStyle: React.FC<Properties> = ({
 	const dayListClasses = getClassNames(
 		styles["day-list"],
 		PlanStyleModules[inputStyle]["day-list"],
+		view === "desktop" && styles["desktop-day-list"],
 	);
 
 	return (
