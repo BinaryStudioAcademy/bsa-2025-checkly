@@ -1,6 +1,6 @@
 import { type Knex } from "knex";
 
-const TABLE_NAMES = {
+const TableNames = {
 	PLAN_CATEGORIES: "plan_categories",
 	PLANS: "plans",
 };
@@ -19,15 +19,15 @@ const CategoriesColumnName = {
 };
 
 async function down(knex: Knex): Promise<void> {
-	await knex.schema.dropTable(TABLE_NAMES.PLAN_CATEGORIES);
+	await knex.schema.dropTable(TableNames.PLAN_CATEGORIES);
 
-	await knex.schema.alterTable(TABLE_NAMES.PLANS, (table) => {
+	await knex.schema.alterTable(TableNames.PLANS, (table) => {
 		table.dropColumn(PlanColumnName.CATEGORY_ID);
 	});
 }
 
 async function up(knex: Knex): Promise<void> {
-	await knex.schema.createTable(TABLE_NAMES.PLAN_CATEGORIES, (table) => {
+	await knex.schema.createTable(TableNames.PLAN_CATEGORIES, (table) => {
 		table.increments(CategoriesColumnName.ID).primary();
 		table.string(CategoriesColumnName.TITLE).notNullable();
 		table.string(CategoriesColumnName.ICON_HREF).notNullable();
@@ -42,11 +42,11 @@ async function up(knex: Knex): Promise<void> {
 			.defaultTo(knex.fn.now());
 	});
 
-	await knex.schema.alterTable(TABLE_NAMES.PLANS, (table) => {
+	await knex.schema.alterTable(TableNames.PLANS, (table) => {
 		table
 			.integer(PlanColumnName.CATEGORY_ID)
 			.references(CategoriesColumnName.ID)
-			.inTable(TABLE_NAMES.PLAN_CATEGORIES);
+			.inTable(TableNames.PLAN_CATEGORIES);
 	});
 }
 

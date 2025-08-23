@@ -16,7 +16,6 @@ export {
 	type QuestionNavigationProperties,
 	type QuestionPageProperties,
 	type QuizCategoryCardProperties,
-	type QuizCategoryProperties,
 	type RadioQuestionProperties,
 	type SingleAnswer,
 	type SingleChoiceWithTextAnswer,

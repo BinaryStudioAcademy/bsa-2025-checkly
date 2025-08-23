@@ -84,7 +84,7 @@ const routes: CustomRouteObject[] = [
 			},
 			{
 				element: <Plan />,
-				handle: { access: RouteAccess.PUBLIC },
+				handle: { access: RouteAccess.AUTHENTICATED },
 				path: AppRoute.PLAN,
 			},
 		],

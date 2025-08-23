@@ -12,7 +12,6 @@ import {
 } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
-import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
 import { TASK_INDEXES } from "~/modules/tasks/libs/constants/constants.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
@@ -57,15 +56,7 @@ const Plan: React.FC = () => {
 			await dispatch(planActions.getAllUserPlans());
 		};
 
-		const getUnauthenticatedUserPlan = async (): Promise<void> => {
-			const planId = await storage.get<number>(StorageKey.PLAN_ID);
-
-			if (planId) {
-				await dispatch(planActions.findPlan(planId));
-			}
-		};
-
-		void (user ? getAllUserPlans() : getUnauthenticatedUserPlan());
+		void getAllUserPlans();
 	}, [user, dispatch]);
 
 	const toggleSelect = useCallback((): void => {
@@ -117,7 +108,7 @@ const Plan: React.FC = () => {
 						return <Task indexItem={index + ONE} item={item} key={index} />;
 					})}
 					{plan && (
-						<NavLink className={navLink} to={AppRoute.CHOOSE_STYLE}>
+						<NavLink className={navLink} to={AppRoute.OVERVIEW_PAGE}>
 							<Button
 								icon={<DecorativeImage src={Download} />}
 								iconOnlySize="medium"
