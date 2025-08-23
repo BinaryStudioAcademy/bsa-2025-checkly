@@ -1,5 +1,5 @@
 export {
 	FeedbackApiPath,
-	FeedbackGetAllOptions,
+	FeedbackGetAllOption,
 	FeedbackValidationRule,
 } from "shared";

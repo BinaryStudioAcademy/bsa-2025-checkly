@@ -54,7 +54,7 @@ export {
 	feedbackCreateValidationSchema,
 	type FeedbackDeleteResponseDto,
 	type FeedbackDto,
-	FeedbackGetAllOptions,
+	FeedbackGetAllOption,
 	type FeedbackPaginationOptions,
 	type FeedbackUpdateRequestDto,
 	type FeedbackUpdateResponseDto,

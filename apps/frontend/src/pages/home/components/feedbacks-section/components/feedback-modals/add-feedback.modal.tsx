@@ -50,7 +50,7 @@ const AddFeedbackModal: React.FC<Properties> = ({
 		[onClose],
 	);
 
-	const onSubmitHandler = useCallback(
+	const handleOnSubmit = useCallback(
 		(event: React.FormEvent<HTMLFormElement>) => {
 			void handleSubmit(handleFormSubmit)(event);
 		},
@@ -62,7 +62,7 @@ const AddFeedbackModal: React.FC<Properties> = ({
 			aria-labelledby="feedback-title"
 			className={getClassNames(styles["form"], "cluster")}
 			noValidate
-			onSubmit={onSubmitHandler}
+			onSubmit={handleOnSubmit}
 		>
 			<h2 className={styles["feedback-title"]} id="feedback-title">
 				Add your feedback
@@ -70,6 +70,7 @@ const AddFeedbackModal: React.FC<Properties> = ({
 			<Input
 				control={control}
 				errors={errors}
+				hasLabel={false}
 				isRequired
 				isTextArea
 				label="Testimonial"

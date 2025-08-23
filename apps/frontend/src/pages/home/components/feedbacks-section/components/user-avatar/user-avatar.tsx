@@ -10,19 +10,17 @@ type AvatarProperties = {
 };
 
 const UserAvatar: FC<AvatarProperties> = ({ alt, src }) => {
-	const displayAvatar = useMemo(() => src ?? AvatarDefault, [src]);
+	const avatarSource = useMemo(() => src ?? AvatarDefault, [src]);
 
 	return (
-		<>
-			<div className={styles["wrapper"]}>
-				<img
-					alt={alt}
-					className={styles["image"]}
-					draggable="false"
-					src={displayAvatar}
-				/>
-			</div>
-		</>
+		<div className={styles["wrapper"]}>
+			<img
+				alt={alt}
+				className={styles["image"]}
+				draggable="false"
+				src={avatarSource}
+			/>
+		</div>
 	);
 };
 

@@ -1,6 +1,6 @@
 export {
 	FeedbackApiPath,
-	FeedbackGetAllOptions,
+	FeedbackGetAllOption,
 	FeedbackValidationRule,
 } from "./libs/emums/enums.js";
 export {

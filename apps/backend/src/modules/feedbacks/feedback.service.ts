@@ -3,7 +3,7 @@ import { type Service } from "~/libs/types/types.js";
 import { FeedbackEntity } from "~/modules/feedbacks/feedback.entity.js";
 import { type FeedbackRepository } from "~/modules/feedbacks/feedback.repository.js";
 
-import { FeedbackGetAllOptions } from "./libs/enums/enums.js";
+import { FeedbackGetAllOption } from "./libs/enums/enums.js";
 import { sanitizeFeedbackInput } from "./libs/helpers/helpers.js";
 import {
 	type FeedbackCreateRequestDto,
@@ -60,8 +60,8 @@ class FeedbackService implements Service {
 		options: { limit?: number; offset?: number } = {},
 	): Promise<FeedbackServiceReturns> {
 		const {
-			limit = FeedbackGetAllOptions.PAGE_SIZE,
-			offset = FeedbackGetAllOptions.DEFAULT_OFFSET,
+			limit = FeedbackGetAllOption.PAGE_SIZE,
+			offset = FeedbackGetAllOption.DEFAULT_OFFSET,
 		} = options;
 
 		const { items, total } = await this.feedbackRepository.findAll({

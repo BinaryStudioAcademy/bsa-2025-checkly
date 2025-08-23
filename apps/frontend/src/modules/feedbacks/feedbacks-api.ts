@@ -11,7 +11,7 @@ import {
 } from "~/modules/feedbacks/feedbacks.js";
 import {
 	FeedbackApiPath,
-	FeedbackGetAllOptions,
+	FeedbackGetAllOption,
 } from "~/modules/feedbacks/libs/enums/enums.js";
 
 type Constructor = {
@@ -60,10 +60,10 @@ class FeedbackApi extends BaseHTTPApi {
 		options: FeedbackFindAllOptions = {},
 	): Promise<Pagination<FeedbackDto>> {
 		const {
-			limit = FeedbackGetAllOptions.PAGE_SIZE,
-			page = FeedbackGetAllOptions.SINGLE_PAGE,
+			limit = FeedbackGetAllOption.PAGE_SIZE,
+			page = FeedbackGetAllOption.SINGLE_PAGE,
 		} = options;
-		const offset = (page - FeedbackGetAllOptions.SINGLE_PAGE) * limit;
+		const offset = (page - FeedbackGetAllOption.SINGLE_PAGE) * limit;
 
 		const endpoint = this.getFullEndpoint(FeedbackApiPath.ROOT, {});
 

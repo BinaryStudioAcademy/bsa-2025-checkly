@@ -1,8 +1,9 @@
 import { type FC, useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "swiper/css";
-import { Mousewheel, Navigation } from "swiper/modules";
+import { Autoplay, Mousewheel, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { type Swiper as SwiperClass } from "swiper/types"; // Import SwiperClass for better type safety
 
 import { Loader } from "~/libs/components/components.js";
 import { feedbackApi } from "~/modules/feedbacks/feedbacks.js";
@@ -15,6 +16,8 @@ import {
 	FEEDBACKS_SWIPER_BREAKPOINTS,
 	LIMIT,
 	SINGLE_PAGE,
+	SWIPER_AUTOPLAY_OPTIONS,
+	TWO_SLIDES,
 } from "~/pages/home/lib/constants.js";
 
 import { FeedbackLoaderContainer } from "../../feedback-loader-container/feedback-loader-container.js";
@@ -38,6 +41,8 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 	const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
 	const [currentPage, setCurrentPage] = useState<number>(SINGLE_PAGE);
 	const [totalFeedbacks, setTotalFeedbacks] = useState<number>(EMPTY_RESPONSE);
+
+	const hasEnoughSlidesForLoop = feedbacks.length > TWO_SLIDES;
 
 	const filterNewFeedbackItems = useCallback(
 		(
@@ -86,17 +91,26 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 		[filterNewFeedbackItems],
 	);
 
-	const handleReachEnd = useCallback(() => {
-		const hasMoreData = feedbacks.length < totalFeedbacks;
+	const handleSlideChange = useCallback(
+		(swiper: SwiperClass) => {
+			const threshold = 3;
+			const { activeIndex } = swiper;
+			const isNearingEnd = activeIndex >= feedbacks.length - threshold;
+			const hasMoreData = feedbacks.length < totalFeedbacks;
+			const isNotLoading = !isLoadingMore;
 
-		if (hasMoreData && !isLoadingMore) {
-			setCurrentPage((previousPage) => previousPage + SINGLE_PAGE);
-		}
-	}, [feedbacks.length, totalFeedbacks, isLoadingMore]);
+			if (isNearingEnd && hasMoreData && isNotLoading) {
+				setCurrentPage((previousPage) => previousPage + SINGLE_PAGE);
+			}
+		},
+		[feedbacks.length, totalFeedbacks, isLoadingMore],
+	);
 
 	useEffect(() => {
-		void fetchFeedbacks(currentPage, LIMIT);
-	}, [fetchFeedbacks, currentPage]);
+		if (currentPage !== SINGLE_PAGE || totalFeedbacks === EMPTY_RESPONSE) {
+			void fetchFeedbacks(currentPage, LIMIT);
+		}
+	}, [fetchFeedbacks, currentPage, totalFeedbacks]);
 
 	useEffect(() => {
 		if (reloadTrigger > EMPTY_RESPONSE) {
@@ -120,12 +134,14 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 	return (
 		<div className={styles["feedbacks-list-wrapper"]}>
 			<Swiper
+				autoplay={hasEnoughSlidesForLoop ? SWIPER_AUTOPLAY_OPTIONS : false}
 				breakpoints={FEEDBACKS_SWIPER_BREAKPOINTS}
 				className={styles["feedbacks-swiper"]}
-				modules={[Navigation, Mousewheel]}
+				loop={hasEnoughSlidesForLoop}
+				modules={[Autoplay, Navigation, Mousewheel]}
 				mousewheel
 				navigation
-				onReachEnd={handleReachEnd}
+				onSlideChange={handleSlideChange}
 				slidesPerView={1}
 				spaceBetween={50}
 			>

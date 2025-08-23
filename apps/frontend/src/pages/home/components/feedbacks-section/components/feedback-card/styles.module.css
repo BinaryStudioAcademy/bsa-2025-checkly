@@ -5,6 +5,8 @@
 	height: clamp(260px, 11.11vw + 220px, 410px);
 	font-size: var(--text-size-heading-5);
 	cursor: pointer;
+	scrollbar-color: #f7b6d2 #fde7f1;
+	scrollbar-width: thin;
 	transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

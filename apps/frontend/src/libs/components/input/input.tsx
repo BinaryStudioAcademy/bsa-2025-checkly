@@ -15,6 +15,7 @@ import styles from "./styles.module.css";
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
+	hasLabel?: boolean;
 	isRequired?: boolean;
 	isTextArea?: boolean;
 	label: string;
@@ -26,6 +27,7 @@ type Properties<T extends FieldValues> = {
 const Input = <T extends FieldValues>({
 	control,
 	errors,
+	hasLabel = true,
 	isRequired,
 	isTextArea = false,
 	label,
@@ -59,7 +61,7 @@ const Input = <T extends FieldValues>({
 
 	return (
 		<div className={inputContainerClass}>
-			{!isTextArea && <label htmlFor={inputId}>{label}</label>}
+			{hasLabel && <label htmlFor={inputId}>{label}</label>}
 			<div className={styles["input-wrapper"]}>
 				{isTextArea ? (
 					<textarea
