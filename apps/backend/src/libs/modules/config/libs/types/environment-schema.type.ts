@@ -27,6 +27,9 @@ type EnvironmentSchema = {
 		OPEN_AI_KEY: string;
 		TEXT_GENERATION_MODEL: string;
 	};
+	PASSWORD_TOKEN: {
+		KEY_SIZE: number;
+	};
 	S3: {
 		ACCESS_KEY_ID: string;
 		BUCKET: string;

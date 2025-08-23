@@ -102,6 +102,14 @@ class BaseConfig implements Config {
 					format: String,
 				},
 			},
+			PASSWORD_TOKEN: {
+				KEY_SIZE: {
+					default: null,
+					doc: "Key size to generate password token",
+					env: "KEY_SIZE",
+					format: Number,
+				},
+			},
 			S3: {
 				ACCESS_KEY_ID: {
 					default: null,

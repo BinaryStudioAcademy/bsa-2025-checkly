@@ -16,7 +16,6 @@ import {
 } from "~/modules/users/libs/types/types.js";
 import { type UserService } from "~/modules/users/user.service.js";
 
-import { checkExpirationDate } from "../password-token/libs/helpers/check-expiration-date.helper.js";
 import { getDefaultExpirationDate } from "../password-token/libs/helpers/get-default-expiration-date.helper.js";
 import { type PasswordTokenService } from "../password-token/password-token.service.js";
 import { UserValidationMessage } from "./libs/enums/enums.js";
@@ -154,29 +153,9 @@ class AuthService {
 			});
 		}
 
-		const { tokenHash, tokenSalt } = existingToken.getToken();
-		const isValidToken = await this.encryptor.compare(
-			token,
-			tokenHash,
-			tokenSalt,
-		);
+		await this.passwordTokenService.checkTokenIsValid(existingToken, token);
 
-		if (!isValidToken) {
-			throw new AuthorizationError({
-				message: UserValidationMessage.LINK_HAS_EXPIRED,
-				status: HTTPCode.NOT_FOUND,
-			});
-		}
-
-		const expirationDate = existingToken.getExpirationDate();
-		const hasExpired = checkExpirationDate(expirationDate);
-
-		if (hasExpired) {
-			throw new AuthorizationError({
-				message: UserValidationMessage.LINK_HAS_EXPIRED,
-				status: HTTPCode.NOT_FOUND,
-			});
-		}
+		this.passwordTokenService.checkTokenIsExpired(existingToken);
 	}
 }
 
