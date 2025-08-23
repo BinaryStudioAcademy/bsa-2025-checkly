@@ -9,46 +9,11 @@
 
 .navigation-buttons {
 	--cluster-horizontal-alignment: center;
-	--gutter: var(--space-xl);
+	--gutter: var(--space-l);
 }
 
 .question-counter {
 	font-size: var(--font-size-xs);
 	font-weight: 500;
 	color: var(--color-text-secondary);
-}
-
-@media (height <= 800px) {
-	.question-navigation {
-		gap: var(--space-xs);
-		padding: var(--space-xs) 0;
-	}
-
-	.navigation-buttons {
-		--gutter: var(--space-xs);
-	}
-}
-
-@media (width <= 768px) {
-	.navigation-buttons {
-		--gutter: var(--space-m);
-	}
-
-	.navigation-buttons .navigation-button {
-		min-width: 100px;
-		padding: var(--space-s) var(--space-m);
-		font-size: var(--font-size-s);
-	}
-}
-
-@media (width <= 320px) {
-	.navigation-buttons {
-		--gutter: var(--space-s);
-	}
-
-	.navigation-buttons .navigation-button {
-		min-width: 80px;
-		padding: var(--space-xs) var(--space-s);
-		font-size: var(--font-size-xs);
-	}
 }
