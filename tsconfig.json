@@ -11,6 +11,17 @@
 		"resolveJsonModule": true,
 		"target": "ESNext",
 		"module": "NodeNext",
-		"moduleResolution": "NodeNext"
+		"moduleResolution": "NodeNext",
+		"baseUrl": ".",
+		"types": ["@playwright/test", "node"],
+		"allowSyntheticDefaultImports": true,
+		"paths": {
+			"@schemas/*": ["./tests/api/schemas/*"],
+			"@test-helpers-api/*": ["./tests/api/helpers/*"],
+			"@test-fixtures-api/*": ["./tests/api/fixtures/*"],
+			"@tests/*": ["./tests/*"],
+			"@ui/controllers/*": ["./tests/ui/controllers/*"],
+			"@ui/*": ["./tests/ui/*"]
+		}
 	}
 }

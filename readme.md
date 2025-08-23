@@ -152,20 +152,6 @@ As we are already using js on both frontend and backend it would be useful to sh
 
 1. [Zod](https://github.com/colinhacks/zod) — a schema validator
 
-### 5.5 Testing Package
-
-#### 5.5.1 Reason
-
-This package (`packages/testing`) contains automated API and UI tests for the Checkly application. It uses [Playwright](https://playwright.dev/) to test both backend and frontend functionality, with environment-based configurations and CI integration.
-
-#### 5.5.2 Technologies
-
-- [Playwright](https://playwright.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Faker](https://www.npmjs.com/package/@faker-js/faker)
-- [Ajv](https://ajv.js.org/)
-- [dotenv](https://www.npmjs.com/package/dotenv)
-
 ## 6. How to Run
 
 ### 6.1 Manually
@@ -234,32 +220,55 @@ Examples:
 
 CI/CD implemented using [GitHub Actions](https://docs.github.com/en/actions)
 
-## 9. Running Tests (packages/testing)
+## 9. Running Tests
 
-From the **monorepo root**:
+Automated **API** and **UI** tests for the Checkly monorepo, developed as part of the **Binary Studio Academy 2025** program.
 
-1. Ensure dependencies are installed:
+This package uses [Playwright](https://playwright.dev/) to test both backend and frontend functionality of Checkly.
+Includes Continuous Integration via GitHub Actions and generates HTML test reports as build artifacts.
 
-```bash
-npm install
-```
+---
 
-> 🛠 This will also automatically install Playwright browsers.
+### 9.1 Tech Stack
 
-2. Create `.env.local` inside `packages/testing/`:
+- [Playwright](https://playwright.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Faker](https://www.npmjs.com/package/@faker-js/faker) – fake test data
+- [Ajv](https://ajv.js.org/) – schema validation
+- [dotenv](https://www.npmjs.com/package/dotenv) – environment configuration
 
-```env
-FRONTEND_URL=http://localhost:3000/
-API_URL=http://localhost:3001/api/v1/
-```
+---
 
-3. Run tests:
+### 9.2 Useful Commands
 
-```bash
-npm run testing:test       # Run all tests (local)
-npm run testing:ui         # Run only UI tests
-npm run testing:api        # Run only API tests
-npm run testing:report     # View last HTML report
-```
+npm run test Run all tests with the default configuration.
 
-> The Playwright HTML report will be generated in `packages/testing/playwright-report/index.html`.
+npm run test:ui Run only UI tests using
+
+npm run test:api Run only API tests
+
+npm run report Shows test report
+
+npm run test --ui Open the interactive Playwright Test Runner UI
+
+---
+
+### 9.4 Environment Configuration
+
+The playwright.config.ts automatically reads:
+
+apps/frontend/.env → VITE_APP_DEVELOPMENT_PORT, VITE_APP_API_ORIGIN_URL
+
+apps/backend/.env → HOST, PORT
+
+From these, it calculates:
+
+WEB_BASE_URL → defaults to http://localhost:3000
+
+API_BASE_URL → defaults to http://localhost:3001/api/v1
+
+To override on the fly:
+
+WEB_BASE_URL=http://localhost:5173 \
+API_BASE_URL=http://localhost:4000/api/v1 \
+npx playwright test

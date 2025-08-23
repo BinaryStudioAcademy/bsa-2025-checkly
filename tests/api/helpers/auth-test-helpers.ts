@@ -1,14 +1,14 @@
 import { expect } from "@playwright/test";
 
-import { ApiControllers } from "@tests/api/controllers/api-controllers";
+import { ApiControllers } from "@tests/api/controllers/api-controllers.js";
 import {
 	registerResponseSchema,
 	loginResponseSchema,
 	getCurrentUserSchema,
-} from "@tests/api/schemas/auth-schemas";
-import { errorSchema } from "@tests/api/schemas/error-schemas";
-import { expectToMatchSchema } from "@test-helpers-api/schema-validator";
-import { expectDataToMatch } from "@test-helpers-api/data-validator";
+} from "@tests/api/schemas/auth-schemas.js";
+import { errorSchema } from "@tests/api/schemas/error-schemas.js";
+import { expectToMatchSchema } from "@test-helpers-api/schema-validator.js";
+import { expectDataToMatch } from "@test-helpers-api/data-validator.js";
 
 export async function expectSuccessfulRegistration(
 	api: ApiControllers,

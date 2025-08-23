@@ -18,6 +18,4 @@ ignore:
   - apps/frontend/node_modules
   - apps/backend/build
   - apps/backend/node_modules
-  - packages/testing/.gitignore
-  - packages/testing/node_modules
-  - packages/testing/playwright-report
+  - tests

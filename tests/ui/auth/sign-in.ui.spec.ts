@@ -1,8 +1,8 @@
 import { test as base, expect as baseExpect } from "@playwright/test";
-import { test, expect } from "@ui/fixtures/user.fixture";
-import { SignInPage } from "@tests/ui/controllers/signin-page";
-import { signUpUser } from "@ui/helpers/auth";
-import { DashboardPage } from "@ui/controllers/dashboard-page";
+import { test, expect } from "@ui/fixtures/user.fixture.js";
+import { SignInPage } from "@tests/ui/controllers/signin-page.js";
+import { signUpUser } from "@ui/helpers/auth.js";
+import { DashboardPage } from "@ui/controllers/dashboard-page.js";
 
 test.describe("[Sign in - UI] Consolidated suite", () => {
 	test.afterEach(async ({ page }) => {

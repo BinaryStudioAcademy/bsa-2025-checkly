@@ -1,8 +1,8 @@
-import { test } from "@tests/api/fixtures/sign-up-fixtures";
+import { test } from "@tests/api/fixtures/sign-up-fixtures.js";
 import {
 	expectSuccessfulRegistration,
 	expectRegistrationError,
-} from "@tests/api/helpers/auth-test-helpers";
+} from "@tests/api/helpers/auth-test-helpers.js";
 import { faker } from "@faker-js/faker";
 
 test.describe("[CHECKLY-1] Successful registration with valid data", () => {

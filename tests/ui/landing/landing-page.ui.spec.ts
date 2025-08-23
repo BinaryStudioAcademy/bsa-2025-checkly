@@ -1,4 +1,4 @@
-import { test } from "@ui/fixtures/landing-sections.fixture";
+import { test } from "@ui/fixtures/landing-sections.fixture.js";
 import { expect } from "@playwright/test";
 
 test.describe("Page Title", async () => {

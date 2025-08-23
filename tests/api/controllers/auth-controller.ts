@@ -4,7 +4,7 @@ export class AuthController {
 	constructor(private requestContext: APIRequestContext) {}
 
 	async login(email: string, password: string): Promise<APIResponse> {
-		const response = await this.requestContext.post("auth/login", {
+		const response = await this.requestContext.post("v1/auth/login", {
 			data: {
 				email,
 				password,
@@ -19,7 +19,7 @@ export class AuthController {
 		name: string,
 		password: string,
 	): Promise<APIResponse> {
-		const response = await this.requestContext.post("auth/register", {
+		const response = await this.requestContext.post("v1/auth/register", {
 			data: {
 				email,
 				name,
@@ -31,7 +31,7 @@ export class AuthController {
 	}
 
 	async getCurrentUser(token: string): Promise<APIResponse> {
-		const response = await this.requestContext.get("auth/me", {
+		const response = await this.requestContext.get("v1/auth/me", {
 			headers: token
 				? {
 						Authorization: `Bearer ${token}`,

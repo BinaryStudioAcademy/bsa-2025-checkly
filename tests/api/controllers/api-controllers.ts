@@ -1,5 +1,5 @@
 import { APIRequestContext } from "@playwright/test";
-import { AuthController } from "./auth-controller";
+import { AuthController } from "./auth-controller.js";
 
 export class ApiControllers {
 	public readonly auth: AuthController;

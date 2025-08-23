@@ -1,5 +1,5 @@
 import { test as base, expect } from "@playwright/test";
-import { signUpUser } from "../helpers/auth";
+import { signUpUser } from "../helpers/auth.js";
 
 type UserFixture = {
 	email: string;

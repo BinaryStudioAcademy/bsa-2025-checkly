@@ -14,3 +14,4 @@ build
 
 # Testing
 /playwright-report/
+/test-results/

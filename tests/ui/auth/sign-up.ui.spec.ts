@@ -1,12 +1,12 @@
 // tests/ui/auth/sign-up.ui.spec.ts
-import { test, expect } from "@ui/fixtures/user.fixture";
-import { signUpUser } from "@ui/helpers/auth";
-import { SignUpPage } from "@tests/ui/controllers/sign-up-page";
+import { test, expect } from "@ui/fixtures/user.fixture.js";
+import { signUpUser } from "@ui/helpers/auth.js";
+import { SignUpPage } from "@tests/ui/controllers/sign-up-page.js";
 import {
 	uniqueEmail,
 	validPassword,
 	validName,
-} from "@tests/ui/helpers/user-data";
+} from "@tests/ui/helpers/user-data.js";
 
 test.describe("[Sign up - UI] Consolidated suite", () => {
 	test.afterEach(async ({ page }) => {
