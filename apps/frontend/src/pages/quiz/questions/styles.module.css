@@ -1,5 +1,5 @@
 .question-flow {
-	--grid-opacity: 0.2;
+	--grid-opacity: 0.1;
 
 	display: flex;
 	flex-direction: column;
