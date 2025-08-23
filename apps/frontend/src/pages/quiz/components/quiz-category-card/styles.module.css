@@ -1,4 +1,6 @@
 .quiz-category-card {
+	--flow-space: var(--space-xl);
+
 	position: relative;
 	width: 100%;
 	padding: var(--space-s);
