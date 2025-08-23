@@ -1,9 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import JSZip from "jszip";
 
+import { PLAN } from "~/libs/components/plan-styles/mocks/plan-mocks.js";
 import {
 	type CategoryId,
+	DEFAULT_PAGES,
+	FIRST_PAGE,
 	getCategoryStyle,
+	MAX_DAYS_PER_PAGE,
 	MESSAGES,
+	MIN_PAGES,
 } from "~/libs/constants/constants.js";
 import {
 	FileExtension,
@@ -22,6 +28,28 @@ import {
 
 import { name as sliceName } from "./pdf-export.slice.js";
 
+const getPageCount = (totalDays: number): number =>
+	Math.max(MIN_PAGES, Math.ceil(totalDays / MAX_DAYS_PER_PAGE));
+
+const downloadPngZip = async (
+	pageCount: number,
+	fetchPageBlob: (page: number) => Promise<Blob>,
+): Promise<string> => {
+	const zip = new JSZip();
+
+	for (let page = FIRST_PAGE; page <= pageCount; page++) {
+		const partName = `${PlanName.PLAN_1}-part-${String(page)}.${FileExtension.PNG}`;
+		const blob = await fetchPageBlob(page);
+		zip.file(partName, blob);
+	}
+
+	const zipBlob = await zip.generateAsync({ type: "blob" });
+	const zipName = `${PlanName.PLAN_1}.zip`;
+	downloadFile(zipBlob, zipName);
+
+	return zipName;
+};
+
 type ExportPdfThunkArguments = {
 	category: CategoryId;
 };
@@ -34,22 +62,25 @@ const exportPdf = createAsyncThunk<
 	const { pdfExportApi } = extra;
 
 	const backendEndpoint = getBackendEndpoint(category);
-
 	const view = getCategoryStyle(category);
-
 	const format = PaperFormat.A4;
 
-	const fileName = `${PlanName.PLAN_1}.${FileExtension.PDF}`;
-	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
-		format,
-		html: view,
-	});
+	const pages = DEFAULT_PAGES;
 
-	downloadFile(blob, fileName);
+	for (const page of pages) {
+		const fileName = `${PlanName.PLAN_1}-part-${String(page)}.${FileExtension.PDF}`;
+		const blob = await pdfExportApi.exportPlan(backendEndpoint, {
+			format,
+			html: view,
+			page,
+		});
+
+		downloadFile(blob, fileName);
+	}
 
 	notifications.success(MESSAGES.DOWNLOAD.SUCCESS);
 
-	return { fileName };
+	return { fileName: `${PlanName.PLAN_1}-part-1.${FileExtension.PDF}` };
 });
 
 const exportDesktopPng = createAsyncThunk<
@@ -63,6 +94,23 @@ const exportDesktopPng = createAsyncThunk<
 	const backendEndpoint = getBackendEndpoint(category);
 	const view = getCategoryStyle(category);
 	const size: WindowSize = useWindowSize();
+
+	const totalDays = PLAN.days.length;
+	const pageCount = getPageCount(totalDays);
+
+	if (pageCount > MIN_PAGES) {
+		const zipName = await downloadPngZip(pageCount, (page) =>
+			pdfExportApi.exportPlan(backendEndpoint, {
+				html: view,
+				page,
+				windowSize: size,
+			}),
+		);
+
+		notifications.success(MESSAGES.DOWNLOAD.SUCCESS);
+
+		return { fileName: zipName };
+	}
 
 	const fileName = `${PlanName.PLAN_1}.${FileExtension.PNG}`;
 	const blob = await pdfExportApi.exportPlan(backendEndpoint, {

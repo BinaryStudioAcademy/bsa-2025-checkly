@@ -18,7 +18,7 @@
 	justify-content: center;
 	width: 100%;
 	max-width: 900px;
-	padding: var(--space-s) var(--space-s) 0;
+	padding: var(--space-s) var(--space-s) var(--space-s);
 	margin: 0;
 }
 
@@ -120,7 +120,7 @@
 
 	.plan-content {
 		max-width: 100%;
-		padding: var(--space-s) var(--space-xs) 0;
+		padding: var(--space-s) var(--space-xs) var(--space-s);
 	}
 
 	.actions-section {
@@ -140,7 +140,7 @@
 	}
 
 	.plan-content {
-		padding: var(--space-xs) var(--space-xs) 0;
+		padding: var(--space-xs) var(--space-xs) var(--space-xs);
 	}
 
 	.coming-soon {

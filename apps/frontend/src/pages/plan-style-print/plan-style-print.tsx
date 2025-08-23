@@ -9,19 +9,28 @@ import {
 
 import styles from "./styles.module.css";
 
+const MIN_PAGE = 1;
+
 const PlanStylePrint: React.FC = () => {
 	const inputStyle: PlanStyleOption = "WITH_REMARKS";
-	const requested =
-		new URLSearchParams(globalThis.location.search).get("view") ?? "";
+	const search = new URLSearchParams(globalThis.location.search);
+	const requested = search.get("view") ?? "";
 	const viewStyle: ViewOptions = (VIEW_OPTIONS as readonly string[]).includes(
 		requested,
 	)
 		? (requested as ViewOptions)
 		: "regular";
 
+	const pageParameter = search.get("page");
+	const parsed = pageParameter ? Number(pageParameter) : undefined;
+	const page =
+		Number.isFinite(parsed) && parsed !== undefined && parsed > MIN_PAGE
+			? Math.floor(parsed)
+			: undefined;
+
 	return (
 		<div className={styles["print-container"]} id="print-container">
-			<PlanStyle inputStyle={inputStyle} view={viewStyle} />
+			<PlanStyle inputStyle={inputStyle} page={page} view={viewStyle} />
 		</div>
 	);
 };

@@ -4,6 +4,7 @@ import { type PaperFormatValue } from "./paper-format.type.js";
 type ExportPlanPdfDto = {
 	format?: PaperFormatValue;
 	html: string;
+	page?: number;
 	windowSize?: WindowSize;
 };
 

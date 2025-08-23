@@ -11,6 +11,7 @@ const windowSizeSchema = z.object({
 const planPdfExportCreateSchema = z.object({
 	format: z.nativeEnum(PaperFormat).optional(),
 	html: z.string(),
+	page: z.number().int().positive().optional(),
 	windowSize: windowSizeSchema.optional(),
 });
 

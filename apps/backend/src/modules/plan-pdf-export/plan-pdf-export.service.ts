@@ -37,6 +37,10 @@ class PlanPdfExportService {
 		const url = new URL(printUrl);
 		url.searchParams.set("view", view);
 
+		if (dto.page) {
+			url.searchParams.set("page", String(dto.page));
+		}
+
 		await page.goto(url.toString(), { waitUntil: NETWORK_IDLE_0 });
 
 		const pdfBuffer = await page.pdf({
@@ -68,6 +72,10 @@ class PlanPdfExportService {
 
 		const url = new URL(printUrl);
 		url.searchParams.set("view", view);
+
+		if (dto.page) {
+			url.searchParams.set("page", String(dto.page));
+		}
 
 		const width = dto.windowSize?.width ?? DEFAULT_IMAGE.WIDTH;
 		const height = dto.windowSize?.height ?? DEFAULT_IMAGE.HEIGHT;
