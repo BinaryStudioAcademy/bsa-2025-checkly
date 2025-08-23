@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.21.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.20.0...frontend-v1.21.0) (2025-08-23)
+
+
+### Features
+
+* my plan overview post quiz flow cy-302 ([f8fc599](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f8fc599b9c9019820c4b4e8a3610dd3586f66182))
+
 ## [1.20.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.19.1...frontend-v1.20.0) (2025-08-21)
 
 

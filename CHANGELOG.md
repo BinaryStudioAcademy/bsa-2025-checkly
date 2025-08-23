@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.26.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.25.0...v1.26.0) (2025-08-23)
+
+
+### Features
+
+* my plan overview post quiz flow cy-302 ([f8fc599](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f8fc599b9c9019820c4b4e8a3610dd3586f66182))
+
 ## [1.25.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.24.1...v1.25.0) (2025-08-21)
 
 
