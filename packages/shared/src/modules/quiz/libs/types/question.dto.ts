@@ -5,7 +5,6 @@ type QuestionDto = {
 	id: number;
 	isOptional: boolean;
 	options: QuestionOptionDto[];
-	order: number;
 	text: string;
 	type: QuestionType;
 };

@@ -8,11 +8,18 @@ class QuizQuestionService {
 		this.quizQuestionRepository = quizQuestionRepository;
 	}
 
-	public async findAll(): Promise<QuizQuestionsResponseDto> {
-		const questions = await this.quizQuestionRepository.findAllWithOptions();
+	public async findAllByCategoryId(
+		categoryId: number,
+	): Promise<QuizQuestionsResponseDto> {
+		const questionsCategories =
+			await this.quizQuestionRepository.findAllWithOptionsByCategoryId(
+				categoryId,
+			);
 
 		return {
-			items: questions.map((question) => question.toObject()),
+			items: questionsCategories.map(
+				(questionCategory) => questionCategory.toObjectWithQuestion().question,
+			),
 		};
 	}
 }
