@@ -58,7 +58,8 @@
 }
 
 .loader-container {
-	min-height: clamp(260px, 11.11vw + 220px, 410px);
+	--cluster-horizontal-alignment: center
+		min-height: clamp(260px, 11.11vw + 220px, 410px);
 }
 
 @media (width >= 768px) {
