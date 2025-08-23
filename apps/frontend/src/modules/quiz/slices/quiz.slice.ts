@@ -63,7 +63,7 @@ const { actions, name, reducer } = createSlice({
 		},
 		saveAnswer: (state, action: { payload: QuizAnswer }) => {
 			const answer = action.payload;
-			state.answers[answer.questionId] = answer;
+			state.answers[state.currentQuestion] = answer;
 		},
 		setCategory: (state, action: { payload: string }) => {
 			state.selectedCategory = action.payload;
