@@ -58,7 +58,7 @@ const ProfilePasswordForm = forwardRef<
 		},
 	}));
 
-	const onFormSubmit = useCallback(
+	const handleFormSubmit = useCallback(
 		(event: React.FormEvent<HTMLFormElement>): void => {
 			event.preventDefault();
 			void handleSubmit((formData: UserUpdateRequestDto) => {
@@ -72,7 +72,7 @@ const ProfilePasswordForm = forwardRef<
 	return (
 		<form
 			className={getClassNames(sharedStyles["form"], "cluster", styles["form"])}
-			onSubmit={onFormSubmit}
+			onSubmit={handleFormSubmit}
 			ref={formReference}
 		>
 			<Input
