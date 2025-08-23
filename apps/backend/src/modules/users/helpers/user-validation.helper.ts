@@ -11,6 +11,11 @@ const normalizeField = (value?: string): null | string | undefined => {
 	return trimmed === "" ? null : trimmed;
 };
 
+type UserUpdateData = Partial<UserUpdateRequestDto> & {
+	passwordHash?: string;
+	passwordSalt?: string;
+};
+
 type ValidateAndPrepareUpdateDataParameters = {
 	encryptor: Encryptor;
 	id: number;
@@ -23,9 +28,7 @@ const validateAndPrepareUpdateData = async ({
 	id,
 	payload,
 	userRepository,
-}: ValidateAndPrepareUpdateDataParameters): Promise<
-	Partial<UserUpdateRequestDto>
-> => {
+}: ValidateAndPrepareUpdateDataParameters): Promise<UserUpdateData> => {
 	const email = normalizeField(payload.email);
 	const password = normalizeField(payload.password);
 	const currentPassword = normalizeField(payload.currentPassword);
@@ -74,7 +77,7 @@ const validateAndPrepareUpdateData = async ({
 		}
 	}
 
-	const updateData: Partial<UserUpdateRequestDto> = {};
+	let updateData: UserUpdateData = {};
 
 	if (payload.dob !== undefined) {
 		updateData.dob = payload.dob;
@@ -90,10 +93,7 @@ const validateAndPrepareUpdateData = async ({
 
 	if (password) {
 		const { hash, salt } = await encryptor.encrypt(password);
-		Object.assign(updateData, {
-			passwordHash: hash,
-			passwordSalt: salt,
-		});
+		updateData = { ...updateData, passwordHash: hash, passwordSalt: salt };
 	}
 
 	return updateData;
