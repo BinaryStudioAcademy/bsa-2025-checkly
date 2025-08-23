@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.10.0...shared-v1.11.0) (2025-08-21)
+
+
+### Features
+
+* save generated plan to db automatically cy-309 ([f32f962](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f32f9628032d7a6e37905471e5d8af0fa6368cd8))
+* saving generated plan to db automatically cy-309 ([23a7320](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/23a7320cdc7712f881e66c083b8d2bb1822b8b65))
+
+
+### Bug Fixes
+
+* update generate plan payload cy-309 ([e4650a3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e4650a3d83a6a8b4ec4417e7c86fe55e893ab49d))
+* update user in generate plan payload cy-309 ([f1a620b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f1a620b69c1393f4a545f9a0a7ee467824f08631))
+
 ## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.9.0...shared-v1.10.0) (2025-08-20)
 
 
