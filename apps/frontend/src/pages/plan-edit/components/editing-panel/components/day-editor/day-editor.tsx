@@ -9,6 +9,7 @@ import {
 	Input,
 } from "~/libs/components/components.js";
 import { INCREMENT_VALUE } from "~/libs/constants/constants.js";
+import { SuccessMessage } from "~/libs/enums/enums.js";
 import { type PlanEditForm } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
@@ -39,11 +40,11 @@ const DayEditor: FC<Properties> = ({ control, dayIndex, errors }) => {
 	});
 
 	const handleRegenerateTask = useCallback((): void => {
-		toast.success("Regenerate task");
+		toast.success(SuccessMessage.REGENERATE_TASK_SUCCESS);
 	}, []);
 
 	const handleSetTaskTime = useCallback((): void => {
-		toast.info("Set time for task");
+		toast.info(SuccessMessage.SET_TASK_TIME_INFO);
 	}, []);
 
 	return (

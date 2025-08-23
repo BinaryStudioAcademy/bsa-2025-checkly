@@ -2,6 +2,13 @@ import { useLayoutEffect, useRef, useState } from "react";
 
 import { BASE_DIMENSIONS, ONE, ZERO } from "~/libs/constants/constants.js";
 
+const calculateA4Scale = (rect: DOMRectReadOnly): number => {
+	return Math.min(
+		rect.width / BASE_DIMENSIONS.WIDTH,
+		rect.height / BASE_DIMENSIONS.HEIGHT,
+	);
+};
+
 function useA4Scale(): {
 	readonly scale: number;
 	readonly viewportReference: React.RefObject<HTMLDivElement | null>;
@@ -16,20 +23,15 @@ function useA4Scale(): {
 			return;
 		}
 
-		const resize = (rect: DOMRectReadOnly): void => {
-			const size = Math.min(
-				rect.width / BASE_DIMENSIONS.WIDTH,
-				rect.height / BASE_DIMENSIONS.HEIGHT,
-			);
-			setScale(size);
-		};
-
 		const resizeObserver = new ResizeObserver((entries) => {
-			if (!entries[ZERO]) {
+			const entry = entries[ZERO];
+
+			if (!entry) {
 				return;
 			}
 
-			resize(entries[ZERO].contentRect);
+			const newScale = calculateA4Scale(entry.contentRect);
+			setScale(newScale);
 		});
 
 		resizeObserver.observe(element);
