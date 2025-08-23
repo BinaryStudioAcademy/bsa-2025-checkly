@@ -101,13 +101,13 @@ import { type QuizQuestionService } from "./quiz-question.service.js";
  *               type: "single_choice_with_text_input"
  *               options:
  *                 - id: 1
- *                   text: "🎁 Achieving a concrete result'
+ *                   text: "🎁 Achieving a concrete result"
  *                   order: 1
  *                 - id: 2
- *                   text: "🧭 Building new habits or disciplin
+ *                   text: "🧭 Building new habits or disciplin"
  *                   order: 2
  *                 - id: 3
- *                   text: "🧡 Feeling better emotionally
+ *                   text: "🧡 Feeling better emotionally"
  *                   order: 3
  *
  */
