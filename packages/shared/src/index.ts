@@ -43,6 +43,7 @@ export {
 	type ValueOf,
 	VIEW_OPTIONS,
 	type ViewOptions,
+	type WindowSize,
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
 export { type GeneratedPlanDTO } from "./modules/openai/openai.js";

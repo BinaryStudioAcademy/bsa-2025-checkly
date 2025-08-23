@@ -9,3 +9,4 @@ export {
 export { type ValidationSchema } from "./validation-schema.type.js";
 export { type EnumValue, type ValueOf } from "./value-of.type.js";
 export { VIEW_OPTIONS, type ViewOptions } from "./view-options.type.js";
+export { type WindowSize } from "./window-size.type.js";

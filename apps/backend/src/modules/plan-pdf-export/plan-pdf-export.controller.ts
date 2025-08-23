@@ -59,7 +59,6 @@ import { type PlanPdfExportService } from "./plan-pdf-export.service.js";
  *           schema:
  *             $ref: '#/components/schemas/ExportPlanPdfDto'
  *           example:
- *             format: "A4"
  *             html: "desktop"
  *             width: 1920
  *             height: 1080
@@ -93,10 +92,10 @@ import { type PlanPdfExportService } from "./plan-pdf-export.service.js";
  *           schema:
  *             $ref: '#/components/schemas/ExportPlanPdfDto'
  *           example:
- *             format: "A4"
  *             html: "mobile"
- *             width: 1920
- *             height: 1080
+ *             width: 390
+ *             height: 844
+ *             pixelRatio: 3
  *     responses:
  *       200:
  *         description: PNG exported successfully

@@ -69,10 +69,11 @@ class PlanPdfExportService {
 		const url = new URL(printUrl);
 		url.searchParams.set("view", view);
 
-		const width = dto.width ?? DEFAULT_IMAGE.WIDTH;
-		const height = dto.height ?? DEFAULT_IMAGE.HEIGHT;
+		const width = dto.windowSize?.width ?? DEFAULT_IMAGE.WIDTH;
+		const height = dto.windowSize?.height ?? DEFAULT_IMAGE.HEIGHT;
+		const deviceScaleFactor = dto.windowSize?.pixelRatio ?? DEFAULT_IMAGE.SCALE;
 		await page.setViewport({
-			deviceScaleFactor: DEFAULT_IMAGE.SCALE,
+			deviceScaleFactor,
 			height,
 			width,
 		});

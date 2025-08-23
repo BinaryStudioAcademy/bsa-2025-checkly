@@ -31,4 +31,5 @@ export {
 	type ValueOf,
 	VIEW_OPTIONS,
 	type ViewOptions,
+	type WindowSize,
 } from "shared";

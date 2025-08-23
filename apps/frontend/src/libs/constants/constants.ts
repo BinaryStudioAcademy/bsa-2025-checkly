@@ -1,5 +1,10 @@
 export { MESSAGES } from "./messages.constants.js";
-export { LAST_INDEX } from "./numbers.js";
+export {
+	DEFAULT_HEIGHT,
+	DEFAULT_PIXEL_RATIO,
+	DEFAULT_WIDTH,
+	LAST_INDEX,
+} from "./numbers.js";
 export {
 	type CategoryId,
 	getCategoryIcon,

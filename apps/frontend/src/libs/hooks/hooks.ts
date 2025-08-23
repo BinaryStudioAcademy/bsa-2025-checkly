@@ -5,6 +5,7 @@ export { useDebounce } from "./use-debounce/use-debounce.hook.js";
 export { useDropdownMenu } from "./use-dropdown-menu/use-dropdown-menu.hook.js";
 export { usePlanCategory } from "./use-plan-category/use-plan-category.hook.js";
 export { useQuizSaved } from "./use-quiz-saved/use-quiz-saved.js";
+export { useWindowSize } from "./use-window-size/use-window-size.hook.js";
 export { useUserPlanSearch } from "./user-user-plan-search/use-user-plan-search.hook.js";
 export { useCallback } from "react";
 export { useController as useFormController } from "react-hook-form";

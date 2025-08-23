@@ -1,10 +1,10 @@
+import { type WindowSize } from "../../../../libs/types/types.js";
 import { type PaperFormatValue } from "./paper-format.type.js";
 
 type ExportPlanPdfDto = {
-	format: PaperFormatValue;
-	height?: number;
+	format?: PaperFormatValue;
 	html: string;
-	width?: number;
+	windowSize?: WindowSize;
 };
 
 export { type ExportPlanPdfDto };

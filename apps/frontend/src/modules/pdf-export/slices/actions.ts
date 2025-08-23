@@ -10,8 +10,10 @@ import {
 	PaperFormat,
 	PlanCategoryId,
 } from "~/libs/enums/enums.js";
+import { useWindowSize } from "~/libs/hooks/hooks.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { type AsyncThunkConfig } from "~/libs/types/async-thunk-config.type.js";
+import { type WindowSize } from "~/libs/types/types.js";
 import { PlanName } from "~/pages/plan-style-overview/lib/enums/enums.js";
 import {
 	downloadFile,
@@ -60,14 +62,12 @@ const exportDesktopPng = createAsyncThunk<
 	const category = PlanCategoryId.DESKTOP;
 	const backendEndpoint = getBackendEndpoint(category);
 	const view = getCategoryStyle(category);
-	const format = PaperFormat.A4;
+	const size: WindowSize = useWindowSize();
 
 	const fileName = `${PlanName.PLAN_1}.${FileExtension.PNG}`;
 	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
-		format,
-		height: 1080,
 		html: view,
-		width: 1920,
+		windowSize: size,
 	});
 
 	downloadFile(blob, fileName);
@@ -86,14 +86,12 @@ const exportMobilePng = createAsyncThunk<
 	const category = PlanCategoryId.MOBILE;
 	const backendEndpoint = getBackendEndpoint(category);
 	const view = getCategoryStyle(category);
-	const format = PaperFormat.A4;
+	const size: WindowSize = useWindowSize();
 
 	const fileName = `${PlanName.PLAN_1}.${FileExtension.PNG}`;
 	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
-		format,
-		height: 1080,
 		html: view,
-		width: 1920,
+		windowSize: size,
 	});
 
 	downloadFile(blob, fileName);
