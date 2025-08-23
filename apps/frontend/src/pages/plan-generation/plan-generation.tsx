@@ -78,7 +78,7 @@ const PlanGeneration: React.FC = () => {
 		onComplete: (): void => {
 			dispatch(quizActions.resetQuiz());
 			void storage.drop(StorageKey.QUIZ_STATE);
-			void navigate(AppRoute.PLAN);
+			void navigate(AppRoute.OVERVIEW_PAGE);
 		},
 		status,
 	});
