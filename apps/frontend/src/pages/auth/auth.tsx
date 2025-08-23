@@ -32,7 +32,7 @@ const Auth: React.FC = () => {
 		navigation.setNavigate(navigate);
 	}, [navigate]);
 
-	const getRedirectPath = useCallback((): null | string => {
+	const handleGetRedirectPath = useCallback((): null | string => {
 		const parameters = new URLSearchParams(location.search);
 		const redirect = parameters.get(REDIRECT_PARAM);
 
@@ -42,21 +42,21 @@ const Auth: React.FC = () => {
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
 			void dispatch(authActions.signIn(payload)).then(() => {
-				const redirectPath = getRedirectPath();
+				const redirectPath = handleGetRedirectPath();
 				void navigate(redirectPath ?? AppRoute.DASHBOARD, { replace: true });
 			});
 		},
-		[dispatch, navigate, getRedirectPath],
+		[dispatch, navigate, handleGetRedirectPath],
 	);
 
 	const handleSignUpSubmit = useCallback(
 		(payload: UserSignUpRequestDto): void => {
 			void dispatch(authActions.signUp(payload)).then(() => {
-				const redirectPath = getRedirectPath();
+				const redirectPath = handleGetRedirectPath();
 				void navigate(redirectPath ?? AppRoute.DASHBOARD, { replace: true });
 			});
 		},
-		[dispatch, navigate, getRedirectPath],
+		[dispatch, navigate, handleGetRedirectPath],
 	);
 
 	const getScreen = (screen: string): JSX.Element => {

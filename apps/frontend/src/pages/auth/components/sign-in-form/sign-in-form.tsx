@@ -83,9 +83,9 @@ const SignInForm: React.FC<Properties> = ({
 
 	const location = useLocation();
 	const parameters = new URLSearchParams(location.search);
-	const redirect = parameters.get(REDIRECT_PARAM);
-	const signUpLink = redirect
-		? `${AppRoute.SIGN_UP}?${REDIRECT_PARAM}=${encodeURIComponent(redirect)}`
+	const redirectParameter = parameters.get(REDIRECT_PARAM);
+	const signUpLink = redirectParameter
+		? `${AppRoute.SIGN_UP}?${REDIRECT_PARAM}=${encodeURIComponent(redirectParameter)}`
 		: AppRoute.SIGN_UP;
 
 	return (
