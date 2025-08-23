@@ -1,18 +1,6 @@
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type QuizQuestionsResponseDto } from "~/modules/quiz/libs/types/types.js";
 
-const isIdleStatus = (dataStatus: string): boolean => {
-	return dataStatus === DataStatus.IDLE;
-};
-
-const shouldFetchQuestions = (
-	selectedCategory: null | string,
-	questions: null | QuizQuestionsResponseDto,
-	dataStatus: string,
-): boolean => {
-	return !!selectedCategory && !questions && isIdleStatus(dataStatus);
-};
-
 const shouldRedirectToQuiz = (
 	selectedCategory: null | string,
 	hasSavedState: boolean,
@@ -41,10 +29,4 @@ const hasError = (dataStatus: string): boolean => {
 	return dataStatus === DataStatus.REJECTED;
 };
 
-export {
-	canSubmitQuiz,
-	hasError,
-	isLoading,
-	shouldFetchQuestions,
-	shouldRedirectToQuiz,
-};
+export { canSubmitQuiz, hasError, isLoading, shouldRedirectToQuiz };

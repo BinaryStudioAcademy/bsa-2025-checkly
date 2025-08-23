@@ -6,6 +6,7 @@ const DatabaseTableName = {
 	PLANS: "plans",
 	QUESTION_OPTIONS: "question_options",
 	QUESTIONS: "questions",
+	QUESTIONS_CATEGORIES: "questions_categories",
 	TASKS: "tasks",
 	USERS: "users",
 } as const;

@@ -1,5 +1,3 @@
-import { buildQueryString } from "shared/src/libs/helpers/helpers.js";
-
 import { APIPath, ContentType, HTTPRequestMethod } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
@@ -7,6 +5,7 @@ import { type Storage } from "~/libs/modules/storage/storage.js";
 import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
 import { PlansApiPath } from "./libs/enums/enums.js";
+import { buildQueryString } from "./libs/helpers/helpers.js";
 import {
 	type GeneratePlanRequestDto,
 	type PlanSearchQueryParameter,

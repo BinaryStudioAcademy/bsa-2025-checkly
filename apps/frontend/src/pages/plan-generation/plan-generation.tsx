@@ -26,7 +26,10 @@ import {
 } from "~/pages/plan-generation/libs/types/types.js";
 
 import { ImageSlider } from "./components/slider/slider.js";
-import { DEFAULT_QUIZ_STATE } from "./libs/constants/constants.js";
+import {
+	DEFAULT_QUIZ_STATE,
+	LOADING_MESSAGES,
+} from "./libs/constants/constants.js";
 import { useProgress } from "./libs/hooks/hooks.js";
 import styles from "./styles.module.css";
 
@@ -75,10 +78,14 @@ const PlanGeneration: React.FC = () => {
 		onComplete: (): void => {
 			dispatch(quizActions.resetQuiz());
 			void storage.drop(StorageKey.QUIZ_STATE);
-			void navigate(AppRoute.PLAN);
+			void navigate(AppRoute.OVERVIEW_PAGE);
 		},
 		status,
 	});
+
+	const message =
+		LOADING_MESSAGES.find(({ max, min }) => progress >= min && progress < max)
+			?.text ?? "";
 
 	const containerClasses = getClassNames(
 		styles["container"],
@@ -90,7 +97,7 @@ const PlanGeneration: React.FC = () => {
 		<main className={containerClasses}>
 			<ImageSlider slides={SLIDES} />
 			<h1 className={styles["progress"]}>
-				Analyzing{" "}
+				{message}{" "}
 				<span className={styles["progress-number"]}>
 					{Math.floor(progress)}%
 				</span>
