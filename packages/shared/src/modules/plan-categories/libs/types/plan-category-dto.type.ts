@@ -6,4 +6,8 @@ type PlanCategoryDto = {
 	title: string;
 };
 
-export { type PlanCategoryDto };
+type PlanCategoryWithColorDto = PlanCategoryDto & {
+	color: string;
+};
+
+export { type PlanCategoryDto, type PlanCategoryWithColorDto };

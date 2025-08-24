@@ -1,11 +1,11 @@
 import { type PlanCategoryDto } from "./libs/types/types.js";
 
 class PlanCategoryEntity {
-	private readonly iconHref: string;
-	private readonly id: number;
-	private readonly key: string;
-	private readonly order: number;
-	private readonly title: string;
+	private iconHref: string;
+	private id: number;
+	private key: string;
+	private order: number;
+	private title: string;
 
 	constructor({ iconHref, id, key, order, title }: PlanCategoryDto) {
 		this.iconHref = iconHref;

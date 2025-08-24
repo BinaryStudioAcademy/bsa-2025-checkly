@@ -6,15 +6,15 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	inputStyle: PlanStyleOption;
+	notes?: string;
 };
 
 const NotesText = {
 	HINT: "Use this space to reflect on any patterns, surprises, or small wins from the week. Honor your progress.",
-	TEXT: "Morning workouts gave me energy. Healthy meals were easier to prepare. I enjoyed meditation and felt good about my progress. Taking time to reflect helped me notice small improvements each day.",
 	TITLE: "Notes:",
 } as const;
 
-const Notes: React.FC<Properties> = ({ inputStyle }: Properties) => {
+const Notes: React.FC<Properties> = ({ inputStyle, notes }: Properties) => {
 	const notesClasses = getClassNames(
 		styles["notes"],
 		PlanStyleModules[inputStyle]["notes"],
@@ -35,8 +35,11 @@ const Notes: React.FC<Properties> = ({ inputStyle }: Properties) => {
 	return (
 		<li className={notesClasses}>
 			<h2 className={notesTitleClasses}>{NotesText.TITLE}</h2>
-			<p className={notesHintClasses}>{NotesText.HINT}</p>
-			<p className={notesTextClasses}>&emsp;{NotesText.TEXT}</p>
+			{notes ? (
+				<p className={notesTextClasses}>&emsp;{notes}</p>
+			) : (
+				<p className={notesHintClasses}>{NotesText.HINT}</p>
+			)}
 		</li>
 	);
 };
