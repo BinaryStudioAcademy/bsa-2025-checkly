@@ -39,6 +39,7 @@ const Quiz: React.FC = (): React.ReactElement => {
 
 	const handleCategorySelect = useCallback(
 		(category: string): void => {
+			dispatch(actions.resetQuiz());
 			dispatch(actions.setCategory(category));
 		},
 		[dispatch],
