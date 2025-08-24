@@ -23,7 +23,7 @@
 }
 
 .question-title {
-	max-width: 750px;
+	max-width: 600px;
 	font-size: var(--text-size-heading-3);
 	text-align: center;
 	text-wrap: balance;
