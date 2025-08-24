@@ -1,5 +1,5 @@
 .progress-bar {
-	--circle-size: 1.4rem;
+	--circle-size: var(--text-size-heading-2);
 
 	width: 100%;
 	padding: var(--space-m) 0;
@@ -33,12 +33,8 @@
 }
 
 @media (width >= 768px) {
-	.progress-bar {
-		--circle-size: 1.75rem;
-	}
-
 	.progress-container::before {
-		width: calc(var(--circle-size) * 20);
+		width: calc(var(--circle-size) * 19);
 	}
 }
 
@@ -50,7 +46,7 @@
 	justify-content: center;
 	width: var(--circle-size);
 	height: var(--circle-size);
-	font-weight: var(--font-weight-semi-bold);
+	line-height: 0;
 	background-color: var(--color-bg-white);
 	border: 2px solid var(--color-bg-dark);
 	border-radius: 50%;
@@ -76,11 +72,10 @@
 }
 
 .progress-circle .number {
-	font-size: var(--font-weight-body-small);
-	font-weight: var(--font-weight-semibold);
+	font-weight: var(--font-weight-bold);
 }
 
 .progress-circle .checkmark {
-	font-size: 1.75em;
+	font-size: 1.5em;
 	color: var(--color-bg-white);
 }

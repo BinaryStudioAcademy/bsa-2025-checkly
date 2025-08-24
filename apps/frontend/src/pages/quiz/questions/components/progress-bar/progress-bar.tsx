@@ -70,7 +70,7 @@ const ProgressBar: React.FC<ProgressBarProperties> = ({
 							onClick={createNavigationHandler(questionNumber)}
 						>
 							{isCompleted ? (
-								<span className={styles["checkmark"]}>✓</span>
+								<span className={styles["checkmark"]}>&#10003;</span>
 							) : (
 								<span className={styles["number"]}>{questionNumber}</span>
 							)}
