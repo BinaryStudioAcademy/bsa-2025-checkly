@@ -4,6 +4,8 @@ const SuccessMessage = {
 	EMAIL_SENT: "Email was sent successfully!",
 	PASSWORD_CHANGED: "Password was changed successfully!",
 	PROFILE_UPDATE: "Profile was updated successfully!",
+	REGENERATE_TASK_SUCCESS: "Regenerate task successfully!",
+	SET_TASK_TIME_INFO: "Set time successfully!",
 	SIGN_UP: "Registration successful!",
 } as const;
 

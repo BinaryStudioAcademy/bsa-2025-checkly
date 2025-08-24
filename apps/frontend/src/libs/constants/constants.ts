@@ -5,4 +5,11 @@ export {
 	getCategoryName,
 	getCategoryShortName,
 } from "./plan-category.constants.js";
-export { LAST_INDEX, ONE, UPLOAD_MAX_FILE_SIZE_BYTES, ZERO } from "shared";
+export {
+	BASE_DIMENSIONS,
+	EDITOR_ROWS,
+	LAST_INDEX,
+	ONE,
+	UPLOAD_MAX_FILE_SIZE_BYTES,
+	ZERO,
+} from "shared";
