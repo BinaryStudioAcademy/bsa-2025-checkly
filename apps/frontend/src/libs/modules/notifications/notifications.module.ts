@@ -28,7 +28,7 @@ class Notifications {
 	}
 
 	public success(
-		message: string,
+		message: React.ReactNode | string,
 		notificationOptions?: Partial<ToastOptions>,
 	): string {
 		const customNotificationOptions =
