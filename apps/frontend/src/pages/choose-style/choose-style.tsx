@@ -1,5 +1,6 @@
-import React, { useCallback, useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import {
 	ArrowLeftIcon,
@@ -20,18 +21,61 @@ import {
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { useCallback } from "~/libs/hooks/hooks.js";
 import { type ViewOptions } from "~/libs/types/types.js";
+import { usePlanStyles } from "~/modules/plan-styles/hooks/use-plan-styles.hook.js";
+import { PlanStyle as PlanStyleEnum } from "~/modules/plan-styles/libs/enums/enums.js";
+import { planApi } from "~/modules/plans/plans.js";
 
 import { styleCards } from "./choose-style.data.js";
+import { CHOOSE_STYLE_MESSAGES } from "./libs/constants/choose-style.constants.js";
+import { type StyleValidationResult } from "./libs/types/types.js";
 import styles from "./style.module.css";
 
-const PRESELECTED_ELEMENT = 1;
+const PRESELECTED_ELEMENT_INDEX = 1;
 const PLAN_VIEW_OPTION: ViewOptions = "selection";
 
+const updatePlanStyle = async (
+	planId: number,
+	styleId: number,
+): Promise<void> => {
+	await planApi.updateStyle(planId, styleId);
+	toast.success(CHOOSE_STYLE_MESSAGES.PLAN_STYLE_UPDATED_SUCCESS);
+};
+
 const ChooseStyle: React.FC = () => {
+	const { id: planId } = useParams<{ id: string }>();
+	const { styles: planStyles } = usePlanStyles();
 	const [selectedCard, setSelectedCard] = useState<null | string>(
-		styleCards[PRESELECTED_ELEMENT]?.id ?? null,
+		styleCards[PRESELECTED_ELEMENT_INDEX]?.id ?? null,
 	);
+	const [isSaving, setIsSaving] = useState<boolean>(false);
+
+	const getStyleId = useCallback((styleName: string): number => {
+		const style = planStyles.find((s) => s.name === styleName);
+
+		return style?.id ?? PlanStyleEnum.WITH_REMARKS;
+	}, [planStyles]);
+
+	const validateAndGetStyle = useCallback((): StyleValidationResult => {
+		if (!planId || !selectedCard) {
+			toast.error(CHOOSE_STYLE_MESSAGES.SELECT_STYLE_AND_PLAN_ID);
+
+			return null;
+		}
+
+		const selectedStyle = styleCards.find((card) => card.id === selectedCard);
+
+		if (!selectedStyle) {
+			toast.error(CHOOSE_STYLE_MESSAGES.INVALID_STYLE_SELECTION);
+
+			return null;
+		}
+
+		const styleId = getStyleId(selectedStyle.planStyle);
+
+		return { planId: Number(planId), styleId };
+	}, [planId, selectedCard, getStyleId]);
 
 	const handleCardClick = useCallback(
 		(event: React.MouseEvent<HTMLButtonElement>): void => {
@@ -39,6 +83,28 @@ const ChooseStyle: React.FC = () => {
 		},
 		[],
 	);
+
+	const handleSaveStyle = useCallback(async (): Promise<void> => {
+		const validation = validateAndGetStyle();
+		
+		if (!validation) {
+			return;
+		}
+
+		setIsSaving(true);
+		
+		try {
+			await updatePlanStyle(validation.planId, validation.styleId);
+		} catch {
+			toast.error(CHOOSE_STYLE_MESSAGES.FAILED_TO_UPDATE_PLAN_STYLE);
+		} finally {
+			setIsSaving(false);
+		}
+	}, [validateAndGetStyle]);
+
+	const handleSaveStyleClick = useCallback((): void => {
+		void handleSaveStyle();
+	}, [handleSaveStyle]);
 
 	const navLink = getClassNames(styles["nav-link"]);
 
@@ -108,13 +174,13 @@ const ChooseStyle: React.FC = () => {
 					))}
 				</div>
 				<div className={styles["bottom-buttons"]}>
-					<NavLink className={navLink} to={AppRoute.ROOT}>
-						<Button
-							className={styles["bottom-download-button"]}
-							icon={<DownloadIcon aria-hidden="true" />}
-							label="Download"
-						/>
-					</NavLink>
+					<Button
+						className={styles["bottom-download-button"]}
+						icon={<DownloadIcon aria-hidden="true" />}
+						isDisabled={isSaving || !selectedCard}
+						label={isSaving ? "Saving..." : "Save Style"}
+						onClick={handleSaveStyleClick}
+					/>
 					<NavLink className={navLink} to={AppRoute.PLAN}>
 						<Button
 							className={styles["bottom-back-button"]}

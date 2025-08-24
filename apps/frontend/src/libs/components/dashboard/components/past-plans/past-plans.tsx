@@ -9,15 +9,23 @@ import {
 	useAppSelector,
 	useUserPlanSearch,
 } from "~/libs/hooks/hooks.js";
+import { type PlanStyleOption } from "~/libs/types/types.js";
 import { actions as planCategoryActions } from "~/modules/plan-categories/plan-categories.js";
+import {
+	DEFAULT_PLAN_STYLE,
+	PLAN_STYLE_MAPPING,
+} from "~/modules/plan-styles/libs/constants/plan-style.constants.js";
 
-import { ZERO_CATEGORY_ID } from "../libs/enums/enums.js";
 import { PlanCategorySelect } from "./components/plan-category-select/plan-category-select.js";
 import { PlanSearchInput } from "./components/plan-search-input/plan-search-input.js";
 import { PlansFoundBlock } from "./components/plans-found-block/plans-found-block.js";
 import { defaultCategoryOption } from "./libs/enums/enums.js";
 import { type CategoryOption } from "./libs/types/types.js";
 import styles from "./styles.module.css";
+
+const getStyleName = (styleId: number): PlanStyleOption => {
+	return PLAN_STYLE_MAPPING[styleId] ?? DEFAULT_PLAN_STYLE;
+};
 
 const PlanCardSkeleton: FC = () => (
 	<div className={getClassNames("flow", styles["plan-card-skeleton"])}>
@@ -76,7 +84,7 @@ const PastPlans: FC = () => {
 
 	const handleCategoryChange = useCallback(
 		(selectedOption: SingleValue<CategoryOption>): void => {
-			const id = selectedOption?.value ?? ZERO_CATEGORY_ID;
+			const id = selectedOption?.value ?? ZERO;
 			setCategoryId(id);
 		},
 		[setCategoryId],
@@ -90,7 +98,7 @@ const PastPlans: FC = () => {
 	);
 
 	const handleClearFilters = useCallback((): void => {
-		setCategoryId(ZERO_CATEGORY_ID);
+		setCategoryId(ZERO);
 		setTitle("");
 	}, [setCategoryId, setTitle]);
 
@@ -99,7 +107,7 @@ const PastPlans: FC = () => {
 			{userPlans.map((plan) => (
 				<div className={styles["plan-card"]} key={plan.id}>
 					<PlanStyle
-						inputStyle="WITH_REMARKS"
+						inputStyle={getStyleName(plan.styleId)}
 						planTitle={plan.title}
 						view="selection"
 					/>
