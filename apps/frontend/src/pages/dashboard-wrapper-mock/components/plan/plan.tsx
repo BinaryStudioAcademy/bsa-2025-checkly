@@ -112,10 +112,6 @@ const Plan: React.FC = () => {
 		);
 	}
 
-	if (!plan) {
-		return <Loader />;
-	}
-
 	return (
 		<div className={styles["plan"]}>
 			<div className={styles["nav"]}>
@@ -158,16 +154,18 @@ const Plan: React.FC = () => {
 					{selectedDayTasks.map((item, index) => {
 						return <Task indexItem={index + ONE} item={item} key={index} />;
 					})}
-					<NavLink className={navLink} to={AppRoute.OVERVIEW_PAGE}>
-						<Button
-							icon={<DecorativeImage src={Download} />}
-							iconOnlySize="medium"
-							label="Download PDF"
-							size={ButtonSizes.LARGE}
-							type={ElementTypes.BUTTON}
-							variant={ButtonVariants.PRIMARY}
-						/>
-					</NavLink>
+					{plan && (
+						<NavLink className={navLink} to={AppRoute.OVERVIEW_PAGE}>
+							<Button
+								icon={<DecorativeImage src={Download} />}
+								iconOnlySize="medium"
+								label="Download PDF"
+								size={ButtonSizes.LARGE}
+								type={ElementTypes.BUTTON}
+								variant={ButtonVariants.PRIMARY}
+							/>
+						</NavLink>
+					)}
 				</div>
 			</div>
 		</div>

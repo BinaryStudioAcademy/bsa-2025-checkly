@@ -613,7 +613,7 @@ class PlanController extends BaseController {
 	 *         description: Plan not found
 	 */
 	private async updateStyle(
-		options: APIBodyOptions<{ styleId: number }> & IdParametersOption,
+		options: APIBodyOptions<PlanStyleUpdateRequestDto> & IdParametersOption,
 	): Promise<APIHandlerResponse> {
 		const { body, params } = options;
 		const userId = options.user?.id;

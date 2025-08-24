@@ -2,7 +2,7 @@ import { type Knex } from "knex";
 
 import { DatabaseTableName } from "~/libs/modules/database/database.js";
 
-const planStyles = [
+const PLAN_STYLES = [
 	{ name: "MINIMAL" },
 	{ name: "WITH_REMARKS" },
 	{ name: "COLOURFUL" },
@@ -10,7 +10,7 @@ const planStyles = [
 
 async function seed(knex: Knex): Promise<void> {
 	await knex(DatabaseTableName.PLAN_STYLES)
-		.insert(planStyles)
+		.insert(PLAN_STYLES)
 		.onConflict("name")
 		.ignore();
 }

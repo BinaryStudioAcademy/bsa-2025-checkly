@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { type PlanStyleDto } from "~/modules/plan-styles/libs/types/types.js";
 import { actions } from "~/modules/plan-styles/slices/plan-style.js";
 
-type UsePlanStyles = {
+type PlanStylesState = {
 	isError: boolean;
 	isLoading: boolean;
 	isSuccess: boolean;
@@ -14,7 +14,7 @@ type UsePlanStyles = {
 	styles: PlanStyleDto[];
 };
 
-const usePlanStyles = (): UsePlanStyles => {
+const usePlanStyles = (): PlanStylesState => {
 	const dispatch = useAppDispatch();
 	const { dataStatus, styles } = useAppSelector((state) => state.planStyles);
 

@@ -34,7 +34,16 @@ const CurrentPlan: FC = () => {
 		const fetchCurrentPlan = async (): Promise<void> => {
 			try {
 				const plans = await planApi.getAllUserPlans();
-				const latestPlan = plans[ZERO] ?? null;
+
+				if (plans.length === ZERO) {
+					setCurrentPlan(null);
+
+					return;
+				}
+
+				const maxId = Math.max(...plans.map((p) => p.id));
+				const latestPlan = plans.find((plan) => plan.id === maxId) ?? null;
+
 				setCurrentPlan(latestPlan);
 			} catch {
 				setError(PLAN_CONSTANTS.MESSAGES.FAILED_TO_FETCH_CURRENT_PLAN);
@@ -86,7 +95,7 @@ const CurrentPlan: FC = () => {
 					<Link
 						asButtonSize="small"
 						asButtonVariant="primary"
-						to={AppRoute.PLAN}
+						to={AppRoute.QUIZ}
 					>
 						Create Plan
 					</Link>

@@ -38,10 +38,10 @@ const PlanStyleOverview: React.FC = () => {
 	const { selectedCategory } = usePlanCategory(PlanCategoryId.PDF);
 
 	useEffect(() => {
-		if (!plan && user) {
+		if (user) {
 			void dispatch(planActions.getAllUserPlans());
 		}
-	}, [plan, user, dispatch]);
+	}, [user, dispatch]);
 
 	useEffect(() => {
 		if (userPlans.length > ZERO) {
@@ -53,12 +53,6 @@ const PlanStyleOverview: React.FC = () => {
 			}
 		}
 	}, [userPlans, dispatch]);
-
-	useEffect(() => {
-		if (user) {
-			void dispatch(planActions.getAllUserPlans());
-		}
-	}, [user, dispatch]);
 
 	const getStyleFromPlan = useCallback((): PlanStyleOption => {
 		if (!plan) {
