@@ -12,7 +12,7 @@ class PlanRepository implements Repository {
 	}
 
 	public async create(entity: PlanEntity): Promise<PlanEntity> {
-		const { categoryId, duration, intensity, title, userId } =
+		const { categoryId, duration, intensity, styleId, title, userId } =
 			entity.toNewObject();
 
 		const plan = await this.planModel
@@ -21,6 +21,7 @@ class PlanRepository implements Repository {
 				categoryId,
 				duration,
 				intensity,
+				styleId,
 				title,
 				userId,
 			})
@@ -99,6 +100,21 @@ class PlanRepository implements Repository {
 			.patchAndFetchById(id, payload);
 
 		return PlanEntity.initialize(updatedPlan);
+	}
+
+	public async updateStyle(
+		userId: number,
+		planId: number,
+		styleId: number,
+	): Promise<null | PlanEntity> {
+		const updatedPlan = await this.planModel
+			.query()
+			.where({ id: planId, userId })
+			.patch({ styleId })
+			.returning("*")
+			.first();
+
+		return updatedPlan ? PlanEntity.initialize(updatedPlan) : null;
 	}
 }
 

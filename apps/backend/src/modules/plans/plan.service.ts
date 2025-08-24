@@ -97,6 +97,16 @@ class PlanService implements Service {
 
 		return plan ? plan.toObject() : null;
 	}
+
+	public async updateStyle(
+		userId: number,
+		planId: number,
+		styleId: number,
+	): Promise<null | PlanDto> {
+		const plan = await this.planRepository.updateStyle(userId, planId, styleId);
+
+		return plan ? plan.toObject() : null;
+	}
 }
 
 export { PlanService };
