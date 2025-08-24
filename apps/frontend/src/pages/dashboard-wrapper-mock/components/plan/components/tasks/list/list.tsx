@@ -45,7 +45,7 @@ const TaskList: React.FC<Properties> = ({
 			<Task
 				indexItem={index + ONE}
 				item={task}
-				key={task.id}
+				key={index}
 				onRegenerate={onRegenerate}
 			/>
 		);
