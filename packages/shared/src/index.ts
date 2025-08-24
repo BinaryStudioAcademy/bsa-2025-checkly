@@ -1,4 +1,12 @@
-export { LAST_INDEX, ONE, ZERO } from "./libs/constants/constants.js";
+export {
+	BASE_DIMENSIONS,
+	EDITOR_ROWS,
+	LAST_INDEX,
+	MAX_AGE,
+	MIN_AGE,
+	ONE,
+	ZERO,
+} from "./libs/constants/constants.js";
 export {
 	UPLOAD_MAX_FILE_SIZE_BYTES,
 	UPLOAD_MAX_FILE_SIZE_MB,
@@ -104,6 +112,7 @@ export {
 	type QuizCategoryType,
 	QuizIndexes,
 	QuizQuestionFormat,
+	QuizQuestionFormatLabels,
 	type QuizQuestionsResponseDto,
 	quizStateValidationSchema,
 } from "./modules/quiz/quiz.js";
@@ -122,6 +131,11 @@ export {
 } from "./modules/tasks/tasks.js";
 export {
 	AvatarTypes,
+	type ForgotPasswordRequestDto,
+	forgotPasswordValidationSchema,
+	type ResetPasswordFormValidationSchema,
+	type ResetPasswordRequestDto,
+	resetPasswordValidationSchema,
 	S3BucketIndex,
 	type SignUpFormValidationSchema,
 	type UserDto,
@@ -138,4 +152,5 @@ export {
 	userUpdateValidationSchema,
 	UserValidationMessage,
 	UserValidationRule,
+	type VerifyTokenRequestDto,
 } from "./modules/users/users.js";

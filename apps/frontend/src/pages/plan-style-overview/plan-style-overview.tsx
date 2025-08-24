@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { StarsYellow02 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { AppHeader, DecorativeImage } from "~/libs/components/components.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
-import { getCategoryName, MESSAGES, ZERO } from "~/libs/constants/constants.js";
+import { MESSAGES, ZERO } from "~/libs/constants/constants.js";
 import { AppRoute, DataStatus, PlanCategoryId } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, usePlanCategory } from "~/libs/hooks/hooks.js";
@@ -35,11 +35,7 @@ const PlanStyleOverview: React.FC = () => {
 	const isAuthenticated = Boolean(user);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
-	const { handleCategorySelect, selectedCategory } = usePlanCategory(
-		PlanCategoryId.PDF,
-	);
-
-	const selectedCategoryName = getCategoryName(selectedCategory);
+	const { selectedCategory } = usePlanCategory(PlanCategoryId.PDF);
 
 	useEffect(() => {
 		if (!plan && user) {
@@ -118,30 +114,15 @@ const PlanStyleOverview: React.FC = () => {
 		<>
 			<AppHeader />
 			<div className={styles["header-section"]}>
-				<PlanStyleCategory
-					categories={Object.values(PlanCategoryId).reverse()}
-					onCategorySelect={handleCategorySelect}
-					selectedCategory={selectedCategory}
-				/>
+				<PlanStyleCategory />
 			</div>
 			<div className={getClassNames(styles["container"], "grid-pattern")}>
 				<div className={styles["plan-content"]}>
-					{selectedCategory === PlanCategoryId.PDF ? (
-						<>
-							<PlanStyle inputStyle={getStyleFromPlan()} />
-							<DecorativeImage
-								className={styles["yellow-stars-reflection"]}
-								src={StarsYellow02}
-							/>
-						</>
-					) : (
-						<div className={styles["coming-soon"]}>
-							<h2>Coming Soon</h2>
-							<p>
-								{selectedCategoryName} {MESSAGES.FEATURE.COMING_SOON}
-							</p>
-						</div>
-					)}
+					<PlanStyle inputStyle={getStyleFromPlan()} />
+					<DecorativeImage
+						className={styles["yellow-stars-reflection"]}
+						src={StarsYellow02}
+					/>
 					<DecorativeImage
 						className={styles["yellow-stars"]}
 						src={StarsYellow02}

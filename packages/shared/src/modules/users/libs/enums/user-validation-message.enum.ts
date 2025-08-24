@@ -1,10 +1,12 @@
 import { UserValidationRule } from "./user-validation-rule.enum.js";
 
 const UserValidationMessage = {
+	AGE_INVALID: "Age must be between 13 and 120 years",
 	DATE_INVALID: "Date must be in format YYYY-MM-DD",
 	EMAIL_ALREADY_EXISTS: "Email already in use",
 	EMAIL_INVALID: "Invalid email format",
 	FIELD_REQUIRED: "Field is required",
+	LINK_HAS_EXPIRED: "Link has expired",
 	NAME_INVALID: `Name must be between ${String(UserValidationRule.NAME_MIN_LENGTH)} and ${String(UserValidationRule.NAME_MAX_LENGTH)} characters`,
 	NAME_LENGTH: `Name must have at least ${String(UserValidationRule.NAME_MIN_LENGTH)} characters and maximum of ${String(UserValidationRule.NAME_MAX_LENGTH)} characters`,
 	NAME_ONLY_ALLOWED_CHARS: "Digits and special characters are not allowed",
