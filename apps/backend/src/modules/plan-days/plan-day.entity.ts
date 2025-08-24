@@ -1,5 +1,7 @@
 import { type Entity } from "~/libs/types/types.js";
 
+import { type TaskDto } from "../plans/libs/types/types.js";
+
 class PlanDayEntity implements Entity {
 	private dayNumber: number;
 
@@ -7,33 +9,41 @@ class PlanDayEntity implements Entity {
 
 	private planId: number;
 
+	private tasks: TaskDto[];
+
 	private constructor({
 		dayNumber,
 		id,
 		planId,
+		tasks = [],
 	}: {
 		dayNumber: number;
 		id: null | number;
 		planId: number;
+		tasks?: TaskDto[];
 	}) {
 		this.id = id;
 		this.dayNumber = dayNumber;
 		this.planId = planId;
+		this.tasks = tasks;
 	}
 
 	public static initialize({
 		dayNumber,
 		id,
 		planId,
+		tasks = [],
 	}: {
 		dayNumber: number;
 		id: number;
 		planId: number;
+		tasks?: TaskDto[];
 	}): PlanDayEntity {
 		return new PlanDayEntity({
 			dayNumber,
 			id,
 			planId,
+			tasks,
 		});
 	}
 
@@ -48,6 +58,7 @@ class PlanDayEntity implements Entity {
 			dayNumber,
 			id: null,
 			planId,
+			tasks: [],
 		});
 	}
 

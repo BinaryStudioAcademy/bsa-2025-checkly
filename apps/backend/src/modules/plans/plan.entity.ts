@@ -1,11 +1,11 @@
-import { type PlanCategoryDto } from "shared";
-
 import { type Entity } from "~/libs/types/types.js";
 import {
 	type PlanDayDto,
 	type PlanDaysTaskDto,
 	type PlanWithCategoryDto,
 } from "~/modules/plans/plans.js";
+
+import { type PlanCategoryDto, type TaskDto } from "./libs/types/types.js";
 
 class PlanEntity implements Entity {
 	private category?: PlanCategoryDto;
@@ -155,13 +155,14 @@ class PlanEntity implements Entity {
 			days: this.days.map((day) => ({
 				dayNumber: day.dayNumber,
 				id: day.id,
-				tasks: day.tasks.map((task) => ({
+				tasks: day.tasks.map((task: TaskDto) => ({
 					completedAt: task.completedAt,
 					description: task.description,
 					executionTimeType: task.executionTimeType,
 					id: task.id,
 					isCompleted: task.isCompleted,
 					order: task.order,
+					planDayId: task.planDayId,
 					title: task.title,
 				})),
 			})),

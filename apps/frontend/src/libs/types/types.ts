@@ -8,8 +8,6 @@ export { type PlanEditForm } from "./plan-edit-form.type.js";
 export { type PlanDay } from "./plan/plan-day.type.js";
 export { type PlanStyleOption } from "./plan/plan-style-option.type.js";
 export { type ViewOptions } from "./plan/plan-view-option.type.js";
-export { type Plan } from "./plan/plan.type.js";
-export { type Task } from "./plan/task.type.js";
 export {
 	type CheckboxQuestionProperties,
 	type MixedAnswer,

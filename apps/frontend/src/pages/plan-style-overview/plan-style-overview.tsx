@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { StarsYellow02 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { AppHeader, DecorativeImage } from "~/libs/components/components.js";
+import { PLAN_TEMPLATE } from "~/libs/components/plan-styles/mocks/plan-mocks.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { MESSAGES } from "~/libs/constants/constants.js";
 import { AppRoute, DataStatus, PlanCategoryId } from "~/libs/enums/enums.js";
@@ -24,6 +25,7 @@ import styles from "./styles.module.css";
 const PlanStyleOverview: React.FC = () => {
 	const user = useAppSelector((state) => state.auth.user);
 	const selectedStyle = useAppSelector((state) => state.plan.selectedStyle);
+	const currentPlan = useAppSelector(({ plan }) => plan.plan) ?? PLAN_TEMPLATE;
 	const isAuthenticated = Boolean(user);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
@@ -74,7 +76,7 @@ const PlanStyleOverview: React.FC = () => {
 			</div>
 			<div className={getClassNames(styles["container"], "grid-pattern")}>
 				<div className={styles["plan-content"]}>
-					<PlanStyle inputStyle={selectedStyle} />
+					<PlanStyle inputStyle={selectedStyle} plan={currentPlan} />
 					<DecorativeImage
 						className={styles["yellow-stars-reflection"]}
 						src={StarsYellow02}

@@ -1,4 +1,5 @@
 import { type PlanCategoryDto } from "../../../plan-categories/plan-categories.js";
+import { type TaskDto } from "../../../tasks/tasks.js";
 
 type PlanDayDto = {
 	dayNumber: number;
@@ -21,16 +22,6 @@ type PlanDto = {
 
 type PlanWithCategoryDto = PlanDaysTaskDto & {
 	category?: PlanCategoryDto;
-};
-
-type TaskDto = {
-	completedAt: null | string;
-	description: string;
-	executionTimeType: string;
-	id: number;
-	isCompleted: boolean;
-	order: number;
-	title: string;
 };
 
 export {

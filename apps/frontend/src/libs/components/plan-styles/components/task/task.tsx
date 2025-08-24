@@ -5,7 +5,7 @@ import { type PlanStyleOption } from "~/libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	id: string;
+	id: number;
 	inputStyle: PlanStyleOption;
 	taskText: string;
 };
@@ -15,6 +15,8 @@ const Task: React.FC<Properties> = ({
 	inputStyle,
 	taskText,
 }: Properties) => {
+	const taskId = id.toString();
+
 	const taskClasses = getClassNames(
 		styles["task"],
 		PlanStyleModules[inputStyle]["task"],
@@ -35,11 +37,11 @@ const Task: React.FC<Properties> = ({
 			<input
 				className={taskCheckboxClasses}
 				disabled
-				id={id}
-				name={`Task${id}`}
+				id={taskId}
+				name={`Task${taskId}`}
 				type="checkbox"
 			/>
-			<label className={taskTextClasses} htmlFor={id}>
+			<label className={taskTextClasses} htmlFor={taskId}>
 				{taskText}
 			</label>
 		</li>

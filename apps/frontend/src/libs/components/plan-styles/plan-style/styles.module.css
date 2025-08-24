@@ -14,6 +14,7 @@
 	min-height: 0;
 	max-height: 250px;
 	overflow-y: hidden;
+	text-align: left;
 }
 
 .selection-container {
@@ -21,6 +22,7 @@
 	min-height: 0;
 	max-height: 285px;
 	overflow-y: hidden;
+	text-align: left;
 }
 
 @media (width <= 768px) {

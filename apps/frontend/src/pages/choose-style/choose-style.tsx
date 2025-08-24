@@ -17,6 +17,7 @@ import {
 	Button,
 	DecorativeImage,
 } from "~/libs/components/components.js";
+import { NOTES_PLAN_TEMPLATE } from "~/libs/components/plan-styles/mocks/plan-mocks.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
@@ -117,7 +118,11 @@ const ChooseStyle: React.FC = () => {
 							role="radio"
 							type="button"
 						>
-							<PlanStyle inputStyle={planStyle} view={PLAN_VIEW_OPTION} />
+							<PlanStyle
+								inputStyle={planStyle}
+								notes={NOTES_PLAN_TEMPLATE}
+								view={PLAN_VIEW_OPTION}
+							/>
 							<span className={styles["card-text"]}>{label}</span>
 						</button>
 					))}
