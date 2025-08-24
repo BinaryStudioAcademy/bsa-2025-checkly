@@ -17,6 +17,8 @@ type Properties<T extends FieldValues> = {
 	errors: FieldErrors<T>;
 	isRequired?: boolean;
 	label: string;
+	max?: string;
+	min?: string;
 	name: FieldPath<T>;
 	placeholder?: string;
 	type?: "date" | "email" | "password" | "text";
@@ -27,6 +29,8 @@ const Input = <T extends FieldValues>({
 	errors,
 	isRequired,
 	label,
+	max,
+	min,
 	name,
 	placeholder = "",
 	type = "text",
@@ -47,6 +51,7 @@ const Input = <T extends FieldValues>({
 		styles["input-container"],
 		"cluster",
 	);
+
 	const inputFieldClass = getClassNames(
 		styles["input-field"],
 		hasError && styles["input-field--error"],
@@ -64,6 +69,8 @@ const Input = <T extends FieldValues>({
 					aria-invalid={hasError}
 					className={inputFieldClass}
 					id={inputId}
+					max={max}
+					min={min}
 					name={name}
 					placeholder={placeholder}
 					required={isRequired}

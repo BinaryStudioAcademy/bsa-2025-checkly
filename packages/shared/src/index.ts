@@ -1,4 +1,10 @@
-export { LAST_INDEX, ONE, ZERO } from "./libs/constants/constants.js";
+export {
+	LAST_INDEX,
+	MAX_AGE,
+	MIN_AGE,
+	ONE,
+	ZERO,
+} from "./libs/constants/constants.js";
 export {
 	UPLOAD_MAX_FILE_SIZE_BYTES,
 	UPLOAD_MAX_FILE_SIZE_MB,
