@@ -51,11 +51,14 @@ const ChooseStyle: React.FC = () => {
 	);
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 
-	const getStyleId = useCallback((styleName: string): number => {
-		const style = planStyles.find((s) => s.name === styleName);
+	const getStyleId = useCallback(
+		(styleName: string): number => {
+			const style = planStyles.find((s) => s.name === styleName);
 
-		return style?.id ?? PlanStyleEnum.WITH_REMARKS;
-	}, [planStyles]);
+			return style?.id ?? PlanStyleEnum.WITH_REMARKS;
+		},
+		[planStyles],
+	);
 
 	const validateAndGetStyle = useCallback((): StyleValidationResult => {
 		if (!planId || !selectedCard) {
@@ -86,13 +89,13 @@ const ChooseStyle: React.FC = () => {
 
 	const handleSaveStyle = useCallback(async (): Promise<void> => {
 		const validation = validateAndGetStyle();
-		
+
 		if (!validation) {
 			return;
 		}
 
 		setIsSaving(true);
-		
+
 		try {
 			await updatePlanStyle(validation.planId, validation.styleId);
 		} catch {
