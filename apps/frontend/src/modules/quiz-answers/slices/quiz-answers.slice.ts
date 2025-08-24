@@ -7,19 +7,22 @@ import { saveAnswers } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
+	quizId?: number;
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
+	quizId: undefined,
 };
 
-const { actions, name } = createSlice({
+const { actions, name, reducer } = createSlice({
 	extraReducers(builder) {
 		builder.addCase(saveAnswers.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
-		builder.addCase(saveAnswers.fulfilled, (state) => {
+		builder.addCase(saveAnswers.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
+			state.quizId = action.payload;
 		});
 		builder.addCase(saveAnswers.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -30,4 +33,4 @@ const { actions, name } = createSlice({
 	reducers: {},
 });
 
-export { actions, name };
+export { actions, name, reducer };

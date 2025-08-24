@@ -11,4 +11,4 @@ const quizAnswerApi = new QuizAnswerApi({
 });
 
 export { quizAnswerApi };
-export { actions } from "./slices/quiz-answers.js";
+export { actions, reducer } from "./slices/quiz-answers.js";

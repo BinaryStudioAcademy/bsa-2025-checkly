@@ -177,8 +177,6 @@ class PlanService implements Service {
 			PlanAction.PLAN,
 		)) as GeneratedPlanDTO;
 
-		// TODO: mock data
-		// const generatedPlan: PlanDaysTaskDto = MOCK_GENERATED_PLAN;
 		await this.planRepository.regenerate(id, generatedPlan);
 
 		const newPlan = await this.planRepository.findWithRelations(id);

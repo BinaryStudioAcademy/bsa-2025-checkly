@@ -51,9 +51,9 @@ const PlanGeneration: React.FC = () => {
 
 	useEffect(() => {
 		const generatePlan = async (): Promise<void> => {
-			const stored = await storage.get(StorageKey.QUIZ_STATE);
-			const quizState = stored
-				? (JSON.parse(stored) as QuizState)
+			const storedQuiz = await storage.get(StorageKey.QUIZ_STATE);
+			const quizState = storedQuiz
+				? (JSON.parse(storedQuiz) as QuizState)
 				: DEFAULT_QUIZ_STATE;
 
 			const quizAnswers: QuizAnswersRequestDto = {
