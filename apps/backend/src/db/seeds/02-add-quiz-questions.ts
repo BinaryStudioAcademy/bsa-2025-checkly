@@ -515,7 +515,8 @@ async function seed(knex: Knex): Promise<void> {
 			text: "🌐 No internet during parts of the day",
 		},
 		{ order: 4, question_id: 20, text: "📍 Only at home (can't go out)" },
-		{ order: 5, question_id: 20, text: "✍️ Other" },
+		{ order: 5, question_id: 20, text: "💪 No limitations" },
+		{ order: 6, question_id: 20, text: "✍️ Other" },
 
 		{ order: 1, question_id: 21, text: "✅ Yes, and I loved it" },
 		{ order: 2, question_id: 21, text: "✅ Yes, but I dropped it quickly" },
