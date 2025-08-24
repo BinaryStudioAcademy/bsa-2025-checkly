@@ -55,22 +55,22 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 					/>
 				)}
 
-				{showSkip ? (
+				<Button
+					className={styles["navigation-button"]}
+					isDisabled={isNextDisabled}
+					label={nextButtonLabel}
+					onClick={onNext}
+					size={ButtonSizes.LARGE}
+					variant={ButtonVariants.PRIMARY}
+				/>
+
+				{showSkip && (
 					<Button
 						className={styles["navigation-button"]}
-						label={ButtonLabels.NEXT}
+						label={ButtonLabels.SKIP}
 						onClick={onSkip}
 						size={ButtonSizes.LARGE}
-						variant={ButtonVariants.PRIMARY}
-					/>
-				) : (
-					<Button
-						className={styles["navigation-button"]}
-						isDisabled={isNextDisabled}
-						label={nextButtonLabel}
-						onClick={onNext}
-						size={ButtonSizes.LARGE}
-						variant={ButtonVariants.PRIMARY}
+						variant={ButtonVariants.TRANSPARENT}
 					/>
 				)}
 			</div>
