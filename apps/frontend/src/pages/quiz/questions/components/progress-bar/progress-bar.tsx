@@ -37,7 +37,7 @@ const ProgressBar: React.FC<ProgressBarProperties> = ({
 	);
 
 	const isAnswered = (questionIndex: number): string => {
-		return answers[questionIndex] ? "answered" : "";
+		return Object.values(answers).length >= questionIndex ? "answered" : "";
 	};
 
 	const createNavigationHandler = useCallback(

@@ -18,12 +18,13 @@
 }
 
 .question-number {
-	font-size: var(--text-size-heading-3);
+	font-size: var(--text-size-heading-5);
 	color: var(--color-header-pink);
 }
 
 .question-title {
-	max-width: 600px;
+	max-width: 750px;
+	font-size: var(--text-size-heading-3);
 	text-align: center;
 	text-wrap: balance;
 }
