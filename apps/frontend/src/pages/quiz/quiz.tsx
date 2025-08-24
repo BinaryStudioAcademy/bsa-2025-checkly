@@ -113,7 +113,7 @@ const Quiz: React.FC = (): React.ReactElement => {
 				/>
 
 				<div className={getClassNames("wrapper", styles["quiz-wrapper"])}>
-					<div className="flow">
+					<div className="flow-loose-xl">
 						<h1 className={styles["title"]}>
 							Pick the field you&apos;d like to improve
 						</h1>

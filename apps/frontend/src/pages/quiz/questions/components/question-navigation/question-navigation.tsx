@@ -44,6 +44,7 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 						{ButtonLabels.BACK_TO_START_QUIZ_PAGE}
 					</Link>
 				)}
+
 				{!isFirst && (
 					<Button
 						className={styles["navigation-button"]}
@@ -54,22 +55,22 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 					/>
 				)}
 
-				<Button
-					className={styles["navigation-button"]}
-					isDisabled={isNextDisabled}
-					label={nextButtonLabel}
-					onClick={onNext}
-					size={ButtonSizes.LARGE}
-					variant={ButtonVariants.PRIMARY}
-				/>
-
-				{showSkip && (
+				{showSkip ? (
 					<Button
 						className={styles["navigation-button"]}
-						label={ButtonLabels.SKIP}
+						label={ButtonLabels.NEXT}
 						onClick={onSkip}
 						size={ButtonSizes.LARGE}
-						variant={ButtonVariants.TRANSPARENT}
+						variant={ButtonVariants.PRIMARY}
+					/>
+				) : (
+					<Button
+						className={styles["navigation-button"]}
+						isDisabled={isNextDisabled}
+						label={nextButtonLabel}
+						onClick={onNext}
+						size={ButtonSizes.LARGE}
+						variant={ButtonVariants.PRIMARY}
 					/>
 				)}
 			</div>

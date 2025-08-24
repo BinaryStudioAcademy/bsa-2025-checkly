@@ -39,6 +39,12 @@
 	left: -5%;
 }
 
+@media (width >= 480px) {
+	.quiz-category-card-image {
+		left: 0%;
+	}
+}
+
 @media (width >= 768px) {
 	.quiz-category-card-image {
 		top: -20%;
@@ -46,7 +52,7 @@
 }
 
 .quiz-category-card-icon {
-	--card-icon-size: clamp(90px, 8vw, 110px);
+	--card-icon-size: clamp(90px, 14vw, 110px);
 
 	width: var(--card-icon-size);
 	height: var(--card-icon-size);

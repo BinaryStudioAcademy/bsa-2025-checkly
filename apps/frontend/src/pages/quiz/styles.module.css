@@ -24,8 +24,6 @@
 }
 
 .quiz-wrapper {
-	--flow-space: var(--space-xl);
-
 	padding-block: var(--space-l);
 }
 
