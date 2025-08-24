@@ -34,10 +34,7 @@ const getCurrentAnswer = (
 	answers: Record<number, QuizAnswer>,
 	currentQuestion: number,
 ): QuizAnswer | undefined => {
-	const allAnswers = Object.values(answers);
-	const OFFSET = 1;
-
-	return allAnswers[currentQuestion - OFFSET];
+	return answers[currentQuestion];
 };
 
 const isQuestionCompleted = (
