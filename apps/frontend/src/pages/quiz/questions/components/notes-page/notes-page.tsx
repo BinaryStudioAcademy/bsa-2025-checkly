@@ -4,13 +4,13 @@ import { PlaceholderValues } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { sanitizeTextInput } from "~/libs/helpers/helpers.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
-import { actions } from "~/modules/quiz/quiz.js";
+import { actions } from "~/modules/quiz-questions/quiz-questions.js";
 
 import styles from "./styles.module.css";
 
 const NotesPage: React.FC = (): React.ReactElement => {
 	const dispatch = useAppDispatch();
-	const { notes } = useAppSelector((state) => state.quiz);
+	const { notes } = useAppSelector((state) => state.quizQuestion);
 
 	const handleNotesChange = useCallback(
 		(event: React.ChangeEvent<HTMLTextAreaElement>): void => {

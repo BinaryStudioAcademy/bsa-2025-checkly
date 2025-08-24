@@ -8,7 +8,7 @@ import {
 } from "~/assets/img/shared/illustrations/categories/categories.img.js";
 import { CategoriesColors } from "~/libs/enums/enums.js";
 import { type QuizCategoryProperties } from "~/libs/types/types.js";
-import { QuizCategory } from "~/modules/quiz/libs/enums/enums.js";
+import { QuizCategory } from "~/modules/quiz-questions/libs/enums/enums.js";
 
 const QUIZ_CATEGORIES: QuizCategoryProperties[] = [
 	{

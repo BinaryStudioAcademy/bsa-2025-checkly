@@ -14,7 +14,12 @@ import {
 	reducer as planCategoryReducer,
 } from "~/modules/plan-categories/plan-categories.js";
 import { planApi, reducer as planReducer } from "~/modules/plans/plans.js";
-import { quizApi, reducer as quizReducer } from "~/modules/quiz/quiz.js";
+import { quizAnswerApi } from "~/modules/quiz-answers/quiz-answers.js";
+import {
+	quizQuestionApi,
+	reducer as quizQuestionReducer,
+} from "~/modules/quiz-questions/quiz-questions.js";
+import { quizApi } from "~/modules/quiz/quiz.js";
 import { userApi } from "~/modules/users/users.js";
 
 import { notifications } from "../notifications/notifications.js";
@@ -26,7 +31,9 @@ type ExtraArguments = {
 	notifications: typeof notifications;
 	planApi: typeof planApi;
 	planCategoryApi: typeof planCategoryApi;
+	quizAnswerApi: typeof quizAnswerApi;
 	quizApi: typeof quizApi;
+	quizQuestionApi: typeof quizQuestionApi;
 	storage: BaseStorage;
 	userApi: typeof userApi;
 };
@@ -35,7 +42,7 @@ type RootReducer = {
 	auth: ReturnType<typeof authReducer>;
 	plan: ReturnType<typeof planReducer>;
 	planCategory: ReturnType<typeof planCategoryReducer>;
-	quiz: ReturnType<typeof quizReducer>;
+	quizQuestion: ReturnType<typeof quizQuestionReducer>;
 };
 
 class Store {
@@ -53,7 +60,9 @@ class Store {
 			notifications,
 			planApi,
 			planCategoryApi,
+			quizAnswerApi,
 			quizApi,
+			quizQuestionApi,
 			storage,
 			userApi,
 		};
@@ -73,7 +82,7 @@ class Store {
 				auth: authReducer,
 				plan: planReducer,
 				planCategory: planCategoryReducer,
-				quiz: quizReducer,
+				quizQuestion: quizQuestionReducer,
 			},
 		});
 	}

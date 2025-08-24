@@ -1,5 +1,5 @@
 import { DataStatus, QuizIndexes } from "~/libs/enums/enums.js";
-import { type QuizState } from "~/modules/quiz/slices/quiz.slice.js";
+import { type QuizState } from "~/modules/quiz-questions/slices/quiz-questions.slice.js";
 
 const DEFAULT_QUIZ_STATE: QuizState = {
 	answers: {},

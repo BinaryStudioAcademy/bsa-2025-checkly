@@ -33,9 +33,9 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 	);
 
 	const handleOptionChange = useCallback(
-		(option: string, checked: boolean): void => {
+		(option: number, optionText: string, checked: boolean): void => {
 			const newSelectedOptions = toggleOption(option, selectedOptions, checked);
-			const isSwitchingFromOther = isOtherOption(option) && !checked;
+			const isSwitchingFromOther = isOtherOption(optionText) && !checked;
 			const newUserInput = isSwitchingFromOther ? "" : userInput;
 
 			setSelectedOptions(newSelectedOptions);
@@ -52,9 +52,9 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 	);
 
 	const handleInputChange = useCallback(
-		(optionText: string) =>
+		(optionId: number, optionText: string) =>
 			(event_: React.ChangeEvent<HTMLInputElement>): void => {
-				handleOptionChange(optionText, event_.target.checked);
+				handleOptionChange(optionId, optionText, event_.target.checked);
 			},
 		[handleOptionChange],
 	);
@@ -73,15 +73,15 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 			<div className={styles["checkbox-section"]}>
 				<div className={styles["options-container"]}>
 					{question.options.map((option) => (
-						<label className={styles["checkbox-option"]} key={option.text}>
+						<label className={styles["checkbox-option"]} key={option.id}>
 							<input
-								checked={isOptionSelected(option.text, selectedOptions)}
+								checked={isOptionSelected(option.id, selectedOptions)}
 								className={styles["checkbox-input"]}
-								onChange={handleInputChange(option.text)}
+								onChange={handleInputChange(option.id, option.text)}
 								type={ElementTypes.CHECKBOX}
 							/>
 							<div className={styles["checkbox-custom"]}>
-								{isOptionSelected(option.text, selectedOptions) && (
+								{isOptionSelected(option.id, selectedOptions) && (
 									<img alt="Selected" src={logoIcon} />
 								)}
 							</div>

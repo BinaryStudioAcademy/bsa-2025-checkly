@@ -5,8 +5,10 @@ import { authController } from "~/modules/auth/auth.js";
 import { planCategoryController } from "~/modules/plan-categories/plan-categories.js";
 import { planDayController } from "~/modules/plan-days/plan-days.js";
 import { planController } from "~/modules/plans/plans.js";
+import { quizAnswerOptionController } from "~/modules/quiz-answer-options/quiz-answer-options.js";
 import { quizAnswerController } from "~/modules/quiz-answers/quiz-answers.js";
 import { quizQuestionController } from "~/modules/quiz-questions/quiz-question.js";
+import { quizController } from "~/modules/quiz/quiz.js";
 import { taskController } from "~/modules/tasks/tasks.js";
 import { userController } from "~/modules/users/users.js";
 
@@ -24,6 +26,8 @@ const apiV1 = new BaseServerApplicationApi(
 	...quizAnswerController.routes,
 	...quizQuestionController.routes,
 	...planCategoryController.routes,
+	...quizController.routes,
+	...quizAnswerOptionController.routes,
 );
 const serverApplication = new BaseServerApplication({
 	apis: [apiV1],

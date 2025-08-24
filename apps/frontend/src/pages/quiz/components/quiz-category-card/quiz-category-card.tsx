@@ -4,7 +4,7 @@ import { ElementTypes, KeyboardKeys, QuizIndexes } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { type QuizCategoryCardProperties } from "~/libs/types/types.js";
-import { formatCategoryTitle } from "~/modules/quiz/libs/helpers/format-category-title.js";
+import { formatCategoryTitle } from "~/modules/quiz-questions/libs/helpers/format-category-title.js";
 
 import styles from "./styles.module.css";
 

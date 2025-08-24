@@ -6,8 +6,8 @@ import {
 	type QuizAnswer,
 	type QuizCategoryValue,
 	type QuizQuestionsResponseDto,
-} from "~/modules/quiz/libs/types/types.js";
-import { fetchQuestions } from "~/modules/quiz/slices/actions.js";
+} from "~/modules/quiz-questions/libs/types/types.js";
+import { fetchQuestions } from "~/modules/quiz-questions/slices/actions.js";
 
 interface QuizState {
 	answers: Record<number, QuizAnswer>;
@@ -42,7 +42,7 @@ const { actions, name, reducer } = createSlice({
 			});
 	},
 	initialState,
-	name: "quiz",
+	name: "quiz-question",
 	reducers: {
 		initializeFromStorage: (state, action: { payload: Partial<QuizState> }) => {
 			const { answers, currentQuestion, notes, questions, selectedCategory } =

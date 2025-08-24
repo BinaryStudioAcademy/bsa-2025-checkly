@@ -1,5 +1,5 @@
 import { DataStatus } from "~/libs/enums/enums.js";
-import { type QuizQuestionsResponseDto } from "~/modules/quiz/libs/types/types.js";
+import { type QuizQuestionsResponseDto } from "~/modules/quiz-questions/libs/types/types.js";
 
 const isIdleStatus = (dataStatus: string): boolean => {
 	return dataStatus === DataStatus.IDLE;

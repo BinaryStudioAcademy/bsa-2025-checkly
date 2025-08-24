@@ -1,0 +1,1 @@
+export { QuizAnswerOptionApiPath } from "shared";

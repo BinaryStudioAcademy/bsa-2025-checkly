@@ -2,7 +2,7 @@ import { type QuestionDto } from "~/libs/types/types.js";
 import {
 	type QuizAnswer,
 	type QuizCategoryValue,
-} from "~/modules/quiz/quiz.js";
+} from "~/modules/quiz-questions/quiz-questions.js";
 
 type CheckboxQuestionProperties = {
 	currentAnswer?: MultipleAnswers[];

@@ -1,5 +1,5 @@
-import { QuizCategory } from "~/modules/quiz/libs/enums/enums.js";
-import { type QuizCategoryValue } from "~/modules/quiz/quiz.js";
+import { QuizCategory } from "~/modules/quiz-questions/libs/enums/enums.js";
+import { type QuizCategoryValue } from "~/modules/quiz-questions/quiz-questions.js";
 
 const formatCategoryTitle = (category: QuizCategoryValue): string => {
 	const titleMap: Record<QuizCategoryValue, string> = {

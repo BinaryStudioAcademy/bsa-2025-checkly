@@ -11,8 +11,8 @@ import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { AppRoute, ButtonLabels, ButtonVariants } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
-import { type QuizCategoryValue } from "~/modules/quiz/libs/types/types.js";
-import { actions } from "~/modules/quiz/quiz.js";
+import { type QuizCategoryValue } from "~/modules/quiz-questions/libs/types/types.js";
+import { actions } from "~/modules/quiz-questions/quiz-questions.js";
 import { QuizCategoryCard } from "~/pages/quiz/components/quiz-category-card/quiz-category-card.js";
 import { QUIZ_CATEGORIES } from "~/pages/quiz/mock-data/index.js";
 
@@ -22,7 +22,7 @@ const Quiz: React.FC = (): React.ReactElement => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
-	const { selectedCategory } = useAppSelector((state) => state.quiz);
+	const { selectedCategory } = useAppSelector((state) => state.quizQuestion);
 
 	const handleCategorySelect = useCallback(
 		(category: QuizCategoryValue): void => {
