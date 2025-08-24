@@ -8,7 +8,7 @@ import {
 	DecorativeImage,
 	Input,
 } from "~/libs/components/components.js";
-import { INCREMENT_VALUE } from "~/libs/constants/constants.js";
+import { ONE } from "~/libs/constants/constants.js";
 import { SuccessMessage } from "~/libs/enums/enums.js";
 import { type PlanEditForm } from "~/libs/types/types.js";
 
@@ -54,7 +54,7 @@ const DayEditor: FC<Properties> = ({ control, dayIndex, errors }) => {
 					<div className={styles["activityRow"]} key={field.id}>
 						<div className={styles["activityHeader"]}>
 							<span className={styles["activityLabel"]}>
-								{`Task ${String(taskIndex + INCREMENT_VALUE)}`}
+								{`Task ${String(taskIndex + ONE)}`}
 							</span>
 
 							<div className={styles["actionButtons"]}>

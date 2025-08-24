@@ -32,4 +32,5 @@ export {
 	type ServerErrorResponse,
 	type ValidationSchema,
 	type ValueOf,
+	type VerifyTokenRequestDto,
 } from "shared";

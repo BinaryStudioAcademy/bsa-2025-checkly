@@ -1,4 +1,6 @@
 export {
+	BASE_DIMENSIONS,
+	EDITOR_ROWS,
 	LAST_INDEX,
 	MAX_AGE,
 	MIN_AGE,
@@ -122,6 +124,11 @@ export {
 } from "./modules/tasks/tasks.js";
 export {
 	AvatarTypes,
+	type ForgotPasswordRequestDto,
+	forgotPasswordValidationSchema,
+	type ResetPasswordFormValidationSchema,
+	type ResetPasswordRequestDto,
+	resetPasswordValidationSchema,
 	S3BucketIndex,
 	type SignUpFormValidationSchema,
 	type UserDto,
@@ -138,4 +145,5 @@ export {
 	userUpdateValidationSchema,
 	UserValidationMessage,
 	UserValidationRule,
+	type VerifyTokenRequestDto,
 } from "./modules/users/users.js";

@@ -7,10 +7,13 @@ import {
 import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
+	type ForgotPasswordRequestDto,
+	type ResetPasswordRequestDto,
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
+	type VerifyTokenRequestDto,
 } from "~/modules/users/users.js";
 
 import { type AuthService } from "./auth.service.js";
@@ -89,6 +92,42 @@ class AuthController extends BaseController {
 			method: HTTPRequestMethod.GET,
 			path: AuthApiPath.ME,
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.sendResetLink(
+					options as APIHandlerOptions<{
+						body: ForgotPasswordRequestDto;
+					}>,
+				),
+			isPublic: true,
+			method: HTTPRequestMethod.POST,
+			path: AuthApiPath.FORGOT_PASSWORD,
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.verifyToken(
+					options as APIHandlerOptions<{
+						body: VerifyTokenRequestDto;
+					}>,
+				),
+			isPublic: true,
+			method: HTTPRequestMethod.POST,
+			path: AuthApiPath.VERIFY_TOKEN,
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.resetPassword(
+					options as APIHandlerOptions<{
+						body: ResetPasswordRequestDto;
+					}>,
+				),
+			isPublic: true,
+			method: HTTPRequestMethod.POST,
+			path: AuthApiPath.RESET_PASSWORD,
+		});
 	}
 
 	/**
@@ -116,6 +155,118 @@ class AuthController extends BaseController {
 	private getAuthenticatedUser(options: APIHandlerOptions): APIHandlerResponse {
 		return {
 			payload: options.user,
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /auth/reset-password:
+	 *    post:
+	 *      summary: Reset a user's password
+	 *      description: Allows a user to reset their password.
+	 *      requestBody:
+	 *        description: Reset password payload
+	 *        required: true
+	 *        content:
+	 *          application/json:
+	 *            schema:
+	 *              type: object
+	 *              properties:
+	 *                userId:
+	 *                  type: number
+	 *                  description: Id of the user
+	 *                password:
+	 *                  type: string
+	 *                  format: password
+	 *                  description: The new password to set
+	 *              required:
+	 *                - userId
+	 *                - password
+	 *      responses:
+	 *        200:
+	 *          description: Password reset successful
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                nullable: true
+	 *        500:
+	 *          description: Internal server error
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                properties:
+	 *                  message:
+	 *                    type: string
+	 *                    description: The error message
+	 */
+	private async resetPassword(
+		options: APIHandlerOptions<{
+			body: ResetPasswordRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		await this.authService.resetPassword(options.body);
+
+		return {
+			payload: null,
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /auth/forgot-password:
+	 *    post:
+	 *      summary: Send password reset link
+	 *      description: Sends a password reset link to the user's email address.
+	 *      requestBody:
+	 *        description: Forgot password payload
+	 *        required: true
+	 *        content:
+	 *          application/json:
+	 *            schema:
+	 *              type: object
+	 *              properties:
+	 *                email:
+	 *                  type: string
+	 *                  format: email
+	 *                  description: The email address of the user requesting a password reset
+	 *              required:
+	 *                - email
+	 *      responses:
+	 *        200:
+	 *          description: Reset link sent successfully
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                nullable: true
+	 *        500:
+	 *          description: Internal server error
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                properties:
+	 *                  message:
+	 *                    type: string
+	 *                    description: The error message
+	 *                  status:
+	 *                    type: number
+	 *                    description: The HTTP status code
+	 */
+
+	private async sendResetLink(
+		options: APIHandlerOptions<{
+			body: ForgotPasswordRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		await this.authService.sendResetLink(options.body);
+
+		return {
+			payload: null,
 			status: HTTPCode.OK,
 		};
 	}
@@ -234,6 +385,77 @@ class AuthController extends BaseController {
 		return {
 			payload: await this.authService.signUp(options.body),
 			status: HTTPCode.CREATED,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /auth/verify-token:
+	 *    post:
+	 *      summary: Verify password reset token
+	 *      description: Verifies whether a password reset token is valid and not expired.
+	 *      requestBody:
+	 *        description: Token verification payload
+	 *        required: true
+	 *        content:
+	 *          application/json:
+	 *            schema:
+	 *              type: object
+	 *              properties:
+	 *                token:
+	 *                  type: string
+	 *                  description: The password reset token to verify
+	 * 				  userId:
+	 * 					type: number
+	 * 					description: The id of the user who is trying to verify token
+	 *              required:
+	 *                - token
+	 *      responses:
+	 *        200:
+	 *          description: Token is valid
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                nullable: true
+	 *        404:
+	 *          description: Invalid token
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                properties:
+	 *                  message:
+	 *                    type: string
+	 *                    description: The error message
+	 *                  status:
+	 *                    type: number
+	 *                    description: The HTTP status code
+	 *        500:
+	 *          description: Internal server error
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                properties:
+	 *                  message:
+	 *                    type: string
+	 *                    description: The error message
+	 *                  status:
+	 *                    type: number
+	 *                    description: The HTTP status code
+	 */
+
+	private async verifyToken(
+		options: APIHandlerOptions<{
+			body: VerifyTokenRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		await this.authService.verifyToken(options.body);
+
+		return {
+			payload: null,
+			status: HTTPCode.OK,
 		};
 	}
 }
