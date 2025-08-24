@@ -1,7 +1,4 @@
 const MIN_PAGES = 1;
 const FIRST_PAGE = 1;
-const SECOND_PAGE = 2;
-const THIRD_PAGE = 3;
-const DEFAULT_PAGES = [FIRST_PAGE, SECOND_PAGE, THIRD_PAGE] as const;
 
-export { DEFAULT_PAGES, FIRST_PAGE, MIN_PAGES };
+export { FIRST_PAGE, MIN_PAGES };

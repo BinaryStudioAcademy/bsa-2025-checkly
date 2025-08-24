@@ -4,7 +4,6 @@ import JSZip from "jszip";
 import { PLAN } from "~/libs/components/plan-styles/mocks/plan-mocks.js";
 import {
 	type CategoryId,
-	DEFAULT_PAGES,
 	FIRST_PAGE,
 	getCategoryStyle,
 	MAX_DAYS_PER_PAGE,
@@ -65,22 +64,17 @@ const exportPdf = createAsyncThunk<
 	const view = getCategoryStyle(category);
 	const format = PaperFormat.A4;
 
-	const pages = DEFAULT_PAGES;
+	const fileName = `${PlanName.PLAN_1}.${FileExtension.PDF}`;
+	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
+		format,
+		html: view,
+	});
 
-	for (const page of pages) {
-		const fileName = `${PlanName.PLAN_1}-part-${String(page)}.${FileExtension.PDF}`;
-		const blob = await pdfExportApi.exportPlan(backendEndpoint, {
-			format,
-			html: view,
-			page,
-		});
-
-		downloadFile(blob, fileName);
-	}
+	downloadFile(blob, fileName);
 
 	notifications.success(MESSAGES.DOWNLOAD.SUCCESS);
 
-	return { fileName: `${PlanName.PLAN_1}-part-1.${FileExtension.PDF}` };
+	return { fileName };
 });
 
 const exportDesktopPng = createAsyncThunk<

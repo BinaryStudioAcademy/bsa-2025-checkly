@@ -5,11 +5,7 @@ export {
 	DEFAULT_WIDTH,
 	LAST_INDEX,
 } from "./numbers.js";
-export {
-	DEFAULT_PAGES,
-	FIRST_PAGE,
-	MIN_PAGES,
-} from "./pdf-export.constants.js";
+export { FIRST_PAGE, MIN_PAGES } from "./pdf-export.constants.js";
 export {
 	type CategoryId,
 	getCategoryIcon,
