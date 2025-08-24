@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { logoIcon } from "~/assets/img/shared/shared.img.js";
 import { ElementTypes, PlaceholderValues } from "~/libs/enums/enums.js";
-import { sanitizeTextInput } from "~/libs/helpers/helpers.js";
+import { getClassNames, sanitizeTextInput } from "~/libs/helpers/helpers.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { type SingleChoiceWithTextQuestionProperties } from "~/libs/types/types.js";
 import { isOtherOption } from "~/pages/quiz/questions/libs/utilities.js";
@@ -95,7 +95,7 @@ const SingleChoiceWithTextQuestion: React.FC<
 			</div>
 
 			{isOtherSelected && (
-				<div className={styles["text-section"]}>
+				<div className={getClassNames("flow", styles["text-input-wrapper"])}>
 					<label
 						className={styles["label"]}
 						htmlFor="single-choice-text-answer"

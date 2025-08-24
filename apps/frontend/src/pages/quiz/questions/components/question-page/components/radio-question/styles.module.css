@@ -4,8 +4,6 @@
 	gap: var(--space-m);
 	width: 100%;
 	max-width: 600px;
-	margin-right: auto;
-	margin-left: auto;
 }
 
 .radio-question-few-options {
