@@ -1,4 +1,5 @@
-import { useCallback, useEffect } from "react";
+import { isFulfilled } from "@reduxjs/toolkit";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { StarsYellow02 } from "~/assets/img/shared/shapes/shapes.img.js";
@@ -7,7 +8,7 @@ import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.j
 import { getCategoryName, MESSAGES, ZERO } from "~/libs/constants/constants.js";
 import { AppRoute, DataStatus, PlanCategoryId } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
-import { usePlanCategory } from "~/libs/hooks/hooks.js";
+import { useCallback, usePlanCategory } from "~/libs/hooks/hooks.js";
 import { useAppDispatch } from "~/libs/hooks/use-app-dispatch/use-app-dispatch.hook.js";
 import { useAppSelector } from "~/libs/hooks/use-app-selector/use-app-selector.hook.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
@@ -20,7 +21,11 @@ import {
 import { actions as planActions } from "~/modules/plans/plans.js";
 import { actions as planSliceActions } from "~/modules/plans/slices/plan.slice.js";
 
-import { PlanActions, PlanStyleCategory } from "./components/components.js";
+import {
+	PlanActions,
+	PlanStyleCategory,
+	ToastSuccess,
+} from "./components/components.js";
 import styles from "./styles.module.css";
 
 const PlanStyleOverview: React.FC = () => {
@@ -75,13 +80,28 @@ const PlanStyleOverview: React.FC = () => {
 
 	const pdfExportStatus = useAppSelector((state) => state.pdfExport.dataStatus);
 
+	const handleGoToDashboard = useCallback((): void => {
+		void navigate(AppRoute.DASHBOARD);
+	}, [navigate]);
+
 	const handleDownloadPlan = useCallback(async (): Promise<void> => {
 		try {
-			await dispatch(actions.exportPdf({ category: selectedCategory }));
+			const resultAction = await dispatch(
+				actions.exportPdf({ category: selectedCategory }),
+			);
+
+			if (isFulfilled(resultAction)) {
+				notifications.success(
+					<ToastSuccess
+						message={MESSAGES.DOWNLOAD.SUCCESS}
+						onGoToDashboard={handleGoToDashboard}
+					/>,
+				);
+			}
 		} catch {
 			notifications.error(MESSAGES.DOWNLOAD.FAILED);
 		}
-	}, [dispatch, selectedCategory]);
+	}, [dispatch, selectedCategory, handleGoToDashboard]);
 
 	const handleDownload = useCallback((): void => {
 		void handleDownloadPlan();
@@ -89,10 +109,6 @@ const PlanStyleOverview: React.FC = () => {
 
 	const handleChooseStyle = useCallback((): void => {
 		void navigate(AppRoute.CHOOSE_STYLE);
-	}, [navigate]);
-
-	const handleGoToDashboard = useCallback((): void => {
-		void navigate(AppRoute.DASHBOARD);
 	}, [navigate]);
 
 	return (
