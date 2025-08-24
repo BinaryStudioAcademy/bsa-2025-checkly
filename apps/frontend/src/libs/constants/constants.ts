@@ -1,5 +1,11 @@
 export { MESSAGES } from "./messages.constants.js";
-export { LAST_INDEX } from "./numbers.js";
+export {
+	BASE_DIMENSIONS,
+	EDITOR_ROWS,
+	INCREMENT_VALUE,
+	INITIAL_ITEM,
+	LAST_INDEX,
+} from "./numbers.js";
 export {
 	type CategoryId,
 	getCategoryIcon,

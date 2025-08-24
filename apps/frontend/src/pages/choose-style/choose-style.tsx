@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import {
@@ -22,10 +22,12 @@ import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.j
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
+import { useAppDispatch } from "~/libs/hooks/use-app-dispatch/use-app-dispatch.hook.js";
+import { useAppSelector } from "~/libs/hooks/use-app-selector/use-app-selector.hook.js";
 import { type ViewOptions } from "~/libs/types/types.js";
 import { usePlanStyles } from "~/modules/plan-styles/hooks/use-plan-styles.hook.js";
 import { PlanStyle as PlanStyleEnum } from "~/modules/plan-styles/libs/enums/enums.js";
-import { planApi } from "~/modules/plans/plans.js";
+import { actions as planActions, planApi } from "~/modules/plans/plans.js";
 
 import { styleCards } from "./choose-style.data.js";
 import { CHOOSE_STYLE_MESSAGES } from "./libs/constants/choose-style.constants.js";
@@ -35,17 +37,11 @@ import styles from "./style.module.css";
 const PRESELECTED_ELEMENT_INDEX = 1;
 const PLAN_VIEW_OPTION: ViewOptions = "selection";
 
-const updatePlanStyle = async (
-	planId: number,
-	styleId: number,
-): Promise<void> => {
-	await planApi.updateStyle(planId, styleId);
-	toast.success(CHOOSE_STYLE_MESSAGES.PLAN_STYLE_UPDATED_SUCCESS);
-};
-
 const ChooseStyle: React.FC = () => {
-	const { id: planId } = useParams<{ id: string }>();
+	const plan = useAppSelector((state) => state.plan.plan);
 	const { styles: planStyles } = usePlanStyles();
+	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 	const [selectedCard, setSelectedCard] = useState<null | string>(
 		styleCards[PRESELECTED_ELEMENT_INDEX]?.id ?? null,
 	);
@@ -61,7 +57,7 @@ const ChooseStyle: React.FC = () => {
 	);
 
 	const validateAndGetStyle = useCallback((): StyleValidationResult => {
-		if (!planId || !selectedCard) {
+		if (!plan?.id || !selectedCard) {
 			toast.error(CHOOSE_STYLE_MESSAGES.SELECT_STYLE_AND_PLAN_ID);
 
 			return null;
@@ -77,8 +73,8 @@ const ChooseStyle: React.FC = () => {
 
 		const styleId = getStyleId(selectedStyle.planStyle);
 
-		return { planId: Number(planId), styleId };
-	}, [planId, selectedCard, getStyleId]);
+		return { planId: plan.id, styleId };
+	}, [plan, selectedCard, getStyleId]);
 
 	const handleCardClick = useCallback(
 		(event: React.MouseEvent<HTMLButtonElement>): void => {
@@ -97,13 +93,16 @@ const ChooseStyle: React.FC = () => {
 		setIsSaving(true);
 
 		try {
-			await updatePlanStyle(validation.planId, validation.styleId);
+			await planApi.updateStyle(validation.planId, validation.styleId);
+			await dispatch(planActions.getAllUserPlans());
+			toast.success(CHOOSE_STYLE_MESSAGES.PLAN_STYLE_UPDATED_SUCCESS);
+			void navigate(AppRoute.OVERVIEW_PAGE);
 		} catch {
 			toast.error(CHOOSE_STYLE_MESSAGES.FAILED_TO_UPDATE_PLAN_STYLE);
 		} finally {
 			setIsSaving(false);
 		}
-	}, [validateAndGetStyle]);
+	}, [validateAndGetStyle, dispatch, navigate]);
 
 	const handleSaveStyleClick = useCallback((): void => {
 		void handleSaveStyle();
@@ -122,7 +121,7 @@ const ChooseStyle: React.FC = () => {
 				)}
 			>
 				<div className={styles["nav"]}>
-					<NavLink className={navLink} to={AppRoute.PLAN}>
+					<NavLink className={navLink} to={AppRoute.OVERVIEW_PAGE}>
 						<button aria-label="Go back" className={styles["nav-back-button"]}>
 							<ArrowLeftIcon aria-hidden="true" />
 						</button>
@@ -184,14 +183,6 @@ const ChooseStyle: React.FC = () => {
 						label={isSaving ? "Saving..." : "Save Style"}
 						onClick={handleSaveStyleClick}
 					/>
-					<NavLink className={navLink} to={AppRoute.PLAN}>
-						<Button
-							className={styles["bottom-back-button"]}
-							icon={<ArrowLeftIcon aria-hidden="true" />}
-							label="Back"
-							variant="secondary"
-						/>
-					</NavLink>
 				</div>
 				<DecorativeImage className={styles["flower"]} src={FlowerPink} />
 				<DecorativeImage className={styles["stars"]} src={StarsYellow02} />

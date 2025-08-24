@@ -36,9 +36,11 @@ const planCreate = z.object({
 		.max(PlanValidationRule.TITLE_MAX_LENGTH, {
 			message: PlanValidationMessage.TITLE_LENGTH,
 		}),
-	userId: z.number({
-		required_error: PlanValidationMessage.FIELD_REQUIRED,
-	}),
+	userId: z
+		.number({
+			required_error: PlanValidationMessage.FIELD_REQUIRED,
+		})
+		.nullable(),
 });
 
 type PlanCreateRequestDto = z.infer<typeof planCreate>;

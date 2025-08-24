@@ -17,7 +17,7 @@ type PlanDto = {
 	intensity: string;
 	styleId: number;
 	title: string;
-	userId: number;
+	userId: null | number;
 };
 
 type PlanWithCategoryDto = PlanDaysTaskDto & {

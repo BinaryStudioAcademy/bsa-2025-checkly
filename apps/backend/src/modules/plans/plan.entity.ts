@@ -24,7 +24,7 @@ class PlanEntity implements Entity {
 
 	private title: string;
 
-	private userId: number;
+	private userId: null | number;
 
 	private constructor({
 		category,
@@ -45,7 +45,7 @@ class PlanEntity implements Entity {
 		intensity: string;
 		styleId: number;
 		title: string;
-		userId: number;
+		userId: null | number;
 	}) {
 		this.id = id;
 		this.title = title;
@@ -77,7 +77,7 @@ class PlanEntity implements Entity {
 		intensity: string;
 		styleId: number;
 		title: string;
-		userId: number;
+		userId: null | number;
 	}): PlanEntity {
 		return new PlanEntity({
 			category,
@@ -105,7 +105,7 @@ class PlanEntity implements Entity {
 		intensity: string;
 		styleId: number;
 		title: string;
-		userId: number;
+		userId: null | number;
 	}): PlanEntity {
 		return new PlanEntity({
 			categoryId,
@@ -125,7 +125,7 @@ class PlanEntity implements Entity {
 		intensity: string;
 		styleId: number;
 		title: string;
-		userId: number;
+		userId: null | number;
 	} {
 		return {
 			categoryId: this.categoryId,
@@ -144,7 +144,7 @@ class PlanEntity implements Entity {
 		intensity: string;
 		styleId: number;
 		title: string;
-		userId: number;
+		userId: null | number;
 	} {
 		return {
 			categoryId: this.categoryId,

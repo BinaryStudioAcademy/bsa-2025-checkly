@@ -15,12 +15,12 @@ import {
 	planCreateValidationSchema,
 	type PlanSearchQueryParameter,
 	planSearchQueryParametersValidationSchema,
-	type QuizAnswersRequestDto,
-	quizAnswersValidationSchema,
 } from "~/modules/plans/plans.js";
 
 import { type PlanStyleUpdateRequestDto } from "../plan-styles/libs/types/types.js";
 import { PlansApiPath } from "./libs/enums/enums.js";
+import { type GeneratePlanRequestDto } from "./libs/types/types.js";
+import { generatePlanValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
 /**
  * @swagger
@@ -239,6 +239,7 @@ class PlanController extends BaseController {
 		this.addRoute({
 			handler: (options) =>
 				this.findWithRelations(options as IdParametersOption),
+			isPublic: true,
 			method: HTTPRequestMethod.GET,
 			path: PlansApiPath.PLAN,
 		});
@@ -255,12 +256,12 @@ class PlanController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.generate(options as APIBodyOptions<QuizAnswersRequestDto>),
+				this.generate(options as APIBodyOptions<GeneratePlanRequestDto>),
 			isPublic: true,
 			method: HTTPRequestMethod.POST,
 			path: PlansApiPath.PLAN_GENERATE,
 			validation: {
-				body: quizAnswersValidationSchema,
+				body: generatePlanValidationSchema,
 			},
 		});
 
@@ -478,7 +479,7 @@ class PlanController extends BaseController {
 	 *                   example: "At least one of the selected options or user input must be provided for a non-skipped question."
 	 */
 	private async generate(
-		options: APIBodyOptions<QuizAnswersRequestDto>,
+		options: APIBodyOptions<GeneratePlanRequestDto>,
 	): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.planService.generate(options.body),

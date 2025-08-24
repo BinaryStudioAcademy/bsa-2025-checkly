@@ -53,6 +53,7 @@ class PlanRepository implements Repository {
 		return await this.planModel
 			.query()
 			.where({ userId })
+			.orderBy("createdAt", "desc")
 			.withGraphFetched("days.tasks")
 			.withGraphFetched("category")
 			.then((plans) => plans.map((plan) => PlanEntity.initialize(plan)));

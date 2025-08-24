@@ -14,6 +14,13 @@ const NotesPage: React.FC = (): React.ReactElement => {
 
 	const handleNotesChange = useCallback(
 		(event: React.ChangeEvent<HTMLTextAreaElement>): void => {
+			dispatch(actions.setNotes(event.target.value));
+		},
+		[dispatch],
+	);
+
+	const handleNotesBlur = useCallback(
+		(event: React.FocusEvent<HTMLTextAreaElement>): void => {
 			dispatch(actions.setNotes(sanitizeTextInput(event.target.value)));
 		},
 		[dispatch],
@@ -33,6 +40,7 @@ const NotesPage: React.FC = (): React.ReactElement => {
 
 				<textarea
 					className={styles["notes-textarea"]}
+					onBlur={handleNotesBlur}
 					onChange={handleNotesChange}
 					placeholder={PlaceholderValues.WRITE_YOUR_NOTES_HERE}
 					value={notes}

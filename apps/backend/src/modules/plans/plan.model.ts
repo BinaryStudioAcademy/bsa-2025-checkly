@@ -53,7 +53,7 @@ class PlanModel extends AbstractModel {
 
 	public title!: string;
 
-	public userId!: number;
+	public userId!: null | number;
 }
 
 export { PlanModel };
