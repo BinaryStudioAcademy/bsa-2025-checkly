@@ -3,9 +3,15 @@
 	flex-direction: column;
 	gap: var(--space-l);
 	width: 100%;
-	max-width: 600px;
+	max-width: 400px;
 	margin-right: auto;
 	margin-left: auto;
+}
+
+@media (width >= 768px) {
+	.single-choice-with-text-question {
+		max-width: 600px;
+	}
 }
 
 .radio-section,
