@@ -64,7 +64,7 @@ const PlanStyleOverview: React.FC = () => {
 		}
 	}, [user, dispatch]);
 
-	const getStyleFromPlan = (): PlanStyleOption => {
+	const getStyleFromPlan = useCallback((): PlanStyleOption => {
 		if (!plan) {
 			return DEFAULT_PLAN_STYLE;
 		}
@@ -72,7 +72,7 @@ const PlanStyleOverview: React.FC = () => {
 		const style = PLAN_STYLE_MAPPING[plan.styleId] ?? DEFAULT_PLAN_STYLE;
 
 		return style;
-	};
+	}, [plan]);
 
 	const handleEditPlan = useCallback((): void => {
 		notifications.info(MESSAGES.FEATURE.NOT_IMPLEMENTED);
@@ -87,7 +87,10 @@ const PlanStyleOverview: React.FC = () => {
 	const handleDownloadPlan = useCallback(async (): Promise<void> => {
 		try {
 			const resultAction = await dispatch(
-				actions.exportPdf({ category: selectedCategory }),
+				actions.exportPdf({
+					category: selectedCategory,
+					planStyle: getStyleFromPlan(),
+				}),
 			);
 
 			if (isFulfilled(resultAction)) {
@@ -101,7 +104,7 @@ const PlanStyleOverview: React.FC = () => {
 		} catch {
 			notifications.error(MESSAGES.DOWNLOAD.FAILED);
 		}
-	}, [dispatch, selectedCategory, handleGoToDashboard]);
+	}, [dispatch, selectedCategory, handleGoToDashboard, getStyleFromPlan]);
 
 	const handleDownload = useCallback((): void => {
 		void handleDownloadPlan();

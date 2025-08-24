@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { Download } from "~/assets/img/icons/icons.js";
 import {
@@ -12,6 +12,7 @@ import {
 	AppRoute,
 	ButtonSizes,
 	ButtonVariants,
+	DataStatus,
 	ElementTypes,
 } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
@@ -29,9 +30,13 @@ const Plan: React.FC = () => {
 	const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
 
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 	const user = useAppSelector((state) => state.auth.user);
 	const plan = useAppSelector((state) => state.plan.plan);
 	const userPlans = useAppSelector((state) => state.plan.userPlans);
+	const userPlansDataStatus = useAppSelector(
+		(state) => state.plan.userPlansDataStatus,
+	);
 	const tasks = useAppSelector((state) => state.task.tasks);
 
 	const planDays = plan?.days ?? [];
@@ -80,7 +85,32 @@ const Plan: React.FC = () => {
 		setIsSelectOpen((previous) => !previous);
 	}, []);
 
+	const handleCreatePlan = useCallback((): void => {
+		void navigate(AppRoute.QUIZ);
+	}, [navigate]);
+
 	const navLink = getClassNames(styles["nav-link"]);
+
+	const hasNoPlans = userPlans.length === ZERO && !plan;
+	const isLoading = userPlansDataStatus === DataStatus.PENDING;
+
+	if (isLoading) {
+		return <Loader />;
+	}
+
+	if (hasNoPlans) {
+		return (
+			<div className={styles["no-plans-container"]}>
+				<div className={styles["no-plans-message"]}>No plans yet</div>
+				<Button
+					label="Create Plan"
+					onClick={handleCreatePlan}
+					size="small"
+					variant={ButtonVariants.PRIMARY}
+				/>
+			</div>
+		);
+	}
 
 	if (!plan) {
 		return <Loader />;
