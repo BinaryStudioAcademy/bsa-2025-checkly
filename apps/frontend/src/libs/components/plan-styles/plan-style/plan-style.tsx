@@ -36,7 +36,7 @@ const selectPagesToRender = (
 ): (typeof PLAN.days)[] => {
 	const hasValidPage = typeof page === "number" && page >= MIN_PAGE;
 
-	if (view === "desktop") {
+	if (view === "desktop" || view === "mobile") {
 		if (hasValidPage) {
 			const clampedIndex = Math.min(
 				page - MIN_PAGE,
@@ -92,6 +92,7 @@ const PlanStyle: React.FC<Properties> = ({
 		styles["day-list"],
 		PlanStyleModules[inputStyle]["day-list"],
 		view === "desktop" && styles["desktop-day-list"],
+		view === "mobile" && styles["mobile-day-list"],
 	);
 
 	const allChunks = chunkDays(PLAN.days, MAX_DAYS_PER_PAGE);
@@ -128,11 +129,15 @@ const PlanStyle: React.FC<Properties> = ({
 			</>
 		);
 
-	return view === "desktop" && pagesToRender.length >= MIN_STACK_PAGES ? (
-		<div className={styles["pages-stack"]}>{content}</div>
-	) : (
-		content
-	);
+	if (view === "desktop" && pagesToRender.length >= MIN_STACK_PAGES) {
+		return <div className={styles["pages-stack"]}>{content}</div>;
+	}
+
+	if (view === "mobile" && pagesToRender.length >= MIN_STACK_PAGES) {
+		return <div className={styles["pages-stack"]}>{content}</div>;
+	}
+
+	return content;
 };
 
 export { PlanStyle };

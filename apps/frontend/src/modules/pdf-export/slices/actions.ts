@@ -130,6 +130,23 @@ const exportMobilePng = createAsyncThunk<
 	const view = getCategoryStyle(category);
 	const size: WindowSize = useWindowSize();
 
+	const totalDays = PLAN.days.length;
+	const pageCount = getPageCount(totalDays);
+
+	if (pageCount > MIN_PAGES) {
+		const zipName = await downloadPngZip(pageCount, (page) =>
+			pdfExportApi.exportPlan(backendEndpoint, {
+				html: view,
+				page,
+				windowSize: size,
+			}),
+		);
+
+		notifications.success(MESSAGES.DOWNLOAD.SUCCESS);
+
+		return { fileName: zipName };
+	}
+
 	const fileName = `${PlanName.PLAN_1}.${FileExtension.PNG}`;
 	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
 		html: view,

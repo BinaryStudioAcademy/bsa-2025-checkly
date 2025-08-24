@@ -6,6 +6,7 @@ import {
 	getCategoryName,
 	getCategoryShortName,
 } from "~/libs/constants/constants.js";
+import { PlanCategoryId } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 
 import styles from "./styles.module.css";
@@ -33,6 +34,7 @@ const PlanStyleCategory: React.FC<Properties> = ({
 		<div className={styles["category-container"]}>
 			{categories.map((categoryId) => {
 				const categoryName = getCategoryName(categoryId);
+				const isDisabled = categoryId === PlanCategoryId.MOBILE;
 
 				return (
 					<button
@@ -41,6 +43,7 @@ const PlanStyleCategory: React.FC<Properties> = ({
 							styles["category-button"],
 							selectedCategory === categoryId ? styles["active"] : "",
 						)}
+						disabled={isDisabled}
 						key={categoryId}
 						onClick={handleCategoryClick(categoryId)}
 						type="button"

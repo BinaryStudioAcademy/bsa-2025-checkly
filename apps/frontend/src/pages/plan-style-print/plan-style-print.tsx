@@ -24,7 +24,7 @@ const PlanStylePrint: React.FC = () => {
 	const pageParameter = search.get("page");
 	const parsed = pageParameter ? Number(pageParameter) : undefined;
 	const page =
-		Number.isFinite(parsed) && parsed !== undefined && parsed > MIN_PAGE
+		Number.isFinite(parsed) && parsed !== undefined && parsed >= MIN_PAGE
 			? Math.floor(parsed)
 			: undefined;
 

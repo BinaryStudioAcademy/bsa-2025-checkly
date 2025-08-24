@@ -88,7 +88,7 @@ class PlanPdfExportService {
 
 		await page.goto(url.toString(), { waitUntil: NETWORK_IDLE_0 });
 
-		const pngBuffer = await page.screenshot({ fullPage: false, type: "png" });
+		const pngBuffer = await page.screenshot({ fullPage: true, type: "png" });
 
 		await browser.close();
 

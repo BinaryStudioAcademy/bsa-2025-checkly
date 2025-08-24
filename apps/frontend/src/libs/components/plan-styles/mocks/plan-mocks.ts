@@ -2,7 +2,7 @@ import { ONE, ZERO } from "~/libs/constants/constants.js";
 import { type Plan, type PlanDay, type Task } from "~/libs/types/types.js";
 
 const TASK_NUM = 5;
-const DAY_NUM = 21;
+const DAY_NUM = 7;
 const DESCRIPTION = "Test description. Demonstration purposes";
 const PLAN_TITLE = "Plan title";
 
