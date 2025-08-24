@@ -3,6 +3,7 @@ export {
 	QuizApiPath,
 	QuizIndexes,
 	QuizQuestionFormat,
+	QuizQuestionFormatLabels,
 } from "./libs/enums/enums.js";
 export {
 	type QuestionCategoryDto,

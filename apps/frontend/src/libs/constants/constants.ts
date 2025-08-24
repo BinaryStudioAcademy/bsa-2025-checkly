@@ -1,10 +1,7 @@
 export { MESSAGES } from "./messages.constants.js";
-export {
-	type CategoryId,
-	getCategoryIcon,
-	getCategoryName,
-	getCategoryShortName,
-} from "./plan-category.constants.js";
+export { type CategoryId } from "./plan-category.constants.js";
+export { PLAN_NAME_DEFAULT } from "./plan-name.constants.js";
+export { REDIRECT_PARAM } from "./redirect.constants.js";
 export {
 	BASE_DIMENSIONS,
 	EDITOR_ROWS,

@@ -15,9 +15,10 @@ import {
 	Loader,
 } from "~/libs/components/components.js";
 import { Logo } from "~/libs/components/logo/logo.js";
+import { REDIRECT_PARAM } from "~/libs/constants/constants.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
-import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import { useAppForm, useCallback, useLocation } from "~/libs/hooks/hooks.js";
 import {
 	type SignUpFormValidationSchema,
 	type UserSignUpRequestDto,
@@ -78,6 +79,13 @@ const SignUpForm: React.FC<Properties> = ({
 		"wrapper grid-pattern flow-loose",
 	);
 
+	const location = useLocation();
+	const parameters = new URLSearchParams(location.search);
+	const redirectParameter = parameters.get(REDIRECT_PARAM);
+	const signInLink = redirectParameter
+		? `${AppRoute.SIGN_IN}?${REDIRECT_PARAM}=${encodeURIComponent(redirectParameter)}`
+		: AppRoute.SIGN_IN;
+
 	return (
 		<div className={containerClasses}>
 			<main className={authFormContainerClasses}>
@@ -88,7 +96,7 @@ const SignUpForm: React.FC<Properties> = ({
 					</h1>
 					<p className={sharedStyles["redirect-text"]}>
 						Already have an account? Go to{" "}
-						<Link aria-label="Go to create account page" to={AppRoute.SIGN_IN}>
+						<Link aria-label="Go to create account page" to={signInLink}>
 							Sign In
 						</Link>
 					</p>

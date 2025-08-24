@@ -8,7 +8,7 @@ const MESSAGES = {
 		FAILED: "Download failed",
 		NO_PLAN_FOUND: "No plan content found to download",
 		NOT_AVAILABLE: "Download not available for",
-		SUCCESS: "Plan downloaded successfully!",
+		SUCCESS: "Download Successful",
 	},
 	FEATURE: {
 		COMING_SOON: "Format will be available soon",

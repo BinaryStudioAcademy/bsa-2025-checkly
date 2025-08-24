@@ -1,60 +1,36 @@
-import React, { useCallback } from "react";
-
 import {
-	type CategoryId,
-	getCategoryIcon,
-	getCategoryName,
-	getCategoryShortName,
-} from "~/libs/constants/constants.js";
-import { getClassNames } from "~/libs/helpers/helpers.js";
+	FileIcon,
+	MonitorIcon,
+	SmartphoneIcon,
+} from "~/assets/img/icons/icons.js";
+import { Button } from "~/libs/components/components.js";
 
 import styles from "./styles.module.css";
 
-type Properties = {
-	categories: CategoryId[];
-	onCategorySelect?: (categoryId: CategoryId) => void;
-	selectedCategory: CategoryId;
-};
-
-const PlanStyleCategory: React.FC<Properties> = ({
-	categories,
-	onCategorySelect,
-	selectedCategory,
-}) => {
-	const handleCategoryClick = useCallback(
-		(categoryId: CategoryId): (() => void) =>
-			() => {
-				onCategorySelect?.(categoryId);
-			},
-		[onCategorySelect],
-	);
-
+const PlanStyleCategory: React.FC = () => {
 	return (
-		<div className={styles["category-container"]}>
-			{categories.map((categoryId) => {
-				const categoryName = getCategoryName(categoryId);
-
-				return (
-					<button
-						aria-label={`Select ${categoryName} category`}
-						className={getClassNames(
-							styles["category-button"],
-							selectedCategory === categoryId ? styles["active"] : "",
-						)}
-						key={categoryId}
-						onClick={handleCategoryClick(categoryId)}
-						type="button"
-					>
-						<span className={styles["category-icon"]}>
-							{getCategoryIcon(categoryId)}
-						</span>
-						<span className={styles["category-name-full"]}>{categoryName}</span>
-						<span className={styles["category-name-short"]}>
-							{getCategoryShortName(categoryId)}
-						</span>
-					</button>
-				);
-			})}
+		<div className={styles["header-buttons"]}>
+			<Button
+				className={styles["header-buttons-button"]}
+				icon={<FileIcon aria-hidden="true" />}
+				label="PDF"
+				size="small"
+			/>
+			<Button
+				className={styles["header-buttons-button"]}
+				icon={<SmartphoneIcon aria-hidden="true" />}
+				iconOnlySize="large"
+				isDisabled
+				label="Mobile Wallpaper"
+				size="small"
+			/>
+			<Button
+				className={styles["header-buttons-button"]}
+				icon={<MonitorIcon aria-hidden="true" />}
+				isDisabled
+				label="Desktop Wallpaper"
+				size="small"
+			/>
 		</div>
 	);
 };

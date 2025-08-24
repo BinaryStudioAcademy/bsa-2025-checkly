@@ -197,10 +197,12 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 		if (isNotesPageValue) {
 			return (
 				<>
-					<ProgressBar
-						currentQuestion={currentQuestion}
-						totalQuestions={totalSteps}
-					/>
+					<div className="show-mobile-large-up">
+						<ProgressBar
+							currentQuestion={currentQuestion}
+							totalQuestions={totalSteps}
+						/>
+					</div>
 					<NotesPage />
 					<QuestionNavigation
 						currentQuestion={currentQuestion}
@@ -235,10 +237,12 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 
 		return (
 			<>
-				<ProgressBar
-					currentQuestion={currentQuestion}
-					totalQuestions={totalSteps}
-				/>
+				<div className="show-mobile-large-up">
+					<ProgressBar
+						currentQuestion={currentQuestion}
+						totalQuestions={totalSteps}
+					/>
+				</div>
 				<QuestionPage
 					currentAnswer={currentAnswer as QuizAnswer}
 					onAnswer={handleAnswer}
@@ -260,7 +264,7 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 
 	return (
 		<div className={getClassNames(styles["question-flow"], "grid-pattern")}>
-			{renderContent()}
+			<div className="wrapper flow-loose-xl">{renderContent()}</div>
 		</div>
 	);
 };

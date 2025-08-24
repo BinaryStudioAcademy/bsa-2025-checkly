@@ -103,6 +103,7 @@ export {
 	type QuizCategoryType,
 	QuizIndexes,
 	QuizQuestionFormat,
+	QuizQuestionFormatLabels,
 	type QuizQuestionsResponseDto,
 	quizStateValidationSchema,
 } from "./modules/quiz/quiz.js";
