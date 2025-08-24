@@ -10,8 +10,5 @@ const quizApi = new QuizApi({
 });
 
 export { quizApi };
-export {
-	type QuizAnswer,
-	type QuizCategoryValue,
-} from "~/modules/quiz/libs/types/types.js";
+export { type QuizAnswer } from "~/modules/quiz/libs/types/types.js";
 export { actions, reducer } from "~/modules/quiz/slices/quiz.js";

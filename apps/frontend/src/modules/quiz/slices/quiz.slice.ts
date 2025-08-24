@@ -4,7 +4,6 @@ import { DataStatus, QuizIndexes } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import {
 	type QuizAnswer,
-	type QuizCategoryValue,
 	type QuizQuestionsResponseDto,
 } from "~/modules/quiz/libs/types/types.js";
 import { fetchQuestions } from "~/modules/quiz/slices/actions.js";
@@ -15,7 +14,7 @@ type QuizState = {
 	dataStatus: ValueOf<typeof DataStatus>;
 	notes: string;
 	questions: null | QuizQuestionsResponseDto;
-	selectedCategory: null | QuizCategoryValue;
+	selectedCategory: null | string;
 };
 
 const initialState: QuizState = {
@@ -64,9 +63,9 @@ const { actions, name, reducer } = createSlice({
 		},
 		saveAnswer: (state, action: { payload: QuizAnswer }) => {
 			const answer = action.payload;
-			state.answers[answer.questionId] = answer;
+			state.answers[state.currentQuestion] = answer;
 		},
-		setCategory: (state, action: { payload: QuizCategoryValue }) => {
+		setCategory: (state, action: { payload: string }) => {
 			state.selectedCategory = action.payload;
 		},
 		setCurrentQuestion: (state, action: { payload: number }) => {

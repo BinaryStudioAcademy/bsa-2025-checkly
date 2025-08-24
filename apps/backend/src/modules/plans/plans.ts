@@ -16,10 +16,8 @@ export {
 	type PlanDaysTaskDto,
 	type PlanSearchQueryParameter,
 	type PlanWithCategoryDto,
-	type QuizAnswersRequestDto,
 } from "./libs/types/types.js";
 export {
 	planCreateValidationSchema,
 	planSearchQueryParametersValidationSchema,
-	quizAnswersValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";

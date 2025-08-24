@@ -23,7 +23,6 @@ class TaskApi extends BaseHTTPApi {
 		await this.load(
 			this.getFullEndpoint(TasksApiPath.TASK_DELETE, { id: String(id) }),
 			{
-				contentType: ContentType.JSON,
 				hasAuth: true,
 				method: HTTPRequestMethod.DELETE,
 			},

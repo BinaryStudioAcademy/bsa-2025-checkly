@@ -1,0 +1,1 @@
+export { questionCategoryValidationSchema } from "shared";

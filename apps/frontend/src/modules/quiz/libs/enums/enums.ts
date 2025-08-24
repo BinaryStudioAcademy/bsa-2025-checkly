@@ -1,1 +1,1 @@
-export { QuizApiPath, QuizCategory } from "shared";
+export { QuizApiPath } from "shared";

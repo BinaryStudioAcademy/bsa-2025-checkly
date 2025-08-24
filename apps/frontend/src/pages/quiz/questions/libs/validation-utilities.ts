@@ -43,8 +43,8 @@ const isQuestionRequired = (currentQuestionData: QuestionDto): boolean => {
 };
 
 const isNextDisabled = (
-	currentAnswer: QuizAnswer | undefined,
-	currentQuestionData: QuestionDto | undefined,
+	currentAnswer?: QuizAnswer,
+	currentQuestionData?: QuestionDto,
 ): boolean => {
 	if (!currentQuestionData || !isQuestionRequired(currentQuestionData)) {
 		return false;

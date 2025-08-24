@@ -1,5 +1,41 @@
 # Changelog
 
+## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.9.0...backend-v1.10.0) (2025-08-21)
+
+
+### Features
+
+* save generated plan to db automatically cy-309 ([f32f962](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f32f9628032d7a6e37905471e5d8af0fa6368cd8))
+* saving generated plan to db automatically cy-309 ([23a7320](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/23a7320cdc7712f881e66c083b8d2bb1822b8b65))
+
+
+### Bug Fixes
+
+* add migrations cy-309 ([84a0808](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/84a0808745097d92ede29fd69f47c78b4ebbf906))
+* update env variables cy-309 ([da17c6f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/da17c6fb0857b47a5dc0920dc22d0dba28d705c6))
+* update generate plan payload cy-309 ([e4650a3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e4650a3d83a6a8b4ec4417e7c86fe55e893ab49d))
+* update user in generate plan payload cy-309 ([f1a620b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f1a620b69c1393f4a545f9a0a7ee467824f08631))
+
+## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.8.1...backend-v1.9.0) (2025-08-20)
+
+
+### Features
+
+* **frontend/backend/shared:** add task editing, deletion, and day deletion cy-253 ([09c8569](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/09c8569c4dfec5a6db2e5672abe940efb58c20a1))
+* **frontend:** add plan style overview page cy-65 ([8d67e95](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8d67e95e55b45ffb62dd64cf1eb637c898ed7b58))
+
+
+### Bug Fixes
+
+* **frontend/backend/shared:** fix code to meet requirements cy-288 ([24fbfba](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/24fbfba70b4bcc18c93b13f3ba57fd65662495a3))
+* **frontend:** fix conflicts with main branch cy-65 ([bd96b98](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bd96b9850d7e3b4edb78e1fd1d7cfa53f12dd50a))
+* improve code quality and resolve errors cy-65 ([254c81f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/254c81f79c952c0af39bc1e1a637e0199784c689))
+* improve code quality cy-65 ([f2e9c5d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f2e9c5d59ad4ca0cf9a5aca623c95f226122d31b))
+* merge main into local branch cy-288 ([32fd807](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/32fd80783ee9271da9fd59780076731f32137b07))
+* no mutated imports, dialog instead of div cy-253 ([b0de517](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b0de5179f70e14e889fc4f84559d179b5e5ecbd4))
+* wrong status code, api accepting oversized file cy-303 ([380a863](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/380a863d715c3d1eb8a32fe20ce3cb08b59e5b89))
+* wrong status code, api accepting oversized file cy-303 ([ac3f103](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ac3f103905f9b204ac81e5275451c4c7440afbb2))
+
 ## [1.8.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.8.0...backend-v1.8.1) (2025-08-19)
 
 

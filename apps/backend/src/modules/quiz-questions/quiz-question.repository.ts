@@ -1,35 +1,44 @@
-import { OPTIONS } from "./libs/constants/constants.js";
 import {
 	QuestionEntity,
 	QuestionOptionEntity,
 } from "./libs/entities/entities.js";
-import { type QuestionModel } from "./libs/models/models.js";
+import { QuestionCategoryEntity } from "./libs/entities/question-category.entity.js";
+import { type QuestionCategoryModel } from "./libs/models/models.js";
 
 class QuizQuestionRepository {
-	private questionModel: typeof QuestionModel;
+	private questionCategoryModel: typeof QuestionCategoryModel;
 
-	public constructor(questionModel: typeof QuestionModel) {
-		this.questionModel = questionModel;
+	public constructor(questionCategoryModel: typeof QuestionCategoryModel) {
+		this.questionCategoryModel = questionCategoryModel;
 	}
 
-	public async findAllWithOptions(): Promise<QuestionEntity[]> {
-		const data = await this.questionModel
+	public async findAllWithOptionsByCategoryId(
+		categoryId: number,
+	): Promise<QuestionCategoryEntity[]> {
+		const data = await this.questionCategoryModel
 			.query()
-			.orderBy("order")
-			.withGraphFetched(OPTIONS);
+			.where("categoryId", categoryId)
+			.withGraphFetched("question.options")
+			.orderBy("order");
 
-		return data.map((question) => {
-			const options = question.options.map((option) =>
+		return data.map((questionCategory) => {
+			const options = questionCategory.question.options.map((option) =>
 				QuestionOptionEntity.initialize(option),
 			);
+			const { id, isOptional, text, type } = questionCategory.question;
 
-			return QuestionEntity.initialize({
-				id: question.id,
-				isOptional: question.isOptional,
-				options,
-				order: question.order,
-				text: question.text,
-				type: question.type,
+			return QuestionCategoryEntity.initialize({
+				categoryId: questionCategory.categoryId,
+				id: questionCategory.id,
+				order: questionCategory.order,
+				question: QuestionEntity.initialize({
+					id,
+					isOptional,
+					options,
+					text,
+					type,
+				}),
+				questionId: questionCategory.questionId,
 			});
 		});
 	}

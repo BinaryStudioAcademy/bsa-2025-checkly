@@ -9,6 +9,8 @@ import { AppEnvironment } from "~/libs/enums/enums.js";
 import { type Config } from "~/libs/modules/config/config.js";
 import { storage } from "~/libs/modules/storage/storage.js";
 import { authApi, reducer as authReducer } from "~/modules/auth/auth.js";
+import { pdfExportApi } from "~/modules/pdf-export/pdf-export.js";
+import { reducer as pdfExportReducer } from "~/modules/pdf-export/slices/pdf-export.js";
 import {
 	planCategoryApi,
 	reducer as planCategoryReducer,
@@ -25,6 +27,7 @@ import { listenerMiddleware } from "./listener-middleware/listener-middleware.js
 type ExtraArguments = {
 	authApi: typeof authApi;
 	notifications: typeof notifications;
+	pdfExportApi: typeof pdfExportApi;
 	planApi: typeof planApi;
 	planCategoryApi: typeof planCategoryApi;
 	quizApi: typeof quizApi;
@@ -35,6 +38,7 @@ type ExtraArguments = {
 
 type RootReducer = {
 	auth: ReturnType<typeof authReducer>;
+	pdfExport: ReturnType<typeof pdfExportReducer>;
 	plan: ReturnType<typeof planReducer>;
 	planCategory: ReturnType<typeof planCategoryReducer>;
 	quiz: ReturnType<typeof quizReducer>;
@@ -54,6 +58,7 @@ class Store {
 		return {
 			authApi,
 			notifications,
+			pdfExportApi,
 			planApi,
 			planCategoryApi,
 			quizApi,
@@ -75,6 +80,7 @@ class Store {
 			},
 			reducer: {
 				auth: authReducer,
+				pdfExport: pdfExportReducer,
 				plan: planReducer,
 				planCategory: planCategoryReducer,
 				quiz: quizReducer,

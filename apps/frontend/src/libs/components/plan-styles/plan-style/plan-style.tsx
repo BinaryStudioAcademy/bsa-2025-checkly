@@ -14,7 +14,7 @@ type Properties = {
 
 const PlanStyle: React.FC<Properties> = ({
 	inputStyle,
-	planTitle = "Plan title",
+	planTitle,
 	view = "regular",
 }: Properties) => {
 	const containerClasses = getClassNames(
@@ -35,9 +35,11 @@ const PlanStyle: React.FC<Properties> = ({
 		PlanStyleModules[inputStyle]["day-list"],
 	);
 
+	const headerTitle = planTitle?.trim() || PLAN.title;
+
 	return (
 		<section className={containerClasses}>
-			<PlanHeader inputStyle={inputStyle} title={planTitle} />
+			<PlanHeader inputStyle={inputStyle} title={headerTitle} />
 			<div className={planBodyClasses}>
 				<ul className={dayListClasses}>
 					{PLAN.days.map((day) => {

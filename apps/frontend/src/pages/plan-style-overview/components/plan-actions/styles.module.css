@@ -1,0 +1,76 @@
+.footer-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+
+.footer-message {
+	margin-top: 1rem;
+	font-size: 1rem;
+	color: var(--color-text-primary);
+	text-align: center;
+	background: none;
+}
+
+.login-link {
+	font-weight: 800;
+	color: var(--color-primary-blue, #007bff);
+	text-decoration: none;
+	cursor: pointer;
+}
+
+@media (width <= 480px) {
+	.footer-message {
+		margin-top: 0.7rem;
+		font-size: 0.95rem;
+	}
+}
+
+.actions-container {
+	display: flex;
+	gap: var(--space-m);
+	justify-content: center;
+	width: 100%;
+	padding: 0;
+}
+
+@media (width <= 768px) {
+	.actions-container {
+		gap: var(--space-s);
+	}
+
+	.action-button {
+		width: 140px;
+		min-width: 140px;
+		padding: 0.4rem 1.2rem;
+		font-size: 0.8rem;
+	}
+}
+
+@media (width <= 480px) {
+	.actions-container {
+		flex-direction: column;
+		gap: var(--space-l);
+		align-items: center;
+	}
+
+	.action-button {
+		justify-content: center;
+		width: 100%;
+		max-width: 200px;
+		padding: 0.6rem 1rem;
+	}
+}
+
+@media (width <= 375px) {
+	.action-button {
+		max-width: 180px;
+		padding: 0.5rem 0.8rem;
+		font-size: 0.75rem;
+	}
+
+	.button-icon {
+		font-size: 0.9rem;
+	}
+}

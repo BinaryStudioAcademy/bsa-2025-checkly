@@ -1,7 +1,7 @@
 .mixed-question {
 	display: flex;
 	flex-direction: column;
-	gap: var(--space-xl);
+	gap: var(--space-s);
 	width: 100%;
 	max-width: 600px;
 	margin-right: auto;
@@ -16,7 +16,7 @@
 }
 
 .text-section {
-	margin-top: var(--space-xl);
+	margin-top: var(--space-s);
 }
 
 .section-title {
@@ -32,12 +32,18 @@
 	gap: var(--space-m);
 }
 
+.options-container-few-options {
+	grid-template-columns: 1fr;
+	max-width: 400px;
+	margin: 0 auto;
+}
+
 .checkbox-option {
 	position: relative;
 	display: flex;
-	gap: var(--space-m);
+	gap: var(--space-s);
 	align-items: center;
-	padding: var(--space-s);
+	padding: var(--space-xs);
 	cursor: pointer;
 	background: var(--color-bg-white);
 	border: 2px solid var(--color-text-primary);
@@ -64,20 +70,20 @@
 	flex-shrink: 0;
 	align-items: center;
 	justify-content: center;
-	width: 2rem;
-	height: 2rem;
+	width: 1.5rem;
+	height: 1.5rem;
 	background: var(--color-white);
 	border: 2px solid var(--color-text-primary);
 	border-radius: var(--radius-s);
 	transition: all 0.2s ease;
 }
 
-.checkbox-custom img {
-	width: 1.75rem;
-	height: 1.75rem;
+.checkbox-custom .checkbox-icon {
+	width: 1.25rem;
+	height: 1.25rem;
 }
 
-.checkbox-option img {
+.checkbox-option .checkbox-icon {
 	width: 100%;
 	height: 100%;
 	object-fit: contain;
@@ -91,7 +97,7 @@
 
 .option-text {
 	flex: 1;
-	font-size: var(--text-size-heading-3);
+	font-size: var(--text-size-body);
 	font-weight: var(--font-weight-semibold);
 	color: var(--color-text-primary);
 	word-break: keep-all;
@@ -100,7 +106,7 @@
 .label {
 	display: block;
 	margin-bottom: 0.5rem;
-	font-size: 2rem;
+	font-size: 1.25rem;
 	font-weight: 500;
 	color: var(--color-text-primary);
 }
@@ -144,8 +150,8 @@
 	}
 
 	.checkbox-custom {
-		width: 1rem;
-		height: 1rem;
+		width: 0.875rem;
+		height: 0.875rem;
 	}
 
 	.checkbox-option {
@@ -184,5 +190,53 @@
 
 	.text-input::placeholder {
 		font-size: var(--text-body-small);
+	}
+}
+
+@media (height <= 800px) {
+	.mixed-question {
+		gap: var(--space-m);
+		max-width: 400px;
+	}
+
+	.checkbox-section,
+	.text-section {
+		gap: var(--space-s);
+	}
+
+	.text-section {
+		margin-top: var(--space-m);
+	}
+
+	.section-title {
+		font-size: var(--text-size-heading-3);
+	}
+
+	.options-container {
+		gap: var(--space-s);
+	}
+
+	.checkbox-option {
+		gap: var(--space-xs);
+		padding: var(--space-xs);
+	}
+
+	.checkbox-custom {
+		width: 1rem;
+		height: 1rem;
+	}
+
+	.option-text {
+		font-size: var(--text-size-small);
+	}
+
+	.label {
+		font-size: var(--text-size-heading-4);
+	}
+
+	.text-input {
+		max-height: 60px;
+		padding: var(--space-s);
+		font-size: var(--text-size-small);
 	}
 }

@@ -1,15 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { DataStatus } from "~/libs/enums/enums.js";
-import { type ValueOf } from "~/libs/types/types.js";
+import { colorValues, DataStatus } from "~/libs/enums/enums.js";
 
-import { type PlanCategoryDto } from "../libs/types/types.js";
+import { PLAN_CATEGORY } from "../libs/enums/enums.js";
+import { assignColor } from "../libs/helpers/helpers.js";
+import { type PlanCategoryState as State } from "../libs/types/types.js";
 import { getAll } from "./actions.js";
-
-type State = {
-	dataStatus: ValueOf<typeof DataStatus>;
-	planCategories: PlanCategoryDto[];
-};
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
@@ -23,7 +19,10 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getAll.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
-			state.planCategories = action.payload;
+			state.planCategories = action.payload.map((category) => ({
+				...category,
+				color: assignColor(category.id, colorValues),
+			}));
 		});
 		builder.addCase(getAll.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -31,7 +30,7 @@ const { actions, name, reducer } = createSlice({
 		});
 	},
 	initialState,
-	name: "plan-category",
+	name: PLAN_CATEGORY,
 	reducers: {},
 });
 

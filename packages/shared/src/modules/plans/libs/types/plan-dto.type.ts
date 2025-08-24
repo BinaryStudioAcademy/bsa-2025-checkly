@@ -16,7 +16,7 @@ type PlanDto = {
 	id: number;
 	intensity: string;
 	title: string;
-	userId: number;
+	userId: null | number;
 };
 
 type PlanWithCategoryDto = PlanDaysTaskDto & {
