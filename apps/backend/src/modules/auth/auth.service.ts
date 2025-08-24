@@ -21,6 +21,13 @@ import { type PasswordTokenService } from "../password-token/password-token.serv
 import { UserValidationMessage } from "./libs/enums/enums.js";
 import { AuthorizationError } from "./libs/exceptions/exceptions.js";
 
+type ConstructorArguments = {
+	emailService: EmailService;
+	encryptor: Encryptor;
+	passwordTokenService: PasswordTokenService;
+	userService: UserService;
+};
+
 class AuthService {
 	private emailService: EmailService;
 
@@ -30,13 +37,12 @@ class AuthService {
 
 	private userService: UserService;
 
-	// eslint-disable-next-line max-params
-	public constructor(
-		userService: UserService,
-		encryptor: Encryptor,
-		emailService: EmailService,
-		passwordTokenService: PasswordTokenService,
-	) {
+	public constructor({
+		emailService,
+		encryptor,
+		passwordTokenService,
+		userService,
+	}: ConstructorArguments) {
 		this.userService = userService;
 		this.encryptor = encryptor;
 		this.emailService = emailService;

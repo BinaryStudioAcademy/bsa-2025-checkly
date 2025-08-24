@@ -7,12 +7,12 @@ import { passwordTokenService } from "../password-token/password-token.js";
 import { AuthController } from "./auth.controller.js";
 import { AuthService } from "./auth.service.js";
 
-const authService = new AuthService(
-	userService,
-	encryptor,
+const authService = new AuthService({
 	emailService,
+	encryptor,
 	passwordTokenService,
-);
+	userService,
+});
 const authController = new AuthController(logger, authService);
 
 export { authController };
