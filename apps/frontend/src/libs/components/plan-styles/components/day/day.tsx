@@ -50,8 +50,8 @@ const Day: React.FC<Properties> = ({
 						<TaskItem
 							id={task.id}
 							inputStyle={inputStyle}
-							key={task.id}
-							taskText={task.title}
+							key={task.id.toString() + dayNumber.toString()}
+							taskText={task.title || ""}
 						/>
 					);
 				})}

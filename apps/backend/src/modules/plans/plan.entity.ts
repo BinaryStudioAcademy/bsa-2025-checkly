@@ -22,6 +22,8 @@ class PlanEntity implements Entity {
 
 	private intensity: string;
 
+	private styleId: number;
+
 	private title: string;
 
 	private updatedAt?: string;
@@ -36,6 +38,7 @@ class PlanEntity implements Entity {
 		duration,
 		id,
 		intensity,
+		styleId,
 		title,
 		updatedAt,
 		userId,
@@ -47,6 +50,7 @@ class PlanEntity implements Entity {
 		duration: number;
 		id: null | number;
 		intensity: string;
+		styleId: number;
 		title: string;
 		updatedAt?: string;
 		userId: null | number;
@@ -61,6 +65,7 @@ class PlanEntity implements Entity {
 		this.category = category;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.styleId = styleId;
 	}
 
 	public static initialize({
@@ -71,6 +76,7 @@ class PlanEntity implements Entity {
 		duration,
 		id,
 		intensity,
+		styleId,
 		title,
 		updatedAt,
 		userId,
@@ -82,6 +88,7 @@ class PlanEntity implements Entity {
 		duration: number;
 		id: number;
 		intensity: string;
+		styleId: number;
 		title: string;
 		updatedAt?: string;
 		userId: null | number;
@@ -94,6 +101,7 @@ class PlanEntity implements Entity {
 			duration,
 			id,
 			intensity,
+			styleId,
 			title,
 			updatedAt,
 			userId,
@@ -104,12 +112,14 @@ class PlanEntity implements Entity {
 		categoryId,
 		duration,
 		intensity,
+		styleId,
 		title,
 		userId,
 	}: {
 		categoryId: number;
 		duration: number;
 		intensity: string;
+		styleId: number;
 		title: string;
 		userId: null | number;
 	}): PlanEntity {
@@ -120,6 +130,7 @@ class PlanEntity implements Entity {
 			duration,
 			id: null,
 			intensity,
+			styleId,
 			title,
 			updatedAt: "",
 			userId,
@@ -130,6 +141,7 @@ class PlanEntity implements Entity {
 		categoryId: number;
 		duration: number;
 		intensity: string;
+		styleId: number;
 		title: string;
 		userId: null | number;
 	} {
@@ -137,6 +149,7 @@ class PlanEntity implements Entity {
 			categoryId: this.categoryId,
 			duration: this.duration,
 			intensity: this.intensity,
+			styleId: this.styleId,
 			title: this.title,
 			userId: this.userId,
 		};
@@ -148,6 +161,7 @@ class PlanEntity implements Entity {
 		duration: number;
 		id: number;
 		intensity: string;
+		styleId: number;
 		title: string;
 		updatedAt?: string;
 		userId: null | number;
@@ -158,6 +172,7 @@ class PlanEntity implements Entity {
 			duration: this.duration,
 			id: this.id as number,
 			intensity: this.intensity,
+			styleId: this.styleId,
 			title: this.title,
 			updatedAt: this.updatedAt,
 			userId: this.userId,

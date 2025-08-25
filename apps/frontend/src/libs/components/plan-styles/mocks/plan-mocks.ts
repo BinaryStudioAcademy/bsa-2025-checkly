@@ -442,6 +442,7 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 	"duration": 7,
 	"id": 12,
 	"intensity": "moderate",
+	"styleId": 1,
 	"title": "7-Day Personal Development Micro Boost",
 	"userId": 1,
 };

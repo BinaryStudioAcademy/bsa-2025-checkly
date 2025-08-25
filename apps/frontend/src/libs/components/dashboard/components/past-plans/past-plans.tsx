@@ -3,7 +3,7 @@ import { type SingleValue } from "react-select";
 
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { ZERO } from "~/libs/constants/constants.js";
-import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { getClassNames, getPlanStyleName } from "~/libs/helpers/helpers.js";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -13,7 +13,6 @@ import { actions as planCategoryActions } from "~/modules/plan-categories/plan-c
 import { type PlanWithCategoryDto } from "~/modules/plans/libs/types/types.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
 
-import { ZERO_CATEGORY_ID } from "../libs/enums/enums.js";
 import { PlanCategorySelect } from "./components/plan-category-select/plan-category-select.js";
 import { PlanSearchInput } from "./components/plan-search-input/plan-search-input.js";
 import { PlansFoundBlock } from "./components/plans-found-block/plans-found-block.js";
@@ -78,7 +77,7 @@ const PastPlans: FC = () => {
 
 	const handleCategoryChange = useCallback(
 		(selectedOption: SingleValue<CategoryOption>): void => {
-			const id = selectedOption?.value ?? ZERO_CATEGORY_ID;
+			const id = selectedOption?.value ?? ZERO;
 			setCategoryId(id);
 		},
 		[setCategoryId],
@@ -92,7 +91,7 @@ const PastPlans: FC = () => {
 	);
 
 	const handleClearFilters = useCallback((): void => {
-		setCategoryId(ZERO_CATEGORY_ID);
+		setCategoryId(ZERO);
 		setTitle("");
 	}, [setCategoryId, setTitle]);
 
@@ -121,7 +120,11 @@ const PastPlans: FC = () => {
 					onClick={handlePlanSelect}
 					role="button"
 				>
-					<PlanStyle inputStyle="WITH_REMARKS" plan={plan} view="selection" />
+					<PlanStyle
+						inputStyle={getPlanStyleName(plan.styleId)}
+						plan={plan}
+						view="selection"
+					/>
 				</div>
 			))}
 		</>
