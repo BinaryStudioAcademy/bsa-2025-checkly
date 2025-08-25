@@ -22,7 +22,6 @@ import styles from "./styles.module.css";
 type Properties = {
 	indexItem: number;
 	item: {
-		description: string;
 		executionTimeType: string;
 		id: number;
 		title: string;
@@ -32,51 +31,39 @@ type Properties = {
 const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 	const [isEditing, setIsEditing] = useState<boolean>(false);
 	const [editedTitle, setEditedTitle] = useState<string>(item.title);
-	const [editedDescription, setEditedDescription] = useState<string>(
-		item.description,
-	);
+
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		setEditedTitle(item.title);
-		setEditedDescription(item.description);
-	}, [item.title, item.description]);
+	}, [item.title]);
 
 	const handleEditClick = useCallback((): void => {
 		if (isEditing) {
 			setEditedTitle(item.title);
-			setEditedDescription(item.description);
 			setIsEditing(false);
 		} else {
 			setIsEditing(true);
 		}
-	}, [isEditing, item.title, item.description]);
+	}, [isEditing, item.title]);
 
 	const handleSaveClick = useCallback((): void => {
 		void dispatch(
 			taskActions.updateTask({
 				id: item.id,
 				payload: {
-					description: editedDescription,
 					title: editedTitle,
 				},
 			}),
 		);
 		setIsEditing(false);
-	}, [dispatch, item.id, editedDescription, editedTitle]);
+	}, [dispatch, item.id, editedTitle]);
 
 	const handleTitleChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
 			setEditedTitle(event.target.value);
-		},
-		[],
-	);
-
-	const handleDescriptionChange = useCallback(
-		(event: React.ChangeEvent<HTMLTextAreaElement>): void => {
-			setEditedDescription(event.target.value);
 		},
 		[],
 	);
@@ -123,20 +110,6 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 								{editedTitle.length}/{TaskValidationRule.TITLE_MAX_LENGTH}{" "}
 								characters
 							</div>
-							<textarea
-								className={getClassNames(
-									styles["edit-input"],
-									styles["edit-input-description"],
-								)}
-								maxLength={TaskValidationRule.DESCRIPTION_MAX_LENGTH}
-								onChange={handleDescriptionChange}
-								placeholder="Task description"
-								value={editedDescription}
-							/>
-							<div className={styles["char-counter"]}>
-								{editedDescription.length}/
-								{TaskValidationRule.DESCRIPTION_MAX_LENGTH} characters
-							</div>
 							<div className={styles["save-button-wrapper"]}>
 								<Button
 									className={getClassNames(styles["save-button"])}
@@ -151,7 +124,6 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 					) : (
 						<>
 							<h5>{item.title}</h5>
-							<p>{item.description}</p>
 						</>
 					)}
 				</div>

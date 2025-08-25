@@ -7,6 +7,7 @@ import {
 
 import { PlanCategoryModel } from "../plan-categories/plan-category.model.js";
 import { PlanDayModel } from "../plan-days/plan-day.model.js";
+import { PlanStyleModel } from "../plan-styles/plan-style.model.js";
 
 class PlanModel extends AbstractModel {
 	static get relationMappings(): RelationMappings {
@@ -27,6 +28,14 @@ class PlanModel extends AbstractModel {
 				modelClass: PlanDayModel,
 				relation: AbstractModel.HasManyRelation,
 			},
+			style: {
+				join: {
+					from: "plans.style_id",
+					to: "plan_styles.id",
+				},
+				modelClass: PlanStyleModel,
+				relation: AbstractModel.BelongsToOneRelation,
+			},
 		};
 	}
 
@@ -39,6 +48,8 @@ class PlanModel extends AbstractModel {
 	public duration!: number;
 
 	public intensity!: string;
+
+	public styleId!: number;
 
 	public title!: string;
 
