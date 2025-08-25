@@ -4,10 +4,11 @@ import { type PlanStyleOption, type ViewOptions } from "~/libs/types/types.js";
 import { type PlanWithCategoryDto } from "~/modules/plans/libs/types/types.js";
 
 import { Day, Notes, PlanHeader } from "../components/components.js";
-import { PLAN_TEMPLATE } from "../mocks/plan-mocks.js";
+import {
+	PLAN_TEMPLATE,
+	PLAN_TEMPLATE_START_DATE,
+} from "../mocks/plan-mocks.js";
 import styles from "./styles.module.css";
-
-const PLAN_START_DATE = "2025-08-30";
 
 type Properties = {
 	inputStyle: PlanStyleOption;
@@ -51,7 +52,7 @@ const PlanStyle: React.FC<Properties> = ({
 						return (
 							<Day
 								dayNumber={day.dayNumber}
-								firstDayDate={PLAN_START_DATE}
+								firstDayDate={plan.createdAt ?? PLAN_TEMPLATE_START_DATE}
 								inputStyle={inputStyle}
 								key={day.id}
 								tasks={day.tasks}

@@ -38,7 +38,7 @@ const searchPlan = createAsyncThunk<
 });
 
 const getAllUserPlans = createAsyncThunk<
-	PlanDaysTaskDto[],
+	PlanWithCategoryDto[],
 	undefined,
 	AsyncThunkConfig
 >(`${sliceName}/getAllUserPlans`, async (_, { extra }) => {

@@ -12,6 +12,8 @@ class PlanEntity implements Entity {
 
 	private categoryId: number;
 
+	private createdAt?: string;
+
 	private days: PlanDayDto[];
 
 	private duration: number;
@@ -22,25 +24,31 @@ class PlanEntity implements Entity {
 
 	private title: string;
 
+	private updatedAt?: string;
+
 	private userId: null | number;
 
 	private constructor({
 		category,
 		categoryId,
+		createdAt,
 		days = [],
 		duration,
 		id,
 		intensity,
 		title,
+		updatedAt,
 		userId,
 	}: {
 		category?: PlanCategoryDto;
 		categoryId: number;
+		createdAt?: string;
 		days?: PlanDayDto[];
 		duration: number;
 		id: null | number;
 		intensity: string;
 		title: string;
+		updatedAt?: string;
 		userId: null | number;
 	}) {
 		this.id = id;
@@ -51,35 +59,43 @@ class PlanEntity implements Entity {
 		this.days = days;
 		this.categoryId = categoryId;
 		this.category = category;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 	}
 
 	public static initialize({
 		category,
 		categoryId,
+		createdAt,
 		days = [],
 		duration,
 		id,
 		intensity,
 		title,
+		updatedAt,
 		userId,
 	}: {
 		category?: PlanCategoryDto;
 		categoryId: number;
+		createdAt?: string;
 		days?: PlanDayDto[];
 		duration: number;
 		id: number;
 		intensity: string;
 		title: string;
+		updatedAt?: string;
 		userId: null | number;
 	}): PlanEntity {
 		return new PlanEntity({
 			category,
 			categoryId,
+			createdAt,
 			days,
 			duration,
 			id,
 			intensity,
 			title,
+			updatedAt,
 			userId,
 		});
 	}
@@ -99,11 +115,13 @@ class PlanEntity implements Entity {
 	}): PlanEntity {
 		return new PlanEntity({
 			categoryId,
+			createdAt: "",
 			days: [],
 			duration,
 			id: null,
 			intensity,
 			title,
+			updatedAt: "",
 			userId,
 		});
 	}
@@ -126,18 +144,22 @@ class PlanEntity implements Entity {
 
 	public toObject(): {
 		categoryId: number;
+		createdAt?: string;
 		duration: number;
 		id: number;
 		intensity: string;
 		title: string;
+		updatedAt?: string;
 		userId: null | number;
 	} {
 		return {
 			categoryId: this.categoryId,
+			createdAt: this.createdAt,
 			duration: this.duration,
 			id: this.id as number,
 			intensity: this.intensity,
 			title: this.title,
+			updatedAt: this.updatedAt,
 			userId: this.userId,
 		};
 	}

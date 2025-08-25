@@ -13,10 +13,12 @@ type PlanDaysTaskDto = PlanDto & {
 
 type PlanDto = {
 	categoryId: number;
+	createdAt?: string;
 	duration: number;
 	id: number;
 	intensity: string;
 	title: string;
+	updatedAt?: string;
 	userId: null | number;
 };
 
