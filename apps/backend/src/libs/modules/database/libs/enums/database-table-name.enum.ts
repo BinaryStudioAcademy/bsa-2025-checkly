@@ -5,6 +5,7 @@ const DatabaseTableName = {
 	PLAN_DAYS: "plan_days",
 	PLAN_STYLES: "plan_styles",
 	PLANS: "plans",
+	QUESTION_ANSWERS: "answers",
 	QUESTION_OPTIONS: "question_options",
 	QUESTIONS: "questions",
 	QUESTIONS_CATEGORIES: "questions_categories",
