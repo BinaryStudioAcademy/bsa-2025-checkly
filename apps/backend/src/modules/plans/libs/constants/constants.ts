@@ -1,4 +1,7 @@
-import { type PlanDaysTaskDto } from "~/modules/plans/libs/types/types.js";
+import {
+	type PlanDayDto,
+	type PlanDaysTaskDto,
+} from "~/modules/plans/libs/types/types.js";
 
 const MOCK_GENERATED_PLAN: PlanDaysTaskDto = {
 	categoryId: 2,
@@ -6,11 +9,13 @@ const MOCK_GENERATED_PLAN: PlanDaysTaskDto = {
 		{
 			dayNumber: 1,
 			id: 1,
+			planId: 1,
 			tasks: [],
 		},
 		{
 			dayNumber: 2,
 			id: 2,
+			planId: 1,
 			tasks: [
 				{
 					completedAt: null,
@@ -18,6 +23,7 @@ const MOCK_GENERATED_PLAN: PlanDaysTaskDto = {
 					id: 2,
 					isCompleted: false,
 					order: 1,
+					planDayId: 1,
 					title: "Meet a person in the cafe",
 				},
 				{
@@ -26,6 +32,7 @@ const MOCK_GENERATED_PLAN: PlanDaysTaskDto = {
 					id: 3,
 					isCompleted: false,
 					order: 2,
+					planDayId: 2,
 					title: "Meet a person in the cafe",
 				},
 			],
@@ -35,12 +42,38 @@ const MOCK_GENERATED_PLAN: PlanDaysTaskDto = {
 	id: 1,
 	intensity: "high",
 	quizId: 1,
-    styleId: 1,
+	styleId: 1,
 	title: "Some plan",
 	userId: 2,
 };
 
-export { MOCK_GENERATED_PLAN };
+const MOCK_GENERATED_PLAN_DAY: PlanDayDto = {
+	dayNumber: 2,
+	id: 2,
+	planId: 1,
+	tasks: [
+		{
+			completedAt: null,
+			executionTimeType: "morning",
+			id: 2,
+			isCompleted: false,
+			order: 1,
+			planDayId: 1,
+			title: "Meet a person in the cafe",
+		},
+		{
+			completedAt: null,
+			executionTimeType: "evening",
+			id: 3,
+			isCompleted: false,
+			order: 2,
+			planDayId: 1,
+			title: "Meet a person in the cafe",
+		},
+	],
+};
+
+export { MOCK_GENERATED_PLAN, MOCK_GENERATED_PLAN_DAY };
 export {
 	STYLE_ANSWER_MAP,
 	STYLE_ANSWER_MIX,

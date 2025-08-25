@@ -3,6 +3,7 @@ import { type PlanCategoryDto } from "../../../plan-categories/plan-categories.j
 type PlanDayDto = {
 	dayNumber: number;
 	id: number;
+	planId: number;
 	tasks: TaskDto[];
 };
 
@@ -31,6 +32,7 @@ type TaskDto = {
 	id: number;
 	isCompleted: boolean;
 	order: number;
+	planDayId: number;
 	title: string;
 };
 
