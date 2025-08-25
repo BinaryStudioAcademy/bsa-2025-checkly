@@ -24,6 +24,7 @@ import {
 import { actions } from "~/modules/quiz/quiz.js";
 import { QuizCategoryCard } from "~/pages/quiz/components/quiz-category-card/quiz-category-card.js";
 
+import { QuizCategoryCardSkeleton } from "./components/quiz-category-card/quiz-category-card-skeleton.js";
 import styles from "./styles.module.css";
 
 const Quiz: React.FC = (): React.ReactElement => {
@@ -34,7 +35,8 @@ const Quiz: React.FC = (): React.ReactElement => {
 		void dispatch(planActions.getAll());
 	}, [dispatch]);
 
-	const { planCategories } = useAppSelector((state) => state.planCategory);
+	const { dataStatus: planCategoriesDataStatus, planCategories } =
+		useAppSelector((state) => state.planCategory);
 	const { selectedCategory } = useAppSelector((state) => state.quiz);
 
 	const handleCategorySelect = useCallback(
@@ -67,6 +69,12 @@ const Quiz: React.FC = (): React.ReactElement => {
 	const renderCategories = (
 		categories: PlanCategoryWithColorDto[],
 	): JSX.Element[] => {
+		if (planCategoriesDataStatus.length === ZERO) {
+			return Array.from({ length: 6 }, (_, index) => (
+				<QuizCategoryCardSkeleton key={`skeleton-${String(index)}`} />
+			));
+		}
+
 		return categories.map((category) => (
 			<QuizCategoryCard
 				color={category.color}

@@ -61,8 +61,10 @@
 
 .quiz-category-card-title {
 	padding-top: clamp(30px, 15vw, 15px);
-	font-size: var(--text-size-heading-5);
-	font-weight: var(--font-weight-regular);
+	font-family: var(--font-family-nunito);
+	font-size: var(--text-size-heading-4);
+	font-weight: var(--font-weight-semi-bold);
+	color: var(--color-bg-dark);
 	text-align: center;
 	text-wrap: pretty;
 }
@@ -111,4 +113,38 @@
 
 .quiz-category-card-card-cyan {
 	background-color: var(--color-card-cyan);
+}
+
+.quiz-category-card-skeleton {
+	width: 100%;
+	padding: var(--space-s);
+	pointer-events: none;
+	cursor: default;
+	user-select: none;
+	border: 2px solid var(--color-bg-dark);
+	border-radius: var(--radius-l);
+}
+
+.skeleton-body {
+	height: clamp(150px, 10vw, 200px);
+	background: linear-gradient(
+		90deg,
+		var(--color-skeleton-base, #f0f0f0) 25%,
+		var(--color-skeleton-highlight, #e0e0e0) 50%,
+		var(--color-skeleton-base, #f0f0f0) 75%
+	);
+	background-size: 200% 100%;
+	border: 2px solid var(--color-bg-dark);
+	border-radius: var(--radius-l);
+	animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+	0% {
+		background-position: -200% 0;
+	}
+
+	100% {
+		background-position: 200% 0;
+	}
 }
