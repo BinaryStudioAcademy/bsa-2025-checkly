@@ -1,3 +1,4 @@
+import { isFulfilled } from "@reduxjs/toolkit";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,11 +14,16 @@ import { useAppSelector } from "~/libs/hooks/use-app-selector/use-app-selector.h
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { actions } from "~/modules/pdf-export/slices/pdf-export.js";
 
-import { PlanActions, PlanStyleCategory } from "./components/components.js";
+import {
+	PlanActions,
+	PlanStyleCategory,
+	ToastSuccess,
+} from "./components/components.js";
 import styles from "./styles.module.css";
 
 const PlanStyleOverview: React.FC = () => {
 	const user = useAppSelector((state) => state.auth.user);
+	const selectedStyle = useAppSelector((state) => state.plan.selectedStyle);
 	const isAuthenticated = Boolean(user);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
@@ -33,27 +39,44 @@ const PlanStyleOverview: React.FC = () => {
 
 	const pdfExportStatus = useAppSelector((state) => state.pdfExport.dataStatus);
 
+	const handleGoToDashboard = useCallback((): void => {
+		void navigate(AppRoute.DASHBOARD);
+	}, [navigate]);
+
 	const handleDownloadPlan = useCallback(async (): Promise<void> => {
 		try {
+			let resultAction;
+
 			switch (selectedCategory) {
 				case PlanCategoryId.DESKTOP: {
-					await dispatch(actions.exportDesktopPng());
+					resultAction = await dispatch(actions.exportDesktopPng());
 					break;
 				}
 
 				case PlanCategoryId.MOBILE: {
-					await dispatch(actions.exportMobilePng());
+					resultAction = await dispatch(actions.exportMobilePng());
 					break;
 				}
 
 				default: {
-					await dispatch(actions.exportPdf({ category: selectedCategory }));
+					resultAction = await dispatch(
+						actions.exportPdf({ category: selectedCategory }),
+					);
 				}
+			}
+
+			if (isFulfilled(resultAction)) {
+				notifications.success(
+					<ToastSuccess
+						message={MESSAGES.DOWNLOAD.SUCCESS}
+						onGoToDashboard={handleGoToDashboard}
+					/>,
+				);
 			}
 		} catch {
 			notifications.error(MESSAGES.DOWNLOAD.FAILED);
 		}
-	}, [dispatch, selectedCategory]);
+	}, [dispatch, selectedCategory, handleGoToDashboard]);
 
 	const handleDownload = useCallback((): void => {
 		void handleDownloadPlan();
@@ -61,10 +84,6 @@ const PlanStyleOverview: React.FC = () => {
 
 	const handleChooseStyle = useCallback((): void => {
 		void navigate(AppRoute.CHOOSE_STYLE);
-	}, [navigate]);
-
-	const handleGoToDashboard = useCallback((): void => {
-		void navigate(AppRoute.DASHBOARD);
 	}, [navigate]);
 
 	return (
@@ -79,7 +98,7 @@ const PlanStyleOverview: React.FC = () => {
 			</div>
 			<div className={getClassNames(styles["container"], "grid-pattern")}>
 				<div className={styles["plan-content"]}>
-					<PlanStyle inputStyle="WITH_REMARKS" view={planView} />
+					<PlanStyle inputStyle={selectedStyle} view={planView} />
 					<DecorativeImage
 						className={styles["yellow-stars-reflection"]}
 						src={StarsYellow02}

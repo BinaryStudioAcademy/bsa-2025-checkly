@@ -1,4 +1,4 @@
-export { ONE, ZERO } from "./libs/constants/constants.js";
+export { LAST_INDEX, ONE, ZERO } from "./libs/constants/constants.js";
 export {
 	UPLOAD_MAX_FILE_SIZE_BYTES,
 	UPLOAD_MAX_FILE_SIZE_MB,
@@ -46,10 +46,15 @@ export {
 	type WindowSize,
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
-export { type GeneratedPlanDTO } from "./modules/openai/openai.js";
+export {
+	type GeneratedPlanDTO,
+	type GeneratePlanRequestDto,
+	generatePlanValidationSchema,
+} from "./modules/openai/openai.js";
 export {
 	PlanCategoriesApiPath,
 	type PlanCategoryDto,
+	type PlanCategoryWithColorDto,
 	ZERO_CATEGORY_ID,
 } from "./modules/plan-categories/plan-categories.js";
 export {
@@ -81,6 +86,8 @@ export {
 	type PlanWithCategoryDto,
 } from "./modules/plans/plans.js";
 export {
+	type QuestionCategoryDto,
+	questionCategoryValidationSchema,
 	type QuestionDto,
 	type QuestionOptionDto,
 	type QuestionType,

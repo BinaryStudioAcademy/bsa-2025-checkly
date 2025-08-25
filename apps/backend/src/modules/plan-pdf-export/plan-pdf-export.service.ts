@@ -37,6 +37,12 @@ class PlanPdfExportService {
 		const url = new URL(printUrl);
 		url.searchParams.set("view", view);
 
+		const style = dto.style?.trim();
+
+		if (style) {
+			url.searchParams.set("style", style);
+		}
+
 		if (dto.page) {
 			url.searchParams.set("page", String(dto.page));
 		}
@@ -72,6 +78,12 @@ class PlanPdfExportService {
 
 		const url = new URL(printUrl);
 		url.searchParams.set("view", view);
+
+		const style = dto.style?.trim();
+
+		if (style) {
+			url.searchParams.set("style", style);
+		}
 
 		if (dto.page) {
 			url.searchParams.set("page", String(dto.page));

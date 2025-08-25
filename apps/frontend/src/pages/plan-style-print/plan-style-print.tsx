@@ -1,6 +1,7 @@
 import React from "react";
 
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
+import { PlanStyle as PlanStyleEnum } from "~/libs/enums/enums.js";
 import {
 	type PlanStyleOption,
 	VIEW_OPTIONS,
@@ -11,9 +12,19 @@ import styles from "./styles.module.css";
 
 const MIN_PAGE = 1;
 
+const isPlanStyleOption = (v: string): v is PlanStyleOption =>
+	v === PlanStyleEnum.WITH_REMARKS ||
+	v === PlanStyleEnum.MINIMAL ||
+	v === PlanStyleEnum.COLOURFUL;
+
 const PlanStylePrint: React.FC = () => {
-	const inputStyle: PlanStyleOption = "WITH_REMARKS";
 	const search = new URLSearchParams(globalThis.location.search);
+
+	const requestedStyle = search.get("style") ?? "";
+	const inputStyle: PlanStyleOption = isPlanStyleOption(requestedStyle)
+		? requestedStyle
+		: PlanStyleEnum.WITH_REMARKS;
+
 	const requested = search.get("view") ?? "";
 	const viewStyle: ViewOptions = (VIEW_OPTIONS as readonly string[]).includes(
 		requested,
@@ -29,7 +40,11 @@ const PlanStylePrint: React.FC = () => {
 			: undefined;
 
 	return (
-		<div className={styles["print-container"]} id="print-container">
+		<div
+			className={styles["print-container"]}
+			data-plan-style={inputStyle}
+			id="print-container"
+		>
 			<PlanStyle inputStyle={inputStyle} page={page} view={viewStyle} />
 		</div>
 	);

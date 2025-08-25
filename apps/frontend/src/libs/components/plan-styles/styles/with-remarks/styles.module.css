@@ -4,6 +4,8 @@
 @import url("../../components/notes/styles.module.css");
 
 .container {
+	--plan-bg: var(--color-bg-plan-style-with-remarks);
+
 	background-color: var(--color-bg-plan-style-with-remarks);
 }
 

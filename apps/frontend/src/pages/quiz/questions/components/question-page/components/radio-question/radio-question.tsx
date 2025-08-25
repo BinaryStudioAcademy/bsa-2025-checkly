@@ -31,7 +31,11 @@ const RadioQuestion: React.FC<RadioQuestionProperties> = ({
 					/>
 					<div className={styles["radio-custom"]}>
 						{currentAnswer === option.text && (
-							<img alt="Selected" src={logoIcon} />
+							<img
+								alt="Selected"
+								className={styles["radio-icon"]}
+								src={logoIcon}
+							/>
 						)}
 					</div>
 					<span className={styles["radio-text"]}>{option.text}</span>

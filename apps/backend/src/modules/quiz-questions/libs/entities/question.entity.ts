@@ -5,7 +5,6 @@ type QuestionProperties = {
 	id: number;
 	isOptional: boolean;
 	options: QuestionOptionEntity[];
-	order: number;
 	text: string;
 	type: QuestionType;
 };
@@ -14,7 +13,6 @@ class QuestionEntity {
 	private id: number;
 	private isOptional: boolean;
 	private options: QuestionOptionEntity[];
-	private order: number;
 	private text: string;
 	private type: QuestionType;
 
@@ -22,13 +20,11 @@ class QuestionEntity {
 		id,
 		isOptional,
 		options,
-		order,
 		text,
 		type,
 	}: QuestionProperties) {
 		this.id = id;
 		this.isOptional = isOptional;
-		this.order = order;
 		this.text = text;
 		this.type = type;
 		this.options = options;
@@ -38,7 +34,6 @@ class QuestionEntity {
 		id,
 		isOptional,
 		options,
-		order,
 		text,
 		type,
 	}: QuestionProperties): QuestionEntity {
@@ -46,7 +41,6 @@ class QuestionEntity {
 			id,
 			isOptional,
 			options,
-			order,
 			text,
 			type,
 		});
@@ -59,7 +53,6 @@ class QuestionEntity {
 			options: this.options.map((option: QuestionOptionEntity) =>
 				option.toObject(),
 			),
-			order: this.order,
 			text: this.text,
 			type: this.type,
 		};

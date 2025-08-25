@@ -9,6 +9,7 @@ import {
 	MAX_DAYS_PER_PAGE,
 	MESSAGES,
 	MIN_PAGES,
+	PLAN_NAME_DEFAULT,
 } from "~/libs/constants/constants.js";
 import {
 	FileExtension,
@@ -19,7 +20,6 @@ import { useWindowSize } from "~/libs/hooks/hooks.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { type AsyncThunkConfig } from "~/libs/types/async-thunk-config.type.js";
 import { type WindowSize } from "~/libs/types/types.js";
-import { PlanName } from "~/pages/plan-style-overview/lib/enums/enums.js";
 import {
 	downloadFile,
 	getBackendEndpoint,
@@ -31,19 +31,20 @@ const getPageCount = (totalDays: number): number =>
 	Math.max(MIN_PAGES, Math.ceil(totalDays / MAX_DAYS_PER_PAGE));
 
 const downloadPngZip = async (
+	baseName: string,
 	pageCount: number,
 	fetchPageBlob: (page: number) => Promise<Blob>,
 ): Promise<string> => {
 	const zip = new JSZip();
 
 	for (let page = FIRST_PAGE; page <= pageCount; page++) {
-		const partName = `${PlanName.PLAN_1}-part-${String(page)}.${FileExtension.PNG}`;
+		const partName = `${baseName}-part-${String(page)}.${FileExtension.PNG}`;
 		const blob = await fetchPageBlob(page);
 		zip.file(partName, blob);
 	}
 
 	const zipBlob = await zip.generateAsync({ type: "blob" });
-	const zipName = `${PlanName.PLAN_1}.zip`;
+	const zipName = `${baseName}.zip`;
 	downloadFile(zipBlob, zipName);
 
 	return zipName;
@@ -57,22 +58,23 @@ const exportPdf = createAsyncThunk<
 	{ fileName: string },
 	ExportPdfThunkArguments,
 	AsyncThunkConfig
->(`${sliceName}/export`, async ({ category }, { extra }) => {
+>(`${sliceName}/export`, async ({ category }, { extra, getState }) => {
 	const { pdfExportApi } = extra;
 
 	const backendEndpoint = getBackendEndpoint(category);
 	const view = getCategoryStyle(category);
 	const format = PaperFormat.A4;
 
-	const fileName = `${PlanName.PLAN_1}.${FileExtension.PDF}`;
+	const planTitle = String(getState().plan.plan?.title ?? PLAN_NAME_DEFAULT);
+	const { selectedStyle } = getState().plan;
+	const fileName = `${planTitle}.${FileExtension.PDF}`;
 	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
 		format,
 		html: view,
+		style: selectedStyle,
 	});
 
 	downloadFile(blob, fileName);
-
-	notifications.success(MESSAGES.DOWNLOAD.SUCCESS);
 
 	return { fileName };
 });
@@ -81,7 +83,7 @@ const exportDesktopPng = createAsyncThunk<
 	{ fileName: string },
 	undefined,
 	AsyncThunkConfig
->(`${sliceName}/export-desktop-png`, async (_unused, { extra }) => {
+>(`${sliceName}/export-desktop-png`, async (_unused, { extra, getState }) => {
 	const { pdfExportApi } = extra;
 
 	const category = PlanCategoryId.DESKTOP;
@@ -91,29 +93,30 @@ const exportDesktopPng = createAsyncThunk<
 
 	const totalDays = PLAN.days.length;
 	const pageCount = getPageCount(totalDays);
+	const planTitle = String(getState().plan.plan?.title ?? PLAN_NAME_DEFAULT);
+	const { selectedStyle } = getState().plan;
 
 	if (pageCount > MIN_PAGES) {
-		const zipName = await downloadPngZip(pageCount, (page) =>
+		const zipName = await downloadPngZip(planTitle, pageCount, (page) =>
 			pdfExportApi.exportPlan(backendEndpoint, {
 				html: view,
 				page,
+				style: selectedStyle,
 				windowSize: size,
 			}),
 		);
 
-		notifications.success(MESSAGES.DOWNLOAD.SUCCESS);
-
 		return { fileName: zipName };
 	}
 
-	const fileName = `${PlanName.PLAN_1}.${FileExtension.PNG}`;
+	const fileName = `${planTitle}.${FileExtension.PNG}`;
 	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
 		html: view,
+		style: selectedStyle,
 		windowSize: size,
 	});
 
 	downloadFile(blob, fileName);
-	notifications.success(MESSAGES.DOWNLOAD.SUCCESS);
 
 	return { fileName };
 });
@@ -122,7 +125,7 @@ const exportMobilePng = createAsyncThunk<
 	{ fileName: string },
 	undefined,
 	AsyncThunkConfig
->(`${sliceName}/export-mobile-png`, async (_unused, { extra }) => {
+>(`${sliceName}/export-mobile-png`, async (_unused, { extra, getState }) => {
 	const { pdfExportApi } = extra;
 
 	const category = PlanCategoryId.MOBILE;
@@ -132,12 +135,15 @@ const exportMobilePng = createAsyncThunk<
 
 	const totalDays = PLAN.days.length;
 	const pageCount = getPageCount(totalDays);
+	const planTitle = String(getState().plan.plan?.title ?? PLAN_NAME_DEFAULT);
+	const { selectedStyle } = getState().plan;
 
 	if (pageCount > MIN_PAGES) {
-		const zipName = await downloadPngZip(pageCount, (page) =>
+		const zipName = await downloadPngZip(planTitle, pageCount, (page) =>
 			pdfExportApi.exportPlan(backendEndpoint, {
 				html: view,
 				page,
+				style: selectedStyle,
 				windowSize: size,
 			}),
 		);
@@ -147,9 +153,10 @@ const exportMobilePng = createAsyncThunk<
 		return { fileName: zipName };
 	}
 
-	const fileName = `${PlanName.PLAN_1}.${FileExtension.PNG}`;
+	const fileName = `${planTitle}.${FileExtension.PNG}`;
 	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
 		html: view,
+		style: selectedStyle,
 		windowSize: size,
 	});
 

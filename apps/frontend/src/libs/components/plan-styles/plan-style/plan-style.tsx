@@ -105,11 +105,12 @@ const PlanStyle: React.FC<Properties> = ({
 				{pagesToRender.map((daysChunk, index) => (
 					<section
 						className={containerClasses}
+						data-plan-style={inputStyle}
 						key={`plan-page-${String(index)}`}
 					>
 						<PlanHeader inputStyle={inputStyle} title={planTitle} />
 						<div className={planBodyClasses}>
-							<ul className={dayListClasses}>
+							<ul className={dayListClasses} data-view={view}>
 								{daysChunk.map((day) => {
 									return (
 										<Day

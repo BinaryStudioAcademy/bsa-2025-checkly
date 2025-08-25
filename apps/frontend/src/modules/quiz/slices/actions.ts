@@ -6,12 +6,12 @@ import { name as sliceName } from "~/modules/quiz/slices/quiz.slice.js";
 
 const fetchQuestions = createAsyncThunk<
 	QuizQuestionsResponseDto,
-	undefined,
+	{ categoryId: number },
 	AsyncThunkConfig
->(`${sliceName}/fetch-questions`, async (_, { extra }) => {
+>(`${sliceName}/fetch-questions`, async ({ categoryId }, { extra }) => {
 	const { quizApi } = extra;
 
-	return await quizApi.getQuestions();
+	return await quizApi.getQuestionsByCategoryId(categoryId);
 });
 
 export { fetchQuestions };
