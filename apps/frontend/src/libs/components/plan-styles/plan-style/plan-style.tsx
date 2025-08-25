@@ -41,8 +41,6 @@ const PlanStyle: React.FC<Properties> = ({
 		PlanStyleModules[inputStyle]["day-list"],
 	);
 
-	const headerTitle = planTitle?.trim() || PLAN.title;
-
 	return (
 		<section className={containerClasses}>
 			<PlanHeader inputStyle={inputStyle} title={plan.title} />
