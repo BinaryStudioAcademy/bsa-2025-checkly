@@ -102,6 +102,10 @@ const { actions, name, reducer } = createSlice({
 	initialState,
 	name: "plan",
 	reducers: {
+		clearPlan(state) {
+			state.plan = null;
+			state.dataStatus = DataStatus.IDLE;
+		},
 		setSelectedStyle: (state, action: PayloadAction<PlanStyleOption>) => {
 			state.selectedStyle = action.payload;
 		},
