@@ -6,7 +6,7 @@ import { Button, Modal } from "~/libs/components/components.js";
 import { DataStatus } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppSelector } from "~/libs/hooks/hooks.js";
-import { EMPTY_RESPONSE, SINGLE_PAGE } from "~/pages/home/lib/constants.js";
+import { NO_ITEMS, SINGLE_PAGE } from "~/pages/home/lib/constants.js";
 
 import { FeedbackSectionDecoration } from "./components/feedback-decoration/feedbacksection-decoration.js";
 import { FeedbackList } from "./components/feedback-list/feedback-list.js";
@@ -24,7 +24,7 @@ const FeedbacksSection: FC = () => {
 		null,
 	);
 	const [openModal, setOpenModal] = useState<OpenModalType>(null);
-	const [reloadTrigger, setReloadTrigger] = useState<number>(EMPTY_RESPONSE);
+	const [reloadTrigger, setReloadTrigger] = useState<number>(NO_ITEMS);
 
 	const { dataStatus, user } = useAppSelector(({ auth }) => auth);
 	const isAuthorized = dataStatus === DataStatus.FULFILLED && user;

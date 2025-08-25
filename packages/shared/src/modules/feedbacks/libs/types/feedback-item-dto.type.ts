@@ -13,4 +13,4 @@ type UserPartialDto = {
 	name: string;
 };
 
-export { type FeedbackDto };
+export { type FeedbackDto, type UserPartialDto };

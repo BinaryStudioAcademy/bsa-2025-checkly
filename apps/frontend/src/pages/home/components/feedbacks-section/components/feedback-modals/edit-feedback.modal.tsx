@@ -1,11 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { useCallback, useEffect } from "react";
 
-import { Button, Input, Loader } from "~/libs/components/components.js";
+import { Button, Loader, Textarea } from "~/libs/components/components.js";
+import { DataStatus } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { useAppForm } from "~/libs/hooks/hooks.js";
 import {
-	feedbackApi,
+	useAppDispatch,
+	useAppForm,
+	useAppSelector,
+} from "~/libs/hooks/hooks.js";
+import {
+	actions,
 	type FeedbackUpdateRequestDto,
 	feedbackUpdateValidationSchema,
 } from "~/modules/feedbacks/feedbacks.js";
@@ -24,8 +28,11 @@ const EditFeedbackModal: React.FC<Properties> = ({
 	onClose,
 	userId,
 }: Properties) => {
-	const [isFetching, setIsFetching] = useState<boolean>(true);
-	const [isUpdating, setIsUpdating] = useState<boolean>(false);
+	const dispatch = useAppDispatch();
+	const { dataStatus, feedbacks } = useAppSelector((state) => state.feedbacks);
+
+	const feedbackToEdit = feedbacks.find((feedback) => feedback.id === id);
+	const isUpdating = dataStatus === DataStatus.PENDING;
 
 	const { control, errors, handleSubmit, reset } =
 		useAppForm<FeedbackUpdateRequestDto>({
@@ -34,50 +41,41 @@ const EditFeedbackModal: React.FC<Properties> = ({
 		});
 
 	useEffect(() => {
-		const fetchFeedback = async (): Promise<void> => {
-			setIsFetching(true);
-			const fetchedFeedback = await feedbackApi.findById(id);
+		if (!feedbackToEdit) {
+			void dispatch(actions.fetchFeedbackById(id));
+		}
+	}, [dispatch, id, feedbackToEdit]);
 
-			if (fetchedFeedback) {
-				reset({
-					text: fetchedFeedback.text,
-					userId: fetchedFeedback.userId,
-				});
-			}
-
-			setIsFetching(false);
-		};
-
-		void fetchFeedback();
-	}, [id, reset]);
+	useEffect(() => {
+		if (feedbackToEdit && dataStatus !== DataStatus.PENDING) {
+			reset({
+				text: feedbackToEdit.text,
+				userId: feedbackToEdit.userId,
+			});
+		}
+	}, [dataStatus, feedbackToEdit, reset]);
 
 	const handleUpdateSubmit = useCallback(
-		async (payload: FeedbackUpdateRequestDto): Promise<void> => {
-			setIsUpdating(true);
-
-			try {
-				await feedbackApi.update(id, payload);
-				toast.success("Feedback was successfully updated!");
-				onClose();
-			} catch {
-				toast.error("Failed to update feedback. Please try again later.");
-			} finally {
-				setIsUpdating(false);
-			}
+		(payload: FeedbackUpdateRequestDto): void => {
+			void dispatch(actions.updateFeedback({ id, payload }));
 		},
-		[id, onClose],
+		[dispatch, id],
 	);
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
-			void handleSubmit((data) => {
-				void handleUpdateSubmit(data);
-			})(event_);
+			void handleSubmit(handleUpdateSubmit)(event_);
 		},
 		[handleSubmit, handleUpdateSubmit],
 	);
 
-	if (isFetching) {
+	useEffect(() => {
+		if (dataStatus === DataStatus.FULFILLED && feedbackToEdit) {
+			onClose();
+		}
+	}, [dataStatus, onClose, feedbackToEdit]);
+
+	if (!feedbackToEdit || dataStatus === DataStatus.PENDING) {
 		return <FeedbackLoaderContainer />;
 	}
 
@@ -91,18 +89,14 @@ const EditFeedbackModal: React.FC<Properties> = ({
 			<h2 className={styles["feedback-title"]} id="feedback-title">
 				Edit your feedback
 			</h2>
-			<Input
+			<Textarea
 				control={control}
 				errors={errors}
-				isRequired
-				isTextArea
-				label="Testimonial"
 				name="text"
-				placeholder="Enter a testimonial"
-				type="text"
+				placeholder="Enter a new testimonial"
 			/>
 			<Button
-				isDisabled={isUpdating || isFetching}
+				isDisabled={isUpdating}
 				label="Save Changes"
 				loader={
 					<Loader

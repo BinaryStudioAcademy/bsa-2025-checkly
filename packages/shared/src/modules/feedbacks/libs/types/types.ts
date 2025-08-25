@@ -1,6 +1,9 @@
 export { type FeedbackCreateRequestDto } from "./feedback-create-request-dto.type.js";
 export { type FeedbackDeleteResponseDto } from "./feedback-delete-response-dto.type.js";
-export { type FeedbackDto } from "./feedback-item-dto.type.js";
+export {
+	type FeedbackDto,
+	type UserPartialDto,
+} from "./feedback-item-dto.type.js";
 export {
 	type FeedbackPaginationOptions,
 	type IdParameter,

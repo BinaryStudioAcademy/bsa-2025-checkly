@@ -10,6 +10,7 @@ import { SuccessMessage } from "~/libs/enums/success-messages.enum.js";
 import { getErrorMessage } from "~/libs/helpers/get-error-message.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
+import { actions as feedbackActions } from "~/modules/feedbacks/feedbacks.js";
 
 import { navigation } from "../../navigation/navigation.js";
 
@@ -55,6 +56,27 @@ listenerMiddleware.startListening({
 		notifications.success(SuccessMessage.AVATAR_REMOVE);
 	},
 	matcher: isFulfilled(authActions.avatarRemove),
+});
+
+listenerMiddleware.startListening({
+	effect: () => {
+		notifications.success(SuccessMessage.FEEDBACK_CREATE);
+	},
+	matcher: isFulfilled(feedbackActions.createFeedback),
+});
+
+listenerMiddleware.startListening({
+	effect: () => {
+		notifications.success(SuccessMessage.FEEDBACK_UPDATE);
+	},
+	matcher: isFulfilled(feedbackActions.updateFeedback),
+});
+
+listenerMiddleware.startListening({
+	effect: () => {
+		notifications.success(SuccessMessage.FEEDBACK_DELETE);
+	},
+	matcher: isFulfilled(feedbackActions.deleteFeedback),
 });
 
 export { listenerMiddleware };

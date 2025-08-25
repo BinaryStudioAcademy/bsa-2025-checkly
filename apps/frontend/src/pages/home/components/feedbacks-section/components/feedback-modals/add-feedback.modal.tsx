@@ -1,11 +1,15 @@
-import { useCallback, useState } from "react";
-import { toast } from "react-toastify";
+import { useCallback } from "react";
 
-import { Button, Input, Loader } from "~/libs/components/components.js";
+import { Button, Loader, Textarea } from "~/libs/components/components.js";
+import { DataStatus } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { useAppForm } from "~/libs/hooks/hooks.js";
 import {
-	feedbackApi,
+	useAppDispatch,
+	useAppForm,
+	useAppSelector,
+} from "~/libs/hooks/hooks.js";
+import {
+	actions,
 	type FeedbackCreateRequestDto,
 	feedbackCreateValidationSchema,
 	FeedbackValidationRule,
@@ -22,8 +26,11 @@ const AddFeedbackModal: React.FC<Properties> = ({
 	onClose,
 	userId,
 }: Properties) => {
-	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const { control, errors, handleSubmit, watch } =
+	const dispatch = useAppDispatch();
+	const { dataStatus } = useAppSelector((state) => state.feedbacks);
+	const isLoading = dataStatus === DataStatus.PENDING;
+
+	const { control, errors, handleSubmit, reset, watch } =
 		useAppForm<FeedbackCreateRequestDto>({
 			defaultValues: { text: "", userId: Number(userId) },
 			validationSchema: feedbackCreateValidationSchema,
@@ -35,19 +42,15 @@ const AddFeedbackModal: React.FC<Properties> = ({
 
 	const handleFormSubmit = useCallback(
 		async (payload: FeedbackCreateRequestDto): Promise<void> => {
-			setIsLoading(true);
-
 			try {
-				await feedbackApi.create(payload);
-				toast.success("Feedback was successfully added!");
+				await dispatch(actions.createFeedback(payload)).unwrap();
 				onClose();
+				reset();
 			} catch {
-				toast.error("Failed to add feedback. Please try again later.");
-			} finally {
-				setIsLoading(false);
+				onClose();
 			}
 		},
-		[onClose],
+		[dispatch, onClose, reset],
 	);
 
 	const handleOnSubmit = useCallback(
@@ -67,16 +70,11 @@ const AddFeedbackModal: React.FC<Properties> = ({
 			<h2 className={styles["feedback-title"]} id="feedback-title">
 				Add your feedback
 			</h2>
-			<Input
+			<Textarea
 				control={control}
 				errors={errors}
-				hasLabel={false}
-				isRequired
-				isTextArea
-				label="Testimonial"
 				name="text"
 				placeholder="Enter your testimonial"
-				type="text"
 			/>
 			<div className={styles["character-counter"]}>
 				{characterCount}/{maxCharacters}

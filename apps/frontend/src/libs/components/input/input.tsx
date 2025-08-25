@@ -15,9 +15,7 @@ import styles from "./styles.module.css";
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
-	hasLabel?: boolean;
 	isRequired?: boolean;
-	isTextArea?: boolean;
 	label: string;
 	name: FieldPath<T>;
 	placeholder?: string;
@@ -27,9 +25,7 @@ type Properties<T extends FieldValues> = {
 const Input = <T extends FieldValues>({
 	control,
 	errors,
-	hasLabel = true,
 	isRequired,
-	isTextArea = false,
 	label,
 	name,
 	placeholder = "",
@@ -61,31 +57,18 @@ const Input = <T extends FieldValues>({
 
 	return (
 		<div className={inputContainerClass}>
-			{hasLabel && <label htmlFor={inputId}>{label}</label>}
+			<label htmlFor={inputId}>{label}</label>
 			<div className={styles["input-wrapper"]}>
-				{isTextArea ? (
-					<textarea
-						{...field}
-						aria-invalid={hasError}
-						className={inputFieldClass}
-						cols={40}
-						id={inputId}
-						name={name}
-						placeholder={placeholder}
-						rows={5}
-					/>
-				) : (
-					<input
-						{...field}
-						aria-invalid={hasError}
-						className={inputFieldClass}
-						id={inputId}
-						name={name}
-						placeholder={placeholder}
-						required={isRequired}
-						type={inputType}
-					/>
-				)}
+				<input
+					{...field}
+					aria-invalid={hasError}
+					className={inputFieldClass}
+					id={inputId}
+					name={name}
+					placeholder={placeholder}
+					required={isRequired}
+					type={inputType}
+				/>
 				{isPasswordField && (
 					<button
 						aria-label={showPassword ? "Hide password" : "Show password"}

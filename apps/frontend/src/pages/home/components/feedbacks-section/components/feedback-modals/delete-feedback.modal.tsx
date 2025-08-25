@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { type FC, useCallback, useEffect } from "react";
 
 import { Button, Loader } from "~/libs/components/components.js";
+import { DataStatus } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { feedbackApi } from "~/modules/feedbacks/feedbacks.js";
-import { type FeedbackDto } from "~/modules/feedbacks/libs/types/types.js";
+import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
+import { actions } from "~/modules/feedbacks/feedbacks.js";
 
 import { FeedbackLoaderContainer } from "../../feedback-loader-container/feedback-loader-container.js";
 import styles from "./styles.module.css";
@@ -15,51 +15,36 @@ type Properties = {
 	onClose: () => void;
 };
 
-const DeleteFeedbackModal: React.FC<Properties> = ({
+const DeleteFeedbackModal: FC<Properties> = ({
 	handleCancelClick,
 	id,
 	onClose,
-}: Properties) => {
-	const [isFetching, setIsFetching] = useState<boolean>(true);
-	const [isDeleting, setIsDeleting] = useState<boolean>(false);
-	const [feedbackToDelete, setFeedbackToDelete] = useState<FeedbackDto | null>(
-		null,
-	);
+}) => {
+	const dispatch = useAppDispatch();
+	const { dataStatus, feedbacks } = useAppSelector((state) => state.feedbacks);
+
+	const feedbackToDelete = feedbacks.find((feedback) => feedback.id === id);
+	const isDeleting = dataStatus === DataStatus.PENDING;
 
 	useEffect(() => {
-		const fetchFeedback = async (): Promise<void> => {
-			setIsFetching(true);
-			const fetchedFeedback = await feedbackApi.findById(id);
-
-			if (fetchedFeedback) {
-				setFeedbackToDelete(fetchedFeedback);
-			}
-
-			setIsFetching(false);
-		};
-
-		void fetchFeedback();
-	}, [id]);
-
-	const handleDeleteClick = useCallback(async (): Promise<void> => {
-		setIsDeleting(true);
-
-		try {
-			await feedbackApi.delete(id);
-			toast.success("Feedback was successfully deleted!");
-			onClose();
-		} catch {
-			toast.error("Failed to delete feedback. Please try again later.");
-		} finally {
-			setIsDeleting(false);
+		if (!feedbackToDelete) {
+			void dispatch(actions.fetchFeedbackById(id));
 		}
-	}, [id, onClose]);
+	}, [dispatch, id, feedbackToDelete]);
 
-	const handleButtonClick = useCallback(() => {
+	const handleDeleteClick = useCallback(async () => {
+		const result = await dispatch(actions.deleteFeedback(id)).unwrap();
+
+		if (result) {
+			onClose();
+		}
+	}, [dispatch, id, onClose]);
+
+	const handleDeleteButtonClick = useCallback(() => {
 		void handleDeleteClick();
 	}, [handleDeleteClick]);
 
-	if (isFetching || !feedbackToDelete) {
+	if (!feedbackToDelete || isDeleting) {
 		return <FeedbackLoaderContainer />;
 	}
 
@@ -84,7 +69,7 @@ const DeleteFeedbackModal: React.FC<Properties> = ({
 							theme="accent"
 						/>
 					}
-					onClick={handleButtonClick}
+					onClick={handleDeleteButtonClick}
 					type="button"
 				/>
 				<Button label="Cancel" onClick={handleCancelClick} type="button" />

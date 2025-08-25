@@ -83,7 +83,7 @@ class FeedbackApi extends BaseHTTPApi {
 		return data;
 	}
 
-	public async findById(id: number): Promise<FeedbackDto | null> {
+	public async findById(id: number): Promise<FeedbackDto> {
 		const response = await this.load(
 			this.getFullEndpoint(FeedbackApiPath.FEEDBACK, getIdParameter(id)),
 			{
@@ -93,17 +93,13 @@ class FeedbackApi extends BaseHTTPApi {
 			},
 		);
 
-		if (!response.ok) {
-			return null;
-		}
-
 		return await response.json<FeedbackDto>();
 	}
 
 	public async update(
 		id: number,
 		payload: FeedbackUpdateRequestDto,
-	): Promise<FeedbackDto | null> {
+	): Promise<FeedbackDto> {
 		const response = await this.load(
 			this.getFullEndpoint(FeedbackApiPath.FEEDBACK, getIdParameter(id)),
 			{
@@ -113,10 +109,6 @@ class FeedbackApi extends BaseHTTPApi {
 				payload: JSON.stringify(payload),
 			},
 		);
-
-		if (!response.ok) {
-			return null;
-		}
 
 		return await response.json<FeedbackDto>();
 	}

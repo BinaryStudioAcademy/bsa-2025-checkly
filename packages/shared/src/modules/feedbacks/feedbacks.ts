@@ -12,6 +12,7 @@ export {
 	type FeedbackUpdateResponseDto,
 	type IdParameter,
 	type Pagination,
+	type UserPartialDto,
 } from "./libs/types/types.js";
 export {
 	feedbackCreateValidationSchema,

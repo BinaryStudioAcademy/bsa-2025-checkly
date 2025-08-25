@@ -18,8 +18,10 @@ export {
 	type FeedbackDto,
 	type FeedbackUpdateRequestDto,
 	type Pagination,
+	type UserPartialDto,
 } from "./libs/types/types.js";
 export {
 	feedbackCreateValidationSchema,
 	feedbackUpdateValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
+export { actions, reducer } from "./slices/feedback.js";

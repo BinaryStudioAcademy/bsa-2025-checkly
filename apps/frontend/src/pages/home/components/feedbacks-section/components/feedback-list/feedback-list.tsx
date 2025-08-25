@@ -1,21 +1,19 @@
-import { type FC, useCallback, useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { type FC, useCallback, useEffect, useRef, useState } from "react";
 import "swiper/css";
 import { Autoplay, Mousewheel, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { type Swiper as SwiperClass } from "swiper/types"; // Import SwiperClass for better type safety
+import { type Swiper as SwiperClass } from "swiper/types";
 
 import { Loader } from "~/libs/components/components.js";
-import { feedbackApi } from "~/modules/feedbacks/feedbacks.js";
+import { DataStatus } from "~/libs/enums/enums.js";
+import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
+import { actions, type UserPartialDto } from "~/modules/feedbacks/feedbacks.js";
 import {
-	type FeedbackDto,
-	type Pagination,
-} from "~/modules/feedbacks/feedbacks.js";
-import {
-	EMPTY_RESPONSE,
 	FEEDBACKS_SWIPER_BREAKPOINTS,
 	LIMIT,
+	NO_ITEMS,
 	SINGLE_PAGE,
+	START_INDEX,
 	SWIPER_AUTOPLAY_OPTIONS,
 	TWO_SLIDES,
 } from "~/pages/home/lib/constants.js";
@@ -27,103 +25,81 @@ import { FeedbackCard } from "../feedback-card/feedback-card.js";
 type Properties = {
 	onOpenModal: (type: "DELETE" | "EDIT", id: number) => () => void;
 	reloadTrigger: number;
-	user: null | User;
-};
-
-type User = {
-	id: number;
-	name: string;
+	user: null | UserPartialDto;
 };
 
 const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
-	const [feedbacks, setFeedbacks] = useState<FeedbackDto[]>([]);
-	const [isLoadingInitial, setIsLoadingInitial] = useState<boolean>(true);
-	const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
+	const dispatch = useAppDispatch();
+	const { dataStatus, feedbacks, total } = useAppSelector(
+		(state) => state.feedbacks,
+	);
+
 	const [currentPage, setCurrentPage] = useState<number>(SINGLE_PAGE);
-	const [totalFeedbacks, setTotalFeedbacks] = useState<number>(EMPTY_RESPONSE);
+	const swiperReference = useRef<null | SwiperClass>(null);
 
+	const isLoadingInitial =
+		dataStatus === DataStatus.PENDING && currentPage === SINGLE_PAGE;
+	const isLoadingMore =
+		dataStatus === DataStatus.PENDING && currentPage > SINGLE_PAGE;
 	const hasEnoughSlidesForLoop = feedbacks.length > TWO_SLIDES;
-
-	const filterNewFeedbackItems = useCallback(
-		(
-			previousFeedbacks: FeedbackDto[],
-			fetchedItems: FeedbackDto[],
-		): FeedbackDto[] => {
-			return fetchedItems.filter(
-				(item) => !previousFeedbacks.some((f) => f.id === item.id),
-			);
-		},
-		[],
-	);
-
-	const fetchFeedbacks = useCallback(
-		async (page: number, limit: number): Promise<void> => {
-			const setLoading =
-				page === SINGLE_PAGE ? setIsLoadingInitial : setIsLoadingMore;
-			setLoading(true);
-
-			try {
-				const fetchedData: Pagination<FeedbackDto> = await feedbackApi.findAll({
-					limit,
-					page,
-				});
-
-				setFeedbacks((previousFeedbacks) => {
-					if (page === SINGLE_PAGE) {
-						setTotalFeedbacks(fetchedData.total);
-
-						return fetchedData.items;
-					}
-
-					const newItems = filterNewFeedbackItems(
-						previousFeedbacks,
-						fetchedData.items,
-					);
-
-					return [...previousFeedbacks, ...newItems];
-				});
-			} catch {
-				toast.error("Failed to load feedbacks. Please try again later.");
-			} finally {
-				setLoading(false);
-			}
-		},
-		[filterNewFeedbackItems],
-	);
 
 	const handleSlideChange = useCallback(
 		(swiper: SwiperClass) => {
 			const threshold = 3;
 			const { activeIndex } = swiper;
 			const isNearingEnd = activeIndex >= feedbacks.length - threshold;
-			const hasMoreData = feedbacks.length < totalFeedbacks;
-			const isNotLoading = !isLoadingMore;
+			const hasMoreData = feedbacks.length < total;
+			const isNotLoading = dataStatus !== DataStatus.PENDING;
 
 			if (isNearingEnd && hasMoreData && isNotLoading) {
 				setCurrentPage((previousPage) => previousPage + SINGLE_PAGE);
 			}
 		},
-		[feedbacks.length, totalFeedbacks, isLoadingMore],
+		[feedbacks.length, total, dataStatus],
 	);
 
-	useEffect(() => {
-		if (currentPage !== SINGLE_PAGE || totalFeedbacks === EMPTY_RESPONSE) {
-			void fetchFeedbacks(currentPage, LIMIT);
-		}
-	}, [fetchFeedbacks, currentPage, totalFeedbacks]);
+	const handleSwiper = useCallback((swiper: SwiperClass) => {
+		swiperReference.current = swiper;
+	}, []);
 
 	useEffect(() => {
-		if (reloadTrigger > EMPTY_RESPONSE) {
-			void fetchFeedbacks(SINGLE_PAGE, LIMIT);
-			setCurrentPage(SINGLE_PAGE);
+		void dispatch(
+			actions.fetchAllFeedbacks({
+				limit: LIMIT,
+				page: SINGLE_PAGE,
+			}),
+		);
+	}, [dispatch]);
+
+	useEffect(() => {
+		if (currentPage > SINGLE_PAGE) {
+			void dispatch(
+				actions.fetchAllFeedbacks({
+					limit: LIMIT,
+					page: currentPage,
+				}),
+			);
 		}
-	}, [fetchFeedbacks, reloadTrigger]);
+	}, [dispatch, currentPage]);
+
+	useEffect(() => {
+		if (reloadTrigger > NO_ITEMS) {
+			setCurrentPage(SINGLE_PAGE);
+			void dispatch(
+				actions.fetchAllFeedbacks({
+					limit: LIMIT,
+					page: SINGLE_PAGE,
+				}),
+			);
+			swiperReference.current?.slideTo(START_INDEX);
+		}
+	}, [dispatch, reloadTrigger]);
 
 	if (isLoadingInitial) {
 		return <FeedbackLoaderContainer />;
 	}
 
-	if (feedbacks.length === EMPTY_RESPONSE) {
+	if (feedbacks.length === NO_ITEMS) {
 		return (
 			<div className={styles["no-feedbacks-title"]}>
 				There are no feedbacks yet.
@@ -142,6 +118,7 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 				mousewheel
 				navigation
 				onSlideChange={handleSlideChange}
+				onSwiper={handleSwiper}
 				slidesPerView={1}
 				spaceBetween={50}
 			>

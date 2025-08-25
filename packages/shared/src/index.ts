@@ -62,6 +62,7 @@ export {
 	FeedbackValidationRule,
 	type IdParameter,
 	type Pagination,
+	type UserPartialDto,
 } from "./modules/feedbacks/feedbacks.js";
 export {
 	type GeneratedPlanDTO,
