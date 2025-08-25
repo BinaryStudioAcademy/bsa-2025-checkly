@@ -1,6 +1,6 @@
 import { type Transaction } from "objection";
 
-import { type Repository, type ValueOf } from "~/libs/types/types.js";
+import { type Repository } from "~/libs/types/types.js";
 import { PlanDayEntity } from "~/modules/plan-days/plan-day.entity.js";
 import { type PlanDayRepository } from "~/modules/plan-days/plan-day.repository.js";
 import { PlanEntity } from "~/modules/plans/plan.entity.js";
@@ -8,8 +8,10 @@ import { type PlanModel } from "~/modules/plans/plan.model.js";
 import { TaskEntity } from "~/modules/tasks/task.entity.js";
 import { type TaskRepository } from "~/modules/tasks/task.repository.js";
 
-import { type ExecutionTimeType } from "./libs/enums/enums.js";
-import { type SearchProperties } from "./libs/types/types.js";
+import {
+	type GeneratedPlanDTO,
+	type SearchProperties,
+} from "./libs/types/types.js";
 
 class PlanRepository implements Repository {
 	private planDayRepository: PlanDayRepository;
@@ -102,12 +104,14 @@ class PlanRepository implements Repository {
 		return plan ? PlanEntity.initialize(plan) : null;
 	}
 
-	public async regenerate(planId: number, plan: PlanEntity): Promise<void> {
+	public async regenerate(
+		planId: number,
+		plan: GeneratedPlanDTO,
+	): Promise<void> {
 		await this.planModel.transaction(async (trx) => {
-			const { days, duration, intensity, quizId, title, userId } =
-				plan.toObjectWithRelations();
+			const { days, duration, intensity, title } = plan;
 
-			const payload = { duration, intensity, quizId, title, userId };
+			const payload = { duration, intensity, title };
 			await this.update(planId, payload);
 
 			await this.taskRepository.deleteByPlanId(planId, trx);
@@ -135,11 +139,7 @@ class PlanRepository implements Repository {
 
 				return relatedDay.tasks.map((task) =>
 					TaskEntity.initializeNew({
-						completedAt: task.completedAt,
-						executionTimeType: task.executionTimeType as null | ValueOf<
-							typeof ExecutionTimeType
-						>,
-						isCompleted: task.isCompleted,
+						executionTimeType: task.executionTimeType,
 						order: task.order,
 						planDayId,
 						title: task.title,

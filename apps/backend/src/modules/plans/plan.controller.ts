@@ -20,7 +20,7 @@ import {
 } from "~/modules/plans/plans.js";
 
 import { type PlanStyleUpdateRequestDto } from "../plan-styles/libs/types/types.js";
-import { PlansApiPath } from "./libs/enums/enums.js";
+import { PlanAction, PlansApiPath } from "./libs/enums/enums.js";
 import { type GeneratePlanRequestDto } from "./libs/types/types.js";
 import { generatePlanValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
@@ -533,7 +533,7 @@ class PlanController extends BaseController {
 		options: APIBodyOptions<GeneratePlanRequestDto>,
 	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.planService.generate(options.body),
+			payload: await this.planService.generate(options.body, PlanAction.PLAN),
 			status: HTTPCode.OK,
 		};
 	}
@@ -549,9 +549,9 @@ class PlanController extends BaseController {
 		};
 	}
 
-	private async regenerateDay(options: {
+	private async regenerateDay(options: APIHandlerOptions<{
 		params: PlanDayRegenerationRequestDto;
-	}): Promise<APIHandlerResponse> {
+	}>): Promise<APIHandlerResponse> {
 		const { dayId, planId } = options.params;
 
 		return {

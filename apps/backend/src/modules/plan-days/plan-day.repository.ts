@@ -7,6 +7,7 @@ import { TaskEntity } from "~/modules/tasks/task.entity.js";
 import { type TaskRepository } from "~/modules/tasks/task.repository.js";
 
 import { ZERO } from "./libs/constants/constants.js";
+import { type GeneratedDayDTO } from "./libs/types/types.js";
 
 class PlanDayRepository implements Repository {
 	private planDayModel: typeof PlanDayModel;
@@ -88,19 +89,16 @@ class PlanDayRepository implements Repository {
 
 	public async regenerate(
 		planDayId: number,
-		planDay: PlanDayEntity,
+		planDay: GeneratedDayDTO,
 	): Promise<void> {
 		await this.planDayModel.transaction(async (trx) => {
-			const { tasks } = planDay.toObjectWithRelations();
+			const { tasks } = planDay;
 
 			await this.taskRepository.deleteByPlanDayId(planDayId, trx);
 
 			const taskEntities = tasks.map((task) =>
 				TaskEntity.initializeNew({
-					completedAt: task.completedAt,
-					description: task.description,
 					executionTimeType: task.executionTimeType,
-					isCompleted: task.isCompleted,
 					order: task.order,
 					planDayId,
 					title: task.title,

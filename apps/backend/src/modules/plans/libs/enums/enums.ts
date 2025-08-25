@@ -1,7 +1,7 @@
 export {
 	ErrorMessage,
-	ExecutionTimeType,
 	HTTPCode,
 	HTTPError,
+	PlanAction,
 	PlansApiPath,
 } from "shared";

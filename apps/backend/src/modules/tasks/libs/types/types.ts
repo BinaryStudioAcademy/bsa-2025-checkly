@@ -1,4 +1,5 @@
 export {
+	type GeneratedTaskDTO,
 	type TaskCreateRequestDto,
 	type TaskGetAllResponseDto,
 	type TaskResponseDto,
