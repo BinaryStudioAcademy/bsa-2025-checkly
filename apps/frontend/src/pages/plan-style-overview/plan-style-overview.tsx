@@ -65,8 +65,8 @@ const PlanStyleOverview: React.FC = () => {
 	}, [plan]);
 
 	const handleEditPlan = useCallback((): void => {
-		notifications.info(MESSAGES.FEATURE.NOT_IMPLEMENTED);
-	}, []);
+		void navigate(AppRoute.PLAN_EDIT);
+	}, [navigate]);
 
 	const pdfExportStatus = useAppSelector((state) => state.pdfExport.dataStatus);
 
