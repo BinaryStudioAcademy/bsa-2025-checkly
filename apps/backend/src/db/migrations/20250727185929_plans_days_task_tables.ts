@@ -25,7 +25,6 @@ const PlanDayColumnName = {
 
 const TaskColumnName = {
 	COMPLETED_AT: "completed_at",
-	DESCRIPTION: "description",
 	EXECUTION_TIME_TYPE: "execution_time_type",
 	ID: "id",
 	IS_COMPLETED: "is_completed",
@@ -105,7 +104,6 @@ async function up(knex: Knex): Promise<void> {
 	await knex.schema.createTable(TableNames.TASK, (table) => {
 		table.increments(TaskColumnName.ID).primary();
 		table.string(TaskColumnName.TITLE, ColumnLength.TASK_TITLE).notNullable();
-		table.text(TaskColumnName.DESCRIPTION).notNullable();
 		table.integer(TaskColumnName.ORDER).notNullable().checkPositive();
 		table
 			.integer(TaskColumnName.PLAN_DAY_ID)

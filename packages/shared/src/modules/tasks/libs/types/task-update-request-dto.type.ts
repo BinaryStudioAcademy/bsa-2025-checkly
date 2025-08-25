@@ -1,5 +1,4 @@
 type TaskUpdateRequestDto = {
-	description?: string;
 	title?: string;
 };
 

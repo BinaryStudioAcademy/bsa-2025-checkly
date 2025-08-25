@@ -160,7 +160,6 @@ class PlanService implements Service {
 
 			for (const task of day.tasks) {
 				const taskEntity: TaskCreateRequestDto = {
-					description: task.description,
 					executionTimeType: task.executionTimeType,
 					isCompleted: false,
 					order: task.order,

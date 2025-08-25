@@ -157,7 +157,6 @@ class PlanEntity implements Entity {
 				id: day.id,
 				tasks: day.tasks.map((task) => ({
 					completedAt: task.completedAt,
-					description: task.description,
 					executionTimeType: task.executionTimeType,
 					id: task.id,
 					isCompleted: task.isCompleted,
