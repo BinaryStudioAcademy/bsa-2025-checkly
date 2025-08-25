@@ -25,7 +25,7 @@ const planService = new PlanService({
 });
 const planController = new PlanController(logger, planService);
 
-export { planController };
+export { planController, planService };
 export {
 	type PlanCreateRequestDto,
 	type PlanDayDto,
