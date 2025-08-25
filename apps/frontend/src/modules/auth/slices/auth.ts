@@ -3,9 +3,12 @@ import {
 	avatarUpload,
 	getCurrentUser,
 	logout,
+	resetPassword,
+	sendResetLink,
 	signIn,
 	signUp,
 	updateProfile,
+	verifyToken,
 } from "./actions.js";
 import { actions } from "./auth.slice.js";
 
@@ -15,9 +18,12 @@ const allActions = {
 	avatarUpload,
 	getCurrentUser,
 	logout,
+	resetPassword,
+	sendResetLink,
 	signIn,
 	signUp,
 	updateProfile,
+	verifyToken,
 };
 
 export { allActions as actions };

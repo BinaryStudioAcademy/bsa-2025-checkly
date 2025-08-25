@@ -6,6 +6,7 @@ const UserValidationMessage = {
 	EMAIL_ALREADY_EXISTS: "Email already in use",
 	EMAIL_INVALID: "Invalid email format",
 	FIELD_REQUIRED: "Field is required",
+	LINK_HAS_EXPIRED: "Link has expired",
 	NAME_INVALID: `Name must be between ${String(UserValidationRule.NAME_MIN_LENGTH)} and ${String(UserValidationRule.NAME_MAX_LENGTH)} characters`,
 	NAME_LENGTH: `Name must have at least ${String(UserValidationRule.NAME_MIN_LENGTH)} characters and maximum of ${String(UserValidationRule.NAME_MAX_LENGTH)} characters`,
 	NAME_ONLY_ALLOWED_CHARS: "Digits and special characters are not allowed",

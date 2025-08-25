@@ -4,7 +4,7 @@
 }
 
 .sign-in {
-	padding-block: var(--space-xl) var(--space-3xl);
+	padding-block: var(--space-xl);
 	padding-inline: var(--space-m-3xl);
 	margin-inline: var(--space-s);
 }
@@ -39,4 +39,9 @@
 	right: 5%;
 	display: inline-block;
 	width: clamp(120px, 20vw, 200px);
+}
+
+.forgot-password-link {
+	display: block;
+	text-align: center;
 }

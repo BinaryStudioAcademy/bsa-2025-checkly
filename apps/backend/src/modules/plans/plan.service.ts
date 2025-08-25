@@ -8,6 +8,7 @@ import { planCategoryService } from "../plan-categories/plan-categories.js";
 import { type PlanCategoryService } from "../plan-categories/plan-category.service.js";
 import { type PlanDayService } from "../plan-days/plan-day.service.js";
 import { planDayService } from "../plan-days/plan-days.js";
+import { PlanStyle } from "../plan-styles/libs/enums/enums.js";
 import { type TaskService } from "../tasks/task.service.js";
 import { taskService } from "../tasks/tasks.js";
 import { LAST_INDEX } from "./libs/constants/constants.js";
@@ -123,6 +124,16 @@ class PlanService implements Service {
 		return plan ? plan.toObject() : null;
 	}
 
+	public async updateStyle(
+		userId: number,
+		planId: number,
+		styleId: number,
+	): Promise<null | PlanDto> {
+		const plan = await this.planRepository.updateStyle(userId, planId, styleId);
+
+		return plan ? plan.toObject() : null;
+	}
+
 	private async saveToDB({
 		category,
 		plan,
@@ -141,6 +152,7 @@ class PlanService implements Service {
 				LAST_INDEX,
 			duration: plan.duration,
 			intensity: plan.intensity,
+			styleId: PlanStyle.WITH_REMARKS,
 			title: plan.title,
 			userId,
 		};
@@ -177,7 +189,11 @@ class PlanService implements Service {
 			days.push({ ...planDayResponse, tasks });
 		}
 
-		const result: PlanDaysTaskDto = { ...planResponse, days };
+		const result: PlanDaysTaskDto = {
+			...planResponse,
+			days,
+			styleId: PlanStyle.WITH_REMARKS,
+		};
 
 		return result;
 	}

@@ -1,4 +1,6 @@
 export {
+	type ForgotPasswordRequestDto,
+	type ResetPasswordRequestDto,
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserSignInRequestDto,
@@ -6,4 +8,5 @@ export {
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 	type UserUpdateRequestDto,
+	type VerifyTokenRequestDto,
 } from "shared";

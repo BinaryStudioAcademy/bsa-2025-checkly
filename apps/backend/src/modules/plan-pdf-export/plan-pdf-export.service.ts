@@ -17,7 +17,11 @@ class PlanPdfExportService {
 			throw new Error(ErrorConstants.DEFAULT_ERROR_MESSAGE);
 		}
 
-		await page.goto(printUrl, { waitUntil: NETWORK_IDLE_0 });
+		const urlWithStyle = dto.planStyle
+			? `${printUrl}?style=${encodeURIComponent(dto.planStyle)}`
+			: printUrl;
+
+		await page.goto(urlWithStyle, { waitUntil: NETWORK_IDLE_0 });
 
 		const pdfBuffer = await page.pdf({
 			format: dto.format,

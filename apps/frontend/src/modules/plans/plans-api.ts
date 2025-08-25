@@ -93,6 +93,23 @@ class PlanApi extends BaseHTTPApi {
 
 		return await response.json<PlanWithCategoryDto[]>();
 	}
+
+	public async updateStyle(
+		planId: number,
+		styleId: number,
+	): Promise<PlanDaysTaskDto> {
+		const response = await this.load(
+			this.getFullEndpoint(PlansApiPath.PLAN_STYLE, { id: planId.toString() }),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: HTTPRequestMethod.PATCH,
+				payload: JSON.stringify({ styleId }),
+			},
+		);
+
+		return await response.json<PlanDaysTaskDto>();
+	}
 }
 
 export { PlanApi };

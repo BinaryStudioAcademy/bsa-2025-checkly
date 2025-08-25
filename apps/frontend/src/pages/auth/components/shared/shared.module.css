@@ -37,4 +37,6 @@
 	--cluster-direction: column;
 	--cluster-vertical-alignment: stretch;
 	--gutter: var(--space-xl);
+
+	margin-bottom: var(--space-s);
 }
