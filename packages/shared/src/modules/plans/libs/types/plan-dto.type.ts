@@ -42,4 +42,5 @@ export {
 	type PlanDaysTaskDto,
 	type PlanDto,
 	type PlanWithCategoryDto,
+	type TaskDto,
 };

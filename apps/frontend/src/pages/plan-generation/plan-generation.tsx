@@ -67,7 +67,7 @@ const PlanGeneration: React.FC = () => {
 			};
 
 			await dispatch(
-				planActions.generatePlan({ quizAnswers, userId: user?.id ?? null }),
+				planActions.generatePlan({ quizAnswers, userId: user?.id }),
 			);
 		};
 

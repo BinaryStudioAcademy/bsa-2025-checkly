@@ -9,7 +9,6 @@ import { buildQueryString } from "./libs/helpers/helpers.js";
 import {
 	type GeneratePlanRequestDto,
 	type PlanDayRegenerationRequestDto,
-	type PlanRegenerationRequestDto,
 	type PlanSearchQueryParameter,
 	type PlanWithCategoryDto,
 	type TaskRegenerationRequestDto,
@@ -68,12 +67,12 @@ class PlanApi extends BaseHTTPApi {
 		return await response.json<PlanDaysTaskDto[]>();
 	}
 
-	public async getByUserId(userId: number): Promise<PlanDaysTaskDto> {
+	public async getByUserId(): Promise<PlanDaysTaskDto> {
 		const response = await this.load(
-			this.getFullEndpoint(PlansApiPath.$USER_ID, { userId }),
+			this.getFullEndpoint(PlansApiPath.ACTIVE, {}),
 			{
 				contentType: ContentType.JSON,
-				hasAuth: false,
+				hasAuth: true,
 				method: HTTPRequestMethod.GET,
 			},
 		);
@@ -81,19 +80,16 @@ class PlanApi extends BaseHTTPApi {
 		return await response.json<PlanDaysTaskDto>();
 	}
 
-	public async regeneratePlan(
-		payload: PlanRegenerationRequestDto,
-	): Promise<PlanDaysTaskDto> {
-		const { id } = payload;
-
+	public async regeneratePlan(payload: number): Promise<PlanDaysTaskDto> {
 		const response = await this.load(
 			this.getFullEndpoint(PlansApiPath.REGENERATE, {
-				id,
+				id: payload,
 			}),
 			{
 				contentType: ContentType.JSON,
-				hasAuth: false,
-				method: HTTPRequestMethod.POST,
+				hasAuth: true,
+				method: HTTPRequestMethod.PUT,
+				payload: JSON.stringify({}),
 			},
 		);
 
@@ -112,8 +108,9 @@ class PlanApi extends BaseHTTPApi {
 			}),
 			{
 				contentType: ContentType.JSON,
-				hasAuth: false,
-				method: HTTPRequestMethod.POST,
+				hasAuth: true,
+				method: HTTPRequestMethod.PATCH,
+				payload: JSON.stringify({}),
 			},
 		);
 
@@ -133,8 +130,9 @@ class PlanApi extends BaseHTTPApi {
 			}),
 			{
 				contentType: ContentType.JSON,
-				hasAuth: false,
-				method: HTTPRequestMethod.POST,
+				hasAuth: true,
+				method: HTTPRequestMethod.PATCH,
+				payload: JSON.stringify({}),
 			},
 		);
 

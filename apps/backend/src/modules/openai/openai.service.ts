@@ -11,6 +11,7 @@ import {
 } from "./libs/constants/constants.js";
 import {
 	OpenAIRole,
+	PlanAction,
 	PlanErrorMessage,
 	ResponseFormat,
 } from "./libs/enums/enums.js";
@@ -18,6 +19,8 @@ import {
 	type GeneratedDayDTO,
 	type GeneratedPlanDTO,
 	type GeneratedTaskDTO,
+	type PlanActionType,
+	type PlanActionTypeMap,
 } from "./libs/types/types.js";
 import { delay, PromptBuilder } from "./libs/utilities/utilities.js";
 import {
@@ -25,14 +28,6 @@ import {
 	taskCreateValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
 import { type OpenAIModule } from "./openai.module.js";
-
-type ActionType = keyof ActionTypeMap;
-
-type ActionTypeMap = {
-	day: GeneratedDayDTO;
-	plan: GeneratedPlanDTO;
-	task: GeneratedTaskDTO;
-};
 
 class OpenAIService {
 	private maxAttempts: number;
@@ -55,8 +50,8 @@ class OpenAIService {
 		this.maxAttempts = MAX_ATTEMPTS;
 	}
 
-	public async generate<T extends ActionType>({
-		actionType = "plan" as T,
+	public async generate<T extends PlanActionType>({
+		actionType = PlanAction.PLAN as T,
 		assistantPrompt,
 		attempts = ZERO,
 		userPrompt,
@@ -65,7 +60,7 @@ class OpenAIService {
 		assistantPrompt?: string;
 		attempts?: number;
 		userPrompt: string;
-	}): Promise<ActionTypeMap[T]> {
+	}): Promise<PlanActionTypeMap[T]> {
 		let answer = "";
 
 		try {
@@ -75,7 +70,7 @@ class OpenAIService {
 				userPrompt,
 			});
 
-			const data = JSON.parse(answer) as ActionTypeMap[T];
+			const data = JSON.parse(answer) as PlanActionTypeMap[T];
 
 			this.validationHandlers[actionType](data);
 

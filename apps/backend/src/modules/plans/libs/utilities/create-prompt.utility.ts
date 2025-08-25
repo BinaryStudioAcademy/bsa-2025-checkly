@@ -64,6 +64,7 @@ const processAnswers = (answers: QuizAnswer[]): string[] =>
 const createPrompt = ({
 	answers,
 	category,
+	context,
 	notes,
 }: QuizAnswersRequestDto): string => {
 	const styleResponse = (
@@ -95,6 +96,11 @@ const createPrompt = ({
 		This is because the user prefers a "${styleKey}" style and has "${timeKey}" available.
 		The plan should consist of ${rule.details}
 	`;
+	let existingTask = "";
+
+	if (context) {
+		existingTask = context.tasks.map((task) => `${task.title}`).join("; ");
+	}
 
 	return [
 		`${PROMPT_HEADER} - ${category.replaceAll("_", " ")}`,
@@ -105,9 +111,10 @@ const createPrompt = ({
 		USER_DATA_START,
 		"Quiz Answers",
 		processAnswers(answers),
-		notes
-			? `User notes (just for your reference): ${sanitizeTextInput(notes)}`
-			: "",
+		context &&
+			`Existing tasks: ${existingTask}. For each new task, you may choose a different time of day, a different type of activity, or a new perspective on the same user goal. Make sure the wording and approach are distinct from all previous tasks.`,
+		notes &&
+			`User notes (just for your reference): ${sanitizeTextInput(notes)}`,
 		USER_DATA_END,
 	].join("\n");
 };

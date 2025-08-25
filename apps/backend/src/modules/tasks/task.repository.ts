@@ -101,11 +101,10 @@ class TaskRepository implements Repository {
 		taskId: number,
 		task: GeneratedTaskDTO,
 	): Promise<TaskEntity> {
-		const { executionTimeType, order, title } = task;
+		const { executionTimeType, title } = task;
 
 		const payload = {
 			executionTimeType,
-			order,
 			title,
 		};
 

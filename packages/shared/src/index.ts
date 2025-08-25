@@ -57,6 +57,7 @@ export {
 	type GeneratedTaskDTO,
 	type GeneratePlanRequestDto,
 	generatePlanValidationSchema,
+	type PlanActionTypeMap,
 } from "./modules/openai/openai.js";
 export {
 	PlanCategoriesApiPath,
@@ -123,6 +124,7 @@ export {
 	quizAnswersValidationSchema,
 	QuizApiPath,
 	type QuizCategoryType,
+	type QuizContext,
 	QuizIndexes,
 	QuizQuestionFormat,
 	QuizQuestionFormatLabels,
