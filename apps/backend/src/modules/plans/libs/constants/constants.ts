@@ -1,6 +1,7 @@
 import {
 	type PlanDayDto,
 	type PlanDaysTaskDto,
+	type TaskDto,
 } from "~/modules/plans/libs/types/types.js";
 
 const MOCK_GENERATED_PLAN: PlanDaysTaskDto = {
@@ -51,7 +52,7 @@ const MOCK_GENERATED_PLAN: PlanDaysTaskDto = {
 const MOCK_GENERATED_PLAN_DAY: PlanDayDto = {
 	dayNumber: 2,
 	id: 2,
-	planId: 1,
+	planId: 58,
 	tasks: [
 		{
 			completedAt: null,
@@ -76,5 +77,16 @@ const MOCK_GENERATED_PLAN_DAY: PlanDayDto = {
 	],
 };
 
-export { MOCK_GENERATED_PLAN, MOCK_GENERATED_PLAN_DAY };
+const MOCK_GENERATED_TASK: TaskDto = {
+	completedAt: null,
+	description: "Hello2-------------",
+	executionTimeType: "morning",
+	id: 2,
+	isCompleted: false,
+	order: 1,
+	planDayId: 259,
+	title: "Meet a person in the cafe",
+};
+
+export { MOCK_GENERATED_PLAN, MOCK_GENERATED_PLAN_DAY, MOCK_GENERATED_TASK };
 export { LAST_INDEX } from "shared";

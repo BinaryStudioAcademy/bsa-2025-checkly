@@ -18,4 +18,5 @@ export {
 	type QuizAnswersRequestDto,
 	type TaskCreateRequestDto,
 	type TaskDto,
+	type TaskRegenerateRequestDto,
 } from "shared";

@@ -10,8 +10,10 @@ const ErrorMessage = {
 	FORBIDDEN: "Forbidden",
 	ID_INVALID: "Invalid user id",
 	MISSING_REQUEST: "Missing original request for multipart processing",
+	PLAN_DAY_REGENERATION_FAILED: "Failed to regenerate plan day",
 	PLAN_NOT_FOUND: "Plan does not exist",
 	PLAN_REGENERATION_FAILED: "Failed to regenerate plan",
+	TASK_REGENERATION_FAILED: "Failed to regenerate task",
 	UNAUTHORIZED_ACCESS: "Unauthorized access",
 	USER_NOT_FOUND: "User not found.",
 } as const;
