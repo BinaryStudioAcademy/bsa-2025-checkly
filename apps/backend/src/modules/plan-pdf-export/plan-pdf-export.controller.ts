@@ -15,7 +15,7 @@ import { planPdfExportValidationSchema } from "./libs/validation-schemas/validat
 import { type PlanPdfExportService } from "./plan-pdf-export.service.js";
 /**
  * @swagger
- * /plan-pdf-export/export-pdf:
+ * /plan-export/pdf:
  *   post:
  *     tags:
  *       - plan-pdf-export
@@ -27,12 +27,80 @@ import { type PlanPdfExportService } from "./plan-pdf-export.service.js";
  *           schema:
  *             $ref: '#/components/schemas/ExportPlanPdfDto'
  *           example:
- *             planId: 1
+ *             format: "A4"
+ *             html: "regular"
  *     responses:
  *       200:
  *         description: PDF exported successfully
  *         content:
  *           application/pdf:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       400:
+ *         description: An unexpected error occurred. Please try again later.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *             example:
+ *               errorType: "VALIDATION"
+ *               message: "An unexpected error occurred. Please try again later."
+ *
+ * /plan-export/pdf/desktop:
+ *   post:
+ *     tags:
+ *       - plan-pdf-export
+ *     summary: Export plan as PNG (desktop)
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ExportPlanPdfDto'
+ *           example:
+ *             html: "desktop"
+ *             width: 1920
+ *             height: 1080
+ *     responses:
+ *       200:
+ *         description: PNG exported successfully
+ *         content:
+ *           image/png:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       400:
+ *         description: An unexpected error occurred. Please try again later.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *             example:
+ *               errorType: "VALIDATION"
+ *               message: "An unexpected error occurred. Please try again later."
+ *
+ * /plan-export/pdf/mobile:
+ *   post:
+ *     tags:
+ *       - plan-pdf-export
+ *     summary: Export plan as PNG (mobile)
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ExportPlanPdfDto'
+ *           example:
+ *             html: "mobile"
+ *             width: 390
+ *             height: 844
+ *             pixelRatio: 3
+ *     responses:
+ *       200:
+ *         description: PNG exported successfully
+ *         content:
+ *           image/png:
  *             schema:
  *               type: string
  *               format: binary
@@ -65,6 +133,26 @@ class PlanPdfExportController extends BaseController {
 				body: planPdfExportValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.exportPng(options as APIBodyOptions<ExportPlanPdfDto>),
+			method: HTTPRequestMethod.POST,
+			path: PlanPdfExportApiPath.EXPORT_PDF_DESKTOP,
+			validation: {
+				body: planPdfExportValidationSchema,
+			},
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.exportPng(options as APIBodyOptions<ExportPlanPdfDto>),
+			method: HTTPRequestMethod.POST,
+			path: PlanPdfExportApiPath.EXPORT_PDF_MOBILE,
+			validation: {
+				body: planPdfExportValidationSchema,
+			},
+		});
 	}
 
 	private async exportPdf(
@@ -75,6 +163,18 @@ class PlanPdfExportController extends BaseController {
 		return {
 			headers: { "Content-Type": ContentType.PDF },
 			payload: pdfBuffer,
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async exportPng(
+		options: APIBodyOptions<ExportPlanPdfDto>,
+	): Promise<ExportPdfResponse> {
+		const pngBuffer = await this.planPdfExportService.generatePng(options.body);
+
+		return {
+			headers: { "Content-Type": ContentType.PNG },
+			payload: pngBuffer,
 			status: HTTPCode.OK,
 		};
 	}

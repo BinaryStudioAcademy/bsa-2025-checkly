@@ -1,9 +1,27 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import JSZip from "jszip";
 
-import { MESSAGES, PLAN_NAME_DEFAULT } from "~/libs/constants/constants.js";
-import { AppRoute, FileExtension, PaperFormat } from "~/libs/enums/enums.js";
+import { PLAN } from "~/libs/components/plan-styles/mocks/plan-mocks.js";
+import {
+	type CategoryId,
+	DEFAULT_HEIGHT,
+	DEFAULT_PIXEL_RATIO,
+	DEFAULT_WIDTH,
+	FIRST_PAGE,
+	getCategoryStyle,
+	MAX_DAYS_PER_PAGE,
+	MESSAGES,
+	MIN_PAGES,
+	PLAN_NAME_DEFAULT,
+} from "~/libs/constants/constants.js";
+import {
+	FileExtension,
+	PaperFormat,
+	PlanCategoryId,
+} from "~/libs/enums/enums.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { type AsyncThunkConfig } from "~/libs/types/async-thunk-config.type.js";
+import { type WindowSize } from "~/libs/types/types.js";
 import {
 	downloadFile,
 	getBackendEndpoint,
@@ -11,8 +29,42 @@ import {
 
 import { name as sliceName } from "./pdf-export.slice.js";
 
+const getPageCount = (totalDays: number): number =>
+	Math.max(MIN_PAGES, Math.ceil(totalDays / MAX_DAYS_PER_PAGE));
+
+const getWindowSize = (): WindowSize => {
+	const w = (globalThis as { window?: Window }).window;
+	const screen = w?.screen;
+
+	const height = screen?.height ?? DEFAULT_HEIGHT;
+	const width = screen?.width ?? DEFAULT_WIDTH;
+	const pixelRatio = w?.devicePixelRatio ?? DEFAULT_PIXEL_RATIO;
+
+	return { height, pixelRatio, width };
+};
+
+const downloadPngZip = async (
+	baseName: string,
+	pageCount: number,
+	fetchPageBlob: (page: number) => Promise<Blob>,
+): Promise<string> => {
+	const zip = new JSZip();
+
+	for (let page = FIRST_PAGE; page <= pageCount; page++) {
+		const partName = `${baseName}-part-${String(page)}.${FileExtension.PNG}`;
+		const blob = await fetchPageBlob(page);
+		zip.file(partName, blob);
+	}
+
+	const zipBlob = await zip.generateAsync({ type: "blob" });
+	const zipName = `${baseName}.zip`;
+	downloadFile(zipBlob, zipName);
+
+	return zipName;
+};
+
 type ExportPdfThunkArguments = {
-	category: string;
+	category: CategoryId;
 };
 
 const exportPdf = createAsyncThunk<
@@ -23,23 +75,16 @@ const exportPdf = createAsyncThunk<
 	const { pdfExportApi } = extra;
 
 	const backendEndpoint = getBackendEndpoint(category);
-
-	const responsePage = await fetch(AppRoute.PLAN_STYLE_PRINT);
-
-	if (!responsePage.ok) {
-		notifications.error(MESSAGES.DOWNLOAD.NO_PLAN_FOUND);
-
-		return { fileName: "" };
-	}
-
+	const view = getCategoryStyle(category);
 	const format = PaperFormat.A4;
-	const html = await responsePage.text();
 
-	const planTitle = getState().plan.plan?.title || PLAN_NAME_DEFAULT;
+	const planTitle = String(getState().plan.plan?.title ?? PLAN_NAME_DEFAULT);
+	const { selectedStyle } = getState().plan;
 	const fileName = `${planTitle}.${FileExtension.PDF}`;
 	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
 		format,
-		html,
+		html: view,
+		style: selectedStyle,
 	});
 
 	downloadFile(blob, fileName);
@@ -47,4 +92,91 @@ const exportPdf = createAsyncThunk<
 	return { fileName };
 });
 
-export { exportPdf };
+const exportDesktopPng = createAsyncThunk<
+	{ fileName: string },
+	undefined,
+	AsyncThunkConfig
+>(`${sliceName}/export-desktop-png`, async (_unused, { extra, getState }) => {
+	const { pdfExportApi } = extra;
+
+	const category = PlanCategoryId.DESKTOP;
+	const backendEndpoint = getBackendEndpoint(category);
+	const view = getCategoryStyle(category);
+	const size: WindowSize = getWindowSize();
+
+	const totalDays = PLAN.days.length;
+	const pageCount = getPageCount(totalDays);
+	const planTitle = String(getState().plan.plan?.title ?? PLAN_NAME_DEFAULT);
+	const { selectedStyle } = getState().plan;
+
+	if (pageCount > MIN_PAGES) {
+		const zipName = await downloadPngZip(planTitle, pageCount, (page) =>
+			pdfExportApi.exportPlan(backendEndpoint, {
+				html: view,
+				page,
+				style: selectedStyle,
+				windowSize: size,
+			}),
+		);
+
+		return { fileName: zipName };
+	}
+
+	const fileName = `${planTitle}.${FileExtension.PNG}`;
+	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
+		html: view,
+		style: selectedStyle,
+		windowSize: size,
+	});
+
+	downloadFile(blob, fileName);
+
+	return { fileName };
+});
+
+const exportMobilePng = createAsyncThunk<
+	{ fileName: string },
+	undefined,
+	AsyncThunkConfig
+>(`${sliceName}/export-mobile-png`, async (_unused, { extra, getState }) => {
+	const { pdfExportApi } = extra;
+
+	const category = PlanCategoryId.MOBILE;
+	const backendEndpoint = getBackendEndpoint(category);
+	const view = getCategoryStyle(category);
+	const size: WindowSize = getWindowSize();
+
+	const totalDays = PLAN.days.length;
+	const pageCount = getPageCount(totalDays);
+	const planTitle = String(getState().plan.plan?.title ?? PLAN_NAME_DEFAULT);
+	const { selectedStyle } = getState().plan;
+
+	if (pageCount > MIN_PAGES) {
+		const zipName = await downloadPngZip(planTitle, pageCount, (page) =>
+			pdfExportApi.exportPlan(backendEndpoint, {
+				html: view,
+				page,
+				style: selectedStyle,
+				windowSize: size,
+			}),
+		);
+
+		notifications.success(MESSAGES.DOWNLOAD.SUCCESS);
+
+		return { fileName: zipName };
+	}
+
+	const fileName = `${planTitle}.${FileExtension.PNG}`;
+	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
+		html: view,
+		style: selectedStyle,
+		windowSize: size,
+	});
+
+	downloadFile(blob, fileName);
+	notifications.success(MESSAGES.DOWNLOAD.SUCCESS);
+
+	return { fileName };
+});
+
+export { exportDesktopPng, exportMobilePng, exportPdf };

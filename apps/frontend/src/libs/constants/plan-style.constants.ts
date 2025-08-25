@@ -1,0 +1,6 @@
+const MAX_DAYS_PER_PAGE = 7;
+const MIN_PAGE = 1;
+const MIN_INDEX = 0;
+const MIN_STACK_PAGES = 2;
+
+export { MAX_DAYS_PER_PAGE, MIN_INDEX, MIN_PAGE, MIN_STACK_PAGES };

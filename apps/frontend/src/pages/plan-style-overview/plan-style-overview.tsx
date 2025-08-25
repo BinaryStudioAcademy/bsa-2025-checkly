@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { StarsYellow02 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { AppHeader, DecorativeImage } from "~/libs/components/components.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
-import { MESSAGES } from "~/libs/constants/constants.js";
+import { getCategoryStyle, MESSAGES } from "~/libs/constants/constants.js";
 import { AppRoute, DataStatus, PlanCategoryId } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { usePlanCategory } from "~/libs/hooks/hooks.js";
@@ -27,7 +27,9 @@ const PlanStyleOverview: React.FC = () => {
 	const isAuthenticated = Boolean(user);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
-	const { selectedCategory } = usePlanCategory(PlanCategoryId.PDF);
+	const { handleCategorySelect, selectedCategory } = usePlanCategory(
+		PlanCategoryId.PDF,
+	);
 
 	const handleEditPlan = useCallback((): void => {
 		notifications.info(MESSAGES.FEATURE.NOT_IMPLEMENTED);
@@ -41,9 +43,25 @@ const PlanStyleOverview: React.FC = () => {
 
 	const handleDownloadPlan = useCallback(async (): Promise<void> => {
 		try {
-			const resultAction = await dispatch(
-				actions.exportPdf({ category: selectedCategory }),
-			);
+			let resultAction;
+
+			switch (selectedCategory) {
+				case PlanCategoryId.DESKTOP: {
+					resultAction = await dispatch(actions.exportDesktopPng());
+					break;
+				}
+
+				case PlanCategoryId.MOBILE: {
+					resultAction = await dispatch(actions.exportMobilePng());
+					break;
+				}
+
+				default: {
+					resultAction = await dispatch(
+						actions.exportPdf({ category: selectedCategory }),
+					);
+				}
+			}
 
 			if (isFulfilled(resultAction)) {
 				notifications.success(
@@ -70,11 +88,17 @@ const PlanStyleOverview: React.FC = () => {
 		<>
 			<AppHeader />
 			<div className={styles["header-section"]}>
-				<PlanStyleCategory />
+				<PlanStyleCategory
+					onSelect={handleCategorySelect}
+					selectedCategory={selectedCategory}
+				/>
 			</div>
 			<div className={getClassNames(styles["container"], "grid-pattern")}>
 				<div className={styles["plan-content"]}>
-					<PlanStyle inputStyle={selectedStyle} />
+					<PlanStyle
+						inputStyle={selectedStyle}
+						view={getCategoryStyle(selectedCategory)}
+					/>
 					<DecorativeImage
 						className={styles["yellow-stars-reflection"]}
 						src={StarsYellow02}
