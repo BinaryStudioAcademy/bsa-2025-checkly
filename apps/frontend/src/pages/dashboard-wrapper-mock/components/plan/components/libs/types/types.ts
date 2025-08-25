@@ -1,1 +1,1 @@
-export { type TaskDto } from "shared";
+export { type PlanDayDto, type TaskDto } from "shared";
