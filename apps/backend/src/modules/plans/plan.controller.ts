@@ -16,6 +16,7 @@ import {
 	type PlanDayRegenerateRequestDto,
 	type PlanSearchQueryParameter,
 	planSearchQueryParametersValidationSchema,
+	type TaskRegenerateRequestDto,
 } from "~/modules/plans/plans.js";
 
 import { type PlanStyleUpdateRequestDto } from "../plan-styles/libs/types/types.js";
@@ -264,6 +265,17 @@ class PlanController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
+				this.regenerateTask(
+					options as APIHandlerOptions<{
+						params: TaskRegenerateRequestDto;
+					}>,
+				),
+			method: HTTPRequestMethod.POST,
+			path: PlansApiPath.REGENERATE_TASK,
+		});
+
+		this.addRoute({
+			handler: (options) =>
 				this.create(options as APIBodyOptions<PlanCreateRequestDto>),
 			method: HTTPRequestMethod.POST,
 			path: PlansApiPath.ROOT,
@@ -450,6 +462,7 @@ class PlanController extends BaseController {
 			status: HTTPCode.OK,
 		};
 	}
+
 	/**
 	 * @swagger
 	 * /plans/generate:
@@ -504,7 +517,6 @@ class PlanController extends BaseController {
 			status: HTTPCode.OK,
 		};
 	}
-
 	private async regenerate(
 		options: IdParametersOption,
 	): Promise<APIHandlerResponse> {
@@ -523,6 +535,17 @@ class PlanController extends BaseController {
 
 		return {
 			payload: await this.planService.regenerateDay(planId),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async regenerateTask(options: {
+		params: TaskRegenerateRequestDto;
+	}): Promise<APIHandlerResponse> {
+		const { planId } = options.params;
+
+		return {
+			payload: await this.planService.regenerateTask(planId),
 			status: HTTPCode.OK,
 		};
 	}

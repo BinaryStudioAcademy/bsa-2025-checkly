@@ -7,6 +7,7 @@ export {
 export {
 	type TaskDto,
 	type TaskGetAllResponseDto,
+	type TaskRegenerateRequestDto,
 	type TaskResponseDto,
 	type TaskUpdateRequestDto,
 } from "./libs/types/types.js";

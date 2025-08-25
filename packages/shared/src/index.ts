@@ -132,6 +132,7 @@ export {
 	type TaskDto,
 	type TaskGetAllResponseDto,
 	TaskMessage,
+	type TaskRegenerateRequestDto,
 	type TaskResponseDto,
 	TasksApiPath,
 	type TaskUpdateRequestDto,
