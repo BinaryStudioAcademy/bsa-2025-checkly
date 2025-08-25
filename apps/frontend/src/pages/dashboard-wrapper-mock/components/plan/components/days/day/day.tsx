@@ -5,7 +5,7 @@ import { ArrowBold } from "~/assets/img/shared/shapes/shapes.img.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 
-import { type PlanDayDto } from "../libs/types/types.js";
+import { type PlanDayDto } from "../../libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {

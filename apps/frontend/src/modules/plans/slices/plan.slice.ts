@@ -100,6 +100,10 @@ const { actions, name, reducer } = createSlice({
 	initialState,
 	name: "plan",
 	reducers: {
+		clearPlan: (state) => {
+			state.plan = null;
+			state.dataStatus = DataStatus.IDLE;
+		},
 		setPlan: (state, action: PayloadAction<PlanDaysTaskDto>) => {
 			state.plan = action.payload;
 		},

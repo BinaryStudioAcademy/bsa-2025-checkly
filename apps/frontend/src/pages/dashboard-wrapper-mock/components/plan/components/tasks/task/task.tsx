@@ -17,8 +17,8 @@ import { useAppDispatch, useCallback } from "~/libs/hooks/hooks.js";
 import { TaskValidationRule } from "~/modules/tasks/libs/enums/enums.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
-import { type TaskDto } from "../libs/types/types.js";
-import styles from "./styles.module.css";
+import { type TaskDto } from "../../libs/types/types.js";
+import styles from "../../shared/task/styles.module.css";
 
 type Properties = {
 	indexItem: number;
