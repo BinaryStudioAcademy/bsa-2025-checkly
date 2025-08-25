@@ -5,11 +5,15 @@
 }
 
 .form {
-	--cluster-vertical-alignment: space-between;
+	--cluster-direction: column;
+	--cluster-vertical-alignment: flex-start;
 
-	gap: 30px;
-	max-width: 320px;
+	gap: 20px;
 	height: 100%;
+}
+
+.character-counter {
+	align-self: flex-end;
 }
 
 .button-group {

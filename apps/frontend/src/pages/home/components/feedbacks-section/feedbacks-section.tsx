@@ -85,7 +85,7 @@ const FeedbacksSection: FC = () => {
 				</div>
 			</div>
 			{openModal === "CREATE" && (
-				<Modal isOpen onClose={handleCloseModal}>
+				<Modal isOpen onClose={handleCloseModal} title="Add your feedback">
 					<AddFeedbackModal
 						onClose={handleCloseModalAndUpdate}
 						userId={user?.id}

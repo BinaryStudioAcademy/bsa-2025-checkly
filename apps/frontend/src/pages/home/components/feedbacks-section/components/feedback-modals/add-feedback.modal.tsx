@@ -63,18 +63,17 @@ const AddFeedbackModal: React.FC<Properties> = ({
 	return (
 		<form
 			aria-labelledby="feedback-title"
-			className={getClassNames(styles["form"], "cluster")}
+			className={getClassNames("cluster", styles["form"])}
 			noValidate
 			onSubmit={handleOnSubmit}
 		>
-			<h2 className={styles["feedback-title"]} id="feedback-title">
-				Add your feedback
-			</h2>
 			<Textarea
 				control={control}
 				errors={errors}
 				name="text"
 				placeholder="Enter your testimonial"
+				resize="horizontal"
+				rows={10}
 			/>
 			<div className={styles["character-counter"]}>
 				{characterCount}/{maxCharacters}

@@ -38,7 +38,7 @@
 
 .modal-title {
 	margin: 0;
-	font-size: var(--text-body-large);
+	font-size: var(--text-size-heading-2);
 	font-weight: var(--font-weight-semi-bold);
 }
 
