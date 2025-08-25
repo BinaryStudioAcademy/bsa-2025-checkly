@@ -60,14 +60,14 @@ class PlanDayController extends BaseController {
 		this.addRoute({
 			handler: (options) => this.findById(options as IdParametersOption),
 			method: HTTPRequestMethod.GET,
-			path: PlanDaysApiPath.PLAN_DAY,
+			path: PlanDaysApiPath.$ID,
 		});
 
 		this.addRoute({
 			handler: (options) =>
 				this.create(options as APIBodyOptions<PlanDayCreateRequestDto>),
 			method: HTTPRequestMethod.POST,
-			path: PlanDaysApiPath.PLAN_DAY_CREATE,
+			path: PlanDaysApiPath.ROOT,
 			validation: {
 				body: planDayCreateValidationSchema,
 			},

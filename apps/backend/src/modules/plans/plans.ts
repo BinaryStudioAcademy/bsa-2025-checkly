@@ -12,13 +12,14 @@ const planRepository = new PlanRepository(
 	planDayRepository,
 	taskRepository,
 );
-const planService = new PlanService(planRepository);
+const planService = new PlanService(planRepository, planDayRepository);
 const planController = new PlanController(logger, planService);
 
 export { planController };
 export {
 	type PlanCreateRequestDto,
 	type PlanDayDto,
+	type PlanDayRegenerateRequestDto,
 	type PlanDaysTaskDto,
 	type PlanSearchQueryParameter,
 	type PlanWithCategoryDto,

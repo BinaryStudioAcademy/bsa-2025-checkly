@@ -6,6 +6,7 @@ export {
 	type PlanCreateRequestDto,
 	type PlanDayCreateRequestDto,
 	type PlanDayDto,
+	type PlanDayRegenerateRequestDto,
 	type PlanDaysTaskDto,
 	type PlanDto,
 	type PlanGetAllResponseDto,

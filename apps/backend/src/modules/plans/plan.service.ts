@@ -6,11 +6,17 @@ import { openAiService } from "../openai/openai.js";
 import { type OpenAIService } from "../openai/openai.service.js";
 import { planCategoryService } from "../plan-categories/plan-categories.js";
 import { type PlanCategoryService } from "../plan-categories/plan-category.service.js";
+import { PlanDayEntity } from "../plan-days/plan-day.entity.js";
+import { type PlanDayRepository } from "../plan-days/plan-day.repository.js";
 import { type PlanDayService } from "../plan-days/plan-day.service.js";
 import { planDayService } from "../plan-days/plan-days.js";
 import { type TaskService } from "../tasks/task.service.js";
 import { taskService } from "../tasks/tasks.js";
-import { LAST_INDEX, MOCK_GENERATED_PLAN } from "./libs/constants/constants.js";
+import {
+	LAST_INDEX,
+	MOCK_GENERATED_PLAN,
+	MOCK_GENERATED_PLAN_DAY,
+} from "./libs/constants/constants.js";
 import { ErrorMessage, HTTPCode, HTTPError } from "./libs/enums/enums.js";
 import {
 	type GeneratedPlanDTO,
@@ -34,14 +40,19 @@ import { createPrompt } from "./libs/utilities/utilities.js";
 class PlanService implements Service {
 	private openAIService: OpenAIService;
 	private planCategoryService: PlanCategoryService;
+	private planDayRepository: PlanDayRepository;
 	private planDayService: PlanDayService;
 	private planRepository: PlanRepository;
 	private taskService: TaskService;
 
-	public constructor(planRepository: PlanRepository) {
+	public constructor(
+		planRepository: PlanRepository,
+		planDayRepository: PlanDayRepository,
+	) {
 		this.planRepository = planRepository;
 		this.openAIService = openAiService;
 		this.planDayService = planDayService;
+		this.planDayRepository = planDayRepository;
 		this.taskService = taskService;
 		this.planCategoryService = planCategoryService;
 	}
@@ -134,6 +145,42 @@ class PlanService implements Service {
 		}
 
 		const newPlan = await this.planRepository.findWithRelations(newPlanId);
+
+		return newPlan ? newPlan.toObjectWithRelations() : null;
+	}
+
+	public async regenerateDay(id: number): Promise<null | PlanDaysTaskDto> {
+		const existingPlan = await this.planRepository.find(id);
+
+		if (!existingPlan) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		// TODO: Replace with actual quizId from plan when available
+		// const quizId = 1;
+		// const answers = await this.quizAnswerRepository.findAllWithOptionExceptId(quizId, planDayId);
+		// const summaryOfOtherDayTasks = await this.openAIService.summaryOfOtherDayTasks(answers);
+
+		// TODO: Replace mock with OpenAI service
+		// const prompt = createPrompt({ answers, category: "creativity", notes: "", additional: summaryOfOtherDayTasks });
+		// const generatedPlan = await this.openAIService.generatePlan(prompt);
+
+		const generatedPlanDay: PlanDayDto = MOCK_GENERATED_PLAN_DAY;
+		const planDayEntity = PlanDayEntity.initialize(generatedPlanDay);
+
+		const newPlanDayId = await this.planDayRepository.regenerate(planDayEntity);
+
+		if (!newPlanDayId) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_REGENERATION_FAILED,
+				status: HTTPCode.INTERNAL_SERVER_ERROR,
+			});
+		}
+
+		const newPlan = await this.planRepository.findWithRelations(id);
 
 		return newPlan ? newPlan.toObjectWithRelations() : null;
 	}
