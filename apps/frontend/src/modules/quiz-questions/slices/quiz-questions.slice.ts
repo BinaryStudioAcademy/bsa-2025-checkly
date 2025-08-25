@@ -5,8 +5,8 @@ import { type ValueOf } from "~/libs/types/types.js";
 import {
 	type QuizAnswer,
 	type QuizQuestionsResponseDto,
-} from "~/modules/quiz/libs/types/types.js";
-import { fetchQuestions } from "~/modules/quiz/slices/actions.js";
+} from "~/modules/quiz-questions/libs/types/types.js";
+import { fetchQuestions } from "~/modules/quiz-questions/slices/actions.js";
 
 type QuizState = {
 	answers: Record<number, QuizAnswer>;
@@ -41,7 +41,7 @@ const { actions, name, reducer } = createSlice({
 			});
 	},
 	initialState,
-	name: "quiz",
+	name: "quiz-question",
 	reducers: {
 		initializeFromStorage: (state, action: { payload: Partial<QuizState> }) => {
 			const { answers, currentQuestion, notes, questions, selectedCategory } =

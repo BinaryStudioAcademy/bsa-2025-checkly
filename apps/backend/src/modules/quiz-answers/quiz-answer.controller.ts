@@ -14,6 +14,7 @@ import {
 } from "~/modules/quiz-answers/quiz-answers.js";
 
 import { QuizAnswerApiPath } from "./libs/enums/enums.js";
+import { type QuizAnswerOptionsRequestDto } from "./libs/types/types.js";
 
 class QuizAnswerController extends BaseController {
 	private quizAnswerService: QuizAnswerService;
@@ -27,6 +28,15 @@ class QuizAnswerController extends BaseController {
 			handler: (options) => this.findById(options as IdParametersOption),
 			method: HTTPRequestMethod.GET,
 			path: QuizAnswerApiPath.$ID,
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.createAnswerWithOptions(
+					options as APIBodyOptions<QuizAnswerOptionsRequestDto>,
+				),
+			method: HTTPRequestMethod.POST,
+			path: QuizAnswerApiPath.ANSWER_OTPIONS,
 		});
 
 		this.addRoute({
@@ -45,6 +55,17 @@ class QuizAnswerController extends BaseController {
 	): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.quizAnswerService.create(options.body),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async createAnswerWithOptions(
+		options: APIBodyOptions<QuizAnswerOptionsRequestDto>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.quizAnswerService.createAnswerWithOptions(
+				options.body,
+			),
 			status: HTTPCode.OK,
 		};
 	}

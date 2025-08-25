@@ -1,7 +1,7 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
-import { quizStateValidationSchema } from "~/modules/quiz/libs/validation-schemas/quiz.validation-schema.js";
-import { type QuizState } from "~/modules/quiz/slices/quiz.slice.js";
+import { quizStateValidationSchema } from "~/modules/quiz-questions/libs/validation-schemas/quiz-questions.validation-schema.js";
+import { type QuizState } from "~/modules/quiz-questions/slices/quiz-questions.slice.js";
 
 const saveQuizState = async (state: Partial<QuizState>): Promise<void> => {
 	try {

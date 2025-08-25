@@ -3,7 +3,7 @@ import {
 	type QuestionDto,
 	type QuizAnswer,
 	type QuizQuestionsResponseDto,
-} from "~/modules/quiz/libs/types/types.js";
+} from "~/modules/quiz-questions/libs/types/types.js";
 
 const getTextAnswerValue = (currentAnswer?: string): string => {
 	return currentAnswer ?? "";
