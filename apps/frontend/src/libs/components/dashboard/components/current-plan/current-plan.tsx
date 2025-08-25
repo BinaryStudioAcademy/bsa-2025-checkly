@@ -1,7 +1,7 @@
 import { type FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Button, Link } from "~/libs/components/components.js";
+import { Button } from "~/libs/components/components.js";
 import { ZERO } from "~/libs/components/dashboard/components/libs/enums/enums.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
@@ -56,7 +56,7 @@ const CurrentPlan: FC = () => {
 	if (isLoading) {
 		return (
 			<div className={getClassNames("flow-loose", styles["container"])}>
-				<h2 className={styles["title"]}>Current active plan</h2>
+				<h2 className={styles["title"]}>You have no plans yet</h2>
 				<div className={styles["plan-card"]}>
 					<div>{CURRENT_PLAN_MESSAGES.LOADING}</div>
 				</div>
@@ -67,7 +67,7 @@ const CurrentPlan: FC = () => {
 	if (errorMessage) {
 		return (
 			<div className={getClassNames("flow-loose", styles["container"])}>
-				<h2 className={styles["title"]}>Current active plan</h2>
+				<h2 className={styles["title"]}>You have no plans yet</h2>
 				<div className={styles["plan-card"]}>
 					<div>{errorMessage}</div>
 				</div>
@@ -78,19 +78,7 @@ const CurrentPlan: FC = () => {
 	if (!currentPlan) {
 		return (
 			<div className={getClassNames("flow-loose", styles["container"])}>
-				<h2 className={styles["title"]}>Current active plan</h2>
-				<div className={styles["plan-card"]}>
-					<div>{CURRENT_PLAN_MESSAGES.NO_ACTIVE_PLAN}</div>
-				</div>
-				<div className={styles["button-wrapper"]}>
-					<Link
-						asButtonSize="small"
-						asButtonVariant="primary"
-						to={AppRoute.QUIZ}
-					>
-						Create Plan
-					</Link>
-				</div>
+				<h2 className={styles["title"]}>You have no plans yet</h2>
 			</div>
 		);
 	}
