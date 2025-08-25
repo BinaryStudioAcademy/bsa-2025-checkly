@@ -18,26 +18,6 @@ const layoutExamples: LayoutExample[] = [
 		planStyle: "MINIMAL",
 		title: "Minimal",
 	},
-	{
-		id: 4,
-		planStyle: "WITH_REMARKS",
-		title: "With Remarks",
-	},
-	{
-		id: 5,
-		planStyle: "COLOURFUL",
-		title: "Colourful",
-	},
-	{
-		id: 6,
-		planStyle: "MINIMAL",
-		title: "Minimal",
-	},
-	{
-		id: 7,
-		planStyle: "WITH_REMARKS",
-		title: "With Remarks",
-	},
 ];
 
 export { layoutExamples };
