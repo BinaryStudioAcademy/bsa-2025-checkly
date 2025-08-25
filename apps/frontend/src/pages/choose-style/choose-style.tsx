@@ -47,7 +47,7 @@ const ChooseStyle: React.FC = () => {
 	);
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 
-	const getStyleId = useCallback(
+	const handleGetStyleId = useCallback(
 		(styleName: string): number => {
 			const style = planStyles.find((s) => s.name === styleName);
 
@@ -56,7 +56,7 @@ const ChooseStyle: React.FC = () => {
 		[planStyles],
 	);
 
-	const validateAndGetStyle = useCallback((): StyleValidationResult => {
+	const handleStyleValidation = useCallback((): StyleValidationResult => {
 		if (!plan?.id || !selectedCard) {
 			toast.error(CHOOSE_STYLE_MESSAGES.SELECT_STYLE_AND_PLAN_ID);
 
@@ -71,10 +71,10 @@ const ChooseStyle: React.FC = () => {
 			return null;
 		}
 
-		const styleId = getStyleId(selectedStyle.planStyle);
+		const styleId = handleGetStyleId(selectedStyle.planStyle);
 
 		return { planId: plan.id, styleId };
-	}, [plan, selectedCard, getStyleId]);
+	}, [plan, selectedCard, handleGetStyleId]);
 
 	const handleCardClick = useCallback(
 		(event: React.MouseEvent<HTMLButtonElement>): void => {
@@ -84,7 +84,7 @@ const ChooseStyle: React.FC = () => {
 	);
 
 	const handleSaveStyle = useCallback(async (): Promise<void> => {
-		const validation = validateAndGetStyle();
+		const validation = handleStyleValidation();
 
 		if (!validation) {
 			return;
@@ -102,7 +102,7 @@ const ChooseStyle: React.FC = () => {
 		} finally {
 			setIsSaving(false);
 		}
-	}, [validateAndGetStyle, dispatch, navigate]);
+	}, [handleStyleValidation, dispatch, navigate]);
 
 	const handleSaveStyleClick = useCallback((): void => {
 		void handleSaveStyle();

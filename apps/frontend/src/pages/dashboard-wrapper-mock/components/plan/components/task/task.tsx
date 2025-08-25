@@ -22,7 +22,6 @@ import styles from "./styles.module.css";
 type Properties = {
 	indexItem: number;
 	item: {
-		description: string;
 		executionTimeType: string;
 		id: number;
 		title: string;
@@ -55,13 +54,12 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 			taskActions.updateTask({
 				id: item.id,
 				payload: {
-					description: item.description,
 					title: editedTitle,
 				},
 			}),
 		);
 		setIsEditing(false);
-	}, [dispatch, item.id, item.description, editedTitle]);
+	}, [dispatch, item.id, editedTitle]);
 
 	const handleTitleChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -126,7 +124,6 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 					) : (
 						<>
 							<h5>{item.title}</h5>
-							<p>{item.description}</p>
 						</>
 					)}
 				</div>

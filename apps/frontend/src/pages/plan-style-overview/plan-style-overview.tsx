@@ -16,7 +16,7 @@ import { type PlanStyleOption } from "~/libs/types/types.js";
 import { actions } from "~/modules/pdf-export/slices/pdf-export.js";
 import {
 	DEFAULT_PLAN_STYLE,
-	PLAN_STYLE_MAPPING,
+	PLAN_STYLE_TO_READABLE,
 } from "~/modules/plan-styles/libs/constants/plan-style.constants.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
 import { actions as planSliceActions } from "~/modules/plans/slices/plan.slice.js";
@@ -54,12 +54,12 @@ const PlanStyleOverview: React.FC = () => {
 		}
 	}, [userPlans, dispatch]);
 
-	const getStyleFromPlan = useCallback((): PlanStyleOption => {
+	const handleGetStyleFromPlan = useCallback((): PlanStyleOption => {
 		if (!plan) {
 			return DEFAULT_PLAN_STYLE;
 		}
 
-		const style = PLAN_STYLE_MAPPING[plan.styleId] ?? DEFAULT_PLAN_STYLE;
+		const style = PLAN_STYLE_TO_READABLE[plan.styleId] ?? DEFAULT_PLAN_STYLE;
 
 		return style;
 	}, [plan]);
@@ -79,7 +79,7 @@ const PlanStyleOverview: React.FC = () => {
 			const resultAction = await dispatch(
 				actions.exportPdf({
 					category: selectedCategory,
-					planStyle: getStyleFromPlan(),
+					planStyle: handleGetStyleFromPlan(),
 				}),
 			);
 
@@ -94,7 +94,7 @@ const PlanStyleOverview: React.FC = () => {
 		} catch {
 			notifications.error(MESSAGES.DOWNLOAD.FAILED);
 		}
-	}, [dispatch, selectedCategory, handleGoToDashboard, getStyleFromPlan]);
+	}, [dispatch, selectedCategory, handleGoToDashboard, handleGetStyleFromPlan]);
 
 	const handleDownload = useCallback((): void => {
 		void handleDownloadPlan();
@@ -112,7 +112,7 @@ const PlanStyleOverview: React.FC = () => {
 			</div>
 			<div className={getClassNames(styles["container"], "grid-pattern")}>
 				<div className={styles["plan-content"]}>
-					<PlanStyle inputStyle={getStyleFromPlan()} />
+					<PlanStyle inputStyle={handleGetStyleFromPlan()} />
 					<DecorativeImage
 						className={styles["yellow-stars-reflection"]}
 						src={StarsYellow02}

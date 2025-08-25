@@ -3,7 +3,7 @@ import { PlanStyle } from "~/modules/plan-styles/libs/enums/enums.js";
 
 type PlanStyleMapping = Record<number, PlanStyleOption>;
 
-const PLAN_STYLE_MAPPING: PlanStyleMapping = {
+const PLAN_STYLE_TO_READABLE: PlanStyleMapping = {
 	[PlanStyle.COLOURFUL]: "COLOURFUL",
 	[PlanStyle.MINIMAL]: "MINIMAL",
 	[PlanStyle.WITH_REMARKS]: "WITH_REMARKS",
@@ -11,4 +11,4 @@ const PLAN_STYLE_MAPPING: PlanStyleMapping = {
 
 const DEFAULT_PLAN_STYLE: PlanStyleOption = "WITH_REMARKS";
 
-export { DEFAULT_PLAN_STYLE, PLAN_STYLE_MAPPING };
+export { DEFAULT_PLAN_STYLE, PLAN_STYLE_TO_READABLE };

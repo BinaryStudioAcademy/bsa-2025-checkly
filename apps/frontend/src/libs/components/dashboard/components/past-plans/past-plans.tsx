@@ -3,18 +3,13 @@ import { type SingleValue } from "react-select";
 
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { ZERO } from "~/libs/constants/constants.js";
-import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { getClassNames, getPlanStyleName } from "~/libs/helpers/helpers.js";
 import {
 	useAppDispatch,
 	useAppSelector,
 	useUserPlanSearch,
 } from "~/libs/hooks/hooks.js";
-import { type PlanStyleOption } from "~/libs/types/types.js";
 import { actions as planCategoryActions } from "~/modules/plan-categories/plan-categories.js";
-import {
-	DEFAULT_PLAN_STYLE,
-	PLAN_STYLE_MAPPING,
-} from "~/modules/plan-styles/libs/constants/plan-style.constants.js";
 
 import { PlanCategorySelect } from "./components/plan-category-select/plan-category-select.js";
 import { PlanSearchInput } from "./components/plan-search-input/plan-search-input.js";
@@ -22,10 +17,6 @@ import { PlansFoundBlock } from "./components/plans-found-block/plans-found-bloc
 import { defaultCategoryOption } from "./libs/enums/enums.js";
 import { type CategoryOption } from "./libs/types/types.js";
 import styles from "./styles.module.css";
-
-const getStyleName = (styleId: number): PlanStyleOption => {
-	return PLAN_STYLE_MAPPING[styleId] ?? DEFAULT_PLAN_STYLE;
-};
 
 const PlanCardSkeleton: FC = () => (
 	<div className={getClassNames("flow", styles["plan-card-skeleton"])}>
@@ -107,7 +98,7 @@ const PastPlans: FC = () => {
 			{userPlans.map((plan) => (
 				<div className={styles["plan-card"]} key={plan.id}>
 					<PlanStyle
-						inputStyle={getStyleName(plan.styleId)}
+						inputStyle={getPlanStyleName(plan.styleId)}
 						planTitle={plan.title}
 						view="selection"
 					/>
