@@ -17,19 +17,24 @@ import { useAppDispatch, useCallback } from "~/libs/hooks/hooks.js";
 import { TaskValidationRule } from "~/modules/tasks/libs/enums/enums.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
+import { type TaskDto } from "../libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
 	indexItem: number;
-	item: {
-		description: string;
-		executionTimeType: string;
-		id: number;
-		title: string;
-	};
+	item: TaskDto;
+	onRegenerate: (index: number) => void;
 };
 
-const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
+const Task: React.FC<Properties> = ({
+	indexItem,
+	item,
+	onRegenerate,
+}: Properties) => {
+	const handleRegenerate = useCallback(() => {
+		onRegenerate(item.id);
+	}, [item, onRegenerate]);
+
 	const [isEditing, setIsEditing] = useState<boolean>(false);
 	const [editedTitle, setEditedTitle] = useState<string>(item.title);
 	const [editedDescription, setEditedDescription] = useState<string>(
@@ -173,6 +178,7 @@ const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 							icon={<DecorativeImage src={Regenerate} />}
 							isIconOnly
 							label="Regenerate task"
+							onClick={handleRegenerate}
 						/>
 						<Button
 							className={getClassNames(styles["item-actions_button"])}

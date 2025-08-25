@@ -12,7 +12,7 @@ import {
 } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
-import { actions as planActions } from "~/modules/plans/plans.js";
+import { actions, actions as planActions } from "~/modules/plans/plans.js";
 import { TASK_INDEXES } from "~/modules/tasks/libs/constants/constants.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
@@ -26,16 +26,32 @@ const Plan: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const user = useAppSelector((state) => state.auth.user);
 	const plan = useAppSelector((state) => state.plan.plan);
-	const tasks = useAppSelector((state) => state.task.tasks);
+
+	useEffect(() => {
+		const userId = 2;
+
+		const getPlan = async (): Promise<void> => {
+			await dispatch(actions.getPlan(userId));
+		};
+
+		void getPlan();
+	}, [dispatch]);
 
 	const planDays = plan?.days ?? [];
 
-	const currentDay = plan?.days[selectedDay];
-	const selectedDayTasks = currentDay
-		? tasks
-				.filter((task) => task.planDayId === currentDay.id)
-				.toSorted((first, second) => first.order - second.order)
-		: [];
+	const handleTaskRegenerate = useCallback(
+		(taskId: number) => {
+			const planId = plan?.id;
+			const dayId = plan?.days[selectedDay]?.id;
+
+			if (!planId || !dayId) {
+				return;
+			}
+
+			void dispatch(actions.regenerateTask({ dayId, planId, taskId }));
+		},
+		[plan, selectedDay, dispatch],
+	);
 
 	useEffect(() => {
 		const allTasks =
@@ -62,8 +78,6 @@ const Plan: React.FC = () => {
 	const toggleSelect = useCallback((): void => {
 		setIsSelectOpen((previous) => !previous);
 	}, []);
-
-	const navLink = getClassNames(styles["nav-link"]);
 
 	return (
 		<div className={styles["plan"]}>
@@ -104,21 +118,27 @@ const Plan: React.FC = () => {
 						"cluster grid-pattern flow",
 					)}
 				>
-					{selectedDayTasks.map((item, index) => {
-						return <Task indexItem={index + ONE} item={item} key={index} />;
-					})}
-					{plan && (
-						<NavLink className={navLink} to={AppRoute.OVERVIEW_PAGE}>
-							<Button
-								icon={<DecorativeImage src={Download} />}
-								iconOnlySize="medium"
-								label="Download PDF"
-								size={ButtonSizes.LARGE}
-								type={ElementTypes.BUTTON}
-								variant={ButtonVariants.PRIMARY}
-							/>
-						</NavLink>
-					)}
+					{plan?.days[selectedDay]?.tasks.map((item, index) => (
+						<Task
+							indexItem={index + ONE}
+							item={item}
+							key={index}
+							onRegenerate={handleTaskRegenerate}
+						/>
+					))}
+					<NavLink
+						className={getClassNames(styles["nav-link"])}
+						to={AppRoute.CHOOSE_STYLE}
+					>
+						<Button
+							icon={<DecorativeImage src={Download} />}
+							iconOnlySize="medium"
+							label="Download PDF"
+							size={ButtonSizes.LARGE}
+							type={ElementTypes.BUTTON}
+							variant={ButtonVariants.PRIMARY}
+						/>
+					</NavLink>
 				</div>
 			</div>
 		</div>

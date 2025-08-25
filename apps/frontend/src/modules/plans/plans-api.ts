@@ -65,6 +65,42 @@ class PlanApi extends BaseHTTPApi {
 		return await response.json<PlanDaysTaskDto[]>();
 	}
 
+	public async getByUserId(userId: number): Promise<PlanDaysTaskDto> {
+		const response = await this.load(
+			this.getFullEndpoint(PlansApiPath.$USER_ID, { userId: String(userId) }),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: false,
+				method: HTTPRequestMethod.GET,
+			},
+		);
+
+		return await response.json<PlanDaysTaskDto>();
+	}
+
+	public async regenerateTask(payload: {
+		dayId: number;
+		planId: number;
+		taskId: number;
+	}): Promise<PlanDaysTaskDto> {
+		const { dayId, planId, taskId } = payload;
+
+		const response = await this.load(
+			this.getFullEndpoint(PlansApiPath.REGENERATE_TASK, {
+				dayId: String(dayId),
+				planId: String(planId),
+				taskId: String(taskId),
+			}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: false,
+				method: HTTPRequestMethod.POST,
+			},
+		);
+
+		return await response.json<PlanDaysTaskDto>();
+	}
+
 	public async search({
 		categoryId,
 		title,

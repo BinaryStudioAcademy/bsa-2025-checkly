@@ -9,6 +9,8 @@ import {
 	findPlan,
 	generatePlan,
 	getAllUserPlans,
+	getPlan,
+	regenerateTask,
 	searchPlan,
 } from "./actions.js";
 
@@ -73,6 +75,29 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(findPlan.rejected, (state) => {
 			state.userPlansDataStatus = DataStatus.REJECTED;
+			state.plan = null;
+		});
+		builder.addCase(getPlan.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(getPlan.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.plan = action.payload;
+		});
+		builder.addCase(getPlan.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+			state.plan = null;
+		});
+
+		builder.addCase(regenerateTask.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(regenerateTask.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.plan = action.payload;
+		});
+		builder.addCase(regenerateTask.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
 			state.plan = null;
 		});
 	},

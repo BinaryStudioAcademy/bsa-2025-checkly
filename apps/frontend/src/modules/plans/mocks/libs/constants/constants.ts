@@ -49,7 +49,32 @@ const MOCK_PLAN: ApiSchemas["PlanDaysTaskDto"] = {
 	],
 };
 
+const MOCK_REGENERATED_TASK: ApiSchemas["TaskDto"] = {
+	id: 101,
+	title: "Task regenerated",
+	description: "Just regenerated",
+	order: 1,
+	isCompleted: false,
+	executionTimeType: "morning",
+	completedAt: null,
+};
+
 const MIN_DELAY_MS = 1000;
 const MAX_DELAY_MS = 10000;
 
-export { MOCK_PLAN, MIN_DELAY_MS, MAX_DELAY_MS };
+const NOT_FOUND_INDEX = -1;
+
+const ErrorMessage = {
+	MISSING_PARAMS: "Missing required parameters",
+	DAY_OR_TASKS_NOT_FOUND: "Target day or tasks not found",
+	TASK_NOT_FOUND: "Task not found",
+} as const;
+
+export {
+	MOCK_PLAN,
+	ErrorMessage,
+	MOCK_REGENERATED_TASK,
+	NOT_FOUND_INDEX,
+	MIN_DELAY_MS,
+	MAX_DELAY_MS,
+};

@@ -86,6 +86,14 @@ class PlanService implements Service {
 		return item ? item.toObject() : null;
 	}
 
+	public async findActiveByUserId(
+		userId: number,
+	): Promise<null | PlanDaysTaskDto> {
+		const item = await this.planRepository.findActiveByUserId(userId);
+
+		return item ? item.toObjectWithRelations() : null;
+	}
+
 	public async findAll(): Promise<PlanGetAllResponseDto> {
 		const items = await this.planRepository.findAll();
 
