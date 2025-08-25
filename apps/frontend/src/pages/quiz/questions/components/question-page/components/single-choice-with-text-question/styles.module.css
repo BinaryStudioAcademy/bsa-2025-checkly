@@ -28,7 +28,7 @@
 .section-title {
 	margin: 0;
 	font-size: 2.25rem;
-	font-weight: var(--font-weight-semibold);
+	font-weight: var(--font-weight-semi-bold);
 	color: var(--color-text-primary);
 }
 
@@ -104,7 +104,7 @@
 .option-text {
 	flex: 1;
 	font-size: var(--text-size-body);
-	font-weight: var(--font-weight-semibold);
+	font-weight: var(--font-weight-semi-bold);
 	color: var(--color-text-primary);
 	word-break: keep-all;
 }
@@ -151,7 +151,7 @@
 }
 
 .radio-option:has(.radio-input:checked) .option-text {
-	font-weight: var(--font-weight-semibold);
+	font-weight: var(--font-weight-semi-bold);
 	color: var(--color-text-primary);
 }
 
