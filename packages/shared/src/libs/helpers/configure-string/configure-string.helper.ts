@@ -1,5 +1,5 @@
 const configureString = (
-	...parameters: [...string[], Record<string, string>]
+	...parameters: [...string[], Record<string, number | string>]
 ): string => {
 	const copiedArguments = [...parameters];
 
@@ -8,7 +8,7 @@ const configureString = (
 	let result = copiedArguments.map(String).join("");
 
 	for (const [key, value] of Object.entries(options)) {
-		result = result.replace(`:${key}`, value);
+		result = result.replace(`:${key}`, String(value));
 	}
 
 	return result;

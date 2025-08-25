@@ -47,13 +47,13 @@ paths:
       $ref: "./endpoints/plan.yaml#/getActivePlan"
 
   /plans/:planId/days/:dayId/tasks/:taskId/regenerate:
-    post:
+    patch:
       $ref: "./endpoints/plan.yaml#/regenerateTask"
 
   /plans/:planId/days/:dayId/regenerate:
-    post:
+    patch:
       $ref: "./endpoints/plan.yaml#/regeneratePlanDay"
 
   /plans/:id/regenerate:
-    post:
+    put:
       $ref: "./endpoints/plan.yaml#/regeneratePlan"

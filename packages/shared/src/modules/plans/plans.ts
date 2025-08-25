@@ -9,6 +9,7 @@ export {
 	type PlanSearchQueryParameter,
 	type PlanUpdateRequestDto,
 	type PlanWithCategoryDto,
+	type TaskDto,
 } from "./libs/types/types.js";
 export {
 	type PlanCreateRequestDto,

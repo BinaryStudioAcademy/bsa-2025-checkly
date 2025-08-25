@@ -72,8 +72,9 @@ class PlanRepository implements Repository {
 	public async findActiveByUserId(userId: number): Promise<null | PlanEntity> {
 		const plan = await this.planModel
 			.query()
-			.where("userId", userId)
-			.orderBy("createdAt", "desc")
+			.where({ userId })
+			.orderBy("created_at", "desc")
+			.withGraphFetched("days.tasks")
 			.first();
 
 		return plan ? PlanEntity.initialize(plan) : null;

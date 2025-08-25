@@ -21,4 +21,15 @@ type GeneratedTaskDTO = {
 	title: string;
 };
 
-export { type GeneratedDayDTO, type GeneratedPlanDTO, type GeneratedTaskDTO };
+type PlanActionTypeMap = {
+	day: GeneratedDayDTO;
+	plan: GeneratedPlanDTO;
+	task: GeneratedTaskDTO;
+};
+
+export {
+	type GeneratedDayDTO,
+	type GeneratedPlanDTO,
+	type GeneratedTaskDTO,
+	type PlanActionTypeMap,
+};

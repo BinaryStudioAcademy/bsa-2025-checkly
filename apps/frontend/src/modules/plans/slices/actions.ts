@@ -7,7 +7,6 @@ import {
 	type GeneratePlanRequestDto,
 	type PlanDayRegenerationRequestDto,
 	type PlanDaysTaskDto,
-	type PlanRegenerationRequestDto,
 	type PlanSearchQueryParameter,
 	type PlanWithCategoryDto,
 	type TaskRegenerationRequestDto,
@@ -64,10 +63,9 @@ const findPlan = createAsyncThunk<PlanDaysTaskDto, number, AsyncThunkConfig>(
 const getPlan = createAsyncThunk<PlanDaysTaskDto, undefined, AsyncThunkConfig>(
 	`${sliceName}/get`,
 	async (_, { extra }) => {
-		const { authApi, planApi } = extra;
+		const { planApi } = extra;
 
-		const user = await authApi.getCurrentUser();
-		const plan = await planApi.getByUserId(user.id);
+		const plan = await planApi.getByUserId();
 
 		return plan;
 	},
@@ -99,7 +97,7 @@ const regeneratePlanDay = createAsyncThunk<
 
 const regeneratePlan = createAsyncThunk<
 	PlanDaysTaskDto,
-	PlanRegenerationRequestDto,
+	number,
 	AsyncThunkConfig
 >(`${sliceName}/regenerate-plan`, async (payload, { extra }) => {
 	const { planApi } = extra;

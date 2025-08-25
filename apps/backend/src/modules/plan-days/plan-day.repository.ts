@@ -76,7 +76,11 @@ class PlanDayRepository implements Repository {
 	}
 
 	public async find(id: number): Promise<null | PlanDayEntity> {
-		const planDay = await this.planDayModel.query().where({ id }).first();
+		const planDay = await this.planDayModel
+			.query()
+			.where({ id })
+			.withGraphFetched("tasks")
+			.first();
 
 		return planDay ? PlanDayEntity.initialize(planDay) : null;
 	}

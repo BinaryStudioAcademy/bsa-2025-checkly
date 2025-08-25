@@ -12,6 +12,6 @@ const quizAnswerController = new QuizAnswerController(
 	quizAnswerService,
 );
 
-export { quizAnswerController };
+export { quizAnswerController, quizAnswerRepository };
 export { type QuizAnswerCreateRequestDto } from "./libs/types/types.js";
 export { quizAnswerCreateValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
