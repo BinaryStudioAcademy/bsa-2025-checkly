@@ -30,6 +30,7 @@ export {
 	type ServerErrorResponse,
 	type ValidationSchema,
 	type ValueOf,
+	type VerifyTokenRequestDto,
 	VIEW_OPTIONS,
 	type ViewOptions,
 	type WindowSize,

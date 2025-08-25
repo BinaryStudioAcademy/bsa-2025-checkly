@@ -96,7 +96,7 @@ const SignUpForm: React.FC<Properties> = ({
 					</h1>
 					<p className={sharedStyles["redirect-text"]}>
 						Already have an account? Go to{" "}
-						<Link aria-label="Go to carate account page" to={signInLink}>
+						<Link aria-label="Go to create account page" to={signInLink}>
 							Sign In
 						</Link>
 					</p>

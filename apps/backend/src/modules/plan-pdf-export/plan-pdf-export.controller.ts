@@ -112,7 +112,7 @@ import { type PlanPdfExportService } from "./plan-pdf-export.service.js";
  *               $ref: '#/components/schemas/ErrorResponse'
  *             example:
  *               errorType: "VALIDATION"
- *               message: "An unexpected error occurred. Please try again later.'
+ *               message: "An unexpected error occurred. Please try again later."
  */
 class PlanPdfExportController extends BaseController {
 	private planPdfExportService: PlanPdfExportService;

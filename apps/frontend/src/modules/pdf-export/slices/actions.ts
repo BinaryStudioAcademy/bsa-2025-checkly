@@ -4,6 +4,9 @@ import JSZip from "jszip";
 import { PLAN } from "~/libs/components/plan-styles/mocks/plan-mocks.js";
 import {
 	type CategoryId,
+	DEFAULT_HEIGHT,
+	DEFAULT_PIXEL_RATIO,
+	DEFAULT_WIDTH,
 	FIRST_PAGE,
 	getCategoryStyle,
 	MAX_DAYS_PER_PAGE,
@@ -16,7 +19,6 @@ import {
 	PaperFormat,
 	PlanCategoryId,
 } from "~/libs/enums/enums.js";
-import { useWindowSize } from "~/libs/hooks/hooks.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { type AsyncThunkConfig } from "~/libs/types/async-thunk-config.type.js";
 import { type WindowSize } from "~/libs/types/types.js";
@@ -29,6 +31,17 @@ import { name as sliceName } from "./pdf-export.slice.js";
 
 const getPageCount = (totalDays: number): number =>
 	Math.max(MIN_PAGES, Math.ceil(totalDays / MAX_DAYS_PER_PAGE));
+
+const getWindowSize = (): WindowSize => {
+	const w = (globalThis as { window?: Window }).window;
+	const screen = w?.screen;
+
+	const height = screen?.height ?? DEFAULT_HEIGHT;
+	const width = screen?.width ?? DEFAULT_WIDTH;
+	const pixelRatio = w?.devicePixelRatio ?? DEFAULT_PIXEL_RATIO;
+
+	return { height, pixelRatio, width };
+};
 
 const downloadPngZip = async (
 	baseName: string,
@@ -89,7 +102,7 @@ const exportDesktopPng = createAsyncThunk<
 	const category = PlanCategoryId.DESKTOP;
 	const backendEndpoint = getBackendEndpoint(category);
 	const view = getCategoryStyle(category);
-	const size: WindowSize = useWindowSize();
+	const size: WindowSize = getWindowSize();
 
 	const totalDays = PLAN.days.length;
 	const pageCount = getPageCount(totalDays);
@@ -131,7 +144,7 @@ const exportMobilePng = createAsyncThunk<
 	const category = PlanCategoryId.MOBILE;
 	const backendEndpoint = getBackendEndpoint(category);
 	const view = getCategoryStyle(category);
-	const size: WindowSize = useWindowSize();
+	const size: WindowSize = getWindowSize();
 
 	const totalDays = PLAN.days.length;
 	const pageCount = getPageCount(totalDays);

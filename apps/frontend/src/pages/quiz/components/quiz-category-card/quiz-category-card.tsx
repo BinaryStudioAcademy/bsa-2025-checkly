@@ -59,6 +59,7 @@ const QuizCategoryCard: React.FC<QuizCategoryCardProperties> = ({
 				id={`quiz-category-${title}`}
 				name="quiz-category"
 				onChange={handleChange}
+				tabIndex={-1}
 				type={ElementTypes.RADIO}
 				value={title}
 			/>

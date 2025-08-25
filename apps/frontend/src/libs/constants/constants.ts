@@ -5,16 +5,11 @@ export {
 	DEFAULT_PIXEL_RATIO,
 	DEFAULT_WIDTH,
 	EDITOR_ROWS,
-	INCREMENT_VALUE,
-	INITIAL_ITEM,
 	LAST_INDEX,
 } from "./numbers.js";
 export { FIRST_PAGE, MIN_PAGES } from "./pdf-export.constants.js";
 export {
 	type CategoryId,
-	getCategoryIcon,
-	getCategoryName,
-	getCategoryShortName,
 	getCategoryStyle,
 } from "./plan-category.constants.js";
 export { PLAN_NAME_DEFAULT } from "./plan-name.constants.js";

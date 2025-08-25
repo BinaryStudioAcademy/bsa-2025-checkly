@@ -14,19 +14,15 @@ const config: KnipConfig = {
 	workspaces: {
 		".": {
 			entry: ["./dangerfile.ts"],
-			ignoreDependencies: ["tsc-alias"],
 		},
 		"apps/backend": {
 			entry: ["src/db/migrations/*.ts", "src/db/seeds/*.ts", "knexfile.ts"],
 			ignoreDependencies: ["pg"],
-			ignoreBinaries: ["tsc-alias"],
 		},
 		"apps/frontend": {
 			entry: ["src/index.tsx"],
 		},
-		"packages/shared": {
-			ignoreBinaries: ["tsc-alias"],
-		},
+		"packages/shared": {},
 	},
 };
 

@@ -31,8 +31,6 @@ const PlanStyleOverview: React.FC = () => {
 		PlanCategoryId.PDF,
 	);
 
-	const planView = getCategoryStyle(selectedCategory);
-
 	const handleEditPlan = useCallback((): void => {
 		notifications.info(MESSAGES.FEATURE.NOT_IMPLEMENTED);
 	}, []);
@@ -91,14 +89,16 @@ const PlanStyleOverview: React.FC = () => {
 			<AppHeader />
 			<div className={styles["header-section"]}>
 				<PlanStyleCategory
-					categories={Object.values(PlanCategoryId).reverse()}
-					onCategorySelect={handleCategorySelect}
+					onSelect={handleCategorySelect}
 					selectedCategory={selectedCategory}
 				/>
 			</div>
 			<div className={getClassNames(styles["container"], "grid-pattern")}>
 				<div className={styles["plan-content"]}>
-					<PlanStyle inputStyle={selectedStyle} view={planView} />
+					<PlanStyle
+						inputStyle={selectedStyle}
+						view={getCategoryStyle(selectedCategory)}
+					/>
 					<DecorativeImage
 						className={styles["yellow-stars-reflection"]}
 						src={StarsYellow02}

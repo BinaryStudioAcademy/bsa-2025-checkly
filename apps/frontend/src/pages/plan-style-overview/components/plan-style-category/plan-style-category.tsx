@@ -1,63 +1,71 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 
 import {
-	type CategoryId,
-	getCategoryIcon,
-	getCategoryName,
-	getCategoryShortName,
-} from "~/libs/constants/constants.js";
+	FileIcon,
+	MonitorIcon,
+	SmartphoneIcon,
+} from "~/assets/img/icons/icons.js";
+import { Button } from "~/libs/components/button/button.js";
+import { type CategoryId } from "~/libs/constants/constants.js";
 import { PlanCategoryId } from "~/libs/enums/enums.js";
-import { getClassNames } from "~/libs/helpers/helpers.js";
 
 import styles from "./styles.module.css";
 
 type Properties = {
-	categories: CategoryId[];
-	onCategorySelect?: (categoryId: CategoryId) => void;
+	onSelect: (category: CategoryId) => void;
 	selectedCategory: CategoryId;
 };
 
 const PlanStyleCategory: React.FC<Properties> = ({
-	categories,
-	onCategorySelect,
+	onSelect,
 	selectedCategory,
-}) => {
-	const handleCategoryClick = useCallback(
-		(categoryId: CategoryId): (() => void) =>
-			() => {
-				onCategorySelect?.(categoryId);
-			},
-		[onCategorySelect],
-	);
+}: Properties) => {
+	const handleSelectPdf = useCallback((): void => {
+		onSelect(PlanCategoryId.PDF);
+	}, [onSelect]);
+
+	const handleSelectMobile = useCallback((): void => {
+		onSelect(PlanCategoryId.MOBILE);
+	}, [onSelect]);
+
+	const handleSelectDesktop = useCallback((): void => {
+		onSelect(PlanCategoryId.DESKTOP);
+	}, [onSelect]);
 
 	return (
-		<div className={styles["category-container"]}>
-			{categories.map((categoryId) => {
-				const categoryName = getCategoryName(categoryId);
-				const isDisabled = categoryId === PlanCategoryId.MOBILE;
-
-				return (
-					<button
-						aria-label={`Select ${categoryName} category`}
-						className={getClassNames(
-							styles["category-button"],
-							selectedCategory === categoryId ? styles["active"] : "",
-						)}
-						disabled={isDisabled}
-						key={categoryId}
-						onClick={handleCategoryClick(categoryId)}
-						type="button"
-					>
-						<span className={styles["category-icon"]}>
-							{getCategoryIcon(categoryId)}
-						</span>
-						<span className={styles["category-name-full"]}>{categoryName}</span>
-						<span className={styles["category-name-short"]}>
-							{getCategoryShortName(categoryId)}
-						</span>
-					</button>
-				);
-			})}
+		<div className={styles["header-buttons"]}>
+			<Button
+				className={styles["header-buttons-button"]}
+				icon={<FileIcon aria-hidden="true" />}
+				label="PDF"
+				onClick={handleSelectPdf}
+				size="small"
+				variant={
+					selectedCategory === PlanCategoryId.PDF ? "primary" : "secondary"
+				}
+			/>
+			<Button
+				className={styles["header-buttons-button"]}
+				icon={<SmartphoneIcon aria-hidden="true" />}
+				iconOnlySize="large"
+				isDisabled
+				label="Mobile Wallpaper"
+				onClick={handleSelectMobile}
+				size="small"
+				variant={
+					selectedCategory === PlanCategoryId.MOBILE ? "primary" : "secondary"
+				}
+			/>
+			<Button
+				className={styles["header-buttons-button"]}
+				icon={<MonitorIcon aria-hidden="true" />}
+				label="Desktop Wallpaper"
+				onClick={handleSelectDesktop}
+				size="small"
+				variant={
+					selectedCategory === PlanCategoryId.DESKTOP ? "primary" : "secondary"
+				}
+			/>
 		</div>
 	);
 };
