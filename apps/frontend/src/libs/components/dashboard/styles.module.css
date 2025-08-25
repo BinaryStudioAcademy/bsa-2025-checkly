@@ -1,7 +1,7 @@
 .dashboard {
 	--grid-color: var(--color-light-grey);
 
-	min-height: 100vh;
+	min-height: 100%;
 }
 
 .content-grid {
