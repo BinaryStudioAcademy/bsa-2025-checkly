@@ -1,10 +1,9 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-import { LAST_INDEX } from "~/libs/constants/constants.js";
-import { DataStatus, PlanStyle } from "~/libs/enums/enums.js";
+import { DataStatus, PlanStyle, ZERO } from "~/libs/enums/enums.js";
 import { type PlanStyleOption, type ValueOf } from "~/libs/types/types.js";
-import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
+import { type PlanWithCategoryDto } from "../libs/types/types.js";
 import {
 	findPlan,
 	generatePlan,
@@ -14,9 +13,9 @@ import {
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
-	plan: null | PlanDaysTaskDto;
+	plan: null | PlanWithCategoryDto;
 	selectedStyle: PlanStyleOption;
-	userPlans: PlanDaysTaskDto[];
+	userPlans: PlanWithCategoryDto[];
 	userPlansDataStatus: ValueOf<typeof DataStatus>;
 };
 
@@ -47,7 +46,7 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getAllUserPlans.fulfilled, (state, action) => {
 			state.userPlansDataStatus = DataStatus.FULFILLED;
 			state.userPlans = action.payload;
-			state.plan = action.payload.at(LAST_INDEX) ?? null;
+			state.plan = action.payload.at(ZERO) ?? null;
 		});
 		builder.addCase(getAllUserPlans.rejected, (state) => {
 			state.userPlansDataStatus = DataStatus.REJECTED;
@@ -79,6 +78,9 @@ const { actions, name, reducer } = createSlice({
 	initialState,
 	name: "plan",
 	reducers: {
+		setCurrentPlan: (state, action: PayloadAction<PlanWithCategoryDto>) => {
+			state.plan = action.payload;
+		},
 		setSelectedStyle: (state, action: PayloadAction<PlanStyleOption>) => {
 			state.selectedStyle = action.payload;
 		},

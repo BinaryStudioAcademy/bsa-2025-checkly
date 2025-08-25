@@ -12,7 +12,6 @@ import {
 } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
-import { actions as planActions } from "~/modules/plans/plans.js";
 import { TASK_INDEXES } from "~/modules/tasks/libs/constants/constants.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
@@ -24,7 +23,6 @@ const Plan: React.FC = () => {
 	const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
 
 	const dispatch = useAppDispatch();
-	const user = useAppSelector((state) => state.auth.user);
 	const plan = useAppSelector((state) => state.plan.plan);
 	const tasks = useAppSelector((state) => state.task.tasks);
 
@@ -50,14 +48,6 @@ const Plan: React.FC = () => {
 			dispatch(taskActions.setTasks(allTasks));
 		}
 	}, [plan, dispatch]);
-
-	useEffect(() => {
-		const getAllUserPlans = async (): Promise<void> => {
-			await dispatch(planActions.getAllUserPlans());
-		};
-
-		void getAllUserPlans();
-	}, [user, dispatch]);
 
 	const toggleSelect = useCallback((): void => {
 		setIsSelectOpen((previous) => !previous);
