@@ -13,10 +13,10 @@ import { type PlanService } from "~/modules/plans/plan.service.js";
 import {
 	type PlanCreateRequestDto,
 	planCreateValidationSchema,
-	type PlanDayRegenerateRequestDto,
+	type PlanDayRegenerationRequestDto,
 	type PlanSearchQueryParameter,
 	planSearchQueryParametersValidationSchema,
-	type TaskRegenerateRequestDto,
+	type TaskRegenerationRequestDto,
 } from "~/modules/plans/plans.js";
 
 import { type PlanStyleUpdateRequestDto } from "../plan-styles/libs/types/types.js";
@@ -258,14 +258,14 @@ class PlanController extends BaseController {
 					options as APIHandlerOptions<{ query: { userId: string } }>,
 				),
 			method: HTTPRequestMethod.GET,
-			path: PlansApiPath.ROOT,
+			path: PlansApiPath.ACTIVE,
 		});
 
 		this.addRoute({
 			handler: (options) =>
 				this.regenerateDay(
 					options as APIHandlerOptions<{
-						params: PlanDayRegenerateRequestDto;
+						params: PlanDayRegenerationRequestDto;
 					}>,
 				),
 			method: HTTPRequestMethod.POST,
@@ -276,7 +276,7 @@ class PlanController extends BaseController {
 			handler: (options) =>
 				this.regenerateTask(
 					options as APIHandlerOptions<{
-						params: TaskRegenerateRequestDto;
+						params: TaskRegenerationRequestDto;
 					}>,
 				),
 			method: HTTPRequestMethod.POST,
@@ -537,6 +537,7 @@ class PlanController extends BaseController {
 			status: HTTPCode.OK,
 		};
 	}
+
 	private async regenerate(
 		options: IdParametersOption,
 	): Promise<APIHandlerResponse> {
@@ -549,23 +550,23 @@ class PlanController extends BaseController {
 	}
 
 	private async regenerateDay(options: {
-		params: PlanDayRegenerateRequestDto;
+		params: PlanDayRegenerationRequestDto;
 	}): Promise<APIHandlerResponse> {
-		const { planId } = options.params;
+		const { dayId, planId } = options.params;
 
 		return {
-			payload: await this.planService.regenerateDay(planId),
+			payload: await this.planService.regenerateDay(planId, dayId),
 			status: HTTPCode.OK,
 		};
 	}
 
 	private async regenerateTask(options: {
-		params: TaskRegenerateRequestDto;
+		params: TaskRegenerationRequestDto;
 	}): Promise<APIHandlerResponse> {
-		const { planId } = options.params;
+		const { dayId, planId, taskId } = options.params;
 
 		return {
-			payload: await this.planService.regenerateTask(planId),
+			payload: await this.planService.regenerateTask(planId, dayId, taskId),
 			status: HTTPCode.OK,
 		};
 	}

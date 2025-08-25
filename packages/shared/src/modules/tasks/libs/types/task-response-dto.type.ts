@@ -1,10 +1,8 @@
-import { type ValueOf } from "src/libs/types/types.js";
-
-import { type ExecutionTimeType } from "../enums/enums.js";
+import { type ExecutionTimeTypeValue } from "./execution-time-type.type.js";
 
 type TaskResponseDto = {
 	completedAt: null | string;
-	executionTimeType?: null | ValueOf<typeof ExecutionTimeType>;
+	executionTimeType?: ExecutionTimeTypeValue;
 	id: number;
 	isCompleted: boolean;
 	order: number;

@@ -1,6 +1,7 @@
 import { type PlanCategoryDto } from "shared";
 
-import { type Entity } from "~/libs/types/types.js";
+import { type ExecutionTimeType } from "~/libs/enums/enums.js";
+import { type Entity, type ValueOf } from "~/libs/types/types.js";
 import {
 	type PlanDayDto,
 	type PlanDaysTaskDto,
@@ -188,7 +189,9 @@ class PlanEntity implements Entity {
 				planId: day.planId,
 				tasks: day.tasks.map((task) => ({
 					completedAt: task.completedAt,
-					executionTimeType: task.executionTimeType,
+					executionTimeType: task.executionTimeType as null | ValueOf<
+						typeof ExecutionTimeType
+					>,
 					id: task.id,
 					isCompleted: task.isCompleted,
 					order: task.order,

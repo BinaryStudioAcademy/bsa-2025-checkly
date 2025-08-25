@@ -45,11 +45,11 @@ class QuizAnswerRepository implements Repository {
 		return answers.map((answer) => QuizAnswerEntity.initialize(answer));
 	}
 
-	public async findAllWithOption(quiz_id: number): Promise<QuizAnswer[]> {
+	public async findAllWithOption(quizId: number): Promise<QuizAnswer[]> {
 		const answers = await this.quizAnswerModel
 			.query()
 			.alias("answers")
-			.where("answers.quiz_id", quiz_id)
+			.where("answers.quiz_id", quizId)
 			.select(
 				"answers.is_skipped as isSkipped",
 				"answers.id as answerId",

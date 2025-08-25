@@ -1,1 +1,1 @@
-export { ExecutionTimeType, PlanDaysApiPath } from "shared";
+export { PlanDaysApiPath } from "shared";

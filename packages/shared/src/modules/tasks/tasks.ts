@@ -5,9 +5,10 @@ export {
 	TaskValidationRule,
 } from "./libs/enums/enums.js";
 export {
+	type ExecutionTimeTypeValue,
 	type TaskDto,
 	type TaskGetAllResponseDto,
-	type TaskRegenerateRequestDto,
+	type TaskRegenerationRequestDto,
 	type TaskResponseDto,
 	type TaskUpdateRequestDto,
 } from "./libs/types/types.js";
