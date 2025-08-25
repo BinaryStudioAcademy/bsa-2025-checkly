@@ -24,7 +24,7 @@
 
 .no-plans-message {
 	margin-bottom: var(--space-l);
-	font-size: var(--text-body);
+	font-size: var(--text-size-heading-4);
 	color: var(--color-text-secondary);
 }
 
