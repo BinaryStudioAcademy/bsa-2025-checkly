@@ -4,7 +4,6 @@ import { type ExecutionTimeType } from "../enums/enums.js";
 
 type TaskResponseDto = {
 	completedAt: null | string;
-	description: string;
 	executionTimeType?: null | ValueOf<typeof ExecutionTimeType>;
 	id: number;
 	isCompleted: boolean;

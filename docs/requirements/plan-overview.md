@@ -10,7 +10,6 @@
 - Each day of the plan is displayed as a vertical list with **1 to 5 activities**.
 - Each activity card must include:
  - Task title
- - Short description
  - Time-of-day marker (Morning / Afternoon / Evening)
  - Four action buttons: **Edit (✏️)**, **Regenerate (🔁)**, **Delete (🗑️)** and **Complete (✅)**
 - A task that has the field `is_completed` equal to `true` should be visually highlighted as such, either by reduced opacity, strikethrough text or other way to indicate it.
@@ -30,7 +29,7 @@
   - Clicking the button should open a dialog box for the user to confirm the action. If he then confirms it the whole day is regenerated.
 
 ### 4. Task Interactions
-- **Edit Button:** Clicking this button should toggle the edit mode for a specific task, and switch the button to a **Save Button**. Edit mode should allow the user to change every field of a task (Time-of-day, title, description, order)
+- **Edit Button:** Clicking this button should toggle the edit mode for a specific task, and switch the button to a **Save Button**. Edit mode should allow the user to change every field of a task (Time-of-day, title, order)
 - **Regenerate Button:** Clicking this button should open a dialog box for the user to confirm the action. If the then confirms it then the task is regenerated.
 - **Delete Button:**: Clicking this button should open a dialog box for the user to confirm the action. If he then confirms it then the task should be deleted.
 - **Complete Button:** This button resembles a checkmark, clicking it should toggle the task `is_completed` field to `true` or `false` depending on the previous value. The button should be empty when the field is `false` and full when the field is `true`

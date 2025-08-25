@@ -144,7 +144,6 @@ class OpenAIService {
 			for (const task of day.tasks) {
 				const taskResult = taskCreateValidationSchema
 					.pick({
-						description: true,
 						executionTimeType: true,
 						order: true,
 						title: true,

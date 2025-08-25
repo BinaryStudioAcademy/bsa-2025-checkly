@@ -31,7 +31,6 @@ type Properties = {
 const Task: React.FC<Properties> = ({ indexItem, item }: Properties) => {
 	const [isEditing, setIsEditing] = useState<boolean>(false);
 	const [editedTitle, setEditedTitle] = useState<string>(item.title);
-
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
 	const dispatch = useAppDispatch();

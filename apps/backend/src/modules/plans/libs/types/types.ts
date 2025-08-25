@@ -1,4 +1,5 @@
 export { type SearchProperties } from "./search-properties.type.js";
+export { type Style, type Time } from "./task-generation-rules.type.js";
 export {
 	type GeneratedPlanDTO,
 	type GeneratePlanRequestDto,

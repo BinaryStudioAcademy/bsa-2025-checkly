@@ -5,12 +5,6 @@ import { TaskValidationRule } from "../enums/tasks-validation-rule.enum.js";
 
 const taskUpdate = z
 	.object({
-		description: z
-			.string()
-			.max(TaskValidationRule.DESCRIPTION_MAX_LENGTH, {
-				message: TaskValidationMessage.DESCRIPTION_LENGTH,
-			})
-			.optional(),
 		title: z
 			.string()
 			.max(TaskValidationRule.TITLE_MAX_LENGTH, {

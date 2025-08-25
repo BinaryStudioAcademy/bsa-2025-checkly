@@ -1,6 +1,5 @@
 type TaskDto = {
 	completedAt: null | string;
-	description: string;
 	executionTimeType: string;
 	id: number;
 	isCompleted: boolean;
