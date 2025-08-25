@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.27.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.27.0...v1.27.1) (2025-08-25)
+
+
+### Bug Fixes
+
+* button styles, my plan grid cy-352 ([5c6b39c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5c6b39ceee55e4fe7729d7ef83219c62f4f09e85))
+* **frontend:** plan overview page buttons width difference cy-352 ([6f81bdc](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6f81bdc74409019410dc8cd7fd44b94bec22d0d0))
+* reduce grid opacity cy-352 ([bd3902f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bd3902f76561d47344b6d0daf8ab7b0f20b858fb))
+* remove duplicate layout examples from constants cy-342 ([3987bc0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3987bc0f745254b0c3139d5237b28aa215777bcc))
+* repeated styles in sample layouts cy-342 ([c0de66c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c0de66c60943b85d08a24e3a1c13f390162bc436))
+* whitespace trailing cy-352 ([49bcfb2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/49bcfb2ad59bae91ebeca3397f611581fd09daa8))
+
 ## [1.27.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.26.0...v1.27.0) (2025-08-25)
 
 
