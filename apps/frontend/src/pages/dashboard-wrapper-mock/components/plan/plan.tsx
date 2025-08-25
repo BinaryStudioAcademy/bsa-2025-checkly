@@ -195,7 +195,7 @@ const Plan: React.FC = () => {
 				<div
 					className={getClassNames(
 						styles["content__tasks"],
-						"cluster grid-pattern flow",
+						"cluster grid-pattern flow-loose",
 					)}
 				>
 					<TaskList

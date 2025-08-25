@@ -7,7 +7,10 @@
 
 .light-background {
 	--grid-color: var(--color-light-grey);
-	--grid-line: 1px;
+	--grid-opacity: var(--dashboard-grid-opacity);
+
+	padding-top: var(--space-l);
+	padding-bottom: var(--space-xl);
 }
 
 .profile-container {
@@ -18,6 +21,7 @@
 .title {
 	font-size: var(--text-size-heading-2);
 }
+<<<<<<< HEAD
 
 .tabs {
 	display: flex;
@@ -72,3 +76,5 @@
 		padding: var(--space-l);
 	}
 }
+=======
+>>>>>>> 4f808b61 (feat: * refine dashboard styles cy-300)

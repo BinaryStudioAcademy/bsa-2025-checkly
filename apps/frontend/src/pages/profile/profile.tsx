@@ -87,8 +87,9 @@ const Profile: React.FC = () => {
 
 	return (
 		<div className={contentClasses}>
-			<div className={styles["profile-container"]}>
+			<div className={getClassNames("flow-loose", styles["profile-container"])}>
 				<AvatarEdit />
+<<<<<<< HEAD
 				<h1 className={styles["title"]}>Profile</h1>
 				<Tabs
 					defaultActiveTab={ProfileTab.PERSONAL}
@@ -96,6 +97,75 @@ const Profile: React.FC = () => {
 					onSaveChanges={handleSaveChanges}
 					tabs={tabs}
 				/>
+=======
+				<div className="flow">
+					<header>
+						<h1 className={getClassNames(styles["title"])} id="profile-title">
+							Profile
+						</h1>
+					</header>
+					<form
+						aria-labelledby="profile-title"
+						className={getClassNames(sharedStyles["form"], "cluster")}
+						onSubmit={handleFormSubmit}
+					>
+						<div className="flow-loose">
+							<Input
+								control={control}
+								errors={errors}
+								isRequired
+								label="Name"
+								name="name"
+								type="text"
+							/>
+							<Input
+								control={control}
+								errors={errors}
+								isRequired
+								label="Email"
+								name="email"
+								type="email"
+							/>
+							<Input
+								control={control}
+								errors={errors}
+								label="Date of birth"
+								max={dateLimits.max}
+								min={dateLimits.min}
+								name="dob"
+								type="date"
+							/>
+							<Input
+								control={control}
+								errors={errors}
+								label="New password"
+								name="password"
+								type="password"
+							/>
+							<Input
+								control={control}
+								errors={errors}
+								label="Confirm password"
+								name="confirmPassword"
+								type="password"
+							/>
+						</div>
+						<Button
+							isDisabled={isSubmitting || !isDirty}
+							label="Save changes"
+							loader={
+								<Loader
+									container="inline"
+									isLoading={isSubmitting}
+									size="small"
+									theme="accent"
+								/>
+							}
+							type="submit"
+						/>
+					</form>
+				</div>
+>>>>>>> 4f808b61 (feat: * refine dashboard styles cy-300)
 			</div>
 		</div>
 	);
