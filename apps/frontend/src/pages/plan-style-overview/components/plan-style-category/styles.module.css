@@ -30,7 +30,7 @@
 	}
 }
 
-@media (width <= 958px) {
+@media (width <= 995px) {
 	.header-buttons {
 		padding: 0.3rem 1rem;
 	}
