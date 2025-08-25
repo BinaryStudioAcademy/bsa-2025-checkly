@@ -11,7 +11,8 @@ import { planDayService } from "../plan-days/plan-days.js";
 import { PlanStyle } from "../plan-styles/libs/enums/enums.js";
 import { type TaskService } from "../tasks/task.service.js";
 import { taskService } from "../tasks/tasks.js";
-import { LAST_INDEX } from "./libs/constants/constants.js";
+import { LAST_INDEX, MOCK_GENERATED_PLAN } from "./libs/constants/constants.js";
+import { ErrorMessage, HTTPCode, HTTPError } from "./libs/enums/enums.js";
 import {
 	type GeneratedPlanDTO,
 	type GeneratePlanRequestDto,
@@ -103,6 +104,41 @@ class PlanService implements Service {
 		return savedPlan;
 	}
 
+	public async regenerate(id: number): Promise<null | PlanDaysTaskDto> {
+		const existingPlan = await this.planRepository.find(id);
+
+		if (!existingPlan) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		// TODO: Replace with actual quizId from plan when available
+		// const quizId = 1;
+		// const answers = await this.quizAnswerRepository.findAllWithOption(quizId);
+
+		// TODO: Replace mock with OpenAI service
+		// const prompt = createPrompt({ answers, category: "creativity", notes: "" });
+		// const generatedPlan = await this.openAIService.generatePlan(prompt);
+
+		const generatedPlan: PlanDaysTaskDto = MOCK_GENERATED_PLAN;
+		const planEntity = PlanEntity.initialize(generatedPlan);
+
+		const newPlanId = await this.planRepository.regenerate(planEntity);
+
+		if (!newPlanId) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_REGENERATION_FAILED,
+				status: HTTPCode.INTERNAL_SERVER_ERROR,
+			});
+		}
+
+		const newPlan = await this.planRepository.findWithRelations(newPlanId);
+
+		return newPlan ? newPlan.toObjectWithRelations() : null;
+	}
+
 	public async search(
 		userId: number,
 		filters: PlanSearchQueryParameter,
@@ -143,6 +179,7 @@ class PlanService implements Service {
 		plan: GeneratedPlanDTO;
 		userId: null | number;
 	}): Promise<PlanDaysTaskDto> {
+		const quizId = 2;
 		const categories: PlanCategoryDto[] =
 			await this.planCategoryService.findAll();
 
@@ -152,6 +189,7 @@ class PlanService implements Service {
 				LAST_INDEX,
 			duration: plan.duration,
 			intensity: plan.intensity,
+			quizId,
 			styleId: PlanStyle.WITH_REMARKS,
 			title: plan.title,
 			userId,
@@ -189,11 +227,7 @@ class PlanService implements Service {
 			days.push({ ...planDayResponse, tasks });
 		}
 
-		const result: PlanDaysTaskDto = {
-			...planResponse,
-			days,
-			styleId: PlanStyle.WITH_REMARKS,
-		};
+		const result: PlanDaysTaskDto = { ...planResponse, days, quizId };
 
 		return result;
 	}

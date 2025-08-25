@@ -1,11 +1,17 @@
 import { logger } from "~/libs/modules/logger/logger.js";
+import { planDayRepository } from "~/modules/plan-days/plan-days.js";
+import { taskRepository } from "~/modules/tasks/tasks.js";
 
 import { PlanController } from "./plan.controller.js";
 import { PlanModel } from "./plan.model.js";
 import { PlanRepository } from "./plan.repository.js";
 import { PlanService } from "./plan.service.js";
 
-const planRepository = new PlanRepository(PlanModel);
+const planRepository = new PlanRepository(
+	PlanModel,
+	planDayRepository,
+	taskRepository,
+);
 const planService = new PlanService(planRepository);
 const planController = new PlanController(logger, planService);
 
