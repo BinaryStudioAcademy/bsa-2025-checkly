@@ -53,3 +53,7 @@ paths:
   /plans/:planId/days/:dayId/regenerate:
     post:
       $ref: "./endpoints/plan.yaml#/regeneratePlanDay"
+
+  /plans/:id/regenerate:
+    post:
+      $ref: "./endpoints/plan.yaml#/regeneratePlan"

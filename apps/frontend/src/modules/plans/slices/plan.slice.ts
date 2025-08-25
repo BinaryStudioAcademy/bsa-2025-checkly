@@ -9,6 +9,7 @@ import {
 	generatePlan,
 	getAllUserPlans,
 	getPlan,
+	regeneratePlan,
 	regeneratePlanDay,
 	regenerateTask,
 	searchPlan,
@@ -61,6 +62,7 @@ const { actions, name, reducer } = createSlice({
 				regenerateTask.pending,
 				regeneratePlanDay.pending,
 				findPlan.pending,
+				regeneratePlan.pending,
 			),
 			(state) => {
 				state.dataStatus = DataStatus.PENDING;
@@ -73,6 +75,7 @@ const { actions, name, reducer } = createSlice({
 				regenerateTask.fulfilled,
 				regeneratePlanDay.fulfilled,
 				findPlan.fulfilled,
+				regeneratePlan.fulfilled,
 			),
 			(state, action) => {
 				state.dataStatus = DataStatus.FULFILLED;
@@ -86,6 +89,7 @@ const { actions, name, reducer } = createSlice({
 				regenerateTask.rejected,
 				regeneratePlanDay.rejected,
 				findPlan.rejected,
+				regeneratePlan.rejected,
 			),
 			(state) => {
 				state.dataStatus = DataStatus.REJECTED;

@@ -3,6 +3,7 @@ import {
 	generatePlan,
 	getAllUserPlans,
 	getPlan,
+	regeneratePlan,
 	regeneratePlanDay,
 	regenerateTask,
 } from "./actions.js";
@@ -14,6 +15,7 @@ const allActions = {
 	generatePlan,
 	getAllUserPlans,
 	getPlan,
+	regeneratePlan,
 	regeneratePlanDay,
 	regenerateTask,
 };

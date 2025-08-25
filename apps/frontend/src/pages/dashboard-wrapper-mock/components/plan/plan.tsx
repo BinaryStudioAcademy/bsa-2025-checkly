@@ -17,6 +17,7 @@ import {
 } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
+import { actions as authActions } from "~/modules/auth/auth.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
 import { actions as planSliceActions } from "~/modules/plans/slices/plan.slice.js";
 import { TASK_INDEXES } from "~/modules/tasks/libs/constants/constants.js";
@@ -32,6 +33,7 @@ const Plan: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const user = useAppSelector((state) => state.auth.user);
+	const userStatus = useAppSelector((state) => state.auth.dataStatus);
 	const plan = useAppSelector((state) => state.plan.plan);
 	const userPlans = useAppSelector((state) => state.plan.userPlans);
 	const userPlansDataStatus = useAppSelector(
@@ -39,27 +41,24 @@ const Plan: React.FC = () => {
 	);
 
 	useEffect(() => {
-
-		if (!user) {
-			return;
+		if (userStatus === DataStatus.IDLE) {
+			void dispatch(authActions.getCurrentUser());
 		}
+	}, [userStatus, dispatch]);
 
-		const getPlan = async (): Promise<void> => {
-			await dispatch(planSliceActions.getPlan(user.id));
-		};
-
-		void getPlan();
-	}, [dispatch, user]);
+	useEffect(() => {
+		if (userStatus === DataStatus.FULFILLED && user) {
+			void dispatch(planActions.getPlan(user.id));
+		}
+	}, [dispatch, userStatus, user]);
 
 	const handleDayRegenerate = useCallback(
 		(dayId: number) => {
-			const planId = plan?.id;
-
-			if (!planId) {
+			if (!plan) {
 				return;
 			}
 
-			void dispatch(actions.regeneratePlanDay({ dayId, planId }));
+			void dispatch(planActions.regeneratePlanDay({ dayId, planId: plan.id }));
 		},
 
 		[plan, dispatch],
@@ -74,10 +73,18 @@ const Plan: React.FC = () => {
 				return;
 			}
 
-			void dispatch(planSliceActions.regenerateTask({ dayId, planId, taskId }));
+			void dispatch(planActions.regenerateTask({ dayId, planId, taskId }));
 		},
 		[plan, selectedDay, dispatch],
 	);
+
+	const handlePlanRegenerate = useCallback((): void => {
+		if (!plan) {
+			return;
+		}
+
+		void dispatch(planActions.regeneratePlan(plan.id));
+	}, [dispatch, plan]);
 
 	useEffect(() => {
 		const allTasks =
@@ -120,8 +127,6 @@ const Plan: React.FC = () => {
 		void navigate(AppRoute.QUIZ);
 	}, [navigate]);
 
-	const navLink = getClassNames(styles["nav-link"]);
-
 	const hasNoPlans = userPlans.length === ZERO && !plan;
 	const isLoading = userPlansDataStatus === DataStatus.PENDING;
 
@@ -149,6 +154,13 @@ const Plan: React.FC = () => {
 		<div className={styles["plan"]}>
 			<div className={styles["nav"]}>
 				<p className={styles["nav-text"]}>Here’s your plan!</p>
+				<Button
+					label="Regenerate plan"
+					onClick={handlePlanRegenerate}
+					size="small"
+					type="button"
+					variant={ButtonVariants.SECONDARY}
+				/>
 				<Button
 					className={getClassNames(styles["select-day"])}
 					label={`Day ${String(selectedDay + ONE)}`}
