@@ -37,7 +37,19 @@ const Plan: React.FC = () => {
 		void getPlan();
 	}, [dispatch]);
 
-	const planDays = plan?.days ?? [];
+	const handleDayRegenerate = useCallback(
+		(dayId: number) => {
+			const planId = plan?.id;
+
+			if (!planId) {
+				return;
+			}
+
+			void dispatch(actions.regeneratePlanDay({ dayId, planId }));
+		},
+
+		[plan, dispatch],
+	);
 
 	const handleTaskRegenerate = useCallback(
 		(taskId: number) => {
@@ -98,18 +110,18 @@ const Plan: React.FC = () => {
 							isSelectOpen ? styles["content__days__open"] : "",
 						)}
 					>
-						{planDays.map((_, index) => {
-							return (
-								<Day
-									indexDay={index}
-									isOpen={isSelectOpen}
-									key={index}
-									onChangeIsOpen={setIsSelectOpen}
-									onChangeSelectedDay={setSelectedDay}
-									selectedDay={selectedDay}
-								/>
-							);
-						})}
+						{plan?.days.map((item, index) => (
+							<Day
+								index={index}
+								isOpen={isSelectOpen}
+								item={item}
+								key={item.id}
+								onRegenerate={handleDayRegenerate}
+								selectedDay={selectedDay}
+								setIsOpen={setIsSelectOpen}
+								setSelectedDay={setSelectedDay}
+							/>
+						))}
 					</div>
 				</div>
 				<div

@@ -1,4 +1,4 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf, type PayloadAction } from "@reduxjs/toolkit";
 
 import { LAST_INDEX } from "~/libs/constants/constants.js";
 import { DataStatus, PlanStyle } from "~/libs/enums/enums.js";
@@ -10,6 +10,7 @@ import {
 	generatePlan,
 	getAllUserPlans,
 	getPlan,
+	regeneratePlanDay,
 	regenerateTask,
 	searchPlan,
 } from "./actions.js";
@@ -32,17 +33,6 @@ const initialState: State = {
 
 const { actions, name, reducer } = createSlice({
 	extraReducers(builder) {
-		builder.addCase(generatePlan.pending, (state) => {
-			state.dataStatus = DataStatus.PENDING;
-		});
-		builder.addCase(generatePlan.fulfilled, (state, action) => {
-			state.dataStatus = DataStatus.FULFILLED;
-			state.plan = action.payload;
-		});
-		builder.addCase(generatePlan.rejected, (state) => {
-			state.dataStatus = DataStatus.REJECTED;
-			state.plan = null;
-		});
 		builder.addCase(getAllUserPlans.pending, (state) => {
 			state.userPlansDataStatus = DataStatus.PENDING;
 		});
@@ -66,40 +56,44 @@ const { actions, name, reducer } = createSlice({
 			state.userPlansDataStatus = DataStatus.REJECTED;
 			state.userPlans = [];
 		});
-		builder.addCase(findPlan.pending, (state) => {
-			state.userPlansDataStatus = DataStatus.PENDING;
-		});
-		builder.addCase(findPlan.fulfilled, (state, action) => {
-			state.userPlansDataStatus = DataStatus.FULFILLED;
-			state.plan = action.payload;
-		});
-		builder.addCase(findPlan.rejected, (state) => {
-			state.userPlansDataStatus = DataStatus.REJECTED;
-			state.plan = null;
-		});
-		builder.addCase(getPlan.pending, (state) => {
-			state.dataStatus = DataStatus.PENDING;
-		});
-		builder.addCase(getPlan.fulfilled, (state, action) => {
-			state.dataStatus = DataStatus.FULFILLED;
-			state.plan = action.payload;
-		});
-		builder.addCase(getPlan.rejected, (state) => {
-			state.dataStatus = DataStatus.REJECTED;
-			state.plan = null;
-		});
-
-		builder.addCase(regenerateTask.pending, (state) => {
-			state.dataStatus = DataStatus.PENDING;
-		});
-		builder.addCase(regenerateTask.fulfilled, (state, action) => {
-			state.dataStatus = DataStatus.FULFILLED;
-			state.plan = action.payload;
-		});
-		builder.addCase(regenerateTask.rejected, (state) => {
-			state.dataStatus = DataStatus.REJECTED;
-			state.plan = null;
-		});
+		builder.addMatcher(
+			isAnyOf(
+				generatePlan.pending,
+				getPlan.pending,
+				regenerateTask.pending,
+				regeneratePlanDay.pending,
+				findPlan.pending,
+			),
+			(state) => {
+				state.dataStatus = DataStatus.PENDING;
+			},
+		);
+		builder.addMatcher(
+			isAnyOf(
+				generatePlan.fulfilled,
+				getPlan.fulfilled,
+				regenerateTask.fulfilled,
+				regeneratePlanDay.fulfilled,
+				findPlan.fulfilled,
+			),
+			(state, action) => {
+				state.dataStatus = DataStatus.FULFILLED;
+				state.plan = action.payload;
+			},
+		);
+		builder.addMatcher(
+			isAnyOf(
+				generatePlan.rejected,
+				getPlan.rejected,
+				regenerateTask.rejected,
+				regeneratePlanDay.rejected,
+				findPlan.rejected,
+			),
+			(state) => {
+				state.dataStatus = DataStatus.REJECTED;
+				state.plan = null;
+			},
+		);
 	},
 	initialState,
 	name: "plan",
