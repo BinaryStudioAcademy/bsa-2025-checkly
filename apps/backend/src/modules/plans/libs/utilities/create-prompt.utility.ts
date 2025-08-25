@@ -1,4 +1,16 @@
-import { type QuizAnswer, type QuizAnswersRequestDto } from "../types/types.js";
+import { ZERO } from "shared";
+
+import {
+	STYLE_ANSWER_MAP,
+	TASK_GENERATION_RULES,
+	TIME_ANSWER_MAP,
+} from "../constants/constants.js";
+import {
+	type QuizAnswer,
+	type QuizAnswersRequestDto,
+	type Style,
+	type Time,
+} from "../types/types.js";
 import { sanitizeTextInput } from "./utilities.js";
 
 const USER_DATA_START = "USER DATA START";
@@ -28,8 +40,30 @@ const createPrompt = ({
 	category,
 	notes,
 }: QuizAnswersRequestDto): string => {
+	const styleResponse = (
+		answers.find((a) =>
+			a.questionText.includes("What style of work fits you best?"),
+		) || { selectedOptions: ["👌 I like a bit of both"] }
+	).selectedOptions[ZERO] as Style;
+
+	const timeResponse = (
+		answers.find((a) =>
+			a.questionText.includes(
+				"How much time can you realistically dedicate per day?",
+			),
+		) || { selectedOptions: ["⏱ 20–30 min"] }
+	).selectedOptions[ZERO] as Time;
+
+	const styleKey = STYLE_ANSWER_MAP[styleResponse] || "Mix";
+	const timeKey = TIME_ANSWER_MAP[timeResponse] || "20-30min";
+
+	const rule = TASK_GENERATION_RULES[styleKey][timeKey];
+
+	const dynamicInstruction = `IMPORTANT RULE: Generate a plan with exactly ${String(rule.tasks)} tasks per day. This is because the user prefers a "${styleKey}" style and has "${timeKey}" available. The plan should consist of ${rule.details}`;
+
 	return [
 		`${PROMPT_HEADER} - ${category.replaceAll("_", " ")}`,
+		dynamicInstruction,
 		PROMPT_ALERT_NOTE,
 		USER_DATA_START,
 		"Quiz Answers",
