@@ -1,4 +1,10 @@
-import { findPlan, generatePlan, getAllUserPlans } from "./actions.js";
+import {
+	findPlan,
+	generatePlan,
+	getAllUserPlans,
+	getPlan,
+	regenerateTask,
+} from "./actions.js";
 import { actions } from "./plan.slice.js";
 
 const allActions = {
@@ -6,6 +12,8 @@ const allActions = {
 	findPlan,
 	generatePlan,
 	getAllUserPlans,
+	getPlan,
+	regenerateTask,
 };
 
 export { allActions as actions };

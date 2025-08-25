@@ -67,6 +67,16 @@ class PlanRepository implements Repository {
 		return plan ? PlanEntity.initialize(plan) : null;
 	}
 
+	public async findActiveByUserId(userId: number): Promise<null | PlanEntity> {
+		const plan = await this.planModel
+			.query()
+			.where("userId", userId)
+			.orderBy("createdAt", "desc")
+			.first();
+
+		return plan ? PlanEntity.initialize(plan) : null;
+	}
+
 	public async findAll(): Promise<PlanEntity[]> {
 		const plans = await this.planModel.query().execute();
 

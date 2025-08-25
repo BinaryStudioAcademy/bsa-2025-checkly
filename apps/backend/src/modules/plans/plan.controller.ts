@@ -254,6 +254,15 @@ class PlanController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
+				this.findActiveByUserId(
+					options as APIHandlerOptions<{ query: { userId: string } }>,
+				),
+			method: HTTPRequestMethod.GET,
+			path: PlansApiPath.ROOT,
+		});
+
+		this.addRoute({
+			handler: (options) =>
 				this.regenerateDay(
 					options as APIHandlerOptions<{
 						params: PlanDayRegenerateRequestDto;
@@ -363,6 +372,17 @@ class PlanController extends BaseController {
 		return {
 			payload: await this.planService.create(options.body),
 			status: HTTPCode.CREATED,
+		};
+	}
+
+	private async findActiveByUserId(
+		options: APIHandlerOptions<{ query: { userId: string } }>,
+	): Promise<APIHandlerResponse> {
+		const userId = Number(options.query.userId);
+
+		return {
+			payload: await this.planService.findActiveByUserId(userId),
+			status: HTTPCode.OK,
 		};
 	}
 

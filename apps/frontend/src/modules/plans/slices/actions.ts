@@ -58,4 +58,34 @@ const findPlan = createAsyncThunk<PlanDaysTaskDto, number, AsyncThunkConfig>(
 	},
 );
 
-export { findPlan, generatePlan, getAllUserPlans, searchPlan };
+const getPlan = createAsyncThunk<PlanDaysTaskDto, number, AsyncThunkConfig>(
+	`${sliceName}/get`,
+	async (payload, { extra }) => {
+		const { planApi } = extra;
+
+		const plan = await planApi.getByUserId(payload);
+
+		return plan;
+	},
+);
+
+const regenerateTask = createAsyncThunk<
+	PlanDaysTaskDto,
+	{ dayId: number; planId: number; taskId: number },
+	AsyncThunkConfig
+>(`${sliceName}/regenerate-task`, async (payload, { extra }) => {
+	const { planApi } = extra;
+
+	const plan = await planApi.regenerateTask(payload);
+
+	return plan;
+});
+
+export {
+	findPlan,
+	generatePlan,
+	getAllUserPlans,
+	getPlan,
+	regenerateTask,
+	searchPlan,
+};
