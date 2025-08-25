@@ -3,8 +3,10 @@ import React, {
 	useCallback,
 	useEffect,
 	useImperativeHandle,
+	useMemo,
 	useRef,
 } from "react";
+import { MAX_AGE, MIN_AGE } from "shared/src/libs/constants/numbers.js";
 
 import { Button, Input, Loader } from "~/libs/components/components.js";
 import { formatDateForInput } from "~/libs/helpers/date-helpers.js";
@@ -49,6 +51,21 @@ const ProfilePersonalForm = forwardRef<
 		});
 
 	const formReference = useRef<HTMLFormElement>(null);
+
+	const dateLimits = useMemo(() => {
+		const today = new Date();
+
+		const minAgeDate = new Date();
+		minAgeDate.setFullYear(today.getFullYear() - MIN_AGE);
+
+		const maxAgeDate = new Date();
+		maxAgeDate.setFullYear(today.getFullYear() - MAX_AGE);
+
+		return {
+			max: formatDateForInput(minAgeDate.toISOString()),
+			min: formatDateForInput(maxAgeDate.toISOString()),
+		};
+	}, []);
 
 	useEffect(() => {
 		reset(getDefaultValues(user));
@@ -100,6 +117,8 @@ const ProfilePersonalForm = forwardRef<
 				control={control}
 				errors={errors}
 				label="Date of Birth"
+				max={dateLimits.max}
+				min={dateLimits.min}
 				name="dob"
 				placeholder="YYYY-MM-DD"
 				type="date"

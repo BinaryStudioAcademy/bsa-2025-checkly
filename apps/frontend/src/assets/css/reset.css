@@ -126,3 +126,8 @@ ol[data-list] {
 	margin: 0;
 	list-style: none;
 }
+
+textarea {
+	min-height: 5rem;
+	resize: vertical;
+}

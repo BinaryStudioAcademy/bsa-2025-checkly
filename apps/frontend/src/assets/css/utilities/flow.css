@@ -9,3 +9,11 @@
 .flow-loose > * + * {
 	margin-top: var(--space-m);
 }
+
+.flow-loose-lg > * + * {
+	margin-top: var(--space-l);
+}
+
+.flow-loose-xl > * + * {
+	margin-top: var(--space-xl);
+}

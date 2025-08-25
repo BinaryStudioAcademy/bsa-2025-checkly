@@ -5,6 +5,29 @@
 	height: 100%;
 }
 
+.no-plans-container {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	padding: var(--gutter);
+	text-align: center;
+}
+
+.no-plans-title {
+	margin-bottom: var(--space-m);
+	font-size: var(--text-size-heading-3);
+	font-weight: var(--font-weight-body);
+}
+
+.no-plans-message {
+	margin-bottom: var(--space-l);
+	font-size: var(--text-body);
+	color: var(--color-text-secondary);
+}
+
 .nav {
 	display: flex;
 	justify-content: space-between;

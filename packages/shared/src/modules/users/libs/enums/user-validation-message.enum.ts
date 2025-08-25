@@ -1,6 +1,7 @@
 import { UserValidationRule } from "./user-validation-rule.enum.js";
 
 const UserValidationMessage = {
+	AGE_INVALID: "Age must be between 13 and 120 years",
 	CURRENT_PASSWORD_INVALID: "Current password is incorrect",
 	CURRENT_PASSWORD_REQUIRED: "Current password is required to change password",
 	DATE_INVALID: "Date must be in format YYYY-MM-DD",
@@ -11,6 +12,7 @@ const UserValidationMessage = {
 	ENTER_VALID_DATE_OF_BIRTH: "Please enter a valid date of birth",
 	FAILED_TO_UPDATE_PROFILE: "Failed to update user profile",
 	FIELD_REQUIRED: "Field is required",
+	LINK_HAS_EXPIRED: "Link has expired",
 	NAME_INVALID: `Name must be between ${String(UserValidationRule.NAME_MIN_LENGTH)} and ${String(UserValidationRule.NAME_MAX_LENGTH)} characters`,
 	NAME_LENGTH: `Name must have at least ${String(UserValidationRule.NAME_MIN_LENGTH)} characters and maximum of ${String(UserValidationRule.NAME_MAX_LENGTH)} characters`,
 	NAME_ONLY_ALLOWED_CHARS: "Digits and special characters are not allowed",

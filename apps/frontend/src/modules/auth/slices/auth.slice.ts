@@ -4,7 +4,15 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type UserDto } from "~/modules/users/users.js";
 
-import { getCurrentUser, signIn, signUp, updateProfile } from "./actions.js";
+import {
+	getCurrentUser,
+	resetPassword,
+	sendResetLink,
+	signIn,
+	signUp,
+	updateProfile,
+	verifyToken,
+} from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
@@ -61,6 +69,41 @@ const { actions, name, reducer } = createSlice({
 
 		builder.addCase(updateProfile.fulfilled, (state, action) => {
 			state.user = action.payload;
+		});
+
+		builder.addCase(sendResetLink.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+			state.isPreparing = !initialState.isPreparing;
+		});
+		builder.addCase(sendResetLink.fulfilled, (state) => {
+			state.dataStatus = DataStatus.FULFILLED;
+		});
+		builder.addCase(sendResetLink.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+
+		builder.addCase(verifyToken.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+			state.isPreparing = initialState.isPreparing;
+		});
+		builder.addCase(verifyToken.fulfilled, (state) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.isPreparing = !initialState.isPreparing;
+		});
+		builder.addCase(verifyToken.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+			state.isPreparing = !initialState.isPreparing;
+		});
+
+		builder.addCase(resetPassword.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+			state.isPreparing = !initialState.isPreparing;
+		});
+		builder.addCase(resetPassword.fulfilled, (state) => {
+			state.dataStatus = DataStatus.FULFILLED;
+		});
+		builder.addCase(resetPassword.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
 		});
 	},
 	initialState,

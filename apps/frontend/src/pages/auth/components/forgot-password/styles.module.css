@@ -1,0 +1,15 @@
+.forgot-password-container {
+	padding-block: var(--space-3xl);
+	overflow-x: hidden;
+}
+
+.forgot-password {
+	padding-block: var(--space-xl);
+	padding-inline: var(--space-m-3xl);
+	margin-inline: var(--space-s);
+}
+
+.sign-in-link {
+	display: block;
+	text-align: center;
+}

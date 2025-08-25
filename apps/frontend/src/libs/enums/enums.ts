@@ -27,6 +27,7 @@ export {
 	PlanPdfExportApiPath,
 	QuizIndexes,
 	QuizQuestionFormat,
+	QuizQuestionFormatLabels,
 	ServerErrorType,
 	ErrorMessage as SharedErrorMessage,
 	ZERO,

@@ -1,5 +1,9 @@
 import { DecorativeImage } from "~/libs/components/decorative-image/decorative-image.js";
-import { QuizIndexes, QuizQuestionFormat } from "~/libs/enums/enums.js";
+import {
+	QuizIndexes,
+	QuizQuestionFormat,
+	QuizQuestionFormatLabels,
+} from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { getQuestionIcons } from "~/libs/helpers/helpers.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
@@ -185,14 +189,23 @@ const QuestionPage: React.FC<QuestionPageProperties> = ({
 				</div>
 			)}
 
-			<div className={styles["question-content"]}>
-				<div className={styles["question-header"]}>
+			<div
+				className={getClassNames(
+					"cluster grid-pattern",
+					styles["question-content"],
+				)}
+			>
+				<div className={getClassNames("cluster", styles["question-header"])}>
 					{questionNumber && (
-						<div className={styles["question-number"]}>
-							Question #{questionNumber}
-						</div>
+						<p className={styles["question-number"]}>
+							{!question.isOptional && "*"}Question #{questionNumber}{" "}
+							{question.isOptional && "(optional)"}
+						</p>
 					)}
-					<h1 className={styles["question-title"]}>{question.text}</h1>
+					<h2 className={styles["question-title"]}>{question.text}</h2>
+					<p className={styles["question-type"]}>
+						{QuizQuestionFormatLabels[question.type]}
+					</p>
 				</div>
 
 				{renderQuestion()}

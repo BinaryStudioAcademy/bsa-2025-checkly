@@ -17,6 +17,7 @@ import {
 	planSearchQueryParametersValidationSchema,
 } from "~/modules/plans/plans.js";
 
+import { type PlanStyleUpdateRequestDto } from "../plan-styles/libs/types/types.js";
 import { PlansApiPath } from "./libs/enums/enums.js";
 import { type GeneratePlanRequestDto } from "./libs/types/types.js";
 import { generatePlanValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
@@ -280,6 +281,16 @@ class PlanController extends BaseController {
 			validation: {
 				queryString: planSearchQueryParametersValidationSchema,
 			},
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.updateStyle(
+					options as APIBodyOptions<PlanStyleUpdateRequestDto> &
+						IdParametersOption,
+				),
+			method: HTTPRequestMethod.PATCH,
+			path: PlansApiPath.PLAN_STYLE,
 		});
 	}
 
@@ -556,6 +567,63 @@ class PlanController extends BaseController {
 
 		return {
 			payload: await this.planService.search(userId as number, query),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /plans/{id}/style:
+	 *   patch:
+	 *     tags:
+	 *       - plans
+	 *     summary: Update plan style
+	 *     security:
+	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - in: path
+	 *         name: id
+	 *         schema:
+	 *           type: integer
+	 *         required: true
+	 *         example: 1
+	 *     requestBody:
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: object
+	 *             required:
+	 *               - styleId
+	 *             properties:
+	 *               styleId:
+	 *                 type: integer
+	 *                 description: Style ID to assign to the plan
+	 *                 example: 1
+	 *     responses:
+	 *       200:
+	 *         description: Plan style updated successfully
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/PlanResponseDto'
+	 *       401:
+	 *         description: Unauthorized - Invalid or missing authentication token
+	 *       404:
+	 *         description: Plan not found
+	 */
+	private async updateStyle(
+		options: APIBodyOptions<PlanStyleUpdateRequestDto> & IdParametersOption,
+	): Promise<APIHandlerResponse> {
+		const { body, params } = options;
+		const userId = options.user?.id;
+
+		return {
+			payload: await this.planService.updateStyle(
+				userId as number,
+				params.id,
+				body.styleId,
+			),
 			status: HTTPCode.OK,
 		};
 	}

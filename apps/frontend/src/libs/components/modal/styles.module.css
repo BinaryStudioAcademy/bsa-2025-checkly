@@ -5,10 +5,13 @@
 	display: flex;
 	align-items: flex-start;
 	justify-content: center;
+	width: 100vw;
+	height: 100vh;
 	padding-top: 100px;
 	cursor: default;
 	background-color: rgb(255 255 255 / 80%);
 	border: none;
+	backdrop-filter: blur(8px);
 }
 
 .modal-content {
