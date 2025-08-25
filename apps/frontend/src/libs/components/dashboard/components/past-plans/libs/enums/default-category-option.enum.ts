@@ -1,10 +1,10 @@
-import { ZERO_CATEGORY_ID } from "../../../libs/enums/enums.js";
+import { ZERO } from "../../../libs/enums/enums.js";
 
 const ZERO_CATEGORY_ORDER = 0;
 
 const defaultCategoryOption = {
 	iconHref: undefined,
-	id: ZERO_CATEGORY_ID,
+	id: ZERO,
 	order: ZERO_CATEGORY_ORDER,
 	title: "All categories",
 } as const;

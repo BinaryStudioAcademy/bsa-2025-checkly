@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo } from "react";
+import { MAX_AGE, MIN_AGE } from "shared/src/libs/constants/numbers.js";
 
 import {
 	AvatarEdit,
@@ -39,6 +40,21 @@ const Profile: React.FC = () => {
 		() => getDefaultValues(user as UserDto),
 		[user],
 	);
+
+	const dateLimits = useMemo(() => {
+		const today = new Date();
+
+		const minAgeDate = new Date();
+		minAgeDate.setFullYear(today.getFullYear() - MIN_AGE);
+
+		const maxAgeDate = new Date();
+		maxAgeDate.setFullYear(today.getFullYear() - MAX_AGE);
+
+		return {
+			max: formatDateForInput(minAgeDate.toISOString()),
+			min: formatDateForInput(maxAgeDate.toISOString()),
+		};
+	}, []);
 
 	const { control, errors, handleSubmit, isDirty, isSubmitting, reset } =
 		useAppForm<UserUpdateRequestDto>({
@@ -104,6 +120,8 @@ const Profile: React.FC = () => {
 							control={control}
 							errors={errors}
 							label="Date of birth"
+							max={dateLimits.max}
+							min={dateLimits.min}
 							name="dob"
 							type="date"
 						/>

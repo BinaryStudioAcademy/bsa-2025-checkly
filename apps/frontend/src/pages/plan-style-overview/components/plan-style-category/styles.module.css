@@ -1,148 +1,81 @@
-.category-container {
-	position: relative;
-	display: flex;
-	gap: 0.5rem;
-	justify-content: center;
-	padding: 0.3rem 4.5rem;
-	margin-bottom: 0.5rem;
-	overflow: hidden;
-	background: var(--color-brand-primary);
-	border-radius: 2.5rem;
-	box-shadow:
-		0 8px 32px rgb(173 216 230 / 30%),
-		inset 0 1px 0 rgb(255 255 255 / 20%);
-	backdrop-filter: blur(10px);
-}
-
-.category-container::before {
-	position: absolute;
-	top: 0;
-	left: -100%;
-	width: 100%;
-	height: 100%;
-	content: "";
-	background: linear-gradient(
-		90deg,
-		transparent,
-		rgb(255 255 255 / 10%),
-		transparent
-	);
-	transition: left 0.6s ease;
-}
-
-.category-container:hover::before {
-	left: 100%;
-}
-
-.category-button {
-	position: relative;
-	display: flex;
-	gap: 0.5rem;
-	align-items: center;
-	justify-content: center;
-	width: 240px;
-	min-width: 220px;
-	padding: 0.5rem 1rem;
-	overflow: hidden;
-	font-family: var(--font-family-primary);
-	font-size: 0.875rem;
-	font-weight: var(--font-weight-semi-bold);
-	color: rgb(0 0 0 / 50%);
-	text-align: center;
-	letter-spacing: 0.5px;
+.header-buttons-button {
+	width: 19rem;
 	cursor: pointer;
-	background: rgb(198 231 249 / 30%);
-	border: 3px solid rgb(0 0 0 / 30%);
-	border-radius: 1.8rem;
-	opacity: 0.75;
-	transform: scale(0.96);
-	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.category-button:hover {
-	color: rgb(0 0 0 / 60%);
-	background: rgb(198 231 249 / 40%);
-	border-color: rgb(0 0 0 / 40%);
-	opacity: 0.9;
-	transform: scale(0.98) translateY(-2px);
+.header-buttons-button svg {
+	width: unset;
+	height: unset;
 }
 
-.category-button.active {
-	font-weight: var(--font-weight-bold);
-	color: var(--color-text-primary);
-	background: var(--color-brand-primary);
-	border-color: var(--color-text-primary);
-	opacity: 1;
-	transform: scale(1) translateY(-1px);
-}
-
-.category-icon {
+.header-buttons {
 	display: flex;
-	align-items: center;
-	font-size: 1.2rem;
-}
-
-.category-name-full {
-	display: inline;
-}
-
-.category-name-short {
-	display: none;
+	gap: 0.75rem;
+	justify-content: center;
+	width: 100%;
+	max-width: 1100px;
+	padding: 0.4rem 4.5rem;
+	margin: 0.2rem auto 0.3rem;
+	background-color: var(--color-brand-primary);
+	border-radius: 9999px;
 }
 
 @media (width <= 768px) {
-	.category-name-full {
-		display: none;
+	.header-buttons-button {
+		width: 10rem;
 	}
 
-	.category-name-short {
-		display: inline;
-	}
-
-	.category-container {
-		flex-wrap: nowrap;
-		gap: 0.4rem;
-		justify-content: center;
-		padding: 0.3rem 1rem;
-		margin-left: var(--space-l);
-		overflow-x: auto;
-	}
-
-	.category-button {
-		flex-shrink: 0;
-		flex-direction: column;
-		gap: 0.2rem;
-		width: 95px;
-		min-width: 85px;
-		height: auto;
-		padding: 0.4rem 0.3rem;
-		font-size: 0.65rem;
-	}
-
-	.category-icon {
-		font-size: 0.9rem;
+	.header-buttons-button [aria-hidden="true"] {
+		margin-right: 0;
 	}
 }
 
-@media (width <= 480px) {
-	.category-container {
-		gap: 0.3rem;
-		justify-content: center;
-		padding: 0.25rem 0.5rem;
-		margin-left: var(--space-l);
+@media (width <= 958px) {
+	.header-buttons {
+		padding: 0.3rem 1rem;
 	}
 
-	.category-button {
-		flex-direction: column;
-		gap: 0.15rem;
-		width: 90px;
-		min-width: 100px;
-		height: auto;
-		padding: 0.3rem 0.2rem;
-		font-size: 0.6rem;
+	.header-buttons-button {
+		display: block;
+		width: 100%;
+		padding: 0.5rem;
+		margin-right: auto;
+		margin-left: auto;
+		font-size: 0.5rem;
 	}
 
-	.category-icon {
-		font-size: 0.8rem;
+	.header-buttons-button > *:not([aria-hidden="true"]) {
+		display: none;
+	}
+
+	.header-buttons-button [aria-hidden="true"] {
+		transform: scale(1.3);
+	}
+}
+
+@media (width <= 430px) {
+	.header-buttons-button [aria-hidden="true"] {
+		margin-top: auto;
+		margin-bottom: auto;
+	}
+}
+
+@media (width <= 575px) {
+	.header-buttons {
+		padding: 0.3rem 1rem;
+	}
+
+	.header-buttons-button {
+		width: 100%;
+		padding: 0.5rem;
+		font-size: 0.5rem;
+	}
+
+	.header-buttons-button > *:not([aria-hidden="true"]) {
+		display: none;
+	}
+
+	.header-buttons-button [aria-hidden="true"] {
+		transform: scale(1.3);
 	}
 }

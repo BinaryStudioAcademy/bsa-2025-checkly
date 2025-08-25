@@ -1,10 +1,17 @@
 import { z } from "zod";
 
+import { MAX_AGE, MIN_AGE } from "../../../../libs/constants/numbers.js";
 import {
 	UserValidationMessage,
 	UserValidationRegexRule,
 	UserValidationRule,
 } from "../enums/enums.js";
+
+const minAgeDate = new Date();
+minAgeDate.setFullYear(minAgeDate.getFullYear() - MIN_AGE);
+
+const maxAgeDate = new Date();
+maxAgeDate.setFullYear(maxAgeDate.getFullYear() - MAX_AGE);
 
 const userUpdate = z
 	.object({
@@ -17,6 +24,20 @@ const userUpdate = z
 					value === "" || UserValidationRegexRule.DATE_VALID.test(value),
 				{
 					message: UserValidationMessage.DATE_INVALID,
+				},
+			)
+			.refine(
+				(value) => {
+					if (!value) {
+						return true;
+					}
+
+					const inputDate = new Date(value);
+
+					return inputDate <= minAgeDate && inputDate >= maxAgeDate;
+				},
+				{
+					message: UserValidationMessage.AGE_INVALID,
 				},
 			)
 			.nullable()

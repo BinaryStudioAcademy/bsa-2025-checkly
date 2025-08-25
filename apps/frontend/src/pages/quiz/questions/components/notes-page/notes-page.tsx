@@ -27,16 +27,17 @@ const NotesPage: React.FC = (): React.ReactElement => {
 	);
 
 	return (
-		<div className={styles["notes-page"]}>
-			<div className={getClassNames(styles["notes-content"], "grid-pattern")}>
-				<h2 className={styles["notes-title"]}>
-					Want to add any personal notes?
-				</h2>
-				<p className={styles["notes-description"]}>
-					Feel free to add any additional thoughts, comments, or notes about
-					your experience with this quiz. Those are not going to be used for
-					plan.
-				</p>
+		<div className={getClassNames("grid-pattern", styles["notes-page"])}>
+			<div className={getClassNames(styles["notes-content"], "flow-loose-lg")}>
+				<div className="flow">
+					<h2 className={styles["notes-title"]}>
+						📝 Leave a special note for your plan
+					</h2>
+					<p className={styles["notes-description"]}>
+						You can write here little motivational reminder for yourself or
+						something that will inspire you in your achievements.
+					</p>
+				</div>
 
 				<textarea
 					className={styles["notes-textarea"]}

@@ -13,6 +13,19 @@
 	background: none;
 }
 
+@media (width <= 575px) {
+	.footer-container {
+		flex-direction: column-reverse;
+		padding-block: 0.75rem;
+	}
+
+	.footer-message {
+		margin-top: 0;
+		margin-bottom: 1.2rem;
+		font-weight: 400;
+	}
+}
+
 .login-link {
 	font-weight: 800;
 	color: var(--color-primary-blue, #007bff);
@@ -45,6 +58,19 @@
 		min-width: 140px;
 		padding: 0.4rem 1.2rem;
 		font-size: 0.8rem;
+	}
+}
+
+@media (width <= 700px) {
+	.actions-container {
+		flex-direction: column;
+		gap: var(--space-l);
+		align-items: center;
+	}
+
+	.action-button {
+		justify-content: center;
+		width: 100%;
 	}
 }
 

@@ -1,5 +1,6 @@
-import { Button } from "~/libs/components/components.js";
+import { Button, Link } from "~/libs/components/components.js";
 import {
+	AppRoute,
 	ButtonLabels,
 	ButtonSizes,
 	ButtonVariants,
@@ -34,6 +35,16 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 	return (
 		<div className={styles["question-navigation"]}>
 			<div className={getClassNames("cluster", styles["navigation-buttons"])}>
+				{isFirst && (
+					<Link
+						asButtonSize={ButtonSizes.LARGE}
+						asButtonVariant={ButtonVariants.TRANSPARENT}
+						to={AppRoute.QUIZ}
+					>
+						{ButtonLabels.BACK_TO_START_QUIZ_PAGE}
+					</Link>
+				)}
+
 				{!isFirst && (
 					<Button
 						className={styles["navigation-button"]}

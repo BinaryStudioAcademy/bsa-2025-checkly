@@ -24,7 +24,7 @@ listenerMiddleware.startListening({
 });
 
 listenerMiddleware.startListening({
-	async effect() {
+	effect: async () => {
 		await navigation.navigateTo(AppRoute.ROOT);
 	},
 	matcher: isAnyOf(authActions.signIn.fulfilled, authActions.signUp.fulfilled),
@@ -77,6 +77,44 @@ listenerMiddleware.startListening({
 		notifications.success(SuccessMessage.FEEDBACK_DELETE);
 	},
 	matcher: isFulfilled(feedbackActions.deleteFeedback),
+});
+
+listenerMiddleware.startListening({
+	effect: async () => {
+		notifications.success(SuccessMessage.EMAIL_SENT);
+		await navigation.navigateTo(AppRoute.SIGN_IN);
+	},
+	matcher: isAnyOf(
+		authActions.sendResetLink.fulfilled,
+		authActions.sendResetLink.rejected,
+	),
+});
+
+listenerMiddleware.startListening({
+	effect: async () => {
+		notifications.success(SuccessMessage.PASSWORD_CHANGED);
+		await navigation.navigateTo(AppRoute.SIGN_IN);
+	},
+	matcher: isFulfilled(authActions.resetPassword),
+});
+
+listenerMiddleware.startListening({
+	effect: async () => {
+		notifications.success(SuccessMessage.EMAIL_SENT);
+		await navigation.navigateTo(AppRoute.SIGN_IN);
+	},
+	matcher: isAnyOf(
+		authActions.sendResetLink.fulfilled,
+		authActions.sendResetLink.rejected,
+	),
+});
+
+listenerMiddleware.startListening({
+	effect: async () => {
+		notifications.success(SuccessMessage.PASSWORD_CHANGED);
+		await navigation.navigateTo(AppRoute.SIGN_IN);
+	},
+	matcher: isFulfilled(authActions.resetPassword),
 });
 
 export { listenerMiddleware };

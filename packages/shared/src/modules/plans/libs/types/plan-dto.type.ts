@@ -15,6 +15,7 @@ type PlanDto = {
 	duration: number;
 	id: number;
 	intensity: string;
+	styleId: number;
 	title: string;
 	userId: null | number;
 };

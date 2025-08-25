@@ -10,7 +10,7 @@ import {
 	DecorativeImage,
 	Loader,
 } from "~/libs/components/components.js";
-import { INITIAL_ITEM } from "~/libs/constants/constants.js";
+import { ZERO } from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm } from "~/libs/hooks/hooks.js";
 import {
@@ -32,8 +32,7 @@ const mapDaysToNavItems = (
 };
 
 const PlanEdit: FC = () => {
-	const [selectedItem, setSelectedItem] =
-		useState<SelectedItemType>(INITIAL_ITEM);
+	const [selectedItem, setSelectedItem] = useState<SelectedItemType>(ZERO);
 
 	const { control, errors } = useAppForm<PlanEditForm>({
 		defaultValues: activitiesMockData,
@@ -57,7 +56,7 @@ const PlanEdit: FC = () => {
 		toast.success("Plan saved successfully");
 	}, []);
 
-	if (formValues.days.length === INITIAL_ITEM) {
+	if (formValues.days.length === ZERO) {
 		return <Loader />;
 	}
 
