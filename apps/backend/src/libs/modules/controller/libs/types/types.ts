@@ -1,6 +1,7 @@
 export {
 	type APIBodyOptions,
 	type APIHandlerOptions,
+	type AuthIdParametersOption,
 	type IdParametersOption,
 	type SearchQueryParametersOption,
 } from "./api-handler-options.type.js";

@@ -14,6 +14,12 @@ type APIHandlerOptions<
 	user?: UserDto;
 };
 
+type AuthIdParametersOption = IdParametersOption & {
+	user: {
+		id: number;
+	};
+};
+
 type DefaultApiHandlerOptions = {
 	body?: unknown;
 	params?: unknown;
@@ -33,6 +39,7 @@ type SearchQueryParametersOption<T> = APIHandlerOptions<{
 export {
 	type APIBodyOptions,
 	type APIHandlerOptions,
+	type AuthIdParametersOption,
 	type IdParametersOption,
 	type SearchQueryParametersOption,
 };

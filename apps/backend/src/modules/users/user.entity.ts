@@ -77,6 +77,28 @@ class UserEntity implements Entity {
 		});
 	}
 
+	public static initializeWithShortInfo({
+		avatarUrl,
+		email,
+		id,
+		name,
+	}: {
+		avatarUrl: null | string;
+		email: string;
+		id: number;
+		name: string;
+	}): UserEntity {
+		return new UserEntity({
+			avatarUrl,
+			dob: null,
+			email,
+			id,
+			name,
+			passwordHash: "",
+			passwordSalt: "",
+		});
+	}
+
 	public getId(): number {
 		return this.id as number;
 	}

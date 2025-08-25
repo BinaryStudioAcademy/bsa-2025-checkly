@@ -1,6 +1,8 @@
 .textarea-container {
 	--cluster-direction: column;
 	--cluster-vertical-alignment: flex-start;
+
+	width: 100%;
 }
 
 .textarea-label {
@@ -20,7 +22,7 @@
 .textarea-field {
 	box-sizing: border-box;
 	width: 100%;
-	min-width: 320px;
+	min-width: 230px;
 	padding: 0.5rem;
 	font-family: var(--font-family-primary);
 	font-size: var(--text-body);
@@ -48,4 +50,51 @@
 	font-size: var(--text-caption);
 	color: var(--color-text-secondary);
 	text-align: right;
+}
+
+.textarea-field--error {
+	border-color: var(--color-brand-accent);
+	animation: shake 0.6s ease-in-out;
+}
+
+.textarea-field__error {
+	font-size: var(--text-caption);
+	color: var(--color-brand-accent);
+	opacity: 1;
+	transform: translateY(0);
+	animation: slide-in 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes shake {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+
+	10%,
+	30%,
+	50%,
+	70%,
+	90% {
+		transform: translateX(-1px);
+	}
+
+	20%,
+	40%,
+	60%,
+	80% {
+		transform: translateX(1px);
+	}
+}
+
+@keyframes slide-in {
+	from {
+		opacity: 0;
+		transform: translateY(-8px) scale(0.95);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
 }

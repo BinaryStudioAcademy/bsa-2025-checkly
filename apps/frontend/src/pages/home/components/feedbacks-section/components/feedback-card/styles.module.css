@@ -1,11 +1,12 @@
 .card {
+	position: relative;
 	display: flex;
 	flex-direction: column;
-	padding: var(--space-m);
+	height: clamp(260px, 11.11vw + 220px, 410px);
+	font-size: var(--text-size-heading-5);
 	cursor: pointer;
-	background: var(--color-bg-white);
-	border: 2px solid var(--color-bg-dark);
-	border-radius: var(--radius-m);
+	scrollbar-color: #f7b6d2 #fde7f1;
+	scrollbar-width: thin;
 	transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -13,16 +14,37 @@
 	transform: translateY(-8px);
 }
 
+.button-section {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	display: flex;
+	display: none;
+	gap: 20px;
+}
+
 .text {
-	display: -webkit-box;
 	flex-grow: 1;
-	max-height: clamp(300px, 10vh, 350px);
-	margin: 0 0 24px;
-	overflow: hidden;
-	text-overflow: ellipsis;
+	padding-right: var(--space-xs-s);
+	margin: 0 0 15px;
+	overflow-y: auto;
 	-webkit-line-clamp: 5;
 	line-clamp: 5;
+	text-indent: 1em;
+	word-break: break-all;
+	overflow-wrap: break-word;
 	-webkit-box-orient: vertical;
+}
+
+.icon {
+	width: 20px;
+	height: 20px;
+	transition: all 300ms ease-in-out;
+}
+
+.icon:hover,
+.icon:focus {
+	stroke: var(--color-card-darkblue);
 }
 
 .footer {

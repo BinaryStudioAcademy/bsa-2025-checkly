@@ -1,0 +1,1 @@
+export { getIdParameter } from "shared";
