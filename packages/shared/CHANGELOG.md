@@ -1,5 +1,37 @@
 # Changelog
 
+## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.11.0...shared-v1.12.0) (2025-08-25)
+
+
+### Features
+
+* - remove order field from question-dto cy-269 ([ef9d159](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ef9d15969db56855dda13a7fe31d3758883c2f51))
+* - update question validation schema to remove order field cy-269 ([c772c2d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c772c2dead82368c9dbc4f581c83dfc0acb7f166))
+* * export plan-category-with-color from shared cy-269 ([eebfc1f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eebfc1f47168fd9d5a8d279d8c41ebc8649c7389))
+* * update question-cat-search-param validation schema to import zero shared value cy-269 ([f7f1142](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f7f11425cb40fd629bf2ecb44cb0d8346802c8da))
+* * update quiz frontend cy-284 ([dd53a8b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/dd53a8b290416e635648aa378d443d838ef49ca5))
+* * update quiz shared types cy-269 ([99e3941](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/99e3941b7b37d17b57591b51380971c9696bced0))
+* * update quiz to display fetched categories cy-269 ([43b8674](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/43b8674d26328c15ae42aa59ba015a11e220e1e6))
+* * update quiz types cy-269 ([50b4638](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/50b4638847515734fcb2d0e6190d84e8df360321))
+* * update quiz-api cy-269 ([b68c912](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b68c912d2527a330ae7109e938babbcb39f00520))
+* + add plan-category-with-color type cy-269 ([a6ffba9](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a6ffba9217b2fe4f19b0ce9e8cae6f9d8eca989a))
+* + add question-category validation schema cy-269 ([cf4d24b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cf4d24b4281a2635cf825e3bbba62443f216e619))
+* + add questionn-validation message config cy-269 ([eea0119](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eea0119dfe5fdbc9b6a566114789e831a5a5904e))
+* add age validation and constants for user profile cy-176 ([c9b5f96](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c9b5f9633620ebd7273cc6e3bb3ed2f8b8f8d0c6))
+* add shared plan-styles package cy-312 ([b5d5f67](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b5d5f673d5a60f6f1ae228aeb9f517bd26e4e858))
+* category specific questions cy-269 ([ddba983](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ddba9833dd30e0592192b7bd4f4ca877d311dede))
+* donwload plan with set style cy-312 ([76d7cc7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/76d7cc79934f12c5ea806e0efdb689790ea26897))
+* Forgot Password cy-227 ([cd104ef](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cd104ef71157a9a4195e9ade6bbe97a0f4c6417d))
+* **frontend/backend/shared:** add plan preservation cy-312 ([f189bc7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f189bc7ebe4b2816ccaf298937a2bfaef0e384b2))
+* merge main into current branch cy-312 ([b708ede](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b708ede04c0b5eb7a2e98a7a96d9e89ca6122664))
+* merge main into local branch cy-312 ([22ad51c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/22ad51c4256aeadc66a823219f8cf52b8d395d1e))
+* update quiz frontend cy-284 ([e5332cf](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e5332cfecac2087b0c993af2a59c062ec3531ba3))
+
+
+### Bug Fixes
+
+* dob allows future dates cy-176 ([5cd1398](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5cd1398e9dfdf9f4c6547df16dd4c476c9e4b5a6))
+
 ## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.10.0...shared-v1.11.0) (2025-08-21)
 
 

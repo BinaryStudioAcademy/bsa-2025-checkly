@@ -1,5 +1,50 @@
 # Changelog
 
+## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.10.0...backend-v1.11.0) (2025-08-25)
+
+
+### Features
+
+* - update question-entity to remove order field cy-269 ([e0362cf](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e0362cf7f0e6ec145823a5038d30e70c9cbbf872))
+* * add slug field to plan-categories table cy-269 ([0171da6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0171da6e0f1b6ad42529dc87c93106998e277636))
+* * update plan-categories table to add key cy-269 ([a8d3629](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a8d362937050ed9aaf86e99c92fed2d273b21158))
+* * update plan-category model and entity cy-269 ([f36cadf](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f36cadf284446ea7747855668e8169f6c1e21d93))
+* * update question seed cy-269 ([11edd2d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/11edd2d35f457450882ec95c9efca77b1c4b542e))
+* * update question-category repository cy-269 ([93e769a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/93e769ad06bc2a484bff204c107abbccbbd07a51))
+* * update questions seed file cy-269 ([baad10a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/baad10aa648ffee05bc49ce14153b230294950b0))
+* * update questions seed to add no-limitations option cy-284 ([071f579](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/071f579da4488f1274e8ba5eb9c1c740166e9028))
+* * update questions-categories migration cy-269 ([1b704e3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1b704e3736c6a2299b4628dbbb8257edd865056d))
+* * update questions-categories migration cy-269 ([eaa769e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eaa769e34437a582c49623d457002bff7ac9f381))
+* * update qui-question service cy-269 ([e2a9988](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e2a998804f1c76901252ae041e0b6889f71984cc))
+* * update quiz-controller cy-269 ([3c328d6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3c328d6f065d20030efeba49e73bf429591d4b83))
+* * update quiz-question service cy-269 ([633f5ca](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/633f5ca72aff28b83d3ef897593516256ee1f7b1))
+* * update quiz-questions exports cy-269 ([d45f5c8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d45f5c80a9899db42cd9de53bbe0dcc0274e69ae))
+* * update quiz-questions swagger cy-269 ([f99debe](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f99debe4329d7a897236d812671faead26bf76a5))
+* * update seeds cy-269 ([279430c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/279430cfc6dda01d24a52e4c1cd9d9c2fd8b0d8c))
+* * update seeds cy-269 ([b49e44a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b49e44af0e734a415dedf307e50961fed424f9d2))
+* * update variable names cy-269 ([64e61b1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/64e61b1de3f3150a646d19f8b7c452477eeec378))
+* + add new migration to add questions-categories cy-269 ([6e88b19](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6e88b191165ad5093910677d8b2ceef72ca687ef))
+* + add new question to seed cy-269 ([482da52](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/482da52c0b9353fb2fc049f4660cca9ccb109fac))
+* + add question-category entity cy-269 ([b54cb77](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b54cb77c0825f02074674c236f741ea45c31d186))
+* + add question-category model cy-269 ([74e9d14](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/74e9d142cdb861959798e5490968e9a79f6518e2))
+* + add questions-categories to db table name config cy-269 ([b813298](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b813298cc22714b2aae29905b8c7139759d80515))
+* add plan styles to the server module cy-312 ([4c73d70](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/4c73d700d7b6764f9c98ac39719e0edd279090be))
+* category specific questions cy-269 ([ddba983](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ddba9833dd30e0592192b7bd4f4ca877d311dede))
+* db migration and seed cy-312 ([660bf9e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/660bf9e528d020af7858fb179c75d9f55acd9fa3))
+* donwload plan with set style cy-312 ([76d7cc7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/76d7cc79934f12c5ea806e0efdb689790ea26897))
+* Forgot Password cy-227 ([cd104ef](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cd104ef71157a9a4195e9ade6bbe97a0f4c6417d))
+* **frontend/backend/shared:** add plan preservation cy-312 ([f189bc7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f189bc7ebe4b2816ccaf298937a2bfaef0e384b2))
+* merge main into current branch cy-312 ([b708ede](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b708ede04c0b5eb7a2e98a7a96d9e89ca6122664))
+* merge main into local branch cy-312 ([22ad51c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/22ad51c4256aeadc66a823219f8cf52b8d395d1e))
+* plans, plan styles backend cy-312 ([90b4a7b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/90b4a7b241e3cf0043f73b747e088b7373f6cfdb))
+* update quiz frontend cy-284 ([e5332cf](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e5332cfecac2087b0c993af2a59c062ec3531ba3))
+
+
+### Bug Fixes
+
+* avoid eslint error for auth service constructor cy-227 ([7db38f3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7db38f3875272ffc2df7e90e15cb44d74720c997))
+* remove redundant code, fix names cy-312 ([52a991a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/52a991a405a8609a8bcff58f3aaf5239eed5f242))
+
 ## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.9.0...backend-v1.10.0) (2025-08-21)
 
 
