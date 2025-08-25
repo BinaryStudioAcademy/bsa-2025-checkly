@@ -59,10 +59,13 @@ class AuthApi extends BaseHTTPApi {
 	}
 
 	public async signIn(
+		planId: null | string,
 		payload: UserSignInRequestDto,
 	): Promise<UserSignInResponseDto> {
+		const planIdParameter = planId ? `?planId=${planId}` : "";
+
 		const response = await this.load(
-			this.getFullEndpoint(AuthApiPath.SIGN_IN, {}),
+			this.getFullEndpoint(`${AuthApiPath.SIGN_IN}${planIdParameter}`, {}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: false,
@@ -75,10 +78,13 @@ class AuthApi extends BaseHTTPApi {
 	}
 
 	public async signUp(
+		planId: null | string,
 		payload: UserSignUpRequestDto,
 	): Promise<UserSignUpResponseDto> {
+		const planIdParameter = planId ? `?planId=${planId}` : "";
+
 		const response = await this.load(
-			this.getFullEndpoint(AuthApiPath.SIGN_UP, {}),
+			this.getFullEndpoint(`${AuthApiPath.SIGN_UP}${planIdParameter}`, {}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: false,
