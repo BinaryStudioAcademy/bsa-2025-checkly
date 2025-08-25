@@ -7,7 +7,10 @@
 
 .light-background {
 	--grid-color: var(--color-light-grey);
-	--grid-line: 1px;
+	--grid-opacity: var(--dashboard-grid-opacity);
+
+	padding-top: var(--space-l);
+	padding-bottom: var(--space-xl);
 }
 
 .profile-container {
@@ -16,12 +19,5 @@
 }
 
 .title {
-	padding-bottom: var(--space-s);
 	font-size: var(--text-size-heading-2);
-}
-
-@media (width >= 768px) {
-	.content {
-		padding: var(--space-l);
-	}
 }
