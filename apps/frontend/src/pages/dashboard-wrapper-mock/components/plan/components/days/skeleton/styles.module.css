@@ -1,5 +1,5 @@
 .content__day-skeleton {
-	padding: var(--space-2xs) var(--space-m);
+	padding: var(--space-3xs) var(--space-m);
 	text-transform: none;
 	white-space: nowrap;
 	background: #f2f2f2;
@@ -12,7 +12,6 @@
 	height: 100%;
 	background: linear-gradient(90deg, #f0f0f0 25%, #fafafa 50%, #f0f0f0 75%);
 	background-size: 200% 100%;
-	border-radius: 8px;
 	animation: shimmer 1.5s infinite;
 }
 

@@ -2,12 +2,15 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
-import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
 import {
 	type GeneratePlanRequestDto,
+	type PlanDayRegenerationRequestDto,
+	type PlanDaysTaskDto,
+	type PlanRegenerationRequestDto,
 	type PlanSearchQueryParameter,
 	type PlanWithCategoryDto,
+	type TaskRegenerationRequestDto,
 } from "../libs/types/types.js";
 import { name as sliceName } from "./plan.slice.js";
 
@@ -58,12 +61,13 @@ const findPlan = createAsyncThunk<PlanDaysTaskDto, number, AsyncThunkConfig>(
 	},
 );
 
-const getPlan = createAsyncThunk<PlanDaysTaskDto, number, AsyncThunkConfig>(
+const getPlan = createAsyncThunk<PlanDaysTaskDto, undefined, AsyncThunkConfig>(
 	`${sliceName}/get`,
-	async (payload, { extra }) => {
-		const { planApi } = extra;
+	async (_, { extra }) => {
+		const { authApi, planApi } = extra;
 
-		const plan = await planApi.getByUserId(payload);
+		const user = await authApi.getCurrentUser();
+		const plan = await planApi.getByUserId(user.id);
 
 		return plan;
 	},
@@ -71,7 +75,7 @@ const getPlan = createAsyncThunk<PlanDaysTaskDto, number, AsyncThunkConfig>(
 
 const regenerateTask = createAsyncThunk<
 	PlanDaysTaskDto,
-	{ dayId: number; planId: number; taskId: number },
+	TaskRegenerationRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/regenerate-task`, async (payload, { extra }) => {
 	const { planApi } = extra;
@@ -83,7 +87,7 @@ const regenerateTask = createAsyncThunk<
 
 const regeneratePlanDay = createAsyncThunk<
 	PlanDaysTaskDto,
-	{ dayId: number; planId: number },
+	PlanDayRegenerationRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/regenerate-plan-day`, async (payload, { extra }) => {
 	const { planApi } = extra;
@@ -95,7 +99,7 @@ const regeneratePlanDay = createAsyncThunk<
 
 const regeneratePlan = createAsyncThunk<
 	PlanDaysTaskDto,
-	number,
+	PlanRegenerationRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/regenerate-plan`, async (payload, { extra }) => {
 	const { planApi } = extra;

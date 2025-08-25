@@ -8,8 +8,11 @@ import { PlansApiPath } from "./libs/enums/enums.js";
 import { buildQueryString } from "./libs/helpers/helpers.js";
 import {
 	type GeneratePlanRequestDto,
+	type PlanDayRegenerationRequestDto,
+	type PlanRegenerationRequestDto,
 	type PlanSearchQueryParameter,
 	type PlanWithCategoryDto,
+	type TaskRegenerationRequestDto,
 } from "./libs/types/types.js";
 
 type Constructor = {
@@ -67,7 +70,7 @@ class PlanApi extends BaseHTTPApi {
 
 	public async getByUserId(userId: number): Promise<PlanDaysTaskDto> {
 		const response = await this.load(
-			this.getFullEndpoint(PlansApiPath.$USER_ID, { userId: String(userId) }),
+			this.getFullEndpoint(PlansApiPath.$USER_ID, { userId }),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: false,
@@ -78,10 +81,14 @@ class PlanApi extends BaseHTTPApi {
 		return await response.json<PlanDaysTaskDto>();
 	}
 
-	public async regeneratePlan(payload: number): Promise<PlanDaysTaskDto> {
+	public async regeneratePlan(
+		payload: PlanRegenerationRequestDto,
+	): Promise<PlanDaysTaskDto> {
+		const { id } = payload;
+
 		const response = await this.load(
 			this.getFullEndpoint(PlansApiPath.REGENERATE, {
-				id: String(payload),
+				id,
 			}),
 			{
 				contentType: ContentType.JSON,
@@ -93,16 +100,15 @@ class PlanApi extends BaseHTTPApi {
 		return await response.json<PlanDaysTaskDto>();
 	}
 
-	public async regeneratePlanDay(payload: {
-		dayId: number;
-		planId: number;
-	}): Promise<PlanDaysTaskDto> {
+	public async regeneratePlanDay(
+		payload: PlanDayRegenerationRequestDto,
+	): Promise<PlanDaysTaskDto> {
 		const { dayId, planId } = payload;
 
 		const response = await this.load(
 			this.getFullEndpoint(PlansApiPath.REGENERATE_DAY, {
-				dayId: String(dayId),
-				planId: String(planId),
+				dayId,
+				planId,
 			}),
 			{
 				contentType: ContentType.JSON,
@@ -114,18 +120,16 @@ class PlanApi extends BaseHTTPApi {
 		return await response.json<PlanDaysTaskDto>();
 	}
 
-	public async regenerateTask(payload: {
-		dayId: number;
-		planId: number;
-		taskId: number;
-	}): Promise<PlanDaysTaskDto> {
+	public async regenerateTask(
+		payload: TaskRegenerationRequestDto,
+	): Promise<PlanDaysTaskDto> {
 		const { dayId, planId, taskId } = payload;
 
 		const response = await this.load(
 			this.getFullEndpoint(PlansApiPath.REGENERATE_TASK, {
-				dayId: String(dayId),
-				planId: String(planId),
-				taskId: String(taskId),
+				dayId,
+				planId,
+				taskId,
 			}),
 			{
 				contentType: ContentType.JSON,
