@@ -21,7 +21,7 @@ import {
 	actions as planActions,
 	type PlanCategoryWithColorDto,
 } from "~/modules/plan-categories/plan-categories.js";
-import { actions } from "~/modules/quiz/quiz.js";
+import { actions } from "~/modules/quiz-questions/quiz-questions.js";
 import { QuizCategoryCard } from "~/pages/quiz/components/quiz-category-card/quiz-category-card.js";
 
 import styles from "./styles.module.css";
@@ -35,7 +35,7 @@ const Quiz: React.FC = (): React.ReactElement => {
 	}, [dispatch]);
 
 	const { planCategories } = useAppSelector((state) => state.planCategory);
-	const { selectedCategory } = useAppSelector((state) => state.quiz);
+	const { selectedCategory } = useAppSelector((state) => state.quizQuestion);
 
 	const handleCategorySelect = useCallback(
 		(category: string): void => {

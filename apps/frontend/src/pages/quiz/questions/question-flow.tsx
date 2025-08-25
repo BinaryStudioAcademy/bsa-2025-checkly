@@ -11,7 +11,13 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AppRouteType } from "~/libs/types/types.js";
-import { actions, type QuizAnswer } from "~/modules/quiz/quiz.js";
+import { actions as quizAnswerActions } from "~/modules/quiz-answers/quiz-answers.js";
+import {
+	actions,
+	type QuizAnswer,
+} from "~/modules/quiz-questions/quiz-questions.js";
+import { type QuizState } from "~/modules/quiz-questions/slices/quiz-questions.slice.js";
+import { DEFAULT_QUIZ_STATE } from "~/pages/plan-generation/libs/constants/constants.js";
 
 import { NotesPage } from "./components/notes-page/notes-page.js";
 import { ProgressBar } from "./components/progress-bar/progress-bar.js";
@@ -39,7 +45,7 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 	const navigate = useNavigate();
 
 	const { answers, currentQuestion, dataStatus, questions, selectedCategory } =
-		useAppSelector((state) => state.quiz);
+		useAppSelector((state) => state.quizQuestion);
 	const { planCategories } = useAppSelector((state) => state.planCategory);
 
 	useQuizSaved();
@@ -85,8 +91,16 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 			return;
 		}
 
+		const stored = await storage.get(StorageKey.QUIZ_STATE);
+		const quizState = stored
+			? (JSON.parse(stored) as QuizState)
+			: DEFAULT_QUIZ_STATE;
+
+		const answers = Object.values(quizState.answers);
+		await dispatch(quizAnswerActions.saveAnswers(answers));
+
 		await handleSafeNavigate(AppRoute.PLAN_GENERATION);
-	}, [handleSafeNavigate, questions, selectedCategory]);
+	}, [handleSafeNavigate, dispatch, questions, selectedCategory]);
 
 	const handleNext = useCallback((): void => {
 		if (shouldMoveToNext(questions, currentQuestion)) {

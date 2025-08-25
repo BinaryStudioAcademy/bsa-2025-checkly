@@ -10,6 +10,19 @@ class QuizAnswerRepository implements Repository {
 		this.quizAnswerModel = quizAnswerModel;
 	}
 
+	public async bulkCreate(
+		entities: QuizAnswerEntity[],
+	): Promise<QuizAnswerEntity[]> {
+		const answers = entities.map((entity) => entity.toNewObject());
+
+		const inserted = await this.quizAnswerModel
+			.query()
+			.insert(answers)
+			.returning("*");
+
+		return inserted.map((answer) => QuizAnswerEntity.initialize(answer));
+	}
+
 	public async create(entity: QuizAnswerEntity): Promise<QuizAnswerEntity> {
 		const { isSkipped, questionId, quizId, userInput } = entity.toNewObject();
 
@@ -70,6 +83,15 @@ class QuizAnswerRepository implements Repository {
 			.groupBy("answers.id", "questions.id");
 
 		return answers;
+	}
+
+	public async findAnswersByQuiz(
+		quizId: number,
+	): Promise<{ id: number; questionId: number }[]> {
+		return await this.quizAnswerModel
+			.query()
+			.select("id", "questionId")
+			.where({ quizId });
 	}
 
 	public async update(
