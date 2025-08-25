@@ -93,11 +93,24 @@ const regeneratePlanDay = createAsyncThunk<
 	return plan;
 });
 
+const regeneratePlan = createAsyncThunk<
+	PlanDaysTaskDto,
+	number,
+	AsyncThunkConfig
+>(`${sliceName}/regenerate-plan`, async (payload, { extra }) => {
+	const { planApi } = extra;
+
+	const plan = await planApi.regeneratePlan(payload);
+
+	return plan;
+});
+
 export {
 	findPlan,
 	generatePlan,
 	getAllUserPlans,
 	getPlan,
+	regeneratePlan,
 	regeneratePlanDay,
 	regenerateTask,
 	searchPlan,

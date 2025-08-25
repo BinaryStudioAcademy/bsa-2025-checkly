@@ -212,3 +212,20 @@ regeneratePlanDay:
           application/json:
             schema:
               $ref: "#/schemas/PlanDaysTaskDto"
+
+regeneratePlan:
+  post:
+    summary: Regenerate plan
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+    responses:
+      "200":
+        description: Plan regenerated successfully
+        content:
+          application/json:
+            schema:
+              $ref: "#/schemas/PlanDaysTaskDto"

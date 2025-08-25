@@ -78,6 +78,21 @@ class PlanApi extends BaseHTTPApi {
 		return await response.json<PlanDaysTaskDto>();
 	}
 
+	public async regeneratePlan(payload: number): Promise<PlanDaysTaskDto> {
+		const response = await this.load(
+			this.getFullEndpoint(PlansApiPath.REGENERATE, {
+				id: String(payload),
+			}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: false,
+				method: HTTPRequestMethod.POST,
+			},
+		);
+
+		return await response.json<PlanDaysTaskDto>();
+	}
+
 	public async regeneratePlanDay(payload: {
 		dayId: number;
 		planId: number;
