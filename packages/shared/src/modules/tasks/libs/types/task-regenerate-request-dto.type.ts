@@ -1,5 +1,7 @@
-type TaskRegenerateRequestDto = {
+type TaskRegenerationRequestDto = {
+	dayId: number;
 	planId: number;
+	taskId: number;
 };
 
-export { type TaskRegenerateRequestDto };
+export { type TaskRegenerationRequestDto };

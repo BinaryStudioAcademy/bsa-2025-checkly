@@ -80,7 +80,7 @@ const MOCK_GENERATED_PLAN_DAY: PlanDayDto = {
 const MOCK_GENERATED_TASK: TaskDto = {
 	completedAt: null,
 	description: "Hello2-------------",
-	executionTimeType: "morning",
+	executionTimeType: null,
 	id: 2,
 	isCompleted: false,
 	order: 1,

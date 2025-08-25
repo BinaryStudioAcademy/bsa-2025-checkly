@@ -66,7 +66,7 @@ export {
 	type PlanDayCreateRequestDto,
 	planDayCreateValidationSchema,
 	type PlanDayGetAllResponseDto,
-	type PlanDayRegenerateRequestDto,
+	type PlanDayRegenerationRequestDto,
 	type PlanDayResponseDto,
 	PlanDaysApiPath,
 } from "./modules/plan-days/plan-days.js";
@@ -125,7 +125,7 @@ export {
 	type TaskDto,
 	type TaskGetAllResponseDto,
 	TaskMessage,
-	type TaskRegenerateRequestDto,
+	type TaskRegenerationRequestDto,
 	type TaskResponseDto,
 	TasksApiPath,
 	type TaskUpdateRequestDto,

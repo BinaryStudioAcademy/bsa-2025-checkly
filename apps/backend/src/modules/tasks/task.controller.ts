@@ -341,14 +341,10 @@ class TaskController extends BaseController {
 	): Promise<APIHandlerResponse> {
 		const { id } = options.params;
 
-		const updatedTask = await this.taskService.update(id, options.body);
-
-		return updatedTask
-			? { payload: updatedTask, status: HTTPCode.OK }
-			: {
-					payload: { message: TaskMessage.TASK_NOT_FOUND },
-					status: HTTPCode.NOT_FOUND,
-				};
+		return {
+			payload: await this.taskService.update(id, options.body),
+			status: HTTPCode.OK,
+		};
 	}
 }
 

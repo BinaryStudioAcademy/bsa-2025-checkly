@@ -1,5 +1,6 @@
-type PlanDayRegenerateRequestDto = {
+type PlanDayRegenerationRequestDto = {
+	dayId: number;
 	planId: number;
 };
 
-export { type PlanDayRegenerateRequestDto };
+export { type PlanDayRegenerationRequestDto };
