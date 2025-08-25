@@ -134,7 +134,6 @@
 		var(--color-skeleton-base, #f0f0f0) 75%
 	);
 	background-size: 200% 100%;
-	border: 2px solid var(--color-bg-dark);
 	border-radius: var(--radius-l);
 	animation: skeleton-loading 1.5s infinite;
 }
