@@ -52,7 +52,9 @@ export {
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
 export {
+	type GeneratedDayDTO,
 	type GeneratedPlanDTO,
+	type GeneratedTaskDTO,
 	type GeneratePlanRequestDto,
 	generatePlanValidationSchema,
 } from "./modules/openai/openai.js";
@@ -77,6 +79,8 @@ export {
 	planPdfExportValidationSchema,
 } from "./modules/plan-pdf-export/plan-pdf-export.js";
 export {
+	PlanAction,
+	type PlanActionType,
 	type PlanCreateRequestDto,
 	planCreateValidationSchema,
 	type PlanDayDto,

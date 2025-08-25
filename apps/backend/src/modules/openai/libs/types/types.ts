@@ -1,1 +1,6 @@
-export { ExecutionTimeType, type GeneratedPlanDTO } from "shared";
+export {
+	type GeneratedDayDTO,
+	type GeneratedPlanDTO,
+	type GeneratedTaskDTO,
+	type PlanActionType,
+} from "shared";

@@ -19,7 +19,7 @@ import {
 	type TaskRegenerationRequestDto,
 } from "~/modules/plans/plans.js";
 
-import { PlansApiPath } from "./libs/enums/enums.js";
+import { PlanAction, PlansApiPath } from "./libs/enums/enums.js";
 import { type GeneratePlanRequestDto } from "./libs/types/types.js";
 import { generatePlanValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
@@ -522,7 +522,7 @@ class PlanController extends BaseController {
 		options: APIBodyOptions<GeneratePlanRequestDto>,
 	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.planService.generate(options.body),
+			payload: await this.planService.generate(options.body, PlanAction.PLAN),
 			status: HTTPCode.OK,
 		};
 	}

@@ -1,8 +1,12 @@
-import { PLAN_SCHEMA } from "./constants.js";
+import { PlanAction } from "../enums/enums.js";
+import { type PlanActionType } from "../types/types.js";
+import { DAY_SCHEMA, PLAN_SCHEMA, TASK_SCHEMA } from "./constants.js";
 
-const SYSTEM_PROMPT = `
-You are a strict JSON generator.
-Return ONLY valid JSON following this schema:
+const BASE_RULES = `
+Rules:
+- You are a strict JSON generator.
+- Return ONLY valid JSON following the schema.
+- No explanations, no markdown, no extra text.
 
 ${PLAN_SCHEMA}
 
@@ -16,4 +20,29 @@ Rules:
 - Do NOT rephrase existing descriptions.
 `;
 
-export { SYSTEM_PROMPT };
+const makeSystemPrompt = (schema: string, extra: string = ""): string => `
+You are a strict JSON generator.
+Schema:
+${schema}
+${BASE_RULES}
+${extra}
+`;
+
+const SYSTEM_PROMPT_FOR_PLAN = makeSystemPrompt(PLAN_SCHEMA);
+const SYSTEM_PROMPT_FOR_DAY = makeSystemPrompt(
+	DAY_SCHEMA,
+	"Instruction: Generate one single day with exactly 5 tasks.",
+);
+
+const SYSTEM_PROMPT_FOR_TASK = makeSystemPrompt(
+	TASK_SCHEMA,
+	"Instruction: Generate only one single task.",
+);
+
+const SYSTEM_PROMPTS: Record<PlanActionType, string> = {
+	[PlanAction.DAY]: SYSTEM_PROMPT_FOR_DAY,
+	[PlanAction.PLAN]: SYSTEM_PROMPT_FOR_PLAN,
+	[PlanAction.TASK]: SYSTEM_PROMPT_FOR_TASK,
+};
+
+export { SYSTEM_PROMPTS };
