@@ -15,7 +15,8 @@
 	padding: var(--gutter);
 	text-align: center;
 
-	--grid-opacity: 0.4;
+	--grid-color: var(--color-light-grey);
+	--grid-opacity: var(--dashboard-grid-opacity);
 }
 
 .no-plans-title {
