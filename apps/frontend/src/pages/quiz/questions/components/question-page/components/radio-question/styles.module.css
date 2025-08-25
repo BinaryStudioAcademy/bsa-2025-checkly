@@ -71,14 +71,14 @@
 .radio-text {
 	flex: 1;
 	font-size: var(--text-size-body);
-	font-weight: var(--font-weight-semibold);
+	font-weight: var(--font-weight-semi-bold);
 	color: var(--color-text-primary);
 	word-break: keep-all;
 	cursor: pointer;
 }
 
 .radio-option:has(.radio-input:checked) .radio-text {
-	font-weight: var(--font-weight-semibold);
+	font-weight: var(--font-weight-semi-bold);
 }
 
 @media (width <= 768px) {
