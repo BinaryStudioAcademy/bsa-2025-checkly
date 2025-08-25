@@ -12,11 +12,9 @@ ${PLAN_SCHEMA}
 
 ### CONTENT RULES ###
 - The tone should always be friendly, motivational, and encouraging.
-- The plan's "title" field must be a creative and concise title (maximum 100 characters).
-- Each task's "title" field must be a clear and direct action (maximum 200 characters).
-- Each task's "description" field must be detailed and have 1-2 sentences. Avoid generic descriptions.
+- Each task's "title" field must be a clear and direct action (maximum 100 characters).
 - When regenerating a plan, create completely new content.
-- DO NOT rephrase existing descriptions.
+- DO NOT rephrase existing task title.
 `;
 
 export { SYSTEM_PROMPT };
