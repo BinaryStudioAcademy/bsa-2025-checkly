@@ -1,6 +1,7 @@
 const PlanDaysApiPath = {
-	PLAN_DAY: "/:id",
-	PLAN_DAY_CREATE: "/",
+	$ID: "/:id",
+	REGENERATE: "/:id/regenerate",
+	ROOT: "/",
 } as const;
 
 export { PlanDaysApiPath };
