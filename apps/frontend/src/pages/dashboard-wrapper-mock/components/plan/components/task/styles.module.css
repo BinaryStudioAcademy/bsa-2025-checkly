@@ -96,6 +96,7 @@
 	flex-direction: column;
 	width: 100%;
 	max-width: 100%;
+	word-break: break-all;
 }
 
 .edit-input {
@@ -203,7 +204,7 @@
 	}
 }
 
-@media (width <= 500px) {
+@media (width <= 400px) {
 	.content__tasks-item {
 		flex-wrap: wrap;
 		gap: var(--space-xs);
@@ -218,12 +219,12 @@
 		flex: 1;
 		flex-direction: column;
 		width: 100%;
-		min-width: 100px;
+		min-width: 150px;
 	}
 
 	.edit-input {
 		width: 100%;
-		min-width: 100px;
+		min-width: 150px;
 	}
 
 	.item-actions {
