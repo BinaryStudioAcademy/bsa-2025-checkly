@@ -29,10 +29,12 @@ const signIn = createAsyncThunk<
 	`${sliceName}/sign-in`,
 	async (registerPayload, { extra, rejectWithValue }) => {
 		const { authApi, storage } = extra;
+		const planId = await storage.get(StorageKey.PLAN_ID);
 
 		try {
-			const { token, user } = await authApi.signIn(registerPayload);
+			const { token, user } = await authApi.signIn(planId, registerPayload);
 			await storage.set(StorageKey.TOKEN, token);
+			await storage.drop(StorageKey.PLAN_ID);
 
 			return user;
 		} catch {
@@ -47,9 +49,11 @@ const signUp = createAsyncThunk<
 	AsyncThunkConfig
 >(`${sliceName}/sign-up`, async (registerPayload, { extra }) => {
 	const { authApi, storage } = extra;
+	const planId = await storage.get(StorageKey.PLAN_ID);
 
-	const { token, user } = await authApi.signUp(registerPayload);
+	const { token, user } = await authApi.signUp(planId, registerPayload);
 	await storage.set(StorageKey.TOKEN, token);
+	await storage.drop(StorageKey.PLAN_ID);
 
 	return user;
 });

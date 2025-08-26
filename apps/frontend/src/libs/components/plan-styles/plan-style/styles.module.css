@@ -5,7 +5,6 @@
 .container {
 	width: 100%;
 	max-width: calc(595px * var(--coefficient));
-	min-height: calc(842px * var(--coefficient));
 	padding: calc(24px * var(--coefficient));
 }
 
@@ -25,7 +24,7 @@
 
 @media (width <= 768px) {
 	.regular-view {
-		--coefficient: 0.7;
+		--coefficient: 0.8;
 	}
 
 	.container {
@@ -33,9 +32,15 @@
 	}
 }
 
-@media (width <= 475px) {
+@media (width <= 390px) and (height <= 933px) {
 	.regular-view {
-		--coefficient: 0.5;
+		--coefficient: 0.6;
+	}
+}
+
+@media (width <= 480px) {
+	.regular-view {
+		--coefficient: 0.6;
 	}
 }
 

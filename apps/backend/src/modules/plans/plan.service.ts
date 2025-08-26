@@ -180,10 +180,12 @@ class PlanService implements Service {
 			PlanAction.PLAN,
 		)) as GeneratedPlanDTO;
 
+		const styleId = 1;
 		const planId = await this.planRepository.saveGeneratedPlan({
 			categoryId,
 			plan,
 			quizId,
+			styleId,
 			userId,
 		});
 
@@ -417,6 +419,16 @@ class PlanService implements Service {
 		payload: PlanUpdateRequestDto,
 	): Promise<null | PlanDto> {
 		const plan = await this.planRepository.update(id, payload);
+
+		return plan ? plan.toObject() : null;
+	}
+
+	public async updateStyle(
+		userId: number,
+		planId: number,
+		styleId: number,
+	): Promise<null | PlanDto> {
+		const plan = await this.planRepository.updateStyle(userId, planId, styleId);
 
 		return plan ? plan.toObject() : null;
 	}

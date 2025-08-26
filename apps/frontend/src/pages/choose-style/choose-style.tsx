@@ -1,5 +1,6 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import {
 	ArrowLeftIcon,
@@ -20,22 +21,60 @@ import {
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { useCallback } from "~/libs/hooks/hooks.js";
 import { useAppDispatch } from "~/libs/hooks/use-app-dispatch/use-app-dispatch.hook.js";
+import { useAppSelector } from "~/libs/hooks/use-app-selector/use-app-selector.hook.js";
 import { type ViewOptions } from "~/libs/types/types.js";
-import { actions } from "~/modules/plans/slices/plan.slice.js";
+import { usePlanStyles } from "~/modules/plan-styles/hooks/use-plan-styles.hook.js";
+import { PlanStyle as PlanStyleEnum } from "~/modules/plan-styles/libs/enums/enums.js";
+import { actions as planActions, planApi } from "~/modules/plans/plans.js";
 
 import { styleCards } from "./choose-style.data.js";
+import { CHOOSE_STYLE_MESSAGES } from "./libs/constants/choose-style.constants.js";
+import { type StyleValidationResult } from "./libs/types/types.js";
 import styles from "./style.module.css";
 
-const PRESELECTED_ELEMENT = 1;
+const PRESELECTED_ELEMENT_INDEX = 1;
 const PLAN_VIEW_OPTION: ViewOptions = "selection";
 
 const ChooseStyle: React.FC = () => {
-	const [selectedCard, setSelectedCard] = useState<null | string>(
-		styleCards[PRESELECTED_ELEMENT]?.id ?? null,
-	);
+	const plan = useAppSelector((state) => state.plan.plan);
+	const { styles: planStyles } = usePlanStyles();
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
+	const [selectedCard, setSelectedCard] = useState<null | string>(
+		styleCards[PRESELECTED_ELEMENT_INDEX]?.id ?? null,
+	);
+	const [isSaving, setIsSaving] = useState<boolean>(false);
+
+	const handleGetStyleId = useCallback(
+		(styleName: string): number => {
+			const style = planStyles.find((s) => s.name === styleName);
+
+			return style?.id ?? PlanStyleEnum.WITH_REMARKS;
+		},
+		[planStyles],
+	);
+
+	const handleStyleValidation = useCallback((): StyleValidationResult => {
+		if (!plan?.id || !selectedCard) {
+			toast.error(CHOOSE_STYLE_MESSAGES.SELECT_STYLE_AND_PLAN_ID);
+
+			return null;
+		}
+
+		const selectedStyle = styleCards.find((card) => card.id === selectedCard);
+
+		if (!selectedStyle) {
+			toast.error(CHOOSE_STYLE_MESSAGES.INVALID_STYLE_SELECTION);
+
+			return null;
+		}
+
+		const styleId = handleGetStyleId(selectedStyle.planStyle);
+
+		return { planId: plan.id, styleId };
+	}, [plan, selectedCard, handleGetStyleId]);
 
 	const handleCardClick = useCallback(
 		(event: React.MouseEvent<HTMLButtonElement>): void => {
@@ -44,16 +83,30 @@ const ChooseStyle: React.FC = () => {
 		[],
 	);
 
-	const handleSaveStyle = useCallback((): void => {
-		const selectedStyleCard = styleCards.find(
-			(card) => card.id === selectedCard,
-		);
+	const handleSaveStyle = useCallback(async (): Promise<void> => {
+		const validation = handleStyleValidation();
 
-		if (selectedStyleCard) {
-			dispatch(actions.setSelectedStyle(selectedStyleCard.planStyle));
-			void navigate(AppRoute.OVERVIEW_PAGE);
+		if (!validation) {
+			return;
 		}
-	}, [selectedCard, dispatch, navigate]);
+
+		setIsSaving(true);
+
+		try {
+			await planApi.updateStyle(validation.planId, validation.styleId);
+			await dispatch(planActions.getAllUserPlans());
+			toast.success(CHOOSE_STYLE_MESSAGES.PLAN_STYLE_UPDATED_SUCCESS);
+			void navigate(AppRoute.OVERVIEW_PAGE);
+		} catch {
+			toast.error(CHOOSE_STYLE_MESSAGES.FAILED_TO_UPDATE_PLAN_STYLE);
+		} finally {
+			setIsSaving(false);
+		}
+	}, [handleStyleValidation, dispatch, navigate]);
+
+	const handleSaveStyleClick = useCallback((): void => {
+		void handleSaveStyle();
+	}, [handleSaveStyle]);
 
 	const navLink = getClassNames(styles["nav-link"]);
 
@@ -124,10 +177,11 @@ const ChooseStyle: React.FC = () => {
 				</div>
 				<div className={styles["bottom-buttons"]}>
 					<Button
+						className={styles["bottom-download-button"]}
 						icon={<DownloadIcon aria-hidden="true" />}
-						label="Save"
-						onClick={handleSaveStyle}
-						variant="primary"
+						isDisabled={isSaving || !selectedCard}
+						label={isSaving ? "Saving..." : "Save Style"}
+						onClick={handleSaveStyleClick}
 					/>
 				</div>
 				<DecorativeImage className={styles["flower"]} src={FlowerPink} />

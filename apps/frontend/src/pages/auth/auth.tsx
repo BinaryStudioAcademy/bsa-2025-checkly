@@ -1,3 +1,4 @@
+import { isFulfilled } from "@reduxjs/toolkit";
 import React, { type JSX, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -45,9 +46,11 @@ const Auth: React.FC = () => {
 
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
-			void dispatch(authActions.signIn(payload)).then(() => {
-				const redirectPath = handleGetRedirectPath();
-				void navigate(redirectPath ?? AppRoute.DASHBOARD, { replace: true });
+			void dispatch(authActions.signIn(payload)).then((resultAction) => {
+				if (isFulfilled(resultAction)) {
+					const redirectPath = handleGetRedirectPath();
+					void navigate(redirectPath ?? AppRoute.DASHBOARD, { replace: true });
+				}
 			});
 		},
 		[dispatch, navigate, handleGetRedirectPath],
@@ -55,9 +58,11 @@ const Auth: React.FC = () => {
 
 	const handleSignUpSubmit = useCallback(
 		(payload: UserSignUpRequestDto): void => {
-			void dispatch(authActions.signUp(payload)).then(() => {
-				const redirectPath = handleGetRedirectPath();
-				void navigate(redirectPath ?? AppRoute.DASHBOARD, { replace: true });
+			void dispatch(authActions.signUp(payload)).then((resultAction) => {
+				if (isFulfilled(resultAction)) {
+					const redirectPath = handleGetRedirectPath();
+					void navigate(redirectPath ?? AppRoute.DASHBOARD, { replace: true });
+				}
 			});
 		},
 		[dispatch, navigate, handleGetRedirectPath],

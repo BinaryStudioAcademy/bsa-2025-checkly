@@ -15,6 +15,10 @@ import {
 	planCategoryApi,
 	reducer as planCategoryReducer,
 } from "~/modules/plan-categories/plan-categories.js";
+import {
+	planStylesApi,
+	reducer as planStylesReducer,
+} from "~/modules/plan-styles/plan-styles.js";
 import { planApi, reducer as planReducer } from "~/modules/plans/plans.js";
 import {
 	quizAnswerApi,
@@ -38,6 +42,7 @@ type ExtraArguments = {
 	pdfExportApi: typeof pdfExportApi;
 	planApi: typeof planApi;
 	planCategoryApi: typeof planCategoryApi;
+	planStylesApi: typeof planStylesApi;
 	quizAnswerApi: typeof quizAnswerApi;
 	quizApi: typeof quizApi;
 	quizQuestionApi: typeof quizQuestionApi;
@@ -51,6 +56,7 @@ type RootReducer = {
 	pdfExport: ReturnType<typeof pdfExportReducer>;
 	plan: ReturnType<typeof planReducer>;
 	planCategory: ReturnType<typeof planCategoryReducer>;
+	planStyles: ReturnType<typeof planStylesReducer>;
 	quizAnswer: ReturnType<typeof quizAnswerReducer>;
 	quizQuestion: ReturnType<typeof quizQuestionReducer>;
 	task: ReturnType<typeof taskReducer>;
@@ -72,6 +78,7 @@ class Store {
 			pdfExportApi,
 			planApi,
 			planCategoryApi,
+			planStylesApi,
 			quizAnswerApi,
 			quizApi,
 			quizQuestionApi,
@@ -96,6 +103,7 @@ class Store {
 				pdfExport: pdfExportReducer,
 				plan: planReducer,
 				planCategory: planCategoryReducer,
+				planStyles: planStylesReducer,
 				quizAnswer: quizAnswerReducer,
 				quizQuestion: quizQuestionReducer,
 				task: taskReducer,

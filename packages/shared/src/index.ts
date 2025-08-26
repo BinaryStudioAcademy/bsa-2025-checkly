@@ -80,6 +80,12 @@ export {
 	planPdfExportValidationSchema,
 } from "./modules/plan-pdf-export/plan-pdf-export.js";
 export {
+	PlanStyle,
+	type PlanStyleDto,
+	type PlanStyleOption,
+	type PlanStyleType,
+} from "./modules/plan-styles/plan-styles.js";
+export {
 	PlanAction,
 	type PlanActionType,
 	type PlanCreateRequestDto,
@@ -93,6 +99,7 @@ export {
 	type PlanSearchQueryDto,
 	type PlanSearchQueryParameter,
 	planSearchQueryParametersValidationSchema,
+	type PlanStyleUpdateRequestDto,
 	type PlanUpdateRequestDto,
 	type PlanWithCategoryDto,
 } from "./modules/plans/plans.js";

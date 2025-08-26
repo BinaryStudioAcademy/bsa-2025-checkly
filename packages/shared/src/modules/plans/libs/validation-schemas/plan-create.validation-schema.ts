@@ -24,6 +24,12 @@ const planCreate = z.object({
 	quizId: z.number({
 		required_error: PlanValidationMessage.FIELD_REQUIRED,
 	}),
+	styleId: z
+		.number({
+			required_error: PlanValidationMessage.FIELD_REQUIRED,
+		})
+		.int()
+		.positive(),
 	title: z
 		.string()
 		.trim()

@@ -32,7 +32,7 @@ class PlanRepository implements Repository {
 		entity: PlanEntity,
 		trx?: Transaction,
 	): Promise<PlanEntity> {
-		const { categoryId, duration, intensity, quizId, title, userId } =
+		const { categoryId, duration, intensity, quizId, styleId, title, userId } =
 			entity.toNewObject();
 
 		const plan = await this.planModel
@@ -42,6 +42,7 @@ class PlanRepository implements Repository {
 				duration,
 				intensity,
 				quizId,
+				styleId,
 				title,
 				userId,
 			})
@@ -98,6 +99,7 @@ class PlanRepository implements Repository {
 		return await this.planModel
 			.query()
 			.where({ userId })
+			.orderBy("createdAt", "desc")
 			.withGraphFetched("days.tasks")
 			.withGraphFetched("category")
 			.then((plans) => plans.map((plan) => PlanEntity.initialize(plan)));
@@ -141,11 +143,13 @@ class PlanRepository implements Repository {
 		categoryId,
 		plan,
 		quizId,
+		styleId,
 		userId,
 	}: {
 		categoryId: number;
 		plan: GeneratedPlanDTO;
 		quizId: number;
+		styleId: number;
 		userId: null | number;
 	}): Promise<number> {
 		return await this.planModel.transaction(async (trx) => {
@@ -156,6 +160,7 @@ class PlanRepository implements Repository {
 				duration,
 				intensity,
 				quizId,
+				styleId,
 				title,
 				userId,
 			});
@@ -203,6 +208,21 @@ class PlanRepository implements Repository {
 			.patchAndFetchById(id, payload);
 
 		return PlanEntity.initialize(updatedPlan);
+	}
+
+	public async updateStyle(
+		userId: number,
+		planId: number,
+		styleId: number,
+	): Promise<null | PlanEntity> {
+		const updatedPlan = await this.planModel
+			.query()
+			.where({ id: planId, userId })
+			.patch({ styleId })
+			.returning("*")
+			.first();
+
+		return updatedPlan ? PlanEntity.initialize(updatedPlan) : null;
 	}
 
 	private async saveDaysAndTasks(

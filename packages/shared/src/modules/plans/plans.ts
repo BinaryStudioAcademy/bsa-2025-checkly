@@ -7,6 +7,7 @@ export {
 	type PlanGetAllResponseDto,
 	type PlanResponseDto,
 	type PlanSearchQueryParameter,
+	type PlanStyleUpdateRequestDto,
 	type PlanUpdateRequestDto,
 	type PlanWithCategoryDto,
 	type TaskDto,

@@ -47,10 +47,11 @@ const Day: React.FC<Properties> = ({
 				{tasks.map((task: Task) => {
 					return (
 						<TaskItem
+							executionTimeType={task.executionType}
 							id={task.id + dayNumber.toString()}
 							inputStyle={inputStyle}
 							key={task.id + dayNumber.toString()}
-							taskText={task.description}
+							taskText={task.title || ""}
 						/>
 					);
 				})}

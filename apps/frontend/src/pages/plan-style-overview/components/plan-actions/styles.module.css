@@ -13,16 +13,27 @@
 	background: none;
 }
 
+@media (width <= 916px) {
+	.action-button {
+		font-size: 0.6rem;
+	}
+}
+
 @media (width <= 575px) {
 	.footer-container {
-		flex-direction: column-reverse;
+		flex-direction: column;
 		padding-block: 0.75rem;
 	}
 
 	.footer-message {
+		order: -1;
 		margin-top: 0;
 		margin-bottom: 1.2rem;
 		font-weight: 400;
+	}
+
+	.actions-container {
+		order: 1;
 	}
 }
 
@@ -35,8 +46,14 @@
 
 @media (width <= 480px) {
 	.footer-message {
-		margin-top: 0.7rem;
-		font-size: 0.95rem;
+		margin-top: 0.5rem;
+		font-size: 0.8rem;
+	}
+
+	.action-button {
+		max-width: 200px;
+		padding: 0.3rem 0.6rem;
+		font-size: 0.5rem;
 	}
 }
 
@@ -48,55 +65,71 @@
 	padding: 0;
 }
 
-@media (width <= 768px) {
+@media (width <= 845px) and (width > 735px) {
 	.actions-container {
 		gap: var(--space-s);
+		max-height: 200px;
 	}
 
 	.action-button {
-		width: 140px;
-		min-width: 140px;
-		padding: 0.4rem 1.2rem;
+		font-size: 0.5rem;
+	}
+}
+
+@media (width <= 768px) {
+	.actions-container {
+		flex-direction: column;
+		gap: var(--space-s);
+		align-items: center;
+		order: 1;
+	}
+
+	.action-button {
+		justify-content: center;
+		width: 320px;
+		font-size: 0.85rem;
+	}
+
+	.footer-message {
+		order: -1;
+		margin-bottom: 1rem;
+	}
+}
+
+@media (width <= 390px) and (height <= 933px) {
+	.footer-message {
+		margin-top: 0.7rem;
 		font-size: 0.8rem;
 	}
-}
-
-@media (width <= 700px) {
-	.actions-container {
-		flex-direction: column;
-		gap: var(--space-l);
-		align-items: center;
-	}
 
 	.action-button {
-		justify-content: center;
-		width: 100%;
-	}
-}
-
-@media (width <= 480px) {
-	.actions-container {
-		flex-direction: column;
-		gap: var(--space-l);
-		align-items: center;
-	}
-
-	.action-button {
-		justify-content: center;
-		width: 100%;
 		max-width: 200px;
-		padding: 0.6rem 1rem;
+		padding: 0.3rem 0.6rem;
+		font-size: 0.7rem;
 	}
 }
 
-@media (width <= 375px) {
-	.action-button {
-		max-width: 180px;
-		padding: 0.5rem 0.8rem;
-		font-size: 0.75rem;
+@media (width >= 820px) and (height > 1000px) {
+	.footer-container {
+		flex-direction: column;
 	}
 
-	.button-icon {
-		font-size: 0.9rem;
+	.footer-message {
+		order: -1;
+		margin-top: 0;
+		margin-bottom: 1rem;
+	}
+
+	.actions-container {
+		flex-direction: column;
+		gap: var(--space-s);
+		align-items: center;
+		order: 1;
+	}
+
+	.action-button {
+		justify-content: center;
+		width: 300px;
+		font-size: 0.75rem;
 	}
 }

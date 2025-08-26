@@ -18,6 +18,7 @@ type PlanDto = {
 	id: number;
 	intensity: string;
 	quizId: null | number;
+	styleId: number;
 	title: string;
 	userId: null | number;
 };

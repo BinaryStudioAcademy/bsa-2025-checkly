@@ -13,38 +13,49 @@ import { name as sliceName } from "./pdf-export.slice.js";
 
 type ExportPdfThunkArguments = {
 	category: string;
+	planStyle?: string;
 };
 
 const exportPdf = createAsyncThunk<
 	{ fileName: string },
 	ExportPdfThunkArguments,
 	AsyncThunkConfig
->(`${sliceName}/export`, async ({ category }, { extra, getState }) => {
-	const { pdfExportApi } = extra;
+>(
+	`${sliceName}/export`,
+	async ({ category, planStyle }, { extra, getState }) => {
+		const { pdfExportApi } = extra;
 
-	const backendEndpoint = getBackendEndpoint(category);
+		const backendEndpoint = getBackendEndpoint(category);
 
-	const responsePage = await fetch(AppRoute.PLAN_STYLE_PRINT);
+		const printUrl = planStyle
+			? `${AppRoute.PLAN_STYLE_PRINT}?style=${encodeURIComponent(planStyle)}`
+			: AppRoute.PLAN_STYLE_PRINT;
 
-	if (!responsePage.ok) {
-		notifications.error(MESSAGES.DOWNLOAD.NO_PLAN_FOUND);
+		const responsePage = await fetch(printUrl);
 
-		return { fileName: "" };
-	}
+		if (!responsePage.ok) {
+			notifications.error(MESSAGES.DOWNLOAD.NO_PLAN_FOUND);
 
-	const format = PaperFormat.A4;
-	const html = await responsePage.text();
+			return { fileName: "" };
+		}
 
-	const planTitle = getState().plan.plan?.title || PLAN_NAME_DEFAULT;
-	const fileName = `${planTitle}.${FileExtension.PDF}`;
-	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
-		format,
-		html,
-	});
+		const format = PaperFormat.A4;
+		const html = await responsePage.text();
 
-	downloadFile(blob, fileName);
+		const currentPlan = getState().plan.plan;
+		const planTitle = currentPlan?.title || PLAN_NAME_DEFAULT;
+		const fileName = `${planTitle}.${FileExtension.PDF}`;
 
-	return { fileName };
-});
+		const blob = await pdfExportApi.exportPlan(backendEndpoint, {
+			format,
+			html,
+			planStyle,
+		});
+
+		downloadFile(blob, fileName);
+
+		return { fileName };
+	},
+);
 
 export { exportPdf };
