@@ -1,7 +1,7 @@
 import { type EmailOptions } from "../types/types.js";
 
 const EmailOptionsValues: Readonly<Partial<EmailOptions>> = {
-	from: "Checkly <onboarding@resend.dev>",
+	from: "Checkly <checkly@brunoazvd.com>",
 	subject: "Password Recovery",
 } as const;
 
