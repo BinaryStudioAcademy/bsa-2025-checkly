@@ -5,7 +5,11 @@ import { type UserRepository } from "~/modules/users/user.repository.js";
 import { UserValidationMessage } from "../libs/enums/enums.js";
 import { type UserUpdateRequestDto } from "../libs/types/types.js";
 
-const normalizeField = (value?: string): null | string | undefined => {
+const normalizeField = (value?: null | string): null | string | undefined => {
+	if (value === null) {
+		return null;
+	}
+
 	const trimmed = value?.trim();
 
 	return trimmed === "" ? null : trimmed;
@@ -80,7 +84,7 @@ const validateAndPrepareUpdateData = async ({
 	let updateData: UserUpdateData = {};
 
 	if (payload.dob !== undefined) {
-		updateData.dob = payload.dob;
+		updateData.dob = normalizeField(payload.dob);
 	}
 
 	if (email) {
