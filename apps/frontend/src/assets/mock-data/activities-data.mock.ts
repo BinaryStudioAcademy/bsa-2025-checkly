@@ -1,5 +1,7 @@
 import { type PlanEditForm } from "~/libs/types/types.js";
 
+import { ExecutionTimeType } from "./types/types.js";
+
 const activitiesMockData: PlanEditForm = {
 	days: [
 		{
@@ -9,7 +11,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Set a calm tone every day.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 11,
 					isCompleted: false,
 					order: 1,
@@ -19,7 +21,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Practice gratitude in your journal.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 12,
 					isCompleted: false,
 					order: 2,
@@ -29,7 +31,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Focus on every bite and flavor.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 13,
 					isCompleted: false,
 					order: 3,
@@ -39,7 +41,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Know what you want to achieve.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 14,
 					isCompleted: false,
 					order: 4,
@@ -49,7 +51,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Spend one hour without screens.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 15,
 					isCompleted: false,
 					order: 5,
@@ -65,7 +67,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Choose your favorite physical exercise.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 21,
 					isCompleted: false,
 					order: 1,
@@ -75,7 +77,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Start the day with good energy.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 22,
 					isCompleted: false,
 					order: 2,
@@ -85,7 +87,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Hydration is essential for you.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 23,
 					isCompleted: false,
 					order: 3,
@@ -95,7 +97,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Improve your body flexibility.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 24,
 					isCompleted: false,
 					order: 4,
@@ -105,7 +107,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Proper rest is very important.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 25,
 					isCompleted: false,
 					order: 5,
@@ -121,7 +123,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Choose a subject that interests you.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 31,
 					isCompleted: false,
 					order: 1,
@@ -131,7 +133,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Learn something new on your commute.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 32,
 					isCompleted: false,
 					order: 2,
@@ -141,7 +143,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "It can be a language or programming.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 33,
 					isCompleted: false,
 					order: 3,
@@ -151,7 +153,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Explore a topic of your curiosity.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 34,
 					isCompleted: false,
 					order: 4,
@@ -161,7 +163,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Reflect on your learning.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 35,
 					isCompleted: false,
 					order: 5,
@@ -177,7 +179,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Listen without interrupting the other person.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 41,
 					isCompleted: false,
 					order: 1,
@@ -187,7 +189,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Keep your social bonds strong.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 42,
 					isCompleted: false,
 					order: 2,
@@ -197,7 +199,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "A small gesture can change a day.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 43,
 					isCompleted: false,
 					order: 3,
@@ -207,7 +209,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Identify what you felt and why.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 44,
 					isCompleted: false,
 					order: 4,
@@ -217,7 +219,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Strengthen your personal connections.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 45,
 					isCompleted: false,
 					order: 5,
@@ -233,7 +235,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "It can be drawing, writing, or playing music.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 51,
 					isCompleted: false,
 					order: 1,
@@ -243,7 +245,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "A clean environment helps you focus.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 52,
 					isCompleted: false,
 					order: 2,
@@ -253,7 +255,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Think of something that relaxes you.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 53,
 					isCompleted: false,
 					order: 3,
@@ -263,7 +265,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Let the music take over you.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 54,
 					isCompleted: false,
 					order: 4,
@@ -273,7 +275,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Think about what you have achieved.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 55,
 					isCompleted: false,
 					order: 5,
@@ -289,7 +291,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Go to a park or trail.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 61,
 					isCompleted: false,
 					order: 1,
@@ -299,7 +301,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Be present in a conversation with someone.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 62,
 					isCompleted: false,
 					order: 2,
@@ -309,7 +311,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Cooking can be very relaxing.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 63,
 					isCompleted: false,
 					order: 3,
@@ -319,7 +321,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "It can be a museum or a café.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 64,
 					isCompleted: false,
 					order: 4,
@@ -329,7 +331,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Appreciate the little things around you.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 65,
 					isCompleted: false,
 					order: 5,
@@ -345,7 +347,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "See what worked and what didn’t.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 71,
 					isCompleted: false,
 					order: 1,
@@ -355,7 +357,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Set your focus for the coming days.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 72,
 					isCompleted: false,
 					order: 2,
@@ -365,7 +367,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Make your daily routine easier.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 73,
 					isCompleted: false,
 					order: 3,
@@ -375,7 +377,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "Start the week with everything organized.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 74,
 					isCompleted: false,
 					order: 4,
@@ -385,7 +387,7 @@ const activitiesMockData: PlanEditForm = {
 				{
 					completedAt: null,
 					description: "It can be a bath or reading.",
-					executionTimeType: "afternoon",
+					executionTimeType: ExecutionTimeType.AFTERNOON,
 					id: 75,
 					isCompleted: false,
 					order: 5,

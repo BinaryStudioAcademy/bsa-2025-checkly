@@ -85,7 +85,9 @@ const Plan: React.FC = () => {
 
 	if (hasNoPlans) {
 		return (
-			<div className={styles["no-plans-container"]}>
+			<div
+				className={getClassNames(styles["no-plans-container"], "grid-pattern")}
+			>
 				<div className={styles["no-plans-message"]}>No plans yet</div>
 				<Button
 					label="Create Plan"

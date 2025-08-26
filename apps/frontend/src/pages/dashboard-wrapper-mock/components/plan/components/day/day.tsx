@@ -38,7 +38,7 @@ const Day: React.FC<Properties> = ({
 					<Button
 						icon={<DecorativeImage src={Regenerate} />}
 						isIconOnly
-						label=""
+						label="Regenerate day"
 					/>
 				)}
 			</div>

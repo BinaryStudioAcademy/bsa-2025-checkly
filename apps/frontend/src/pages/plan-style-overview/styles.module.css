@@ -115,14 +115,26 @@
 	}
 }
 
+@media (width >= 864px) and (height > 1000px) {
+	.plan-content {
+		margin-bottom: 13rem;
+		transform: scale(1.25);
+		transform-origin: top center;
+	}
+}
+
 @media (width <= 480px) {
 	.header-section {
-		gap: var(--space-l);
+		gap: var(--space-xs);
 		padding: var(--space-xs) var(--space-xs);
 	}
 
 	.plan-content {
-		padding: var(--space-xs) var(--space-xs) 0;
+		padding: var(--space-xs) 0 0;
+	}
+
+	.actions-section {
+		padding: var(--space-xs) var(--space-xs) var(--space-xs);
 	}
 }
 
