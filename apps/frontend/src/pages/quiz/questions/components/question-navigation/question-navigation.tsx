@@ -1,4 +1,7 @@
-import { Button, Link } from "~/libs/components/components.js";
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { Button } from "~/libs/components/components.js";
 import {
 	AppRoute,
 	ButtonLabels,
@@ -32,17 +35,25 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 	);
 	const nextButtonLabel = getNextButtonLabel(currentQuestion, totalQuestions);
 
+	const navigate = useNavigate();
+
+	const handleBack = useCallback((): void => {
+		const redirect = async (): Promise<void> => {
+			await navigate(AppRoute.QUIZ);
+		};
+
+		void redirect();
+	}, [navigate]);
+
 	return (
 		<div className={styles["question-navigation"]}>
 			<div className={getClassNames("cluster", styles["navigation-buttons"])}>
 				{isFirst && (
-					<Link
-						asButtonSize={ButtonSizes.LARGE}
-						asButtonVariant={ButtonVariants.TRANSPARENT}
-						to={AppRoute.QUIZ}
-					>
-						{ButtonLabels.BACK_TO_START_QUIZ_PAGE}
-					</Link>
+					<Button
+						label={ButtonLabels.BACK_TO_START_QUIZ_PAGE}
+						onClick={handleBack}
+						variant={ButtonVariants.SECONDARY}
+					/>
 				)}
 
 				{!isFirst && (
