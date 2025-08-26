@@ -9,7 +9,9 @@ import {
 } from "~/assets/img/icons/icons.js";
 import { Button } from "~/libs/components/button/button.js";
 import { Loader } from "~/libs/components/loader/loader.js";
+import { REDIRECT_PARAM } from "~/libs/constants/constants.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
+import { useLocation } from "~/libs/hooks/hooks.js";
 
 import styles from "./styles.module.css";
 
@@ -30,6 +32,7 @@ const PlanActions: React.FC<Properties> = ({
 	onEdit,
 	onGoToDashboard,
 }: Properties) => {
+	const location = useLocation();
 	const handleEditClick = useCallback((): void => {
 		onEdit();
 	}, [onEdit]);
@@ -50,6 +53,7 @@ const PlanActions: React.FC<Properties> = ({
 		<div className={styles["footer-container"]}>
 			<div className={styles["actions-container"]}>
 				<Button
+					className={styles["action-button"]}
 					icon={<Palette aria-hidden="true" />}
 					isDisabled={!isAuthenticated}
 					label="CHOOSE STYLE"
@@ -58,6 +62,7 @@ const PlanActions: React.FC<Properties> = ({
 					variant="secondary"
 				/>
 				<Button
+					className={styles["action-button"]}
 					icon={<EditIcon aria-hidden="true" />}
 					isDisabled={!isAuthenticated}
 					label="EDIT"
@@ -66,6 +71,7 @@ const PlanActions: React.FC<Properties> = ({
 					variant="secondary"
 				/>
 				<Button
+					className={styles["action-button"]}
 					icon={<DownloadIcon aria-hidden="true" />}
 					isDisabled={!isAuthenticated || isDownloading}
 					label="DOWNLOAD"
@@ -79,6 +85,7 @@ const PlanActions: React.FC<Properties> = ({
 					variant="primary"
 				/>
 				<Button
+					className={styles["action-button"]}
 					icon={<Dashboard aria-hidden="true" />}
 					isDisabled={!isAuthenticated}
 					label="GO TO DASHBOARD"
@@ -90,7 +97,10 @@ const PlanActions: React.FC<Properties> = ({
 			{!isAuthenticated && (
 				<div className={styles["footer-message"]}>
 					Customize and Download your Plan by{" "}
-					<Link className={styles["login-link"]} to={AppRoute.SIGN_IN}>
+					<Link
+						className={styles["login-link"]}
+						to={`${AppRoute.SIGN_IN}?${REDIRECT_PARAM}=${encodeURIComponent(location.pathname)}`}
+					>
 						Logging in
 					</Link>
 				</div>

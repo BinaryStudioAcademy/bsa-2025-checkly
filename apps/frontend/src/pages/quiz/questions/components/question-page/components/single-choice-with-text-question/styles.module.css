@@ -1,11 +1,17 @@
 .single-choice-with-text-question {
 	display: flex;
 	flex-direction: column;
-	gap: var(--space-s);
+	gap: var(--space-l);
 	width: 100%;
-	max-width: 600px;
+	max-width: 400px;
 	margin-right: auto;
 	margin-left: auto;
+}
+
+@media (width >= 768px) {
+	.single-choice-with-text-question {
+		max-width: 600px;
+	}
 }
 
 .radio-section,
@@ -103,31 +109,40 @@
 	word-break: keep-all;
 }
 
+.text-input-wrapper {
+	padding: var(--space-s);
+	margin-inline: auto;
+	background-color: var(--color-border-light-blue);
+	border-radius: var(--radius-m);
+}
+
+@media (width >= 768px) {
+	.text-input-wrapper {
+		width: 100%;
+	}
+}
+
 .label {
-	display: block;
-	font-size: 1.25rem;
-	font-weight: 500;
-	color: var(--color-text-primary);
+	text-wrap: pretty;
 }
 
 .text-input {
 	width: 100%;
-	padding: 0.75rem 1rem;
-	font-size: 1rem;
-	color: var(--color-text-primary);
-	background-color: var(--color-bg-white);
-	border: 2px solid var(--color-border-grey);
+	padding: var(--space-xs) var(--space-s);
+	border: 2px solid var(--color-bg-dark);
 	border-radius: var(--radius-m);
-	transition: border-color 0.2s ease;
-}
-
-.text-input:focus {
-	outline: none;
-	border-color: var(--color-primary);
+	transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .text-input::placeholder {
-	color: var(--color-text-secondary);
+	font-weight: var(--font-weight-body-small);
+	opacity: 0.85;
+	transition: all 0.15s ease;
+}
+
+.text-input:focus {
+	outline: 4px solid var(--color-brand-muted);
+	outline-offset: 0;
 }
 
 .radio-option:has(.radio-input:checked) {
@@ -144,8 +159,6 @@
 	.options-container {
 		grid-template-columns: 1fr;
 		justify-content: center;
-		max-width: 400px;
-		margin: 0 auto;
 	}
 
 	.radio-custom {
@@ -182,20 +195,11 @@
 	.option-text {
 		font-size: var(--text-body-small);
 	}
-
-	.label {
-		font-size: var(--text-size-heading-3);
-	}
-
-	.text-input::placeholder {
-		font-size: var(--text-body-small);
-	}
 }
 
 @media (height <= 800px) {
 	.single-choice-with-text-question {
 		gap: var(--space-m);
-		max-width: 400px;
 	}
 
 	.radio-section,
@@ -227,10 +231,6 @@
 
 	.option-text {
 		font-size: var(--text-size-small);
-	}
-
-	.label {
-		font-size: var(--text-size-heading-4);
 	}
 
 	.text-input {

@@ -6,6 +6,7 @@ import { planCalendarExportController } from "~/modules/plan-calendar-export/pla
 import { planCategoryController } from "~/modules/plan-categories/plan-categories.js";
 import { planDayController } from "~/modules/plan-days/plan-days.js";
 import { planPdfExportController } from "~/modules/plan-pdf-export/plan-pdf-export.js";
+import { planStylesController } from "~/modules/plan-styles/plan-styles.js";
 import { planController } from "~/modules/plans/plans.js";
 import { quizQuestionController } from "~/modules/quiz-questions/quiz-question.js";
 import { taskController } from "~/modules/tasks/tasks.js";
@@ -23,6 +24,7 @@ const apiV1 = new BaseServerApplicationApi(
 	...planDayController.routes,
 	...planPdfExportController.routes,
 	...planCalendarExportController.routes,
+	...planStylesController.routes,
 	...taskController.routes,
 	...quizQuestionController.routes,
 	...planCategoryController.routes,

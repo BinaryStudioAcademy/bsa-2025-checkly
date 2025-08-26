@@ -10,8 +10,8 @@ import styles from "./styles.module.css";
 const QuizCategoryCard: React.FC<QuizCategoryCardProperties> = ({
 	color,
 	iconHref,
+	isSelected,
 	onSelect,
-	selected,
 	title,
 }: QuizCategoryCardProperties): React.ReactElement => {
 	const handleChange = useCallback((): void => {
@@ -34,12 +34,12 @@ const QuizCategoryCard: React.FC<QuizCategoryCardProperties> = ({
 	return (
 		<div
 			aria-label={`Select ${title} category`}
-			aria-pressed={selected}
+			aria-pressed={isSelected}
 			className={getClassNames(
 				"flow",
 				styles["quiz-category-card"],
 				styles[`quiz-category-card-${color}`],
-				selected && styles["quiz-category-card-selected"],
+				isSelected && styles["quiz-category-card-selected"],
 			)}
 			onClick={onSelect}
 			onKeyDown={handleKeyDown}
@@ -54,15 +54,16 @@ const QuizCategoryCard: React.FC<QuizCategoryCardProperties> = ({
 			</div>
 			<h2 className={styles["quiz-category-card-title"]}>{title}</h2>
 			<input
-				checked={selected}
+				checked={isSelected}
 				className={styles["quiz-category-card-input"]}
 				id={`quiz-category-${title}`}
 				name="quiz-category"
 				onChange={handleChange}
+				tabIndex={-1}
 				type={ElementTypes.RADIO}
 				value={title}
 			/>
-			{selected && (
+			{isSelected && (
 				<div className={styles["quiz-category-card-tick"]}>
 					<DecorativeImage src={logoIcon} />
 				</div>

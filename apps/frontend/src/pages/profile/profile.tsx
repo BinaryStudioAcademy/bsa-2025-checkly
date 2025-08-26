@@ -1,67 +1,83 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useRef } from "react";
 
-import {
-	AvatarEdit,
-	Button,
-	Input,
-	Loader,
-} from "~/libs/components/components.js";
-import { formatDateForInput } from "~/libs/helpers/date-helpers.js";
+import { AvatarEdit, Loader, Tabs } from "~/libs/components/components.js";
+import { type Tab } from "~/libs/components/tabs/types/tab.type.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import {
-	useAppDispatch,
-	useAppForm,
-	useAppSelector,
-} from "~/libs/hooks/hooks.js";
+import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { updateProfile } from "~/modules/auth/slices/actions.js";
+import { type UserUpdateRequestDto } from "~/modules/users/users.js";
+
 import {
-	type UserDto,
-	type UserUpdateRequestDto,
-	userUpdateValidationSchema,
-} from "~/modules/users/users.js";
-
-import sharedStyles from "../auth/components/shared/shared.module.css";
+	ProfilePasswordForm,
+	type ProfilePasswordFormReference,
+} from "./components/profile-password-form/profile-password-form.js";
+import {
+	ProfilePersonalForm,
+	type ProfilePersonalFormReference,
+} from "./components/profile-personal-form/profile-personal-form.js";
+import { ProfileTab } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
-
-const getDefaultValues = (user: UserDto): UserUpdateRequestDto => ({
-	confirmPassword: "",
-	dob: formatDateForInput(user.dob),
-	email: user.email,
-	name: user.name,
-	password: "",
-});
 
 const Profile: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { user } = useAppSelector(({ auth }) => auth);
 
-	const defaultValues = useMemo<UserUpdateRequestDto>(
-		() => getDefaultValues(user as UserDto),
-		[user],
-	);
+	const personalFormReference = useRef<ProfilePersonalFormReference>(null);
+	const passwordFormReference = useRef<ProfilePasswordFormReference>(null);
 
-	const { control, errors, handleSubmit, isDirty, isSubmitting, reset } =
-		useAppForm<UserUpdateRequestDto>({
-			defaultValues,
-			validationSchema: userUpdateValidationSchema,
-		});
-
-	useEffect(() => {
-		reset(defaultValues);
-	}, [defaultValues, reset]);
-
-	const handleFormSubmit = useCallback(
-		(event_: React.BaseSyntheticEvent): void => {
-			void handleSubmit((data) => {
-				if (!isDirty) {
-					return;
-				}
-
-				void dispatch(updateProfile(data));
-			})(event_);
+	const handleSubmit = useCallback(
+		(data: UserUpdateRequestDto) => {
+			void dispatch(updateProfile(data));
 		},
-		[dispatch, handleSubmit, isDirty],
+		[dispatch],
 	);
+
+	const handleBeforeTabChange = useCallback((currentTabId: string): boolean => {
+		const currentFormReference =
+			currentTabId === ProfileTab.PERSONAL
+				? personalFormReference.current
+				: passwordFormReference.current;
+
+		return !currentFormReference?.hasUnsavedChanges();
+	}, []);
+
+	const handleSaveChanges = useCallback((currentTabId: string): void => {
+		const currentFormReference =
+			currentTabId === ProfileTab.PERSONAL
+				? personalFormReference.current
+				: passwordFormReference.current;
+
+		currentFormReference?.submitForm();
+	}, []);
+
+	if (!user) {
+		return <Loader />;
+	}
+
+	const tabs: Tab[] = [
+		{
+			content: (
+				<ProfilePersonalForm
+					onSubmit={handleSubmit}
+					ref={personalFormReference}
+					user={user}
+				/>
+			),
+			id: ProfileTab.PERSONAL,
+			label: "Personal Information",
+		},
+		{
+			content: (
+				<ProfilePasswordForm
+					onSubmit={handleSubmit}
+					ref={passwordFormReference}
+					user={user}
+				/>
+			),
+			id: ProfileTab.PASSWORD,
+			label: "Change Password",
+		},
+	];
 
 	const contentClasses = getClassNames(
 		"grid-pattern",
@@ -73,69 +89,13 @@ const Profile: React.FC = () => {
 		<div className={contentClasses}>
 			<div className={styles["profile-container"]}>
 				<AvatarEdit />
-				<header className="flow">
-					<h1 className={getClassNames(styles["title"])} id="profile-title">
-						Profile
-					</h1>
-				</header>
-				<form
-					aria-labelledby="profile-title"
-					className={getClassNames(sharedStyles["form"], "cluster")}
-					onSubmit={handleFormSubmit}
-				>
-					<div className="flow-loose">
-						<Input
-							control={control}
-							errors={errors}
-							isRequired
-							label="Name"
-							name="name"
-							type="text"
-						/>
-						<Input
-							control={control}
-							errors={errors}
-							isRequired
-							label="Email"
-							name="email"
-							type="email"
-						/>
-						<Input
-							control={control}
-							errors={errors}
-							label="Date of birth"
-							name="dob"
-							type="date"
-						/>
-						<Input
-							control={control}
-							errors={errors}
-							label="New password"
-							name="password"
-							type="password"
-						/>
-						<Input
-							control={control}
-							errors={errors}
-							label="Confirm password"
-							name="confirmPassword"
-							type="password"
-						/>
-					</div>
-					<Button
-						isDisabled={isSubmitting || !isDirty}
-						label="Save changes"
-						loader={
-							<Loader
-								container="inline"
-								isLoading={isSubmitting}
-								size="small"
-								theme="accent"
-							/>
-						}
-						type="submit"
-					/>
-				</form>
+				<h1 className={styles["title"]}>Profile</h1>
+				<Tabs
+					defaultActiveTab={ProfileTab.PERSONAL}
+					onBeforeTabChange={handleBeforeTabChange}
+					onSaveChanges={handleSaveChanges}
+					tabs={tabs}
+				/>
 			</div>
 		</div>
 	);

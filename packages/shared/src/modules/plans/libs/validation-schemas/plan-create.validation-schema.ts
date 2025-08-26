@@ -21,6 +21,12 @@ const planCreate = z.object({
 		.max(PlanValidationRule.INTENSITY_MAX_LENGTH, {
 			message: PlanValidationMessage.INTENSITY_LENGTH,
 		}),
+	styleId: z
+		.number({
+			required_error: PlanValidationMessage.FIELD_REQUIRED,
+		})
+		.int()
+		.positive(),
 	title: z
 		.string()
 		.trim()

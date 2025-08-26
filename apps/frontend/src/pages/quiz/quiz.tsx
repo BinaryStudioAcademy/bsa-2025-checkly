@@ -7,10 +7,11 @@ import {
 	StarsYellow01,
 	TwinklesYellow,
 } from "~/assets/img/shared/shapes/shapes.img.js";
-import { Button, DecorativeImage } from "~/libs/components/components.js";
+import { Button, DecorativeImage, Link } from "~/libs/components/components.js";
 import {
 	AppRoute,
 	ButtonLabels,
+	ButtonSizes,
 	ButtonVariants,
 	ZERO,
 } from "~/libs/enums/enums.js";
@@ -38,6 +39,7 @@ const Quiz: React.FC = (): React.ReactElement => {
 
 	const handleCategorySelect = useCallback(
 		(category: string): void => {
+			dispatch(actions.resetQuiz());
 			dispatch(actions.setCategory(category));
 		},
 		[dispatch],
@@ -69,9 +71,9 @@ const Quiz: React.FC = (): React.ReactElement => {
 			<QuizCategoryCard
 				color={category.color}
 				iconHref={category.iconHref}
+				isSelected={category.key === selectedCategory}
 				key={category.id}
 				onSelect={handleSelect(category.key)}
-				selected={selectedCategory === category.key}
 				title={category.title}
 			/>
 		));
@@ -111,17 +113,26 @@ const Quiz: React.FC = (): React.ReactElement => {
 					src={Arrow}
 				/>
 
-				<div className={getClassNames("wrapper", styles["wrapper"])}>
-					<div className="flow-loose">
+				<div className={getClassNames("wrapper", styles["quiz-wrapper"])}>
+					<div className="flow-loose-xl">
 						<h1 className={styles["title"]}>
 							Pick the field you&apos;d like to improve
 						</h1>
 
-						<div className={getClassNames("cluster", styles["container"])}>
+						<div
+							className={getClassNames("grid", styles["quiz-cards-container"])}
+						>
 							{planCategories.length > ZERO && renderCategories(planCategories)}
 						</div>
 
 						<div className={getClassNames("cluster", styles["actions"])}>
+							<Link
+								asButtonSize={ButtonSizes.LARGE}
+								asButtonVariant={ButtonVariants.TRANSPARENT}
+								to={AppRoute.ROOT}
+							>
+								{ButtonLabels.BACK_TO_MAIN_PAGE}
+							</Link>
 							<Button
 								isDisabled={!selectedCategory}
 								label={ButtonLabels.NEXT}

@@ -13,6 +13,10 @@ type EnvironmentSchema = {
 		POOL_MAX: number;
 		POOL_MIN: number;
 	};
+	EMAIL_SERVICE: {
+		EMAIL_API_KEY: string;
+		RESET_PASSWORD_LINK: string;
+	};
 	ENCRYPTOR: {
 		SALT_SIZE: number;
 	};
@@ -22,6 +26,9 @@ type EnvironmentSchema = {
 	OPEN_AI: {
 		OPEN_AI_KEY: string;
 		TEXT_GENERATION_MODEL: string;
+	};
+	PASSWORD_TOKEN: {
+		KEY_SIZE: number;
 	};
 	S3: {
 		ACCESS_KEY_ID: string;

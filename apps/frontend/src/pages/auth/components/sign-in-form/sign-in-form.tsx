@@ -16,9 +16,10 @@ import {
 	Loader,
 } from "~/libs/components/components.js";
 import { Logo } from "~/libs/components/logo/logo.js";
+import { REDIRECT_PARAM } from "~/libs/constants/constants.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
-import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import { useAppForm, useCallback, useLocation } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
@@ -68,6 +69,11 @@ const SignInForm: React.FC<Properties> = ({
 		"wrapper grid-pattern flow-loose",
 	);
 	const cupClasses = getClassNames(styles["floating-image"], styles["cup"]);
+	const forgotPasswordLinkClasses = getClassNames(
+		sharedStyles["redirect-text__link"],
+		styles["forgot-password-link"],
+	);
+
 	const { control, errors, handleSubmit } = useAppForm<UserSignInRequestDto>({
 		defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
 		validationSchema: userSignInValidationSchema,
@@ -79,6 +85,13 @@ const SignInForm: React.FC<Properties> = ({
 		},
 		[handleSubmit, onSubmit],
 	);
+
+	const location = useLocation();
+	const parameters = new URLSearchParams(location.search);
+	const redirectParameter = parameters.get(REDIRECT_PARAM);
+	const signUpLink = redirectParameter
+		? `${AppRoute.SIGN_UP}?${REDIRECT_PARAM}=${encodeURIComponent(redirectParameter)}`
+		: AppRoute.SIGN_UP;
 
 	return (
 		<div className={containerClasses}>
@@ -93,7 +106,7 @@ const SignInForm: React.FC<Properties> = ({
 						<Link
 							aria-label="Go to create account page"
 							className={sharedStyles["redirect-text__link"]}
-							to={AppRoute.SIGN_UP}
+							to={signUpLink}
 						>
 							Create an account
 						</Link>
@@ -138,6 +151,13 @@ const SignInForm: React.FC<Properties> = ({
 						type="submit"
 					/>
 				</form>
+				<Link
+					aria-label="Go to forgot password page"
+					className={forgotPasswordLinkClasses}
+					to={AppRoute.FORGOT_PASSWORD}
+				>
+					Forgot password?
+				</Link>
 				<DecorativeImage className={pinkStarsClasses} src={StarsPink01} />
 				<DecorativeImage className={cupClasses} src={CupGreen} />
 			</main>

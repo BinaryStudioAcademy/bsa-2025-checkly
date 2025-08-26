@@ -1,0 +1,70 @@
+:root {
+	--a4-w: 794px;
+	--a4-h: 1123px;
+}
+
+.a4-viewport {
+	--a4-page-width-mm: 210;
+	--a4-page-height-mm: 297;
+	--a4-aspect-ratio: calc(var(--a4-page-width-mm) / var(--a4-page-height-mm));
+	--a4-preview-max-height: 800px;
+	--coefficient: 1;
+
+	position: relative;
+	width: 100%;
+	max-width: calc(var(--a4-aspect-ratio) * var(--a4-preview-max-height));
+	aspect-ratio: var(--a4-aspect-ratio);
+	margin: 0 auto;
+	overflow: hidden;
+	border: var(--preview-border, none);
+	border-radius: var(--preview-border-radius, 10px);
+	box-shadow: var(--preview-shadow, none);
+}
+
+.plan-preview {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: var(--a4-w);
+	height: var(--a4-h);
+	padding: var(--preview-padding, 32px);
+	overflow: hidden;
+	background-color: #fdf6ef;
+	border: 1px solid var(--border-color, #d3c4ae);
+	border-radius: var(--preview-border-radius, 10px);
+	transform-origin: top left;
+}
+
+.day-block,
+.notes-section {
+	padding: var(--day-block-padding, var(--space-s));
+	border: var(--day-block-border, 1px solid rgb(0 0 0 / 0%));
+	border-radius: var(--day-block-border-radius, 8px);
+}
+
+.notes-section {
+	margin-top: 8px;
+}
+
+.notes-section h3 {
+	margin: 0 0 6px;
+	font-weight: 800;
+	color: var(--topic-color, #4a4a4a);
+}
+
+.notes-lines {
+	margin-top: 6px;
+	border-top: 1px solid var(--notes-line-color, #e9e0d6);
+}
+
+.notes-lines p {
+	line-height: 2;
+	color: #595959;
+	background-image: repeating-linear-gradient(
+		to bottom,
+		transparent 0,
+		transparent 1.9em,
+		var(--notes-line-color, #e9e0d6) 1.9em,
+		var(--notes-line-color, #e9e0d6) 2em
+	);
+}

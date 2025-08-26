@@ -27,7 +27,7 @@ class BaseDatabase implements Database {
 
 	private get initialConfig(): Knex.Config {
 		const sslConfig =
-			this.appConfig.ENV.APP.ENVIRONMENT === AppEnvironment.LOCAL
+			this.appConfig.ENV.APP.ENVIRONMENT === AppEnvironment.DEVELOPMENT
 				? {}
 				: { ssl: { rejectUnauthorized: false } };
 
