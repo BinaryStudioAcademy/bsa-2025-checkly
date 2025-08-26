@@ -105,7 +105,7 @@ const PlanActions: React.FC<Properties> = ({
 						className={styles["action-button"]}
 						icon={<Dashboard aria-hidden="true" />}
 						isDisabled={!isAuthenticated}
-						label="TO DASHBOARD"
+						label="GO TO DASHBOARD"
 						onClick={handleGoToDashboardClick}
 						size="small"
 						variant="secondary"
