@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.12.0...shared-v1.13.0) (2025-08-26)
+
+
+### Features
+
+* add info password tabs cy-314 ([e4f622d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e4f622ddd97baf857b01873bcd4b89df72831aa3))
+
 ## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.11.0...shared-v1.12.0) (2025-08-25)
 
 
