@@ -28,6 +28,7 @@ export {
 	type Nullable,
 	type PlanStyleOption,
 	type QuestionDto,
+	type QuizAnswer,
 	type ServerErrorDetail,
 	type ServerErrorResponse,
 	type ValidationSchema,

@@ -8,6 +8,7 @@ import {
 	MOCK_REGENERATED_TASK,
 	MOCK_CATEGORY,
 	NOT_FOUND_INDEX,
+	MIN_DELAY_MS,
 } from "../libs/constants/constants.js";
 
 const updateTask = (
@@ -46,7 +47,7 @@ const planTaskRegenerationHandlers = [
 				);
 			}
 
-			await delay(500);
+			await delay(MIN_DELAY_MS);
 
 			const existingPlan =
 				MOCK_PLAN.id?.toString() === planId ? MOCK_PLAN : null;
