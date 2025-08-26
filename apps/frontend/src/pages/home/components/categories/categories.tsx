@@ -8,6 +8,7 @@ import {
 	DecorativeImage,
 	Modal,
 } from "~/libs/components/components.js";
+import { SKELETON_COUNT } from "~/libs/constants/category-skeleton-count.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import {
@@ -83,7 +84,7 @@ const Categories: React.FC = () => {
 		categories: PlanCategoryWithColorDto[],
 	): JSX.Element[] => {
 		if (planCategoriesDataStatus.length === ZERO) {
-			return Array.from({ length: 6 }, (_, index) => (
+			return Array.from({ length: SKELETON_COUNT }, (_, index) => (
 				<QuizCategoryCardSkeleton key={`skeleton-${String(index)}`} />
 			));
 		}

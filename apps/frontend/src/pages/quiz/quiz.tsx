@@ -8,6 +8,7 @@ import {
 	TwinklesYellow,
 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
+import { SKELETON_COUNT } from "~/libs/constants/category-skeleton-count.js";
 import {
 	AppRoute,
 	ButtonLabels,
@@ -77,7 +78,7 @@ const Quiz: React.FC = (): React.ReactElement => {
 		categories: PlanCategoryWithColorDto[],
 	): JSX.Element[] => {
 		if (planCategoriesDataStatus.length === ZERO) {
-			return Array.from({ length: 6 }, (_, index) => (
+			return Array.from({ length: SKELETON_COUNT }, (_, index) => (
 				<QuizCategoryCardSkeleton key={`skeleton-${String(index)}`} />
 			));
 		}
