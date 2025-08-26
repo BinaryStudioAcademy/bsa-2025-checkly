@@ -45,10 +45,10 @@ class TaskService implements Service {
 	public async update(
 		id: number,
 		payload: TaskUpdateRequestDto,
-	): Promise<null | TaskResponseDto> {
+	): Promise<TaskResponseDto> {
 		const item = await this.taskRepository.update(id, payload);
 
-		return item ? item.toObject() : null;
+		return item.toObject();
 	}
 }
 

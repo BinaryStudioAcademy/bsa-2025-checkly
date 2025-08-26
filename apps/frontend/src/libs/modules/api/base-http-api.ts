@@ -68,11 +68,11 @@ class BaseHTTPApi implements HTTPApi {
 	}
 
 	protected getFullEndpoint(
-		...parameters: [...string[], Record<string, string>]
+		...parameters: [...string[], Record<string, number | string>]
 	): string {
 		const copiedParameters = [...parameters];
 
-		const options = copiedParameters.pop() as Record<string, string>;
+		const options = copiedParameters.pop() as Record<string, number | string>;
 
 		return configureString(
 			this.baseUrl,

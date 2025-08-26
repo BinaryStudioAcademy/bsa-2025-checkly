@@ -2,10 +2,9 @@ import { APIPath, ContentType, HTTPRequestMethod } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
-import { type QuizQuestionsResponseDto } from "~/modules/quiz/libs/types/types.js";
 
 import { QuizApiPath } from "./libs/enums/enums.js";
-import { buildQueryString } from "./libs/helpers/helpers.js";
+import { type QuizCreateRequestDto } from "./libs/types/types.js";
 
 type Constructor = {
 	baseUrl: string;
@@ -15,22 +14,21 @@ type Constructor = {
 
 class QuizApi extends BaseHTTPApi {
 	public constructor({ baseUrl, http, storage }: Constructor) {
-		super({ baseUrl, http, path: APIPath.QUIZ_QUESTIONS, storage });
+		super({ baseUrl, http, path: APIPath.QUIZ, storage });
 	}
 
-	public async getQuestionsByCategoryId(
-		categoryId: number,
-	): Promise<QuizQuestionsResponseDto> {
-		const queryString = buildQueryString({ categoryId });
-		const endpointWithQuery =
-			this.getFullEndpoint(QuizApiPath.ROOT, {}) + `?${queryString}`;
-		const response = await this.load(endpointWithQuery, {
-			contentType: ContentType.JSON,
-			hasAuth: false,
-			method: HTTPRequestMethod.GET,
-		});
+	public async create(payload: QuizCreateRequestDto): Promise<number> {
+		const response = await this.load(
+			this.getFullEndpoint(QuizApiPath.ROOT, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: HTTPRequestMethod.POST,
+				payload: JSON.stringify(payload),
+			},
+		);
 
-		return await response.json<QuizQuestionsResponseDto>();
+		return await response.json<number>();
 	}
 }
 
