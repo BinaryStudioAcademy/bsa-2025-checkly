@@ -5,14 +5,14 @@ import {
 	clearQuizState,
 	loadQuizState,
 	saveQuizState,
-} from "~/modules/quiz/libs/storage/quiz-storage.js";
-import { actions } from "~/modules/quiz/quiz.js";
+} from "~/modules/quiz-questions/libs/storage/quiz-questions-storage.js";
+import { actions } from "~/modules/quiz-questions/quiz-questions.js";
 
 const useQuizSaved = (): { clearStorage: () => Promise<void> } => {
 	const dispatch = useAppDispatch();
 
 	const { answers, currentQuestion, notes, questions, selectedCategory } =
-		useAppSelector((state) => state.quiz);
+		useAppSelector((state) => state.quizQuestion);
 
 	useEffect(() => {
 		const initializeState = async (): Promise<void> => {

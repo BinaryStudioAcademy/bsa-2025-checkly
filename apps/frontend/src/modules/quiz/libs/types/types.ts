@@ -1,5 +1,1 @@
-export {
-	type QuestionDto,
-	type QuizAnswer,
-	type QuizQuestionsResponseDto,
-} from "shared";
+export { type QuizCreateRequestDto } from "shared";

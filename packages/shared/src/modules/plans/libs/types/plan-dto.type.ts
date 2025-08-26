@@ -1,8 +1,10 @@
+import { type ExecutionTimeTypeValue } from "../../../../modules/tasks/tasks.js";
 import { type PlanCategoryDto } from "../../../plan-categories/plan-categories.js";
 
 type PlanDayDto = {
 	dayNumber: number;
 	id: number;
+	planId: number;
 	tasks: TaskDto[];
 };
 
@@ -11,10 +13,11 @@ type PlanDaysTaskDto = PlanDto & {
 };
 
 type PlanDto = {
-	categoryId: number;
+	categoryId: null | number;
 	duration: number;
 	id: number;
 	intensity: string;
+	quizId: null | number;
 	styleId: number;
 	title: string;
 	userId: null | number;
@@ -27,10 +30,11 @@ type PlanWithCategoryDto = PlanDaysTaskDto & {
 type TaskDto = {
 	completedAt: null | string;
 	description: string;
-	executionTimeType: string;
+	executionTimeType: ExecutionTimeTypeValue;
 	id: number;
 	isCompleted: boolean;
 	order: number;
+	planDayId: number;
 	title: string;
 };
 
@@ -39,4 +43,5 @@ export {
 	type PlanDaysTaskDto,
 	type PlanDto,
 	type PlanWithCategoryDto,
+	type TaskDto,
 };

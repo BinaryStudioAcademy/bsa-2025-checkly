@@ -1,5 +1,4 @@
-import { type QuestionDto } from "~/libs/types/types.js";
-import { type QuizAnswer } from "~/modules/quiz/quiz.js";
+import { type QuestionDto, type QuizAnswer } from "~/libs/types/types.js";
 
 type CheckboxQuestionProperties = {
 	currentAnswer?: MultipleAnswers[];

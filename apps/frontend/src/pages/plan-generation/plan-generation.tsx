@@ -18,8 +18,8 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
-import { actions as quizActions } from "~/modules/quiz/quiz.js";
-import { type QuizState } from "~/modules/quiz/slices/quiz.slice.js";
+import { actions as quizActions } from "~/modules/quiz-questions/quiz-questions.js";
+import { type QuizState } from "~/modules/quiz-questions/slices/quiz-questions.slice.js";
 import {
 	type QuizAnswersRequestDto,
 	type QuizCategoryType,
@@ -66,9 +66,7 @@ const PlanGeneration: React.FC = () => {
 				notes: quizState.notes,
 			};
 
-			await dispatch(
-				planActions.generatePlan({ quizAnswers, userId: user?.id ?? null }),
-			);
+			await dispatch(planActions.generatePlan(quizAnswers));
 		};
 
 		void generatePlan();

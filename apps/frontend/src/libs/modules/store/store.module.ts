@@ -20,7 +20,15 @@ import {
 	reducer as planStylesReducer,
 } from "~/modules/plan-styles/plan-styles.js";
 import { planApi, reducer as planReducer } from "~/modules/plans/plans.js";
-import { quizApi, reducer as quizReducer } from "~/modules/quiz/quiz.js";
+import {
+	quizAnswerApi,
+	reducer as quizAnswerReducer,
+} from "~/modules/quiz-answers/quiz-answers.js";
+import {
+	quizQuestionApi,
+	reducer as quizQuestionReducer,
+} from "~/modules/quiz-questions/quiz-questions.js";
+import { quizApi } from "~/modules/quiz/quiz.js";
 import { taskApi, reducer as taskReducer } from "~/modules/tasks/tasks.js";
 import { userApi } from "~/modules/users/users.js";
 
@@ -35,7 +43,9 @@ type ExtraArguments = {
 	planApi: typeof planApi;
 	planCategoryApi: typeof planCategoryApi;
 	planStylesApi: typeof planStylesApi;
+	quizAnswerApi: typeof quizAnswerApi;
 	quizApi: typeof quizApi;
+	quizQuestionApi: typeof quizQuestionApi;
 	storage: BaseStorage;
 	taskApi: typeof taskApi;
 	userApi: typeof userApi;
@@ -47,7 +57,8 @@ type RootReducer = {
 	plan: ReturnType<typeof planReducer>;
 	planCategory: ReturnType<typeof planCategoryReducer>;
 	planStyles: ReturnType<typeof planStylesReducer>;
-	quiz: ReturnType<typeof quizReducer>;
+	quizAnswer: ReturnType<typeof quizAnswerReducer>;
+	quizQuestion: ReturnType<typeof quizQuestionReducer>;
 	task: ReturnType<typeof taskReducer>;
 };
 
@@ -68,7 +79,9 @@ class Store {
 			planApi,
 			planCategoryApi,
 			planStylesApi,
+			quizAnswerApi,
 			quizApi,
+			quizQuestionApi,
 			storage,
 			taskApi,
 			userApi,
@@ -91,7 +104,8 @@ class Store {
 				plan: planReducer,
 				planCategory: planCategoryReducer,
 				planStyles: planStylesReducer,
-				quiz: quizReducer,
+				quizAnswer: quizAnswerReducer,
+				quizQuestion: quizQuestionReducer,
 				task: taskReducer,
 			},
 		});

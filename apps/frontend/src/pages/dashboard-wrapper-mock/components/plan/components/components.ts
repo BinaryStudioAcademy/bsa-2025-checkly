@@ -1,2 +1,2 @@
-export { Day } from "./day/day.js";
-export { Task } from "./task/task.js";
+export { DayList } from "./days/list/list.js";
+export { TaskList } from "./tasks/list/list.js";
