@@ -149,7 +149,7 @@ const PlanStyleOverview: React.FC = () => {
 			<div className={styles["header-section"]}>
 				<PlanStyleCategory
 					actionButtonDisabled={isCalendarDownloading}
-					actionButtonLabel="Download ICS"
+					actionButtonLabel="Calendar File"
 					onActionButtonClick={openCalendarModal}
 				/>
 			</div>
