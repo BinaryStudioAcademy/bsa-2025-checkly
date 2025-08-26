@@ -35,7 +35,6 @@ const validateAndPrepareUpdateData = async ({
 }: ValidateAndPrepareUpdateDataParameters): Promise<UserUpdateData> => {
 	const email = normalizeField(payload.email);
 	const password = normalizeField(payload.password);
-	const currentPassword = normalizeField(payload.currentPassword);
 	const name = normalizeField(payload.name);
 
 	if (email) {
@@ -49,36 +48,13 @@ const validateAndPrepareUpdateData = async ({
 		}
 	}
 
-	if (password) {
-		if (!currentPassword) {
-			throw new HTTPError({
-				message: UserValidationMessage.CURRENT_PASSWORD_REQUIRED,
-				status: HTTPCode.BAD_REQUEST,
-			});
-		}
+	const currentUser = await userRepository.find(id);
 
-		const currentUser = await userRepository.find(id);
-
-		if (!currentUser) {
-			throw new HTTPError({
-				message: UserValidationMessage.USER_NOT_FOUND,
-				status: HTTPCode.NOT_FOUND,
-			});
-		}
-
-		const { passwordHash, passwordSalt } = currentUser.getPasswordData();
-		const isCurrentPasswordValid = await encryptor.compare(
-			currentPassword,
-			passwordHash,
-			passwordSalt,
-		);
-
-		if (!isCurrentPasswordValid) {
-			throw new HTTPError({
-				message: UserValidationMessage.CURRENT_PASSWORD_INVALID,
-				status: HTTPCode.UNPROCESSED_ENTITY,
-			});
-		}
+	if (!currentUser) {
+		throw new HTTPError({
+			message: UserValidationMessage.USER_NOT_FOUND,
+			status: HTTPCode.NOT_FOUND,
+		});
 	}
 
 	let updateData: UserUpdateData = {};
