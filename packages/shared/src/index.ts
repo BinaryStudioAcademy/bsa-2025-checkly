@@ -122,11 +122,14 @@ export {
 	QuizApiPath,
 	type QuizCategoryType,
 	type QuizContext,
+	type QuizCreateRequestDto,
+	quizCreateValidationSchema,
 	QuizIndexes,
 	QuizQuestionApiPath,
 	QuizQuestionFormat,
 	QuizQuestionFormatLabels,
 	type QuizQuestionsResponseDto,
+	type QuizResponseDto,
 	quizStateValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {

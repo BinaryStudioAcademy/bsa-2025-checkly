@@ -92,7 +92,7 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 			return;
 		}
 
-		if (!selectedCategory) {
+		if (!categoryId) {
 			return;
 		}
 
@@ -113,9 +113,9 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 			return;
 		}
 
-		void dispatch(quizAnswerActions.saveAnswers(answers));
+		void dispatch(quizAnswerActions.saveAnswers({ answers, categoryId }));
 		void handleSafeNavigate(AppRoute.PLAN_GENERATION);
-	}, [handleSafeNavigate, dispatch, questions, selectedCategory]);
+	}, [handleSafeNavigate, categoryId, dispatch, questions, selectedCategory]);
 
 	const handleNext = useCallback((): void => {
 		if (shouldMoveToNext(questions, currentQuestion)) {

@@ -133,38 +133,39 @@ class PlanRepository implements Repository {
 			await this.taskRepository.deleteByPlanId(planId, trx);
 			await this.planDayRepository.deleteByPlanId(planId, trx);
 
-			const dayEntities = days.map((day) =>
-				PlanDayEntity.initializeNew({
-					dayNumber: day.dayNumber,
-					planId,
-				}).toNewObject(),
-			);
+			await this.saveDaysAndTasks(planId, days, trx);
+		});
+	}
 
-			const insertedDays = await this.planDayRepository.bulkCreate(
-				dayEntities,
-				trx,
-			);
+	public async saveGeneratedPlan({
+		categoryId,
+		plan,
+		quizId,
+		userId,
+	}: {
+		categoryId: number;
+		plan: GeneratedPlanDTO;
+		quizId: number;
+		userId: null | number;
+	}): Promise<number> {
+		return await this.planModel.transaction(async (trx) => {
+			const { days, duration, intensity, title } = plan;
 
-			const taskEntities = insertedDays.flatMap((day, index) => {
-				const { id: planDayId } = day.toObject();
-				const relatedDay = days[index];
-
-				if (!relatedDay) {
-					return [];
-				}
-
-				return relatedDay.tasks.map((task) =>
-					TaskEntity.initializeNew({
-						description: task.description,
-						executionTimeType: task.executionTimeType,
-						order: task.order,
-						planDayId,
-						title: task.title,
-					}).toNewObject(),
-				);
+			const planEntity = PlanEntity.initializeNew({
+				categoryId,
+				duration,
+				intensity,
+				quizId,
+				title,
+				userId,
 			});
 
-			await this.taskRepository.bulkCreate(taskEntities, trx);
+			const createdPlan = await this.create(planEntity);
+			const { id: planId } = createdPlan.toObject();
+
+			await this.saveDaysAndTasks(planId, days, trx);
+
+			return planId;
 		});
 	}
 
@@ -202,6 +203,43 @@ class PlanRepository implements Repository {
 			.patchAndFetchById(id, payload);
 
 		return PlanEntity.initialize(updatedPlan);
+	}
+
+	private async saveDaysAndTasks(
+		planId: number,
+		days: GeneratedPlanDTO["days"],
+		trx: Transaction,
+	): Promise<void> {
+		const dayEntities = days.map((day) =>
+			PlanDayEntity.initializeNew({
+				dayNumber: day.dayNumber,
+				planId,
+			}).toNewObject(),
+		);
+
+		const insertedDays = await this.planDayRepository.bulkCreate(
+			dayEntities,
+			trx,
+		);
+
+		const taskEntities = insertedDays.flatMap((day, index) => {
+			const { id: planDayId } = day.toObject();
+			const relatedDay = days[index];
+
+			return (
+				relatedDay?.tasks.map((task) =>
+					TaskEntity.initializeNew({
+						description: task.description,
+						executionTimeType: task.executionTimeType,
+						order: task.order,
+						planDayId,
+						title: task.title,
+					}).toNewObject(),
+				) ?? []
+			);
+		});
+
+		await this.taskRepository.bulkCreate(taskEntities, trx);
 	}
 }
 

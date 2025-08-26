@@ -3,6 +3,7 @@ import { type Knex } from "knex";
 const TABLE_NAMES = {
 	ANSWER_OPTIONS: "answer_options",
 	ANSWERS: "answers",
+	PLAN_CATEGORIES: "plan_categories",
 	PLANS: "plans",
 	QUESTION_OPTIONS: "question_options",
 	QUESTIONS: "questions",
@@ -10,6 +11,7 @@ const TABLE_NAMES = {
 };
 
 const QuizColumnName = {
+	CATEGORY_ID: "category_id",
 	CREATED_AT: "created_at",
 	ID: "id",
 	UPDATED_AT: "updated_at",
@@ -31,6 +33,10 @@ const AnswerOptionColumnName = {
 	ID: "id",
 	OPTION_ID: "option_id",
 	UPDATED_AT: "updated_at",
+} as const;
+
+const PlanCategoryColumnName = {
+	ID: "id",
 } as const;
 
 const QuestionColumnName = {
@@ -62,6 +68,11 @@ async function down(knex: Knex): Promise<void> {
 async function up(knex: Knex): Promise<void> {
 	await knex.schema.createTable(TABLE_NAMES.QUIZ, (table) => {
 		table.increments(QuizColumnName.ID).primary();
+		table
+			.integer(QuizColumnName.CATEGORY_ID)
+			.references(PlanCategoryColumnName.ID)
+			.inTable(TABLE_NAMES.PLAN_CATEGORIES)
+			.onDelete("SET NULL");
 		table
 			.timestamp(QuizColumnName.CREATED_AT, { useTz: true })
 			.notNullable()

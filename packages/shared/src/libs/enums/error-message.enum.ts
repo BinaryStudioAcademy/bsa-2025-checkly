@@ -16,6 +16,7 @@ const ErrorMessage = {
 	PLAN_DAY_REGENERATION_FAILED: "Failed to regenerate plan day",
 	PLAN_NOT_FOUND: "Plan does not exist",
 	PLAN_REGENERATION_FAILED: "Failed to regenerate plan",
+	QUIZ_NOT_FOUND: "Quiz does not exist",
 	TASK_NOT_FOUND: "Task does not exist",
 	TASK_REGENERATION_FAILED: "Failed to regenerate task",
 	UNAUTHORIZED_ACCESS: "Unauthorized access",

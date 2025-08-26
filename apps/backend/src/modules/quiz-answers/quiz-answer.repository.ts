@@ -63,6 +63,7 @@ class QuizAnswerRepository implements Repository {
 			.query()
 			.alias("answers")
 			.where("answers.quiz_id", quizId)
+			.andWhere("answers.is_skipped", false)
 			.select(
 				"answers.is_skipped as isSkipped",
 				"answers.id as answerId",
