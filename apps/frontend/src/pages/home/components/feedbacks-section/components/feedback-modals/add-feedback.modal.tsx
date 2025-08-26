@@ -1,4 +1,5 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
+import { toast } from "react-toastify";
 
 import { Button, Loader, Textarea } from "~/libs/components/components.js";
 import { DataStatus } from "~/libs/enums/enums.js";
@@ -13,6 +14,7 @@ import {
 	type FeedbackCreateRequestDto,
 	feedbackCreateValidationSchema,
 	FeedbackValidationRule,
+	selectFeedbackByUserId,
 } from "~/modules/feedbacks/feedbacks.js";
 
 import styles from "./styles.module.css";
@@ -30,11 +32,24 @@ const AddFeedbackModal: React.FC<Properties> = ({
 	const { dataStatus } = useAppSelector((state) => state.feedbacks);
 	const isLoading = dataStatus === DataStatus.PENDING;
 
+	const existingFeedback = useAppSelector((state) =>
+		selectFeedbackByUserId(state, userId),
+	);
+
 	const { control, errors, handleSubmit, reset, watch } =
 		useAppForm<FeedbackCreateRequestDto>({
-			defaultValues: { text: "", userId: Number(userId) },
+			defaultValues: {
+				text: existingFeedback?.text ?? "",
+				userId,
+			},
 			validationSchema: feedbackCreateValidationSchema,
 		});
+
+	useEffect(() => {
+		if (existingFeedback) {
+			reset({ text: existingFeedback.text, userId: existingFeedback.userId });
+		}
+	}, [existingFeedback, reset]);
 
 	const textValue = watch?.("text") ?? "";
 	const characterCount = textValue.length;
@@ -42,15 +57,21 @@ const AddFeedbackModal: React.FC<Properties> = ({
 
 	const handleFormSubmit = useCallback(
 		async (payload: FeedbackCreateRequestDto): Promise<void> => {
+			if (existingFeedback && existingFeedback.text === payload.text) {
+				onClose();
+				toast.info("No changes were made.");
+
+				return;
+			}
+
 			try {
 				await dispatch(actions.createFeedback(payload)).unwrap();
 				onClose();
-				reset();
 			} catch {
 				onClose();
 			}
 		},
-		[dispatch, onClose, reset],
+		[dispatch, onClose, existingFeedback],
 	);
 
 	const handleOnSubmit = useCallback(

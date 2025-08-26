@@ -12,7 +12,10 @@ const feedbackApi = new FeedbackApi({
 
 export { feedbackApi };
 export { FeedbackValidationRule } from "./libs/enums/enums.js";
-export { getIdParameter } from "./libs/helpers/helpers.js";
+export {
+	getIdParameter,
+	selectFeedbackByUserId,
+} from "./libs/helpers/helpers.js";
 export {
 	type FeedbackCreateRequestDto,
 	type FeedbackDto,

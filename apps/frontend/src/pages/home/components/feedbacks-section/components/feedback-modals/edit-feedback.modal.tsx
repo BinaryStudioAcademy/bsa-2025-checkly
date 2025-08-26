@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from "react";
+import { toast } from "react-toastify";
 
 import { Button, Loader, Textarea } from "~/libs/components/components.js";
 import { DataStatus } from "~/libs/enums/enums.js";
@@ -36,7 +37,10 @@ const EditFeedbackModal: React.FC<Properties> = ({
 
 	const { control, errors, handleSubmit, reset } =
 		useAppForm<FeedbackUpdateRequestDto>({
-			defaultValues: { text: "", userId: Number(userId) },
+			defaultValues: {
+				text: feedbackToEdit?.text ?? "",
+				userId: Number(userId),
+			},
 			validationSchema: feedbackUpdateValidationSchema,
 		});
 
@@ -57,9 +61,18 @@ const EditFeedbackModal: React.FC<Properties> = ({
 
 	const handleUpdateSubmit = useCallback(
 		(payload: FeedbackUpdateRequestDto): void => {
+			const isTextUnchanged = feedbackToEdit?.text === payload.text;
+
+			if (isTextUnchanged) {
+				onClose();
+				toast.info("No changes were made.");
+
+				return;
+			}
+
 			void dispatch(actions.updateFeedback({ id, payload }));
 		},
-		[dispatch, id],
+		[dispatch, id, feedbackToEdit, onClose],
 	);
 
 	const handleFormSubmit = useCallback(
