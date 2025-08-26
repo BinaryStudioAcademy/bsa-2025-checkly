@@ -53,16 +53,6 @@
 	font-weight: var(--font-weight-semi-bold);
 }
 
-.modal-close {
-	padding: var(--space-2xs);
-	font-weight: var(--font-weight-bold);
-	color: var(--color-text-secondary);
-	cursor: pointer;
-	background: none;
-	border: none;
-	transition: all 0.2s ease;
-}
-
 .modal-header .modal-close:not(:disabled):hover {
 	color: var(--color-text-secondary);
 	background-color: var(--color-bg-light);
