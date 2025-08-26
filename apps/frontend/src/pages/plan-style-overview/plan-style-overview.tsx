@@ -110,7 +110,7 @@ const PlanStyleOverview: React.FC = () => {
 			<div className={styles["header-section"]}>
 				<PlanStyleCategory />
 			</div>
-			<div className="flow-loose">
+			<div className="flow-loose-xl">
 				<div className={getClassNames(styles["container"])}>
 					<div className={getClassNames("wrapper", styles["plan-content"])}>
 						<PlanStyle inputStyle={handleGetStyleFromPlan()} />

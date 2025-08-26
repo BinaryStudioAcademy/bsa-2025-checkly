@@ -63,25 +63,9 @@ const PlanActions: React.FC<Properties> = ({
 					</Link>
 				</div>
 			)}
-			<div className={getClassNames("cluster", styles["actions-container"])}>
-				<Button
-					className={styles["action-button"]}
-					icon={<Palette aria-hidden="true" />}
-					isDisabled={!isAuthenticated}
-					label="CHOOSE STYLE"
-					onClick={handleChooseStyleClick}
-					size="small"
-					variant="secondary"
-				/>
-				<Button
-					className={styles["action-button"]}
-					icon={<EditIcon aria-hidden="true" />}
-					isDisabled={!isAuthenticated}
-					label="EDIT"
-					onClick={handleEditClick}
-					size="small"
-					variant="secondary"
-				/>
+			<div
+				className={getClassNames("cluster flow", styles["actions-container"])}
+			>
 				<Button
 					className={styles["action-button"]}
 					icon={<DownloadIcon aria-hidden="true" />}
@@ -93,18 +77,40 @@ const PlanActions: React.FC<Properties> = ({
 						) : undefined
 					}
 					onClick={handleDownloadClick}
-					size="small"
+					size="large"
 					variant="primary"
 				/>
-				<Button
-					className={styles["action-button"]}
-					icon={<Dashboard aria-hidden="true" />}
-					isDisabled={!isAuthenticated}
-					label="TO DASHBOARD"
-					onClick={handleGoToDashboardClick}
-					size="small"
-					variant="secondary"
-				/>
+				<div
+					className={getClassNames("cluster", styles["actions-sub-container"])}
+				>
+					<Button
+						className={styles["action-button"]}
+						icon={<Palette aria-hidden="true" />}
+						isDisabled={!isAuthenticated}
+						label="CHOOSE STYLE"
+						onClick={handleChooseStyleClick}
+						size="small"
+						variant="secondary"
+					/>
+					<Button
+						className={styles["action-button"]}
+						icon={<EditIcon aria-hidden="true" />}
+						isDisabled={!isAuthenticated}
+						label="EDIT"
+						onClick={handleEditClick}
+						size="small"
+						variant="secondary"
+					/>
+					<Button
+						className={styles["action-button"]}
+						icon={<Dashboard aria-hidden="true" />}
+						isDisabled={!isAuthenticated}
+						label="TO DASHBOARD"
+						onClick={handleGoToDashboardClick}
+						size="small"
+						variant="secondary"
+					/>
+				</div>
 			</div>
 		</div>
 	);
