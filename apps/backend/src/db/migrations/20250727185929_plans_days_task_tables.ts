@@ -25,6 +25,7 @@ const PlanDayColumnName = {
 
 const TaskColumnName = {
 	COMPLETED_AT: "completed_at",
+	DESCRIPTION: "description",
 	EXECUTION_TIME_TYPE: "execution_time_type",
 	ID: "id",
 	IS_COMPLETED: "is_completed",
