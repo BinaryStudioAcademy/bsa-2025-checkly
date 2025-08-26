@@ -1,5 +1,36 @@
 # Changelog
 
+## [1.23.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.22.0...frontend-v1.23.0) (2025-08-26)
+
+
+### Features
+
+* add daytime icons to pdf cy-324 ([c4a382b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c4a382be8fe300426aed1f53f552e3fa45056a2c))
+* add info password tabs cy-314 ([e4f622d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e4f622ddd97baf857b01873bcd4b89df72831aa3))
+* add morning/afternoon/evening icon near the task in plan cy-324 ([175a0b3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/175a0b3a5a1b6b1a59e2ca449f9e83e3d7674fc5))
+
+
+### Bug Fixes
+
+* assign user to plan after successful authentication cy-349 ([a7e130c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a7e130ce47a1d53342532f6139082a795fba76b1))
+* button styles, my plan grid cy-352 ([5c6b39c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5c6b39ceee55e4fe7729d7ef83219c62f4f09e85))
+* **frontend:** fix blank space, enable button and show new message cy-351 ([698122c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/698122c6adb82555b9a486faa79d720bc27f4c20))
+* **frontend:** fix blank space, enable button and show new message cy-351 ([69c31ef](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/69c31efcde6c20c1c8c3dbdcc78b3d7013e2bad4))
+* **frontend:** modify min-height: 100% for not scroll cy-351 ([5799960](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/57999606f266025a14aaa761b1ba4ec377c4901e))
+* **frontend:** persist form input values after failed sign-in and sign-up cy-362 ([c878b22](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c878b22bb2377a60ce4804a3c64825526b669d1e))
+* **frontend:** persist form input values after failed sign-in and sign-up cy-362 ([75a00d5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/75a00d54ad64ea4bef298f71d579d511fa71001c))
+* **frontend:** plan overview page buttons width difference cy-352 ([6f81bdc](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6f81bdc74409019410dc8cd7fd44b94bec22d0d0))
+* **frontend:** quality criteria check 2 cy-0 ([447b844](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/447b844cfae2defbd876c8ac1a19f327b8bb9d2d))
+* plan not associated to user after succesful authentication cy-349 ([b035088](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b03508875dc1d86a51cc76e6d57cf28bc12707ac))
+* quality criteria check 2 cy-0 ([c435e02](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c435e0241dfd79c0698cd7e3bc1e398fa0c14fd4))
+* reduce grid opacity cy-352 ([bd3902f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bd3902f76561d47344b6d0daf8ab7b0f20b858fb))
+* remove duplicate layout examples from constants cy-342 ([3987bc0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3987bc0f745254b0c3139d5237b28aa215777bcc))
+* repeated styles in sample layouts cy-342 ([c0de66c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c0de66c60943b85d08a24e3a1c13f390162bc436))
+* resolve linter error cy-324 ([c336752](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c336752b54da558c0be40bffeb2ed11014e8c872))
+* task title overflows when it has many characters long with no spaces cy-358 ([6c9a959](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6c9a959605c5d4c5e6eeb8c405bcce8e2f0d7e44))
+* update task title styles cy-358 ([d78e2a0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d78e2a00fe47723682ea1d968c1315cc0c1d8abf))
+* whitespace trailing cy-352 ([49bcfb2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/49bcfb2ad59bae91ebeca3397f611581fd09daa8))
+
 ## [1.22.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.21.0...frontend-v1.22.0) (2025-08-25)
 
 
