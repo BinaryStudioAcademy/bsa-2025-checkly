@@ -23,39 +23,44 @@ type UserUpdateData = Partial<UserUpdateRequestDto> & {
 type ValidateAndPrepareUpdateDataParameters = {
 	encryptor: Encryptor;
 	id: number;
+	isReseting: boolean;
 	payload: UserUpdateRequestDto;
+	userRepository: UserRepository;
+};
+
+type ValidateDataParameters = {
+	currentPassword?: null | string;
+	email?: null | string;
+	encryptor: Encryptor;
+	id: number;
+	isReseting: boolean;
+	password?: null | string;
 	userRepository: UserRepository;
 };
 
 const validateAndPrepareUpdateData = async ({
 	encryptor,
 	id,
+	isReseting = false,
 	payload,
 	userRepository,
 }: ValidateAndPrepareUpdateDataParameters): Promise<UserUpdateData> => {
 	const email = normalizeField(payload.email);
 	const password = normalizeField(payload.password);
+	const currentPassword = isReseting
+		? undefined
+		: normalizeField(payload.currentPassword);
 	const name = normalizeField(payload.name);
 
-	if (email) {
-		const userWithSameEmail = await userRepository.findByField("email", email);
-
-		if (userWithSameEmail && userWithSameEmail.toObject().id !== id) {
-			throw new HTTPError({
-				message: UserValidationMessage.EMAIL_ALREADY_EXISTS,
-				status: HTTPCode.CONFLICT,
-			});
-		}
-	}
-
-	const currentUser = await userRepository.find(id);
-
-	if (!currentUser) {
-		throw new HTTPError({
-			message: UserValidationMessage.USER_NOT_FOUND,
-			status: HTTPCode.NOT_FOUND,
-		});
-	}
+	await validateData({
+		currentPassword,
+		email,
+		encryptor,
+		id,
+		isReseting,
+		password,
+		userRepository,
+	});
 
 	let updateData: UserUpdateData = {};
 
@@ -77,6 +82,59 @@ const validateAndPrepareUpdateData = async ({
 	}
 
 	return updateData;
+};
+
+const validateData = async ({
+	currentPassword,
+	email,
+	encryptor,
+	id,
+	isReseting,
+	password,
+	userRepository,
+}: ValidateDataParameters): Promise<void> => {
+	if (email) {
+		const userWithSameEmail = await userRepository.findByField("email", email);
+
+		if (userWithSameEmail && userWithSameEmail.toObject().id !== id) {
+			throw new HTTPError({
+				message: UserValidationMessage.EMAIL_ALREADY_EXISTS,
+				status: HTTPCode.CONFLICT,
+			});
+		}
+	}
+
+	if (password && !isReseting) {
+		if (!currentPassword) {
+			throw new HTTPError({
+				message: UserValidationMessage.CURRENT_PASSWORD_REQUIRED,
+				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
+		const currentUser = await userRepository.find(id);
+
+		if (!currentUser) {
+			throw new HTTPError({
+				message: UserValidationMessage.USER_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { passwordHash, passwordSalt } = currentUser.getPasswordData();
+		const isCurrentPasswordValid = await encryptor.compare(
+			currentPassword,
+			passwordHash,
+			passwordSalt,
+		);
+
+		if (!isCurrentPasswordValid) {
+			throw new HTTPError({
+				message: UserValidationMessage.CURRENT_PASSWORD_INVALID,
+				status: HTTPCode.UNPROCESSED_ENTITY,
+			});
+		}
+	}
 };
 
 export { validateAndPrepareUpdateData };
