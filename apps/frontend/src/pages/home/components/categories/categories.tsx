@@ -92,9 +92,9 @@ const Categories: React.FC = () => {
 			<QuizCategoryCard
 				color={category.color}
 				iconHref={category.iconHref}
+				isSelected={selectedCategory === category.key}
 				key={category.id}
 				onSelect={handleSelect(category.key)}
-				selected={selectedCategory === category.key}
 				title={category.title}
 			/>
 		));

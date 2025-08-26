@@ -21,7 +21,6 @@
 .title {
 	font-size: var(--text-size-heading-2);
 }
-<<<<<<< HEAD
 
 .tabs {
 	display: flex;
@@ -76,5 +75,3 @@
 		padding: var(--space-l);
 	}
 }
-=======
->>>>>>> 4f808b61 (feat: * refine dashboard styles cy-300)
