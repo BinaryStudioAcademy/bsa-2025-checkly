@@ -74,7 +74,15 @@ class PlanRepository implements Repository {
 			.query()
 			.where({ userId })
 			.orderBy("created_at", "desc")
-			.withGraphFetched("days.tasks")
+			.withGraphFetched("days(orderByDayNumber).[tasks(orderByTaskOrder)]")
+			.modifiers({
+				orderByDayNumber(builder) {
+					builder.orderBy("dayNumber", "asc");
+				},
+				orderByTaskOrder(builder) {
+					builder.orderBy("order", "asc");
+				},
+			})
 			.first();
 
 		return plan ? PlanEntity.initialize(plan) : null;
@@ -99,7 +107,15 @@ class PlanRepository implements Repository {
 		const plan = await this.planModel
 			.query()
 			.findById(id)
-			.withGraphFetched("days.tasks");
+			.withGraphFetched("days(orderByDayNumber).[tasks(orderByTaskOrder)]")
+			.modifiers({
+				orderByDayNumber(builder) {
+					builder.orderBy("dayNumber", "asc");
+				},
+				orderByTaskOrder(builder) {
+					builder.orderBy("order", "asc");
+				},
+			});
 
 		return plan ? PlanEntity.initialize(plan) : null;
 	}

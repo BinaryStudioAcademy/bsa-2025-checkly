@@ -7,14 +7,9 @@ Rules:
 - You are a strict JSON generator.
 - Return ONLY valid JSON following the schema.
 - No explanations, no markdown, no extra text.
-
-${PLAN_SCHEMA}
-
-Rules:
-- No explanations, no markdown, no extra text.
 - The "title" field in the plan (root object) must be a string up to 100 characters.
 - The "title" field of each task must be a string up to 150 characters.
-- The "description" field of each task must contain a detailed and expanded description.
+- The "description" field of each task must contain a concise description, limit "description" to max 140 characters.
 - The "tasks" array for each day must contain 5 elements.
 - Refresh all parts of the plan with new content when regenerating.
 - Do NOT rephrase existing descriptions.
@@ -24,7 +19,9 @@ const makeSystemPrompt = (schema: string, extra: string = ""): string => `
 You are a strict JSON generator.
 Schema:
 ${schema}
+
 ${BASE_RULES}
+
 ${extra}
 `;
 
