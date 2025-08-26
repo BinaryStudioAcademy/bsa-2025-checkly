@@ -18,6 +18,8 @@ import { type UserService } from "~/modules/users/user.service.js";
 
 import { getDefaultExpirationDate } from "../password-token/libs/helpers/get-default-expiration-date.helper.js";
 import { type PasswordTokenService } from "../password-token/password-token.service.js";
+import { type PlanService } from "../plans/plan.service.js";
+import { planService } from "../plans/plans.js";
 import { UserValidationMessage } from "./libs/enums/enums.js";
 import { AuthorizationError } from "./libs/exceptions/exceptions.js";
 
@@ -35,6 +37,8 @@ class AuthService {
 
 	private passwordTokenService: PasswordTokenService;
 
+	private planService: PlanService;
+
 	private userService: UserService;
 
 	public constructor({
@@ -47,6 +51,7 @@ class AuthService {
 		this.encryptor = encryptor;
 		this.emailService = emailService;
 		this.passwordTokenService = passwordTokenService;
+		this.planService = planService;
 	}
 
 	public async resetPassword({
@@ -91,9 +96,13 @@ class AuthService {
 		}
 	}
 
-	public async signIn(
-		userRequestDto: UserSignInRequestDto,
-	): Promise<UserSignInResponseDto> {
+	public async signIn({
+		planId,
+		userRequestDto,
+	}: {
+		planId?: string;
+		userRequestDto: UserSignInRequestDto;
+	}): Promise<UserSignInResponseDto> {
 		const { email, password } = userRequestDto;
 
 		const user = await this.userService.findByEmail(email);
@@ -123,12 +132,23 @@ class AuthService {
 		const userDto = user.toObject();
 		const newToken = await token.generate(userDto.id);
 
+		if (planId) {
+			await this.updatePlanWithUser({
+				planId: Number(planId),
+				userId: userDto.id,
+			});
+		}
+
 		return { token: newToken, user: userDto };
 	}
 
-	public async signUp(
-		userRequestDto: UserSignUpRequestDto,
-	): Promise<UserSignUpResponseDto> {
+	public async signUp({
+		planId,
+		userRequestDto,
+	}: {
+		planId?: string;
+		userRequestDto: UserSignUpRequestDto;
+	}): Promise<UserSignUpResponseDto> {
 		const { email } = userRequestDto;
 
 		const existingUserByEmail = await this.userService.findByEmail(email);
@@ -142,6 +162,13 @@ class AuthService {
 
 		const userDto = await this.userService.create(userRequestDto);
 		const newToken = await token.generate(userDto.id);
+
+		if (planId) {
+			await this.updatePlanWithUser({
+				planId: Number(planId),
+				userId: userDto.id,
+			});
+		}
 
 		return { token: newToken, user: userDto };
 	}
@@ -162,6 +189,23 @@ class AuthService {
 		await this.passwordTokenService.checkTokenIsValid(existingToken, token);
 
 		this.passwordTokenService.checkTokenIsExpired(existingToken);
+	}
+
+	private async updatePlanWithUser({
+		planId,
+		userId,
+	}: {
+		planId: number;
+		userId: number;
+	}): Promise<void> {
+		const plans = await this.planService.findAll();
+		const plan = plans.items.some(
+			(plan) => plan.id === planId && plan.userId === null,
+		);
+
+		if (plan) {
+			await this.planService.update(planId, { userId });
+		}
 	}
 }
 

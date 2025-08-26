@@ -3,9 +3,11 @@ import {
 	MIN_INDEX,
 	MIN_PAGE,
 	MIN_STACK_PAGES,
+	PLAN_NAME_DEFAULT,
 } from "~/libs/constants/constants.js";
 import { PlanStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { useAppSelector } from "~/libs/hooks/use-app-selector/use-app-selector.hook.js";
 import {
 	type PlanStyleOption,
 	ViewOption,
@@ -74,9 +76,12 @@ const selectPagesToRender = (
 const PlanStyle: React.FC<Properties> = ({
 	inputStyle,
 	page,
-	planTitle = "Plan title",
+	planTitle,
 	view = ViewOption.REGULAR,
 }: Properties) => {
+	const plan = useAppSelector((state) => state.plan.plan);
+	const finalTitle = planTitle ?? String(plan?.title ?? PLAN_NAME_DEFAULT);
+
 	const containerClasses = getClassNames(
 		styles["container"],
 		styles[`${view}-view`],
@@ -112,7 +117,7 @@ const PlanStyle: React.FC<Properties> = ({
 						data-plan-style={inputStyle}
 						key={`plan-page-${String(index)}`}
 					>
-						<PlanHeader inputStyle={inputStyle} title={planTitle} />
+						<PlanHeader inputStyle={inputStyle} title={finalTitle} />
 						<div className={planBodyClasses}>
 							<ul className={dayListClasses} data-view={view}>
 								{daysChunk.map((day) => {

@@ -1,1 +1,1 @@
-export { ZERO_CATEGORY_ID } from "shared";
+export { ZERO } from "shared";

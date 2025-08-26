@@ -1,5 +1,7 @@
 import { type PlanEditForm } from "~/libs/types/types.js";
 
+import { ExecutionTimeType } from "./types/types.js";
+
 const activitiesMockData: PlanEditForm = {
 	days: [
 		{
@@ -8,30 +10,35 @@ const activitiesMockData: PlanEditForm = {
 			tasks: [
 				{
 					description: "Set a calm tone every day.",
+					executionType: ExecutionTimeType.MORNING,
 					id: "day-1-task-1",
 					isCompleted: false,
 					title: "Start the day with guided meditation.",
 				},
 				{
 					description: "Practice gratitude in your journal.",
+					executionType: ExecutionTimeType.MORNING,
 					id: "day-1-task-2",
 					isCompleted: false,
 					title: "Write down three things you are grateful for.",
 				},
 				{
 					description: "Focus on every bite and flavor.",
+					executionType: ExecutionTimeType.AFTERNOON,
 					id: "day-1-task-3",
 					isCompleted: false,
 					title: "Practice mindful eating at lunch.",
 				},
 				{
 					description: "Know what you want to achieve.",
+					executionType: ExecutionTimeType.AFTERNOON,
 					id: "day-1-task-4",
 					isCompleted: false,
 					title: "Set an intention for the week.",
 				},
 				{
 					description: "Spend one hour without screens.",
+					executionType: ExecutionTimeType.EVENING,
 					id: "day-1-task-5",
 					isCompleted: false,
 					title: "Do a digital detox before bed.",
@@ -44,12 +51,14 @@ const activitiesMockData: PlanEditForm = {
 			tasks: [
 				{
 					description: "Choose your favorite physical exercise.",
+					executionType: ExecutionTimeType.MORNING,
 					id: "day-2-task-1",
 					isCompleted: false,
 					title: "Do 30 minutes of physical activity.",
 				},
 				{
 					description: "Start the day with good energy.",
+					executionType: ExecutionTimeType.MORNING,
 					id: "day-2-task-2",
 					isCompleted: false,
 					title: "Prepare a healthy breakfast.",
@@ -62,6 +71,7 @@ const activitiesMockData: PlanEditForm = {
 				},
 				{
 					description: "Improve your body flexibility.",
+					executionType: ExecutionTimeType.EVENING,
 					id: "day-2-task-4",
 					isCompleted: false,
 					title: "Do a stretching routine.",
@@ -80,12 +90,14 @@ const activitiesMockData: PlanEditForm = {
 			tasks: [
 				{
 					description: "Choose a subject that interests you.",
+					executionType: ExecutionTimeType.MORNING,
 					id: "day-3-task-1",
 					isCompleted: false,
 					title: "Read a chapter of a book.",
 				},
 				{
 					description: "Learn something new on your commute.",
+					executionType: ExecutionTimeType.AFTERNOON,
 					id: "day-3-task-2",
 					isCompleted: false,
 					title: "Listen to an educational podcast today.",
@@ -98,12 +110,14 @@ const activitiesMockData: PlanEditForm = {
 				},
 				{
 					description: "Explore a topic of your curiosity.",
+					executionType: ExecutionTimeType.AFTERNOON,
 					id: "day-3-task-4",
 					isCompleted: false,
 					title: "Watch an interesting documentary.",
 				},
 				{
 					description: "Reflect on your learning.",
+					executionType: ExecutionTimeType.EVENING,
 					id: "day-3-task-5",
 					isCompleted: false,
 					title: "Write down one new thing you learned.",
@@ -116,24 +130,28 @@ const activitiesMockData: PlanEditForm = {
 			tasks: [
 				{
 					description: "Listen without interrupting the other person.",
+					executionType: ExecutionTimeType.AFTERNOON,
 					id: "day-4-task-1",
 					isCompleted: false,
 					title: "Practice active listening today.",
 				},
 				{
 					description: "Keep your social bonds strong.",
+					executionType: ExecutionTimeType.EVENING,
 					id: "day-4-task-2",
 					isCompleted: false,
 					title: "Connect with a friend or family member.",
 				},
 				{
 					description: "A small gesture can change a day.",
+					executionType: ExecutionTimeType.EVENING,
 					id: "day-4-task-3",
 					isCompleted: false,
 					title: "Do a random act of kindness.",
 				},
 				{
 					description: "Identify what you felt and why.",
+					executionType: ExecutionTimeType.EVENING,
 					id: "day-4-task-4",
 					isCompleted: false,
 					title: "Write about your emotions.",
@@ -152,30 +170,35 @@ const activitiesMockData: PlanEditForm = {
 			tasks: [
 				{
 					description: "It can be drawing, writing, or playing music.",
+					executionType: ExecutionTimeType.MORNING,
 					id: "day-5-task-1",
 					isCompleted: false,
 					title: "Dedicate 30 minutes to a hobby.",
 				},
 				{
 					description: "A clean environment helps you focus.",
+					executionType: ExecutionTimeType.MORNING,
 					id: "day-5-task-2",
 					isCompleted: false,
 					title: "Organize a small area of your home.",
 				},
 				{
 					description: "Think of something that relaxes you.",
+					executionType: ExecutionTimeType.AFTERNOON,
 					id: "day-5-task-3",
 					isCompleted: false,
 					title: "Plan an activity for the weekend.",
 				},
 				{
 					description: "Let the music take over you.",
+					executionType: ExecutionTimeType.AFTERNOON,
 					id: "day-5-task-4",
 					isCompleted: false,
 					title: "Listen to a playlist and dance.",
 				},
 				{
 					description: "Think about what you have achieved.",
+					executionType: ExecutionTimeType.AFTERNOON,
 					id: "day-5-task-5",
 					isCompleted: false,
 					title: "Reflect on your achievements today.",
@@ -188,18 +211,21 @@ const activitiesMockData: PlanEditForm = {
 			tasks: [
 				{
 					description: "Go to a park or trail.",
+					executionType: ExecutionTimeType.AFTERNOON,
 					id: "day-6-task-1",
 					isCompleted: false,
 					title: "Spend an hour in nature.",
 				},
 				{
 					description: "Be present in a conversation with someone.",
+					executionType: ExecutionTimeType.EVENING,
 					id: "day-6-task-2",
 					isCompleted: false,
 					title: "Have a conversation without your phone.",
 				},
 				{
 					description: "Cooking can be very relaxing.",
+					executionType: ExecutionTimeType.EVENING,
 					id: "day-6-task-3",
 					isCompleted: false,
 					title: "Try a new recipe today.",
@@ -212,6 +238,7 @@ const activitiesMockData: PlanEditForm = {
 				},
 				{
 					description: "Appreciate the little things around you.",
+					executionType: ExecutionTimeType.EVENING,
 					id: "day-6-task-5",
 					isCompleted: false,
 					title: "Take photos of beautiful things.",
@@ -224,30 +251,35 @@ const activitiesMockData: PlanEditForm = {
 			tasks: [
 				{
 					description: "See what worked and what didn’t.",
+					executionType: ExecutionTimeType.MORNING,
 					id: "day-7-task-1",
 					isCompleted: false,
 					title: "Review the highlights of the week.",
 				},
 				{
 					description: "Set your focus for the coming days.",
+					executionType: ExecutionTimeType.MORNING,
 					id: "day-7-task-2",
 					isCompleted: false,
 					title: "Plan 3 priorities for the week.",
 				},
 				{
 					description: "Make your daily routine easier.",
+					executionType: ExecutionTimeType.MORNING,
 					id: "day-7-task-3",
 					isCompleted: false,
 					title: "Prepare healthy snacks for the days.",
 				},
 				{
 					description: "Start the week with everything organized.",
+					executionType: ExecutionTimeType.AFTERNOON,
 					id: "day-7-task-4",
 					isCompleted: false,
 					title: "Tidy up your space for the week.",
 				},
 				{
 					description: "It can be a bath or reading.",
+					executionType: ExecutionTimeType.AFTERNOON,
 					id: "day-7-task-5",
 					isCompleted: false,
 					title: "Do a relaxing activity today.",

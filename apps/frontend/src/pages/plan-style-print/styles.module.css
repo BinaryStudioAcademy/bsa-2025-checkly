@@ -7,6 +7,9 @@
 	width: 210mm;
 	min-height: 297mm;
 	margin: 0 auto;
+}
+
+.print-container--with-remarks {
 	background: var(--color-bg-plan-style-with-remarks, #f7e9ce);
 }
 

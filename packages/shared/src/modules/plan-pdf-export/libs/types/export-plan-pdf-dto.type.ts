@@ -5,7 +5,8 @@ type ExportPlanPdfDto = {
 	format?: PaperFormatValue;
 	html: string;
 	page?: number;
-	style?: string;
+	planStyle?: string;
+	title?: string;
 	windowSize?: WindowSize;
 };
 

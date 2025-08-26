@@ -9,7 +9,7 @@ const planRepository = new PlanRepository(PlanModel);
 const planService = new PlanService(planRepository);
 const planController = new PlanController(logger, planService);
 
-export { planController };
+export { planController, planService };
 export {
 	type PlanCreateRequestDto,
 	type PlanDayDto,

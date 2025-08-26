@@ -39,10 +39,14 @@ class PlanPdfExportService {
 		const url = new URL(printUrl);
 		url.searchParams.set("view", view);
 
-		const style = dto.style?.trim();
+		const style = dto.planStyle?.trim().toUpperCase();
 
 		if (style) {
 			url.searchParams.set("style", style);
+		}
+
+		if (dto.title) {
+			url.searchParams.set("title", dto.title);
 		}
 
 		if (dto.page) {
@@ -83,10 +87,14 @@ class PlanPdfExportService {
 		const url = new URL(printUrl);
 		url.searchParams.set("view", view);
 
-		const style = dto.style?.trim();
+		const style = dto.planStyle?.trim().toUpperCase();
 
 		if (style) {
 			url.searchParams.set("style", style);
+		}
+
+		if (dto.title) {
+			url.searchParams.set("title", dto.title);
 		}
 
 		if (dto.page) {

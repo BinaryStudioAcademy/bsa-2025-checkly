@@ -1,6 +1,8 @@
 import { ONE, ZERO } from "~/libs/constants/constants.js";
 import { type Plan, type PlanDay } from "~/libs/types/types.js";
 
+import { ExecutionTimeType } from "../libs/types/types.js";
+
 const PLAN_TITLE = "Wellness Week";
 
 const DAY_ACTIVITIES: string[][] = [
@@ -60,6 +62,7 @@ const days: PlanDay[] = DAY_ACTIVITIES.map((activities, dayIndex) => ({
 	id: String(dayIndex),
 	tasks: activities.map((activity, taskIndex) => ({
 		description: activity,
+		executionType: ExecutionTimeType.MORNING,
 		id: `${String(dayIndex)}-${String(taskIndex)}`,
 		isCompleted: false,
 		title: activity,

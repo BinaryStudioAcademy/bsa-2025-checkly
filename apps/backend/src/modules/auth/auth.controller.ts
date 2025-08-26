@@ -62,6 +62,7 @@ class AuthController extends BaseController {
 				this.signIn(
 					options as APIHandlerOptions<{
 						body: UserSignInRequestDto;
+						query?: { planId: string };
 					}>,
 				),
 			isPublic: true,
@@ -77,6 +78,7 @@ class AuthController extends BaseController {
 				this.signUp(
 					options as APIHandlerOptions<{
 						body: UserSignUpRequestDto;
+						query?: { planId: string };
 					}>,
 				),
 			isPublic: true,
@@ -330,10 +332,14 @@ class AuthController extends BaseController {
 	private async signIn(
 		options: APIHandlerOptions<{
 			body: UserSignInRequestDto;
+			query?: { planId: string };
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.authService.signIn(options.body),
+			payload: await this.authService.signIn({
+				planId: options.query?.planId,
+				userRequestDto: options.body,
+			}),
 			status: HTTPCode.OK,
 		};
 	}
@@ -380,10 +386,14 @@ class AuthController extends BaseController {
 	private async signUp(
 		options: APIHandlerOptions<{
 			body: UserSignUpRequestDto;
+			query?: { planId: string };
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.authService.signUp(options.body),
+			payload: await this.authService.signUp({
+				planId: options.query?.planId,
+				userRequestDto: options.body,
+			}),
 			status: HTTPCode.CREATED,
 		};
 	}
