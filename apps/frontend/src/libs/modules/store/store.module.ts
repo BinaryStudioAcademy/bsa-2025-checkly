@@ -9,6 +9,8 @@ import { AppEnvironment } from "~/libs/enums/enums.js";
 import { type Config } from "~/libs/modules/config/config.js";
 import { storage } from "~/libs/modules/storage/storage.js";
 import { authApi, reducer as authReducer } from "~/modules/auth/auth.js";
+import { calendarExportApi } from "~/modules/calendar-export/index.js";
+import { reducer as calendarExportReducer } from "~/modules/calendar-export/slices/calendar-export.js";
 import { pdfExportApi } from "~/modules/pdf-export/pdf-export.js";
 import { reducer as pdfExportReducer } from "~/modules/pdf-export/slices/pdf-export.js";
 import {
@@ -26,6 +28,7 @@ import { listenerMiddleware } from "./listener-middleware/listener-middleware.js
 
 type ExtraArguments = {
 	authApi: typeof authApi;
+	calendarExportApi: typeof calendarExportApi;
 	notifications: typeof notifications;
 	pdfExportApi: typeof pdfExportApi;
 	planApi: typeof planApi;
@@ -38,6 +41,7 @@ type ExtraArguments = {
 
 type RootReducer = {
 	auth: ReturnType<typeof authReducer>;
+	calendarExport: ReturnType<typeof calendarExportReducer>;
 	pdfExport: ReturnType<typeof pdfExportReducer>;
 	plan: ReturnType<typeof planReducer>;
 	planCategory: ReturnType<typeof planCategoryReducer>;
@@ -57,6 +61,7 @@ class Store {
 	public get extraArguments(): ExtraArguments {
 		return {
 			authApi,
+			calendarExportApi,
 			notifications,
 			pdfExportApi,
 			planApi,
@@ -80,6 +85,7 @@ class Store {
 			},
 			reducer: {
 				auth: authReducer,
+				calendarExport: calendarExportReducer,
 				pdfExport: pdfExportReducer,
 				plan: planReducer,
 				planCategory: planCategoryReducer,

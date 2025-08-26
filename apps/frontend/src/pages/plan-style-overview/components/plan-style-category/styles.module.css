@@ -1,3 +1,4 @@
+/* stylelint-disable order/properties-order */
 .category-container {
 	position: relative;
 	display: flex;
@@ -59,12 +60,29 @@
 	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.download-button {
+	text-transform: uppercase;
+	color: rgb(0 0 0 / 100%);
+	background: rgb(198 231 249 / 80%);
+	border: 3px solid rgb(0 0 0 / 80%);
+	border-radius: 1.8rem;
+	font-weight: var(--font-weight-bold);
+	opacity: 1;
+	transform: scale(0.96);
+}
+
 .category-button:hover {
 	color: rgb(0 0 0 / 60%);
 	background: rgb(198 231 249 / 40%);
 	border-color: rgb(0 0 0 / 40%);
 	opacity: 0.9;
 	transform: scale(0.98) translateY(-2px);
+}
+
+.download-button:hover {
+	color: rgb(0 0 0 / 100%);
+	background: rgb(198 231 249 / 80%);
+	border: 3px solid rgb(0 0 0 / 80%);
 }
 
 .category-button.active {

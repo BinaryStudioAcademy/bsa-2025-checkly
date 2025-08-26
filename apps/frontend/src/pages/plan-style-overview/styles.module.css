@@ -99,6 +99,14 @@
 	opacity: 0.8;
 }
 
+.calendar-modal {
+	display: flex;
+	flex-direction: row;
+	gap: var(--space-s);
+	justify-content: flex-end;
+	margin-top: var(--space-m);
+}
+
 @media (width <= 768px) {
 	.header-section {
 		position: relative;

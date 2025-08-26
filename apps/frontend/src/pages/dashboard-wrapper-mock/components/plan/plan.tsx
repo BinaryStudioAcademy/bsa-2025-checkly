@@ -108,16 +108,18 @@ const Plan: React.FC = () => {
 						return <Task indexItem={index + ONE} item={item} key={index} />;
 					})}
 					{plan && (
-						<NavLink className={navLink} to={AppRoute.OVERVIEW_PAGE}>
-							<Button
-								icon={<DecorativeImage src={Download} />}
-								iconOnlySize="medium"
-								label="Download PDF"
-								size={ButtonSizes.LARGE}
-								type={ElementTypes.BUTTON}
-								variant={ButtonVariants.PRIMARY}
-							/>
-						</NavLink>
+						<div className={styles["content__download"]}>
+							<NavLink className={navLink} to={AppRoute.OVERVIEW_PAGE}>
+								<Button
+									icon={<DecorativeImage src={Download} />}
+									iconOnlySize="medium"
+									label="Download PDF"
+									size={ButtonSizes.LARGE}
+									type={ElementTypes.BUTTON}
+									variant={ButtonVariants.PRIMARY}
+								/>
+							</NavLink>
+						</div>
 					)}
 				</div>
 			</div>

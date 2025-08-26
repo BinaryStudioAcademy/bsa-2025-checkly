@@ -49,6 +49,13 @@ export {
 	generatePlanValidationSchema,
 } from "./modules/openai/openai.js";
 export {
+	type ExportDataDto,
+	PlanCalendarExportApiPath,
+	type PlanCalendarExportRequestDto,
+	planCalendarExportSchema,
+	planCalendarRequestSchema,
+} from "./modules/plan-calendar-export/plan-calendar-export.js";
+export {
 	PlanCategoriesApiPath,
 	type PlanCategoryDto,
 	type PlanCategoryWithColorDto,

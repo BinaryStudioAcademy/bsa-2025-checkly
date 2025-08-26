@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { LuCalendarArrowDown } from "react-icons/lu";
 
 import {
 	type CategoryId,
@@ -11,13 +12,19 @@ import { getClassNames } from "~/libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	actionButtonDisabled?: boolean;
+	actionButtonLabel?: string;
 	categories: CategoryId[];
+	onActionButtonClick?: () => void;
 	onCategorySelect?: (categoryId: CategoryId) => void;
 	selectedCategory: CategoryId;
 };
 
 const PlanStyleCategory: React.FC<Properties> = ({
+	actionButtonDisabled,
+	actionButtonLabel,
 	categories,
+	onActionButtonClick,
 	onCategorySelect,
 	selectedCategory,
 }) => {
@@ -55,6 +62,29 @@ const PlanStyleCategory: React.FC<Properties> = ({
 					</button>
 				);
 			})}
+
+			{actionButtonLabel ? (
+				<button
+					aria-label={actionButtonLabel}
+					className={getClassNames(
+						styles["category-button"],
+						styles["download-button"],
+					)}
+					disabled={Boolean(actionButtonDisabled)}
+					onClick={onActionButtonClick}
+					type="button"
+				>
+					<span className={styles["category-icon"]}>
+						<LuCalendarArrowDown aria-hidden="true" />
+					</span>
+					<span className={styles["category-name-full"]}>
+						{actionButtonLabel}
+					</span>
+					<span className={styles["category-name-short"]}>
+						{actionButtonLabel}
+					</span>
+				</button>
+			) : null}
 		</div>
 	);
 };
