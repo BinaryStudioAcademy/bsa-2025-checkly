@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.28.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.28.0...v1.28.1) (2025-08-26)
+
+
+### Bug Fixes
+
+* add newline cy-0 ([1de116a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1de116aee564ff68524e6aa6cf97bdfa2f010418))
+* extend deploy nginx response wait time cy-0 ([206ee98](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/206ee988a5dc60a7857da9ad5aafca70bec6fe91))
+* extend deploy nginx response wait time cy-0 ([e3b4bf6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e3b4bf685c9291f220be7418bdb75eeb22675e84))
+
 ## [1.28.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.27.0...v1.28.0) (2025-08-26)
 
 
