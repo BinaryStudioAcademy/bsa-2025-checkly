@@ -14,6 +14,8 @@
 	height: 100%;
 	padding: var(--gutter);
 	text-align: center;
+
+	--grid-opacity: 0.4;
 }
 
 .no-plans-title {
@@ -24,7 +26,7 @@
 
 .no-plans-message {
 	margin-bottom: var(--space-l);
-	font-size: var(--text-body);
+	font-size: var(--text-size-heading-4);
 	color: var(--color-text-secondary);
 }
 
