@@ -4,6 +4,7 @@ import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
 
 import { QuizApiPath } from "./libs/enums/enums.js";
+import { type QuizCreateRequestDto } from "./libs/types/types.js";
 
 type Constructor = {
 	baseUrl: string;
@@ -16,14 +17,14 @@ class QuizApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.QUIZ, storage });
 	}
 
-	public async create(): Promise<number> {
+	public async create(payload: QuizCreateRequestDto): Promise<number> {
 		const response = await this.load(
 			this.getFullEndpoint(QuizApiPath.ROOT, {}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,
 				method: HTTPRequestMethod.POST,
-				payload: JSON.stringify({}),
+				payload: JSON.stringify(payload),
 			},
 		);
 

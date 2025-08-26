@@ -9,4 +9,4 @@ const quizRepository = new QuizRepository(QuizModel);
 const quizService = new QuizService(quizRepository);
 const quizController = new QuizController(logger, quizService);
 
-export { quizController };
+export { quizController, quizRepository };

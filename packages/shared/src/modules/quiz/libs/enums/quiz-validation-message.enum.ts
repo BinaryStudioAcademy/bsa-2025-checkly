@@ -1,5 +1,6 @@
 const QuizValidationMessage = {
 	ANSWERS_REQUIRED: "Answers are required.",
+	FIELD_REQUIRED: "Field is required",
 	NON_SKIPPED_QUESTION:
 		"At least one of the selected options or user input must be provided for a non-skipped question.",
 	QUESTION_TEXT_MIN_LENGTH:

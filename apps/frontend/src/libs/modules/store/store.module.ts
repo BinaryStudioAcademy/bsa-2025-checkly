@@ -20,7 +20,10 @@ import {
 	reducer as planStylesReducer,
 } from "~/modules/plan-styles/plan-styles.js";
 import { planApi, reducer as planReducer } from "~/modules/plans/plans.js";
-import { quizAnswerApi } from "~/modules/quiz-answers/quiz-answers.js";
+import {
+	quizAnswerApi,
+	reducer as quizAnswerReducer,
+} from "~/modules/quiz-answers/quiz-answers.js";
 import {
 	quizQuestionApi,
 	reducer as quizQuestionReducer,
@@ -54,6 +57,7 @@ type RootReducer = {
 	plan: ReturnType<typeof planReducer>;
 	planCategory: ReturnType<typeof planCategoryReducer>;
 	planStyles: ReturnType<typeof planStylesReducer>;
+	quizAnswer: ReturnType<typeof quizAnswerReducer>;
 	quizQuestion: ReturnType<typeof quizQuestionReducer>;
 	task: ReturnType<typeof taskReducer>;
 };
@@ -100,6 +104,7 @@ class Store {
 				plan: planReducer,
 				planCategory: planCategoryReducer,
 				planStyles: planStylesReducer,
+				quizAnswer: quizAnswerReducer,
 				quizQuestion: quizQuestionReducer,
 				task: taskReducer,
 			},

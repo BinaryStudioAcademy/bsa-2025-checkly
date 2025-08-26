@@ -7,3 +7,4 @@ const allActions = {
 };
 
 export { allActions as actions };
+export { reducer } from "./quiz-answers.slice.js";

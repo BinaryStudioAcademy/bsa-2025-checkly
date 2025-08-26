@@ -5,17 +5,19 @@ import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import { type QuizAnswer } from "../libs/types/types.js";
 import { name as sliceName } from "./quiz-answers.slice.js";
 
-const saveAnswers = createAsyncThunk<number, QuizAnswer[], AsyncThunkConfig>(
-	`${sliceName}/save-answers`,
-	async (payload, { extra }) => {
-		const { quizAnswerApi, quizApi } = extra;
+const saveAnswers = createAsyncThunk<
+	number,
+	{ answers: QuizAnswer[]; categoryId: number },
+	AsyncThunkConfig
+>(`${sliceName}/save-answers`, async (payload, { extra }) => {
+	const { quizAnswerApi, quizApi } = extra;
+	const { answers, categoryId } = payload;
 
-		const quizId = await quizApi.create();
+	const quizId = await quizApi.create({ categoryId });
 
-		await quizAnswerApi.create({ answers: payload, quizId });
+	await quizAnswerApi.create({ answers, quizId });
 
-		return quizId;
-	},
-);
+	return quizId;
+});
 
 export { saveAnswers };

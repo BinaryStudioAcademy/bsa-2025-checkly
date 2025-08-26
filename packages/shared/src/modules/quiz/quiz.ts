@@ -20,10 +20,13 @@ export {
 	type QuizContext,
 	type QuizQuestionsResponseDto,
 } from "./libs/types/types.js";
+export { type QuizResponseDto } from "./libs/types/types.js";
 export {
 	questionCategorySchema as questionCategoryValidationSchema,
 	type QuizAnswerOptionCreateRequestDto,
 	quizAnswerOptionSchema as quizAnswerOptionValidationSchema,
 	quizAnswersSchema as quizAnswersValidationSchema,
+	type QuizCreateRequestDto,
+	quizCreateValidationSchema,
 	quizStateSchema as quizStateValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";

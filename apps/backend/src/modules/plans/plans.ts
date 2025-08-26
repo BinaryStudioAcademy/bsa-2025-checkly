@@ -1,5 +1,6 @@
 import { logger } from "~/libs/modules/logger/logger.js";
 import { planDayRepository } from "~/modules/plan-days/plan-days.js";
+import { quizRepository } from "~/modules/quiz/quiz.js";
 import { taskRepository } from "~/modules/tasks/tasks.js";
 
 import { planCategoryRepository } from "../plan-categories/plan-categories.js";
@@ -19,6 +20,7 @@ const planService = new PlanService({
 	planDayRepository,
 	planRepository,
 	quizAnswerRepository,
+	quizRepository,
 	taskRepository,
 });
 const planController = new PlanController(logger, planService);

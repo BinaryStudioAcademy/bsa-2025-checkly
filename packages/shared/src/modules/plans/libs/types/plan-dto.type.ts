@@ -13,11 +13,11 @@ type PlanDaysTaskDto = PlanDto & {
 };
 
 type PlanDto = {
-	categoryId: number;
+	categoryId: null | number;
 	duration: number;
 	id: number;
 	intensity: string;
-	quizId: number;
+	quizId: null | number;
 	styleId: number;
 	title: string;
 	userId: null | number;

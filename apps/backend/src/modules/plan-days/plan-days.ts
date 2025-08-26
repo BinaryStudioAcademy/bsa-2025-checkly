@@ -10,6 +10,6 @@ const planDayRepository = new PlanDayRepository(PlanDayModel, taskRepository);
 const planDayService = new PlanDayService(planDayRepository);
 const planDayController = new PlanDayController(logger, planDayService);
 
-export { planDayController, planDayRepository, planDayService };
+export { planDayController, planDayRepository };
 export { type PlanDayCreateRequestDto } from "./libs/types/types.js";
 export { planDayCreateValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
