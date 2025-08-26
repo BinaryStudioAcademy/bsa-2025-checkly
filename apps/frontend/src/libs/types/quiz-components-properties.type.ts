@@ -49,7 +49,7 @@ type QuizCategoryCardProperties = QuizCategoryProperties & {
 type QuizCategoryProperties = {
 	color: string;
 	iconHref: string;
-	selected: boolean;
+	isSelected: boolean;
 	title: string;
 };
 
