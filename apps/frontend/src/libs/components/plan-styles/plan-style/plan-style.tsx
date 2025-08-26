@@ -6,7 +6,11 @@ import {
 } from "~/libs/constants/constants.js";
 import { PlanStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { type PlanStyleOption, type ViewOptions } from "~/libs/types/types.js";
+import {
+	type PlanStyleOption,
+	ViewOption,
+	type ViewOptions,
+} from "~/libs/types/types.js";
 
 import { Day, Notes, PlanHeader } from "../components/components.js";
 import { PLAN } from "../mocks/plan-mocks.js";
@@ -36,50 +40,50 @@ const selectPagesToRender = (
 ): (typeof PLAN.days)[] => {
 	const hasValidPage = typeof page === "number" && page >= MIN_PAGE;
 
-	if (view === "desktop" || view === "mobile") {
-		if (hasValidPage) {
-			const clampedIndex = Math.min(
-				page - MIN_PAGE,
-				Math.max(MIN_INDEX, allChunks.length - MIN_PAGE),
-			);
-			const selected = allChunks[clampedIndex] ?? [];
-
-			return selected.length > MIN_INDEX ? [selected] : [];
+	if (view === ViewOption.DESKTOP || view === ViewOption.MOBILE) {
+		if (!hasValidPage) {
+			return allChunks;
 		}
 
-		return allChunks;
+		const clampedIndex = Math.min(
+			page - MIN_PAGE,
+			Math.max(MIN_INDEX, allChunks.length - MIN_PAGE),
+		);
+		const selected = allChunks[clampedIndex] ?? [];
+
+		return selected.length > MIN_INDEX ? [selected] : [];
 	}
 
-	if (view === "regular") {
-		if (hasValidPage) {
-			const clampedIndex = Math.min(
-				page - MIN_PAGE,
-				Math.max(MIN_INDEX, allChunks.length - MIN_PAGE),
-			);
-			const selected = allChunks[clampedIndex] ?? [];
-
-			return selected.length > MIN_INDEX ? [selected] : [];
-		}
-
+	if (view !== "regular") {
 		return [PLAN.days];
 	}
 
-	return [PLAN.days];
+	if (!hasValidPage) {
+		return [PLAN.days];
+	}
+
+	const clampedIndex = Math.min(
+		page - MIN_PAGE,
+		Math.max(MIN_INDEX, allChunks.length - MIN_PAGE),
+	);
+	const selected = allChunks[clampedIndex] ?? [];
+
+	return selected.length > MIN_INDEX ? [selected] : [];
 };
 
 const PlanStyle: React.FC<Properties> = ({
 	inputStyle,
 	page,
 	planTitle = "Plan title",
-	view = "regular",
+	view = ViewOption.REGULAR,
 }: Properties) => {
 	const containerClasses = getClassNames(
 		styles["container"],
 		styles[`${view}-view`],
-		view === "homepage" && styles[`${view}-container`],
-		view === "selection" && styles[`${view}-container`],
-		view === "desktop" && styles[`${view}-container`],
-		view === "mobile" && styles[`${view}-container`],
+		view === ViewOption.HOMEPAGE && styles[`${view}-container`],
+		view === ViewOption.SELECTION && styles[`${view}-container`],
+		view === ViewOption.DESKTOP && styles[`${view}-container`],
+		view === ViewOption.MOBILE && styles[`${view}-container`],
 		PlanStyleModules[inputStyle]["container"],
 	);
 
@@ -91,8 +95,8 @@ const PlanStyle: React.FC<Properties> = ({
 	const dayListClasses = getClassNames(
 		styles["day-list"],
 		PlanStyleModules[inputStyle]["day-list"],
-		view === "desktop" && styles["desktop-day-list"],
-		view === "mobile" && styles["mobile-day-list"],
+		view === ViewOption.DESKTOP && styles["desktop-day-list"],
+		view === ViewOption.MOBILE && styles["mobile-day-list"],
 	);
 
 	const allChunks = chunkDays(PLAN.days, MAX_DAYS_PER_PAGE);
@@ -130,11 +134,11 @@ const PlanStyle: React.FC<Properties> = ({
 			</>
 		);
 
-	if (view === "desktop" && pagesToRender.length >= MIN_STACK_PAGES) {
+	if (view === ViewOption.DESKTOP && pagesToRender.length >= MIN_STACK_PAGES) {
 		return <div className={styles["pages-stack"]}>{content}</div>;
 	}
 
-	if (view === "mobile" && pagesToRender.length >= MIN_STACK_PAGES) {
+	if (view === ViewOption.MOBILE && pagesToRender.length >= MIN_STACK_PAGES) {
 		return <div className={styles["pages-stack"]}>{content}</div>;
 	}
 

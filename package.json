@@ -65,7 +65,7 @@
 	},
 	"simple-git-hooks": {
 		"pre-commit": "npm run lint:type && npm run git:hook:precommit",
-		"commit-msg": "npx --no @commitlint/cli --edit \"$1\""
+		"commit-msg": "npm run git:hook:commit"
 	},
 	"dependencies": {
 		"@aws-sdk/client-s3": "3.864.0",

@@ -6,7 +6,7 @@ import { config } from "~/libs/modules/config/config.js";
 import { NETWORK_IDLE_0 } from "./libs/constants/constants.js";
 import {
 	type ExportPlanPdfDto,
-	VIEW_OPTIONS,
+	ViewOption,
 	type ViewOptions,
 } from "./libs/types/types.js";
 
@@ -31,8 +31,10 @@ class PlanPdfExportService {
 
 		const requested = dto.html.trim();
 		const isViewOption = (value: string): value is ViewOptions =>
-			(VIEW_OPTIONS as readonly string[]).includes(value);
-		const view: ViewOptions = isViewOption(requested) ? requested : "regular";
+			Object.values(ViewOption).includes(value as ViewOptions);
+		const view: ViewOptions = isViewOption(requested)
+			? requested
+			: ViewOption.REGULAR;
 
 		const url = new URL(printUrl);
 		url.searchParams.set("view", view);
@@ -73,8 +75,10 @@ class PlanPdfExportService {
 
 		const requested = dto.html.trim();
 		const isViewOption = (value: string): value is ViewOptions =>
-			(VIEW_OPTIONS as readonly string[]).includes(value);
-		const view: ViewOptions = isViewOption(requested) ? requested : "regular";
+			Object.values(ViewOption).includes(value as ViewOptions);
+		const view: ViewOptions = isViewOption(requested)
+			? requested
+			: ViewOption.REGULAR;
 
 		const url = new URL(printUrl);
 		url.searchParams.set("view", view);

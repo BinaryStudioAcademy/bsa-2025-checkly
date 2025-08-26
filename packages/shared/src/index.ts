@@ -49,7 +49,7 @@ export {
 	type ServerValidationErrorResponse,
 	type ValidationSchema,
 	type ValueOf,
-	VIEW_OPTIONS,
+	ViewOption,
 	type ViewOptions,
 	type WindowSize,
 } from "./libs/types/types.js";

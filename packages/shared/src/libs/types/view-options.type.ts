@@ -1,11 +1,11 @@
-const VIEW_OPTIONS = [
-	"desktop",
-	"homepage",
-	"mobile",
-	"regular",
-	"selection",
-] as const;
+const ViewOption = {
+	DESKTOP: "desktop",
+	HOMEPAGE: "homepage",
+	MOBILE: "mobile",
+	REGULAR: "regular",
+	SELECTION: "selection",
+} as const;
 
-type ViewOptions = (typeof VIEW_OPTIONS)[number];
+type ViewOptions = (typeof ViewOption)[keyof typeof ViewOption];
 
-export { VIEW_OPTIONS, type ViewOptions };
+export { ViewOption, type ViewOptions };

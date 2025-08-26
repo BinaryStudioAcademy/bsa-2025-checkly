@@ -4,7 +4,7 @@ import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.j
 import { PlanStyle as PlanStyleEnum } from "~/libs/enums/enums.js";
 import {
 	type PlanStyleOption,
-	VIEW_OPTIONS,
+	ViewOption,
 	type ViewOptions,
 } from "~/libs/types/types.js";
 
@@ -26,11 +26,11 @@ const PlanStylePrint: React.FC = () => {
 		: PlanStyleEnum.WITH_REMARKS;
 
 	const requested = search.get("view") ?? "";
-	const viewStyle: ViewOptions = (VIEW_OPTIONS as readonly string[]).includes(
-		requested,
+	const viewStyle: ViewOptions = Object.values(ViewOption).includes(
+		requested as ViewOptions,
 	)
 		? (requested as ViewOptions)
-		: "regular";
+		: ViewOption.REGULAR;
 
 	const pageParameter = search.get("page");
 	const parsed = pageParameter ? Number(pageParameter) : undefined;

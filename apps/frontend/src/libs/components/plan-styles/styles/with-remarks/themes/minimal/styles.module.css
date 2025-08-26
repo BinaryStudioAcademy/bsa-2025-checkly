@@ -1,3 +1,4 @@
+/* stylelint-disable selector-pseudo-class-no-unknown */
 @import url("../../styles.module.css");
 
 .container {
@@ -46,12 +47,10 @@ p.notes-text {
 	text-decoration-color: var(--color-plan-style-minimal-grey);
 }
 
-/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.container) .day-list {
 	margin-bottom: calc(24px * var(--coefficient));
 }
 
-/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(#print-container) {
 	background: var(--color-bg-white);
 }

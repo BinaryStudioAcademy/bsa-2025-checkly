@@ -31,7 +31,7 @@ export {
 	type ValidationSchema,
 	type ValueOf,
 	type VerifyTokenRequestDto,
-	VIEW_OPTIONS,
+	ViewOption,
 	type ViewOptions,
 	type WindowSize,
 } from "shared";

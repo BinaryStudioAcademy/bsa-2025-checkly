@@ -1,3 +1,4 @@
+/* stylelint-disable selector-pseudo-class-no-unknown */
 .print-container {
 	box-sizing: border-box;
 	display: flex;
@@ -9,17 +10,14 @@
 	background: var(--color-bg-plan-style-with-remarks, #f7e9ce);
 }
 
-/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(#print-container[data-plan-style="WITH_REMARKS"]) {
 	background: var(--color-bg-plan-style-with-remarks, #f7e9ce);
 }
 
-/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(#print-container[data-plan-style="MINIMAL"]) {
 	background: var(--color-bg-white, #ffffff);
 }
 
-/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(#print-container[data-plan-style="COLOURFUL"]) {
 	background: var(--color-bg-white, #ffffff);
 }
