@@ -60,14 +60,6 @@ const Plan: React.FC = () => {
 		}
 	}, [plan, dispatch]);
 
-	useEffect(() => {
-		const getAllUserPlans = async (): Promise<void> => {
-			await dispatch(planActions.getAllUserPlans());
-		};
-
-		void getAllUserPlans();
-	}, [dispatch]);
-
 	const toggleSelect = useCallback((): void => {
 		setIsSelectOpen((previous) => !previous);
 	}, []);
@@ -75,6 +67,12 @@ const Plan: React.FC = () => {
 	const handleCreatePlan = useCallback((): void => {
 		void navigate(AppRoute.QUIZ);
 	}, [navigate]);
+
+	const handleNavigation = useCallback((): void => {
+		if (plan) {
+			void dispatch(planActions.findPlan(plan.id));
+		}
+	}, [dispatch, plan]);
 
 	const navLink = getClassNames(styles["nav-link"]);
 
@@ -118,12 +116,12 @@ const Plan: React.FC = () => {
 							isSelectOpen ? styles["content__days__open"] : "",
 						)}
 					>
-						{planDays.map((_, index) => {
+						{planDays.map((day, index) => {
 							return (
 								<Day
 									indexDay={index}
 									isOpen={isSelectOpen}
-									key={index}
+									key={day.id}
 									onChangeIsOpen={setIsSelectOpen}
 									onChangeSelectedDay={setSelectedDay}
 									selectedDay={selectedDay}
@@ -147,6 +145,7 @@ const Plan: React.FC = () => {
 								icon={<DecorativeImage src={Download} />}
 								iconOnlySize="medium"
 								label="Download PDF"
+								onClick={handleNavigation}
 								size={ButtonSizes.LARGE}
 								type={ElementTypes.BUTTON}
 								variant={ButtonVariants.PRIMARY}

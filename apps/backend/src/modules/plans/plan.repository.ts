@@ -53,8 +53,7 @@ class PlanRepository implements Repository {
 		return await this.planModel
 			.query()
 			.where({ userId })
-			.orderBy("createdAt", "desc")
-			.withGraphFetched("days.tasks")
+			.withGraphFetched("days(orderByDayNumber).tasks(orderByOrder)")
 			.withGraphFetched("category")
 			.orderBy("updated_at", "desc")
 			.then((plans) => plans.map((plan) => PlanEntity.initialize(plan)));
@@ -64,7 +63,7 @@ class PlanRepository implements Repository {
 		const plan = await this.planModel
 			.query()
 			.findById(id)
-			.withGraphFetched("days.tasks");
+			.withGraphFetched("days(orderByDayNumber).tasks(orderByOrder)");
 
 		return plan ? PlanEntity.initialize(plan) : null;
 	}

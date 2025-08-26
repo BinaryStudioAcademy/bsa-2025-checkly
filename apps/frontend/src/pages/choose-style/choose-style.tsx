@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 import {
 	ArrowLeftIcon,
@@ -25,9 +24,11 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { useAppDispatch } from "~/libs/hooks/use-app-dispatch/use-app-dispatch.hook.js";
 import { useAppSelector } from "~/libs/hooks/use-app-selector/use-app-selector.hook.js";
+import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { type ViewOptions } from "~/libs/types/types.js";
 import { usePlanStyles } from "~/modules/plan-styles/hooks/use-plan-styles.hook.js";
 import { PlanStyle as PlanStyleEnum } from "~/modules/plan-styles/libs/enums/enums.js";
+import { type PlanWithCategoryDto } from "~/modules/plans/libs/types/types.js";
 import { actions as planActions, planApi } from "~/modules/plans/plans.js";
 
 import { styleCards } from "./choose-style.data.js";
@@ -59,7 +60,7 @@ const ChooseStyle: React.FC = () => {
 
 	const handleStyleValidation = useCallback((): StyleValidationResult => {
 		if (!plan?.id || !selectedCard) {
-			toast.error(CHOOSE_STYLE_MESSAGES.SELECT_STYLE_AND_PLAN_ID);
+			notifications.error(CHOOSE_STYLE_MESSAGES.SELECT_STYLE_AND_PLAN_ID);
 
 			return null;
 		}
@@ -67,7 +68,7 @@ const ChooseStyle: React.FC = () => {
 		const selectedStyle = styleCards.find((card) => card.id === selectedCard);
 
 		if (!selectedStyle) {
-			toast.error(CHOOSE_STYLE_MESSAGES.INVALID_STYLE_SELECTION);
+			notifications.error(CHOOSE_STYLE_MESSAGES.INVALID_STYLE_SELECTION);
 
 			return null;
 		}
@@ -96,10 +97,10 @@ const ChooseStyle: React.FC = () => {
 		try {
 			await planApi.updateStyle(validation.planId, validation.styleId);
 			await dispatch(planActions.getAllUserPlans());
-			toast.success(CHOOSE_STYLE_MESSAGES.PLAN_STYLE_UPDATED_SUCCESS);
+			notifications.success(CHOOSE_STYLE_MESSAGES.PLAN_STYLE_UPDATED_SUCCESS);
 			void navigate(AppRoute.OVERVIEW_PAGE);
 		} catch {
-			toast.error(CHOOSE_STYLE_MESSAGES.FAILED_TO_UPDATE_PLAN_STYLE);
+			notifications.error(CHOOSE_STYLE_MESSAGES.FAILED_TO_UPDATE_PLAN_STYLE);
 		} finally {
 			setIsSaving(false);
 		}
@@ -174,6 +175,7 @@ const ChooseStyle: React.FC = () => {
 							<PlanStyle
 								inputStyle={planStyle}
 								notes={NOTES_PLAN_TEMPLATE}
+								plan={plan as PlanWithCategoryDto}
 								view={PLAN_VIEW_OPTION}
 							/>
 							<span className={styles["card-text"]}>{label}</span>

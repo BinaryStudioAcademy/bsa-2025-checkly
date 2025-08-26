@@ -1,3 +1,5 @@
+import { type Modifiers } from "objection";
+
 import {
 	AbstractModel,
 	DatabaseTableName,
@@ -7,9 +9,16 @@ import { type ValueOf } from "~/libs/types/types.js";
 import { type ExecutionTimeType } from "./libs/enums/enums.js";
 
 class TaskModel extends AbstractModel {
+	static readonly modifiers: Modifiers = {
+		orderByOrder(builder) {
+			builder.orderBy("order", "asc");
+		},
+	};
+
 	public static override get tableName(): string {
 		return DatabaseTableName.TASKS;
 	}
+
 	public completedAt!: null | string;
 
 	public description!: string;
