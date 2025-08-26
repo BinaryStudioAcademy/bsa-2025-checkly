@@ -1,8 +1,14 @@
 import React, { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { Loader } from "~/libs/components/components.js";
-import { AppRoute, ErrorMessage, QuizIndexes } from "~/libs/enums/enums.js";
+import {
+	AppRoute,
+	ErrorMessage,
+	QuizIndexes,
+	ZERO,
+} from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import {
 	useAppDispatch,
@@ -17,7 +23,6 @@ import {
 	type QuizAnswer,
 } from "~/modules/quiz-questions/quiz-questions.js";
 import { type QuizState } from "~/modules/quiz-questions/slices/quiz-questions.slice.js";
-import { DEFAULT_QUIZ_STATE } from "~/pages/plan-generation/libs/constants/constants.js";
 
 import { NotesPage } from "./components/notes-page/notes-page.js";
 import { ProgressBar } from "./components/progress-bar/progress-bar.js";
@@ -92,14 +97,24 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 		}
 
 		const stored = await storage.get(StorageKey.QUIZ_STATE);
-		const quizState = stored
-			? (JSON.parse(stored) as QuizState)
-			: DEFAULT_QUIZ_STATE;
 
+		if (!stored) {
+			toast.error(ErrorMessage.QUIZ_NOT_COMPLETED);
+
+			return;
+		}
+
+		const quizState = JSON.parse(stored) as QuizState;
 		const answers = Object.values(quizState.answers);
-		await dispatch(quizAnswerActions.saveAnswers(answers));
 
-		await handleSafeNavigate(AppRoute.PLAN_GENERATION);
+		if (answers.length === ZERO) {
+			toast.error(ErrorMessage.QUIZ_NO_ANSWERS);
+
+			return;
+		}
+
+		void dispatch(quizAnswerActions.saveAnswers(answers));
+		void handleSafeNavigate(AppRoute.PLAN_GENERATION);
 	}, [handleSafeNavigate, dispatch, questions, selectedCategory]);
 
 	const handleNext = useCallback((): void => {
