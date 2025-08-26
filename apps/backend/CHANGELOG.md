@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.11.0...backend-v1.12.0) (2025-08-26)
+
+
+### Features
+
+* add info password tabs cy-314 ([e4f622d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e4f622ddd97baf857b01873bcd4b89df72831aa3))
+
+
+### Bug Fixes
+
+* assign user to plan after successful authentication cy-349 ([a7e130c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a7e130ce47a1d53342532f6139082a795fba76b1))
+* plan not associated to user after succesful authentication cy-349 ([b035088](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b03508875dc1d86a51cc76e6d57cf28bc12707ac))
+
 ## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.10.0...backend-v1.11.0) (2025-08-25)
 
 
