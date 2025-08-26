@@ -17,6 +17,7 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AppRouteType } from "~/libs/types/types.js";
+import { actions as categoryActions } from "~/modules/plan-categories/plan-categories.js";
 import { actions as quizAnswerActions } from "~/modules/quiz-answers/quiz-answers.js";
 import {
 	actions,
@@ -65,6 +66,7 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 		},
 		[navigate],
 	);
+
 	const categoryId = planCategories.find(
 		(category) => category.key === selectedCategory,
 	)?.id;
@@ -74,6 +76,10 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 			void dispatch(actions.fetchQuestions({ categoryId }));
 		}
 	}, [categoryId, dispatch]);
+
+	useEffect(() => {
+		void dispatch(categoryActions.getAll());
+	}, [dispatch]);
 
 	useEffect(() => {
 		const initializeQuiz = async (): Promise<void> => {
