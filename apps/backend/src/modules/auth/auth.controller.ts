@@ -423,11 +423,12 @@ class AuthController extends BaseController {
 	 *                token:
 	 *                  type: string
 	 *                  description: The password reset token to verify
-	 * 				  userId:
-	 * 					type: number
-	 * 					description: The id of the user who is trying to verify token
+	 *                userId:
+	 *                  type: number
+	 *                  description: The id of the user who is trying to verify token
 	 *              required:
 	 *                - token
+	 *                - userId
 	 *      responses:
 	 *        200:
 	 *          description: Token is valid
@@ -463,7 +464,6 @@ class AuthController extends BaseController {
 	 *                    type: number
 	 *                    description: The HTTP status code
 	 */
-
 	private async verifyToken(
 		options: APIHandlerOptions<{
 			body: VerifyTokenRequestDto;

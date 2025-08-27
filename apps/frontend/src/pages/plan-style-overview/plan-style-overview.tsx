@@ -5,7 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { StarsYellow02 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { AppHeader, DecorativeImage } from "~/libs/components/components.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
-import { MESSAGES, ZERO } from "~/libs/constants/constants.js";
+import {
+	getCategoryStyle,
+	MESSAGES,
+	PLAN_NAME_DEFAULT,
+	ZERO,
+} from "~/libs/constants/constants.js";
 import { AppRoute, DataStatus, PlanCategoryId } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, usePlanCategory } from "~/libs/hooks/hooks.js";
@@ -35,7 +40,9 @@ const PlanStyleOverview: React.FC = () => {
 	const isAuthenticated = Boolean(user);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
-	const { selectedCategory } = usePlanCategory(PlanCategoryId.PDF);
+	const { handleCategorySelect, selectedCategory } = usePlanCategory(
+		PlanCategoryId.PDF,
+	);
 
 	useEffect(() => {
 		if (user) {
@@ -76,12 +83,25 @@ const PlanStyleOverview: React.FC = () => {
 
 	const handleDownloadPlan = useCallback(async (): Promise<void> => {
 		try {
-			const resultAction = await dispatch(
-				actions.exportPdf({
-					category: selectedCategory,
-					planStyle: handleGetStyleFromPlan(),
-				}),
-			);
+			let resultAction;
+
+			switch (selectedCategory) {
+				case PlanCategoryId.DESKTOP: {
+					resultAction = await dispatch(actions.exportDesktopPng());
+					break;
+				}
+
+				case PlanCategoryId.MOBILE: {
+					resultAction = await dispatch(actions.exportMobilePng());
+					break;
+				}
+
+				default: {
+					resultAction = await dispatch(
+						actions.exportPdf({ category: selectedCategory }),
+					);
+				}
+			}
 
 			if (isFulfilled(resultAction)) {
 				notifications.success(
@@ -94,7 +114,7 @@ const PlanStyleOverview: React.FC = () => {
 		} catch {
 			notifications.error(MESSAGES.DOWNLOAD.FAILED);
 		}
-	}, [dispatch, selectedCategory, handleGoToDashboard, handleGetStyleFromPlan]);
+	}, [dispatch, selectedCategory, handleGoToDashboard]);
 
 	const handleDownload = useCallback((): void => {
 		void handleDownloadPlan();
@@ -108,12 +128,19 @@ const PlanStyleOverview: React.FC = () => {
 		<div className={getClassNames("grid-pattern", styles["page-container"])}>
 			<AppHeader />
 			<div className={styles["header-section"]}>
-				<PlanStyleCategory />
+				<PlanStyleCategory
+					onSelect={handleCategorySelect}
+					selectedCategory={selectedCategory}
+				/>
 			</div>
 			<div className="flow-loose-xl">
 				<div className={getClassNames(styles["container"])}>
-					<div className={getClassNames("wrapper", styles["plan-content"])}>
-						<PlanStyle inputStyle={handleGetStyleFromPlan()} />
+					<div className={styles["plan-content"]}>
+						<PlanStyle
+							inputStyle={handleGetStyleFromPlan()}
+							planTitle={plan?.title ?? PLAN_NAME_DEFAULT}
+							view={getCategoryStyle(selectedCategory)}
+						/>
 						<DecorativeImage
 							className={styles["yellow-stars-reflection"]}
 							src={StarsYellow02}
