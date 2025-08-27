@@ -102,7 +102,6 @@ class PlanDayRepository implements Repository {
 
 			const taskEntities = tasks.map((task) =>
 				TaskEntity.initializeNew({
-					description: task.description,
 					executionTimeType: task.executionTimeType,
 					order: task.order,
 					planDayId,

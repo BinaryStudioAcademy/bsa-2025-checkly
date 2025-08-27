@@ -10,7 +10,6 @@ const transformPlanToExportData = (
 	const exportDays = plan.days.map((day) => ({
 		day: day.dayNumber,
 		tasks: day.tasks.map((task) => ({
-			notes: task.description,
 			title: task.title,
 		})),
 	}));

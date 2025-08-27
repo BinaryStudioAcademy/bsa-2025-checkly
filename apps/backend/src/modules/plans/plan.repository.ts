@@ -249,7 +249,6 @@ class PlanRepository implements Repository {
 			return (
 				relatedDay?.tasks.map((task) =>
 					TaskEntity.initializeNew({
-						description: task.description,
 						executionTimeType: task.executionTimeType,
 						order: task.order,
 						planDayId,
