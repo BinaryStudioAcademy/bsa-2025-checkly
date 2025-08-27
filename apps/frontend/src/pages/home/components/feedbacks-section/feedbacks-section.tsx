@@ -1,6 +1,4 @@
 import { type FC, useCallback, useState } from "react";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import { Button, Modal } from "~/libs/components/components.js";
 import { DataStatus } from "~/libs/enums/enums.js";
@@ -110,7 +108,6 @@ const FeedbacksSection: FC = () => {
 					/>
 				</Modal>
 			)}
-			<ToastContainer />
 		</section>
 	);
 };
