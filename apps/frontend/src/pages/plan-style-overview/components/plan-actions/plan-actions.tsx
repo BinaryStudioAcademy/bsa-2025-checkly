@@ -11,6 +11,7 @@ import { Button } from "~/libs/components/button/button.js";
 import { Loader } from "~/libs/components/loader/loader.js";
 import { REDIRECT_PARAM } from "~/libs/constants/constants.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
+import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useLocation } from "~/libs/hooks/hooks.js";
 
 import styles from "./styles.module.css";
@@ -50,26 +51,21 @@ const PlanActions: React.FC<Properties> = ({
 	}, [onChooseStyle]);
 
 	return (
-		<div className={styles["footer-container"]}>
-			<div className={styles["actions-container"]}>
-				<Button
-					className={styles["action-button"]}
-					icon={<Palette aria-hidden="true" />}
-					isDisabled={!isAuthenticated}
-					label="CHOOSE STYLE"
-					onClick={handleChooseStyleClick}
-					size="small"
-					variant="secondary"
-				/>
-				<Button
-					className={styles["action-button"]}
-					icon={<EditIcon aria-hidden="true" />}
-					isDisabled={!isAuthenticated}
-					label="EDIT"
-					onClick={handleEditClick}
-					size="small"
-					variant="secondary"
-				/>
+		<div className={getClassNames("flow-loose", styles["footer-container"])}>
+			{!isAuthenticated && (
+				<div className={styles["footer-message"]}>
+					Customize and Download your personal plan by{" "}
+					<Link
+						className={styles["login-link"]}
+						to={`${AppRoute.SIGN_IN}?${REDIRECT_PARAM}=${encodeURIComponent(location.pathname)}`}
+					>
+						Logging in
+					</Link>
+				</div>
+			)}
+			<div
+				className={getClassNames("cluster flow", styles["actions-container"])}
+			>
 				<Button
 					className={styles["action-button"]}
 					icon={<DownloadIcon aria-hidden="true" />}
@@ -81,30 +77,41 @@ const PlanActions: React.FC<Properties> = ({
 						) : undefined
 					}
 					onClick={handleDownloadClick}
-					size="small"
+					size="large"
 					variant="primary"
 				/>
-				<Button
-					className={styles["action-button"]}
-					icon={<Dashboard aria-hidden="true" />}
-					isDisabled={!isAuthenticated}
-					label="GO TO DASHBOARD"
-					onClick={handleGoToDashboardClick}
-					size="small"
-					variant="secondary"
-				/>
-			</div>
-			{!isAuthenticated && (
-				<div className={styles["footer-message"]}>
-					Customize and Download your Plan by{" "}
-					<Link
-						className={styles["login-link"]}
-						to={`${AppRoute.SIGN_IN}?${REDIRECT_PARAM}=${encodeURIComponent(location.pathname)}`}
-					>
-						Logging in
-					</Link>
+				<div
+					className={getClassNames("cluster", styles["actions-sub-container"])}
+				>
+					<Button
+						className={styles["action-button"]}
+						icon={<Palette aria-hidden="true" />}
+						isDisabled={!isAuthenticated}
+						label="CHOOSE STYLE"
+						onClick={handleChooseStyleClick}
+						size="small"
+						variant="secondary"
+					/>
+					<Button
+						className={styles["action-button"]}
+						icon={<EditIcon aria-hidden="true" />}
+						isDisabled={!isAuthenticated}
+						label="EDIT"
+						onClick={handleEditClick}
+						size="small"
+						variant="secondary"
+					/>
+					<Button
+						className={styles["action-button"]}
+						icon={<Dashboard aria-hidden="true" />}
+						isDisabled={!isAuthenticated}
+						label="GO TO DASHBOARD"
+						onClick={handleGoToDashboardClick}
+						size="small"
+						variant="secondary"
+					/>
 				</div>
-			)}
+			</div>
 		</div>
 	);
 };

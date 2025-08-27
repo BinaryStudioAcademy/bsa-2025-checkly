@@ -8,6 +8,7 @@ import {
 	TwinklesYellow,
 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
+import { SKELETON_COUNT } from "~/libs/constants/category-skeleton-count.js";
 import {
 	AppRoute,
 	ButtonLabels,
@@ -23,6 +24,7 @@ import {
 import { actions } from "~/modules/quiz-questions/quiz-questions.js";
 import { QuizCategoryCard } from "~/pages/quiz/components/quiz-category-card/quiz-category-card.js";
 
+import { QuizCategoryCardSkeleton } from "./components/quiz-category-card/quiz-category-card-skeleton.js";
 import styles from "./styles.module.css";
 
 const Quiz: React.FC = (): React.ReactElement => {
@@ -33,7 +35,8 @@ const Quiz: React.FC = (): React.ReactElement => {
 		void dispatch(planActions.getAll());
 	}, [dispatch]);
 
-	const { planCategories } = useAppSelector((state) => state.planCategory);
+	const { dataStatus: planCategoriesDataStatus, planCategories } =
+		useAppSelector((state) => state.planCategory);
 	const { selectedCategory } = useAppSelector((state) => state.quizQuestion);
 
 	const handleCategorySelect = useCallback(
@@ -74,6 +77,12 @@ const Quiz: React.FC = (): React.ReactElement => {
 	const renderCategories = (
 		categories: PlanCategoryWithColorDto[],
 	): JSX.Element[] => {
+		if (planCategoriesDataStatus.length === ZERO) {
+			return Array.from({ length: SKELETON_COUNT }, (_, index) => (
+				<QuizCategoryCardSkeleton key={`skeleton-${String(index)}`} />
+			));
+		}
+
 		return categories.map((category) => (
 			<QuizCategoryCard
 				color={category.color}

@@ -87,7 +87,7 @@ const Profile: React.FC = () => {
 
 	return (
 		<div className={contentClasses}>
-			<div className={styles["profile-container"]}>
+			<div className={getClassNames("flow-loose", styles["profile-container"])}>
 				<AvatarEdit />
 				<h1 className={styles["title"]}>Profile</h1>
 				<Tabs
