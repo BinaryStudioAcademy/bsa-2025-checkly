@@ -22,15 +22,13 @@ const generatePlan = createAsyncThunk<
 
 	const state = getState();
 
-	const userId = state.auth.user?.id;
-
 	const stored = await storage.get(StorageKey.QUIZ_ID);
 	const quizId = Number(stored);
 
 	const plan = await planApi.generate({
 		quizAnswers: payload,
 		quizId,
-		userId,
+		userId: state.auth.user?.id,
 	});
 
 	if (!plan.userId) {

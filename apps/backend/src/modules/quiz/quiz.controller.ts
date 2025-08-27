@@ -24,6 +24,7 @@ class QuizController extends BaseController {
 		this.addRoute({
 			handler: (options) =>
 				this.create(options as APIBodyOptions<QuizCreateRequestDto>),
+			isPublic: true,
 			method: HTTPRequestMethod.POST,
 			path: QuizApiPath.ROOT,
 			validation: {
