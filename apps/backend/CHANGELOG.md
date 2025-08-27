@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.13.0...backend-v1.14.0) (2025-08-27)
+
+
+### Features
+
+* add improvements to prompt cy-256 ([2c802d2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2c802d208a98317596584716166057198b108834))
+* add improvements to prompt cy-256 ([ce6f15c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ce6f15c3664f98f0b8b3fde109d8d24f5facdc68))
+
 ## [1.13.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.12.0...backend-v1.13.0) (2025-08-27)
 
 

@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.25.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.24.0...frontend-v1.25.0) (2025-08-27)
+
+
+### Features
+
+* add improvements to prompt cy-256 ([2c802d2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2c802d208a98317596584716166057198b108834))
+* add improvements to prompt cy-256 ([ce6f15c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ce6f15c3664f98f0b8b3fde109d8d24f5facdc68))
+
+
+### Bug Fixes
+
+* restore toast notifications display cy-391 ([6eb44d8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6eb44d88ea8fbbffff5e7cca95567a2df7a35ef4))
+
 ## [1.24.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.23.0...frontend-v1.24.0) (2025-08-27)
 
 
