@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-import { Download } from "~/assets/img/icons/icons.js";
 import { DownloadIcon } from "~/assets/img/icons/icons.js";
-import { Button, DecorativeImage } from "~/libs/components/components.js";
+import { Button } from "~/libs/components/components.js";
 import { ONE, ZERO } from "~/libs/constants/constants.js";
 import {
 	AppRoute,
