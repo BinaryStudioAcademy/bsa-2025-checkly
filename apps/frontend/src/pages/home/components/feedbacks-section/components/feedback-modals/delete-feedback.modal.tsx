@@ -1,0 +1,81 @@
+import { type FC, useCallback, useEffect } from "react";
+
+import { Button, Loader } from "~/libs/components/components.js";
+import { DataStatus } from "~/libs/enums/enums.js";
+import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
+import { actions } from "~/modules/feedbacks/feedbacks.js";
+
+import { FeedbackLoaderContainer } from "../../feedback-loader-container/feedback-loader-container.js";
+import styles from "./styles.module.css";
+
+type Properties = {
+	handleCancelClick: () => void;
+	id: number;
+	onClose: () => void;
+};
+
+const DeleteFeedbackModal: FC<Properties> = ({
+	handleCancelClick,
+	id,
+	onClose,
+}) => {
+	const dispatch = useAppDispatch();
+	const { dataStatus, feedbacks } = useAppSelector((state) => state.feedbacks);
+
+	const feedbackToDelete = feedbacks.find((feedback) => feedback.id === id);
+	const isDeleting = dataStatus === DataStatus.PENDING;
+
+	useEffect(() => {
+		if (!feedbackToDelete) {
+			void dispatch(actions.fetchFeedbackById(id));
+		}
+	}, [dispatch, id, feedbackToDelete]);
+
+	const handleDeleteClick = useCallback(async () => {
+		const result = await dispatch(actions.deleteFeedback(id)).unwrap();
+
+		if (result) {
+			onClose();
+		}
+	}, [dispatch, id, onClose]);
+
+	const handleDeleteButtonClick = useCallback(() => {
+		void handleDeleteClick();
+	}, [handleDeleteClick]);
+
+	if (!feedbackToDelete || isDeleting) {
+		return <FeedbackLoaderContainer />;
+	}
+
+	return (
+		<div
+			aria-labelledby="feedback-title"
+			className={getClassNames(styles["delete-modal"], "cluster")}
+		>
+			<h2 className={styles["feedback-title"]} id="feedback-title">
+				Do you want to delete this feedback?
+			</h2>
+			<p className={styles["feedback-text"]}>{feedbackToDelete.text}</p>
+			<div className={getClassNames(styles["button-group"], "cluster")}>
+				<Button
+					isDisabled={isDeleting}
+					label="Delete"
+					loader={
+						<Loader
+							container="inline"
+							isLoading={isDeleting}
+							size="small"
+							theme="accent"
+						/>
+					}
+					onClick={handleDeleteButtonClick}
+					type="button"
+				/>
+				<Button label="Cancel" onClick={handleCancelClick} type="button" />
+			</div>
+		</div>
+	);
+};
+
+export { DeleteFeedbackModal };

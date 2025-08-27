@@ -2,6 +2,7 @@ import { config } from "~/libs/modules/config/config.js";
 import { database } from "~/libs/modules/database/database.js";
 import { logger } from "~/libs/modules/logger/logger.js";
 import { authController } from "~/modules/auth/auth.js";
+import { feedbackController } from "~/modules/feedbacks/feedbacks.js";
 import { planCategoryController } from "~/modules/plan-categories/plan-categories.js";
 import { planDayController } from "~/modules/plan-days/plan-days.js";
 import { planPdfExportController } from "~/modules/plan-pdf-export/plan-pdf-export.js";
@@ -27,6 +28,7 @@ const apiV1 = new BaseServerApplicationApi(
 	...planPdfExportController.routes,
 	...planStylesController.routes,
 	...taskController.routes,
+	...feedbackController.routes,
 	...quizQuestionController.routes,
 	...quizAnswerController.routes,
 	...planCategoryController.routes,
