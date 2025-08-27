@@ -75,10 +75,12 @@ class UserService implements Service {
 	public async update(
 		id: number,
 		payload: UserUpdateRequestDto,
+		isReseting: boolean = false,
 	): Promise<null | UserDto> {
 		const updateData = await validateAndPrepareUpdateData({
 			encryptor: this.encryptor,
 			id,
+			isReseting,
 			payload,
 			userRepository: this.userRepository,
 		});

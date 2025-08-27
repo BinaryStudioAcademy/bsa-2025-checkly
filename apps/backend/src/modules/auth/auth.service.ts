@@ -62,7 +62,7 @@ class AuthService {
 
 		if (user) {
 			const { email, name } = user;
-			await this.userService.update(userId, { email, name, password });
+			await this.userService.update(userId, { email, name, password }, true);
 		}
 	}
 
