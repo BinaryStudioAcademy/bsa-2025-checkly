@@ -45,7 +45,7 @@ class PlanApi extends BaseHTTPApi {
 			this.getFullEndpoint(PlansApiPath.GENERATE, {}),
 			{
 				contentType: ContentType.JSON,
-				hasAuth: true,
+				hasAuth: false,
 				method: HTTPRequestMethod.POST,
 				payload: JSON.stringify(payload),
 			},
