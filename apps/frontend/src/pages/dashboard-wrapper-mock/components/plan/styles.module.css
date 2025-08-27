@@ -15,7 +15,8 @@
 	padding: var(--gutter);
 	text-align: center;
 
-	--grid-opacity: 0.4;
+	--grid-color: var(--color-light-grey);
+	--grid-opacity: var(--dashboard-grid-opacity);
 }
 
 .no-plans-title {
@@ -86,7 +87,8 @@
 	width: 100%;
 	height: auto;
 	height: 100%;
-	padding: var(--gutter);
+	padding-top: var(--space-l);
+	padding-bottom: var(--space-xl);
 	overflow: hidden auto;
 	border-right: 1px solid var(--color-border-grey);
 }
@@ -95,13 +97,13 @@
 	z-index: 0;
 	flex: 1;
 	flex-direction: column;
-	padding: var(--gutter);
+	padding: var(--space-l) var(--space-m) var(--space-xl);
 	margin-top: -1px;
 	margin-left: -1px;
 
 	--repel-vertical-alignment: flex-start;
 	--grid-color: var(--color-light-grey);
-	--grid-line: 1px;
+	--grid-opacity: var(--dashboard-grid-opacity);
 }
 
 .content__tasks > button:nth-last-child(2) {

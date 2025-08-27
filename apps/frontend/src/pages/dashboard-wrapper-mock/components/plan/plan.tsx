@@ -1,12 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-import { Download } from "~/assets/img/icons/icons.js";
-import {
-	Button,
-	DecorativeImage,
-	Loader,
-} from "~/libs/components/components.js";
+import { DownloadIcon } from "~/assets/img/icons/icons.js";
+import { Button, Loader } from "~/libs/components/components.js";
 import { ONE, ZERO } from "~/libs/constants/constants.js";
 import {
 	AppRoute,
@@ -176,7 +172,7 @@ const Plan: React.FC = () => {
 				<div
 					className={getClassNames(
 						styles["content__tasks"],
-						"cluster grid-pattern flow",
+						"cluster grid-pattern flow-loose",
 					)}
 				>
 					<TaskList
@@ -191,7 +187,7 @@ const Plan: React.FC = () => {
 						to={AppRoute.CHOOSE_STYLE}
 					>
 						<Button
-							icon={<DecorativeImage src={Download} />}
+							icon={<DownloadIcon />}
 							iconOnlySize="medium"
 							label="Download PDF"
 							size={ButtonSizes.LARGE}
