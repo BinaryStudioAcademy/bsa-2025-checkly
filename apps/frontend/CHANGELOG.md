@@ -1,5 +1,65 @@
 # Changelog
 
+## [1.24.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.23.0...frontend-v1.24.0) (2025-08-27)
+
+
+### Features
+
+* - remove unused files cy-300 ([d1fb34f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d1fb34fd6b41a1df1d78b8944f728a3394e6c30b))
+* - remove unused icon export cy-377 ([114722c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/114722c2365f2cb4530f67ada7543c05e056fec1))
+* * refine dashboard styles cy-300 ([5023193](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/50231930014a27dd95a8a7864b038d5df4e722fe))
+* * update button label cy-377 ([da89945](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/da8994526aeb996b6f6432845fb1fa1f10e62eae))
+* * update categories component cy-377 ([2738f87](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2738f874cdbf8f590267e0ba4fc1f740bd4003c2))
+* * update feedback add modal cy-377 ([eeadccc](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eeadccc866f5d75c34a44afed296779c349595e3))
+* * update hero start link cy-380 ([ee6f663](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ee6f6633823e80fe121628c979b0fbac4aeb8e79))
+* * update landing page, quiz category section cy-300 ([167cf9a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/167cf9a7a22738af8c319f50b37f858b8335f590))
+* * update modal component cy-300 ([5e8cfa9](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5e8cfa9e6e4ba8249aac5411a2490b68ab76a410))
+* * update modal component cy-300 ([cb16c9b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cb16c9b96c0da0322e9b2ba9a3bf45362b9c2437))
+* * update notes-page cy-380 ([a7239f3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a7239f364328753c582837e0a7d8973ca885b452))
+* * update plan page grid styles cy-300 ([2e2f7ef](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2e2f7ef0acb11508c39b83ba640f9a5fe97ac8bf))
+* * update plan-generation message cy-300 ([91c5875](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/91c58753ec79ebf908c173121d44567f5f1bbce7))
+* * update plan-overview page styles cy-300 ([8fb3c24](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8fb3c2482a6e070bc4cc265fc06eb348e1a2a562))
+* * update plan-style-overview cy-300 ([1daf63d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1daf63d786eab529593ece4d198de713207f9abb))
+* * update plan-style-overview page cy-300 ([a777012](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a777012a4e165ff1d805307f09a91e7d08b699ce))
+* * update profile component cy-300 ([457b054](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/457b05453d7ee2246b899374aa51e6b7d66fd101))
+* * update quiz-category skeleton card cy-300 ([c2a6892](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c2a689260a62c6231e0dd5b033ab25316fc0f8e3))
+* + add category skeleton-count const cy-377 ([3c05e34](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3c05e348914952465cc96126eb86d0fd83e9080f))
+* + add footer links cy-380 ([e99ca7e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e99ca7e6a2b4f565d3326631030303af00ab5ea8))
+* add desktop export cy-291 ([a1eaae4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a1eaae49907f60a572f60750931fdf7edaea3d2f))
+* add export to calendar cy-294 ([306600d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/306600d604437c494805e88efc0d13520c4bb71d))
+* add feedback flow cy-170 ([2e9238a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2e9238abe15aa8ec9372855a8a983380c3a3f64f))
+* add plan export to .ics and confirmation modal on preview cy-294 ([c547e37](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c547e376109884fda567f47a34a804280b70e822))
+* add quiz generate plan flow, rewrite save generate plan cy-202 ([9eaafec](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9eaafecac28a9840e04e6d12682b97f933564f9c))
+* add sorting for tasks cy-202 ([40e7be0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/40e7be0f842c6a1aa725a848e2529159d03e3f84))
+* frontend refinements cy-377 ([5357642](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5357642fa6c99675a0ff7e4713f7a103e13bdbe2))
+* **frontend:** avoided a call with same feedback text cy-170 ([38d4d54](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/38d4d54a535d39e8e0c7a65e2766f84fb82a8b05))
+* merge with main and fix conflicts cy-291 ([2b4bd4b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2b4bd4b21b327b1628cb2f4c937da43ca80eecad))
+* plan regeneration cy-202 ([9f3f249](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9f3f24981559bc5417bb4f15ce1d4e7f8991489c))
+* rename download calendar button cy-294 ([2ffb84d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2ffb84d2658ee7f301dd2d43c2e7e3ed29c6910f))
+* update landing links cy-380 ([e6963f8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e6963f8a9791a171a3f010fb30d2ba3673ccd1e9))
+
+
+### Bug Fixes
+
+* add constants, change version cy-202 ([b08b670](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b08b67094df88466b82e47d25db988a595392ec3))
+* add quizId, add userId to plan generation if exists cy-382 ([eee97df](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eee97dfbbb45ffa4d84050c0ac233e2ce0298c49))
+* add token validation on backend cy-385 ([3ea3c51](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3ea3c51be31d0964bb9e39fb64a69da23daeb08b))
+* address pr issues cy-291 ([1afeb9e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1afeb9e9b7e1b8ccc30bebb234cc4050da6b7ff0))
+* days on skeleton from plan duration field cy-382 ([2e1a111](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2e1a1110339cafd27a9f968000559ba6c7cbf3ce))
+* forgot/reset password endpoints – security and validation issues cy-385 ([7181a76](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7181a76ed278e9d34dfbb4cb165bb5d0c9acad33))
+* **frontend:** disabled native validation in profile form cy-370 ([7e1a818](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7e1a8182a7c931d9d9f3244d4d50018ac351591a))
+* **frontend:** disabled native validation in profile form cy-370 ([a72fb3f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a72fb3fe0c1a87340f4ab724b6bbaaa95c83f23e))
+* merge conflicts cy-291 ([ba9ddb7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ba9ddb73d317dbd681844cee3c08d8fefd0bd7f9))
+* missing background on two quiz buttons cy-360 ([69e3f39](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/69e3f39f59aae773a1af20c330c084a54699c541))
+* password reset endpoint requiring current password + duplicate success toasts cy-371 ([aba1a54](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/aba1a542a10ec5ceee5608418fbce204a466c4f5))
+* plan regeneration cy-382 ([773aed8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/773aed82754114dee9600ac16c8f3bf23a6d70a6))
+* resolve conflicts cy-382 ([38c6294](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/38c6294857093548e0b5975bcc30f5f1ab21423c))
+* resolve merge conflicts cy-202 ([b89ea1b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b89ea1b5fb3d58e1709fe3bed16099961bad7b26))
+* ui task card bug cy-382 ([d1b8db8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d1b8db891148b18ab141cbf53e48f926eae4ba7a))
+* update quiz buttons background cy-360 ([a1dcb2d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a1dcb2d18ea2687c009434b2f54e071654d94047))
+* update validation before updating password cy-371 ([434a31e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/434a31ed3548d1c021c6566495f3f5bcdfe7080a))
+* whole plan regeneration blink cy-382 ([747a599](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/747a5995df8fafcb7c98f0713cf559e4032298fd))
+
 ## [1.23.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.22.0...frontend-v1.23.0) (2025-08-26)
 
 
