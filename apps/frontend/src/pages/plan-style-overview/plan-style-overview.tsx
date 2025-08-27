@@ -135,8 +135,12 @@ const PlanStyleOverview: React.FC = () => {
 			</div>
 			<div className="flow-loose-xl">
 				<div className={getClassNames(styles["container"])}>
-					<div className={getClassNames("wrapper", styles["plan-content"])}>
-						<PlanStyle inputStyle={handleGetStyleFromPlan()} />
+					<div className={styles["plan-content"]}>
+						<PlanStyle
+							inputStyle={handleGetStyleFromPlan()}
+							planTitle={plan?.title ?? PLAN_NAME_DEFAULT}
+							view={getCategoryStyle(selectedCategory)}
+						/>
 						<DecorativeImage
 							className={styles["yellow-stars-reflection"]}
 							src={StarsYellow02}
