@@ -10,7 +10,13 @@ import {
 	Modal,
 } from "~/libs/components/components.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
-import { MESSAGES, ONE, ZERO } from "~/libs/constants/constants.js";
+import {
+	getCategoryStyle,
+	MESSAGES,
+	ONE,
+	PLAN_NAME_DEFAULT,
+	ZERO,
+} from "~/libs/constants/constants.js";
 import { AppRoute, DataStatus, PlanCategoryId } from "~/libs/enums/enums.js";
 import { addDays, formatDateForInput } from "~/libs/helpers/date-helpers.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
@@ -42,7 +48,9 @@ const PlanStyleOverview: React.FC = () => {
 	const isAuthenticated = Boolean(user);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
-	const { selectedCategory } = usePlanCategory(PlanCategoryId.PDF);
+	const { handleCategorySelect, selectedCategory } = usePlanCategory(
+		PlanCategoryId.PDF,
+	);
 
 	const [isCalendarModalOpen, setIsCalendarModalOpen] =
 		useState<boolean>(false);
@@ -90,12 +98,25 @@ const PlanStyleOverview: React.FC = () => {
 
 	const handleDownloadPlan = useCallback(async (): Promise<void> => {
 		try {
-			const resultAction = await dispatch(
-				actions.exportPdf({
-					category: selectedCategory,
-					planStyle: handleGetStyleFromPlan(),
-				}),
-			);
+			let resultAction;
+
+			switch (selectedCategory) {
+				case PlanCategoryId.DESKTOP: {
+					resultAction = await dispatch(actions.exportDesktopPng());
+					break;
+				}
+
+				case PlanCategoryId.MOBILE: {
+					resultAction = await dispatch(actions.exportMobilePng());
+					break;
+				}
+
+				default: {
+					resultAction = await dispatch(
+						actions.exportPdf({ category: selectedCategory }),
+					);
+				}
+			}
 
 			if (isFulfilled(resultAction)) {
 				notifications.success(
@@ -108,7 +129,7 @@ const PlanStyleOverview: React.FC = () => {
 		} catch {
 			notifications.error(MESSAGES.DOWNLOAD.FAILED);
 		}
-	}, [dispatch, selectedCategory, handleGoToDashboard, handleGetStyleFromPlan]);
+	}, [dispatch, selectedCategory, handleGoToDashboard]);
 
 	const handleDownload = useCallback((): void => {
 		void handleDownloadPlan();
@@ -118,11 +139,11 @@ const PlanStyleOverview: React.FC = () => {
 		void navigate(AppRoute.CHOOSE_STYLE);
 	}, [navigate]);
 
-	const openCalendarModal = useCallback((): void => {
+	const handleOpenCalendarModal = useCallback((): void => {
 		setIsCalendarModalOpen(true);
 	}, []);
 
-	const closeCalendarModal = useCallback((): void => {
+	const handleCloseCalendarModal = useCallback((): void => {
 		setIsCalendarModalOpen(false);
 	}, []);
 
@@ -150,13 +171,19 @@ const PlanStyleOverview: React.FC = () => {
 				<PlanStyleCategory
 					actionButtonDisabled={isCalendarDownloading}
 					actionButtonLabel="Calendar File"
-					onActionButtonClick={openCalendarModal}
+					onActionButtonClick={handleOpenCalendarModal}
+					onSelect={handleCategorySelect}
+					selectedCategory={selectedCategory}
 				/>
 			</div>
 			<div className="flow-loose-xl">
 				<div className={getClassNames(styles["container"])}>
-					<div className={getClassNames("wrapper", styles["plan-content"])}>
-						<PlanStyle inputStyle={handleGetStyleFromPlan()} />
+					<div className={styles["plan-content"]}>
+						<PlanStyle
+							inputStyle={handleGetStyleFromPlan()}
+							planTitle={plan?.title ?? PLAN_NAME_DEFAULT}
+							view={getCategoryStyle(selectedCategory)}
+						/>
 						<DecorativeImage
 							className={styles["yellow-stars-reflection"]}
 							src={StarsYellow02}
@@ -182,7 +209,7 @@ const PlanStyleOverview: React.FC = () => {
 
 			<Modal
 				isOpen={isCalendarModalOpen}
-				onClose={closeCalendarModal}
+				onClose={handleCloseCalendarModal}
 				title="Download Calendar File"
 			>
 				<p>
@@ -193,7 +220,7 @@ const PlanStyleOverview: React.FC = () => {
 				<div className={styles["calendar-modal"]}>
 					<Button
 						label="Cancel"
-						onClick={closeCalendarModal}
+						onClick={handleCloseCalendarModal}
 						size="small"
 						variant="secondary"
 					/>

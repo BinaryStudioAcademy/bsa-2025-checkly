@@ -76,6 +76,10 @@ class PasswordTokenService implements Service {
 		return await this.passwordTokenRepository.delete(id);
 	}
 
+	public async deleteByUserId(userId: number): Promise<boolean> {
+		return await this.passwordTokenRepository.deleteByUserId(userId);
+	}
+
 	public async find(id: number): Promise<null | PasswordTokenDto> {
 		const item = await this.passwordTokenRepository.find(id);
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -19,6 +19,7 @@ import {
 	DecorativeImage,
 } from "~/libs/components/components.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
+import { ZERO } from "~/libs/constants/constants.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
@@ -28,6 +29,7 @@ import { type ViewOptions } from "~/libs/types/types.js";
 import { usePlanStyles } from "~/modules/plan-styles/hooks/use-plan-styles.hook.js";
 import { PlanStyle as PlanStyleEnum } from "~/modules/plan-styles/libs/enums/enums.js";
 import { actions as planActions, planApi } from "~/modules/plans/plans.js";
+import { actions as planSliceActions } from "~/modules/plans/slices/plan.slice.js";
 
 import { styleCards } from "./choose-style.data.js";
 import { CHOOSE_STYLE_MESSAGES } from "./libs/constants/choose-style.constants.js";
@@ -39,6 +41,8 @@ const PLAN_VIEW_OPTION: ViewOptions = "selection";
 
 const ChooseStyle: React.FC = () => {
 	const plan = useAppSelector((state) => state.plan.plan);
+	const user = useAppSelector((state) => state.auth.user);
+	const userPlans = useAppSelector((state) => state.plan.userPlans);
 	const { styles: planStyles } = usePlanStyles();
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
@@ -46,6 +50,23 @@ const ChooseStyle: React.FC = () => {
 		styleCards[PRESELECTED_ELEMENT_INDEX]?.id ?? null,
 	);
 	const [isSaving, setIsSaving] = useState<boolean>(false);
+
+	useEffect(() => {
+		if (user) {
+			void dispatch(planActions.getAllUserPlans());
+		}
+	}, [user, dispatch]);
+
+	useEffect(() => {
+		if (userPlans.length > ZERO) {
+			const maxId = Math.max(...userPlans.map((p) => p.id));
+			const latestPlan = userPlans.find((p) => p.id === maxId);
+
+			if (latestPlan) {
+				dispatch(planSliceActions.setPlan(latestPlan));
+			}
+		}
+	}, [userPlans, dispatch]);
 
 	const handleGetStyleId = useCallback(
 		(styleName: string): number => {
@@ -179,7 +200,7 @@ const ChooseStyle: React.FC = () => {
 					<Button
 						className={styles["bottom-download-button"]}
 						icon={<DownloadIcon aria-hidden="true" />}
-						isDisabled={isSaving || !selectedCard}
+						isDisabled={isSaving || !selectedCard || !plan?.id}
 						label={isSaving ? "Saving..." : "Save Style"}
 						onClick={handleSaveStyleClick}
 					/>

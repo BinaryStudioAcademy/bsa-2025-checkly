@@ -1,5 +1,18 @@
+/* stylelint-disable selector-pseudo-class-no-unknown */
 .day-item {
 	border-block: 1px solid var(--color-border-soft-pink);
+}
+
+:global(section[data-plan-style="WITH_REMARKS"])
+	:global(ul[data-view="desktop"])
+	> :global([class*="day-item"]) {
+	border: 1px solid var(--color-border-soft-pink);
+}
+
+:global(section[data-plan-style="WITH_REMARKS"])
+	:global(ul[data-view="desktop"])
+	> :global([class*="notes"]) {
+	border: none;
 }
 
 .day-item:nth-child(odd) {

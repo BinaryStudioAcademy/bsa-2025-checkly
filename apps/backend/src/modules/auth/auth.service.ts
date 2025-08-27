@@ -56,13 +56,18 @@ class AuthService {
 
 	public async resetPassword({
 		password,
+		token,
 		userId,
 	}: ResetPasswordRequestDto): Promise<void> {
 		const user = await this.userService.find(userId);
 
+		await this.verifyToken({ token, userId });
+
 		if (user) {
 			const { email, name } = user;
 			await this.userService.update(userId, { email, name, password }, true);
+
+			await this.passwordTokenService.deleteByUserId(userId);
 		}
 	}
 

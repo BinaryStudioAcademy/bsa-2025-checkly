@@ -1,3 +1,4 @@
+/* stylelint-disable selector-pseudo-class-no-unknown */
 .print-container {
 	box-sizing: border-box;
 	display: flex;
@@ -10,6 +11,18 @@
 
 .print-container--with-remarks {
 	background: var(--color-bg-plan-style-with-remarks, #f7e9ce);
+}
+
+:global(#print-container[data-plan-style="WITH_REMARKS"]) {
+	background: var(--color-bg-plan-style-with-remarks, #f7e9ce);
+}
+
+:global(#print-container[data-plan-style="MINIMAL"]) {
+	background: var(--color-bg-white, #ffffff);
+}
+
+:global(#print-container[data-plan-style="COLOURFUL"]) {
+	background: var(--color-bg-white, #ffffff);
 }
 
 @media print {
