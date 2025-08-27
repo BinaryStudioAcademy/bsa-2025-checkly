@@ -19,6 +19,20 @@ class TaskApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.TASKS, storage });
 	}
 
+	public async bulkUpdate(payload: Partial<TaskDto>[]): Promise<TaskDto[]> {
+		const response = await this.load(
+			this.getFullEndpoint(TasksApiPath.TASKS_UPDATE, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: HTTPRequestMethod.PATCH,
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<TaskDto[]>();
+	}
+
 	public async delete(id: number): Promise<void> {
 		await this.load(
 			this.getFullEndpoint(TasksApiPath.TASK_DELETE, { id: String(id) }),

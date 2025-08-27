@@ -33,7 +33,7 @@ async function up(knex: Knex): Promise<void> {
 
 	await knex.raw(`
 		CREATE TRIGGER trg_update_plan_day_timestamp
-		AFTER INSERT OR UPDATE ON tasks
+		AFTER INSERT OR UPDATE OR DELETE ON tasks
 		FOR EACH ROW
 		EXECUTE FUNCTION update_plan_day_timestamp();
 	`);
@@ -58,7 +58,7 @@ async function up(knex: Knex): Promise<void> {
 
 	await knex.raw(`
 		CREATE TRIGGER trg_update_plan_timestamp
-		AFTER INSERT OR UPDATE ON plan_days
+		AFTER INSERT OR UPDATE OR DELETE ON plan_days
 		FOR EACH ROW
 		EXECUTE FUNCTION update_plan_timestamp();
 	`);

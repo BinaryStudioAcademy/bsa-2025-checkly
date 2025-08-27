@@ -8,13 +8,13 @@ import {
 import { PlanStyleModules } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useA4Scale } from "~/libs/hooks/hooks.js";
-import { type PlanDay, type PlanStyleOption } from "~/libs/types/types.js";
+import { type PlanDayDto, type PlanStyleOption } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
 
 type Properties = {
 	containerId?: string;
-	days: PlanDay[];
+	days: PlanDayDto[];
 	firstDayDate: string;
 	isForPrint?: boolean;
 	notes?: string;

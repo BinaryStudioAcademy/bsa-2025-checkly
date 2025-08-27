@@ -1,4 +1,4 @@
-import { type Service } from "~/libs/types/types.js";
+import { type Service, type ValueOf } from "~/libs/types/types.js";
 import { PlanEntity } from "~/modules/plans/plan.entity.js";
 import { type PlanRepository } from "~/modules/plans/plan.repository.js";
 
@@ -9,6 +9,7 @@ import { type PlanCategoryService } from "../plan-categories/plan-category.servi
 import { type PlanDayService } from "../plan-days/plan-day.service.js";
 import { planDayService } from "../plan-days/plan-days.js";
 import { PlanStyle } from "../plan-styles/libs/enums/enums.js";
+import { type ExecutionTimeType } from "../tasks/libs/enums/enums.js";
 import { type TaskService } from "../tasks/task.service.js";
 import { taskService } from "../tasks/tasks.js";
 import { LAST_INDEX } from "./libs/constants/constants.js";
@@ -183,7 +184,9 @@ class PlanService implements Service {
 				const taskResponse = await this.taskService.create(taskEntity);
 				tasks.push({
 					...taskResponse,
-					executionTimeType: taskResponse.executionTimeType || "",
+					executionTimeType: taskResponse.executionTimeType as ValueOf<
+						typeof ExecutionTimeType
+					>,
 				});
 			}
 

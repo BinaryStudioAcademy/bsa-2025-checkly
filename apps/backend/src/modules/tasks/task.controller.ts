@@ -15,6 +15,7 @@ import {
 	taskUpdateValidationSchema,
 } from "~/modules/tasks/tasks.js";
 
+import { type TaskDto } from "../plans/libs/types/types.js";
 import { TaskMessage, TasksApiPath } from "./libs/enums/enums.js";
 
 /**
@@ -130,10 +131,62 @@ class TaskController extends BaseController {
 		});
 
 		this.addRoute({
+			handler: (options) =>
+				this.bulkUpdate(options as APIBodyOptions<Partial<TaskDto>[]>),
+			method: HTTPRequestMethod.PATCH,
+			path: TasksApiPath.TASKS_UPDATE,
+		});
+
+		this.addRoute({
 			handler: (options) => this.delete(options as IdParametersOption),
 			method: HTTPRequestMethod.DELETE,
 			path: TasksApiPath.TASK_DELETE,
 		});
+	}
+
+	/**
+	 * @swagger
+	 * /tasks/bulk-update:
+	 *   patch:
+	 *     summary: Bulk update multiple tasks
+	 *     description: Updates multiple tasks in a single request by providing an array of partial task objects.
+	 *     tags:
+	 *       - Tasks
+	 *     requestBody:
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: array
+	 *             items:
+	 *               $ref: '#/components/schemas/TaskDto'
+	 *     responses:
+	 *       200:
+	 *         description: Tasks updated successfully
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 payload:
+	 *                   type: array
+	 *                   items:
+	 *                     $ref: '#/components/schemas/TaskDto'
+	 *                 status:
+	 *                   type: integer
+	 *                   example: 200
+	 *       400:
+	 *         description: Invalid request body
+	 *       500:
+	 *         description: Internal server error
+	 */
+	private async bulkUpdate(
+		options: APIBodyOptions<Partial<TaskDto>[]>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.taskService.bulkUpdate(options.body),
+			status: HTTPCode.OK,
+		};
 	}
 
 	/**
