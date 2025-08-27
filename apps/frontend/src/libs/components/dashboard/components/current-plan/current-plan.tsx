@@ -1,4 +1,5 @@
 import { type FC } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { Button } from "~/libs/components/components.js";
@@ -8,10 +9,13 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import { getClassNames, getPlanStyleName } from "~/libs/helpers/helpers.js";
 import { useAppSelector, useCallback } from "~/libs/hooks/hooks.js";
 import { CURRENT_PLAN_MESSAGES } from "~/modules/plans/libs/constants/plan.constants.js";
+import { type PlanWithCategoryDto } from "~/modules/plans/libs/types/types.js";
+import { actions as planActions } from "~/modules/plans/plans.js";
 
 import styles from "./styles.module.css";
 
 const CurrentPlan: FC = () => {
+	const dispatch = useDispatch();
 	const currentPlan = useAppSelector(({ plan }) => plan.plan);
 	const userPlansStatus = useAppSelector(
 		({ plan }) => plan.userPlansDataStatus,
@@ -22,8 +26,9 @@ const CurrentPlan: FC = () => {
 		userPlansStatus === DataStatus.IDLE;
 
 	const handleContinue = useCallback((): void => {
+		dispatch(planActions.setCurrentPlan(currentPlan as PlanWithCategoryDto));
 		void navigate(AppRoute.PLAN);
-	}, [navigate]);
+	}, [currentPlan, dispatch, navigate]);
 
 	if (isLoading) {
 		return (

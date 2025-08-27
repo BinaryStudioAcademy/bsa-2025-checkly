@@ -40,8 +40,10 @@ const Plan: React.FC = () => {
 	);
 
 	useEffect(() => {
-		void dispatch(planActions.getPlan());
-	}, [dispatch]);
+		if (!plan) {
+			void dispatch(planActions.getPlan());
+		}
+	}, [dispatch, plan]);
 
 	const handleDayRegenerate = useCallback(
 		(dayId: number) => {

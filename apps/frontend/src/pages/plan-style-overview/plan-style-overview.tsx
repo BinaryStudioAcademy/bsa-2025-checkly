@@ -28,7 +28,7 @@ import styles from "./styles.module.css";
 
 const PlanStyleOverview: React.FC = () => {
 	const user = useAppSelector((state) => state.auth.user);
-	let currentPlan = useAppSelector(({ plan }) => plan.plan);
+	const currentPlan = useAppSelector(({ plan }) => plan.plan);
 	const isAuthenticated = Boolean(user);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
