@@ -28,7 +28,12 @@ export {
 	HTTPError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
-export { configureString, sanitizeTextInput } from "./libs/helpers/helpers.js";
+export {
+	configureString,
+	getIdParameter,
+	sanitizeFeedbackInput,
+	sanitizeTextInput,
+} from "./libs/helpers/helpers.js";
 export { type Config } from "./libs/modules/config/config.js";
 export {
 	type HTTP,
@@ -51,6 +56,22 @@ export {
 	type ValueOf,
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
+export {
+	FeedbackApiPath,
+	type FeedbackCreateRequestDto,
+	feedbackCreateValidationSchema,
+	type FeedbackDeleteResponseDto,
+	type FeedbackDto,
+	FeedbackGetAllOption,
+	type FeedbackPaginationOptions,
+	type FeedbackUpdateRequestDto,
+	type FeedbackUpdateResponseDto,
+	feedbackUpdateValidationSchema,
+	FeedbackValidationRule,
+	type IdParameter,
+	type Pagination,
+	type UserPartialDto,
+} from "./modules/feedbacks/feedbacks.js";
 export {
 	type GeneratedDayDTO,
 	type GeneratedPlanDTO,

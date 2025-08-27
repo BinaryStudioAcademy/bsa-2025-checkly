@@ -17,7 +17,7 @@ const MIN_CHARACTERS = 0;
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
-	label: string;
+	label?: string;
 	maxLength?: number;
 	name: FieldPath<T>;
 	placeholder?: string;
@@ -57,9 +57,11 @@ const Textarea = <T extends FieldValues>({
 
 	return (
 		<div className={textareaContainerClass}>
-			<label className={styles["textarea-label"]} htmlFor={textareaId}>
-				{label}
-			</label>
+			{label && (
+				<label className={styles["textarea-label"]} htmlFor={textareaId}>
+					{label}
+				</label>
+			)}
 			<div className={styles["textarea-wrapper"]}>
 				<textarea
 					{...field}
