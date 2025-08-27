@@ -93,6 +93,7 @@ const ProfilePersonalForm = forwardRef<
 	return (
 		<form
 			className={getClassNames(sharedStyles["form"], "cluster", styles["form"])}
+			noValidate
 			onSubmit={handleFormSubmit}
 			ref={formReference}
 		>
