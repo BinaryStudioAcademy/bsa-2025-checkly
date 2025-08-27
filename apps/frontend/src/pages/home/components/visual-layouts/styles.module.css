@@ -88,3 +88,9 @@
 	pointer-events: none;
 	transform: translate(-120%, -170%);
 }
+
+@media (width <= 600px) {
+	.layout-list {
+		justify-content: flex-start;
+	}
+}
