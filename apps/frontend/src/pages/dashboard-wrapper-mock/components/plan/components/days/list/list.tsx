@@ -9,6 +9,7 @@ type Properties = {
 	isOpen: boolean;
 	onRegenerate: (index: number) => void;
 	plan: null | PlanDaysTaskDto;
+	planDaysNumber: null | number;
 	selectedDay: number;
 	setIsOpen: (index: boolean) => void;
 	setSelectedDay: (index: number) => void;
@@ -18,6 +19,7 @@ const DayList: React.FC<Properties> = ({
 	isOpen,
 	onRegenerate,
 	plan,
+	planDaysNumber,
 	selectedDay,
 	setIsOpen,
 	setSelectedDay,
@@ -25,9 +27,11 @@ const DayList: React.FC<Properties> = ({
 	if (!plan) {
 		return (
 			<>
-				{Array.from({ length: DEFAULT_DAY_AMOUNT }).map((_, index) => (
-					<DaySkeleton index={index} key={index} />
-				))}
+				{Array.from({ length: planDaysNumber ?? DEFAULT_DAY_AMOUNT }).map(
+					(_, index) => (
+						<DaySkeleton index={index} key={index} />
+					),
+				)}
 			</>
 		);
 	}

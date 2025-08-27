@@ -2,19 +2,17 @@ import { useCallback, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { DownloadIcon } from "~/assets/img/icons/icons.js";
-import { Button, Loader } from "~/libs/components/components.js";
+import { Button } from "~/libs/components/components.js";
 import { ONE, ZERO } from "~/libs/constants/constants.js";
 import {
 	AppRoute,
 	ButtonSizes,
 	ButtonVariants,
-	DataStatus,
 	ElementTypes,
 } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
-import { actions } from "~/modules/plans/slices/plan.slice.js";
 import { TASK_INDEXES } from "~/modules/tasks/libs/constants/constants.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
@@ -24,18 +22,15 @@ import styles from "./styles.module.css";
 
 const Plan: React.FC = () => {
 	const [selectedDay, setSelectedDay] = useState<number>(ZERO);
+	const [isPlanRegenerating, setIsPlanRegenerating] = useState<boolean>(false);
 	const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
 	const tasksLoading = useLoadingIds();
 	const daysLoading = useLoadingIds();
 
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	const user = useAppSelector((state) => state.auth.user);
 	const plan = useAppSelector((state) => state.plan.plan);
-	const userPlans = useAppSelector((state) => state.plan.userPlans);
-	const userPlansDataStatus = useAppSelector(
-		(state) => state.plan.userPlansDataStatus,
-	);
+	const planDaysNumber = useAppSelector((state) => state.plan.days);
 
 	useEffect(() => {
 		void dispatch(planActions.getPlan());
@@ -84,8 +79,11 @@ const Plan: React.FC = () => {
 			return;
 		}
 
+		setIsPlanRegenerating(true);
 		void dispatch(planActions.clearPlan());
-		void dispatch(planActions.regeneratePlan(plan.id));
+		void dispatch(planActions.regeneratePlan(plan.id)).finally(() => {
+			setIsPlanRegenerating(false);
+		});
 	}, [dispatch, plan]);
 
 	useEffect(() => {
@@ -102,25 +100,6 @@ const Plan: React.FC = () => {
 		}
 	}, [plan, dispatch]);
 
-	useEffect(() => {
-		const getAllUserPlans = async (): Promise<void> => {
-			await dispatch(planActions.getAllUserPlans());
-		};
-
-		void getAllUserPlans();
-	}, [user, dispatch]);
-
-	useEffect(() => {
-		if (userPlans.length > ZERO && !plan) {
-			const maxId = Math.max(...userPlans.map((p) => p.id));
-			const latestPlan = userPlans.find((p) => p.id === maxId);
-
-			if (latestPlan) {
-				dispatch(actions.setPlan(latestPlan));
-			}
-		}
-	}, [userPlans, plan, dispatch]);
-
 	const toggleSelect = useCallback((): void => {
 		setIsSelectOpen((previous) => !previous);
 	}, []);
@@ -129,14 +108,7 @@ const Plan: React.FC = () => {
 		void navigate(AppRoute.QUIZ);
 	}, [navigate]);
 
-	const hasNoPlans = userPlans.length === ZERO && !plan;
-	const isLoading = userPlansDataStatus === DataStatus.PENDING;
-
-	if (isLoading) {
-		return <Loader />;
-	}
-
-	if (hasNoPlans) {
+	if (!plan && !isPlanRegenerating) {
 		return (
 			<div
 				className={getClassNames(styles["no-plans-container"], "grid-pattern")}
@@ -182,6 +154,7 @@ const Plan: React.FC = () => {
 							isOpen={isSelectOpen}
 							onRegenerate={handleDayRegenerate}
 							plan={plan}
+							planDaysNumber={planDaysNumber}
 							selectedDay={selectedDay}
 							setIsOpen={setIsSelectOpen}
 							setSelectedDay={setSelectedDay}

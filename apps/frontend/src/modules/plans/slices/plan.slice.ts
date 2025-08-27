@@ -17,6 +17,7 @@ import {
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
+	days: null | number;
 	plan: null | PlanDaysTaskDto;
 	selectedStyle: PlanStyleOption;
 	userPlans: PlanDaysTaskDto[];
@@ -25,6 +26,7 @@ type State = {
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
+	days: null,
 	plan: null,
 	selectedStyle: PlanStyle.WITH_REMARKS,
 	userPlans: [],
@@ -80,6 +82,7 @@ const { actions, name, reducer } = createSlice({
 			(state, action) => {
 				state.dataStatus = DataStatus.FULFILLED;
 				state.plan = action.payload;
+				state.days = action.payload.duration;
 			},
 		);
 		builder.addMatcher(

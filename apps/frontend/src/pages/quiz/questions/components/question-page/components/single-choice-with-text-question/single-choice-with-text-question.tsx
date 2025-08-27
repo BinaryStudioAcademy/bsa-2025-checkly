@@ -32,6 +32,8 @@ const SingleChoiceWithTextQuestion: React.FC<
 			const isSwitchingFromOther =
 				shouldClearUserInput && !isOtherOption(option);
 			const newUserInput = isSwitchingFromOther ? "" : userInput;
+			const selected = question.options.find((o) => o.text === option);
+			const optionId = selected?.id.toString() ?? option;
 
 			if (isSwitchingFromOther) {
 				setUserInput("");
@@ -39,11 +41,11 @@ const SingleChoiceWithTextQuestion: React.FC<
 
 			setSelectedOption(option);
 			onAnswer({
-				selectedOption: optionId?.toString() ?? option,
+				selectedOption: optionId,
 				userInput: newUserInput,
 			});
 		},
-		[onAnswer, optionId, shouldClearUserInput, userInput],
+		[onAnswer, question, shouldClearUserInput, userInput],
 	);
 
 	const handleTextChange = useCallback(

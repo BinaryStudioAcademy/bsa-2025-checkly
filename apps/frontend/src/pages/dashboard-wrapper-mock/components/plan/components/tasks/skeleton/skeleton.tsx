@@ -14,19 +14,17 @@ const TaskSkeleton: React.FC<Properties> = ({ indexItem }) => {
 		<div
 			className={getClassNames(
 				sharedStyles["content__tasks-item"],
+				styles["content__tasks-item"],
 				"wrapper",
 				sharedStyles[`color-${String(indexItem)}`],
 			)}
 		>
-			<h3 aria-hidden="true" className={styles["skeleton-box"]} />
-			<div className={styles["description-wrapper"]}>
-				<h5 className={styles["skeleton-box"]}>
-					Task generation title skeleton
-				</h5>
-				<p className={styles["skeleton-box"]}>Task description skeleton</p>
+			<h3 aria-hidden="true" className={styles["skeleton-circle-large"]} />
+			<div className={sharedStyles["description-wrapper"]}>
+				<h5 aria-hidden="true" className={styles["skeleton-box"]} />
 			</div>
 			<div className={sharedStyles["item-actions"]}>
-				<div className={styles["item-actions__time"]} />
+				<div className={styles["skeleton-item-time"]} />
 				<div className={sharedStyles["item-actions_buttons-wrapper"]}>
 					<div className={styles["skeleton-circle"]} />
 					<div className={styles["skeleton-circle"]} />
