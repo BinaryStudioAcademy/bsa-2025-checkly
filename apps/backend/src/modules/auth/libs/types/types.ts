@@ -1,0 +1,1 @@
+export { forgotPasswordValidationSchema } from "shared";

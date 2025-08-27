@@ -18,6 +18,7 @@ import {
 
 import { type AuthService } from "./auth.service.js";
 import { AuthApiPath } from "./libs/enums/enums.js";
+import { forgotPasswordValidationSchema } from "./libs/types/types.js";
 
 /**
  * @swagger
@@ -105,6 +106,9 @@ class AuthController extends BaseController {
 			isPublic: true,
 			method: HTTPRequestMethod.POST,
 			path: AuthApiPath.FORGOT_PASSWORD,
+			validation: {
+				body: forgotPasswordValidationSchema,
+			},
 		});
 
 		this.addRoute({
