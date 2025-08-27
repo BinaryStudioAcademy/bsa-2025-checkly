@@ -33,6 +33,12 @@ const overridesConfigs = [
 			"@typescript-eslint/no-magic-numbers": ["off"],
 		},
 	},
+	{
+		files: ["src/modules/quiz-answers/quiz-answer.repository.ts"],
+		rules: {
+			quotes: ["off"],
+		},
+	},
 ];
 
 /** @type {Config[]} */

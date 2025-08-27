@@ -1,5 +1,6 @@
-export { PlansApiPath } from "./libs/enums/enums.js";
+export { PlanAction, PlansApiPath } from "./libs/enums/enums.js";
 export {
+	type PlanActionType,
 	type PlanDayDto,
 	type PlanDaysTaskDto,
 	type PlanDto,
@@ -9,6 +10,7 @@ export {
 	type PlanStyleUpdateRequestDto,
 	type PlanUpdateRequestDto,
 	type PlanWithCategoryDto,
+	type TaskDto,
 } from "./libs/types/types.js";
 export {
 	type PlanCreateRequestDto,

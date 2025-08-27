@@ -1,5 +1,5 @@
 import { ButtonLabels, QuizIndexes } from "~/libs/enums/enums.js";
-import { type QuizQuestionsResponseDto } from "~/modules/quiz/libs/types/types.js";
+import { type QuizQuestionsResponseDto } from "~/modules/quiz-questions/libs/types/types.js";
 
 const isFirstQuestion = (currentQuestion: number): boolean => {
 	return currentQuestion === QuizIndexes.FIRST_INDEX;

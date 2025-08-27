@@ -13,8 +13,10 @@ import { type PlanService } from "~/modules/plans/plan.service.js";
 import {
 	type PlanCreateRequestDto,
 	planCreateValidationSchema,
+	type PlanDayRegenerationRequestDto,
 	type PlanSearchQueryParameter,
 	planSearchQueryParametersValidationSchema,
+	type TaskRegenerationRequestDto,
 } from "~/modules/plans/plans.js";
 
 import { type PlanStyleUpdateRequestDto } from "../plan-styles/libs/types/types.js";
@@ -241,14 +243,47 @@ class PlanController extends BaseController {
 				this.findWithRelations(options as IdParametersOption),
 			isPublic: true,
 			method: HTTPRequestMethod.GET,
-			path: PlansApiPath.PLAN,
+			path: PlansApiPath.$ID,
+		});
+
+		this.addRoute({
+			handler: (options) => this.regenerate(options as IdParametersOption),
+			method: HTTPRequestMethod.PUT,
+			path: PlansApiPath.REGENERATE,
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.regenerateDay(
+					options as APIHandlerOptions<{
+						params: PlanDayRegenerationRequestDto;
+					}>,
+				),
+			method: HTTPRequestMethod.PATCH,
+			path: PlansApiPath.REGENERATE_DAY,
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.regenerateTask(
+					options as APIHandlerOptions<{ params: TaskRegenerationRequestDto }>,
+				),
+			method: HTTPRequestMethod.PATCH,
+			path: PlansApiPath.REGENERATE_TASK,
+		});
+
+		this.addRoute({
+			handler: (options) => this.findActiveByUserId(options),
+			isPublic: false,
+			method: HTTPRequestMethod.GET,
+			path: PlansApiPath.ACTIVE,
 		});
 
 		this.addRoute({
 			handler: (options) =>
 				this.create(options as APIBodyOptions<PlanCreateRequestDto>),
 			method: HTTPRequestMethod.POST,
-			path: PlansApiPath.PLAN_CREATE,
+			path: PlansApiPath.ROOT,
 			validation: {
 				body: planCreateValidationSchema,
 			},
@@ -259,7 +294,7 @@ class PlanController extends BaseController {
 				this.generate(options as APIBodyOptions<GeneratePlanRequestDto>),
 			isPublic: true,
 			method: HTTPRequestMethod.POST,
-			path: PlansApiPath.PLAN_GENERATE,
+			path: PlansApiPath.GENERATE,
 			validation: {
 				body: generatePlanValidationSchema,
 			},
@@ -336,6 +371,17 @@ class PlanController extends BaseController {
 		};
 	}
 
+	private async findActiveByUserId(
+		options: APIHandlerOptions,
+	): Promise<APIHandlerResponse> {
+		const userId = options.user?.id;
+
+		return {
+			payload: await this.planService.findActiveByUserId(userId),
+			status: HTTPCode.OK,
+		};
+	}
+
 	/**
 	 * @swagger
 	 * /plans:
@@ -375,6 +421,7 @@ class PlanController extends BaseController {
 			status: HTTPCode.OK,
 		};
 	}
+
 	/**
 	 * @swagger
 	 * /plans/{id}:
@@ -482,7 +529,135 @@ class PlanController extends BaseController {
 		options: APIBodyOptions<GeneratePlanRequestDto>,
 	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.planService.generate(options.body),
+			payload: await this.planService.generatePlan(options.body),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /plans/{id}/regenerate:
+	 *   put:
+	 *     tags:
+	 *       - plans
+	 *     summary: Regenerate a full plan
+	 *     description: Replaces the content of the plan (days and tasks).
+	 *     security:
+	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - in: path
+	 *         name: id
+	 *         schema:
+	 *           type: integer
+	 *         required: true
+	 *         description: ID of the plan to regenerate
+	 *     responses:
+	 *       200:
+	 *         description: Plan regenerated successfully
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/PlanDaysTaskDto'
+	 *       404:
+	 *         description: Plan not found
+	 */
+	private async regenerate(
+		options: IdParametersOption,
+	): Promise<APIHandlerResponse> {
+		const { id } = options.params;
+
+		return {
+			payload: await this.planService.regenerate(id),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /plans/{planId}/days/{dayId}/regenerate:
+	 *   patch:
+	 *     tags:
+	 *       - plans
+	 *     summary: Regenerate tasks for a specific day in a plan
+	 *     description: Regenerates (replaces) all tasks within the specified day of a plan.
+	 *     security:
+	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - in: path
+	 *         name: planId
+	 *         required: true
+	 *         schema:
+	 *           type: integer
+	 *         description: The ID of the plan
+	 *       - in: path
+	 *         name: dayId
+	 *         required: true
+	 *         schema:
+	 *           type: integer
+	 *         description: The ID of the day to regenerate
+	 *     responses:
+	 *       200:
+	 *         description: Successfully regenerated day tasks
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/PlanDaysTaskDto'
+	 *       404:
+	 *         description: Plan or day not found
+	 */
+	private async regenerateDay(
+		options: APIHandlerOptions<{ params: PlanDayRegenerationRequestDto }>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.planService.regenerateDay(options.params),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /plans/{planId}/days/{dayId}/tasks/{taskId}/regenerate:
+	 *   patch:
+	 *     tags:
+	 *       - plans
+	 *     summary: Regenerate a specific task in a plan day
+	 *     description: Regenerates (replaces) the content of a specific task within the specified day of a plan.
+	 *     security:
+	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - in: path
+	 *         name: planId
+	 *         required: true
+	 *         schema:
+	 *           type: integer
+	 *         description: The ID of the plan
+	 *       - in: path
+	 *         name: dayId
+	 *         required: true
+	 *         schema:
+	 *           type: integer
+	 *         description: The ID of the day containing the task
+	 *       - in: path
+	 *         name: taskId
+	 *         required: true
+	 *         schema:
+	 *           type: integer
+	 *         description: The ID of the task to regenerate
+	 *     responses:
+	 *       200:
+	 *         description: Successfully regenerated the task
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/PlanDaysTaskDto'
+	 *       404:
+	 *         description: Plan, day, or task not found
+	 */
+	private async regenerateTask(
+		options: APIHandlerOptions<{ params: TaskRegenerationRequestDto }>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.planService.regenerateTask(options.params),
 			status: HTTPCode.OK,
 		};
 	}

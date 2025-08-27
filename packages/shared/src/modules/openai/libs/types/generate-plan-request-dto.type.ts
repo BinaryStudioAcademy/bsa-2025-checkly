@@ -2,7 +2,8 @@ import { type QuizAnswersRequestDto } from "../../../quiz/quiz.js";
 
 type GeneratePlanRequestDto = {
 	quizAnswers: QuizAnswersRequestDto;
-	userId: null | number;
+	quizId?: number;
+	userId?: number;
 };
 
 export { type GeneratePlanRequestDto };
