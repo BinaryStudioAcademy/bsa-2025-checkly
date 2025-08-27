@@ -30,6 +30,7 @@ const Plan: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const plan = useAppSelector((state) => state.plan.plan);
+	const planDaysNumber = useAppSelector((state) => state.plan.days);
 
 	useEffect(() => {
 		void dispatch(planActions.getPlan());
@@ -153,6 +154,7 @@ const Plan: React.FC = () => {
 							isOpen={isSelectOpen}
 							onRegenerate={handleDayRegenerate}
 							plan={plan}
+							planDaysNumber={planDaysNumber}
 							selectedDay={selectedDay}
 							setIsOpen={setIsSelectOpen}
 							setSelectedDay={setSelectedDay}
