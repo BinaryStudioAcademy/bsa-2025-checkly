@@ -8,7 +8,9 @@ import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
 	type ForgotPasswordRequestDto,
+	forgotPasswordValidationSchema,
 	type ResetPasswordRequestDto,
+	resetPasswordWithTokenValidationSchema,
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
 	type UserSignUpRequestDto,
@@ -18,7 +20,6 @@ import {
 
 import { type AuthService } from "./auth.service.js";
 import { AuthApiPath } from "./libs/enums/enums.js";
-import { forgotPasswordValidationSchema } from "./libs/types/types.js";
 
 /**
  * @swagger
@@ -133,6 +134,9 @@ class AuthController extends BaseController {
 			isPublic: true,
 			method: HTTPRequestMethod.POST,
 			path: AuthApiPath.RESET_PASSWORD,
+			validation: {
+				body: resetPasswordWithTokenValidationSchema,
+			},
 		});
 	}
 

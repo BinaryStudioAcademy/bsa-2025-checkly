@@ -21,6 +21,7 @@ export {
 	forgotPassword as forgotPasswordValidationSchema,
 	type ResetPasswordFormValidationSchema,
 	resetPassword as resetPasswordValidationSchema,
+	resetPasswordWithToken as resetPasswordWithTokenValidationSchema,
 	type SignUpFormValidationSchema,
 	userSignIn as userSignInValidationSchema,
 	userSignUp as userSignUpValidationSchema,

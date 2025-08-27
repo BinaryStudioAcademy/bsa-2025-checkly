@@ -19,3 +19,5 @@ export { type ResetPasswordRequestDto } from "./libs/types/types.js";
 export { userSignInValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 export { userSignUpValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 export { userUpdateValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+export { forgotPasswordValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+export { resetPasswordWithTokenValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
