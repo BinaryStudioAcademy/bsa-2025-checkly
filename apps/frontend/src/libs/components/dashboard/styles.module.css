@@ -1,7 +1,6 @@
 .dashboard {
 	--grid-color: var(--color-light-grey);
-
-	min-height: 100%;
+	--grid-opacity: var(--dashboard-grid-opacity);
 }
 
 .content-grid {
@@ -11,7 +10,8 @@
 }
 
 .content {
-	padding-block: var(--space-l);
+	padding-top: var(--space-l);
+	padding-bottom: var(--space-xl);
 }
 
 @media (width >= 1200px) {
