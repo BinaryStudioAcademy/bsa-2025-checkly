@@ -1,23 +1,31 @@
 import { isFulfilled } from "@reduxjs/toolkit";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { StarsYellow02 } from "~/assets/img/shared/shapes/shapes.img.js";
-import { AppHeader, DecorativeImage } from "~/libs/components/components.js";
+import {
+	AppHeader,
+	Button,
+	DecorativeImage,
+	Modal,
+} from "~/libs/components/components.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import {
 	getCategoryStyle,
 	MESSAGES,
+	ONE,
 	PLAN_NAME_DEFAULT,
 	ZERO,
 } from "~/libs/constants/constants.js";
 import { AppRoute, DataStatus, PlanCategoryId } from "~/libs/enums/enums.js";
+import { addDays, formatDateForInput } from "~/libs/helpers/date-helpers.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, usePlanCategory } from "~/libs/hooks/hooks.js";
 import { useAppDispatch } from "~/libs/hooks/use-app-dispatch/use-app-dispatch.hook.js";
 import { useAppSelector } from "~/libs/hooks/use-app-selector/use-app-selector.hook.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { type PlanStyleOption } from "~/libs/types/types.js";
+import { actions as calendarExportActions } from "~/modules/calendar-export/slices/calendar-export.js";
 import { actions } from "~/modules/pdf-export/slices/pdf-export.js";
 import {
 	DEFAULT_PLAN_STYLE,
@@ -42,6 +50,13 @@ const PlanStyleOverview: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { handleCategorySelect, selectedCategory } = usePlanCategory(
 		PlanCategoryId.PDF,
+	);
+
+	const [isCalendarModalOpen, setIsCalendarModalOpen] =
+		useState<boolean>(false);
+	const planId = useAppSelector((state) => state.plan.plan?.id ?? null);
+	const isCalendarDownloading = useAppSelector(
+		(state) => state.calendarExport.isDownloading,
 	);
 
 	useEffect(() => {
@@ -124,11 +139,39 @@ const PlanStyleOverview: React.FC = () => {
 		void navigate(AppRoute.CHOOSE_STYLE);
 	}, [navigate]);
 
+	const handleOpenCalendarModal = useCallback((): void => {
+		setIsCalendarModalOpen(true);
+	}, []);
+
+	const handleCloseCalendarModal = useCallback((): void => {
+		setIsCalendarModalOpen(false);
+	}, []);
+
+	const handleConfirmCalendarDownload = useCallback((): void => {
+		if (!planId) {
+			notifications.error(MESSAGES.DOWNLOAD.FAILED);
+
+			return;
+		}
+
+		const payload = {
+			planId: String(planId),
+			startDate: formatDateForInput(addDays(new Date(), ONE).toISOString()),
+		};
+
+		void dispatch(calendarExportActions.exportCalendar(payload)).then(() => {
+			setIsCalendarModalOpen(false);
+		});
+	}, [dispatch, planId]);
+
 	return (
 		<div className={getClassNames("grid-pattern", styles["page-container"])}>
 			<AppHeader />
 			<div className={styles["header-section"]}>
 				<PlanStyleCategory
+					actionButtonDisabled={isCalendarDownloading}
+					actionButtonLabel="Calendar File"
+					onActionButtonClick={handleOpenCalendarModal}
 					onSelect={handleCategorySelect}
 					selectedCategory={selectedCategory}
 				/>
@@ -162,6 +205,44 @@ const PlanStyleOverview: React.FC = () => {
 						onGoToDashboard={handleGoToDashboard}
 					/>
 				</div>
+			</div>
+
+			<Modal
+				isOpen={isCalendarModalOpen}
+				onClose={handleCloseCalendarModal}
+				title="Download Calendar File"
+			>
+				<p>
+					An .ICS file will be downloaded to your computer. You can use this
+					file to import your Checkly plan into the main electronic calendars
+					(Google Calendar, Apple iCalendar, and Outlook).
+				</p>
+				<div className={styles["calendar-modal"]}>
+					<Button
+						label="Cancel"
+						onClick={handleCloseCalendarModal}
+						size="small"
+						variant="secondary"
+					/>
+					<Button
+						isDisabled={isCalendarDownloading}
+						label="Download"
+						onClick={handleConfirmCalendarDownload}
+						size="small"
+						variant="primary"
+					/>
+				</div>
+			</Modal>
+
+			<div className={styles["actions-section"]}>
+				<PlanActions
+					isAuthenticated={isAuthenticated}
+					isDownloading={pdfExportStatus === DataStatus.PENDING}
+					onChooseStyle={handleChooseStyle}
+					onDownload={handleDownload}
+					onEdit={handleEditPlan}
+					onGoToDashboard={handleGoToDashboard}
+				/>
 			</div>
 		</div>
 	);

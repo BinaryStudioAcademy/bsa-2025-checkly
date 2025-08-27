@@ -1,22 +1,30 @@
-import { useCallback } from "react";
+import React, { useCallback } from "react";
+import { LuCalendarArrowDown } from "react-icons/lu";
 
 import {
 	FileIcon,
 	MonitorIcon,
 	SmartphoneIcon,
 } from "~/assets/img/icons/icons.js";
-import { Button } from "~/libs/components/button/button.js";
+import { Button } from "~/libs/components/components.js";
 import { type CategoryId } from "~/libs/constants/constants.js";
 import { PlanCategoryId } from "~/libs/enums/enums.js";
+import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import styles from "./styles.module.css";
 
 type Properties = {
+	actionButtonDisabled?: boolean;
+	actionButtonLabel?: string;
+	onActionButtonClick?: () => void;
 	onSelect: (category: CategoryId) => void;
 	selectedCategory: CategoryId;
 };
 
 const PlanStyleCategory: React.FC<Properties> = ({
+	actionButtonDisabled,
+	actionButtonLabel,
+	onActionButtonClick,
 	onSelect,
 	selectedCategory,
 }: Properties) => {
@@ -66,6 +74,20 @@ const PlanStyleCategory: React.FC<Properties> = ({
 					selectedCategory === PlanCategoryId.DESKTOP ? "primary" : "secondary"
 				}
 			/>
+			{actionButtonLabel ? (
+				<Button
+					aria-label={actionButtonLabel}
+					className={getClassNames(
+						styles["header-buttons-button"],
+						styles["download-button"],
+					)}
+					icon={<LuCalendarArrowDown aria-hidden="true" />}
+					isDisabled={Boolean(actionButtonDisabled)}
+					label={actionButtonLabel}
+					onClick={onActionButtonClick}
+					size="small"
+				/>
+			) : null}
 		</div>
 	);
 };
