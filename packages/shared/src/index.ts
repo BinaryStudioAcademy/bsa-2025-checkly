@@ -183,6 +183,7 @@ export {
 	type ResetPasswordFormValidationSchema,
 	type ResetPasswordRequestDto,
 	resetPasswordValidationSchema,
+	resetPasswordWithTokenValidationSchema,
 	S3BucketIndex,
 	type SignUpFormValidationSchema,
 	type UserDto,

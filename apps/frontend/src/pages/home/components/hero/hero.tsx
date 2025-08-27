@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
 					<Link
 						asButtonSize="large"
 						asButtonVariant="primary"
-						to={AppRoute.TEST_PAGE}
+						to={AppRoute.QUIZ}
 					>
 						Start
 					</Link>
