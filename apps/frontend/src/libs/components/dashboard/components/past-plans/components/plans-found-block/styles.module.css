@@ -1,12 +1,12 @@
 .plans-found {
+	padding: 0.15em 0.3em;
 	font-size: var(--text-body-small);
-	font-weight: var(--font-weight-regular);
+	font-weight: var(--font-weight-semi-bold);
+	color: var(--color-bg-dark);
+	background-color: var(--color-card-yellow);
+	border-radius: var(--radius-s);
 }
 
 .plans-found span {
-	padding: 0.2em;
 	font-weight: var(--font-weight-bold);
-	color: var(--color-bg-dark);
-	background-color: var(--color-card-yellow);
-	border-radius: var(--space-2xs);
 }
