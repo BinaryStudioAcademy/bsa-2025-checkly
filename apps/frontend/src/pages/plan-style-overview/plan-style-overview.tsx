@@ -79,8 +79,8 @@ const PlanStyleOverview: React.FC = () => {
 	}, [plan]);
 
 	const handleEditPlan = useCallback((): void => {
-		notifications.info(MESSAGES.FEATURE.NOT_IMPLEMENTED);
-	}, []);
+		void navigate(AppRoute.PLAN_EDIT);
+	}, [navigate]);
 
 	const pdfExportStatus = useAppSelector((state) => state.pdfExport.dataStatus);
 
@@ -144,7 +144,7 @@ const PlanStyleOverview: React.FC = () => {
 	}, [dispatch, planId]);
 
 	return (
-		<>
+		<div className={getClassNames("grid-pattern", styles["page-container"])}>
 			<AppHeader />
 			<div className={styles["header-section"]}>
 				<PlanStyleCategory
@@ -153,16 +153,29 @@ const PlanStyleOverview: React.FC = () => {
 					onActionButtonClick={openCalendarModal}
 				/>
 			</div>
-			<div className={getClassNames(styles["container"], "grid-pattern")}>
-				<div className={styles["plan-content"]}>
-					<PlanStyle inputStyle={handleGetStyleFromPlan()} />
-					<DecorativeImage
-						className={styles["yellow-stars-reflection"]}
-						src={StarsYellow02}
-					/>
-					<DecorativeImage
-						className={styles["yellow-stars"]}
-						src={StarsYellow02}
+			<div className="flow-loose-xl">
+				<div className={getClassNames(styles["container"])}>
+					<div className={getClassNames("wrapper", styles["plan-content"])}>
+						<PlanStyle inputStyle={handleGetStyleFromPlan()} />
+						<DecorativeImage
+							className={styles["yellow-stars-reflection"]}
+							src={StarsYellow02}
+						/>
+						<DecorativeImage
+							className={styles["yellow-stars"]}
+							src={StarsYellow02}
+						/>
+					</div>
+				</div>
+
+				<div className={styles["actions-section"]}>
+					<PlanActions
+						isAuthenticated={isAuthenticated}
+						isDownloading={pdfExportStatus === DataStatus.PENDING}
+						onChooseStyle={handleChooseStyle}
+						onDownload={handleDownload}
+						onEdit={handleEditPlan}
+						onGoToDashboard={handleGoToDashboard}
 					/>
 				</div>
 			</div>
@@ -204,7 +217,7 @@ const PlanStyleOverview: React.FC = () => {
 					onGoToDashboard={handleGoToDashboard}
 				/>
 			</div>
-		</>
+		</div>
 	);
 };
 

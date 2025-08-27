@@ -83,7 +83,7 @@
 }
 
 .checkbox-option:has(.checkbox-input:checked) .option-text {
-	font-weight: var(--font-weight-semibold);
+	font-weight: var(--font-weight-semi-bold);
 	color: var(--color-text-primary);
 }
 
