@@ -25,6 +25,7 @@ const SingleChoiceWithTextQuestion: React.FC<
 
 	const isOtherSelected = selectedOption && isOtherOption(selectedOption);
 	const shouldClearUserInput = selectedOption && isOtherOption(selectedOption);
+	const optionId = question.options.find((o) => o.text === selectedOption)?.id;
 
 	const handleOptionSelect = useCallback(
 		(option: string): void => {
@@ -38,20 +39,23 @@ const SingleChoiceWithTextQuestion: React.FC<
 
 			setSelectedOption(option);
 			onAnswer({
-				selectedOption: option,
+				selectedOption: optionId?.toString() ?? option,
 				userInput: newUserInput,
 			});
 		},
-		[onAnswer, shouldClearUserInput, userInput],
+		[onAnswer, optionId, shouldClearUserInput, userInput],
 	);
 
 	const handleTextChange = useCallback(
 		(event_: React.ChangeEvent<HTMLInputElement>): void => {
 			const newUserInput = event_.target.value;
 			setUserInput(newUserInput);
-			onAnswer({ selectedOption, userInput: newUserInput });
+			onAnswer({
+				selectedOption: optionId?.toString() ?? selectedOption,
+				userInput: newUserInput,
+			});
 		},
-		[onAnswer, selectedOption],
+		[onAnswer, optionId, selectedOption],
 	);
 
 	const handleTextBlur = useCallback((): void => {

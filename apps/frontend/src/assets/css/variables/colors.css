@@ -3,6 +3,7 @@
 	--color-bg-light: #f6f5fa;
 	--color-bg-white: #ffffff;
 	--color-text-primary: #000000;
+	--color-backdrop-primary: #ffffff80;
 	--color-text-secondary: #68819e;
 	--color-text-tertiary: #0c0c1f;
 	--color-brand-primary: #c6e7f9;
@@ -46,4 +47,5 @@
 	--color-surface: var(--color-bg-white);
 	--color-selection-bg: var(--color-card-yellow);
 	--color-bg-sidebar: var(--color-bg-light);
+	--dashboard-grid-opacity: 0.3;
 }
