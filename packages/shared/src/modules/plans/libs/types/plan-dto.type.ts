@@ -4,6 +4,7 @@ import { type TaskDto } from "../../../tasks/tasks.js";
 type PlanDayDto = {
 	dayNumber: number;
 	id: number;
+	planId: number;
 	tasks: TaskDto[];
 };
 
@@ -12,11 +13,12 @@ type PlanDaysTaskDto = PlanDto & {
 };
 
 type PlanDto = {
-	categoryId: number;
+	categoryId: null | number;
 	createdAt?: string;
 	duration: number;
 	id: number;
 	intensity: string;
+	quizId: null | number;
 	styleId: number;
 	title: string;
 	updatedAt?: string;

@@ -5,13 +5,16 @@ import { TbSunset2 as MorningIcon } from "react-icons/tb";
 
 import { PlanStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
-import { type PlanStyleOption, type ValueOf } from "~/libs/types/types.js";
+import {
+	type ExecutionTimeTypeValue,
+	type PlanStyleOption,
+} from "~/libs/types/types.js";
 
 import { ExecutionTimeType } from "../../libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	executionTimeType?: ValueOf<typeof ExecutionTimeType>;
+	executionTimeType?: ExecutionTimeTypeValue;
 	id: number;
 	inputStyle: PlanStyleOption;
 	taskText: string;

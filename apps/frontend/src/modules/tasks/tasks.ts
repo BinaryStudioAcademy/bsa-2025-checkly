@@ -11,6 +11,7 @@ const taskApi = new TaskApi({
 });
 
 export { taskApi };
+export { getIdParameter } from "./libs/helpers/helpers.js";
 export { actions, reducer } from "./slices/task.js";
 export {
 	type TaskDto,

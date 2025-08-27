@@ -14,6 +14,7 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 		{
 			"dayNumber": 1,
 			"id": 92,
+			"planId": 12,
 			"tasks": [
 				{
 					"completedAt": null,
@@ -75,6 +76,7 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 		{
 			"dayNumber": 2,
 			"id": 93,
+			"planId": 12,
 			"tasks": [
 				{
 					"completedAt": null,
@@ -136,6 +138,7 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 		{
 			"dayNumber": 3,
 			"id": 94,
+			"planId": 12,
 			"tasks": [
 				{
 					"completedAt": null,
@@ -197,6 +200,7 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 		{
 			"dayNumber": 4,
 			"id": 95,
+			"planId": 12,
 			"tasks": [
 				{
 					"completedAt": null,
@@ -258,6 +262,7 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 		{
 			"dayNumber": 5,
 			"id": 96,
+			"planId": 12,
 			"tasks": [
 				{
 					"completedAt": null,
@@ -319,6 +324,7 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 		{
 			"dayNumber": 6,
 			"id": 97,
+			"planId": 12,
 			"tasks": [
 				{
 					"completedAt": null,
@@ -380,6 +386,7 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 		{
 			"dayNumber": 7,
 			"id": 98,
+			"planId": 12,
 			"tasks": [
 				{
 					"completedAt": null,
@@ -442,6 +449,7 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 	"duration": 7,
 	"id": 12,
 	"intensity": "moderate",
+	"quizId": 1,
 	"styleId": 1,
 	"title": "7-Day Personal Development Micro Boost",
 	"userId": 1,

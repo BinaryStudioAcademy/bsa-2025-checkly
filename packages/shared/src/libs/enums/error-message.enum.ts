@@ -1,7 +1,9 @@
 const ErrorMessage = {
+	ANSWERS_NOT_FOUND: "Answers does not exist",
 	AUTHENTICATION_FAILED: "Authentication failed.",
 	AUTHORIZATION_HEADER_MISSING: "Authorization header is missing or invalid.",
 	AVATAR_UPDATE_FAILED: "Failed to update user avatar",
+	CATEGORY_NOT_FOUND: "Category does not exist",
 	FAILED_TO_DELETE_PREVIOUS_AVATAR: "Failed to delete previous avatar",
 	FAILED_TO_UPLOAD_AVATAR: "Failed to upload avatar to storage",
 	FILE_MISSING: "No file uploaded",
@@ -10,6 +12,13 @@ const ErrorMessage = {
 	FORBIDDEN: "Forbidden",
 	ID_INVALID: "Invalid user id",
 	MISSING_REQUEST: "Missing original request for multipart processing",
+	PLAN_DAY_NOT_FOUND: "Plan day does not exist",
+	PLAN_DAY_REGENERATION_FAILED: "Failed to regenerate plan day",
+	PLAN_NOT_FOUND: "Plan does not exist",
+	PLAN_REGENERATION_FAILED: "Failed to regenerate plan",
+	QUIZ_NOT_FOUND: "Quiz does not exist",
+	TASK_NOT_FOUND: "Task does not exist",
+	TASK_REGENERATION_FAILED: "Failed to regenerate task",
 	UNAUTHORIZED_ACCESS: "Unauthorized access",
 	USER_NOT_FOUND: "User not found.",
 } as const;

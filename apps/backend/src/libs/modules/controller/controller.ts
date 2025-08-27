@@ -3,6 +3,7 @@ export {
 	type APIBodyOptions,
 	type APIHandlerOptions,
 	type APIHandlerResponse,
+	type AuthIdParametersOption,
 	type IdParametersOption,
 	type SearchQueryParametersOption,
 } from "./libs/types/types.js";

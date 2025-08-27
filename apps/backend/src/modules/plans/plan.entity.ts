@@ -22,6 +22,8 @@ class PlanEntity implements Entity {
 
 	private intensity: string;
 
+	private quizId: number;
+
 	private styleId: number;
 
 	private title: string;
@@ -38,6 +40,7 @@ class PlanEntity implements Entity {
 		duration,
 		id,
 		intensity,
+		quizId,
 		styleId,
 		title,
 		updatedAt,
@@ -50,6 +53,7 @@ class PlanEntity implements Entity {
 		duration: number;
 		id: null | number;
 		intensity: string;
+		quizId: number;
 		styleId: number;
 		title: string;
 		updatedAt?: string;
@@ -60,6 +64,7 @@ class PlanEntity implements Entity {
 		this.userId = userId;
 		this.duration = duration;
 		this.intensity = intensity;
+		this.quizId = quizId;
 		this.days = days;
 		this.categoryId = categoryId;
 		this.category = category;
@@ -76,6 +81,7 @@ class PlanEntity implements Entity {
 		duration,
 		id,
 		intensity,
+		quizId,
 		styleId,
 		title,
 		updatedAt,
@@ -88,6 +94,7 @@ class PlanEntity implements Entity {
 		duration: number;
 		id: number;
 		intensity: string;
+		quizId: number;
 		styleId: number;
 		title: string;
 		updatedAt?: string;
@@ -101,6 +108,7 @@ class PlanEntity implements Entity {
 			duration,
 			id,
 			intensity,
+			quizId,
 			styleId,
 			title,
 			updatedAt,
@@ -112,6 +120,7 @@ class PlanEntity implements Entity {
 		categoryId,
 		duration,
 		intensity,
+		quizId,
 		styleId,
 		title,
 		userId,
@@ -119,6 +128,7 @@ class PlanEntity implements Entity {
 		categoryId: number;
 		duration: number;
 		intensity: string;
+		quizId: number;
 		styleId: number;
 		title: string;
 		userId: null | number;
@@ -130,6 +140,7 @@ class PlanEntity implements Entity {
 			duration,
 			id: null,
 			intensity,
+			quizId,
 			styleId,
 			title,
 			updatedAt: "",
@@ -141,6 +152,7 @@ class PlanEntity implements Entity {
 		categoryId: number;
 		duration: number;
 		intensity: string;
+		quizId: number;
 		styleId: number;
 		title: string;
 		userId: null | number;
@@ -149,6 +161,7 @@ class PlanEntity implements Entity {
 			categoryId: this.categoryId,
 			duration: this.duration,
 			intensity: this.intensity,
+			quizId: this.quizId,
 			styleId: this.styleId,
 			title: this.title,
 			userId: this.userId,
@@ -161,6 +174,7 @@ class PlanEntity implements Entity {
 		duration: number;
 		id: number;
 		intensity: string;
+		quizId: number;
 		styleId: number;
 		title: string;
 		updatedAt?: string;
@@ -172,6 +186,7 @@ class PlanEntity implements Entity {
 			duration: this.duration,
 			id: this.id as number,
 			intensity: this.intensity,
+			quizId: this.quizId,
 			styleId: this.styleId,
 			title: this.title,
 			updatedAt: this.updatedAt,
@@ -192,6 +207,7 @@ class PlanEntity implements Entity {
 			days: this.days.map((day) => ({
 				dayNumber: day.dayNumber,
 				id: day.id,
+				planId: day.planId,
 				tasks: day.tasks.map((task: TaskDto) => ({
 					completedAt: task.completedAt,
 					description: task.description,

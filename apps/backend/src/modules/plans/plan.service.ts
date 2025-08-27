@@ -1,25 +1,30 @@
-import { type Service, type ValueOf } from "~/libs/types/types.js";
+import { ZERO } from "~/libs/constants/constants.js";
+import { type Service } from "~/libs/types/types.js";
 import { PlanEntity } from "~/modules/plans/plan.entity.js";
 import { type PlanRepository } from "~/modules/plans/plan.repository.js";
 
 import { openAiService } from "../openai/openai.js";
 import { type OpenAIService } from "../openai/openai.service.js";
-import { planCategoryService } from "../plan-categories/plan-categories.js";
-import { type PlanCategoryService } from "../plan-categories/plan-category.service.js";
-import { type PlanDayService } from "../plan-days/plan-day.service.js";
-import { planDayService } from "../plan-days/plan-days.js";
-import { PlanStyle } from "../plan-styles/libs/enums/enums.js";
-import { type ExecutionTimeType } from "../tasks/libs/enums/enums.js";
-import { type TaskService } from "../tasks/task.service.js";
-import { taskService } from "../tasks/tasks.js";
-import { LAST_INDEX } from "./libs/constants/constants.js";
+import { type PlanCategoryRepository } from "../plan-categories/plan-category.repository.js";
+import { type PlanDayRepository } from "../plan-days/plan-day.repository.js";
+import { type QuizAnswerRepository } from "../quiz-answers/quiz-answer.repository.js";
+import { type QuizRepository } from "../quiz/quiz.repository.js";
+import { type TaskRepository } from "../tasks/task.repository.js";
 import {
+	ErrorMessage,
+	HTTPCode,
+	HTTPError,
+	PlanAction,
+} from "./libs/enums/enums.js";
+import {
+	type GeneratedDayDTO,
 	type GeneratedPlanDTO,
+	type GeneratedTaskDTO,
 	type GeneratePlanRequestDto,
-	type PlanCategoryDto,
+	type PlanActionType,
+	type PlanActionTypeMap,
 	type PlanCreateRequestDto,
-	type PlanDayCreateRequestDto,
-	type PlanDayDto,
+	type PlanDayRegenerationRequestDto,
 	type PlanDaysTaskDto,
 	type PlanDto,
 	type PlanGetAllResponseDto,
@@ -27,24 +32,44 @@ import {
 	type PlanSearchQueryParameter,
 	type PlanUpdateRequestDto,
 	type PlanWithCategoryDto,
-	type TaskCreateRequestDto,
-	type TaskDto,
+	type QuizCategoryType,
+	type TaskRegenerationRequestDto,
 } from "./libs/types/types.js";
 import { createPrompt } from "./libs/utilities/utilities.js";
 
+type Constructor = {
+	planCategoryRepository: PlanCategoryRepository;
+	planDayRepository: PlanDayRepository;
+	planRepository: PlanRepository;
+	quizAnswerRepository: QuizAnswerRepository;
+	quizRepository: QuizRepository;
+	taskRepository: TaskRepository;
+};
+
 class PlanService implements Service {
 	private openAIService: OpenAIService;
-	private planCategoryService: PlanCategoryService;
-	private planDayService: PlanDayService;
+	private planCategoryRepository: PlanCategoryRepository;
+	private planDayRepository: PlanDayRepository;
 	private planRepository: PlanRepository;
-	private taskService: TaskService;
+	private quizAnswerRepository: QuizAnswerRepository;
+	private quizRepository: QuizRepository;
+	private taskRepository: TaskRepository;
 
-	public constructor(planRepository: PlanRepository) {
+	public constructor({
+		planCategoryRepository,
+		planDayRepository,
+		planRepository,
+		quizAnswerRepository,
+		quizRepository,
+		taskRepository,
+	}: Constructor) {
 		this.planRepository = planRepository;
 		this.openAIService = openAiService;
-		this.planDayService = planDayService;
-		this.taskService = taskService;
-		this.planCategoryService = planCategoryService;
+		this.quizRepository = quizRepository;
+		this.planDayRepository = planDayRepository;
+		this.taskRepository = taskRepository;
+		this.quizAnswerRepository = quizAnswerRepository;
+		this.planCategoryRepository = planCategoryRepository;
 	}
 
 	public async create(payload: PlanCreateRequestDto): Promise<PlanResponseDto> {
@@ -63,6 +88,21 @@ class PlanService implements Service {
 		const item = await this.planRepository.find(id);
 
 		return item ? item.toObject() : null;
+	}
+
+	public async findActiveByUserId(
+		userId?: number,
+	): Promise<null | PlanDaysTaskDto> {
+		if (!userId) {
+			throw new HTTPError({
+				message: ErrorMessage.USER_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const item = await this.planRepository.findActiveByUserId(userId);
+
+		return item ? item.toObjectWithRelations() : null;
 	}
 
 	public async findAll(): Promise<PlanGetAllResponseDto> {
@@ -89,19 +129,277 @@ class PlanService implements Service {
 		return item ? item.toObjectWithCategory() : null;
 	}
 
-	public async generate(
+	public async generate<T extends PlanActionType>(
 		payload: GeneratePlanRequestDto,
-	): Promise<PlanDaysTaskDto> {
+		actionType: PlanActionType,
+	): Promise<PlanActionTypeMap[T]> {
 		const userPrompt = createPrompt(payload.quizAnswers);
-		const plan = await this.openAIService.generatePlan({ userPrompt });
 
-		const savedPlan = await this.saveToDB({
-			category: payload.quizAnswers.category,
-			plan,
-			userId: payload.userId,
+		const result = await this.openAIService.generate({
+			actionType,
+			userPrompt,
 		});
 
-		return savedPlan;
+		return result as PlanActionTypeMap[T];
+	}
+
+	public async generatePlan(
+		payload: GeneratePlanRequestDto,
+	): Promise<GeneratedPlanDTO | null> {
+		const { quizAnswers, quizId, userId } = payload;
+
+		if (!userId) {
+			throw new HTTPError({
+				message: ErrorMessage.USER_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		if (!quizId) {
+			throw new HTTPError({
+				message: ErrorMessage.QUIZ_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const existingCategory = await this.quizRepository.find(quizId);
+
+		if (!existingCategory) {
+			throw new HTTPError({
+				message: ErrorMessage.CATEGORY_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { categoryId } = existingCategory;
+
+		const plan = (await this.generate(
+			{
+				quizAnswers,
+			},
+			PlanAction.PLAN,
+		)) as GeneratedPlanDTO;
+
+		const styleId = 1;
+		const planId = await this.planRepository.saveGeneratedPlan({
+			categoryId,
+			plan,
+			quizId,
+			styleId,
+			userId,
+		});
+
+		const newPlan = await this.planRepository.findWithRelations(planId);
+
+		return newPlan ? newPlan.toObjectWithRelations() : null;
+	}
+
+	public async regenerate(id: number): Promise<null | PlanDaysTaskDto> {
+		const existingPlan = await this.planRepository.find(id);
+
+		if (!existingPlan) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { categoryId, quizId } = existingPlan.toObject();
+		const quizAnswers =
+			await this.quizAnswerRepository.findAllWithOption(quizId);
+
+		if (quizAnswers.length === ZERO) {
+			throw new HTTPError({
+				message: ErrorMessage.ANSWERS_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const category = await this.planCategoryRepository.find(categoryId);
+
+		if (!category) {
+			throw new HTTPError({
+				message: ErrorMessage.CATEGORY_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { title } = category.toObject();
+
+		const answers = {
+			answers: quizAnswers,
+			category: title as QuizCategoryType,
+		};
+
+		const generatedPlan = (await this.generate(
+			{
+				quizAnswers: answers,
+			},
+			PlanAction.PLAN,
+		)) as GeneratedPlanDTO;
+
+		await this.planRepository.regenerate(id, generatedPlan);
+
+		const newPlan = await this.planRepository.findWithRelations(id);
+
+		return newPlan ? newPlan.toObjectWithRelations() : null;
+	}
+
+	public async regenerateDay(
+		plan: PlanDayRegenerationRequestDto,
+	): Promise<null | PlanDaysTaskDto> {
+		const { dayId, planId } = plan;
+
+		const existingPlan = await this.planRepository.find(planId);
+
+		if (!existingPlan) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const existingPlanDay = await this.planDayRepository.find(dayId);
+
+		if (!existingPlanDay) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_DAY_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { planId: planDayPlanId } = existingPlanDay.toObject();
+
+		if (Number(planId) !== Number(planDayPlanId)) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_DAY_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { categoryId, quizId } = existingPlan.toObject();
+		const quizAnswers =
+			await this.quizAnswerRepository.findAllWithOption(quizId);
+
+		if (quizAnswers.length === ZERO) {
+			throw new HTTPError({
+				message: ErrorMessage.ANSWERS_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const category = await this.planCategoryRepository.find(categoryId);
+
+		if (!category) {
+			throw new HTTPError({
+				message: ErrorMessage.CATEGORY_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { title } = category.toObject();
+
+		const answers = {
+			answers: quizAnswers,
+			category: title as QuizCategoryType,
+		};
+
+		const generatedPlanDay = (await this.generate(
+			{
+				quizAnswers: answers,
+			},
+			PlanAction.DAY,
+		)) as GeneratedDayDTO;
+
+		await this.planDayRepository.regenerate(dayId, generatedPlanDay);
+
+		const newPlan = await this.planRepository.findWithRelations(planId);
+
+		return newPlan ? newPlan.toObjectWithRelations() : null;
+	}
+
+	public async regenerateTask(
+		plan: TaskRegenerationRequestDto,
+	): Promise<null | PlanDaysTaskDto> {
+		const { dayId, planId, taskId } = plan;
+		const existingPlan = await this.planRepository.find(planId);
+
+		if (!existingPlan) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const existingPlanDay = await this.planDayRepository.find(dayId);
+
+		if (!existingPlanDay) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_DAY_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { planId: planDayPlanId, tasks } =
+			existingPlanDay.toObjectWithRelations();
+
+		if (Number(planDayPlanId) !== Number(planId)) {
+			throw new HTTPError({
+				message: ErrorMessage.PLAN_DAY_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const existingTask = await this.taskRepository.find(taskId);
+
+		if (!existingTask) {
+			throw new HTTPError({
+				message: ErrorMessage.TASK_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { categoryId, quizId } = existingPlan.toObject();
+		const quizAnswers =
+			await this.quizAnswerRepository.findAllWithOption(quizId);
+
+		if (quizAnswers.length === ZERO) {
+			throw new HTTPError({
+				message: ErrorMessage.ANSWERS_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const category = await this.planCategoryRepository.find(categoryId);
+
+		if (!category) {
+			throw new HTTPError({
+				message: ErrorMessage.CATEGORY_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { title } = category.toObject();
+
+		const answers = {
+			answers: quizAnswers,
+			category: title as QuizCategoryType,
+			context: {
+				tasks,
+			},
+		};
+
+		const generatedTask = (await this.generate(
+			{
+				quizAnswers: answers,
+			},
+			PlanAction.TASK,
+		)) as GeneratedTaskDTO;
+
+		await this.taskRepository.regenerate(taskId, generatedTask);
+		const newPlan = await this.planRepository.findWithRelations(planId);
+
+		return newPlan ? newPlan.toObjectWithRelations() : null;
 	}
 
 	public async search(
@@ -133,73 +431,6 @@ class PlanService implements Service {
 		const plan = await this.planRepository.updateStyle(userId, planId, styleId);
 
 		return plan ? plan.toObject() : null;
-	}
-
-	private async saveToDB({
-		category,
-		plan,
-		userId,
-	}: {
-		category: string;
-		plan: GeneratedPlanDTO;
-		userId: null | number;
-	}): Promise<PlanDaysTaskDto> {
-		const categories: PlanCategoryDto[] =
-			await this.planCategoryService.findAll();
-
-		const planEntity: PlanCreateRequestDto = {
-			categoryId:
-				categories.find((element) => element.key === category)?.id ??
-				LAST_INDEX,
-			duration: plan.duration,
-			intensity: plan.intensity,
-			styleId: PlanStyle.WITH_REMARKS,
-			title: plan.title,
-			userId,
-		};
-
-		const planResponse = await this.create(planEntity);
-
-		const days: PlanDayDto[] = [];
-
-		for (const day of plan.days) {
-			const planDayEntity: PlanDayCreateRequestDto = {
-				dayNumber: day.dayNumber,
-				planId: planResponse.id,
-			};
-			const planDayResponse = await this.planDayService.create(planDayEntity);
-
-			const tasks: TaskDto[] = [];
-
-			for (const task of day.tasks) {
-				const taskEntity: TaskCreateRequestDto = {
-					description: task.description,
-					executionTimeType: task.executionTimeType,
-					isCompleted: false,
-					order: task.order,
-					planDayId: planDayResponse.id,
-					title: task.title,
-				};
-
-				const taskResponse = await this.taskService.create(taskEntity);
-				tasks.push({
-					...taskResponse,
-					executionTimeType: taskResponse.executionTimeType as ValueOf<
-						typeof ExecutionTimeType
-					>,
-				});
-			}
-
-			days.push({ ...planDayResponse, tasks });
-		}
-
-		const result: PlanDaysTaskDto = {
-			...planResponse,
-			days,
-			styleId: PlanStyle.WITH_REMARKS,
-		};
-
-		return result;
 	}
 }
 

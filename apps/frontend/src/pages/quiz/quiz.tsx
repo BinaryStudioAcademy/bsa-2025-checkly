@@ -7,11 +7,10 @@ import {
 	StarsYellow01,
 	TwinklesYellow,
 } from "~/assets/img/shared/shapes/shapes.img.js";
-import { Button, DecorativeImage, Link } from "~/libs/components/components.js";
+import { Button, DecorativeImage } from "~/libs/components/components.js";
 import {
 	AppRoute,
 	ButtonLabels,
-	ButtonSizes,
 	ButtonVariants,
 	ZERO,
 } from "~/libs/enums/enums.js";
@@ -21,7 +20,7 @@ import {
 	actions as planActions,
 	type PlanCategoryWithColorDto,
 } from "~/modules/plan-categories/plan-categories.js";
-import { actions } from "~/modules/quiz/quiz.js";
+import { actions } from "~/modules/quiz-questions/quiz-questions.js";
 import { QuizCategoryCard } from "~/pages/quiz/components/quiz-category-card/quiz-category-card.js";
 
 import styles from "./styles.module.css";
@@ -35,7 +34,7 @@ const Quiz: React.FC = (): React.ReactElement => {
 	}, [dispatch]);
 
 	const { planCategories } = useAppSelector((state) => state.planCategory);
-	const { selectedCategory } = useAppSelector((state) => state.quiz);
+	const { selectedCategory } = useAppSelector((state) => state.quizQuestion);
 
 	const handleCategorySelect = useCallback(
 		(category: string): void => {
@@ -44,6 +43,14 @@ const Quiz: React.FC = (): React.ReactElement => {
 		},
 		[dispatch],
 	);
+
+	const handleBack = useCallback((): void => {
+		const redirect = async (): Promise<void> => {
+			await navigate(AppRoute.ROOT);
+		};
+
+		void redirect();
+	}, [navigate]);
 
 	const handleNext = useCallback((): void => {
 		const redirect = async (): Promise<void> => {
@@ -126,13 +133,11 @@ const Quiz: React.FC = (): React.ReactElement => {
 						</div>
 
 						<div className={getClassNames("cluster", styles["actions"])}>
-							<Link
-								asButtonSize={ButtonSizes.LARGE}
-								asButtonVariant={ButtonVariants.TRANSPARENT}
-								to={AppRoute.ROOT}
-							>
-								{ButtonLabels.BACK_TO_MAIN_PAGE}
-							</Link>
+							<Button
+								label={ButtonLabels.BACK_TO_MAIN_PAGE}
+								onClick={handleBack}
+								variant={ButtonVariants.SECONDARY}
+							/>
 							<Button
 								isDisabled={!selectedCategory}
 								label={ButtonLabels.NEXT}

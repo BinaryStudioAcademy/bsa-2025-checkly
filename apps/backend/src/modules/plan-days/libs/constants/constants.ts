@@ -1,0 +1,1 @@
+export { ZERO } from "shared";

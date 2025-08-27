@@ -1,11 +1,15 @@
+export { type PlanCategoryDto } from "../../../plan-categories/libs/types/types.js";
 export { type SearchProperties } from "./search-properties.type.js";
 export {
+	type GeneratedDayDTO,
 	type GeneratedPlanDTO,
+	type GeneratedTaskDTO,
 	type GeneratePlanRequestDto,
-	type PlanCategoryDto,
+	type PlanActionType,
+	type PlanActionTypeMap,
 	type PlanCreateRequestDto,
-	type PlanDayCreateRequestDto,
 	type PlanDayDto,
+	type PlanDayRegenerationRequestDto,
 	type PlanDaysTaskDto,
 	type PlanDto,
 	type PlanGetAllResponseDto,
@@ -15,6 +19,7 @@ export {
 	type PlanWithCategoryDto,
 	type QuizAnswer,
 	type QuizAnswersRequestDto,
-	type TaskCreateRequestDto,
+	type QuizCategoryType,
 	type TaskDto,
+	type TaskRegenerationRequestDto,
 } from "shared";

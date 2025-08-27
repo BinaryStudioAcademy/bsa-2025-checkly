@@ -1,6 +1,6 @@
 import { type Entity } from "~/libs/types/types.js";
 
-import { type TaskDto } from "../plans/libs/types/types.js";
+import { type PlanDayDto, type TaskDto } from "./libs/types/types.js";
 
 class PlanDayEntity implements Entity {
 	private dayNumber: number;
@@ -81,6 +81,22 @@ class PlanDayEntity implements Entity {
 			dayNumber: this.dayNumber,
 			id: this.id as number,
 			planId: this.planId,
+		};
+	}
+
+	public toObjectWithRelations(): PlanDayDto {
+		return {
+			...this.toObject(),
+			tasks: this.tasks.map((task) => ({
+				completedAt: task.completedAt,
+				description: task.description,
+				executionTimeType: task.executionTimeType,
+				id: task.id,
+				isCompleted: task.isCompleted,
+				order: task.order,
+				planDayId: task.planDayId,
+				title: task.title,
+			})),
 		};
 	}
 }

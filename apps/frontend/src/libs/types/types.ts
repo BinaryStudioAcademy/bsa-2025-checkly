@@ -22,10 +22,12 @@ export {
 	type TextQuestionProperties,
 } from "./quiz-components-properties.type.js";
 export {
+	type ExecutionTimeTypeValue,
 	type Nullable,
 	type PlanDayDto,
 	type PlanStyleOption,
 	type QuestionDto,
+	type QuizAnswer,
 	type ServerErrorDetail,
 	type ServerErrorResponse,
 	type ValidationSchema,

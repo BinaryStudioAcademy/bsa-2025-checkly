@@ -6,7 +6,7 @@ import {
 	useCallback,
 } from "~/libs/hooks/hooks.js";
 import { type ProgressBarProperties } from "~/libs/types/types.js";
-import { actions } from "~/modules/quiz/quiz.js";
+import { actions } from "~/modules/quiz-questions/quiz-questions.js";
 import {
 	isCurrentQuestion,
 	isQuestionCompleted,
@@ -19,7 +19,7 @@ const ProgressBar: React.FC<ProgressBarProperties> = ({
 	totalQuestions,
 }: ProgressBarProperties): React.ReactElement => {
 	const dispatch = useAppDispatch();
-	const { answers } = useAppSelector((state) => state.quiz);
+	const { answers } = useAppSelector((state) => state.quizQuestion);
 
 	const handleQuestionNavigation = useCallback(
 		(questionIndex: number): void => {
