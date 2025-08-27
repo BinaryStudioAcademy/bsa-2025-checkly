@@ -8,7 +8,9 @@ import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
 	type ForgotPasswordRequestDto,
+	forgotPasswordValidationSchema,
 	type ResetPasswordRequestDto,
+	resetPasswordWithTokenValidationSchema,
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
 	type UserSignUpRequestDto,
@@ -105,6 +107,9 @@ class AuthController extends BaseController {
 			isPublic: true,
 			method: HTTPRequestMethod.POST,
 			path: AuthApiPath.FORGOT_PASSWORD,
+			validation: {
+				body: forgotPasswordValidationSchema,
+			},
 		});
 
 		this.addRoute({
@@ -129,6 +134,9 @@ class AuthController extends BaseController {
 			isPublic: true,
 			method: HTTPRequestMethod.POST,
 			path: AuthApiPath.RESET_PASSWORD,
+			validation: {
+				body: resetPasswordWithTokenValidationSchema,
+			},
 		});
 	}
 

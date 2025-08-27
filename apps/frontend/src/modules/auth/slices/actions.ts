@@ -95,9 +95,9 @@ const resetPassword = createAsyncThunk<
 	AsyncThunkConfig
 >(
 	`${sliceName}/reset-password`,
-	async ({ password, userId }, { rejectWithValue }) => {
+	async ({ password, token, userId }, { rejectWithValue }) => {
 		try {
-			await authApi.resetPassword({ password, userId });
+			await authApi.resetPassword({ password, token, userId });
 		} catch (error) {
 			const errorMessage =
 				error instanceof HTTPError
