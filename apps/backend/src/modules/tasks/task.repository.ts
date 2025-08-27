@@ -33,8 +33,7 @@ class TaskRepository implements Repository {
 		entity: TaskEntity,
 		trx?: Transaction,
 	): Promise<TaskEntity> {
-		const { executionTimeType, order, planDayId, title } =
-			entity.toNewObject();
+		const { executionTimeType, order, planDayId, title } = entity.toNewObject();
 
 		const task = await this.taskModel
 			.query(trx)
@@ -44,7 +43,7 @@ class TaskRepository implements Repository {
 				planDayId,
 				title,
 			})
-			.returning("*")
+			.returning("*");
 
 		return TaskEntity.initialize(task);
 	}

@@ -148,13 +148,6 @@ class PlanService implements Service {
 	): Promise<GeneratedPlanDTO | null> {
 		const { quizAnswers, quizId, userId } = payload;
 
-		if (!userId) {
-			throw new HTTPError({
-				message: ErrorMessage.USER_NOT_FOUND,
-				status: HTTPCode.NOT_FOUND,
-			});
-		}
-
 		if (!quizId) {
 			throw new HTTPError({
 				message: ErrorMessage.QUIZ_NOT_FOUND,
@@ -180,11 +173,13 @@ class PlanService implements Service {
 			PlanAction.PLAN,
 		)) as GeneratedPlanDTO;
 
+		const styleId = 1;
 		const planId = await this.planRepository.saveGeneratedPlan({
 			categoryId,
 			plan,
 			quizId,
-			userId,
+			styleId,
+			userId: userId ?? null,
 		});
 
 		const newPlan = await this.planRepository.findWithRelations(planId);
@@ -417,6 +412,16 @@ class PlanService implements Service {
 		payload: PlanUpdateRequestDto,
 	): Promise<null | PlanDto> {
 		const plan = await this.planRepository.update(id, payload);
+
+		return plan ? plan.toObject() : null;
+	}
+
+	public async updateStyle(
+		userId: number,
+		planId: number,
+		styleId: number,
+	): Promise<null | PlanDto> {
+		const plan = await this.planRepository.updateStyle(userId, planId, styleId);
 
 		return plan ? plan.toObject() : null;
 	}

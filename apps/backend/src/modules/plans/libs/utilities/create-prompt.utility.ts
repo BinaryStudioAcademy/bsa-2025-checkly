@@ -99,7 +99,7 @@ const createPrompt = ({
 	let existingTask = "";
 
 	if (context) {
-		existingTask = context.tasks.map((task) => `${task.title}`).join("; ");
+		existingTask = context.tasks.map((task) => task.title).join("; ");
 	}
 
 	return [

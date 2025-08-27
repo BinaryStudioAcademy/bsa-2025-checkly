@@ -22,7 +22,7 @@ class PlanEntity implements Entity {
 	private intensity: string;
 
 	private quizId: number;
-	
+
 	private styleId: number;
 
 	private title: string;
