@@ -20,7 +20,7 @@ import {
 	actions as planActions,
 	type PlanCategoryWithColorDto,
 } from "~/modules/plan-categories/plan-categories.js";
-import { actions } from "~/modules/quiz/quiz.js";
+import { actions } from "~/modules/quiz-questions/quiz-questions.js";
 import { QuizCategoryCardSkeleton } from "~/pages/quiz/components/quiz-category-card/quiz-category-card-skeleton.js";
 import { QuizCategoryCard } from "~/pages/quiz/components/quiz-category-card/quiz-category-card.js";
 
@@ -33,7 +33,7 @@ const Categories: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { dataStatus: planCategoriesDataStatus, planCategories } =
 		useAppSelector((state) => state.planCategory);
-	const { selectedCategory } = useAppSelector((state) => state.quiz);
+	const { selectedCategory } = useAppSelector((state) => state.quizQuestion);
 
 	useEffect(() => {
 		void dispatch(planActions.getAll());
