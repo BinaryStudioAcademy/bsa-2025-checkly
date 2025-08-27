@@ -233,17 +233,6 @@ const PlanStyleOverview: React.FC = () => {
 					/>
 				</div>
 			</Modal>
-
-			<div className={styles["actions-section"]}>
-				<PlanActions
-					isAuthenticated={isAuthenticated}
-					isDownloading={pdfExportStatus === DataStatus.PENDING}
-					onChooseStyle={handleChooseStyle}
-					onDownload={handleDownload}
-					onEdit={handleEditPlan}
-					onGoToDashboard={handleGoToDashboard}
-				/>
-			</div>
 		</div>
 	);
 };
