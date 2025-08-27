@@ -29,7 +29,6 @@ type PlanWithCategoryDto = PlanDaysTaskDto & {
 
 type TaskDto = {
 	completedAt: null | string;
-	description: string;
 	executionTimeType: ExecutionTimeTypeValue;
 	id: number;
 	isCompleted: boolean;
