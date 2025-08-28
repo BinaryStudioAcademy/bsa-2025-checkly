@@ -30,7 +30,7 @@ import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
 import { DayList } from "../dashboard-wrapper-mock/components/plan/components/components.js";
 import { useLoadingIds } from "../dashboard-wrapper-mock/components/plan/libs/hooks/hooks.js";
-import { TaskNotificationMessage } from "./libs/enums/task-notification-message.enums.js";
+import { TaskNotificationMessage } from "./libs/enums/enums.js";
 import {
 	type RenderTaskInputField,
 	type RenderTaskInputProperties,
