@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.27.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.26.1...frontend-v1.27.0) (2025-08-28)
+
+
+### Features
+
+* * add confirmation modal to plan-edit cy-425 ([3657666](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/36576669edd0189d33712d606c075c6fbed83d53))
+* * update label styles cy-425 ([3722a7f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3722a7ff7d54b1160d045acd82e642300b678b43))
+* * update overflow cy-425 ([a8283d5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a8283d563a80d83157de76ccbc18ec61cd6bb542))
+
+
+### Bug Fixes
+
+* * update plan-styles to add break styles cy-425 ([9c8bb51](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9c8bb512ae3d7df741eeb211a0736f108e3c62b1))
+* update plan-styles to add break styles cy-425 ([565de53](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/565de5322909198c99e5bf2037c836b0bf6c5e45))
+
 ## [1.26.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.26.0...frontend-v1.26.1) (2025-08-28)
 
 
