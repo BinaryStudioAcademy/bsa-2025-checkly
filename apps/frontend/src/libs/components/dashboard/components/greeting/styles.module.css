@@ -41,7 +41,7 @@
 	}
 
 	.button {
-		flex: 0 1 auto;
+		flex-shrink: 0;
 		padding-left: calc(var(--space-l) + 2.5rem);
 	}
 
