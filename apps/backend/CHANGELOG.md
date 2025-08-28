@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.16.3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.16.2...backend-v1.16.3) (2025-08-28)
+
+
+### Bug Fixes
+
+* indents cy-0 ([0fec9c0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0fec9c0c72c6794a8329cbb1131baa6a7ccf6de3))
+* remove invalid dep name cy-0 ([c6023c6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c6023c6140bd4b1ade0759089a9369a882674f2e))
+
 ## [1.16.2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.16.1...backend-v1.16.2) (2025-08-28)
 
 

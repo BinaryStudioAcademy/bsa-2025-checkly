@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.27.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.27.0...frontend-v1.27.1) (2025-08-28)
+
+
+### Bug Fixes
+
+* add responsiveness cy-426 ([a88c133](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a88c13365462adbb305335995296d44ec2087920))
+* download button loader misaligned on plan overview cy-426 ([db42e9e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/db42e9e620bb7eee7849967e9b770598d16c3457))
+* remove lint error cy-426 ([ca8cfde](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ca8cfde65323c9e3c77b3a2a2533162505b8080e))
+* update download button styles cy-426 ([53e5eef](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/53e5eef7892378d1a3e9c4c2d66a592986896b74))
+
 ## [1.27.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.26.1...frontend-v1.27.0) (2025-08-28)
 
 
