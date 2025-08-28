@@ -1,11 +1,9 @@
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
+import { join } from "path";
 
 /**
  * @type {import("puppeteer").Configuration}
- */
-const __dirname = dirname(fileURLToPath(import.meta.url));
+ */ const __dirname = import.meta.dirname;
 
-export default {
+module.exports = {
 	cacheDirectory: join(__dirname, ".cache", "puppeteer"),
 };
