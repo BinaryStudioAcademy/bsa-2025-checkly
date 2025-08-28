@@ -564,18 +564,29 @@ const PlanEdit: React.FC = () => {
 			</div>
 			<ConfirmationModal
 				isOpen={isRegenerateDayModalOpen}
-				message="You sure you want to regenerate the whole day?"
+				message="You are about to regenerate this day."
 				onCancel={handleDayRegenerateCancel}
 				onConfirm={handleDayRegenerateConfirm}
 				title="Day Regeneration"
-			/>
+			>
+				<p>
+					We will create a new day for you and replace this one. Do you want to
+					proceed?
+				</p>
+			</ConfirmationModal>
 			<ConfirmationModal
 				isOpen={isRegenerateTaskModalOpen}
-				message="You sure you want to regenerate this task?"
+				message="You are about to regenerate this task."
 				onCancel={handleRegenerateCancel}
 				onConfirm={handleRegenerateConfirm}
 				title="Task Regeneration"
-			/>
+			>
+				<p>
+					We will create a new task for you and replace this one. Do you want to
+					proceed?
+				</p>
+			</ConfirmationModal>
+
 			<ConfirmationModal
 				isOpen={isDeleteTaskModalOpen}
 				message="You sure you want to permanently delete this task?"
