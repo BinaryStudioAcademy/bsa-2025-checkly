@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.16.2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.16.1...backend-v1.16.2) (2025-08-28)
+
+
+### Bug Fixes
+
+* move file to .cjs cy-0 ([b45461c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b45461ce03f3626bddf54f15d2791152ee008cb6))
+* move file to .cjs cy-0 ([160a183](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/160a1835b165a96c4ac596f2d14639debfdc9ba7))
+
 ## [1.16.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.16.0...backend-v1.16.1) (2025-08-28)
 
 

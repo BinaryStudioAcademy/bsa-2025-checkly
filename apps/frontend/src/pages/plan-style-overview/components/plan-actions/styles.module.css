@@ -9,6 +9,8 @@
 
 .actions-container > *,
 .actions-sub-container > * {
+	--button-padding-inline: var(--space-xl);
+
 	width: clamp(12rem, 50vw, 18rem);
 }
 
@@ -21,6 +23,13 @@
 
 	.actions-sub-container > * {
 		width: auto;
+	}
+}
+
+@media (width <= 768px) {
+	.actions-container > *,
+	.actions-sub-container > * {
+		--button-padding-inline: var(--space-l);
 	}
 }
 
