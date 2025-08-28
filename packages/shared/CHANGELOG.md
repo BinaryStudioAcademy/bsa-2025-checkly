@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.16.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.16.0...shared-v1.16.1) (2025-08-28)
+
+
+### Bug Fixes
+
+* plan regeneration cy-202 ([1d6ce36](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1d6ce3615f5d350289a0d2b3c4279969a4759b36))
+
 ## [1.16.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.15.0...shared-v1.16.0) (2025-08-28)
 
 
