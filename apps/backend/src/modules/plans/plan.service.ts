@@ -146,7 +146,7 @@ class PlanService implements Service {
 	public async generatePlan(
 		payload: GeneratePlanRequestDto,
 	): Promise<GeneratedPlanDTO | null> {
-		const { quizAnswers, quizId, userId } = payload;
+		const { quizId, userId } = payload;
 
 		if (!quizId) {
 			throw new HTTPError({
@@ -155,7 +155,28 @@ class PlanService implements Service {
 			});
 		}
 
-		const existingCategory = await this.quizRepository.find(quizId);
+		const quizAnswers =
+			await this.quizAnswerRepository.findAllWithOption(quizId);
+
+		if (quizAnswers.length === ZERO) {
+			throw new HTTPError({
+				message: ErrorMessage.ANSWERS_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const existingQuiz = await this.quizRepository.find(quizId);
+
+		if (!existingQuiz) {
+			throw new HTTPError({
+				message: ErrorMessage.CATEGORY_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { categoryId } = existingQuiz;
+
+		const existingCategory = await this.planCategoryRepository.find(categoryId);
 
 		if (!existingCategory) {
 			throw new HTTPError({
@@ -164,11 +185,16 @@ class PlanService implements Service {
 			});
 		}
 
-		const { categoryId } = existingCategory;
+		const { title } = existingCategory.toObject();
+
+		const answers = {
+			answers: quizAnswers,
+			category: title as QuizCategoryType,
+		};
 
 		const plan = (await this.generate(
 			{
-				quizAnswers,
+				quizAnswers: answers,
 			},
 			PlanAction.PLAN,
 		)) as GeneratedPlanDTO;

@@ -15,6 +15,7 @@ import {
 	type Style,
 	type Time,
 } from "../types/types.js";
+import { buildExistingTasksContext } from "./build-context.utitlity.js";
 import { sanitizeTextInput } from "./utilities.js";
 
 const USER_DATA_START = "USER DATA START";
@@ -85,20 +86,17 @@ const createPrompt = ({
 	`;
 
 	const dynamicInstruction = `
-		IMPORTANT RULE: Generate a plan with exactly ${String(rule.tasks)} tasks per day.
+		IMPORTANT RULE: Generate a days with exactly ${String(rule.tasks)} tasks per day.
 		This is because the user prefers a "${styleKey}" style and has "${timeKey}" available.
 		The plan should consist of ${rule.details}
 	`;
 
-	let existingTask = "";
-
-	if (context) {
-		existingTask = context.tasks.map((task) => task.title).join("; ");
-	}
+	const existingTask = buildExistingTasksContext(context);
 
 	return [
 		`${PROMPT_HEADER} - ${category.replaceAll("_", " ")}`,
 		dynamicInstruction,
+		"!!! CRITICAL RULE: THE PLAN MUST MATCH THE DURATION SELECTED BY THE USER IN 'Choose your plan duration'. NO EXCEPTIONS.",
 		titleInstruction,
 		EXAMPLE_PROMPT,
 		PROMPT_ALERT_NOTE,
@@ -106,7 +104,13 @@ const createPrompt = ({
 		"Quiz Answers",
 		processAnswers(answers),
 		context &&
-			`Existing tasks: ${existingTask}. For each new task, you may choose a different time of day, a different type of activity, or a new perspective on the same user goal. Make sure the wording and approach are distinct from all previous tasks.`,
+			`${existingTask}
+### CONTEXT INSTRUCTION ###
+You must generate a new task that:
+- Does NOT duplicate or overlap with any of the existing tasks.
+- Complements them by adding a new perspective, activity.
+- Avoids reusing the plan's title or any existing task wording.
+Existing tasks are listed above.`,
 		notes &&
 			`User notes (just for your reference): ${sanitizeTextInput(notes)}`,
 		USER_DATA_END,
