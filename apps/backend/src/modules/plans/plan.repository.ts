@@ -74,7 +74,7 @@ class PlanRepository implements Repository {
 		const plan = await this.planModel
 			.query()
 			.where({ userId })
-			.orderBy("created_at", "desc")
+			.orderBy("updated_at", "desc")
 			.withGraphFetched("days(orderByDayNumber).[tasks(orderByTaskOrder)]")
 			.modifiers({
 				orderByDayNumber(builder) {
