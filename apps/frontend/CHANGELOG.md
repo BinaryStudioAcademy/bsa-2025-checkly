@@ -1,5 +1,53 @@
 # Changelog
 
+## [1.26.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.25.1...frontend-v1.26.0) (2025-08-28)
+
+
+### Features
+
+* - remove redundant plan-edit subcomponents cy-300 ([017b2c2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/017b2c27e656599f758ad59203b0883532a4ff33))
+* - remove use-a4-scale hook cy-300 ([6a39ffd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6a39ffd81df885464f0c41b65c5061247ef2c4c6))
+* * fix lint warnings cy-300 ([b19d654](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b19d6542af7c7ff92bd85fe08a559b0966ecc379))
+* * fix lint warnings cy-300 ([110dc81](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/110dc81340d3c8088e9b9509118e11262d662e56))
+* * fix lint warnings cy-300 ([f5741bf](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f5741bf9f92084a356eee87bd486a726a58aef37))
+* * update app routes cy-300 ([ebd2333](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ebd233304f5dc927f2dbcd57aaddcdf135497bee))
+* * update app-header styles cy-300 ([afc6b99](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/afc6b9901b811278ac0e34d2eab441055638697e))
+* * update choose-style cy-300 ([5df4859](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5df4859cdfbd968ba0c5590f7bc22aafc38588d1))
+* * update confirmation modal styles cy-300 ([d8c9a5e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d8c9a5ee50da1f31d8df3044b0f6869efc26feea))
+* * update icons cy-300 ([10caea2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/10caea2c6efb521b27cd8f1dcf9377d80c6c33dc))
+* * update input component cy-300 ([ac1b815](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ac1b8156b1fd094756fd864024357bf89826765e))
+* * update link component cy-300 ([9f6c893](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9f6c8932db190de1f909badcf9607bd095bf51b8))
+* * update modal component styles cy-300 ([c6d6f73](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c6d6f73b1cf2a4c8d9b36fd776f839b4f414555e))
+* * update plan-edit component cy-300 ([2f8fdf1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2f8fdf12d58bcc4a84fae245fc0e29f3d40212b2))
+* * update plan-edit component cy-300 ([c5b5e48](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c5b5e48249a2679d87573acf5bcbea93557059db))
+* * update plan-edit cy-300 ([ad8e876](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ad8e87640daa60d39b06737fd7492a74b230f098))
+* * update plan-edit to add regeneration notofication cy-300 ([ab09738](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ab09738139336364d390030ce0a93f6c3a309613))
+* * update plan-styles module export cy-300 ([e9c0071](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e9c00715b641155350ecc0b2c82615bea927c4b0))
+* + add confirmation modal to plan-edit cy-300 ([1df9de8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1df9de8e7acf1419eb65919acbd3be62a0e7bdbb))
+* + add plan-edit libs folder cy-300 ([5188932](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5188932f516e6af31f84c0ab12478bc8e2b70d47))
+* + add reducers to plan slice cy-300 ([018447a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/018447a654d609a373b0914daf47dad738765bf9))
+* + add tasks-edit validation schema cy-300 ([a774af1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a774af148c2a96ec761ef465099397129c63f759))
+* + update use-app-form hook to add dirty-fields cy-300 ([9edb30c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9edb30c9541bd2effeba2f48705fbbf36e18b5b6))
+* edit page post quiz flow cy-300 ([10ee5fb](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/10ee5fbd4b4a024912a2dbeb9f54ff1856bc1174))
+* **frontend/backend/shared:** add pdf export cy-348 ([797d4ba](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/797d4ba1a5e5f7509d6dc78b2fc194084d8cefe9))
+* merge main branch into current branch cy-348 ([7bb14ed](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7bb14edce4b2b93a1f41b465cfaa20dcaac32e02))
+* Use real data in post-quiz flow cy-348 ([16db48a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/16db48a7338b512d13da0afdf4416b059fec784a))
+
+
+### Bug Fixes
+
+* Dashboard Past Plans Display Incorrect Background Color cy-420 ([0d67c17](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0d67c17d22db43735e1d00e6d974349c9c0b9bcc))
+* display past plan card background color related to the plan style cy-420 ([57e2d14](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/57e2d14a5a55df00818c704c1cd462318fcebc8c))
+* display the result of edit and delete on the plan page cy-409 ([55edbd4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/55edbd47a154547abcfad649ce927590719ce7c8))
+* make choose-style page set the correct current plan cy-348 ([3962fcb](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3962fcbbf229263bbf328f533983b232de98e597))
+* manually edited tasks are not displayed cy-409 ([6d5bf16](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6d5bf162a7919cc588a6e286894ed444cff6de05))
+* merge changes into local branch cy-348 ([a7bcfcd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a7bcfcdf92b1737a0091d04768936518a94c4816))
+* prevent plan-style-overview page from crush on reload cy-418 ([774df1d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/774df1d54e72e8241000f7fdba39877f4418427b))
+* Reload Plan-Style-Overview page breaks the app cy-418 ([2dd3cd0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2dd3cd08b6759cd2278650f1ad7a8e26a07edd9e))
+* Remove Format Selector from Choose Style Page cy-421 ([22e7213](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/22e7213d5d4acceb8df5af6fee68de9455c82c8b))
+* remove format selector from choose-style page, change download button text on plan page cy-421 ([695baa5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/695baa5750a8c7d8d3d574c078e0ef16ed3c758b))
+* seperate useref function from useeffect cy-348 ([9fefaaa](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9fefaaad1cbe7cd8fa196156b2cd2d0187b59305))
+
 ## [1.25.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.25.0...frontend-v1.25.1) (2025-08-28)
 
 
