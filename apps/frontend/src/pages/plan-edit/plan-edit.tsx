@@ -1,9 +1,8 @@
 import { type FC, useCallback, useState } from "react";
 import { useWatch } from "react-hook-form";
-import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 import { ArrowLeft, Save } from "~/assets/img/icons/icons.js";
-import { activitiesMockData } from "~/assets/mock-data/activities-data.mock.js";
 import {
 	AppHeader,
 	Button,
@@ -11,31 +10,52 @@ import {
 	Loader,
 } from "~/libs/components/components.js";
 import { ZERO } from "~/libs/constants/constants.js";
-import { getClassNames } from "~/libs/helpers/helpers.js";
-import { useAppForm } from "~/libs/hooks/hooks.js";
+import { AppRoute } from "~/libs/enums/enums.js";
+import { getEditedTasks } from "~/libs/helpers/get-edited-tasks.js";
+import { getClassNames, getPlanStyleName } from "~/libs/helpers/helpers.js";
 import {
-	type PlanDay,
+	useAppDispatch,
+	useAppForm,
+	useAppSelector,
+} from "~/libs/hooks/hooks.js";
+import { notifications } from "~/libs/modules/notifications/notifications.js";
+import {
+	type PlanDayDto,
 	type PlanEditForm,
 	type SelectedItemType,
 } from "~/libs/types/types.js";
+import { type PlanWithCategoryDto } from "~/modules/plans/libs/types/types.js";
 
+import { actions as planActions } from "../../modules/plans/plans.js";
+import { actions as tasksActions } from "../../modules/tasks/tasks.js";
 import { DaysNav, EditingPanel, PlanPreview } from "./components/components.js";
 import styles from "./styles.module.css";
 
 const mapDaysToNavItems = (
-	days: PlanDay[],
+	days: PlanDayDto[],
 ): { id: string; label: string }[] => {
 	return days.map((day) => ({
-		id: day.id,
+		id: day.id.toString(),
 		label: `Day ${String(day.dayNumber)}`,
 	}));
 };
 
 const PlanEdit: FC = () => {
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 	const [selectedItem, setSelectedItem] = useState<SelectedItemType>(ZERO);
 
+	const plan = useAppSelector(({ plan }) => plan.plan) as PlanWithCategoryDto;
+	const planFormData: PlanEditForm = {
+		days: plan.days,
+		startDate: plan.createdAt as string,
+		theme: getPlanStyleName(plan.styleId),
+		title: plan.title,
+	};
+	const originTasks = plan.days.flatMap((day) => day.tasks);
+
 	const { control, errors } = useAppForm<PlanEditForm>({
-		defaultValues: activitiesMockData,
+		defaultValues: planFormData,
 	});
 
 	const formValues = useWatch({
@@ -53,8 +73,21 @@ const PlanEdit: FC = () => {
 	}, [handleSelectItem]);
 
 	const handleSave = useCallback((): void => {
-		toast.success("Plan saved successfully");
-	}, []);
+		void (async (): Promise<void> => {
+			const allTasks = formValues.days.flatMap((day) => day.tasks);
+			const editedTasks = getEditedTasks(originTasks, allTasks);
+
+			await dispatch(tasksActions.updateTasks(editedTasks));
+			await dispatch(planActions.findPlan(plan.id));
+
+			notifications.success("Plan saved successfully");
+			void navigate(AppRoute.OVERVIEW_PAGE);
+		})();
+	}, [dispatch, formValues.days, navigate, originTasks, plan.id]);
+
+	const handleNavigateBack = useCallback((): void => {
+		void navigate(AppRoute.OVERVIEW_PAGE);
+	}, [navigate]);
 
 	if (formValues.days.length === ZERO) {
 		return <Loader />;
@@ -81,6 +114,7 @@ const PlanEdit: FC = () => {
 						icon={<DecorativeImage src={ArrowLeft} />}
 						isIconOnly
 						label=""
+						onClick={handleNavigateBack}
 					/>
 				</nav>
 
@@ -99,7 +133,7 @@ const PlanEdit: FC = () => {
 							onSelectPreview={handleSelectPreview}
 							previewLabel="Preview"
 							selectedItem={selectedItem}
-							shouldShowNotes={!!formValues.notes.trim()}
+							shouldShowNotes={!!formValues.notes?.trim()}
 							shouldShowPreviewButton
 						/>
 					</div>

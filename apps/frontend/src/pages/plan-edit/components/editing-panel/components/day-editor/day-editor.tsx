@@ -1,6 +1,5 @@
 import { type FC, useCallback } from "react";
 import { type Control, type FieldErrors, useFieldArray } from "react-hook-form";
-import { toast } from "react-toastify";
 
 import { Regenerate, Timer } from "~/assets/img/icons/icons.js";
 import {
@@ -10,6 +9,7 @@ import {
 } from "~/libs/components/components.js";
 import { ONE } from "~/libs/constants/constants.js";
 import { SuccessMessage } from "~/libs/enums/enums.js";
+import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { type PlanEditForm } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
@@ -17,10 +17,10 @@ import styles from "./styles.module.css";
 const getFieldName = (
 	dayIndex: number,
 	taskIndex: number,
-): `days.${number}.tasks.${number}.description` => {
+): `days.${number}.tasks.${number}.title` => {
 	return `days.${String(dayIndex)}.tasks.${String(
 		taskIndex,
-	)}.description` as `days.${number}.tasks.${number}.description`;
+	)}.title` as `days.${number}.tasks.${number}.title`;
 };
 
 type Properties = {
@@ -40,11 +40,11 @@ const DayEditor: FC<Properties> = ({ control, dayIndex, errors }) => {
 	});
 
 	const handleRegenerateTask = useCallback((): void => {
-		toast.success(SuccessMessage.REGENERATE_TASK_SUCCESS);
+		notifications.success(SuccessMessage.REGENERATE_TASK_SUCCESS);
 	}, []);
 
 	const handleSetTaskTime = useCallback((): void => {
-		toast.info(SuccessMessage.SET_TASK_TIME_INFO);
+		notifications.info(SuccessMessage.SET_TASK_TIME_INFO);
 	}, []);
 
 	return (

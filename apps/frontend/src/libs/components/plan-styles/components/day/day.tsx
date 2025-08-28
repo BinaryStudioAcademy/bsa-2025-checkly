@@ -1,6 +1,7 @@
 import { PlanStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
 import { getClassNames, getWeekday } from "~/libs/helpers/helpers.js";
-import { type PlanStyleOption, type TaskDto } from "~/libs/types/types.js";
+import { type PlanStyleOption } from "~/libs/types/types.js";
+import { type TaskDto } from "~/modules/tasks/libs/types/types.js";
 
 import { Task as TaskItem } from "../components.js";
 import styles from "./styles.module.css";
@@ -61,9 +62,9 @@ const Day: React.FC<Properties> = ({
 					return (
 						<TaskItem
 							executionTimeType={task.executionTimeType ?? undefined}
-							id={`${task.id.toString()}-${dayNumber.toString()}`}
+							id={task.id}
 							inputStyle={inputStyle}
-							key={`${task.id.toString()}-${dayNumber.toString()}`}
+							key={task.id.toString() + dayNumber.toString()}
 							taskText={task.title}
 						/>
 					);

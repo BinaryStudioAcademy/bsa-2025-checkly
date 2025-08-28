@@ -1,8 +1,8 @@
-import { type PlanDay, type PlanStyleOption } from "./types.js";
+import { type PlanDayDto, type PlanStyleOption } from "./types.js";
 
 type PlanEditForm = {
-	days: PlanDay[];
-	notes: string;
+	days: PlanDayDto[];
+	notes?: string;
 	startDate: string;
 	theme: PlanStyleOption;
 	title: string;

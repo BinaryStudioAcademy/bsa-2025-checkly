@@ -7,6 +7,18 @@ import {
 } from "~/modules/tasks/libs/types/types.js";
 import { name as sliceName } from "~/modules/tasks/slices/task.slice.js";
 
+const updateTasks = createAsyncThunk<
+	TaskDto[],
+	Partial<TaskDto>[],
+	AsyncThunkConfig
+>(`${sliceName}/update-tasks`, async (payload, { extra }) => {
+	const { taskApi } = extra;
+
+	const updatedTasks = await taskApi.bulkUpdate(payload);
+
+	return updatedTasks;
+});
+
 const updateTask = createAsyncThunk<
 	TaskDto,
 	{ id: number; payload: TaskUpdateRequestDto },
@@ -28,4 +40,4 @@ const deleteTask = createAsyncThunk<number, number, AsyncThunkConfig>(
 	},
 );
 
-export { deleteTask, updateTask };
+export { deleteTask, updateTask, updateTasks };

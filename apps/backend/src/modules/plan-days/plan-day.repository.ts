@@ -86,7 +86,10 @@ class PlanDayRepository implements Repository {
 	}
 
 	public async findAll(): Promise<PlanDayEntity[]> {
-		const planDays = await this.planDayModel.query().execute();
+		const planDays = await this.planDayModel
+			.query()
+			.orderBy("dayNumber", "asc")
+			.execute();
 
 		return planDays.map((planDay) => PlanDayEntity.initialize(planDay));
 	}

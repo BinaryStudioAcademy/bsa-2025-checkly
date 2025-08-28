@@ -11,6 +11,7 @@ import {
 	MAX_DAYS_PER_PAGE,
 	MESSAGES,
 	MIN_PAGES,
+	PLAN_NAME_DEFAULT,
 } from "~/libs/constants/constants.js";
 import {
 	FileExtension,
@@ -118,17 +119,10 @@ const exportDesktopPng = createAsyncThunk<
 	const view = getCategoryStyle(category);
 	const size: WindowSize = getWindowSize();
 
-	const currentPlan = getState().plan.plan;
-
-	if (!currentPlan?.id) {
-		notifications.error(MESSAGES.DOWNLOAD.NO_PLAN_FOUND);
-
-		return { fileName: "" };
-	}
-
-	const planTitle = String(currentPlan.title);
-	const pageCount = getPageCount(currentPlan.days.length);
-	const planStyleId = currentPlan.styleId;
+	const totalDays = getState().plan.plan?.days.length;
+	const pageCount = getPageCount(totalDays as number);
+	const planTitle = String(getState().plan.plan?.title ?? PLAN_NAME_DEFAULT);
+	const planStyleId = getState().plan.plan?.styleId;
 	const { selectedStyle } = getState().plan;
 	const styleToSend = planStyleId
 		? (PLAN_STYLE_TO_READABLE[Number(planStyleId)] ?? String(selectedStyle))
@@ -140,7 +134,7 @@ const exportDesktopPng = createAsyncThunk<
 				format: PaperFormat.A4,
 				html: view,
 				page,
-				planId: currentPlan.id,
+				planId: getState().plan.plan?.id,
 				planStyle: styleToSend,
 				title: planTitle,
 				windowSize: size,
@@ -154,7 +148,7 @@ const exportDesktopPng = createAsyncThunk<
 	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
 		format: PaperFormat.A4,
 		html: view,
-		planId: currentPlan.id,
+		planId: getState().plan.plan?.id,
 		planStyle: styleToSend,
 		title: planTitle,
 		windowSize: size,
@@ -176,17 +170,9 @@ const exportMobilePng = createAsyncThunk<
 	const view = getCategoryStyle(category);
 	const size: WindowSize = getWindowSize();
 
-	const currentPlan = getState().plan.plan;
-
-	if (!currentPlan?.id) {
-		notifications.error(MESSAGES.DOWNLOAD.NO_PLAN_FOUND);
-
-		return { fileName: "" };
-	}
-
-	const totalDays = currentPlan.days.length;
-	const pageCount = getPageCount(totalDays);
-	const planTitle = String(getState().plan.plan?.title);
+	const totalDays = getState().plan.plan?.days.length;
+	const pageCount = getPageCount(totalDays as number);
+	const planTitle = String(getState().plan.plan?.title ?? PLAN_NAME_DEFAULT);
 	const planStyleId = getState().plan.plan?.styleId;
 	const { selectedStyle } = getState().plan;
 	const styleToSend = planStyleId
@@ -199,7 +185,7 @@ const exportMobilePng = createAsyncThunk<
 				format: PaperFormat.A4,
 				html: view,
 				page,
-				planId: currentPlan.id,
+				planId: getState().plan.plan?.id,
 				planStyle: styleToSend,
 				title: planTitle,
 				windowSize: size,
@@ -215,7 +201,7 @@ const exportMobilePng = createAsyncThunk<
 	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
 		format: PaperFormat.A4,
 		html: view,
-		planId: currentPlan.id,
+		planId: getState().plan.plan?.id,
 		planStyle: styleToSend,
 		title: planTitle,
 		windowSize: size,

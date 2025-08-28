@@ -7,12 +7,12 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppSelector, useCallback } from "~/libs/hooks/hooks.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 import {
-	type PlanDaysTaskDto,
 	type PlanStyleOption,
 	ViewOption,
 	type ViewOptions,
 } from "~/libs/types/types.js";
 import { CURRENT_PLAN_MESSAGES } from "~/modules/plans/libs/constants/plan.constants.js";
+import { type PlanDaysTaskDto } from "~/modules/plans/libs/types/types.js";
 import { planApi } from "~/modules/plans/plans.js";
 
 import { PRINT_STYLE_TEMPLATE } from "./libs/constants/constants.js";
@@ -147,7 +147,7 @@ const PlanStylePrint: React.FC = () => {
 				<PlanStyle
 					inputStyle={inputStyle}
 					page={page}
-					planData={planData}
+					plan={planData ?? undefined}
 					view={viewStyle}
 				/>
 			</div>

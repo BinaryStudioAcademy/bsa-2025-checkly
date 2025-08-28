@@ -5,14 +5,17 @@ import { TbSunset2 as MorningIcon } from "react-icons/tb";
 
 import { PlanStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
-import { type PlanStyleOption } from "~/libs/types/types.js";
+import {
+	type ExecutionTimeTypeValue,
+	type PlanStyleOption,
+} from "~/libs/types/types.js";
 
 import { ExecutionTimeType } from "../../libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	executionTimeType?: string;
-	id: string;
+	executionTimeType?: ExecutionTimeTypeValue;
+	id: number;
 	inputStyle: PlanStyleOption;
 	taskText: string;
 };
@@ -28,6 +31,8 @@ const Task: React.FC<Properties> = ({
 		[ExecutionTimeType.EVENING]: <EveningIcon className={styles["icon"]} />,
 		[ExecutionTimeType.MORNING]: <MorningIcon className={styles["icon"]} />,
 	};
+
+	const taskId = id.toString();
 
 	const taskClasses = getClassNames(
 		styles["task"],
@@ -52,11 +57,11 @@ const Task: React.FC<Properties> = ({
 			<input
 				className={taskCheckboxClasses}
 				disabled
-				id={id}
-				name={`Task${id}`}
+				id={taskId}
+				name={`Task${taskId}`}
 				type="checkbox"
 			/>
-			<label className={taskTextClasses} htmlFor={id}>
+			<label className={taskTextClasses} htmlFor={taskId}>
 				{taskText}
 			</label>
 			{executionTimeType ? icons[executionTimeType] : null}

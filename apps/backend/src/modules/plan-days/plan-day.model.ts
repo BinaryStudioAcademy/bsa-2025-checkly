@@ -1,4 +1,4 @@
-import { type RelationMappings } from "objection";
+import { type Modifiers, type RelationMappings } from "objection";
 
 import {
 	AbstractModel,
@@ -9,6 +9,12 @@ import { PlanModel } from "../plans/plan.model.js";
 import { TaskModel } from "../tasks/task.model.js";
 
 class PlanDayModel extends AbstractModel {
+	static readonly modifiers: Modifiers = {
+		orderByDayNumber(builder) {
+			builder.orderBy("day_number", "asc");
+		},
+	};
+
 	static get relationMappings(): RelationMappings {
 		return {
 			plan: {
@@ -29,6 +35,7 @@ class PlanDayModel extends AbstractModel {
 			},
 		};
 	}
+
 	public static override get tableName(): string {
 		return DatabaseTableName.PLAN_DAYS;
 	}

@@ -5,20 +5,30 @@ import {
 	Notes,
 	PlanHeader,
 } from "~/libs/components/plan-styles/components/components.js";
-import { PlanStyleModules, ZERO } from "~/libs/enums/enums.js";
+import { PlanStyleModules } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useA4Scale } from "~/libs/hooks/hooks.js";
 import {
-	type ExecutionTimeTypeValue,
-	type PlanDay,
+	type PlanDayDto,
 	type PlanStyleOption,
+	type TaskDto,
 } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
 
+const mapTaskToTaskDto = (task: TaskDto, dayNumber: number): TaskDto => ({
+	completedAt: null,
+	executionTimeType: task.executionTimeType,
+	id: Number(task.id),
+	isCompleted: task.isCompleted,
+	order: task.order,
+	planDayId: dayNumber,
+	title: task.title,
+});
+
 type Properties = {
 	containerId?: string;
-	days: PlanDay[];
+	days: PlanDayDto[];
 	firstDayDate: string;
 	isForPrint?: boolean;
 	notes?: string;
@@ -52,16 +62,9 @@ const PlanPreview: React.FC<Properties> = ({
 							firstDayDate={firstDayDate}
 							inputStyle={theme}
 							key={day.id}
-							tasks={day.tasks.map((task) => ({
-								completedAt: null,
-								description: task.description,
-								executionTimeType: task.executionType as ExecutionTimeTypeValue,
-								id: Number(task.id),
-								isCompleted: task.isCompleted,
-								order: task.order ?? ZERO,
-								planDayId: day.dayNumber,
-								title: task.title ?? task.description,
-							}))}
+							tasks={day.tasks.map((task) =>
+								mapTaskToTaskDto(task, day.dayNumber),
+							)}
 						/>
 					))}
 					{notes && <Notes inputStyle={theme} notes={notes} />}

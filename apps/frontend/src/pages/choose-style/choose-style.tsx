@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 import {
 	ArrowLeftIcon,
@@ -18,18 +17,19 @@ import {
 	Button,
 	DecorativeImage,
 } from "~/libs/components/components.js";
+import { NOTES_PLAN_TEMPLATE } from "~/libs/components/plan-styles/mocks/plan-mocks.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
-import { ZERO } from "~/libs/constants/constants.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { useAppDispatch } from "~/libs/hooks/use-app-dispatch/use-app-dispatch.hook.js";
 import { useAppSelector } from "~/libs/hooks/use-app-selector/use-app-selector.hook.js";
+import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { type ViewOptions } from "~/libs/types/types.js";
 import { usePlanStyles } from "~/modules/plan-styles/hooks/use-plan-styles.hook.js";
 import { PlanStyle as PlanStyleEnum } from "~/modules/plan-styles/libs/enums/enums.js";
+import { type PlanWithCategoryDto } from "~/modules/plans/libs/types/types.js";
 import { actions as planActions, planApi } from "~/modules/plans/plans.js";
-import { actions as planSliceActions } from "~/modules/plans/slices/plan.slice.js";
 
 import { styleCards } from "./choose-style.data.js";
 import { CHOOSE_STYLE_MESSAGES } from "./libs/constants/choose-style.constants.js";
@@ -41,8 +41,6 @@ const PLAN_VIEW_OPTION: ViewOptions = "selection";
 
 const ChooseStyle: React.FC = () => {
 	const plan = useAppSelector((state) => state.plan.plan);
-	const user = useAppSelector((state) => state.auth.user);
-	const userPlans = useAppSelector((state) => state.plan.userPlans);
 	const { styles: planStyles } = usePlanStyles();
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
@@ -50,23 +48,6 @@ const ChooseStyle: React.FC = () => {
 		styleCards[PRESELECTED_ELEMENT_INDEX]?.id ?? null,
 	);
 	const [isSaving, setIsSaving] = useState<boolean>(false);
-
-	useEffect(() => {
-		if (user) {
-			void dispatch(planActions.getAllUserPlans());
-		}
-	}, [user, dispatch]);
-
-	useEffect(() => {
-		if (userPlans.length > ZERO) {
-			const maxId = Math.max(...userPlans.map((p) => p.id));
-			const latestPlan = userPlans.find((p) => p.id === maxId);
-
-			if (latestPlan) {
-				dispatch(planSliceActions.setPlan(latestPlan));
-			}
-		}
-	}, [userPlans, dispatch]);
 
 	const handleGetStyleId = useCallback(
 		(styleName: string): number => {
@@ -79,7 +60,7 @@ const ChooseStyle: React.FC = () => {
 
 	const handleStyleValidation = useCallback((): StyleValidationResult => {
 		if (!plan?.id || !selectedCard) {
-			toast.error(CHOOSE_STYLE_MESSAGES.SELECT_STYLE_AND_PLAN_ID);
+			notifications.error(CHOOSE_STYLE_MESSAGES.SELECT_STYLE_AND_PLAN_ID);
 
 			return null;
 		}
@@ -87,7 +68,7 @@ const ChooseStyle: React.FC = () => {
 		const selectedStyle = styleCards.find((card) => card.id === selectedCard);
 
 		if (!selectedStyle) {
-			toast.error(CHOOSE_STYLE_MESSAGES.INVALID_STYLE_SELECTION);
+			notifications.error(CHOOSE_STYLE_MESSAGES.INVALID_STYLE_SELECTION);
 
 			return null;
 		}
@@ -116,10 +97,10 @@ const ChooseStyle: React.FC = () => {
 		try {
 			await planApi.updateStyle(validation.planId, validation.styleId);
 			await dispatch(planActions.getAllUserPlans());
-			toast.success(CHOOSE_STYLE_MESSAGES.PLAN_STYLE_UPDATED_SUCCESS);
+			notifications.success(CHOOSE_STYLE_MESSAGES.PLAN_STYLE_UPDATED_SUCCESS);
 			void navigate(AppRoute.OVERVIEW_PAGE);
 		} catch {
-			toast.error(CHOOSE_STYLE_MESSAGES.FAILED_TO_UPDATE_PLAN_STYLE);
+			notifications.error(CHOOSE_STYLE_MESSAGES.FAILED_TO_UPDATE_PLAN_STYLE);
 		} finally {
 			setIsSaving(false);
 		}
@@ -193,7 +174,8 @@ const ChooseStyle: React.FC = () => {
 						>
 							<PlanStyle
 								inputStyle={planStyle}
-								planData={plan}
+								notes={NOTES_PLAN_TEMPLATE}
+								plan={plan as PlanWithCategoryDto}
 								view={PLAN_VIEW_OPTION}
 							/>
 							<span className={styles["card-text"]}>{label}</span>

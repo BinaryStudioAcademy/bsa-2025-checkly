@@ -23,7 +23,7 @@ const PRINT_STYLE_TEMPLATE = `
 			padding: 25px;
 		}
 
-		#print-container .desktop-view.container {
+		#print-container .desktop-view {
 			position: static;
 			width: auto;
 			height: auto;

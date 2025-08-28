@@ -33,8 +33,10 @@ const Plan: React.FC = () => {
 	const planDaysNumber = useAppSelector((state) => state.plan.days);
 
 	useEffect(() => {
-		void dispatch(planActions.getPlan());
-	}, [dispatch]);
+		if (!plan) {
+			void dispatch(planActions.getPlan());
+		}
+	}, [dispatch, plan]);
 
 	const handleDayRegenerate = useCallback(
 		(dayId: number) => {
@@ -127,8 +129,9 @@ const Plan: React.FC = () => {
 	return (
 		<div className={styles["plan"]}>
 			<div className={styles["nav"]}>
-				<p className={styles["nav-text"]}>Here’s your plan!</p>
+				<h2 className={styles["nav-text"]}>{plan?.title}</h2>
 				<Button
+					className={styles["regenerate-button"]}
 					label="Regenerate plan"
 					onClick={handlePlanRegenerate}
 					size="small"
