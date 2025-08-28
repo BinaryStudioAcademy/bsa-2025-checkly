@@ -6,6 +6,7 @@ import { ArrowLeft, Regenerate, Remove } from "~/assets/img/icons/icons.js";
 import {
 	AppHeader,
 	Button,
+	ConfirmationModal,
 	DecorativeImage,
 	Input,
 	Link,
@@ -38,10 +39,6 @@ import {
 import { tasksEditValidationSchema } from "./libs/validation-schema/validation-schemas.js";
 import styles from "./styles.module.css";
 
-const notify = (message: string, mode: "error" | "success"): void => {
-	notifications[mode](message);
-};
-
 const SKELETON_TASKS_NUMBER = 5;
 const FORM_MODE = "onBlur";
 const FORM_FIELD_NAME = "tasks";
@@ -49,6 +46,16 @@ const FORM_FIELD_NAME = "tasks";
 const PlanEdit: React.FC = () => {
 	const [selectedDay, setSelectedDay] = useState<number>(ZERO);
 	const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
+	const [isRegenerateTaskModalOpen, setIsRegenerateTaskModalOpen] =
+		useState<boolean>(false);
+	const [taskToRegenerateId, setTaskToRegenerateId] = useState<null | number>(
+		null,
+	);
+
+	const [isDeleteTaskModalOpen, setIsDeleteTaskModalOpen] =
+		useState<boolean>(false);
+	const [taskToDeleteId, setTaskToDeleteId] = useState<null | number>(null);
+
 	const tasksLoading = useLoadingIds();
 	const daysLoading = useLoadingIds();
 	const dispatch = useAppDispatch();
@@ -75,6 +82,11 @@ const PlanEdit: React.FC = () => {
 		[plan, daysLoading, dispatch],
 	);
 
+	const handleTaskRegenerateClick = useCallback((taskId: number) => {
+		setTaskToRegenerateId(taskId);
+		setIsRegenerateTaskModalOpen(true);
+	}, []);
+
 	const handleTaskRegenerate = useCallback(
 		(taskId: number) => {
 			const planDay = plan?.days[selectedDay];
@@ -97,8 +109,27 @@ const PlanEdit: React.FC = () => {
 		[plan, tasksLoading, selectedDay, dispatch],
 	);
 
+	const handleRegenerateConfirm = useCallback(() => {
+		if (taskToRegenerateId) {
+			handleTaskRegenerate(taskToRegenerateId);
+		}
+
+		setIsRegenerateTaskModalOpen(false);
+		setTaskToRegenerateId(null);
+	}, [taskToRegenerateId, handleTaskRegenerate]);
+
+	const handleRegenerateCancel = useCallback(() => {
+		setIsRegenerateTaskModalOpen(false);
+		setTaskToRegenerateId(null);
+	}, []);
+
 	const toggleSelect = useCallback((): void => {
 		setIsSelectOpen((previous) => !previous);
+	}, []);
+
+	const handleTaskDeleteClick = useCallback((taskId: number) => {
+		setTaskToDeleteId(taskId);
+		setIsDeleteTaskModalOpen(true);
 	}, []);
 
 	const handleDeleteTask = useCallback(
@@ -112,14 +143,28 @@ const PlanEdit: React.FC = () => {
 
 			void dispatch(taskActions.deleteTask(taskId))
 				.then(() => {
-					notify(TaskNotificationMessage.DELETE_SUCCESS, "success");
+					notifications.success(TaskNotificationMessage.DELETE_SUCCESS);
 				})
 				.catch(() => {
-					notify(TaskNotificationMessage.DELETE_ERROR, "error");
+					notifications.error(TaskNotificationMessage.DELETE_ERROR);
 				});
 		},
 		[dispatch, selectedDay],
 	);
+
+	const handleDeleteConfirm = useCallback(() => {
+		if (taskToDeleteId) {
+			handleDeleteTask(taskToDeleteId);
+		}
+
+		setIsDeleteTaskModalOpen(false);
+		setTaskToDeleteId(null);
+	}, [taskToDeleteId, handleDeleteTask]);
+
+	const handleDeleteCancel = useCallback(() => {
+		setIsDeleteTaskModalOpen(false);
+		setTaskToDeleteId(null);
+	}, []);
 
 	const { control, dirtyFields, errors, getValues, reset } = useAppForm<{
 		[FORM_FIELD_NAME]: TaskDto[];
@@ -186,10 +231,10 @@ const PlanEdit: React.FC = () => {
 
 			void dispatch(taskActions.updateTask(payload))
 				.then(() => {
-					notify(TaskNotificationMessage.UPDATE_SUCCESS, "success");
+					notifications.success(TaskNotificationMessage.UPDATE_SUCCESS);
 				})
 				.catch(() => {
-					notify(TaskNotificationMessage.UPDATE_ERROR, "error");
+					notifications.error(TaskNotificationMessage.UPDATE_ERROR);
 				});
 		},
 		[getValues, dispatch, selectedDay, dirtyFields?.tasks, plan?.days],
@@ -198,19 +243,19 @@ const PlanEdit: React.FC = () => {
 	const createTaskRegenerateHandler = useCallback(
 		(taskId: number) => {
 			return (): void => {
-				handleTaskRegenerate(taskId);
+				handleTaskRegenerateClick(taskId);
 			};
 		},
-		[handleTaskRegenerate],
+		[handleTaskRegenerateClick],
 	);
 
 	const createTaskDeleteHandler = useCallback(
 		(taskId: number) => {
 			return (): void => {
-				handleDeleteTask(taskId);
+				handleTaskDeleteClick(taskId);
 			};
 		},
-		[handleDeleteTask],
+		[handleTaskDeleteClick],
 	);
 
 	const createTaskBlurHandler = useCallback(
@@ -439,6 +484,20 @@ const PlanEdit: React.FC = () => {
 					</div>
 				</div>
 			</div>
+			<ConfirmationModal
+				isOpen={isRegenerateTaskModalOpen}
+				message="You sure you want to regenerate this task?"
+				onCancel={handleRegenerateCancel}
+				onConfirm={handleRegenerateConfirm}
+				title="Task Regeneration"
+			/>
+			<ConfirmationModal
+				isOpen={isDeleteTaskModalOpen}
+				message="You sure you want to permanently delete this task?"
+				onCancel={handleDeleteCancel}
+				onConfirm={handleDeleteConfirm}
+				title="Task Deletion"
+			/>
 		</>
 	);
 };

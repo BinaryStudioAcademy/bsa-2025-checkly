@@ -158,6 +158,10 @@
 	margin-top: var(--space-l);
 }
 
+.input-control:not(:disabled):hover {
+	background: white;
+}
+
 .day-skeleton {
 	width: 100%;
 }
@@ -183,7 +187,7 @@
 }
 
 .skeleton-label {
-	width: 80px;
+	width: 50px;
 	height: var(--text-body);
 	background: linear-gradient(90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
 	background-size: 200% 100%;
