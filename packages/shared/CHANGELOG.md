@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.17.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.16.1...shared-v1.17.0) (2025-08-28)
+
+
+### Features
+
+* improve prompting cy-202 ([46418e4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/46418e482bd89efc055f2c75ea3d3ae20a51a30a))
+* improve prompting, encounter duration while plan generating cy-202 ([8cac8ed](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8cac8ed12d90db8cb56bab0142134c0215cb096b))
+
 ## [1.16.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.16.0...shared-v1.16.1) (2025-08-28)
 
 

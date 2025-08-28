@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.17.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.16.3...backend-v1.17.0) (2025-08-28)
+
+
+### Features
+
+* improve prompting cy-202 ([46418e4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/46418e482bd89efc055f2c75ea3d3ae20a51a30a))
+
+
+### Bug Fixes
+
+* remove dirname puppeteerrc cy-202 ([32dc11a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/32dc11a6e71f693a60cf401602ef8a8f210e1ffe))
+
 ## [1.16.3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.16.2...backend-v1.16.3) (2025-08-28)
 
 
