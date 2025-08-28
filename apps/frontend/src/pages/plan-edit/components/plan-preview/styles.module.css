@@ -28,7 +28,7 @@
 	width: var(--a4-w);
 	height: var(--a4-h);
 	padding: var(--preview-padding, 32px);
-	overflow: hidden;
+	overflow-y: auto;
 	background-color: #fdf6ef;
 	border: 1px solid var(--border-color, #d3c4ae);
 	border-radius: var(--preview-border-radius, 10px);

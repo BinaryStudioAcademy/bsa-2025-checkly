@@ -3,26 +3,37 @@ import {
 	MIN_INDEX,
 	MIN_PAGE,
 	MIN_STACK_PAGES,
-	PLAN_NAME_DEFAULT,
 } from "~/libs/constants/constants.js";
 import { PlanStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { useAppSelector } from "~/libs/hooks/use-app-selector/use-app-selector.hook.js";
 import {
+	type PlanDayDto,
 	type PlanStyleOption,
 	ViewOption,
 	type ViewOptions,
 } from "~/libs/types/types.js";
+import { type PlanWithCategoryDto } from "~/modules/plans/libs/types/types.js";
 
 import { Day, Notes, PlanHeader } from "../components/components.js";
-import { PLAN } from "../mocks/plan-mocks.js";
+import {
+	PLAN_TEMPLATE,
+	PLAN_TEMPLATE_START_DATE,
+} from "../mocks/plan-mocks.js";
 import styles from "./styles.module.css";
 
 type Properties = {
 	inputStyle: PlanStyleOption;
+	notes?: string;
 	page?: number;
-	planTitle?: string;
+	plan?: PlanWithCategoryDto;
 	view?: ViewOptions;
+};
+
+type selectPagesToRenderArguments = {
+	allChunks: PlanDayDto[][];
+	page: number | undefined;
+	plan: PlanWithCategoryDto;
+	view: ViewOptions;
 };
 
 const chunkDays = <T,>(items: T[], size: number): T[][] => {
@@ -35,11 +46,12 @@ const chunkDays = <T,>(items: T[], size: number): T[][] => {
 	return chunks;
 };
 
-const selectPagesToRender = (
-	view: ViewOptions,
-	page: number | undefined,
-	allChunks: (typeof PLAN.days)[],
-): (typeof PLAN.days)[] => {
+const selectPagesToRender = ({
+	allChunks,
+	page,
+	plan,
+	view,
+}: selectPagesToRenderArguments): PlanDayDto[][] => {
 	const hasValidPage = typeof page === "number" && page >= MIN_PAGE;
 
 	if (view === ViewOption.DESKTOP || view === ViewOption.MOBILE) {
@@ -57,11 +69,11 @@ const selectPagesToRender = (
 	}
 
 	if (view !== "regular") {
-		return [PLAN.days];
+		return [plan.days];
 	}
 
 	if (!hasValidPage) {
-		return [PLAN.days];
+		return [plan.days];
 	}
 
 	const clampedIndex = Math.min(
@@ -75,13 +87,11 @@ const selectPagesToRender = (
 
 const PlanStyle: React.FC<Properties> = ({
 	inputStyle,
+	notes,
 	page,
-	planTitle,
+	plan = PLAN_TEMPLATE,
 	view = ViewOption.REGULAR,
 }: Properties) => {
-	const plan = useAppSelector((state) => state.plan.plan);
-	const finalTitle = planTitle ?? String(plan?.title ?? PLAN_NAME_DEFAULT);
-
 	const containerClasses = getClassNames(
 		styles["container"],
 		styles[`${view}-view`],
@@ -104,9 +114,9 @@ const PlanStyle: React.FC<Properties> = ({
 		view === ViewOption.MOBILE && styles["mobile-day-list"],
 	);
 
-	const allChunks = chunkDays(PLAN.days, MAX_DAYS_PER_PAGE);
+	const allChunks = chunkDays(plan.days, MAX_DAYS_PER_PAGE);
 
-	const pagesToRender = selectPagesToRender(view, page, allChunks);
+	const pagesToRender = selectPagesToRender({ allChunks, page, plan, view });
 
 	const content =
 		pagesToRender.length === MIN_INDEX ? null : (
@@ -117,21 +127,21 @@ const PlanStyle: React.FC<Properties> = ({
 						data-plan-style={inputStyle}
 						key={`plan-page-${String(index)}`}
 					>
-						<PlanHeader inputStyle={inputStyle} title={finalTitle} />
+						<PlanHeader inputStyle={inputStyle} title={plan.title} />
 						<div className={planBodyClasses}>
 							<ul className={dayListClasses} data-view={view}>
 								{daysChunk.map((day) => {
 									return (
 										<Day
 											dayNumber={day.dayNumber}
-											firstDayDate={PLAN.createdAt as string}
+											firstDayDate={plan.createdAt ?? PLAN_TEMPLATE_START_DATE}
 											inputStyle={inputStyle}
-											key={`${day.id}-p${String(index + MIN_PAGE)}`}
+											key={`${day.id.toString()}-p${String(index + MIN_PAGE)}`}
 											tasks={day.tasks}
 										/>
 									);
 								})}
-								<Notes inputStyle={inputStyle} />
+								<Notes inputStyle={inputStyle} notes={notes} />
 							</ul>
 						</div>
 					</section>

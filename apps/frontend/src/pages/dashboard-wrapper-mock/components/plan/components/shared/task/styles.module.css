@@ -53,6 +53,7 @@
 	flex-direction: row;
 	gap: var(--space-3xs);
 	align-items: flex-start;
+	justify-content: center;
 	height: 100%;
 	margin-left: auto;
 	white-space: nowrap;

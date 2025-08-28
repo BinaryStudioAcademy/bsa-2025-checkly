@@ -58,6 +58,7 @@ class PlanDayEntity implements Entity {
 			dayNumber,
 			id: null,
 			planId,
+			tasks: [],
 		});
 	}
 

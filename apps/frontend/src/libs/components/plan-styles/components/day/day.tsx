@@ -1,6 +1,7 @@
 import { PlanStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
 import { getClassNames, getWeekday } from "~/libs/helpers/helpers.js";
-import { type PlanStyleOption, type Task } from "~/libs/types/types.js";
+import { type PlanStyleOption } from "~/libs/types/types.js";
+import { type TaskDto } from "~/modules/tasks/libs/types/types.js";
 
 import { Task as TaskItem } from "../components.js";
 import styles from "./styles.module.css";
@@ -9,7 +10,7 @@ type Properties = {
 	dayNumber: number;
 	firstDayDate?: string;
 	inputStyle: PlanStyleOption;
-	tasks: Task[];
+	tasks: TaskDto[];
 };
 
 const Day: React.FC<Properties> = ({
@@ -44,13 +45,13 @@ const Day: React.FC<Properties> = ({
 				</span>
 			</h2>
 			<ol className={taskListClasses}>
-				{tasks.map((task: Task) => {
+				{tasks.map((task: TaskDto) => {
 					return (
 						<TaskItem
-							executionTimeType={task.executionType}
-							id={task.id + dayNumber.toString()}
+							executionTimeType={task.executionTimeType}
+							id={task.id}
 							inputStyle={inputStyle}
-							key={task.id + dayNumber.toString()}
+							key={task.id.toString() + dayNumber.toString()}
 							taskText={task.title || ""}
 						/>
 					);

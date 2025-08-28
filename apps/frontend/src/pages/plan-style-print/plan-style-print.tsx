@@ -43,20 +43,13 @@ const PlanStylePrint: React.FC = () => {
 			? Math.floor(parsed)
 			: undefined;
 
-	const titleFromUrl = search.get("title") ?? undefined;
-
 	return (
 		<div
 			className={styles["print-container"]}
 			data-plan-style={inputStyle}
 			id="print-container"
 		>
-			<PlanStyle
-				inputStyle={inputStyle}
-				page={page}
-				planTitle={titleFromUrl}
-				view={viewStyle}
-			/>
+			<PlanStyle inputStyle={inputStyle} page={page} view={viewStyle} />
 		</div>
 	);
 };

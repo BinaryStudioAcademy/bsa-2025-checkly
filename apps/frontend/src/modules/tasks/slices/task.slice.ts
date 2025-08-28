@@ -5,7 +5,7 @@ import { type ValueOf } from "~/libs/types/types.js";
 import { TASK_INDEXES } from "~/modules/tasks/libs/constants/constants.js";
 import { type TaskDto } from "~/modules/tasks/libs/types/types.js";
 
-import { deleteTask, updateTask } from "./actions.js";
+import { deleteTask, updateTask, updateTasks } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
@@ -36,6 +36,26 @@ const { actions, name, reducer } = createSlice({
 			}
 		});
 		builder.addCase(updateTask.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+
+		builder.addCase(updateTasks.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(updateTasks.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+
+			for (let item of action.payload) {
+				const taskIndex = state.tasks.findIndex((task) => task.id === item.id);
+
+				if (taskIndex >= TASK_INDEXES.TASK_ZERO_INDEX) {
+					state.tasks[taskIndex] = item;
+				} else {
+					state.tasks.push(item);
+				}
+			}
+		});
+		builder.addCase(updateTasks.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 

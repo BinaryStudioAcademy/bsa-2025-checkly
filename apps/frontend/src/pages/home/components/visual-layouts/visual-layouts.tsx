@@ -3,6 +3,7 @@ import {
 	StarsYellow03,
 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { DecorativeImage } from "~/libs/components/components.js";
+import { NOTES_PLAN_TEMPLATE } from "~/libs/components/plan-styles/mocks/plan-mocks.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { type ViewOptions } from "~/libs/types/types.js";
@@ -48,6 +49,7 @@ const VisualLayouts: React.FC = () => {
 							>
 								<PlanStyle
 									inputStyle={example.planStyle}
+									notes={NOTES_PLAN_TEMPLATE}
 									view={PLAN_VIEW_OPTION}
 								/>
 								<h5>{example.title}</h5>

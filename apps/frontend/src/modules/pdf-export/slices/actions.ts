@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import JSZip from "jszip";
 
-import { PLAN } from "~/libs/components/plan-styles/mocks/plan-mocks.js";
 import {
 	type CategoryId,
 	DEFAULT_HEIGHT,
@@ -111,8 +110,8 @@ const exportDesktopPng = createAsyncThunk<
 	const view = getCategoryStyle(category);
 	const size: WindowSize = getWindowSize();
 
-	const totalDays = PLAN.days.length;
-	const pageCount = getPageCount(totalDays);
+	const totalDays = getState().plan.plan?.days.length;
+	const pageCount = getPageCount(totalDays as number);
 	const planTitle = String(getState().plan.plan?.title ?? PLAN_NAME_DEFAULT);
 	const planStyleId = getState().plan.plan?.styleId;
 	const { selectedStyle } = getState().plan;
@@ -158,8 +157,8 @@ const exportMobilePng = createAsyncThunk<
 	const view = getCategoryStyle(category);
 	const size: WindowSize = getWindowSize();
 
-	const totalDays = PLAN.days.length;
-	const pageCount = getPageCount(totalDays);
+	const totalDays = getState().plan.plan?.days.length;
+	const pageCount = getPageCount(totalDays as number);
 	const planTitle = String(getState().plan.plan?.title ?? PLAN_NAME_DEFAULT);
 	const planStyleId = getState().plan.plan?.styleId;
 	const { selectedStyle } = getState().plan;

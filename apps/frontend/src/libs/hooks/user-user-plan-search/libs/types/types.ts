@@ -1,1 +1,4 @@
-export { type PlanDaysTaskDto, type PlanSearchQueryParameter } from "shared";
+export {
+	type PlanSearchQueryParameter,
+	type PlanWithCategoryDto,
+} from "shared";

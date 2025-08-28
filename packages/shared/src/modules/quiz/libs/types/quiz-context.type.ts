@@ -1,4 +1,4 @@
-import { type TaskDto } from "../../../plans/plans.js";
+import { type TaskDto } from "../../../tasks/tasks.js";
 
 type QuizContext = {
 	tasks: TaskDto[];
