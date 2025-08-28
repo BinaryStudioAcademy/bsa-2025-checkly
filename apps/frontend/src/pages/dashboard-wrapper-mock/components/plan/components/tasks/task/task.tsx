@@ -126,7 +126,7 @@ const Task: React.FC<Properties> = ({
 							<div className={styles["save-button-wrapper"]}>
 								<Button
 									className={getClassNames(styles["save-button"])}
-									icon={<DecorativeImage src={Save} />}
+									icon={<Save />}
 									isIconOnly
 									label="Save"
 									onClick={handleSaveClick}

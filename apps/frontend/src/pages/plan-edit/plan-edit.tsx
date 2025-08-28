@@ -1,177 +1,420 @@
-import { type FC, useCallback, useState } from "react";
-import { useWatch } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { type JSX, useCallback, useEffect, useState } from "react";
+import { useFieldArray } from "react-hook-form";
 
-import { ArrowLeft, Save } from "~/assets/img/icons/icons.js";
+import { ArrowLeft, Regenerate, Remove } from "~/assets/img/icons/icons.js";
 import {
 	AppHeader,
 	Button,
 	DecorativeImage,
-	Loader,
+	Input,
+	Link,
 } from "~/libs/components/components.js";
-import { ZERO } from "~/libs/constants/constants.js";
-import { AppRoute } from "~/libs/enums/enums.js";
-import { getEditedTasks } from "~/libs/helpers/get-edited-tasks.js";
-import { getClassNames, getPlanStyleName } from "~/libs/helpers/helpers.js";
+import { ONE, ZERO } from "~/libs/constants/constants.js";
+import { AppRoute, ButtonVariants } from "~/libs/enums/enums.js";
+import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import {
 	useAppDispatch,
 	useAppForm,
 	useAppSelector,
 } from "~/libs/hooks/hooks.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
-import {
-	type PlanDayDto,
-	type PlanEditForm,
-	type SelectedItemType,
-} from "~/libs/types/types.js";
-import { type PlanWithCategoryDto } from "~/modules/plans/libs/types/types.js";
+import { actions as planActions } from "~/modules/plans/plans.js";
+import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
-import { actions as planActions } from "../../modules/plans/plans.js";
-import { actions as tasksActions } from "../../modules/tasks/tasks.js";
-import { DaysNav, EditingPanel, PlanPreview } from "./components/components.js";
+import { DayList } from "../dashboard-wrapper-mock/components/plan/components/components.js";
+import { useLoadingIds } from "../dashboard-wrapper-mock/components/plan/libs/hooks/hooks.js";
+import { PlanPreview } from "./components/components.js";
+import { TaskNotificationMessage } from "./libs/enums/task-notification-message.enums.js";
+import {
+	type RenderTaskInputField,
+	type RenderTaskInputProperties,
+	type TaskDto,
+} from "./libs/types/types.js";
+import { tasksEditValidationSchema } from "./libs/validation-schema/validation-schemas.js";
 import styles from "./styles.module.css";
 
-const mapDaysToNavItems = (
-	days: PlanDayDto[],
-): { id: string; label: string }[] => {
-	return days.map((day) => ({
-		id: day.id.toString(),
-		label: `Day ${String(day.dayNumber)}`,
-	}));
+const notify = (message: string, mode: "error" | "success"): void => {
+	notifications[mode](message);
 };
 
-const PlanEdit: FC = () => {
+const SKELETON_TASKS_NUMBER = 5;
+const FORM_MODE = "onBlur";
+const FORM_FIELD_NAME = "tasks";
+
+const PlanEdit: React.FC = () => {
+	const [selectedDay, setSelectedDay] = useState<number>(ZERO);
+	const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
+	const tasksLoading = useLoadingIds();
+	const daysLoading = useLoadingIds();
 	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
-	const [selectedItem, setSelectedItem] = useState<SelectedItemType>(ZERO);
+	const plan = useAppSelector((state) => state.plan.plan);
+	const planDaysNumber = useAppSelector((state) => state.plan.days);
 
-	const plan = useAppSelector(({ plan }) => plan.plan) as PlanWithCategoryDto;
-	const planFormData: PlanEditForm = {
-		days: plan.days,
-		startDate: plan.createdAt as string,
-		theme: getPlanStyleName(plan.styleId),
-		title: plan.title,
-	};
-	const originTasks = plan.days.flatMap((day) => day.tasks);
+	useEffect(() => {
+		void dispatch(planActions.getPlan());
+	}, [dispatch]);
 
-	const { control, errors } = useAppForm<PlanEditForm>({
-		defaultValues: planFormData,
-	});
+	const handleDayRegenerate = useCallback(
+		(dayId: number) => {
+			if (!plan) {
+				return;
+			}
 
-	const formValues = useWatch({
-		control,
-	}) as PlanEditForm;
+			const planPayload = { dayId, planId: plan.id };
 
-	const planPreviewKey = JSON.stringify(formValues);
+			daysLoading.add(dayId);
+			void dispatch(planActions.regeneratePlanDay(planPayload)).finally(() => {
+				daysLoading.remove(dayId);
+			});
+		},
+		[plan, daysLoading, dispatch],
+	);
 
-	const handleSelectItem = useCallback((item: SelectedItemType): void => {
-		setSelectedItem(item);
+	const handleTaskRegenerate = useCallback(
+		(taskId: number) => {
+			const planDay = plan?.days[selectedDay];
+
+			if (!planDay) {
+				return;
+			}
+
+			const taskPayload = {
+				dayId: planDay.id,
+				planId: plan.id,
+				taskId,
+			};
+
+			tasksLoading.add(taskId);
+			void dispatch(planActions.regenerateTask(taskPayload)).finally(() => {
+				tasksLoading.remove(taskId);
+			});
+		},
+		[plan, tasksLoading, selectedDay, dispatch],
+	);
+
+	const toggleSelect = useCallback((): void => {
+		setIsSelectOpen((previous) => !previous);
 	}, []);
 
-	const handleSelectPreview = useCallback((): void => {
-		handleSelectItem("preview");
-	}, [handleSelectItem]);
+	const handleDeleteTask = useCallback(
+		(taskId: number): void => {
+			dispatch(
+				planActions.deleteTaskFromPlan({
+					dayIndex: selectedDay,
+					taskId,
+				}),
+			);
 
-	const handleSave = useCallback((): void => {
-		void (async (): Promise<void> => {
-			const allTasks = formValues.days.flatMap((day) => day.tasks);
-			const editedTasks = getEditedTasks(originTasks, allTasks);
+			void dispatch(taskActions.deleteTask(taskId))
+				.then(() => {
+					notify(TaskNotificationMessage.DELETE_SUCCESS, "success");
+				})
+				.catch(() => {
+					notify(TaskNotificationMessage.DELETE_ERROR, "error");
+				});
+		},
+		[dispatch, selectedDay],
+	);
 
-			await dispatch(tasksActions.updateTasks(editedTasks));
-			await dispatch(planActions.findPlan(plan.id));
+	const { control, errors, getValues, isDirty, reset } = useAppForm<{
+		[FORM_FIELD_NAME]: TaskDto[];
+	}>({
+		defaultValues: {
+			[FORM_FIELD_NAME]: plan?.days[selectedDay]?.[FORM_FIELD_NAME] ?? [],
+		},
+		mode: FORM_MODE,
+		validationSchema: tasksEditValidationSchema,
+	});
 
-			notifications.success("Plan saved successfully");
-			void navigate(AppRoute.OVERVIEW_PAGE);
-		})();
-	}, [dispatch, formValues.days, navigate, originTasks, plan.id]);
+	useEffect(() => {
+		reset({
+			[FORM_FIELD_NAME]: plan?.days[selectedDay]?.[FORM_FIELD_NAME] ?? [],
+		});
+	}, [selectedDay, reset, plan?.days]);
 
-	const handleNavigateBack = useCallback((): void => {
-		void navigate(AppRoute.OVERVIEW_PAGE);
-	}, [navigate]);
+	const { fields } = useFieldArray({
+		control,
+		keyName: "fieldId",
+		name: FORM_FIELD_NAME,
+	});
 
-	if (formValues.days.length === ZERO) {
-		return <Loader />;
+	const saveIndividualTask = useCallback(
+		(index: number) => {
+			const updatedTask = getValues(FORM_FIELD_NAME)[index];
+
+			if (!updatedTask || !isDirty) {
+				return;
+			}
+
+			if (updatedTask.title.trim().length === ZERO) {
+				return;
+			}
+
+			const payload = {
+				id: updatedTask.id,
+				payload: {
+					title: updatedTask.title,
+				},
+			};
+
+			dispatch(
+				planActions.updateTaskInPlan({
+					dayIndex: selectedDay,
+					task: { ...updatedTask },
+					taskIndex: index,
+				}),
+			);
+
+			void dispatch(taskActions.updateTask(payload))
+				.then(() => {
+					notify(TaskNotificationMessage.UPDATE_SUCCESS, "success");
+				})
+				.catch(() => {
+					notify(TaskNotificationMessage.UPDATE_ERROR, "error");
+				});
+		},
+		[getValues, dispatch, selectedDay, isDirty],
+	);
+
+	const createTaskRegenerateHandler = useCallback(
+		(taskId: number) => {
+			return (): void => {
+				handleTaskRegenerate(taskId);
+			};
+		},
+		[handleTaskRegenerate],
+	);
+
+	const createTaskDeleteHandler = useCallback(
+		(taskId: number) => {
+			return (): void => {
+				handleDeleteTask(taskId);
+			};
+		},
+		[handleDeleteTask],
+	);
+
+	const createTaskBlurHandler = useCallback(
+		(index: number) => {
+			return (): void => {
+				saveIndividualTask(index);
+			};
+		},
+		[saveIndividualTask],
+	);
+
+	const renderDaysLoadingSkeleton = (
+		number = SKELETON_TASKS_NUMBER,
+	): JSX.Element => {
+		return (
+			<div className={getClassNames("flow-loose", styles["day-skeleton"])}>
+				{Array.from({ length: number }).map((_, index) => (
+					<div
+						className={getClassNames("repel", styles["task-skeleton-item"])}
+						key={index}
+					>
+						<div className={styles["skeleton-button"]} />
+						<div
+							className={getClassNames(
+								"flow",
+								styles["skeleton-input-container"],
+							)}
+						>
+							<div className={styles["skeleton-label"]} />
+							<div className={styles["skeleton-input"]} />
+						</div>
+						<div className={styles["skeleton-button"]} />
+					</div>
+				))}
+			</div>
+		);
+	};
+
+	const renderTaskInput = (
+		field: RenderTaskInputField,
+		index: number,
+		properties: RenderTaskInputProperties,
+	): JSX.Element => {
+		const {
+			control,
+			createTaskBlurHandler,
+			createTaskDeleteHandler,
+			createTaskRegenerateHandler,
+			errors,
+			tasksLoading,
+		} = properties;
+		const isTaskRegenerating = tasksLoading.isLoading(field.id);
+
+		if (isTaskRegenerating) {
+			return (
+				<div
+					className={getClassNames("cluster", styles["input-wrapper"])}
+					key={field.id}
+				>
+					{renderDaysLoadingSkeleton(ONE)}
+				</div>
+			);
+		}
+
+		return (
+			<div
+				className={getClassNames("cluster", styles["input-wrapper"])}
+				key={field.id}
+			>
+				<Button
+					className={styles["input-control"]}
+					icon={<DecorativeImage src={Regenerate} />}
+					iconOnlySize="small"
+					isIconOnly
+					label="Regenerate task"
+					onClick={createTaskRegenerateHandler(field.id)}
+					size="small"
+					variant="transparent"
+				/>
+				<div className={styles["input-container"]}>
+					<Input
+						control={control}
+						errorMessage={errors.tasks?.[index]?.title?.message}
+						errors={errors}
+						label={`Task ${String(index + ONE)}`}
+						max="100"
+						name={`tasks.${String(index)}.title` as `tasks.${number}.title`}
+						onBlur={createTaskBlurHandler(index)}
+					/>
+				</div>
+				<Button
+					className={styles["input-control"]}
+					icon={<DecorativeImage src={Remove} />}
+					iconOnlySize="small"
+					isIconOnly
+					label="Delete task"
+					onClick={createTaskDeleteHandler(field.id)}
+					size="small"
+					variant="transparent"
+				/>
+			</div>
+		);
+	};
+
+	const renderContent = (): JSX.Element => {
+		if (!plan || !plan.days[selectedDay]) {
+			return <div>No plan data available.</div>;
+		}
+
+		const isDayLoading = daysLoading.isLoading(plan.days[selectedDay].id);
+
+		if (isDayLoading) {
+			return renderDaysLoadingSkeleton();
+		}
+
+		if (fields.length === ZERO) {
+			return <div>No tasks for this day yet.</div>;
+		}
+
+		return (
+			<>
+				{fields.map((field, index) =>
+					renderTaskInput(field, index, {
+						control,
+						createTaskBlurHandler,
+						createTaskDeleteHandler,
+						createTaskRegenerateHandler,
+						errors,
+						tasksLoading,
+					}),
+				)}
+			</>
+		);
+	};
+
+	if (!plan) {
+		return (
+			<div
+				className={getClassNames(styles["no-plans-container"], "grid-pattern")}
+			>
+				<div className={styles["no-plans-message"]}>No plans yet</div>
+				<Link
+					asButtonSize="small"
+					asButtonVariant={ButtonVariants.PRIMARY}
+					to={AppRoute.QUIZ}
+				>
+					Create Plan
+				</Link>
+			</div>
+		);
 	}
-
-	const isPreviewActiveOnMobile = selectedItem === "preview";
-
-	const navItems = mapDaysToNavItems(formValues.days);
 
 	return (
 		<>
 			<AppHeader />
-			<main
-				className={getClassNames(
-					"cluster",
-					"grid-pattern",
-					styles["page-container"],
-				)}
-				style={{ overflowX: "hidden", position: "relative" }}
-			>
-				<nav className={getClassNames("cluster", styles["nav"])}>
+			<div className={styles["plan"]}>
+				<div className={getClassNames("repel", styles["nav"])}>
+					<div className={getClassNames("cluster", styles["nav-left"])}>
+						<Link tabindex={-1} to={AppRoute.OVERVIEW_PAGE}>
+							<Button
+								icon={<ArrowLeft />}
+								iconOnlySize="small"
+								isIconOnly
+								label="Back to the previous page"
+								size="small"
+							/>
+							<span className="visually-hidden">Back to the previous page</span>
+						</Link>
+						<h2 className={styles["plan-title"]}>{plan.title}</h2>
+					</div>
 					<Button
-						className={getClassNames("button-small", styles["left-arrow"])}
-						icon={<DecorativeImage src={ArrowLeft} />}
-						isIconOnly
-						label=""
-						onClick={handleNavigateBack}
+						className={getClassNames(styles["select-day"])}
+						label={`Day ${String(selectedDay + ONE)}`}
+						onClick={toggleSelect}
+						variant={ButtonVariants.TRANSPARENT}
 					/>
-				</nav>
-
-				<div
-					className={getClassNames(
-						styles["content-grid"],
-						styles["content-grid-padding"],
-						isPreviewActiveOnMobile && styles["preview-mode-mobile"],
-					)}
-				>
-					<div className={styles["left-panel"]}>
-						<DaysNav
-							items={navItems}
-							notesLabel="Notes"
-							onSelectItem={handleSelectItem}
-							onSelectPreview={handleSelectPreview}
-							previewLabel="Preview"
-							selectedItem={selectedItem}
-							shouldShowNotes={!!formValues.notes?.trim()}
-							shouldShowPreviewButton
-						/>
+				</div>
+				<div className={styles["content"]}>
+					<div className={styles["content__days-wrapper"]}>
+						<div
+							className={getClassNames(
+								styles["content__days"],
+								isSelectOpen ? styles["content__days__open"] : "",
+							)}
+						>
+							<DayList
+								isOpen={isSelectOpen}
+								onRegenerate={handleDayRegenerate}
+								plan={plan}
+								planDaysNumber={planDaysNumber}
+								selectedDay={selectedDay}
+								setIsOpen={setIsSelectOpen}
+								setSelectedDay={setSelectedDay}
+							/>
+						</div>
 					</div>
-
-					<div className={styles["center-panel"]}>
-						<EditingPanel
-							control={control}
-							errors={errors}
-							selectedItem={selectedItem}
-						/>
-					</div>
-
-					<div className={getClassNames("cluster", styles["right-panel"])}>
-						<PlanPreview
-							containerId="plan-for-download"
-							days={formValues.days}
-							firstDayDate={formValues.startDate}
-							isForPrint={false}
-							key={planPreviewKey}
-							notes={formValues.notes}
-							theme={formValues.theme}
-							title={formValues.title}
-						/>
+					<div
+						className={getClassNames(styles["content__tasks"], "grid-pattern")}
+					>
+						<div
+							className={getClassNames("wrapper grid", styles["tasks-form"])}
+						>
+							<div
+								className={getClassNames("flow-loose", styles["tasks-list"])}
+							>
+								{renderContent()}
+							</div>
+							<div>
+								<PlanPreview
+									containerId="plan-for-download"
+									days={plan.days}
+									firstDayDate=""
+									isForPrint={false}
+									key={plan.id}
+									notes=""
+									theme="COLOURFUL"
+									title={plan.title}
+								/>
+							</div>
+						</div>
 					</div>
 				</div>
-
-				<footer className={getClassNames("cluster", styles["page-footer"])}>
-					<Button
-						icon={<DecorativeImage src={Save} />}
-						iconOnlySize="medium"
-						label="Save Plan"
-						onClick={handleSave}
-						size="small"
-						type="button"
-						variant="primary"
-					/>
-				</footer>
-			</main>
+			</div>
 		</>
 	);
 };
