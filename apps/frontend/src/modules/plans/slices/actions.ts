@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { ONE } from "~/libs/constants/constants.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 
@@ -24,7 +23,7 @@ const generatePlan = createAsyncThunk<
 	const state = getState();
 
 	const stored = await storage.get(StorageKey.QUIZ_ID);
-	const quizId = Number(stored) + ONE;
+	const quizId = Number(stored);
 
 	const plan = await planApi.generate({
 		quizAnswers: payload,
