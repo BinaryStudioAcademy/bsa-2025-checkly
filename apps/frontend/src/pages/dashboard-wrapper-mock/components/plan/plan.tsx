@@ -184,7 +184,7 @@ const Plan: React.FC = () => {
 						<Button
 							icon={<DownloadIcon />}
 							iconOnlySize="medium"
-							label="Download PDF"
+							label="Download"
 							size={ButtonSizes.LARGE}
 							type={ElementTypes.BUTTON}
 							variant={ButtonVariants.PRIMARY}

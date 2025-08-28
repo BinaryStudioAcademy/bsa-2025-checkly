@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-import {
-	ArrowLeftIcon,
-	DownloadIcon,
-	FileIcon,
-	MonitorIcon,
-	SmartphoneIcon,
-} from "~/assets/img/icons/icons.js";
+import { ArrowLeftIcon, DownloadIcon } from "~/assets/img/icons/icons.js";
 import {
 	FlowerPink,
 	StarsYellow02,
@@ -129,29 +123,6 @@ const ChooseStyle: React.FC = () => {
 						</button>
 					</NavLink>
 					<p className={styles["nav-title"]}>Choose the style</p>
-				</div>
-				<div className={styles["header-buttons"]}>
-					<Button
-						className={styles["header-buttons-button"]}
-						icon={<FileIcon aria-hidden="true" />}
-						label="PDF"
-						size="small"
-					/>
-					<Button
-						className={styles["header-buttons-button"]}
-						icon={<SmartphoneIcon aria-hidden="true" />}
-						iconOnlySize="large"
-						isDisabled
-						label="Mobile Wallpaper"
-						size="small"
-					/>
-					<Button
-						className={styles["header-buttons-button"]}
-						icon={<MonitorIcon aria-hidden="true" />}
-						isDisabled
-						label="Desktop Wallpaper"
-						size="small"
-					/>
 				</div>
 				<div
 					aria-labelledby="card-text"
