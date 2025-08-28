@@ -11,5 +11,5 @@ const planStylesApi = new PlanStylesApi({
 });
 
 export { planStylesApi };
-export { actions, reducer } from "./slices/plan-style.js";
+export { reducer } from "./slices/plan-style.js";
 export { type PlanStyleDto } from "shared";
