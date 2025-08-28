@@ -102,9 +102,16 @@ const PlanEdit: React.FC = () => {
 			};
 
 			tasksLoading.add(taskId);
-			void dispatch(planActions.regenerateTask(taskPayload)).finally(() => {
-				tasksLoading.remove(taskId);
-			});
+			void dispatch(planActions.regenerateTask(taskPayload))
+				.then(() => {
+					notifications.success(TaskNotificationMessage.REGENERATE_SUCCESS);
+				})
+				.catch(() => {
+					notifications.error(TaskNotificationMessage.REGENERATE_ERROR);
+				})
+				.finally(() => {
+					tasksLoading.remove(taskId);
+				});
 		},
 		[plan, tasksLoading, selectedDay, dispatch],
 	);
