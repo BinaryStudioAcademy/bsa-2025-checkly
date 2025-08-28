@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.16.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.15.0...shared-v1.16.0) (2025-08-28)
+
+
+### Features
+
+* + add tasks-edit validation schema cy-300 ([a774af1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a774af148c2a96ec761ef465099397129c63f759))
+* add new constants, types cy-348 ([d9d34ef](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d9d34efc0642bae6af0d8f10a755f33ee1539ffb))
+* add pdf generation cy-348 ([c87cd33](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c87cd33db3d1fd91a0c9fbec2fcf7248bba8194c))
+* edit page post quiz flow cy-300 ([10ee5fb](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/10ee5fbd4b4a024912a2dbeb9f54ff1856bc1174))
+* **frontend/backend/shared:** add pdf export cy-348 ([797d4ba](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/797d4ba1a5e5f7509d6dc78b2fc194084d8cefe9))
+* merge main into local branch cy-348 ([90ed2c7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/90ed2c73782a889ca7bb5594ba1158f5fc31a4eb))
+* Use real data in post-quiz flow cy-348 ([16db48a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/16db48a7338b512d13da0afdf4416b059fec784a))
+
+
+### Bug Fixes
+
+* merge changes into local branch cy-348 ([a7bcfcd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a7bcfcdf92b1737a0091d04768936518a94c4816))
+* seperate useref function from useeffect cy-348 ([9fefaaa](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9fefaaad1cbe7cd8fa196156b2cd2d0187b59305))
+
 ## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.14.0...shared-v1.15.0) (2025-08-27)
 
 

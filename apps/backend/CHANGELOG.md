@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.16.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.15.0...backend-v1.16.0) (2025-08-28)
+
+
+### Features
+
+* **frontend/backend/shared:** add pdf export cy-348 ([797d4ba](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/797d4ba1a5e5f7509d6dc78b2fc194084d8cefe9))
+* merge main branch into current branch cy-348 ([7bb14ed](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7bb14edce4b2b93a1f41b465cfaa20dcaac32e02))
+* Use real data in post-quiz flow cy-348 ([16db48a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/16db48a7338b512d13da0afdf4416b059fec784a))
+
+
+### Bug Fixes
+
+* display the result of edit and delete on the plan page cy-409 ([55edbd4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/55edbd47a154547abcfad649ce927590719ce7c8))
+* manually edited tasks are not displayed cy-409 ([6d5bf16](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6d5bf162a7919cc588a6e286894ed444cff6de05))
+* merge changes into local branch cy-348 ([a7bcfcd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a7bcfcdf92b1737a0091d04768936518a94c4816))
+* seperate useref function from useeffect cy-348 ([9fefaaa](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9fefaaad1cbe7cd8fa196156b2cd2d0187b59305))
+* use pupeeter headless option cy-348 ([4f54598](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/4f54598fbb023e7dbfc0383fd1c2b8ae0e3b0aff))
+
 ## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.14.0...backend-v1.15.0) (2025-08-28)
 
 
