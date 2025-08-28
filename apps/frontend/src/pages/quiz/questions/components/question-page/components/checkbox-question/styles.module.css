@@ -72,9 +72,7 @@
 	font-size: var(--text-size-small);
 	font-weight: var(--font-weight-medium);
 	color: var(--color-text-primary);
-	hyphens: auto;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
+	overflow-wrap: anywhere;
 }
 
 .checkbox-option:has(.checkbox-input:checked) {

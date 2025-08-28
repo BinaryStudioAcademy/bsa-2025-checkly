@@ -56,6 +56,12 @@ const PlanEdit: React.FC = () => {
 		useState<boolean>(false);
 	const [taskToDeleteId, setTaskToDeleteId] = useState<null | number>(null);
 
+	const [isRegenerateDayModalOpen, setIsRegenerateDayModalOpen] =
+		useState<boolean>(false);
+	const [dayToRegenerateId, setDayToRegenerateId] = useState<null | number>(
+		null,
+	);
+
 	const tasksLoading = useLoadingIds();
 	const daysLoading = useLoadingIds();
 	const dispatch = useAppDispatch();
@@ -65,6 +71,11 @@ const PlanEdit: React.FC = () => {
 	useEffect(() => {
 		void dispatch(planActions.getPlan());
 	}, [dispatch]);
+
+	const handleDayRegenerateClick = useCallback((dayId: number) => {
+		setDayToRegenerateId(dayId);
+		setIsRegenerateDayModalOpen(true);
+	}, []);
 
 	const handleDayRegenerate = useCallback(
 		(dayId: number) => {
@@ -81,6 +92,20 @@ const PlanEdit: React.FC = () => {
 		},
 		[plan, daysLoading, dispatch],
 	);
+
+	const handleDayRegenerateConfirm = useCallback(() => {
+		if (dayToRegenerateId) {
+			handleDayRegenerate(dayToRegenerateId);
+		}
+
+		setIsRegenerateDayModalOpen(false);
+		setDayToRegenerateId(null);
+	}, [dayToRegenerateId, handleDayRegenerate]);
+
+	const handleDayRegenerateCancel = useCallback(() => {
+		setIsRegenerateDayModalOpen(false);
+		setDayToRegenerateId(null);
+	}, []);
 
 	const handleTaskRegenerateClick = useCallback((taskId: number) => {
 		setTaskToRegenerateId(taskId);
@@ -460,7 +485,7 @@ const PlanEdit: React.FC = () => {
 						>
 							<DayList
 								isOpen={isSelectOpen}
-								onRegenerate={handleDayRegenerate}
+								onRegenerate={handleDayRegenerateClick}
 								plan={plan}
 								planDaysNumber={planDaysNumber}
 								selectedDay={selectedDay}
@@ -491,6 +516,13 @@ const PlanEdit: React.FC = () => {
 					</div>
 				</div>
 			</div>
+			<ConfirmationModal
+				isOpen={isRegenerateDayModalOpen}
+				message="You sure you want to regenerate the whole day?"
+				onCancel={handleDayRegenerateCancel}
+				onConfirm={handleDayRegenerateConfirm}
+				title="Day Regeneration"
+			/>
 			<ConfirmationModal
 				isOpen={isRegenerateTaskModalOpen}
 				message="You sure you want to regenerate this task?"

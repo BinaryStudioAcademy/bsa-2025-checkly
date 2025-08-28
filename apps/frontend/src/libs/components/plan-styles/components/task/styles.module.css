@@ -1,5 +1,6 @@
 .task-checkbox:checked ~ .task-text {
 	color: var(--color-text-checked-task);
+	overflow-wrap: anywhere;
 	text-decoration: line-through var(--color-text-night-blue);
 }
 

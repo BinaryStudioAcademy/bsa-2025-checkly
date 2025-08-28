@@ -37,6 +37,7 @@ h2.day-title {
 
 .task-text {
 	color: var(--color-plan-style-minimal-grey);
+	overflow-wrap: anywhere;
 }
 
 li.notes:nth-child(odd) {
