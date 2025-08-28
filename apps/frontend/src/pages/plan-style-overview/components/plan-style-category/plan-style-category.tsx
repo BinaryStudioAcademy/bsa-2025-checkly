@@ -56,7 +56,6 @@ const PlanStyleCategory: React.FC<Properties> = ({
 				className={styles["header-buttons-button"]}
 				icon={<SmartphoneIcon aria-hidden="true" />}
 				iconOnlySize="large"
-				isDisabled
 				label="Mobile Wallpaper"
 				onClick={handleSelectMobile}
 				size="small"

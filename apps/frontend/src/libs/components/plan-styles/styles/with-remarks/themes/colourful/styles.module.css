@@ -70,3 +70,15 @@ p.notes-text {
 	> :global([class*="notes"]) {
 	border: none;
 }
+
+:global(section[data-plan-style="COLOURFUL"])
+	:global(ul[data-view="mobile"])
+	> :global([class*="day-item"]) {
+	border: 1px solid var(--color-border-light-blue);
+}
+
+:global(section[data-plan-style="COLOURFUL"])
+	:global(ul[data-view="mobile"])
+	> :global([class*="notes"]) {
+	border: none;
+}

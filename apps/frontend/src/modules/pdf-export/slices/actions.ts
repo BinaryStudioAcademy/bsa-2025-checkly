@@ -11,6 +11,7 @@ import {
 	MAX_DAYS_PER_PAGE,
 	MESSAGES,
 	MIN_PAGES,
+	MOBILE_DAYS_PER_PAGE,
 	PLAN_NAME_DEFAULT,
 } from "~/libs/constants/constants.js";
 import {
@@ -29,8 +30,8 @@ import {
 
 import { name as sliceName } from "./pdf-export.slice.js";
 
-const getPageCount = (totalDays: number): number =>
-	Math.max(MIN_PAGES, Math.ceil(totalDays / MAX_DAYS_PER_PAGE));
+const getPageCount = (totalDays: number, perPage: number): number =>
+	Math.max(MIN_PAGES, Math.ceil(totalDays / perPage));
 
 const getWindowSize = (): WindowSize => {
 	const w = (globalThis as { window?: Window }).window;
@@ -119,8 +120,8 @@ const exportDesktopPng = createAsyncThunk<
 	const view = getCategoryStyle(category);
 	const size: WindowSize = getWindowSize();
 
-	const totalDays = getState().plan.plan?.days.length;
-	const pageCount = getPageCount(totalDays as number);
+	const totalDays = getState().plan.plan?.days.length as number;
+	const pageCount = getPageCount(totalDays, MAX_DAYS_PER_PAGE);
 	const planTitle = String(getState().plan.plan?.title ?? PLAN_NAME_DEFAULT);
 	const planStyleId = getState().plan.plan?.styleId;
 	const { selectedStyle } = getState().plan;
@@ -170,8 +171,8 @@ const exportMobilePng = createAsyncThunk<
 	const view = getCategoryStyle(category);
 	const size: WindowSize = getWindowSize();
 
-	const totalDays = getState().plan.plan?.days.length;
-	const pageCount = getPageCount(totalDays as number);
+	const totalDays = getState().plan.plan?.days.length as number;
+	const pageCount = getPageCount(totalDays, MOBILE_DAYS_PER_PAGE);
 	const planTitle = String(getState().plan.plan?.title ?? PLAN_NAME_DEFAULT);
 	const planStyleId = getState().plan.plan?.styleId;
 	const { selectedStyle } = getState().plan;
@@ -192,8 +193,6 @@ const exportMobilePng = createAsyncThunk<
 			}),
 		);
 
-		notifications.success(MESSAGES.DOWNLOAD.SUCCESS);
-
 		return { fileName: zipName };
 	}
 
@@ -208,7 +207,6 @@ const exportMobilePng = createAsyncThunk<
 	});
 
 	downloadFile(blob, fileName);
-	notifications.success(MESSAGES.DOWNLOAD.SUCCESS);
 
 	return { fileName };
 });

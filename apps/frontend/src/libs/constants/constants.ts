@@ -16,6 +16,7 @@ export {
 	MIN_INDEX,
 	MIN_PAGE,
 	MIN_STACK_PAGES,
+	MOBILE_DAYS_PER_PAGE,
 } from "./plan-style.constants.js";
 export { REDIRECT_PARAM } from "./redirect.constants.js";
 export { ONE, UPLOAD_MAX_FILE_SIZE_BYTES, ZERO } from "shared";
