@@ -20,12 +20,15 @@ type Properties<T extends FieldValues> = {
 	isRequired?: boolean;
 	label: string;
 	max?: string;
+	maxLength?: number;
 	min?: string;
 	name: FieldPath<T>;
 	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 	placeholder?: string;
 	type?: "date" | "email" | "password" | "text";
 };
+
+const INPUT_DEFAULT_MAX_LENGTH = 100;
 
 const Input = <T extends FieldValues>({
 	control,
@@ -35,6 +38,7 @@ const Input = <T extends FieldValues>({
 	isRequired,
 	label,
 	max,
+	maxLength = INPUT_DEFAULT_MAX_LENGTH,
 	min,
 	name,
 	onBlur,
@@ -88,6 +92,7 @@ const Input = <T extends FieldValues>({
 					disabled={disabled}
 					id={inputId}
 					max={max}
+					maxLength={maxLength}
 					min={min}
 					name={name}
 					onBlur={handleBlur}
