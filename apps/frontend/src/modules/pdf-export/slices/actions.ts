@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { MESSAGES, PLAN_NAME_DEFAULT } from "~/libs/constants/constants.js";
-import { AppRoute, FileExtension, PaperFormat } from "~/libs/enums/enums.js";
+import { MESSAGES } from "~/libs/constants/constants.js";
+import { FileExtension, PaperFormat } from "~/libs/enums/enums.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { type AsyncThunkConfig } from "~/libs/types/async-thunk-config.type.js";
 import {
@@ -27,28 +27,19 @@ const exportPdf = createAsyncThunk<
 
 		const backendEndpoint = getBackendEndpoint(category);
 
-		const printUrl = planStyle
-			? `${AppRoute.PLAN_STYLE_PRINT}?style=${encodeURIComponent(planStyle)}`
-			: AppRoute.PLAN_STYLE_PRINT;
+		const currentPlan = getState().plan.plan;
 
-		const responsePage = await fetch(printUrl);
-
-		if (!responsePage.ok) {
+		if (!currentPlan?.id) {
 			notifications.error(MESSAGES.DOWNLOAD.NO_PLAN_FOUND);
 
 			return { fileName: "" };
 		}
 
-		const format = PaperFormat.A4;
-		const html = await responsePage.text();
-
-		const currentPlan = getState().plan.plan;
-		const planTitle = currentPlan?.title || PLAN_NAME_DEFAULT;
-		const fileName = `${planTitle}.${FileExtension.PDF}`;
+		const fileName = `${currentPlan.title}.${FileExtension.PDF}`;
 
 		const blob = await pdfExportApi.exportPlan(backendEndpoint, {
-			format,
-			html,
+			format: PaperFormat.A4,
+			planId: currentPlan.id,
 			planStyle,
 		});
 
