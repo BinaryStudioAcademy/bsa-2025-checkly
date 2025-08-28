@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.33.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.32.1...v1.33.0) (2025-08-28)
+
+
+### Features
+
+* * add confirmation modal to plan-edit cy-425 ([3657666](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/36576669edd0189d33712d606c075c6fbed83d53))
+* * update label styles cy-425 ([3722a7f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3722a7ff7d54b1160d045acd82e642300b678b43))
+* * update overflow cy-425 ([a8283d5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a8283d563a80d83157de76ccbc18ec61cd6bb542))
+
+
+### Bug Fixes
+
+* * update plan-styles to add break styles cy-425 ([9c8bb51](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9c8bb512ae3d7df741eeb211a0736f108e3c62b1))
+* add chromium dep for plan export to pdf cy-0 ([6419304](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/641930488d4fcb915c0f4a3528bb31e89a5560e7))
+* deployment script cy-0 ([cd8b9a3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cd8b9a33dd979f0ef1c993cc27f0d1fc33199e3f))
+* update plan-styles to add break styles cy-425 ([565de53](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/565de5322909198c99e5bf2037c836b0bf6c5e45))
+
 ## [1.32.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.32.0...v1.32.1) (2025-08-28)
 
 
