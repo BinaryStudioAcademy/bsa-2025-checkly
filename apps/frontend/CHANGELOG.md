@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.28.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.27.1...frontend-v1.28.0) (2025-08-28)
+
+
+### Features
+
+* improve prompting cy-202 ([46418e4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/46418e482bd89efc055f2c75ea3d3ae20a51a30a))
+
 ## [1.27.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.27.0...frontend-v1.27.1) (2025-08-28)
 
 
