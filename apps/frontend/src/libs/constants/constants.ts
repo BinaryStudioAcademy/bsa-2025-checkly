@@ -1,6 +1,5 @@
 export { MESSAGES } from "./messages.constants.js";
 export {
-	BASE_DIMENSIONS,
 	DEFAULT_HEIGHT,
 	DEFAULT_PIXEL_RATIO,
 	DEFAULT_WIDTH,
