@@ -121,7 +121,7 @@ const PlanEdit: React.FC = () => {
 		[dispatch, selectedDay],
 	);
 
-	const { control, errors, getValues, isDirty, reset } = useAppForm<{
+	const { control, dirtyFields, errors, getValues, reset } = useAppForm<{
 		[FORM_FIELD_NAME]: TaskDto[];
 	}>({
 		defaultValues: {
@@ -147,11 +147,25 @@ const PlanEdit: React.FC = () => {
 		(index: number) => {
 			const updatedTask = getValues(FORM_FIELD_NAME)[index];
 
-			if (!updatedTask || !isDirty) {
+			if (!updatedTask) {
 				return;
 			}
 
-			if (updatedTask.title.trim().length === ZERO) {
+			const isFieldDirty = dirtyFields?.tasks?.[index]?.title;
+
+			if (!isFieldDirty) {
+				return;
+			}
+
+			const trimmedTitle = updatedTask.title.trim();
+
+			if (trimmedTitle.length === ZERO) {
+				return;
+			}
+
+			const originalTask = plan?.days[selectedDay]?.tasks[index];
+
+			if (originalTask && originalTask.title.trim() === trimmedTitle) {
 				return;
 			}
 
@@ -178,7 +192,7 @@ const PlanEdit: React.FC = () => {
 					notify(TaskNotificationMessage.UPDATE_ERROR, "error");
 				});
 		},
-		[getValues, dispatch, selectedDay, isDirty],
+		[getValues, dispatch, selectedDay, dirtyFields?.tasks, plan?.days],
 	);
 
 	const createTaskRegenerateHandler = useCallback(
