@@ -4,7 +4,6 @@ import {
 	createCalendarIcs,
 	transformPlanToExportData,
 } from "~/modules/plan-calendar-export/libs/helpers/helpers.js";
-import { planCalendarExportSchema } from "~/modules/plan-calendar-export/libs/validation-schemas/validation-schemas.js";
 import { type PlanService } from "~/modules/plans/plan.service.js";
 
 import { type PlanCalendarExportRequestDto } from "./libs/types/types.js";
@@ -35,15 +34,6 @@ class PlanCalendarExportService {
 			planEntity,
 			date,
 		);
-
-		const parseResult = planCalendarExportSchema.safeParse(exportData);
-
-		if (!parseResult.success) {
-			throw new HTTPError({
-				message: "Invalid plan structure for export",
-				status: HTTPCode.UNPROCESSED_ENTITY,
-			});
-		}
 
 		const ics = createCalendarIcs(exportData, planId, planTitle);
 		const filename = buildExportFilename(date, exportData);
