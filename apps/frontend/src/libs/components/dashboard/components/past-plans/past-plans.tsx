@@ -114,7 +114,12 @@ const PastPlans: FC = () => {
 			{userPlans.map((plan) => (
 				<div
 					aria-hidden="true"
-					className={styles["plan-card"]}
+					className={getClassNames(
+						styles["plan-card"],
+						styles[
+							`plan-card__bg-${getPlanStyleName(plan.styleId).toLowerCase()}`
+						],
+					)}
 					data-plan-id={plan.id}
 					key={plan.id}
 					onClick={handlePlanSelect}

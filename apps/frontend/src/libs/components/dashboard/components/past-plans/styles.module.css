@@ -42,8 +42,16 @@
 	display: grid;
 	place-content: center;
 	padding: var(--space-s);
-	background-color: var(--color-bg-plan-style-with-remarks);
 	border-radius: var(--radius-m);
+}
+
+.plan-card__bg-with_remarks {
+	background-color: var(--color-bg-plan-style-with-remarks);
+}
+
+.plan-card__bg-colourful,
+.plan-card__bg-minimal {
+	background-color: var(--color-bg-white);
 }
 
 .plan-card:hover {
