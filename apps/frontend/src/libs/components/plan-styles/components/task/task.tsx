@@ -45,7 +45,10 @@ const Task: React.FC<Properties> = ({
 	);
 
 	return (
-		<li className={taskClasses} key={id}>
+		<li
+			className={getClassNames(taskClasses, styles["day-list__task-item"])}
+			key={id}
+		>
 			<input
 				className={taskCheckboxClasses}
 				disabled

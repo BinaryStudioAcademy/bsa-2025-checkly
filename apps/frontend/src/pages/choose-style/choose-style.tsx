@@ -170,7 +170,11 @@ const ChooseStyle: React.FC = () => {
 							role="radio"
 							type="button"
 						>
-							<PlanStyle inputStyle={planStyle} view={PLAN_VIEW_OPTION} />
+							<PlanStyle
+								inputStyle={planStyle}
+								planData={plan}
+								view={PLAN_VIEW_OPTION}
+							/>
 							<span className={styles["card-text"]}>{label}</span>
 						</button>
 					))}

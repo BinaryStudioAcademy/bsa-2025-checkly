@@ -1,22 +1,31 @@
 import { PlanStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
-import { type PlanStyleOption, type ViewOptions } from "~/libs/types/types.js";
+import {
+	type PlanDaysTaskDto,
+	type PlanStyleOption,
+	type ViewOptions,
+} from "~/libs/types/types.js";
 
 import { Day, Notes, PlanHeader } from "../components/components.js";
-import { PLAN } from "../mocks/plan-mocks.js";
 import styles from "./styles.module.css";
+
+const DATE_PART_INDEX = 0;
 
 type Properties = {
 	inputStyle: PlanStyleOption;
-	planTitle?: string;
+	planData?: null | PlanDaysTaskDto;
 	view?: ViewOptions;
 };
 
 const PlanStyle: React.FC<Properties> = ({
 	inputStyle,
-	planTitle,
+	planData,
 	view = "regular",
 }: Properties) => {
+	if (!planData?.days) {
+		return null;
+	}
+
 	const containerClasses = getClassNames(
 		styles["container"],
 		styles[`${view}-view`],
@@ -35,24 +44,22 @@ const PlanStyle: React.FC<Properties> = ({
 		PlanStyleModules[inputStyle]["day-list"],
 	);
 
-	const headerTitle = planTitle?.trim() || PLAN.title;
-
 	return (
 		<section className={containerClasses}>
-			<PlanHeader inputStyle={inputStyle} title={headerTitle} />
+			<PlanHeader inputStyle={inputStyle} title={planData.title} />
 			<div className={planBodyClasses}>
 				<ul className={dayListClasses}>
-					{PLAN.days.map((day) => {
-						return (
-							<Day
-								dayNumber={day.dayNumber}
-								firstDayDate={PLAN.createdAt as string}
-								inputStyle={inputStyle}
-								key={day.id}
-								tasks={day.tasks}
-							/>
-						);
-					})}
+					{planData.days.map((day) => (
+						<Day
+							dayNumber={day.dayNumber}
+							firstDayDate={
+								new Date().toISOString().split("T")[DATE_PART_INDEX]
+							}
+							inputStyle={inputStyle}
+							key={day.id}
+							tasks={day.tasks}
+						/>
+					))}
 					<Notes inputStyle={inputStyle} />
 				</ul>
 			</div>

@@ -76,10 +76,12 @@ const PlanStyleOverview: React.FC = () => {
 
 	const handleDownloadPlan = useCallback(async (): Promise<void> => {
 		try {
+			const selectedStyle = handleGetStyleFromPlan();
+
 			const resultAction = await dispatch(
 				actions.exportPdf({
 					category: selectedCategory,
-					planStyle: handleGetStyleFromPlan(),
+					planStyle: selectedStyle,
 				}),
 			);
 
@@ -112,7 +114,7 @@ const PlanStyleOverview: React.FC = () => {
 			</div>
 			<div className={getClassNames(styles["container"], "grid-pattern")}>
 				<div className={styles["plan-content"]}>
-					<PlanStyle inputStyle={handleGetStyleFromPlan()} />
+					<PlanStyle inputStyle={handleGetStyleFromPlan()} planData={plan} />
 					<DecorativeImage
 						className={styles["yellow-stars-reflection"]}
 						src={StarsYellow02}

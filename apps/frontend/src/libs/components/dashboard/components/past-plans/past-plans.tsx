@@ -99,7 +99,7 @@ const PastPlans: FC = () => {
 				<div className={styles["plan-card"]} key={plan.id}>
 					<PlanStyle
 						inputStyle={getPlanStyleName(plan.styleId)}
-						planTitle={plan.title}
+						planData={plan}
 						view="selection"
 					/>
 				</div>

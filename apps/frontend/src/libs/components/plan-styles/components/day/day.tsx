@@ -1,6 +1,6 @@
 import { PlanStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
 import { getClassNames, getWeekday } from "~/libs/helpers/helpers.js";
-import { type PlanStyleOption, type Task } from "~/libs/types/types.js";
+import { type PlanStyleOption, type TaskDto } from "~/libs/types/types.js";
 
 import { Task as TaskItem } from "../components.js";
 import styles from "./styles.module.css";
@@ -9,7 +9,7 @@ type Properties = {
 	dayNumber: number;
 	firstDayDate?: string;
 	inputStyle: PlanStyleOption;
-	tasks: Task[];
+	tasks: TaskDto[];
 };
 
 const Day: React.FC<Properties> = ({
@@ -33,25 +33,38 @@ const Day: React.FC<Properties> = ({
 		PlanStyleModules[inputStyle]["task-list"],
 	);
 
-	const weekday = getWeekday(firstDayDate as string, dayNumber);
+	const weekday = firstDayDate ? getWeekday(firstDayDate, dayNumber) : "";
 
 	return (
-		<li className={dayItemClasses} key={dayNumber}>
+		<li
+			className={getClassNames(dayItemClasses, styles["day-list__item"])}
+			key={dayNumber}
+		>
 			<h2 className={dayTitleClasses}>
-				{`Day ${dayNumber.toString()}`}&nbsp;
-				<span className={PlanStyleModules[inputStyle]["day-of-week"]}>
-					({weekday})
-				</span>
+				{`Day ${dayNumber.toString()}`}
+				{weekday && (
+					<>
+						&nbsp;
+						<span className={PlanStyleModules[inputStyle]["day-of-week"]}>
+							({weekday})
+						</span>
+					</>
+				)}
 			</h2>
-			<ol className={taskListClasses}>
-				{tasks.map((task: Task) => {
+			<ol
+				className={getClassNames(
+					taskListClasses,
+					styles["day-list__task-list"],
+				)}
+			>
+				{tasks.map((task: TaskDto) => {
 					return (
 						<TaskItem
-							executionTimeType={task.executionType}
-							id={task.id + dayNumber.toString()}
+							executionTimeType={task.executionTimeType ?? undefined}
+							id={`${task.id.toString()}-${dayNumber.toString()}`}
 							inputStyle={inputStyle}
-							key={task.id + dayNumber.toString()}
-							taskText={task.title || ""}
+							key={`${task.id.toString()}-${dayNumber.toString()}`}
+							taskText={task.title}
 						/>
 					);
 				})}

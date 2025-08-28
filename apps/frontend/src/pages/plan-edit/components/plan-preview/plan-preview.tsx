@@ -5,10 +5,14 @@ import {
 	Notes,
 	PlanHeader,
 } from "~/libs/components/plan-styles/components/components.js";
-import { PlanStyleModules } from "~/libs/enums/enums.js";
+import { PlanStyleModules, ZERO } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useA4Scale } from "~/libs/hooks/hooks.js";
-import { type PlanDay, type PlanStyleOption } from "~/libs/types/types.js";
+import {
+	type ExecutionTimeTypeValue,
+	type PlanDay,
+	type PlanStyleOption,
+} from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
 
@@ -48,7 +52,16 @@ const PlanPreview: React.FC<Properties> = ({
 							firstDayDate={firstDayDate}
 							inputStyle={theme}
 							key={day.id}
-							tasks={day.tasks}
+							tasks={day.tasks.map((task) => ({
+								completedAt: null,
+								description: task.description,
+								executionTimeType: task.executionType as ExecutionTimeTypeValue,
+								id: Number(task.id),
+								isCompleted: task.isCompleted,
+								order: task.order ?? ZERO,
+								planDayId: day.dayNumber,
+								title: task.title ?? task.description,
+							}))}
 						/>
 					))}
 					{notes && <Notes inputStyle={theme} notes={notes} />}

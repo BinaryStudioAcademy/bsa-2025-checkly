@@ -89,7 +89,7 @@ const CurrentPlan: FC = () => {
 			<div className={styles["plan-card"]}>
 				<PlanStyle
 					inputStyle={getPlanStyleName(currentPlan.styleId)}
-					planTitle={currentPlan.title}
+					planData={currentPlan}
 				/>
 			</div>
 			<div className={styles["button-wrapper"]}>
