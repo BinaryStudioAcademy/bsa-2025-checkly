@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.33.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.33.0...v1.33.1) (2025-08-28)
+
+
+### Bug Fixes
+
+* add endline cy-0 ([8a9bedb](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8a9bedb8791013c6804f727f1c880103d6e601b7))
+* add new deps cy-0 ([c85b046](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c85b046ccbb3b0c541b89243546b323714110753))
+* add new deps cy-0 ([770cfd6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/770cfd61ccf0a814a379ce09b5076ca2e32b2d36))
+
 ## [1.33.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.32.1...v1.33.0) (2025-08-28)
 
 

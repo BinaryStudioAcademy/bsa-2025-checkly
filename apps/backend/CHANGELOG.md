@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.16.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.16.0...backend-v1.16.1) (2025-08-28)
+
+
+### Bug Fixes
+
+* add new deps cy-0 ([c85b046](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c85b046ccbb3b0c541b89243546b323714110753))
+* add new deps cy-0 ([770cfd6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/770cfd61ccf0a814a379ce09b5076ca2e32b2d36))
+
 ## [1.16.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.15.0...backend-v1.16.0) (2025-08-28)
 
 
