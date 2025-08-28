@@ -39,7 +39,9 @@
 
 .task-text {
 	color: var(--color-colourful-task-text);
-	word-break: break-all;
+	hyphens: auto;
+	word-break: normal;
+	overflow-wrap: break-word;
 }
 
 li.notes:nth-child(odd) {

@@ -37,7 +37,9 @@ h2.day-title {
 
 .task-text {
 	color: var(--color-plan-style-minimal-grey);
-	word-break: break-all;
+	hyphens: auto;
+	word-break: normal;
+	overflow-wrap: break-word;
 }
 
 li.notes:nth-child(odd) {
