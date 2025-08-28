@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.35.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.35.0...v1.35.1) (2025-08-28)
+
+
+### Bug Fixes
+
+* clear quiz state before setting selected category cy-435 ([e07536f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e07536f6299f477dd4bdf0585958b5c17d5696a2))
+
 ## [1.35.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.34.1...v1.35.0) (2025-08-28)
 
 
