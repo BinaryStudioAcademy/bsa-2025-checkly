@@ -1,0 +1,38 @@
+.delete-modal {
+	--cluster-direction: column;
+	--cluster-vertical-alignment: center;
+	--gutter: var(--space-xl);
+}
+
+.form {
+	--cluster-direction: column;
+	--cluster-vertical-alignment: center;
+
+	gap: 20px;
+	height: 100%;
+}
+
+.character-counter {
+	align-self: flex-end;
+}
+
+.button-group {
+	--cluster-direction: row;
+}
+
+.feedback-title {
+	max-width: 80%;
+	text-align: start;
+}
+
+.feedback-text {
+	min-width: 100%;
+	max-width: 600px;
+	min-height: 100px;
+	padding: 10px;
+	text-indent: 2em;
+	word-break: break-all;
+	background-color: var(--color-brand-primary);
+	border: 1px solid var(--color-card-blue);
+	border-radius: var(--radius-s);
+}

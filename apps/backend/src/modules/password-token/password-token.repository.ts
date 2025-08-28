@@ -37,6 +37,15 @@ class PasswordTokenRepository implements Repository {
 		return Boolean(deletedPasswordToken);
 	}
 
+	public async deleteByUserId(userId: number): Promise<boolean> {
+		const deletedPasswordToken = await this.passwordTokenModel
+			.query()
+			.where("userId", userId)
+			.delete();
+
+		return Boolean(deletedPasswordToken);
+	}
+
 	public async find(id: number): Promise<null | PasswordTokenEntity> {
 		const passwordToken = await this.passwordTokenModel.query().findById(id);
 

@@ -47,7 +47,13 @@ class BaseController implements Controller {
 			query: mapped.query,
 			user: request.user,
 		};
-		const { payload, status } = await handler(handlerOptions);
+		const { headers, payload, status } = await handler(handlerOptions);
+
+		if (headers) {
+			for (const [key, value] of Object.entries(headers)) {
+				reply.header(key, value);
+			}
+		}
 
 		return await reply.status(status).send(payload);
 	}

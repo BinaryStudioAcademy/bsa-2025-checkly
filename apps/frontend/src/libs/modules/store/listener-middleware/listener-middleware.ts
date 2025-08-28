@@ -10,6 +10,7 @@ import { SuccessMessage } from "~/libs/enums/success-messages.enum.js";
 import { getErrorMessage } from "~/libs/helpers/get-error-message.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
+import { actions as feedbackActions } from "~/modules/feedbacks/feedbacks.js";
 
 import { navigation } from "../../navigation/navigation.js";
 
@@ -58,22 +59,24 @@ listenerMiddleware.startListening({
 });
 
 listenerMiddleware.startListening({
-	effect: async () => {
-		notifications.success(SuccessMessage.EMAIL_SENT);
-		await navigation.navigateTo(AppRoute.SIGN_IN);
+	effect: () => {
+		notifications.success(SuccessMessage.FEEDBACK_CREATE);
 	},
-	matcher: isAnyOf(
-		authActions.sendResetLink.fulfilled,
-		authActions.sendResetLink.rejected,
-	),
+	matcher: isFulfilled(feedbackActions.createFeedback),
 });
 
 listenerMiddleware.startListening({
-	effect: async () => {
-		notifications.success(SuccessMessage.PASSWORD_CHANGED);
-		await navigation.navigateTo(AppRoute.SIGN_IN);
+	effect: () => {
+		notifications.success(SuccessMessage.FEEDBACK_UPDATE);
 	},
-	matcher: isFulfilled(authActions.resetPassword),
+	matcher: isFulfilled(feedbackActions.updateFeedback),
+});
+
+listenerMiddleware.startListening({
+	effect: () => {
+		notifications.success(SuccessMessage.FEEDBACK_DELETE);
+	},
+	matcher: isFulfilled(feedbackActions.deleteFeedback),
 });
 
 listenerMiddleware.startListening({

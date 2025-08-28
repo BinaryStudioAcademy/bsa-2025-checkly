@@ -148,13 +148,6 @@ class PlanService implements Service {
 	): Promise<GeneratedPlanDTO | null> {
 		const { quizAnswers, quizId, userId } = payload;
 
-		if (!userId) {
-			throw new HTTPError({
-				message: ErrorMessage.USER_NOT_FOUND,
-				status: HTTPCode.NOT_FOUND,
-			});
-		}
-
 		if (!quizId) {
 			throw new HTTPError({
 				message: ErrorMessage.QUIZ_NOT_FOUND,
@@ -186,7 +179,7 @@ class PlanService implements Service {
 			plan,
 			quizId,
 			styleId,
-			userId,
+			userId: userId ?? null,
 		});
 
 		const newPlan = await this.planRepository.findWithRelations(planId);

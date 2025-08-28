@@ -7,12 +7,6 @@ import {
 } from "../enums/enums.js";
 
 const taskCreate = z.object({
-	description: z
-		.string()
-		.trim()
-		.min(TaskValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
-			message: TaskValidationMessage.FIELD_REQUIRED,
-		}),
 	executionTimeType: z
 		.nativeEnum(ExecutionTimeType)
 		.nullable()

@@ -1,4 +1,4 @@
-import { type Task } from "./task.type.js";
+import { type Task } from "~/libs/types/types.js";
 
 type PlanDay = {
 	dayNumber: number;

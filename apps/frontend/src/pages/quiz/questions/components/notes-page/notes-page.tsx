@@ -34,7 +34,7 @@ const NotesPage: React.FC = (): React.ReactElement => {
 						📝 Leave a special note for your plan
 					</h2>
 					<p className={styles["notes-description"]}>
-						You can write here little motivational reminder for yourself or
+						You can write here a little motivational reminder for yourself or
 						something that will inspire you in your achievements.
 					</p>
 				</div>

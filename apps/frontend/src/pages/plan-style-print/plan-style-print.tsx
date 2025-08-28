@@ -9,12 +9,28 @@ import { notifications } from "~/libs/modules/notifications/notifications.js";
 import {
 	type PlanDaysTaskDto,
 	type PlanStyleOption,
+	ViewOption,
+	type ViewOptions,
 } from "~/libs/types/types.js";
 import { CURRENT_PLAN_MESSAGES } from "~/modules/plans/libs/constants/plan.constants.js";
 import { planApi } from "~/modules/plans/plans.js";
 
 import { PRINT_STYLE_TEMPLATE } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
+
+const MIN_PAGE = 1;
+const ALLOWED_STYLES: ReadonlyArray<PlanStyleOption> = [
+	"WITH_REMARKS",
+	"MINIMAL",
+	"COLOURFUL",
+] as const;
+
+const ALLOWED_STYLES_STR = ALLOWED_STYLES as ReadonlyArray<string>;
+const isPlanStyleOption = (v: string): v is PlanStyleOption =>
+	ALLOWED_STYLES_STR.includes(v);
+
+const VIEW_OPTIONS = Object.values(ViewOption) as ReadonlyArray<string>;
+const isViewOption = (v: string): v is ViewOptions => VIEW_OPTIONS.includes(v);
 
 const injectPrintStyle = (): HTMLStyleElement => {
 	const style = document.createElement("style");
@@ -29,9 +45,22 @@ const PlanStylePrint: React.FC = () => {
 	const styleFromUrl = searchParameters.get("style");
 	const planIdFromUrl = searchParameters.get("planId");
 	const planDataFromUrl = searchParameters.get("planData");
-	const inputStyle: PlanStyleOption = styleFromUrl
+	const requested = searchParameters.get("view") ?? "";
+	const pageParameter = searchParameters.get("page");
+
+	const inputStyle: PlanStyleOption = isPlanStyleOption(styleFromUrl ?? "")
 		? (styleFromUrl as PlanStyleOption)
 		: PlanStyleEnum.WITH_REMARKS;
+
+	const viewStyle: ViewOptions = isViewOption(requested)
+		? requested
+		: ViewOption.REGULAR;
+
+	const parsed = pageParameter ? Number(pageParameter) : undefined;
+	const page =
+		Number.isFinite(parsed) && parsed !== undefined && parsed >= MIN_PAGE
+			? Math.floor(parsed)
+			: undefined;
 
 	const planFromRedux = useAppSelector((state) => state.plan.plan);
 	const [planData, setPlanData] = useState<null | PlanDaysTaskDto>(null);
@@ -115,7 +144,12 @@ const PlanStylePrint: React.FC = () => {
 	return (
 		<div className={containerClassName} id="print-container">
 			<div className={styles["print-container__content"]}>
-				<PlanStyle inputStyle={inputStyle} planData={planData} />
+				<PlanStyle
+					inputStyle={inputStyle}
+					page={page}
+					planData={planData}
+					view={viewStyle}
+				/>
 			</div>
 		</div>
 	);

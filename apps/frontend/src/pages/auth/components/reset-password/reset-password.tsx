@@ -59,12 +59,13 @@ const ResetPassword: React.FC<Properties> = ({
 			void handleSubmit((formData) => {
 				const payload: ResetPasswordRequestDto = {
 					...formData,
+					token,
 					userId,
 				};
 				onSubmit(payload);
 			})(event_);
 		},
-		[handleSubmit, onSubmit, userId],
+		[handleSubmit, onSubmit, userId, token],
 	);
 
 	if (isPreparing) {

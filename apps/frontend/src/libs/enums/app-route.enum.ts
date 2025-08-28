@@ -1,7 +1,10 @@
 const AppRoute = {
 	CHOOSE_STYLE: "/choose-style",
+	CONTACT_US: "mailto:ask@binary-studio.com",
 	DASHBOARD: "/dashboard",
+	FB: "https://www.facebook.com/appcheckly",
 	FORGOT_PASSWORD: "/forgot-password",
+	IG: "https://www.instagram.com/checkly.app",
 	LOGOUT: "/logout",
 	NOT_FOUND: "*",
 	OVERVIEW_PAGE: "/plan-style-overview",
@@ -9,6 +12,7 @@ const AppRoute = {
 	PLAN_EDIT: "/plan/edit",
 	PLAN_GENERATION: "/plan/generation",
 	PLAN_STYLE_PRINT: "/plan-style-print",
+	PRIVACY_POLICY: "https://binary-studio.com/privacy-policy/",
 	PROFILE: "/dashboard/profile",
 	QUIZ: "/quiz",
 	QUIZ_QUESTIONS: "/quiz/questions",
@@ -16,7 +20,9 @@ const AppRoute = {
 	ROOT: "/",
 	SIGN_IN: "/sign-in",
 	SIGN_UP: "/sign-up",
+	TERMS_OF_SERVICE: "https://academy.binary-studio.com/",
 	TEST_PAGE: "/test-page",
+	YT: "https://www.youtube.com/@Checklyapp",
 } as const;
 
 export { AppRoute };
