@@ -1,36 +1,10 @@
-.confirmation-modal-content {
-	display: flex;
-	flex-direction: column;
-	gap: 1.5rem;
-	padding: 1rem 0;
-}
-
 .confirmation-message {
-	margin: 0;
-	font-size: 1rem;
-	line-height: 1.5;
-	color: var(--color-text-primary);
+	font-size: var(--text-size-heading-5);
 	text-align: center;
+	text-wrap: balance;
 }
 
 .confirmation-actions {
-	display: flex;
-	flex-direction: column;
-	gap: 0.75rem;
-	justify-content: center;
-}
-
-.modal-action-button {
-	width: 100%;
-}
-
-@media (width >= 769px) {
-	.confirmation-actions {
-		flex-direction: row;
-	}
-
-	.modal-action-button {
-		width: auto;
-		min-width: 120px;
-	}
+	--gutter: var(--space-m);
+	--cluster-horizontal-alignment: center;
 }

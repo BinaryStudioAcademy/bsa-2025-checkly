@@ -15,5 +15,6 @@ export {
 export {
 	type TaskCreateRequestDto,
 	taskCreate as taskCreateValidationSchema,
+	tasksEdit as tasksEditValidationSchema,
 	taskUpdate as taskUpdateValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";

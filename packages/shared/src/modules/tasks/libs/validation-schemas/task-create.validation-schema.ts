@@ -36,6 +36,10 @@ const taskCreate = z.object({
 		}),
 });
 
+const tasksEdit = z.object({
+	tasks: z.array(taskCreate),
+});
+
 type TaskCreateRequestDto = z.infer<typeof taskCreate>;
 
-export { taskCreate, type TaskCreateRequestDto };
+export { taskCreate, type TaskCreateRequestDto, tasksEdit };

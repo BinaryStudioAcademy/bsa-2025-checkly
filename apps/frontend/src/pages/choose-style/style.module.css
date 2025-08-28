@@ -32,9 +32,9 @@
 	justify-self: start;
 	padding-left: 0;
 	margin: 0;
-	font: var(--font-family-primary);
-	font-size: var(--text-size-heading-5);
-	font-weight: var(--font-weight-heading);
+	font-family: var(--font-family-onest);
+	font-size: var(--text-size-heading-3);
+	font-weight: var(--font-weight-semi-bold);
 	text-align: left;
 }
 

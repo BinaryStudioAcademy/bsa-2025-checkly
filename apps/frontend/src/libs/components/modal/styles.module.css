@@ -24,7 +24,7 @@
 	max-width: 500px;
 	max-height: 80vh;
 	margin-top: 100px;
-	overflow: hidden;
+	overflow: hidden auto;
 	background-color: var(--color-bg-light);
 	border: 2px solid var(--color-bg-dark);
 	border-radius: var(--radius-m);

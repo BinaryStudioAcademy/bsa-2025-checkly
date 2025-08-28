@@ -182,6 +182,7 @@ export {
 	type TaskRegenerationRequestDto,
 	type TaskResponseDto,
 	TasksApiPath,
+	tasksEditValidationSchema,
 	type TaskUpdateRequestDto,
 	taskUpdateValidationSchema,
 	TaskValidationRule,

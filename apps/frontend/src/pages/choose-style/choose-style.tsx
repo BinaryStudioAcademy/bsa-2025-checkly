@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import { ArrowLeftIcon, DownloadIcon } from "~/assets/img/icons/icons.js";
+import { ArrowLeft, DownloadIcon } from "~/assets/img/icons/icons.js";
 import {
 	FlowerPink,
 	StarsYellow02,
@@ -10,6 +10,7 @@ import {
 	AppHeader,
 	Button,
 	DecorativeImage,
+	Link,
 } from "~/libs/components/components.js";
 import { NOTES_PLAN_TEMPLATE } from "~/libs/components/plan-styles/mocks/plan-mocks.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
@@ -104,8 +105,6 @@ const ChooseStyle: React.FC = () => {
 		void handleSaveStyle();
 	}, [handleSaveStyle]);
 
-	const navLink = getClassNames(styles["nav-link"]);
-
 	return (
 		<>
 			<AppHeader />
@@ -117,11 +116,16 @@ const ChooseStyle: React.FC = () => {
 				)}
 			>
 				<div className={styles["nav"]}>
-					<NavLink className={navLink} to={AppRoute.OVERVIEW_PAGE}>
-						<button aria-label="Go back" className={styles["nav-back-button"]}>
-							<ArrowLeftIcon aria-hidden="true" />
-						</button>
-					</NavLink>
+					<Link tabindex={-1} to={AppRoute.OVERVIEW_PAGE}>
+						<Button
+							icon={<ArrowLeft />}
+							iconOnlySize="small"
+							isIconOnly
+							label="Back to the previous page"
+							size="small"
+						/>
+						<span className="visually-hidden">Back to the previous page</span>
+					</Link>
 					<p className={styles["nav-title"]}>Choose the style</p>
 				</div>
 				<div

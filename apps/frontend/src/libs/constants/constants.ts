@@ -1,10 +1,8 @@
 export { MESSAGES } from "./messages.constants.js";
 export {
-	BASE_DIMENSIONS,
 	DEFAULT_HEIGHT,
 	DEFAULT_PIXEL_RATIO,
 	DEFAULT_WIDTH,
-	EDITOR_ROWS,
 	LAST_INDEX,
 } from "./numbers.js";
 export { FIRST_PAGE, MIN_PAGES } from "./pdf-export.constants.js";

@@ -68,7 +68,7 @@ const routes: CustomRouteObject[] = [
 	},
 	{
 		element: <PlanEdit />,
-		handle: { access: RouteAccess.PUBLIC },
+		handle: { access: RouteAccess.AUTHENTICATED },
 		path: AppRoute.PLAN_EDIT,
 	},
 	{

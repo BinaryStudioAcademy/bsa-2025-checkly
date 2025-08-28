@@ -14,31 +14,37 @@ import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
+	disabled?: boolean;
+	errorMessage?: string;
 	errors: FieldErrors<T>;
 	isRequired?: boolean;
 	label: string;
 	max?: string;
 	min?: string;
 	name: FieldPath<T>;
+	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 	placeholder?: string;
 	type?: "date" | "email" | "password" | "text";
 };
 
 const Input = <T extends FieldValues>({
 	control,
+	disabled = false,
+	errorMessage,
 	errors,
 	isRequired,
 	label,
 	max,
 	min,
 	name,
+	onBlur,
 	placeholder = "",
 	type = "text",
 }: Properties<T>): JSX.Element => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const inputId = useId();
 	const { field } = useFormController({ control, name });
-	const error = errors[name]?.message;
+	const error = errors[name]?.message ?? errorMessage;
 	const hasError = Boolean(error);
 	const isPasswordField = type === "password";
 	const inputType = isPasswordField && showPassword ? "text" : type;
@@ -58,6 +64,17 @@ const Input = <T extends FieldValues>({
 		isPasswordField && styles["input-field--password"],
 	);
 
+	const handleBlur = useCallback(
+		(event: React.FocusEvent<HTMLInputElement>) => {
+			field.onBlur();
+
+			if (onBlur) {
+				onBlur(event);
+			}
+		},
+		[field, onBlur],
+	);
+
 	const passwordIcon = showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />;
 
 	return (
@@ -68,10 +85,12 @@ const Input = <T extends FieldValues>({
 					{...field}
 					aria-invalid={hasError}
 					className={inputFieldClass}
+					disabled={disabled}
 					id={inputId}
 					max={max}
 					min={min}
 					name={name}
+					onBlur={handleBlur}
 					placeholder={placeholder}
 					required={isRequired}
 					type={inputType}
