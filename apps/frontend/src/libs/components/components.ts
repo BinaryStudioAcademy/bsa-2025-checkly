@@ -14,5 +14,6 @@ export { Modal } from "./modal/modal.js";
 export { ProtectedRoute } from "./protected-route/protected-route.js";
 export { RouterProvider } from "./router-provider/router-provider.js";
 export { Tabs } from "./tabs/tabs.js";
+export { TaskTimeSelector } from "./task-time-selector/task-time-selector.js";
 export { Textarea } from "./textarea/textarea.js";
 export { Provider as StoreProvider } from "react-redux";

@@ -1,6 +1,5 @@
 import { type JSX, useCallback, useEffect, useState } from "react";
 import { useFieldArray } from "react-hook-form";
-import { type PlanStyleOption } from "shared";
 
 import { ArrowLeft, Regenerate, Remove } from "~/assets/img/icons/icons.js";
 import {
@@ -10,6 +9,7 @@ import {
 	DecorativeImage,
 	Input,
 	Link,
+	TaskTimeSelector,
 } from "~/libs/components/components.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { ONE, ZERO } from "~/libs/constants/constants.js";
@@ -32,6 +32,8 @@ import { DayList } from "../dashboard-wrapper-mock/components/plan/components/co
 import { useLoadingIds } from "../dashboard-wrapper-mock/components/plan/libs/hooks/hooks.js";
 import { TaskNotificationMessage } from "./libs/enums/enums.js";
 import {
+	type ExecutionTimeTypeValue,
+	type PlanStyleOption,
 	type RenderTaskInputField,
 	type RenderTaskInputProperties,
 	type TaskDto,
@@ -326,7 +328,10 @@ const PlanEdit: React.FC = () => {
 								styles["skeleton-input-container"],
 							)}
 						>
-							<div className={styles["skeleton-label"]} />
+							<div className="repel">
+								<div className={styles["skeleton-label"]} />
+								<div className={styles["skeleton-label"]} />
+							</div>
 							<div className={styles["skeleton-input"]} />
 						</div>
 						<div className={styles["skeleton-button"]} />
@@ -335,6 +340,41 @@ const PlanEdit: React.FC = () => {
 			</div>
 		);
 	};
+
+	const createTimeChangeHandler = useCallback(
+		(taskId: number) => {
+			return (newTime: ExecutionTimeTypeValue): void => {
+				void dispatch(
+					taskActions.updateTask({
+						id: taskId,
+						payload: { executionTimeType: newTime },
+					}),
+				);
+
+				const taskIndex = plan?.days[selectedDay]?.tasks.findIndex(
+					(task) => task.id === taskId,
+				);
+
+				if (
+					taskIndex !== undefined &&
+					taskIndex !== -ONE &&
+					plan?.days[selectedDay]
+				) {
+					dispatch(
+						planActions.updateTaskInPlan({
+							dayIndex: selectedDay,
+							task: {
+								...plan.days[selectedDay].tasks[taskIndex],
+								executionTimeType: newTime,
+							} as TaskDto,
+							taskIndex,
+						}),
+					);
+				}
+			};
+		},
+		[dispatch, plan, selectedDay],
+	);
 
 	const renderTaskInput = (
 		field: RenderTaskInputField,
@@ -387,6 +427,12 @@ const PlanEdit: React.FC = () => {
 						name={`tasks.${String(index)}.title` as `tasks.${number}.title`}
 						onBlur={createTaskBlurHandler(index)}
 					/>
+					<div className={styles["time-selector"]}>
+						<TaskTimeSelector
+							currentTime={field.executionTimeType}
+							onTimeChange={createTimeChangeHandler(field.id)}
+						/>
+					</div>
 				</div>
 				<Button
 					className={styles["input-control"]}
@@ -501,7 +547,7 @@ const PlanEdit: React.FC = () => {
 							className={getClassNames("wrapper grid", styles["tasks-form"])}
 						>
 							<div
-								className={getClassNames("flow-loose", styles["tasks-list"])}
+								className={getClassNames("flow-loose-lg", styles["tasks-list"])}
 							>
 								{renderContent()}
 							</div>

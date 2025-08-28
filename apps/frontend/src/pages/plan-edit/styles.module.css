@@ -151,7 +151,14 @@
 }
 
 .input-container {
+	position: relative;
 	flex: 1;
+}
+
+.time-selector {
+	position: absolute;
+	top: -12%;
+	right: 0;
 }
 
 .input-control {
