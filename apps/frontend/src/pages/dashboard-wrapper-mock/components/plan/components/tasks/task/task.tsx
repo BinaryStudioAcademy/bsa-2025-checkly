@@ -14,6 +14,7 @@ import {
 } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppDispatch, useCallback } from "~/libs/hooks/hooks.js";
+import { actions as planActions } from "~/modules/plans/plans.js";
 import { TaskValidationRule } from "~/modules/tasks/libs/enums/enums.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
@@ -56,15 +57,18 @@ const Task: React.FC<Properties> = ({
 	}, [isEditing, item.title]);
 
 	const handleSaveClick = useCallback((): void => {
-		void dispatch(
-			taskActions.updateTask({
-				id: item.id,
-				payload: {
-					title: editedTitle,
-				},
-			}),
-		);
-		setIsEditing(false);
+		void (async (): Promise<void> => {
+			await dispatch(
+				taskActions.updateTask({
+					id: item.id,
+					payload: {
+						title: editedTitle,
+					},
+				}),
+			);
+			await dispatch(planActions.getPlan());
+			setIsEditing(false);
+		})();
 	}, [dispatch, item.id, editedTitle]);
 
 	const handleTitleChange = useCallback(
@@ -79,8 +83,11 @@ const Task: React.FC<Properties> = ({
 	}, []);
 
 	const handleConfirmDelete = useCallback((): void => {
-		void dispatch(taskActions.deleteTask(item.id));
-		setIsDeleteModalOpen(false);
+		void (async (): Promise<void> => {
+			await dispatch(taskActions.deleteTask(item.id));
+			setIsDeleteModalOpen(false);
+			await dispatch(planActions.getPlan());
+		})();
 	}, [dispatch, item.id]);
 
 	const handleCancelDelete = useCallback((): void => {
