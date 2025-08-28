@@ -141,6 +141,7 @@ export {
 } from "./modules/quiz/quiz.js";
 export {
 	ExecutionTimeType,
+	type ExecutionTimeTypeValue,
 	type TaskCreateRequestDto,
 	taskCreateValidationSchema,
 	type TaskDto,
