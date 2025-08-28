@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import {
@@ -19,6 +19,7 @@ import {
 } from "~/libs/components/components.js";
 import { NOTES_PLAN_TEMPLATE } from "~/libs/components/plan-styles/mocks/plan-mocks.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
+import { ZERO } from "~/libs/constants/constants.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
@@ -41,6 +42,8 @@ const PLAN_VIEW_OPTION: ViewOptions = "selection";
 
 const ChooseStyle: React.FC = () => {
 	const plan = useAppSelector((state) => state.plan.plan);
+	const user = useAppSelector((state) => state.auth.user);
+	const userPlans = useAppSelector((state) => state.plan.userPlans);
 	const { styles: planStyles } = usePlanStyles();
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
@@ -48,6 +51,23 @@ const ChooseStyle: React.FC = () => {
 		styleCards[PRESELECTED_ELEMENT_INDEX]?.id ?? null,
 	);
 	const [isSaving, setIsSaving] = useState<boolean>(false);
+
+	useEffect(() => {
+		if (user) {
+			void dispatch(planActions.getAllUserPlans());
+		}
+	}, [user, dispatch]);
+
+	useEffect(() => {
+		if (userPlans.length > ZERO) {
+			const maxId = Math.max(...userPlans.map((p) => p.id));
+			const latestPlan = userPlans.find((p) => p.id === maxId);
+
+			if (latestPlan) {
+				dispatch(planActions.setCurrentPlan(latestPlan));
+			}
+		}
+	}, [userPlans, dispatch]);
 
 	const handleGetStyleId = useCallback(
 		(styleName: string): number => {
@@ -186,7 +206,7 @@ const ChooseStyle: React.FC = () => {
 					<Button
 						className={styles["bottom-download-button"]}
 						icon={<DownloadIcon aria-hidden="true" />}
-						isDisabled={isSaving || !selectedCard}
+						isDisabled={isSaving || !selectedCard || !plan?.id}
 						label={isSaving ? "Saving..." : "Save Style"}
 						onClick={handleSaveStyleClick}
 					/>

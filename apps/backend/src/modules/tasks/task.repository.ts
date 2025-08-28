@@ -33,13 +33,11 @@ class TaskRepository implements Repository {
 		entity: TaskEntity,
 		trx?: Transaction,
 	): Promise<TaskEntity> {
-		const { description, executionTimeType, order, planDayId, title } =
-			entity.toNewObject();
+		const { executionTimeType, order, planDayId, title } = entity.toNewObject();
 
 		const task = await this.taskModel
 			.query(trx)
 			.insert({
-				description,
 				executionTimeType,
 				order,
 				planDayId,
@@ -103,10 +101,9 @@ class TaskRepository implements Repository {
 		taskId: number,
 		task: GeneratedTaskDTO,
 	): Promise<TaskEntity> {
-		const { description, executionTimeType, title } = task;
+		const { executionTimeType, title } = task;
 
 		const payload = {
-			description,
 			executionTimeType,
 			title,
 		};

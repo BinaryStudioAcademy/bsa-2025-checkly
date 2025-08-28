@@ -118,6 +118,11 @@
 	text-wrap: nowrap;
 }
 
+.content__download {
+	display: flex;
+	gap: var(--space-2xl);
+}
+
 @media (width <= 768px) {
 	.select-day {
 		display: block;

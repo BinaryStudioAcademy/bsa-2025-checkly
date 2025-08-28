@@ -18,8 +18,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 			"tasks": [
 				{
 					"completedAt": null,
-					"description":
-						"Spend time reflecting on recent emotional experiences to identify what triggers strong emotions and how you typically react. Write down these triggers and reactions to increase your emotional awareness and start building emotional intelligence.",
 					"executionTimeType": "afternoon",
 					"id": 456,
 					"isCompleted": false,
@@ -29,8 +27,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Define 2-3 specific personal or professional goals you want to achieve by the end of this week. Make sure they are realistic and measurable to help you feel in control of your time and progress.",
 					"executionTimeType": "afternoon",
 					"id": 457,
 					"isCompleted": false,
@@ -40,8 +36,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Engage in a guided or self-led mindfulness meditation focusing on breathing and present moment awareness to help build emotional resilience and enhance your calm state.",
 					"executionTimeType": "afternoon",
 					"id": 458,
 					"isCompleted": false,
@@ -51,8 +45,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Outline how you will use your peak energy time (midday) to focus on your most important tasks. Prioritize what needs your best attention and schedule breaks to maintain focus.",
 					"executionTimeType": "afternoon",
 					"id": 459,
 					"isCompleted": false,
@@ -62,8 +54,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"At the end of the session, write a short journal entry about your emotional state, reflections on your triggers, and progress toward your goals. This will help reinforce new habits and self-discipline.",
 					"executionTimeType": "afternoon",
 					"id": 460,
 					"isCompleted": false,
@@ -80,8 +70,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 			"tasks": [
 				{
 					"completedAt": null,
-					"description":
-						"Spend time learning techniques of active listening, such as paraphrasing and asking clarifying questions. Practice these skills in a conversation or by imagining scenarios to improve emotional intelligence and interpersonal effectiveness.",
 					"executionTimeType": "afternoon",
 					"id": 461,
 					"isCompleted": false,
@@ -91,8 +79,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Choose one key goal and break it into smaller, actionable steps. This will make it easier to achieve consistently and maintain control over your time and progress.",
 					"executionTimeType": "afternoon",
 					"id": 462,
 					"isCompleted": false,
@@ -102,8 +88,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Engage in a resilience exercise such as reframing a negative thought or writing about a past challenge you overcame. This helps strengthen your mental toughness and emotional resilience.",
 					"executionTimeType": "afternoon",
 					"id": 463,
 					"isCompleted": false,
@@ -113,8 +97,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Plan a 45-60 minute work session mixing different types of tasks (creative, analytical, administrative) to keep engagement high and match your preference for variety.",
 					"executionTimeType": "afternoon",
 					"id": 464,
 					"isCompleted": false,
@@ -124,8 +106,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"If you choose, have a short conversation with someone you trust about your emotional growth or goals to gain perspective and social support. This is optional but can enhance motivation.",
 					"executionTimeType": "afternoon",
 					"id": 465,
 					"isCompleted": false,
@@ -142,8 +122,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 			"tasks": [
 				{
 					"completedAt": null,
-					"description":
-						"Make it a habit to notice and name your emotions as they arise throughout the day. This practice builds emotional intelligence by improving your awareness and regulation of feelings.",
 					"executionTimeType": "afternoon",
 					"id": 466,
 					"isCompleted": false,
@@ -153,8 +131,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Assess how well you controlled your time so far and adjust your schedule or strategies to improve consistency and balance between work and rest.",
 					"executionTimeType": "afternoon",
 					"id": 467,
 					"isCompleted": false,
@@ -164,8 +140,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Write down three things you are grateful for and reflect on how these positive elements influence your emotional state and motivation.",
 					"executionTimeType": "afternoon",
 					"id": 468,
 					"isCompleted": false,
@@ -175,8 +149,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"During your peak energy time, complete a Pomodoro session (25 minutes focused work, 5 minutes break) involving varied tasks to maintain interest and productivity.",
 					"executionTimeType": "afternoon",
 					"id": 469,
 					"isCompleted": false,
@@ -186,8 +158,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Write about your experience building new habits and noticing emotions, including challenges and successes. This supports discipline and self-awareness.",
 					"executionTimeType": "afternoon",
 					"id": 470,
 					"isCompleted": false,
@@ -204,8 +174,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 			"tasks": [
 				{
 					"completedAt": null,
-					"description":
-						"Spend time identifying any negative self-talk and consciously replace it with kind, encouraging statements to build emotional strength and confidence.",
 					"executionTimeType": "afternoon",
 					"id": 471,
 					"isCompleted": false,
@@ -215,8 +183,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Create very small, manageable goals for the following day that align with your larger objectives. This will help maintain momentum and a sense of control over your time.",
 					"executionTimeType": "afternoon",
 					"id": 472,
 					"isCompleted": false,
@@ -226,8 +192,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Engage in 10-15 minutes of light exercise such as stretching, walking, or yoga to enhance emotional resilience and prepare for your midday productivity session.",
 					"executionTimeType": "afternoon",
 					"id": 473,
 					"isCompleted": false,
@@ -237,8 +201,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Plan a session combining creative work and analytical tasks to keep your work engaging and aligned with your preference for variety.",
 					"executionTimeType": "afternoon",
 					"id": 474,
 					"isCompleted": false,
@@ -248,8 +210,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"If you feel comfortable, share something new you have learned about your emotional intelligence or habits with a friend or colleague to reinforce your learning. This is optional.",
 					"executionTimeType": "afternoon",
 					"id": 475,
 					"isCompleted": false,
@@ -266,8 +226,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 			"tasks": [
 				{
 					"completedAt": null,
-					"description":
-						"Dedicate time to review your progress in emotional intelligence and resilience over the past days. Note any changes in your reactions and feelings.",
 					"executionTimeType": "afternoon",
 					"id": 476,
 					"isCompleted": false,
@@ -277,8 +235,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Assess how consistently you achieved your goals this week and how well you managed your time. Identify strategies that worked and areas for improvement.",
 					"executionTimeType": "afternoon",
 					"id": 477,
 					"isCompleted": false,
@@ -288,8 +244,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Engage in a relaxation practice such as deep breathing or progressive muscle relaxation to reinforce your calm emotional state and build resilience.",
 					"executionTimeType": "afternoon",
 					"id": 478,
 					"isCompleted": false,
@@ -299,8 +253,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Create a flexible plan for continuing your habit-building journey beyond this micro boost, incorporating what you’ve learned about your preferences and energy cycles.",
 					"executionTimeType": "afternoon",
 					"id": 479,
 					"isCompleted": false,
@@ -310,8 +262,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Write a comprehensive journal entry summarizing your emotional intelligence growth, goal progress, and plans moving forward to solidify your commitment and self-discipline.",
 					"executionTimeType": "afternoon",
 					"id": 480,
 					"isCompleted": false,
@@ -328,8 +278,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 			"tasks": [
 				{
 					"completedAt": null,
-					"description":
-						"Spend 15–20 minutes practicing empathy by imagining another person’s perspective in a current or past situation. Write down how they might have felt and how this changes your understanding.",
 					"executionTimeType": "afternoon",
 					"id": 481,
 					"isCompleted": false,
@@ -339,8 +287,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Review one of your main weekly goals and identify barriers that are slowing you down. Brainstorm strategies to overcome them and adjust your plan.",
 					"executionTimeType": "afternoon",
 					"id": 482,
 					"isCompleted": false,
@@ -350,8 +296,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Do a short visualization exercise: picture yourself succeeding at a key habit or goal, focusing on how it feels and the benefits it brings.",
 					"executionTimeType": "afternoon",
 					"id": 483,
 					"isCompleted": false,
@@ -361,8 +305,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Plan a deep-focus session for your peak energy time tomorrow, where you dedicate uninterrupted attention to your most challenging task.",
 					"executionTimeType": "afternoon",
 					"id": 484,
 					"isCompleted": false,
@@ -372,8 +314,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"End the day by journaling about how perspective-taking and visualization influenced your motivation and emotional state.",
 					"executionTimeType": "afternoon",
 					"id": 485,
 					"isCompleted": false,
@@ -390,8 +330,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 			"tasks": [
 				{
 					"completedAt": null,
-					"description":
-						"Dedicate 15–20 minutes to reviewing your emotional growth, goal progress, and new habits formed over the full 7 days. Identify your biggest achievements.",
 					"executionTimeType": "afternoon",
 					"id": 486,
 					"isCompleted": false,
@@ -401,8 +339,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Set one medium-term goal (1–3 months) that builds on the progress you’ve made this week. Break it into initial steps to start next week.",
 					"executionTimeType": "afternoon",
 					"id": 487,
 					"isCompleted": false,
@@ -412,8 +348,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Spend 5–10 minutes in a closing meditation or reflection, focusing on gratitude for your commitment and the inner peace gained through this journey.",
 					"executionTimeType": "afternoon",
 					"id": 488,
 					"isCompleted": false,
@@ -423,8 +357,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Write a summary in your journal highlighting emotional intelligence insights, effective goal strategies, and habits you want to keep building.",
 					"executionTimeType": "afternoon",
 					"id": 489,
 					"isCompleted": false,
@@ -434,8 +366,6 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 				},
 				{
 					"completedAt": null,
-					"description":
-						"Optionally, celebrate completing the program by sharing your progress with a trusted person or rewarding yourself with a small treat.",
 					"executionTimeType": "afternoon",
 					"id": 490,
 					"isCompleted": false,

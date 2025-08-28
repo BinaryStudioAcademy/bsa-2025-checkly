@@ -1,5 +1,40 @@
 # Changelog
 
+## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.14.0...shared-v1.15.0) (2025-08-27)
+
+
+### Features
+
+* add improvements to prompt cy-256 ([2c802d2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2c802d208a98317596584716166057198b108834))
+* add improvements to prompt cy-256 ([ce6f15c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ce6f15c3664f98f0b8b3fde109d8d24f5facdc68))
+
+## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.13.0...shared-v1.14.0) (2025-08-27)
+
+
+### Features
+
+* + add category skeleton-count const cy-377 ([3c05e34](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3c05e348914952465cc96126eb86d0fd83e9080f))
+* add desktop export cy-291 ([a1eaae4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a1eaae49907f60a572f60750931fdf7edaea3d2f))
+* add export to calendar cy-294 ([306600d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/306600d604437c494805e88efc0d13520c4bb71d))
+* add feedback flow cy-170 ([2e9238a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2e9238abe15aa8ec9372855a8a983380c3a3f64f))
+* add plan export to .ics and confirmation modal on preview cy-294 ([c547e37](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c547e376109884fda567f47a34a804280b70e822))
+* add quiz generate plan flow, rewrite save generate plan cy-202 ([9eaafec](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9eaafecac28a9840e04e6d12682b97f933564f9c))
+* frontend refinements cy-377 ([5357642](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/5357642fa6c99675a0ff7e4713f7a103e13bdbe2))
+* merge with main and fix conflicts cy-291 ([2b4bd4b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2b4bd4b21b327b1628cb2f4c937da43ca80eecad))
+* plan regeneration cy-202 ([9f3f249](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9f3f24981559bc5417bb4f15ce1d4e7f8991489c))
+
+
+### Bug Fixes
+
+* add quizId, add userId to plan generation if exists cy-382 ([eee97df](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eee97dfbbb45ffa4d84050c0ac233e2ce0298c49))
+* add token validation on backend cy-385 ([3ea3c51](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3ea3c51be31d0964bb9e39fb64a69da23daeb08b))
+* add userId to validation schema cy-382 ([1bddfd8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1bddfd884ec91ba8d7bde433988aa3f5130b54c7))
+* address pr issues cy-291 ([1afeb9e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1afeb9e9b7e1b8ccc30bebb234cc4050da6b7ff0))
+* forgot/reset password endpoints – security and validation issues cy-385 ([7181a76](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7181a76ed278e9d34dfbb4cb165bb5d0c9acad33))
+* handle invalid types in forgot password cy-385 ([d0ec1fe](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d0ec1fe060895a732e658a99fc97a8dd8d8eb81a))
+* plan regeneration cy-382 ([773aed8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/773aed82754114dee9600ac16c8f3bf23a6d70a6))
+* resolve merge conflicts cy-202 ([b89ea1b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b89ea1b5fb3d58e1709fe3bed16099961bad7b26))
+
 ## [1.13.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.12.0...shared-v1.13.0) (2025-08-26)
 
 

@@ -1,5 +1,5 @@
 import { type PlanCategoryDto } from "../../../plan-categories/plan-categories.js";
-import { type TaskDto } from "../../../tasks/tasks.js";
+import { type ExecutionTimeTypeValue } from "../../../tasks/tasks.js";
 
 type PlanDayDto = {
 	dayNumber: number;
@@ -27,6 +27,16 @@ type PlanDto = {
 
 type PlanWithCategoryDto = PlanDaysTaskDto & {
 	category?: PlanCategoryDto;
+};
+
+type TaskDto = {
+	completedAt: null | string;
+	executionTimeType: ExecutionTimeTypeValue;
+	id: number;
+	isCompleted: boolean;
+	order: number;
+	planDayId: number;
+	title: string;
 };
 
 export {

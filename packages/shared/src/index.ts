@@ -54,6 +54,9 @@ export {
 	type ServerValidationErrorResponse,
 	type ValidationSchema,
 	type ValueOf,
+	ViewOption,
+	type ViewOptions,
+	type WindowSize,
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
 export {
@@ -80,6 +83,13 @@ export {
 	generatePlanValidationSchema,
 	type PlanActionTypeMap,
 } from "./modules/openai/openai.js";
+export {
+	type ExportDataDto,
+	PlanCalendarExportApiPath,
+	type PlanCalendarExportRequestDto,
+	planCalendarExportSchema,
+	planCalendarRequestSchema,
+} from "./modules/plan-calendar-export/plan-calendar-export.js";
 export {
 	PlanCategoriesApiPath,
 	type PlanCategoryDto,

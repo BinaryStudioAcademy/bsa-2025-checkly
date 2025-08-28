@@ -1,8 +1,10 @@
-import { exportPdf } from "./actions.js";
+import { exportDesktopPng, exportMobilePng, exportPdf } from "./actions.js";
 import { actions } from "./pdf-export.slice.js";
 
 const allActions = {
 	...actions,
+	exportDesktopPng,
+	exportMobilePng,
 	exportPdf,
 };
 
