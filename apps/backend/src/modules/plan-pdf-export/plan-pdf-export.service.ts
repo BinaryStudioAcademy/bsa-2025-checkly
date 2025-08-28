@@ -128,7 +128,10 @@ class PlanPdfExportService {
 	}
 
 	private async launchBrowser(): Promise<puppeteer.Browser> {
-		return await puppeteer.launch();
+		return await puppeteer.launch({
+			args: ["--no-sandbox", "--disable-setuid-sandbox"],
+			headless: true,
+		});
 	}
 
 	private async navigateToPage(
