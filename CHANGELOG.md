@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.31.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.30.0...v1.31.0) (2025-08-28)
+
+
+### Features
+
+* disable validation for calendar export data cy-399 ([6ef2368](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6ef23686eb09a71f21548d14ff7051c52ce72acc))
+
+
+### Bug Fixes
+
+* **frontend:** fix layout button and blank space at the bottom cy-398 ([d3a5f22](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d3a5f222ae5beb74ae89f26dc95ae735091eb58c))
+* **frontend:** fix layout button and blank space at the bottom cy-398 ([d1d0c32](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d1d0c32ec558d5faa35e3fde01721359199374d6))
+* **frontend:** fix slider of templates on mobile view cy-404 ([d4c71f3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d4c71f37d40f28c04ba8b0502ccf28a7429b27c3))
+* **frontend:** fix slider of templates on mobile view cy-404 ([f76e45c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f76e45c25723bc2d9311c54e54ca5de62384cc41))
+* **frontend:** prevent skipping of first mandatory question cy-397 ([3dfdcd4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3dfdcd46b311d1fe1727b40b9ea69a5b2eed3366))
+* **frontend:** prevent skipping of first mandatory question cy-397 ([6c6c792](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6c6c792dd03301e1aab15b4ac8861a1e94c6751c))
+* remove duplicated button cy-399 ([b8e1d29](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b8e1d291f452f7191184be8740e00d0e4b13d164))
+* remove duplicated button cy-399 ([68e1cad](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/68e1cad78fc0824708137b58388a74e80426f8d0))
+
 ## [1.30.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.29.0...v1.30.0) (2025-08-27)
 
 
