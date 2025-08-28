@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.33.2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.33.1...v1.33.2) (2025-08-28)
+
+
+### Bug Fixes
+
+* add indent cy-0 ([6278d97](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6278d97308630e801a3488d7613540c4924e0fda))
+* change dependencies cy-0 ([2bf6bed](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2bf6beda500c95bb8f0a5c5a86a293edf048fee6))
+* change dependencies cy-0 ([7f76080](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7f76080d010e3f1654287d95f5d3e06ecf6c4018))
+* formatting cy-0 ([8d26c0e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8d26c0e6ef345d1366cbae35541e5ef748b401b4))
+
 ## [1.33.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.33.0...v1.33.1) (2025-08-28)
 
 
