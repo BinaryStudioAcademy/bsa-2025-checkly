@@ -36,6 +36,7 @@
 .task-text {
 	font-size: calc(10px * var(--coefficient));
 	color: var(--color-text-tertiary);
+	word-break: break-all;
 }
 
 @media print {

@@ -39,6 +39,7 @@
 
 .task-text {
 	color: var(--color-colourful-task-text);
+	word-break: break-all;
 }
 
 li.notes:nth-child(odd) {
