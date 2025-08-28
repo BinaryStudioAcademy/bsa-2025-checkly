@@ -33,10 +33,8 @@ const Plan: React.FC = () => {
 	const planDaysNumber = useAppSelector((state) => state.plan.days);
 
 	useEffect(() => {
-		if (!plan) {
-			void dispatch(planActions.getPlan());
-		}
-	}, [dispatch, plan]);
+		void dispatch(planActions.getPlan());
+	}, [dispatch]);
 
 	const handleDayRegenerate = useCallback(
 		(dayId: number) => {

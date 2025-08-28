@@ -59,7 +59,10 @@ class PlanRepository implements Repository {
 	}
 
 	public async find(id: number): Promise<null | PlanEntity> {
-		const plan = await this.planModel.query().findById(id);
+		const plan = await this.planModel
+			.query()
+			.findById(id)
+			.withGraphFetched("days.tasks");
 
 		return plan ? PlanEntity.initialize(plan) : null;
 	}

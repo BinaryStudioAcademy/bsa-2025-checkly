@@ -1,3 +1,5 @@
+import { PlanAction } from "shared";
+
 import { ZERO } from "~/libs/constants/constants.js";
 
 import {
@@ -10,11 +12,17 @@ import {
 	TIME_QUESTION_TEXT,
 } from "../constants/constants.js";
 import {
+	DURATION_ANSWER_SUPRISE_ME,
+	DURATION_MAP,
+	DURATION_QUESTION_TEXT,
+} from "../constants/plan-prompt.js";
+import {
+	type CreatePrompt,
 	type QuizAnswer,
-	type QuizAnswersRequestDto,
 	type Style,
 	type Time,
 } from "../types/types.js";
+import { buildExistingTasksContext } from "./build-context.utitlity.js";
 import { sanitizeTextInput } from "./utilities.js";
 
 const USER_DATA_START = "USER DATA START";
@@ -55,11 +63,12 @@ const processAnswers = (answers: QuizAnswer[]): string[] =>
 		.filter(Boolean);
 
 const createPrompt = ({
+	actionType,
 	answers,
 	category,
 	context,
 	notes,
-}: QuizAnswersRequestDto): string => {
+}: CreatePrompt): string => {
 	const styleResponse = (
 		answers.find((a) => a.questionText.includes(STYLE_QUESTION_TEXT)) || {
 			selectedOptions: [STYLE_ANSWER_MIX],
@@ -71,6 +80,22 @@ const createPrompt = ({
 			selectedOptions: [TIME_ANSWER_20_30_MIN],
 		}
 	).selectedOptions[ZERO] as Time;
+
+	const isPlan = actionType === PlanAction.PLAN;
+
+	let numberOfDays: null | number = null;
+
+	if (isPlan) {
+		const durationAnswer = answers.find((a) =>
+			a.questionText.includes(DURATION_QUESTION_TEXT),
+		);
+
+		const durationResponse = durationAnswer
+			? (durationAnswer.selectedOptions[ZERO] as string)
+			: DURATION_ANSWER_SUPRISE_ME;
+
+		numberOfDays = DURATION_MAP[durationResponse] ?? null;
+	}
 
 	const styleKey = STYLE_ANSWER_MAP[styleResponse] || "Mix";
 	const timeKey = TIME_ANSWER_MAP[timeResponse] || "20-30min";
@@ -85,20 +110,19 @@ const createPrompt = ({
 	`;
 
 	const dynamicInstruction = `
-		IMPORTANT RULE: Generate a plan with exactly ${String(rule.tasks)} tasks per day.
+		IMPORTANT RULE: Generate a days with exactly ${String(rule.tasks)} tasks per day.
 		This is because the user prefers a "${styleKey}" style and has "${timeKey}" available.
 		The plan should consist of ${rule.details}
 	`;
 
-	let existingTask = "";
-
-	if (context) {
-		existingTask = context.tasks.map((task) => task.title).join("; ");
-	}
+	const existingTask = buildExistingTasksContext(context);
+	const isNumberOfDaysExists = isPlan && numberOfDays !== null;
 
 	return [
 		`${PROMPT_HEADER} - ${category.replaceAll("_", " ")}`,
 		dynamicInstruction,
+		isNumberOfDaysExists &&
+			`!!! CRITICAL RULE: THE PLAN MUST MATCH THE DURATION of ${String(numberOfDays)}. NO EXCEPTIONS.`,
 		titleInstruction,
 		EXAMPLE_PROMPT,
 		PROMPT_ALERT_NOTE,
@@ -106,7 +130,13 @@ const createPrompt = ({
 		"Quiz Answers",
 		processAnswers(answers),
 		context &&
-			`Existing tasks: ${existingTask}. For each new task, you may choose a different time of day, a different type of activity, or a new perspective on the same user goal. Make sure the wording and approach are distinct from all previous tasks.`,
+			`${existingTask}
+### CONTEXT INSTRUCTION ###
+You must generate a new task that:
+- Does NOT duplicate or overlap with any of the existing tasks.
+- Complements them by adding a new perspective, activity.
+- Avoids reusing the plan's title or any existing task wording.
+Existing tasks are listed above.`,
 		notes &&
 			`User notes (just for your reference): ${sanitizeTextInput(notes)}`,
 		USER_DATA_END,

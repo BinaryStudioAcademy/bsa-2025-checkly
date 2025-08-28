@@ -89,17 +89,20 @@ const { actions, name, reducer } = createSlice({
 			},
 		);
 		builder.addMatcher(
+			isAnyOf(generatePlan.rejected, getPlan.rejected, findPlan.rejected),
+			(state) => {
+				state.dataStatus = DataStatus.REJECTED;
+				state.plan = null;
+			},
+		);
+		builder.addMatcher(
 			isAnyOf(
-				generatePlan.rejected,
-				getPlan.rejected,
 				regenerateTask.rejected,
 				regeneratePlanDay.rejected,
-				findPlan.rejected,
 				regeneratePlan.rejected,
 			),
 			(state) => {
 				state.dataStatus = DataStatus.REJECTED;
-				state.plan = null;
 			},
 		);
 	},

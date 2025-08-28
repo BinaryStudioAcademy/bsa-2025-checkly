@@ -1,4 +1,5 @@
 export { type PlanCategoryDto } from "../../../plan-categories/libs/types/types.js";
+export { type CreatePrompt } from "./create-prompt.type.js";
 export { type SearchProperties } from "./search-properties.type.js";
 export { type Style, type Time } from "./style-time-rules.type.js";
 export {
@@ -19,7 +20,6 @@ export {
 	type PlanUpdateRequestDto,
 	type PlanWithCategoryDto,
 	type QuizAnswer,
-	type QuizAnswersRequestDto,
 	type QuizCategoryType,
 	type TaskDto,
 	type TaskRegenerationRequestDto,
