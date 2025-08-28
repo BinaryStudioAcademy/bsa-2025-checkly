@@ -2,23 +2,52 @@
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: stretch;
 	width: 210mm;
 	min-height: 297mm;
-	margin: 0 auto;
+	padding: 25px;
+	margin: 0;
 }
 
 .print-container--with-remarks {
-	background: var(--color-bg-plan-style-with-remarks, #f7e9ce);
+	width: 100%;
+	height: auto;
+	min-height: 100vh;
+	margin: 0;
+}
+
+.print-container__content {
+	margin-top: 10px;
+}
+
+.print-container__content:first-child {
+	margin-top: 0;
+}
+
+.print-container:not(.print-container--with-remarks) {
+	background: transparent;
 }
 
 @media print {
 	.print-container {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		align-items: stretch;
 		width: 210mm;
 		min-height: 297mm;
+		padding: 25px;
 		margin: 0;
+	}
+
+	.print-container--with-remarks {
+		width: 100%;
+		height: auto;
+		min-height: 100%;
+		margin: 0;
+		background: var(--color-bg-plan-style-with-remarks, #f7e9ce);
+	}
+
+	.print-container:not(.print-container--with-remarks) {
+		background: transparent;
 	}
 }

@@ -8,6 +8,11 @@
 	padding: calc(24px * var(--coefficient));
 }
 
+.plan-body {
+	width: 100%;
+	height: auto;
+}
+
 .homepage-container {
 	height: 100%;
 	min-height: 0;
@@ -20,6 +25,14 @@
 	min-height: 0;
 	max-height: 285px;
 	overflow-y: hidden;
+}
+
+.homepage-view {
+	--coefficient: 0.32;
+}
+
+.selection-view {
+	--coefficient: 0.37;
 }
 
 @media (width <= 768px) {
@@ -44,10 +57,14 @@
 	}
 }
 
-.homepage-view {
-	--coefficient: 0.32;
-}
+@media print {
+	.container {
+		max-width: 100%;
+		padding: 0;
+		page-break-inside: auto;
+	}
 
-.selection-view {
-	--coefficient: 0.37;
+	.day-list {
+		page-break-inside: auto;
+	}
 }

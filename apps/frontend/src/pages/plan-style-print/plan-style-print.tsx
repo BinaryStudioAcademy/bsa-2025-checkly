@@ -54,7 +54,7 @@ const PlanStylePrint: React.FC = () => {
 	const fetchPlanData =
 		useCallback(async (): Promise<null | PlanDaysTaskDto> => {
 			const urlPlanData = parsePlanDataFromUrl();
-			
+
 			if (urlPlanData) {
 				return urlPlanData;
 			}
