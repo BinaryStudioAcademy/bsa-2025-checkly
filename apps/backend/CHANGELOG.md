@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.14.0...backend-v1.15.0) (2025-08-28)
+
+
+### Features
+
+* disable validation for calendar export data cy-399 ([6ef2368](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6ef23686eb09a71f21548d14ff7051c52ce72acc))
+
+
+### Bug Fixes
+
+* remove duplicated button cy-399 ([b8e1d29](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b8e1d291f452f7191184be8740e00d0e4b13d164))
+
 ## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.13.0...backend-v1.14.0) (2025-08-27)
 
 

@@ -1,6 +1,8 @@
 .dashboard {
 	--grid-color: var(--color-light-grey);
 	--grid-opacity: var(--dashboard-grid-opacity);
+
+	min-height: 100%;
 }
 
 .content-grid {
