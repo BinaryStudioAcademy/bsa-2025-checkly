@@ -133,7 +133,10 @@ class PlanService implements Service {
 		payload: GeneratePlanRequestDto,
 		actionType: PlanActionType,
 	): Promise<PlanActionTypeMap[T]> {
-		const userPrompt = createPrompt(payload.quizAnswers);
+		const userPrompt = createPrompt({
+			...payload.quizAnswers,
+			actionType,
+		});
 
 		const result = await this.openAIService.generate({
 			actionType,

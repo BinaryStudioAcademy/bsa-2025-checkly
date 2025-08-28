@@ -1,3 +1,5 @@
+import { PlanAction } from "shared";
+
 import { ZERO } from "~/libs/constants/constants.js";
 
 import {
@@ -10,8 +12,13 @@ import {
 	TIME_QUESTION_TEXT,
 } from "../constants/constants.js";
 import {
+	DURATION_ANSWER_SUPRISE_ME,
+	DURATION_MAP,
+	DURATION_QUESTION_TEXT,
+} from "../constants/plan-prompt.js";
+import {
+	type CreatePrompt,
 	type QuizAnswer,
-	type QuizAnswersRequestDto,
 	type Style,
 	type Time,
 } from "../types/types.js";
@@ -56,11 +63,12 @@ const processAnswers = (answers: QuizAnswer[]): string[] =>
 		.filter(Boolean);
 
 const createPrompt = ({
+	actionType,
 	answers,
 	category,
 	context,
 	notes,
-}: QuizAnswersRequestDto): string => {
+}: CreatePrompt): string => {
 	const styleResponse = (
 		answers.find((a) => a.questionText.includes(STYLE_QUESTION_TEXT)) || {
 			selectedOptions: [STYLE_ANSWER_MIX],
@@ -72,6 +80,22 @@ const createPrompt = ({
 			selectedOptions: [TIME_ANSWER_20_30_MIN],
 		}
 	).selectedOptions[ZERO] as Time;
+
+	const isPlan = actionType === PlanAction.PLAN;
+
+	let numberOfDays: null | number = null;
+
+	if (isPlan) {
+		const durationAnswer = answers.find((a) =>
+			a.questionText.includes(DURATION_QUESTION_TEXT),
+		);
+
+		const durationResponse = durationAnswer
+			? (durationAnswer.selectedOptions[ZERO] as string)
+			: DURATION_ANSWER_SUPRISE_ME;
+
+		numberOfDays = DURATION_MAP[durationResponse] ?? null;
+	}
 
 	const styleKey = STYLE_ANSWER_MAP[styleResponse] || "Mix";
 	const timeKey = TIME_ANSWER_MAP[timeResponse] || "20-30min";
@@ -92,11 +116,13 @@ const createPrompt = ({
 	`;
 
 	const existingTask = buildExistingTasksContext(context);
+	const isNumberOfDaysExists = isPlan && numberOfDays !== null;
 
 	return [
 		`${PROMPT_HEADER} - ${category.replaceAll("_", " ")}`,
 		dynamicInstruction,
-		"!!! CRITICAL RULE: THE PLAN MUST MATCH THE DURATION SELECTED BY THE USER IN 'Choose your plan duration'. NO EXCEPTIONS.",
+		isNumberOfDaysExists &&
+			`!!! CRITICAL RULE: THE PLAN MUST MATCH THE DURATION of ${String(numberOfDays)}. NO EXCEPTIONS.`,
 		titleInstruction,
 		EXAMPLE_PROMPT,
 		PROMPT_ALERT_NOTE,
