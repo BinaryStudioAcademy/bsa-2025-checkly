@@ -1,5 +1,6 @@
 import { type JSX, useCallback, useEffect, useState } from "react";
 import { useFieldArray } from "react-hook-form";
+import { type PlanStyleOption } from "shared";
 
 import { ArrowLeft, Regenerate, Remove } from "~/assets/img/icons/icons.js";
 import {
@@ -9,6 +10,7 @@ import {
 	Input,
 	Link,
 } from "~/libs/components/components.js";
+import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { ONE, ZERO } from "~/libs/constants/constants.js";
 import { AppRoute, ButtonVariants } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
@@ -18,12 +20,15 @@ import {
 	useAppSelector,
 } from "~/libs/hooks/hooks.js";
 import { notifications } from "~/libs/modules/notifications/notifications.js";
+import {
+	DEFAULT_PLAN_STYLE,
+	PLAN_STYLE_TO_READABLE,
+} from "~/modules/plan-styles/libs/constants/plan-style.constants.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
 import { DayList } from "../dashboard-wrapper-mock/components/plan/components/components.js";
 import { useLoadingIds } from "../dashboard-wrapper-mock/components/plan/libs/hooks/hooks.js";
-import { PlanPreview } from "./components/components.js";
 import { TaskNotificationMessage } from "./libs/enums/task-notification-message.enums.js";
 import {
 	type RenderTaskInputField,
@@ -202,6 +207,16 @@ const PlanEdit: React.FC = () => {
 		},
 		[saveIndividualTask],
 	);
+
+	const handleGetStyleFromPlan = useCallback((): PlanStyleOption => {
+		if (!plan) {
+			return DEFAULT_PLAN_STYLE;
+		}
+
+		const style = PLAN_STYLE_TO_READABLE[plan.styleId] ?? DEFAULT_PLAN_STYLE;
+
+		return style;
+	}, [plan]);
 
 	const renderDaysLoadingSkeleton = (
 		number = SKELETON_TASKS_NUMBER,
@@ -400,15 +415,10 @@ const PlanEdit: React.FC = () => {
 								{renderContent()}
 							</div>
 							<div>
-								<PlanPreview
-									containerId="plan-for-download"
-									days={plan.days}
-									firstDayDate=""
-									isForPrint={false}
-									key={plan.id}
-									notes=""
-									theme="COLOURFUL"
-									title={plan.title}
+								<PlanStyle
+									inputStyle={handleGetStyleFromPlan()}
+									plan={plan}
+									view="regular"
 								/>
 							</div>
 						</div>

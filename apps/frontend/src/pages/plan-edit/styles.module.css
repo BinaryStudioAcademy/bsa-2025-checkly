@@ -131,6 +131,7 @@
 	--gutter: var(--space-xl);
 
 	grid-template-columns: 1fr;
+	justify-items: center;
 }
 
 @media (width >= 1200px) {
