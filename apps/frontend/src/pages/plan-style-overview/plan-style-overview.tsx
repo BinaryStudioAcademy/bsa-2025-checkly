@@ -1,5 +1,5 @@
 import { isFulfilled } from "@reduxjs/toolkit";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { StarsYellow02 } from "~/assets/img/shared/shapes/shapes.img.js";
@@ -7,6 +7,7 @@ import {
 	AppHeader,
 	Button,
 	DecorativeImage,
+	Loader,
 	Modal,
 } from "~/libs/components/components.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
@@ -25,7 +26,7 @@ import {
 	DEFAULT_PLAN_STYLE,
 	PLAN_STYLE_TO_READABLE,
 } from "~/modules/plan-styles/libs/constants/plan-style.constants.js";
-import { type PlanWithCategoryDto } from "~/modules/plans/libs/types/types.js";
+import { actions as planActions } from "~/modules/plans/plans.js";
 
 import {
 	PlanActions,
@@ -140,6 +141,16 @@ const PlanStyleOverview: React.FC = () => {
 		});
 	}, [dispatch, planId]);
 
+	useEffect(() => {
+		if (!currentPlan) {
+			void dispatch(planActions.getPlan());
+		}
+	}, [currentPlan, dispatch]);
+
+	if (!currentPlan) {
+		return <Loader />;
+	}
+
 	return (
 		<div className={getClassNames("grid-pattern", styles["page-container"])}>
 			<AppHeader />
@@ -157,7 +168,7 @@ const PlanStyleOverview: React.FC = () => {
 					<div className={getClassNames("wrapper", styles["plan-content"])}>
 						<PlanStyle
 							inputStyle={handleGetStyleFromPlan()}
-							plan={currentPlan as PlanWithCategoryDto}
+							plan={currentPlan}
 							view={getCategoryStyle(selectedCategory)}
 						/>
 						<DecorativeImage

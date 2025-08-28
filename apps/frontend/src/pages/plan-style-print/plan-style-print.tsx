@@ -15,7 +15,10 @@ import { CURRENT_PLAN_MESSAGES } from "~/modules/plans/libs/constants/plan.const
 import { type PlanDaysTaskDto } from "~/modules/plans/libs/types/types.js";
 import { planApi } from "~/modules/plans/plans.js";
 
-import { PRINT_STYLE_TEMPLATE } from "./libs/constants/constants.js";
+import {
+	PAGINATION_STYLE_TEMPLATE,
+	PRINT_STYLE_TEMPLATE,
+} from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 const MIN_PAGE = 1;
@@ -35,6 +38,14 @@ const isViewOption = (v: string): v is ViewOptions => VIEW_OPTIONS.includes(v);
 const injectPrintStyle = (): HTMLStyleElement => {
 	const style = document.createElement("style");
 	style.textContent = PRINT_STYLE_TEMPLATE;
+	document.head.append(style);
+
+	return style;
+};
+
+const injectPaginationStyle = (): HTMLStyleElement => {
+	const style = document.createElement("style");
+	style.textContent = PAGINATION_STYLE_TEMPLATE;
 	document.head.append(style);
 
 	return style;
@@ -65,6 +76,9 @@ const PlanStylePrint: React.FC = () => {
 	const planFromRedux = useAppSelector((state) => state.plan.plan);
 	const [planData, setPlanData] = useState<null | PlanDaysTaskDto>(null);
 	const injectedStyleReference = useRef<HTMLStyleElement | null>(null);
+	const injectedPaginationStyleReference = useRef<HTMLStyleElement | null>(
+		null,
+	);
 
 	const parsePlanDataFromUrl = useCallback((): null | PlanDaysTaskDto => {
 		if (!planDataFromUrl) {
@@ -117,21 +131,28 @@ const PlanStylePrint: React.FC = () => {
 		void fetchPlanData().then(setPlanData);
 	}, [fetchPlanData]);
 
-	useEffect(() => {
-		if (injectedStyleReference.current) {
-			injectedStyleReference.current.remove();
-			injectedStyleReference.current = null;
+	const cleanupStyleReference = (
+		reference: React.RefObject<HTMLStyleElement | null>,
+	): void => {
+		if (reference.current) {
+			reference.current.remove();
+			reference.current = null;
 		}
+	};
+
+	useEffect(() => {
+		cleanupStyleReference(injectedStyleReference);
+		cleanupStyleReference(injectedPaginationStyleReference);
+
+		injectedPaginationStyleReference.current = injectPaginationStyle();
 
 		if (inputStyle === PlanStyleEnum.WITH_REMARKS) {
 			injectedStyleReference.current = injectPrintStyle();
 		}
 
 		return (): void => {
-			if (injectedStyleReference.current) {
-				injectedStyleReference.current.remove();
-				injectedStyleReference.current = null;
-			}
+			cleanupStyleReference(injectedStyleReference);
+			cleanupStyleReference(injectedPaginationStyleReference);
 		};
 	}, [inputStyle]);
 

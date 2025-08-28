@@ -1,4 +1,5 @@
 import { createSlice, isAnyOf, type PayloadAction } from "@reduxjs/toolkit";
+import { type TaskDto } from "shared";
 
 import { DataStatus, PlanStyle, ZERO } from "~/libs/enums/enums.js";
 import { type PlanStyleOption, type ValueOf } from "~/libs/types/types.js";
@@ -109,11 +110,37 @@ const { actions, name, reducer } = createSlice({
 			state.plan = null;
 			state.dataStatus = DataStatus.IDLE;
 		},
+		deleteTaskFromPlan: (
+			state,
+			action: PayloadAction<{ dayIndex: number; taskId: number }>,
+		) => {
+			const { dayIndex, taskId } = action.payload;
+
+			if (state.plan?.days[dayIndex]) {
+				state.plan.days[dayIndex].tasks = state.plan.days[
+					dayIndex
+				].tasks.filter((task) => task.id !== taskId);
+			}
+		},
 		setCurrentPlan: (state, action: PayloadAction<PlanWithCategoryDto>) => {
 			state.plan = action.payload;
 		},
 		setSelectedStyle: (state, action: PayloadAction<PlanStyleOption>) => {
 			state.selectedStyle = action.payload;
+		},
+		updateTaskInPlan: (
+			state,
+			action: PayloadAction<{
+				dayIndex: number;
+				task: TaskDto;
+				taskIndex: number;
+			}>,
+		) => {
+			const { dayIndex, task, taskIndex } = action.payload;
+
+			if (state.plan?.days[dayIndex]?.tasks[taskIndex]) {
+				state.plan.days[dayIndex].tasks[taskIndex] = task;
+			}
 		},
 	},
 });

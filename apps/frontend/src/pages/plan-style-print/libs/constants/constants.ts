@@ -23,7 +23,7 @@ const PRINT_STYLE_TEMPLATE = `
 			padding: 25px;
 		}
 
-		#print-container .desktop-view {
+		#print-container .desktop-view.container {
 			position: static;
 			width: auto;
 			height: auto;
@@ -34,4 +34,28 @@ const PRINT_STYLE_TEMPLATE = `
 	}
 `;
 
-export { PRINT_STYLE_TEMPLATE };
+const PAGINATION_STYLE_TEMPLATE = `
+	@media print {
+		#print-container {
+			position: static;
+			inset: auto;
+			display: block;
+			place-items: unset;
+			width: auto;
+			min-height: auto;
+			overflow: visible;
+			padding: 25px;
+		}
+
+		#print-container .desktop-view.container {
+			position: static;
+			width: auto;
+			height: auto;
+			min-height: auto;
+			margin: 0;
+			transform: none;
+		}
+	}
+`;
+
+export { PAGINATION_STYLE_TEMPLATE, PRINT_STYLE_TEMPLATE };
