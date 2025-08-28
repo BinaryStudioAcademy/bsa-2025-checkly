@@ -15,5 +15,4 @@ dnf install -y \
 	cups-libs \
 	pango \
 	xorg-x11-server-Xvfb \
-	libXss \
 	libXScrnSaver
