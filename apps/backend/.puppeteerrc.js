@@ -1,9 +1,8 @@
-import { join } from "path";
+const { join } = require("path");
 
 /**
  * @type {import("puppeteer").Configuration}
  */
-const __dirname = import.meta.dirname;
 module.exports = {
-	cacheDirectory: join(__dirname, ".cache", "puppeteer"),
+  cacheDirectory: join(__dirname, ".cache", "puppeteer"),
 };
