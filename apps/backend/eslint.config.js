@@ -5,7 +5,7 @@ let Config;
 
 /** @type {Config} */
 const ignoresConfig = {
-	ignores: ["build"],
+	ignores: ["build", ".puppeteerrc.js"],
 };
 
 /** @type {Config[]} */
