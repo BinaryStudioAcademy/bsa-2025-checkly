@@ -8,7 +8,7 @@ const generatePlanSchema = z.object({
 	quizId: z.number({
 		required_error: PlanValidationMessage.FIELD_REQUIRED,
 	}),
-	userId: z.union([z.number().positive(), z.null()]),
+	userId: z.number().positive().nullable().optional().default(null),
 });
 
 export { generatePlanSchema };
