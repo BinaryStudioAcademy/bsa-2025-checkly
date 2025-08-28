@@ -78,8 +78,16 @@ const exportPdf = createAsyncThunk<
 	const view = getCategoryStyle(category);
 	const format = PaperFormat.A4;
 
-	const planTitle = String(getState().plan.plan?.title ?? PLAN_NAME_DEFAULT);
-	const planStyleId = getState().plan.plan?.styleId;
+	const currentPlan = getState().plan.plan;
+
+	if (!currentPlan?.id) {
+		notifications.error(MESSAGES.DOWNLOAD.NO_PLAN_FOUND);
+
+		return { fileName: "" };
+	}
+
+	const planTitle = String(currentPlan.title);
+	const planStyleId = currentPlan.styleId;
 	const { selectedStyle } = getState().plan;
 	const styleToSend = planStyleId
 		? (PLAN_STYLE_TO_READABLE[Number(planStyleId)] ?? String(selectedStyle))
@@ -89,6 +97,7 @@ const exportPdf = createAsyncThunk<
 	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
 		format,
 		html: view,
+		planId: currentPlan.id,
 		planStyle: styleToSend,
 		title: planTitle,
 	});
@@ -122,8 +131,10 @@ const exportDesktopPng = createAsyncThunk<
 	if (pageCount > MIN_PAGES) {
 		const zipName = await downloadPngZip(planTitle, pageCount, (page) =>
 			pdfExportApi.exportPlan(backendEndpoint, {
+				format: PaperFormat.A4,
 				html: view,
 				page,
+				planId: getState().plan.plan?.id,
 				planStyle: styleToSend,
 				title: planTitle,
 				windowSize: size,
@@ -135,7 +146,9 @@ const exportDesktopPng = createAsyncThunk<
 
 	const fileName = `${planTitle}.${FileExtension.PNG}`;
 	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
+		format: PaperFormat.A4,
 		html: view,
+		planId: getState().plan.plan?.id,
 		planStyle: styleToSend,
 		title: planTitle,
 		windowSize: size,
@@ -169,8 +182,10 @@ const exportMobilePng = createAsyncThunk<
 	if (pageCount > MIN_PAGES) {
 		const zipName = await downloadPngZip(planTitle, pageCount, (page) =>
 			pdfExportApi.exportPlan(backendEndpoint, {
+				format: PaperFormat.A4,
 				html: view,
 				page,
+				planId: getState().plan.plan?.id,
 				planStyle: styleToSend,
 				title: planTitle,
 				windowSize: size,
@@ -184,7 +199,9 @@ const exportMobilePng = createAsyncThunk<
 
 	const fileName = `${planTitle}.${FileExtension.PNG}`;
 	const blob = await pdfExportApi.exportPlan(backendEndpoint, {
+		format: PaperFormat.A4,
 		html: view,
+		planId: getState().plan.plan?.id,
 		planStyle: styleToSend,
 		title: planTitle,
 		windowSize: size,

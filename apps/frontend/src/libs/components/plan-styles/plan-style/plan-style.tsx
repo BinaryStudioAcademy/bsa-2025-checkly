@@ -15,10 +15,7 @@ import {
 import { type PlanWithCategoryDto } from "~/modules/plans/libs/types/types.js";
 
 import { Day, Notes, PlanHeader } from "../components/components.js";
-import {
-	PLAN_TEMPLATE,
-	PLAN_TEMPLATE_START_DATE,
-} from "../mocks/plan-mocks.js";
+import { PLAN_TEMPLATE } from "../mocks/plan-mocks.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -92,6 +89,7 @@ const PlanStyle: React.FC<Properties> = ({
 	plan = PLAN_TEMPLATE,
 	view = ViewOption.REGULAR,
 }: Properties) => {
+	const planData = plan;
 	const containerClasses = getClassNames(
 		styles["container"],
 		styles[`${view}-view`],
@@ -114,9 +112,14 @@ const PlanStyle: React.FC<Properties> = ({
 		view === ViewOption.MOBILE && styles["mobile-day-list"],
 	);
 
-	const allChunks = chunkDays(plan.days, MAX_DAYS_PER_PAGE);
+	const allChunks = chunkDays(planData.days, MAX_DAYS_PER_PAGE);
 
-	const pagesToRender = selectPagesToRender({ allChunks, page, plan, view });
+	const pagesToRender = selectPagesToRender({
+		allChunks,
+		page,
+		plan: planData,
+		view,
+	});
 
 	const content =
 		pagesToRender.length === MIN_INDEX ? null : (
@@ -127,14 +130,14 @@ const PlanStyle: React.FC<Properties> = ({
 						data-plan-style={inputStyle}
 						key={`plan-page-${String(index)}`}
 					>
-						<PlanHeader inputStyle={inputStyle} title={plan.title} />
+						<PlanHeader inputStyle={inputStyle} title={planData.title} />
 						<div className={planBodyClasses}>
 							<ul className={dayListClasses} data-view={view}>
 								{daysChunk.map((day) => {
 									return (
 										<Day
 											dayNumber={day.dayNumber}
-											firstDayDate={plan.createdAt ?? PLAN_TEMPLATE_START_DATE}
+											firstDayDate={planData.createdAt}
 											inputStyle={inputStyle}
 											key={`${day.id.toString()}-p${String(index + MIN_PAGE)}`}
 											tasks={day.tasks}

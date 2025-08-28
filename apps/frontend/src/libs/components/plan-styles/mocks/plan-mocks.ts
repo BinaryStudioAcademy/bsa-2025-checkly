@@ -388,6 +388,4 @@ const PLAN_TEMPLATE: PlanWithCategoryDto = {
 const NOTES_PLAN_TEMPLATE =
 	"Change some tasks. Adjust plan to my calendar. Don't give up! Have a small celebration for a successful finishing of each day.";
 
-const PLAN_TEMPLATE_START_DATE = "2025-08-30";
-
-export { NOTES_PLAN_TEMPLATE, PLAN_TEMPLATE, PLAN_TEMPLATE_START_DATE };
+export { NOTES_PLAN_TEMPLATE, PLAN_TEMPLATE };
