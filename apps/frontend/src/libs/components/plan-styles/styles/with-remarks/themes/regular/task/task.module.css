@@ -36,9 +36,7 @@
 .task-text {
 	font-size: calc(10px * var(--coefficient));
 	color: var(--color-text-tertiary);
-	hyphens: auto;
-	word-break: normal;
-	overflow-wrap: break-word;
+	overflow-wrap: anywhere;
 }
 
 @media print {
