@@ -1,4 +1,6 @@
 .content__day-skeleton {
+	min-width: var(--space-3xl);
+	max-width: var(--space-3xl);
 	padding: var(--space-3xs) var(--space-m);
 	text-transform: none;
 	white-space: nowrap;
