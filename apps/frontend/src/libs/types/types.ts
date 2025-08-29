@@ -26,6 +26,7 @@ export {
 	type QuizAnswer,
 	type ServerErrorDetail,
 	type ServerErrorResponse,
+	type TaskResponseDto,
 	type ValidationSchema,
 	type ValueOf,
 	type VerifyTokenRequestDto,

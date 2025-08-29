@@ -87,6 +87,12 @@ class BaseConfig implements Config {
 					env: "FRONTEND_PLAN_PRINT_URL",
 					format: String,
 				},
+				PLAN_PRINT_URL_PRODUCTION: {
+					default: null,
+					doc: "Frontend plan print URL for production",
+					env: "FRONTEND_PLAN_PRINT_URL_PRODUCTION",
+					format: String,
+				},
 			},
 			OPEN_AI: {
 				OPEN_AI_KEY: {
