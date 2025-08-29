@@ -2,13 +2,21 @@ import { useCallback } from "react";
 
 import { Regenerate } from "~/assets/img/icons/icons.js";
 import { ArrowBold } from "~/assets/img/shared/shapes/shapes.img.js";
-import { Button, DecorativeImage } from "~/libs/components/components.js";
+import {
+	Button,
+	DecorativeImage,
+	Loader,
+} from "~/libs/components/components.js";
+import { ZERO } from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
+import { useAppSelector } from "~/libs/hooks/hooks.js";
 
+import { type useLoadingIds } from "../../../libs/hooks/hooks.js";
 import { type PlanDayDto } from "../../libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	daysLoading: ReturnType<typeof useLoadingIds>;
 	index: number;
 	isOpen: boolean;
 	item: PlanDayDto;
@@ -19,6 +27,7 @@ type Properties = {
 };
 
 const Day: React.FC<Properties> = ({
+	daysLoading,
 	index,
 	isOpen,
 	item,
@@ -28,6 +37,10 @@ const Day: React.FC<Properties> = ({
 	setSelectedDay,
 }: Properties) => {
 	const { dayNumber, id } = item;
+
+	const pendingTaskRegenerations = useAppSelector(
+		({ plan }) => plan.pendingTaskRegenerations,
+	);
 
 	const handleDay = useCallback((): void => {
 		setSelectedDay(index);
@@ -46,9 +59,22 @@ const Day: React.FC<Properties> = ({
 			<div className={getClassNames(styles["regenerate-button"])}>
 				{selectedDay === index && (
 					<Button
-						icon={<DecorativeImage src={Regenerate} />}
+						icon={
+							!daysLoading.isLoading(id) && <DecorativeImage src={Regenerate} />
+						}
+						isDisabled={
+							daysLoading.isLoading(id) || pendingTaskRegenerations > ZERO
+						}
 						isIconOnly
 						label="Regenerate day"
+						loader={
+							<Loader
+								container="inline"
+								isLoading={daysLoading.isLoading(id)}
+								size="small"
+								theme="accent"
+							/>
+						}
 						onClick={handleRegenerate}
 					/>
 				)}

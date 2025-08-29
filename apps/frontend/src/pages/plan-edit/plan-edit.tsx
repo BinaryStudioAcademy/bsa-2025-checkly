@@ -68,6 +68,9 @@ const PlanEdit: React.FC = () => {
 	const plan = useAppSelector((state) => state.plan.plan);
 	const planDaysNumber = useAppSelector((state) => state.plan.days);
 
+	const isPendingPlan =
+		tasksLoading.ids.length > ZERO || daysLoading.ids.length > ZERO;
+
 	useEffect(() => {
 		void dispatch(planActions.getPlan());
 	}, [dispatch]);
@@ -460,6 +463,7 @@ const PlanEdit: React.FC = () => {
 							<Button
 								icon={<ArrowLeft />}
 								iconOnlySize="small"
+								isDisabled={isPendingPlan}
 								isIconOnly
 								label="Back to the previous page"
 								size="small"
@@ -484,6 +488,7 @@ const PlanEdit: React.FC = () => {
 							)}
 						>
 							<DayList
+								daysLoading={daysLoading}
 								isOpen={isSelectOpen}
 								onRegenerate={handleDayRegenerateClick}
 								plan={plan}

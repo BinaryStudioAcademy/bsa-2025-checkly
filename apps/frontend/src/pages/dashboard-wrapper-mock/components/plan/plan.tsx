@@ -32,6 +32,9 @@ const Plan: React.FC = () => {
 	const plan = useAppSelector((state) => state.plan.plan);
 	const planDaysNumber = useAppSelector((state) => state.plan.days);
 
+	const isPendingPlan =
+		tasksLoading.ids.length > ZERO || daysLoading.ids.length > ZERO;
+
 	useEffect(() => {
 		void dispatch(planActions.getPlan());
 	}, [dispatch]);
@@ -125,72 +128,77 @@ const Plan: React.FC = () => {
 	}
 
 	return (
-		<div className={styles["plan"]}>
-			<div className={styles["nav"]}>
-				<h2 className={styles["nav-text"]}>{plan?.title}</h2>
-				<Button
-					className={styles["regenerate-button"]}
-					label="Regenerate plan"
-					onClick={handlePlanRegenerate}
-					size="small"
-					type="button"
-					variant="secondary"
-				/>
-				<Button
-					className={getClassNames(styles["select-day"])}
-					label={`Day ${String(selectedDay + ONE)}`}
-					onClick={toggleSelect}
-					variant={ButtonVariants.TRANSPARENT}
-				/>
-			</div>
-			<div className={styles["content"]}>
-				<div className={styles["content__days-wrapper"]}>
+		<>
+			<div className={styles["plan"]}>
+				<div className={styles["nav"]}>
+					<h2 className={styles["nav-text"]}>{plan?.title}</h2>
+					<Button
+						className={styles["regenerate-button"]}
+						isDisabled={isPendingPlan || isPlanRegenerating}
+						label="Regenerate plan"
+						onClick={handlePlanRegenerate}
+						size="small"
+						type="button"
+						variant="secondary"
+					/>
+					<Button
+						className={getClassNames(styles["select-day"])}
+						label={`Day ${String(selectedDay + ONE)}`}
+						onClick={toggleSelect}
+						variant={ButtonVariants.TRANSPARENT}
+					/>
+				</div>
+				<div className={styles["content"]}>
+					<div className={styles["content__days-wrapper"]}>
+						<div
+							className={getClassNames(
+								styles["content__days"],
+								isSelectOpen ? styles["content__days__open"] : "",
+							)}
+						>
+							<DayList
+								daysLoading={daysLoading}
+								isOpen={isSelectOpen}
+								onRegenerate={handleDayRegenerate}
+								plan={plan}
+								planDaysNumber={planDaysNumber}
+								selectedDay={selectedDay}
+								setIsOpen={setIsSelectOpen}
+								setSelectedDay={setSelectedDay}
+							/>
+						</div>
+					</div>
 					<div
 						className={getClassNames(
-							styles["content__days"],
-							isSelectOpen ? styles["content__days__open"] : "",
+							styles["content__tasks"],
+							"cluster grid-pattern flow-loose",
 						)}
 					>
-						<DayList
-							isOpen={isSelectOpen}
-							onRegenerate={handleDayRegenerate}
-							plan={plan}
-							planDaysNumber={planDaysNumber}
-							selectedDay={selectedDay}
-							setIsOpen={setIsSelectOpen}
-							setSelectedDay={setSelectedDay}
+						<TaskList
+							daysLoading={daysLoading}
+							onRegenerate={handleTaskRegenerate}
+							selectedDayId={plan?.days[selectedDay]?.id ?? ZERO}
+							tasks={plan?.days[selectedDay]?.tasks ?? []}
+							tasksLoading={tasksLoading}
 						/>
+						<NavLink
+							className={getClassNames(styles["nav-link"])}
+							to={AppRoute.CHOOSE_STYLE}
+						>
+							<Button
+								icon={<DownloadIcon />}
+								iconOnlySize="medium"
+								isDisabled={isPendingPlan || isPlanRegenerating}
+								label="Download"
+								size={ButtonSizes.LARGE}
+								type={ElementTypes.BUTTON}
+								variant={ButtonVariants.PRIMARY}
+							/>
+						</NavLink>
 					</div>
 				</div>
-				<div
-					className={getClassNames(
-						styles["content__tasks"],
-						"cluster grid-pattern flow-loose",
-					)}
-				>
-					<TaskList
-						daysLoading={daysLoading}
-						onRegenerate={handleTaskRegenerate}
-						selectedDayId={plan?.days[selectedDay]?.id ?? ZERO}
-						tasks={plan?.days[selectedDay]?.tasks ?? []}
-						tasksLoading={tasksLoading}
-					/>
-					<NavLink
-						className={getClassNames(styles["nav-link"])}
-						to={AppRoute.CHOOSE_STYLE}
-					>
-						<Button
-							icon={<DownloadIcon />}
-							iconOnlySize="medium"
-							label="Download"
-							size={ButtonSizes.LARGE}
-							type={ElementTypes.BUTTON}
-							variant={ButtonVariants.PRIMARY}
-						/>
-					</NavLink>
-				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

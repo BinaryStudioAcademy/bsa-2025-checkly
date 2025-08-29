@@ -10,6 +10,7 @@ type Properties = {
 	backdrop?: boolean;
 	container?: LoaderContainer;
 	isLoading?: boolean;
+	overlay?: boolean;
 	size?: LoaderSize;
 	theme?: LoaderTheme;
 };
