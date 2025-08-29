@@ -7,9 +7,13 @@
 }
 
 .plan-title {
-	max-width: clamp(150px, 50vw, 600px);
+	max-width: clamp(15rem, 50vw, 100%);
 	font-size: var(--text-size-heading-3);
 	text-wrap: balance;
+}
+
+.plan-title-link {
+	color: var(--color-text-secondary);
 }
 
 .nav-left {

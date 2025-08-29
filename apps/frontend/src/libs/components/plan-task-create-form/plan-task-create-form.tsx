@@ -27,15 +27,16 @@ const PlanTaskCreateForm = ({
 	onCancel,
 	onSubmit,
 }: Properties): JSX.Element => {
-	const { control, errors, getValues, handleSubmit, reset, setValue } =
-		useAppForm({
-			defaultValues: {
-				executionTimeType: "morning" as ExecutionTimeTypeValue,
-				title: "",
-			},
-			mode: "onBlur",
-			validationSchema: taskCreatePartialValidationSchema,
-		});
+	const { control, errors, handleSubmit, reset, setValue, watch } = useAppForm({
+		defaultValues: {
+			executionTimeType: "morning" as ExecutionTimeTypeValue,
+			title: "",
+		},
+		mode: "onBlur",
+		validationSchema: taskCreatePartialValidationSchema,
+	});
+
+	const currentExecutionTime = watch("executionTimeType");
 
 	const handleTimeChange = useCallback(
 		(newTime: ExecutionTimeTypeValue) => {
@@ -66,7 +67,7 @@ const PlanTaskCreateForm = ({
 				<div className={getClassNames("flow-tight", styles["time-select"])}>
 					<label htmlFor="time-selector">Select time period:</label>
 					<TaskTimeSelector
-						currentTime={getValues().executionTimeType}
+						currentTime={currentExecutionTime}
 						inputId="time-selector"
 						onTimeChange={handleTimeChange}
 						selectStyles={selectStyles}
