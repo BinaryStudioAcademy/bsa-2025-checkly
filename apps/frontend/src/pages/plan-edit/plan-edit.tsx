@@ -73,6 +73,7 @@ const PlanEdit: React.FC = () => {
 
 	const tasksLoading = useLoadingIds();
 	const daysLoading = useLoadingIds();
+
 	const dispatch = useAppDispatch();
 	const plan = useAppSelector((state) => state.plan.plan);
 	const planDay = plan?.days[selectedDay];
@@ -83,8 +84,10 @@ const PlanEdit: React.FC = () => {
 		tasksLoading.ids.length > ZERO || daysLoading.ids.length > ZERO;
 
 	useEffect(() => {
-		void dispatch(planActions.getPlan());
-	}, [dispatch]);
+		if (!plan) {
+			void dispatch(planActions.getPlan());
+		}
+	}, [dispatch, plan]);
 
 	const handleDayRegenerateClick = useCallback((dayId: number) => {
 		setDayToRegenerateId(dayId);

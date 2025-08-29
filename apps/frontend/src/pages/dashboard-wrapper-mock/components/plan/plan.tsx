@@ -47,8 +47,10 @@ const Plan: React.FC = () => {
 		tasksLoading.ids.length > ZERO || daysLoading.ids.length > ZERO;
 
 	useEffect(() => {
-		void dispatch(planActions.getPlan());
-	}, [dispatch]);
+		if (!plan) {
+			void dispatch(planActions.getPlan());
+		}
+	}, [dispatch, plan]);
 
 	const handleDayRegenerateClick = useCallback((dayId: number) => {
 		setDayToRegenerateId(dayId);
@@ -226,7 +228,7 @@ const Plan: React.FC = () => {
 						/>
 						<NavLink
 							className={getClassNames(styles["nav-link"])}
-							to={AppRoute.CHOOSE_STYLE}
+							to={AppRoute.OVERVIEW_PAGE}
 						>
 							<Button
 								icon={<DownloadIcon />}
