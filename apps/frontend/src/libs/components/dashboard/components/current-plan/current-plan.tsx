@@ -1,5 +1,4 @@
-import { type FC } from "react";
-import { useDispatch } from "react-redux";
+import { type FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Button } from "~/libs/components/components.js";
@@ -7,7 +6,11 @@ import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.j
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { DataStatus } from "~/libs/enums/enums.js";
 import { getClassNames, getPlanStyleName } from "~/libs/helpers/helpers.js";
-import { useAppSelector, useCallback } from "~/libs/hooks/hooks.js";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useCallback,
+} from "~/libs/hooks/hooks.js";
 import { CURRENT_PLAN_MESSAGES } from "~/modules/plans/libs/constants/plan.constants.js";
 import { type PlanWithCategoryDto } from "~/modules/plans/libs/types/types.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
@@ -15,7 +18,7 @@ import { actions as planActions } from "~/modules/plans/plans.js";
 import styles from "./styles.module.css";
 
 const CurrentPlan: FC = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const currentPlan = useAppSelector(({ plan }) => plan.plan);
 	const userPlansStatus = useAppSelector(
 		({ plan }) => plan.userPlansDataStatus,
@@ -24,6 +27,12 @@ const CurrentPlan: FC = () => {
 	const isLoading =
 		userPlansStatus === DataStatus.PENDING ||
 		userPlansStatus === DataStatus.IDLE;
+
+	useEffect(() => {
+		if (!currentPlan) {
+			void dispatch(planActions.getPlan());
+		}
+	}, [dispatch, currentPlan]);
 
 	const handleContinue = useCallback((): void => {
 		dispatch(planActions.setCurrentPlan(currentPlan as PlanWithCategoryDto));
