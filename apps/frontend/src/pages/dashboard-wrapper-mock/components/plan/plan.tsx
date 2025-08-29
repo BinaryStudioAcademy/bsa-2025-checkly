@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { DownloadIcon } from "~/assets/img/icons/icons.js";
-import { Button } from "~/libs/components/components.js";
+import { Button, ConfirmationModal } from "~/libs/components/components.js";
 import { ONE, ZERO } from "~/libs/constants/constants.js";
 import {
 	AppRoute,
@@ -17,6 +17,7 @@ import { TASK_INDEXES } from "~/modules/tasks/libs/constants/constants.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
 import { DayList, TaskList } from "./components/components.js";
+import { MODAL_MESSAGES } from "./components/libs/constants/constants.js";
 import { useLoadingIds } from "./libs/hooks/hooks.js";
 import styles from "./styles.module.css";
 
@@ -24,6 +25,8 @@ const Plan: React.FC = () => {
 	const [selectedDay, setSelectedDay] = useState<number>(ZERO);
 	const [isPlanRegenerating, setIsPlanRegenerating] = useState<boolean>(false);
 	const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
+	const [isRegeneratePlanModalOpen, setIsRegeneratePlanModalOpen] =
+		useState<boolean>(false);
 	const tasksLoading = useLoadingIds();
 	const daysLoading = useLoadingIds();
 
@@ -89,6 +92,19 @@ const Plan: React.FC = () => {
 		});
 	}, [dispatch, plan]);
 
+	const handlePlanRegenerateClick = useCallback((): void => {
+		setIsRegeneratePlanModalOpen(true);
+	}, []);
+
+	const handlePlanRegenerateConfirm = useCallback((): void => {
+		handlePlanRegenerate();
+		setIsRegeneratePlanModalOpen(false);
+	}, [handlePlanRegenerate]);
+
+	const handlePlanRegenerateCancel = useCallback((): void => {
+		setIsRegeneratePlanModalOpen(false);
+	}, []);
+
 	useEffect(() => {
 		const allTasks =
 			plan?.days.flatMap((day) =>
@@ -136,7 +152,7 @@ const Plan: React.FC = () => {
 						className={styles["regenerate-button"]}
 						isDisabled={isPendingPlan || isPlanRegenerating}
 						label="Regenerate plan"
-						onClick={handlePlanRegenerate}
+						onClick={handlePlanRegenerateClick}
 						size="small"
 						type="button"
 						variant="secondary"
@@ -198,6 +214,13 @@ const Plan: React.FC = () => {
 					</div>
 				</div>
 			</div>
+			<ConfirmationModal
+				isOpen={isRegeneratePlanModalOpen}
+				message={MODAL_MESSAGES.PLAN_REGENERATION}
+				onCancel={handlePlanRegenerateCancel}
+				onConfirm={handlePlanRegenerateConfirm}
+				title="Plan Regeneration"
+			/>
 		</>
 	);
 };
