@@ -2,4 +2,8 @@ export {
 	type RenderTaskInputField,
 	type RenderTaskInputProperties,
 } from "./render-task-input-properties.type.js";
-export { type TaskDto } from "shared";
+export {
+	type ExecutionTimeTypeValue,
+	type PlanStyleOption,
+	type TaskDto,
+} from "shared";
