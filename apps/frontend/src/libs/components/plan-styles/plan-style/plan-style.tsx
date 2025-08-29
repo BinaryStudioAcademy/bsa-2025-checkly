@@ -3,6 +3,8 @@ import {
 	MIN_INDEX,
 	MIN_PAGE,
 	MIN_STACK_PAGES,
+	MOBILE_DAYS_PER_PAGE,
+	ONE,
 } from "~/libs/constants/constants.js";
 import { PlanStyleModules } from "~/libs/enums/plan-style-modules.enum.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
@@ -112,7 +114,9 @@ const PlanStyle: React.FC<Properties> = ({
 		view === ViewOption.MOBILE && styles["mobile-day-list"],
 	);
 
-	const allChunks = chunkDays(planData.days, MAX_DAYS_PER_PAGE);
+	const daysPerPage: number =
+		view === ViewOption.MOBILE ? MOBILE_DAYS_PER_PAGE : MAX_DAYS_PER_PAGE;
+	const allChunks = chunkDays(planData.days, daysPerPage);
 
 	const pagesToRender = selectPagesToRender({
 		allChunks,
@@ -124,31 +128,40 @@ const PlanStyle: React.FC<Properties> = ({
 	const content =
 		pagesToRender.length === MIN_INDEX ? null : (
 			<>
-				{pagesToRender.map((daysChunk, index) => (
-					<section
-						className={containerClasses}
-						data-plan-style={inputStyle}
-						key={`plan-page-${String(index)}`}
-					>
-						<PlanHeader inputStyle={inputStyle} title={planData.title} />
-						<div className={planBodyClasses}>
-							<ul className={dayListClasses} data-view={view}>
-								{daysChunk.map((day) => {
-									return (
-										<Day
-											dayNumber={day.dayNumber}
-											firstDayDate={planData.createdAt}
-											inputStyle={inputStyle}
-											key={`${day.id.toString()}-p${String(index + MIN_PAGE)}`}
-											tasks={day.tasks}
-										/>
-									);
-								})}
-								<Notes inputStyle={inputStyle} notes={notes} />
-							</ul>
-						</div>
-					</section>
-				))}
+				{pagesToRender.map((daysChunk, index) => {
+					const showNotesOnThisPage =
+						view === ViewOption.MOBILE
+							? allChunks.indexOf(daysChunk) === allChunks.length - ONE
+							: true;
+
+					return (
+						<section
+							className={containerClasses}
+							data-plan-style={inputStyle}
+							key={`plan-page-${String(index)}`}
+						>
+							<PlanHeader inputStyle={inputStyle} title={planData.title} />
+							<div className={planBodyClasses}>
+								<ul className={dayListClasses} data-view={view}>
+									{daysChunk.map((day) => {
+										return (
+											<Day
+												dayNumber={day.dayNumber}
+												firstDayDate={planData.createdAt}
+												inputStyle={inputStyle}
+												key={`${day.id.toString()}-p${String(index + MIN_PAGE)}`}
+												tasks={day.tasks}
+											/>
+										);
+									})}
+									{showNotesOnThisPage && (
+										<Notes inputStyle={inputStyle} notes={notes} />
+									)}
+								</ul>
+							</div>
+						</section>
+					);
+				})}
 			</>
 		);
 
