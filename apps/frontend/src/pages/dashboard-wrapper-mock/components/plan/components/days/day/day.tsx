@@ -1,10 +1,9 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 
 import { Regenerate } from "~/assets/img/icons/icons.js";
 import { ArrowBold } from "~/assets/img/shared/shapes/shapes.img.js";
 import {
 	Button,
-	ConfirmationModal,
 	DecorativeImage,
 	Loader,
 } from "~/libs/components/components.js";
@@ -13,7 +12,6 @@ import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppSelector } from "~/libs/hooks/hooks.js";
 
 import { type useLoadingIds } from "../../../libs/hooks/hooks.js";
-import { MODAL_MESSAGES } from "../../libs/constants/constants.js";
 import { type PlanDayDto } from "../../libs/types/types.js";
 import styles from "./styles.module.css";
 
@@ -43,8 +41,6 @@ const Day: React.FC<Properties> = ({
 	const pendingTaskRegenerations = useAppSelector(
 		({ plan }) => plan.pendingTaskRegenerations,
 	);
-	const [isRegenerateDayModalOpen, setIsRegenerateDayModalOpen] =
-		useState<boolean>(false);
 
 	const handleDay = useCallback((): void => {
 		setSelectedDay(index);
@@ -54,18 +50,9 @@ const Day: React.FC<Properties> = ({
 		}
 	}, [index, isOpen, setIsOpen, setSelectedDay]);
 
-	const handleRegenerateClick = useCallback((): void => {
-		setIsRegenerateDayModalOpen(true);
-	}, []);
-
-	const handleRegenerateConfirm = useCallback((): void => {
+	const handleRegenerate = useCallback((): void => {
 		onRegenerate(id);
-		setIsRegenerateDayModalOpen(false);
 	}, [id, onRegenerate]);
-
-	const handleRegenerateCancel = useCallback((): void => {
-		setIsRegenerateDayModalOpen(false);
-	}, []);
 
 	return (
 		<>
@@ -91,7 +78,7 @@ const Day: React.FC<Properties> = ({
 									theme="accent"
 								/>
 							}
-							onClick={handleRegenerateClick}
+							onClick={handleRegenerate}
 						/>
 					)}
 				</div>
@@ -108,13 +95,6 @@ const Day: React.FC<Properties> = ({
 					{selectedDay === index && <img alt="Arrow" src={ArrowBold} />}
 				</div>
 			</div>
-			<ConfirmationModal
-				isOpen={isRegenerateDayModalOpen}
-				message={MODAL_MESSAGES.DAY_REGENERATION}
-				onCancel={handleRegenerateCancel}
-				onConfirm={handleRegenerateConfirm}
-				title="Day Regeneration"
-			/>
 		</>
 	);
 };

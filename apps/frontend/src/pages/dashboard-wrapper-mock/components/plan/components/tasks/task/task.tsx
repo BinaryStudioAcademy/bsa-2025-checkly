@@ -5,7 +5,6 @@ import {
 	Button,
 	ConfirmationModal,
 	DecorativeImage,
-	Modal,
 	TaskTimeSelector,
 } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
@@ -200,36 +199,26 @@ const Task: React.FC<Properties> = ({
 					</div>
 				</div>
 			</div>
-			<Modal
+
+			<ConfirmationModal
 				isOpen={isDeleteModalOpen}
-				onClose={handleCancelDelete}
-				title="Delete Task"
+				message="You are about to delete this task."
+				onCancel={handleCancelDelete}
+				onConfirm={handleConfirmDelete}
+				title="Task Deletion"
 			>
-				<div className={styles["delete-modal-content"]}>
-					<p>{MODAL_MESSAGES.TASK_DELETION}</p>
-					<div className={styles["delete-modal-actions"]}>
-						<Button
-							className={getClassNames(styles["modal-actions-button"])}
-							label="Cancel"
-							onClick={handleCancelDelete}
-							variant="secondary"
-						/>
-						<Button
-							className={getClassNames(styles["modal-actions-button"])}
-							label="Delete"
-							onClick={handleConfirmDelete}
-							variant="primary"
-						/>
-					</div>
-				</div>
-			</Modal>
+				<p>{MODAL_MESSAGES.TASK_DELETION}</p>
+			</ConfirmationModal>
+
 			<ConfirmationModal
 				isOpen={isRegenerateTaskModalOpen}
-				message={MODAL_MESSAGES.TASK_REGENERATION}
+				message="You are about to regenerate this task."
 				onCancel={handleRegenerateCancel}
 				onConfirm={handleRegenerateConfirm}
 				title="Task Regeneration"
-			/>
+			>
+				<p>{MODAL_MESSAGES.TASK_REGENERATION}</p>
+			</ConfirmationModal>
 		</>
 	);
 };
