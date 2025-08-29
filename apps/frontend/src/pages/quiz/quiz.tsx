@@ -17,6 +17,7 @@ import {
 } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
+import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import {
 	actions as planActions,
 	type PlanCategoryWithColorDto,
@@ -40,11 +41,18 @@ const Quiz: React.FC = (): React.ReactElement => {
 	const { selectedCategory } = useAppSelector((state) => state.quizQuestion);
 
 	const handleCategorySelect = useCallback(
-		(category: string): void => {
-			dispatch(actions.resetQuiz());
-			dispatch(actions.setCategory(category));
+		(clickedCategory: string): void => {
+			if (clickedCategory !== selectedCategory) {
+				const clearStateAndSetCategory = async (): Promise<void> => {
+					await storage.drop(StorageKey.QUIZ_STATE);
+					dispatch(actions.resetQuiz());
+					dispatch(actions.setCategory(clickedCategory));
+				};
+
+				void clearStateAndSetCategory();
+			}
 		},
-		[dispatch],
+		[dispatch, selectedCategory],
 	);
 
 	const handleBack = useCallback((): void => {
