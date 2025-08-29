@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.17.0...shared-v1.18.0) (2025-08-29)
+
+
+### Features
+
+* * update validation schema cy-431 ([666f64a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/666f64af91e53000aff91e476b2a994f5699decd))
+* **backend:** improve white list for individual methods cy-400 ([512ede1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/512ede124bd6e039c5aa5f16823055be02265774))
+* **backend:** improve white list for individual methods cy-400 ([e3c9ec8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e3c9ec8951815f0ebb2d93b7f855f6d92c587639))
+* merge main into local branch cy-432 ([74f7d18](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/74f7d18ff8165d81a4bec34cb678e7b1218528f5))
+* plan edit page inhancements cy-431 ([a081200](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a08120079e33154fe7602375f1a9a80e75047c29))
+
 ## [1.17.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.16.1...shared-v1.17.0) (2025-08-28)
 
 
