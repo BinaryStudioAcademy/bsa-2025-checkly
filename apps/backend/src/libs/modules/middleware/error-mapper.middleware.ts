@@ -18,6 +18,10 @@ type ErrorPayload = {
 
 type ServerErrorTypeValue = EnumValue<typeof ServerErrorType>;
 
+// src/libs/helpers/init-error-mapper-middleware.js
+
+// ...
+
 const initErrorMapperMiddleware = () => {
 	return async (
 		request: FastifyRequest,
@@ -28,11 +32,12 @@ const initErrorMapperMiddleware = () => {
 		reply.send = (payload: unknown): FastifyReply => {
 			if (
 				reply.statusCode >= ErrorConstants.MIN_ERROR_STATUS_CODE &&
-				typeof payload === "object"
+				typeof payload === "object" &&
+				payload !== null
 			) {
 				const errorPayload = payload as ErrorPayload;
 
-				const { details } = errorPayload;
+				const { details = [] } = errorPayload;
 				const hasDetails =
 					Array.isArray(details) &&
 					details.length >= UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH;

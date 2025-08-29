@@ -15,6 +15,7 @@ const Step = {
 type Properties = {
 	isMenuOpen: boolean;
 	menuReference: React.RefObject<HTMLDivElement | null>;
+	modalReference?: React.RefObject<HTMLElement | null>;
 	onClose: () => void;
 };
 
@@ -35,6 +36,7 @@ const getNextIndex = ({
 const useDropdownMenu = ({
 	isMenuOpen,
 	menuReference,
+	modalReference,
 	onClose,
 }: Properties): void => {
 	const handleClickOutside = (event: MouseEvent): void => {
@@ -42,6 +44,13 @@ const useDropdownMenu = ({
 			menuReference.current &&
 			!menuReference.current.contains(event.target as Node)
 		) {
+			if (
+				modalReference?.current &&
+				modalReference.current.contains(event.target as Node)
+			) {
+				return;
+			}
+
 			onClose();
 		}
 	};
@@ -82,7 +91,7 @@ const useDropdownMenu = ({
 			document.removeEventListener("mousedown", handleClickOutside);
 			document.removeEventListener("keydown", handleKeyDown);
 		};
-	}, [isMenuOpen, menuReference, onClose]);
+	}, [isMenuOpen, menuReference, onClose, modalReference]); // Додаємо modalReference до залежностей
 };
 
 export { useDropdownMenu };

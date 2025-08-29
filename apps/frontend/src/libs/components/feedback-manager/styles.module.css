@@ -1,0 +1,13 @@
+.add-feedback-thumb {
+	padding: var(--space-m) var(--space-l);
+}
+
+.menu-item--add-feedback {
+	display: block;
+}
+
+@media (width >= 1024px) {
+	.menu-item--add-feedback {
+		display: none;
+	}
+}

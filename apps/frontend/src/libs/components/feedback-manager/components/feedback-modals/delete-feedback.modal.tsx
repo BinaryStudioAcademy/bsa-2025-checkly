@@ -6,7 +6,7 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { actions } from "~/modules/feedbacks/feedbacks.js";
 
-import { FeedbackLoaderContainer } from "../../feedback-loader-container/feedback-loader-container.js";
+import { FeedbackLoaderContainer } from "../../../../../pages/home/components/feedbacks-section/feedback-loader-container/feedback-loader-container.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -53,11 +53,10 @@ const DeleteFeedbackModal: FC<Properties> = ({
 			aria-labelledby="feedback-title"
 			className={getClassNames(styles["delete-modal"], "cluster")}
 		>
-			<h2 className={styles["feedback-title"]} id="feedback-title">
-				Do you want to delete this feedback?
-			</h2>
 			<p className={styles["feedback-text"]}>{feedbackToDelete.text}</p>
-			<div className={getClassNames(styles["button-group"], "cluster")}>
+			<div
+				className={getClassNames("cluster", styles["feedback-modal-buttons"])}
+			>
 				<Button
 					isDisabled={isDeleting}
 					label="Delete"
@@ -71,8 +70,14 @@ const DeleteFeedbackModal: FC<Properties> = ({
 					}
 					onClick={handleDeleteButtonClick}
 					type="button"
+					variant="secondary"
 				/>
-				<Button label="Cancel" onClick={handleCancelClick} type="button" />
+				<Button
+					label="Cancel"
+					onClick={handleCancelClick}
+					type="button"
+					variant="secondary"
+				/>
 			</div>
 		</div>
 	);

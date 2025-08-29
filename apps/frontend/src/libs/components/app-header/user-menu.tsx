@@ -7,14 +7,16 @@ import { Plan } from "~/assets/img/side-panel/side-panel.img.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 
+import { FeedbackManager } from "../feedback-manager/feedback-manager.js";
 import { NavigationItem } from "../navigation-item/navigation-item.js";
 import styles from "./styles.module.css";
 
 type Properties = {
 	isOpen: boolean;
+	modalReference: React.RefObject<HTMLDialogElement | null>;
 };
 
-const UserMenu: React.FC<Properties> = ({ isOpen }) => {
+const UserMenu: React.FC<Properties> = ({ isOpen, modalReference }) => {
 	const menuDropdownClass = getClassNames(
 		styles["menu-dropdown"],
 		isOpen && styles["menu-dropdown--open"],
@@ -56,6 +58,7 @@ const UserMenu: React.FC<Properties> = ({ isOpen }) => {
 					navigateTo={AppRoute.LOGOUT}
 					onClick={handleLogout}
 				/>
+				<FeedbackManager modalReference={modalReference} type="user-menu" />
 			</ul>
 		</nav>
 	);

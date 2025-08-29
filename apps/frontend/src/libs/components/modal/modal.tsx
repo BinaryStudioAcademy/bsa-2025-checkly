@@ -1,4 +1,5 @@
-import { type ReactNode } from "react";
+import { type ReactNode, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 import { Remove } from "~/assets/img/icons/icons.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
@@ -10,6 +11,7 @@ import styles from "./styles.module.css";
 type Properties = {
 	children: ReactNode;
 	isOpen: boolean;
+	modalReference?: React.RefObject<HTMLDialogElement | null>;
 	onClose: () => void;
 	title?: string;
 };
@@ -17,15 +19,22 @@ type Properties = {
 const Modal: React.FC<Properties> = ({
 	children,
 	isOpen,
+	modalReference,
 	onClose,
 	title,
 }: Properties) => {
-	if (!isOpen) {
+	const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
+
+	useEffect(() => {
+		setPortalElement(document.body);
+	}, []);
+
+	if (!isOpen || !portalElement) {
 		return null;
 	}
 
-	return (
-		<dialog className={styles["modal-overlay"]} open>
+	return createPortal(
+		<dialog className={styles["modal-overlay"]} open ref={modalReference}>
 			<div className={styles["modal-content"]}>
 				{title && (
 					<div className={styles["modal-header"]}>
@@ -42,7 +51,8 @@ const Modal: React.FC<Properties> = ({
 				)}
 				<div className={styles["modal-body"]}>{children}</div>
 			</div>
-		</dialog>
+		</dialog>,
+		portalElement,
 	);
 };
 
