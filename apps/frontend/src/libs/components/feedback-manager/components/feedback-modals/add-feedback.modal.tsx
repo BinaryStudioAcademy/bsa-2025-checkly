@@ -109,7 +109,7 @@ const AddFeedbackModal: React.FC<Properties> = ({
 				>
 					<Button
 						isDisabled={isLoading}
-						label="Add"
+						label={existingFeedback ? "Edit" : "Add"}
 						loader={
 							<Loader
 								container="inline"
