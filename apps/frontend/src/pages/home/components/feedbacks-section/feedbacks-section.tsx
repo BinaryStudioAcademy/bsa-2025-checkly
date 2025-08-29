@@ -1,5 +1,4 @@
 import { type FC } from "react";
-import "react-toastify/dist/ReactToastify.css";
 
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppSelector } from "~/libs/hooks/hooks.js";

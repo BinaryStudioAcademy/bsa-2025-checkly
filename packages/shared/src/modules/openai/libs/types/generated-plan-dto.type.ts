@@ -15,7 +15,6 @@ type GeneratedPlanDTO = {
 };
 
 type GeneratedTaskDTO = {
-	description: string;
 	executionTimeType: null | ValueOf<typeof ExecutionTimeType>;
 	order: number;
 	title: string;

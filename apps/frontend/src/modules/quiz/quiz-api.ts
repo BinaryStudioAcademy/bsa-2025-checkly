@@ -22,7 +22,7 @@ class QuizApi extends BaseHTTPApi {
 			this.getFullEndpoint(QuizApiPath.ROOT, {}),
 			{
 				contentType: ContentType.JSON,
-				hasAuth: true,
+				hasAuth: false,
 				method: HTTPRequestMethod.POST,
 				payload: JSON.stringify(payload),
 			},

@@ -9,6 +9,7 @@ const UserValidationMessage = {
 		"Date of birth cannot be in the future",
 	EMAIL_ALREADY_EXISTS: "Email already in use",
 	EMAIL_INVALID: "Invalid email format",
+	EMAIL_INVALID_TYPE: "This field requires a string value",
 	ENTER_VALID_DATE_OF_BIRTH: "Please enter a valid date of birth",
 	FAILED_TO_UPDATE_PROFILE: "Failed to update user profile",
 	FIELD_REQUIRED: "Field is required",

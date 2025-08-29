@@ -10,6 +10,8 @@ import {
 	useUserPlanSearch,
 } from "~/libs/hooks/hooks.js";
 import { actions as planCategoryActions } from "~/modules/plan-categories/plan-categories.js";
+import { type PlanWithCategoryDto } from "~/modules/plans/libs/types/types.js";
+import { actions as planActions } from "~/modules/plans/plans.js";
 
 import { PlanCategorySelect } from "./components/plan-category-select/plan-category-select.js";
 import { PlanSearchInput } from "./components/plan-search-input/plan-search-input.js";
@@ -93,13 +95,39 @@ const PastPlans: FC = () => {
 		setTitle("");
 	}, [setCategoryId, setTitle]);
 
+	const handlePlanSelect = useCallback(
+		(event: React.MouseEvent<HTMLDivElement>): void => {
+			const planId = Number.parseInt(
+				event.currentTarget.dataset["planId"] as string,
+			);
+			const currentPlan = userPlans.find(
+				(plan) => plan.id === planId,
+			) as PlanWithCategoryDto;
+
+			dispatch(planActions.setCurrentPlan(currentPlan));
+		},
+		[dispatch, userPlans],
+	);
+
 	const renderPlanCards = (): JSX.Element => (
 		<>
 			{userPlans.map((plan) => (
-				<div className={styles["plan-card"]} key={plan.id}>
+				<div
+					aria-hidden="true"
+					className={getClassNames(
+						styles["plan-card"],
+						styles[
+							`plan-card__bg-${getPlanStyleName(plan.styleId).toLowerCase()}`
+						],
+					)}
+					data-plan-id={plan.id}
+					key={plan.id}
+					onClick={handlePlanSelect}
+					role="button"
+				>
 					<PlanStyle
 						inputStyle={getPlanStyleName(plan.styleId)}
-						planTitle={plan.title}
+						plan={plan}
 						view="selection"
 					/>
 				</div>

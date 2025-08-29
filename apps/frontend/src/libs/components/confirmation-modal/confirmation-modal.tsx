@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import { Button } from "~/libs/components/components.js";
 import { Modal } from "~/libs/components/modal/modal.js";
@@ -7,15 +7,17 @@ import { getClassNames } from "~/libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	children?: React.ReactNode;
 	isOpen: boolean;
 	message?: string;
 	onCancel: () => void;
 	onConfirm: () => void;
-	onDiscard: () => void;
+	onDiscard?: () => void;
 	title?: string;
 };
 
 const ConfirmationModal: React.FC<Properties> = ({
+	children,
 	isOpen,
 	message,
 	onCancel,
@@ -23,20 +25,31 @@ const ConfirmationModal: React.FC<Properties> = ({
 	onDiscard,
 	title = "Unsaved Changes",
 }) => {
+	const handleOnDiscard = useCallback(() => {
+		if (onDiscard) {
+			onDiscard();
+		} else {
+			onCancel();
+		}
+	}, [onDiscard, onCancel]);
+
 	return (
 		<Modal isOpen={isOpen} onClose={onCancel} title={title}>
-			<div className={styles["confirmation-modal-content"]}>
+			<div className="flow-loose-lg">
 				<p className={styles["confirmation-message"]}>{message}</p>
-				<div className={styles["confirmation-actions"]}>
+				{children}
+				<div
+					className={getClassNames("cluster", styles["confirmation-actions"])}
+				>
 					<Button
 						className={getClassNames(styles["modal-action-button"])}
-						label="Discard Changes"
-						onClick={onDiscard}
+						label="Cancel"
+						onClick={handleOnDiscard}
 						variant="secondary"
 					/>
 					<Button
 						className={getClassNames(styles["modal-action-button"])}
-						label="Save Changes"
+						label="Confirm"
 						onClick={onConfirm}
 						variant="primary"
 					/>

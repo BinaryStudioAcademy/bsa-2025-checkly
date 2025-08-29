@@ -8,7 +8,9 @@ import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
 	type ForgotPasswordRequestDto,
+	forgotPasswordValidationSchema,
 	type ResetPasswordRequestDto,
+	resetPasswordWithTokenValidationSchema,
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
 	type UserSignUpRequestDto,
@@ -105,6 +107,9 @@ class AuthController extends BaseController {
 			isPublic: true,
 			method: HTTPRequestMethod.POST,
 			path: AuthApiPath.FORGOT_PASSWORD,
+			validation: {
+				body: forgotPasswordValidationSchema,
+			},
 		});
 
 		this.addRoute({
@@ -129,6 +134,9 @@ class AuthController extends BaseController {
 			isPublic: true,
 			method: HTTPRequestMethod.POST,
 			path: AuthApiPath.RESET_PASSWORD,
+			validation: {
+				body: resetPasswordWithTokenValidationSchema,
+			},
 		});
 	}
 
@@ -415,11 +423,12 @@ class AuthController extends BaseController {
 	 *                token:
 	 *                  type: string
 	 *                  description: The password reset token to verify
-	 * 				  userId:
-	 * 					type: number
-	 * 					description: The id of the user who is trying to verify token
+	 *                userId:
+	 *                  type: number
+	 *                  description: The id of the user who is trying to verify token
 	 *              required:
 	 *                - token
+	 *                - userId
 	 *      responses:
 	 *        200:
 	 *          description: Token is valid
@@ -455,7 +464,6 @@ class AuthController extends BaseController {
 	 *                    type: number
 	 *                    description: The HTTP status code
 	 */
-
 	private async verifyToken(
 		options: APIHandlerOptions<{
 			body: VerifyTokenRequestDto;

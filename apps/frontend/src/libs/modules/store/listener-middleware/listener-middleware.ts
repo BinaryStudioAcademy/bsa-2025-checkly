@@ -98,23 +98,4 @@ listenerMiddleware.startListening({
 	matcher: isFulfilled(authActions.resetPassword),
 });
 
-listenerMiddleware.startListening({
-	effect: async () => {
-		notifications.success(SuccessMessage.EMAIL_SENT);
-		await navigation.navigateTo(AppRoute.SIGN_IN);
-	},
-	matcher: isAnyOf(
-		authActions.sendResetLink.fulfilled,
-		authActions.sendResetLink.rejected,
-	),
-});
-
-listenerMiddleware.startListening({
-	effect: async () => {
-		notifications.success(SuccessMessage.PASSWORD_CHANGED);
-		await navigation.navigateTo(AppRoute.SIGN_IN);
-	},
-	matcher: isFulfilled(authActions.resetPassword),
-});
-
 export { listenerMiddleware };

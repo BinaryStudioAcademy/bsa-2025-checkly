@@ -30,7 +30,7 @@ class PlanApi extends BaseHTTPApi {
 			this.getFullEndpoint(PlansApiPath.$ID, { id: String(planId) }),
 			{
 				contentType: ContentType.JSON,
-				hasAuth: false,
+				hasAuth: true,
 				method: HTTPRequestMethod.GET,
 			},
 		);
@@ -54,7 +54,7 @@ class PlanApi extends BaseHTTPApi {
 		return await response.json<PlanDaysTaskDto>();
 	}
 
-	public async getAllUserPlans(): Promise<PlanDaysTaskDto[]> {
+	public async getAllUserPlans(): Promise<PlanWithCategoryDto[]> {
 		const response = await this.load(
 			this.getFullEndpoint(PlansApiPath.ROOT, {}),
 			{
@@ -64,7 +64,7 @@ class PlanApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<PlanDaysTaskDto[]>();
+		return await response.json<PlanWithCategoryDto[]>();
 	}
 
 	public async getByUserId(): Promise<PlanDaysTaskDto> {

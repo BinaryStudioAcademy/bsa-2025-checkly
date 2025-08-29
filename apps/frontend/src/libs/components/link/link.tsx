@@ -16,6 +16,7 @@ type Properties = {
 	asButtonVariant?: ButtonVariant;
 	children: React.ReactNode;
 	className?: string;
+	tabindex?: number;
 	to: ValueOf<typeof AppRoute>;
 };
 
@@ -24,6 +25,7 @@ const Link: React.FC<Properties> = ({
 	asButtonVariant,
 	children,
 	className,
+	tabindex,
 	to,
 }: Properties) => {
 	const linkClasses = asButtonVariant
@@ -36,7 +38,11 @@ const Link: React.FC<Properties> = ({
 		: "";
 
 	return (
-		<NavLink className={getClassNames(linkClasses, className)} to={to}>
+		<NavLink
+			className={getClassNames(linkClasses, className)}
+			tabIndex={tabindex}
+			to={to}
+		>
 			{asButtonVariant ? children : <span>{children}</span>}
 		</NavLink>
 	);

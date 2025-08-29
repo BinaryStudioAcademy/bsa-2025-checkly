@@ -6,7 +6,7 @@
 
 .form {
 	--cluster-direction: column;
-	--cluster-vertical-alignment: flex-start;
+	--cluster-vertical-alignment: center;
 
 	gap: 15px;
 	height: 100%;

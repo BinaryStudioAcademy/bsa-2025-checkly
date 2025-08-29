@@ -54,6 +54,9 @@ export {
 	type ServerValidationErrorResponse,
 	type ValidationSchema,
 	type ValueOf,
+	ViewOption,
+	type ViewOptions,
+	type WindowSize,
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
 export {
@@ -81,9 +84,17 @@ export {
 	type PlanActionTypeMap,
 } from "./modules/openai/openai.js";
 export {
+	type ExportDataDto,
+	PlanCalendarExportApiPath,
+	type PlanCalendarExportRequestDto,
+	planCalendarExportSchema,
+	planCalendarRequestSchema,
+} from "./modules/plan-calendar-export/plan-calendar-export.js";
+export {
 	PlanCategoriesApiPath,
 	type PlanCategoryDto,
 	type PlanCategoryWithColorDto,
+	SKELETON_COUNT,
 	ZERO_CATEGORY_ID,
 } from "./modules/plan-categories/plan-categories.js";
 export {
@@ -162,6 +173,9 @@ export {
 } from "./modules/quiz/quiz.js";
 export {
 	ExecutionTimeType,
+	type ExecutionTimeTypeValue,
+	type TaskCreateFormValues,
+	taskCreatePartialValidationSchema,
 	type TaskCreateRequestDto,
 	taskCreateValidationSchema,
 	type TaskDto,
@@ -170,6 +184,7 @@ export {
 	type TaskRegenerationRequestDto,
 	type TaskResponseDto,
 	TasksApiPath,
+	tasksEditValidationSchema,
 	type TaskUpdateRequestDto,
 	taskUpdateValidationSchema,
 	TaskValidationRule,
@@ -181,6 +196,7 @@ export {
 	type ResetPasswordFormValidationSchema,
 	type ResetPasswordRequestDto,
 	resetPasswordValidationSchema,
+	resetPasswordWithTokenValidationSchema,
 	S3BucketIndex,
 	type SignUpFormValidationSchema,
 	type UserDto,

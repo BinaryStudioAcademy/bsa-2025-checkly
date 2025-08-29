@@ -76,7 +76,9 @@
 }
 
 .loader-container {
-	--cluster-horizontal-alignment: center min-height: 200px;
+	--cluster-horizontal-alignment: center;
+
+	min-height: 200px;
 }
 
 @media (width >= 768px) {

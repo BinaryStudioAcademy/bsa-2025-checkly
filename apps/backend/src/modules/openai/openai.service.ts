@@ -172,7 +172,6 @@ class OpenAIService {
 	private validateTask(task: GeneratedTaskDTO): void {
 		const result = taskCreateValidationSchema
 			.pick({
-				description: true,
 				executionTimeType: true,
 				order: true,
 				title: true,

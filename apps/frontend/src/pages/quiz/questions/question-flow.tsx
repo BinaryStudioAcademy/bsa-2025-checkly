@@ -119,7 +119,7 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 			return;
 		}
 
-		void dispatch(quizAnswerActions.saveAnswers({ answers, categoryId }));
+		await dispatch(quizAnswerActions.saveAnswers({ answers, categoryId }));
 		void handleSafeNavigate(AppRoute.PLAN_GENERATION);
 	}, [handleSafeNavigate, categoryId, dispatch, questions, selectedCategory]);
 

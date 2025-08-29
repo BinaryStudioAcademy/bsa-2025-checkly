@@ -2,9 +2,19 @@ import { z } from "zod";
 
 import { PaperFormat } from "../enums/paper-format.enum.js";
 
+const windowSizeSchema = z.object({
+	height: z.number().int().positive(),
+	pixelRatio: z.number().positive(),
+	width: z.number().int().positive(),
+});
+
 const planPdfExportCreateSchema = z.object({
-	format: z.nativeEnum(PaperFormat),
-	html: z.string(),
+	format: z.nativeEnum(PaperFormat).optional(),
+	html: z.string().optional(),
+	page: z.number().int().positive().optional(),
+	planId: z.number().optional(),
+	planStyle: z.string().optional(),
+	windowSize: windowSizeSchema.optional(),
 });
 
 export { planPdfExportCreateSchema };

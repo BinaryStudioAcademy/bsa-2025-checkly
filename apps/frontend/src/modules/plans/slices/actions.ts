@@ -22,15 +22,13 @@ const generatePlan = createAsyncThunk<
 
 	const state = getState();
 
-	const userId = state.auth.user?.id;
-
 	const stored = await storage.get(StorageKey.QUIZ_ID);
 	const quizId = Number(stored);
 
 	const plan = await planApi.generate({
 		quizAnswers: payload,
 		quizId,
-		userId,
+		userId: state.auth.user?.id,
 	});
 
 	if (!plan.userId) {
@@ -52,7 +50,7 @@ const searchPlan = createAsyncThunk<
 });
 
 const getAllUserPlans = createAsyncThunk<
-	PlanDaysTaskDto[],
+	PlanWithCategoryDto[],
 	undefined,
 	AsyncThunkConfig
 >(`${sliceName}/getAllUserPlans`, async (_, { extra }) => {

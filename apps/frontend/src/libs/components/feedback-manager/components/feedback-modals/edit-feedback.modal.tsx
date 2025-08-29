@@ -21,13 +21,11 @@ import styles from "./styles.module.css";
 type Properties = {
 	id: number;
 	onClose: () => void;
-	userId?: number;
 };
 
 const EditFeedbackModal: React.FC<Properties> = ({
 	id,
 	onClose,
-	userId,
 }: Properties) => {
 	const dispatch = useAppDispatch();
 	const { dataStatus, feedbacks } = useAppSelector((state) => state.feedbacks);
@@ -39,7 +37,6 @@ const EditFeedbackModal: React.FC<Properties> = ({
 		useAppForm<FeedbackUpdateRequestDto>({
 			defaultValues: {
 				text: feedbackToEdit?.text ?? "",
-				userId: Number(userId),
 			},
 			validationSchema: feedbackUpdateValidationSchema,
 		});
@@ -54,7 +51,6 @@ const EditFeedbackModal: React.FC<Properties> = ({
 		if (feedbackToEdit && dataStatus !== DataStatus.PENDING) {
 			reset({
 				text: feedbackToEdit.text,
-				userId: feedbackToEdit.userId,
 			});
 		}
 	}, [dataStatus, feedbackToEdit, reset]);

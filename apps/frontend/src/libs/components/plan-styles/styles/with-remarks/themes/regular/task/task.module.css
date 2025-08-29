@@ -36,4 +36,11 @@
 .task-text {
 	font-size: calc(10px * var(--coefficient));
 	color: var(--color-text-tertiary);
+	overflow-wrap: anywhere;
+}
+
+@media print {
+	.task {
+		page-break-inside: avoid;
+	}
 }

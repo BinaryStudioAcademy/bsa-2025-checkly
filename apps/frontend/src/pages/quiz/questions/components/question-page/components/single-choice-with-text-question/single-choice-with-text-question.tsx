@@ -16,6 +16,7 @@ const SingleChoiceWithTextQuestion: React.FC<
 	onAnswer,
 	question,
 }: SingleChoiceWithTextQuestionProperties): React.ReactElement => {
+	const OTHER_OPTION_TITLE = "✍️ Other";
 	const [selectedOption, setSelectedOption] = useState<null | string>(
 		currentAnswer?.selectedOption ?? null,
 	);
@@ -32,18 +33,22 @@ const SingleChoiceWithTextQuestion: React.FC<
 			const isSwitchingFromOther =
 				shouldClearUserInput && !isOtherOption(option);
 			const newUserInput = isSwitchingFromOther ? "" : userInput;
+			const selected = question.options.find((o) => o.text === option);
+			const optionValue = isOtherOption(option)
+				? OTHER_OPTION_TITLE
+				: (selected?.id.toString() ?? option);
 
 			if (isSwitchingFromOther) {
 				setUserInput("");
 			}
 
-			setSelectedOption(option);
+			setSelectedOption(optionValue);
 			onAnswer({
-				selectedOption: optionId?.toString() ?? option,
+				selectedOption: optionValue,
 				userInput: newUserInput,
 			});
 		},
-		[onAnswer, optionId, shouldClearUserInput, userInput],
+		[onAnswer, question, shouldClearUserInput, userInput],
 	);
 
 	const handleTextChange = useCallback(
@@ -78,17 +83,21 @@ const SingleChoiceWithTextQuestion: React.FC<
 			<div className={styles["radio-section"]}>
 				<div className={styles["options-container"]}>
 					{question.options.map((option) => (
-						<label className={styles["radio-option"]} key={option.text}>
+						<label className={styles["radio-option"]} key={option.id}>
 							<input
-								checked={selectedOption === option.text}
+								checked={
+									selectedOption === option.id.toString() ||
+									selectedOption === option.text
+								}
 								className={styles["radio-input"]}
 								name="single-choice-option"
 								onChange={handleOptionChange(option.text)}
 								type={ElementTypes.RADIO}
-								value={option.text}
+								value={option.id.toString()}
 							/>
 							<div className={styles["radio-custom"]}>
-								{selectedOption === option.text && (
+								{(selectedOption === option.id.toString() ||
+									selectedOption === option.text) && (
 									<img alt="Selected" src={logoIcon} />
 								)}
 							</div>

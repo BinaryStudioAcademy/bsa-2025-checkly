@@ -36,6 +36,8 @@ type Constructor = {
 	title: string;
 };
 
+type WhiteRoute = { method: string; path: string };
+
 class BaseServerApplication implements ServerApplication {
 	private apis: ServerApplicationApi[];
 
@@ -152,16 +154,14 @@ class BaseServerApplication implements ServerApplication {
 		this.addRoutes(routers);
 	}
 
-	private getWhiteRoutes(): string[] {
-		const publicApiRoutes = this.apis.flatMap((api) =>
-			api.routes.filter((route) => route.isPublic).map((route) => route.path),
+	private getWhiteRoutes(): WhiteRoute[] {
+		const publicApiRoutes: WhiteRoute[] = this.apis.flatMap((api) =>
+			api.routes
+				.filter((route) => route.isPublic)
+				.map((route) => ({ method: String(route.method), path: route.path })),
 		);
 
-		const documentationRoutes = this.apis.map(
-			(api) => `/${api.version}/documentation/**`,
-		);
-
-		return [...publicApiRoutes, ...documentationRoutes];
+		return publicApiRoutes;
 	}
 
 	private initErrorHandler(): void {

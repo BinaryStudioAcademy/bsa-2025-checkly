@@ -1,16 +1,20 @@
+/* stylelint-disable selector-pseudo-class-no-unknown */
 @import url("../../styles.module.css");
 
 .container {
+	--plan-bg: var(--color-bg-white);
+
+	padding-bottom: calc(32px * var(--coefficient));
 	background-color: var(--color-bg-white);
 }
 
-/* Header styles */
+.plan-header {
+	margin-bottom: calc(20px * var(--coefficient));
+}
 
 .plan-title {
 	color: var(--color-header-pink);
 }
-
-/* Day styles */
 
 .day-of-week {
 	color: var(--color-remark-purple);
@@ -29,17 +33,14 @@
 	border-right-color: var(--color-border-light-blue);
 }
 
-/* Task styles */
-
 .task-checkbox {
 	background-color: var(--color-bg-task-checkbox-purple);
 }
 
 .task-text {
 	color: var(--color-colourful-task-text);
+	overflow-wrap: anywhere;
 }
-
-/* Notes styles */
 
 li.notes:nth-child(odd) {
 	border-right-color: var(--color-border-light-blue);
@@ -49,4 +50,36 @@ li.notes:nth-child(odd) {
 
 p.notes-text {
 	text-decoration-color: var(--color-border-light-blue);
+}
+
+:global(#print-container) {
+	background: var(--color-bg-white);
+}
+
+:global(.container) .day-list {
+	margin-bottom: calc(24px * var(--coefficient));
+}
+
+:global(section[data-plan-style="COLOURFUL"])
+	:global(ul[data-view="desktop"])
+	> :global([class*="day-item"]) {
+	border: 1px solid var(--color-border-light-blue);
+}
+
+:global(section[data-plan-style="COLOURFUL"])
+	:global(ul[data-view="desktop"])
+	> :global([class*="notes"]) {
+	border: none;
+}
+
+:global(section[data-plan-style="COLOURFUL"])
+	:global(ul[data-view="mobile"])
+	> :global([class*="day-item"]) {
+	border: 1px solid var(--color-border-light-blue);
+}
+
+:global(section[data-plan-style="COLOURFUL"])
+	:global(ul[data-view="mobile"])
+	> :global([class*="notes"]) {
+	border: none;
 }

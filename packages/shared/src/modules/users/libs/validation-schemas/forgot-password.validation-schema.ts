@@ -13,7 +13,9 @@ type ForgotPasswordRequestValidationDto = {
 const forgotPassword = z
 	.object<ForgotPasswordRequestValidationDto>({
 		email: z
-			.string()
+			.string({
+				invalid_type_error: UserValidationMessage.EMAIL_INVALID_TYPE,
+			})
 			.trim()
 			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
 				message: UserValidationMessage.FIELD_REQUIRED,

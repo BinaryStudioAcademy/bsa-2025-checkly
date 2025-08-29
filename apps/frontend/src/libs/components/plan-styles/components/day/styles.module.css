@@ -18,3 +18,23 @@
 	padding: 0;
 	list-style: none;
 }
+
+@media print {
+	.day-item {
+		margin-top: 0;
+		page-break-after: auto;
+		page-break-inside: avoid;
+	}
+
+	.day-item:first-child {
+		margin-top: 0;
+	}
+
+	.day-item:last-child {
+		margin-top: 0;
+	}
+
+	.task-list {
+		page-break-inside: avoid;
+	}
+}

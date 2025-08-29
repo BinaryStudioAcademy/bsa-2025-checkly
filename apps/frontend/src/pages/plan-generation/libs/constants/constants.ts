@@ -30,9 +30,9 @@ const ProgressLimits = {
 const LOADING_DURATION_MS = 6000;
 
 const LOADING_MESSAGES = [
-	{ max: 31, min: 0, text: "Checking out your answers..." },
-	{ max: 51, min: 31, text: "Figuring out what will work best..." },
-	{ max: 91, min: 51, text: "Getting your plan ready..." },
+	{ max: 51, min: 0, text: "Checking out your answers..." },
+	{ max: 80, min: 51, text: "Figuring out what will work best..." },
+	{ max: 91, min: 80, text: "Getting your plan ready..." },
 	{ max: 100, min: 91, text: "Almost done!" },
 ] as const;
 
