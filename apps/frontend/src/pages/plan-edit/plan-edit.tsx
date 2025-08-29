@@ -587,7 +587,10 @@ const PlanEdit: React.FC = () => {
 								{renderContent()}
 								<Button
 									className={styles["add-task-button"]}
-									isDisabled={tasksAmountPerSelectedDay >= MAX_TASKS_AMOUNT}
+									isDisabled={
+										tasksAmountPerSelectedDay >= MAX_TASKS_AMOUNT ||
+										daysLoading.ids.includes(planDay?.id as number)
+									}
 									label="Add task"
 									onClick={handleCreateTaskModalOpen}
 									size="small"
