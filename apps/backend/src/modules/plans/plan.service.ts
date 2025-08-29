@@ -290,7 +290,7 @@ class PlanService implements Service {
 			});
 		}
 
-		const { planId: planDayPlanId } = existingPlanDay.toObject();
+		const { dayNumber, planId: planDayPlanId } = existingPlanDay.toObject();
 
 		if (Number(planId) !== Number(planDayPlanId)) {
 			throw new HTTPError({
@@ -320,10 +320,19 @@ class PlanService implements Service {
 		}
 
 		const { title } = category.toObject();
+		const { days } = existingPlan.toObjectWithRelations();
+
+		const daysContext = {
+			currentDayIndex: dayNumber,
+			days,
+		};
 
 		const answers = {
 			answers: quizAnswers,
 			category: title as QuizCategoryType,
+			context: {
+				days: daysContext,
+			},
 		};
 
 		const generatedPlanDay = (await this.generate(

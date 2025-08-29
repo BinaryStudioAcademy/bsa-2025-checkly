@@ -32,6 +32,7 @@ import { actions as planActions } from "~/modules/plans/plans.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
 import { DayList } from "../dashboard-wrapper-mock/components/plan/components/components.js";
+import { MODAL_MESSAGES } from "../dashboard-wrapper-mock/components/plan/components/libs/constants/constants.js";
 import { useLoadingIds } from "../dashboard-wrapper-mock/components/plan/libs/hooks/hooks.js";
 import { TaskNotificationMessage } from "./libs/enums/enums.js";
 import {
@@ -77,6 +78,9 @@ const PlanEdit: React.FC = () => {
 	const planDay = plan?.days[selectedDay];
 	const tasksAmountPerSelectedDay = planDay?.tasks.length ?? MAX_TASKS_AMOUNT;
 	const planDaysNumber = useAppSelector((state) => state.plan.days);
+
+	const isPendingPlan =
+		tasksLoading.ids.length > ZERO || daysLoading.ids.length > ZERO;
 
 	useEffect(() => {
 		void dispatch(planActions.getPlan());
@@ -536,13 +540,19 @@ const PlanEdit: React.FC = () => {
 							<Button
 								icon={<ArrowLeft />}
 								iconOnlySize="small"
+								isDisabled={isPendingPlan}
 								isIconOnly
 								label="Back to the previous page"
 								size="small"
 							/>
 							<span className="visually-hidden">Back to the previous page</span>
 						</Link>
-						<h2 className={styles["plan-title"]}>{plan.title}</h2>
+						<h2 className={styles["plan-title"]}>
+							{plan.title} -{" "}
+							<Link className={styles["plan-title-link"]} to={AppRoute.PLAN}>
+								Manage plan
+							</Link>
+						</h2>
 					</div>
 					<Button
 						className={getClassNames(styles["select-day"])}
@@ -560,6 +570,7 @@ const PlanEdit: React.FC = () => {
 							)}
 						>
 							<DayList
+								daysLoading={daysLoading}
 								isOpen={isSelectOpen}
 								onRegenerate={handleDayRegenerateClick}
 								plan={plan}
@@ -582,7 +593,10 @@ const PlanEdit: React.FC = () => {
 								{renderContent()}
 								<Button
 									className={styles["add-task-button"]}
-									isDisabled={tasksAmountPerSelectedDay >= MAX_TASKS_AMOUNT}
+									isDisabled={
+										tasksAmountPerSelectedDay >= MAX_TASKS_AMOUNT ||
+										daysLoading.ids.includes(planDay?.id as number)
+									}
 									label="Add task"
 									onClick={handleCreateTaskModalOpen}
 									size="small"
@@ -607,10 +621,7 @@ const PlanEdit: React.FC = () => {
 				onConfirm={handleDayRegenerateConfirm}
 				title="Day Regeneration"
 			>
-				<p>
-					We will create a new day for you and replace this one. Do you want to
-					proceed?
-				</p>
+				<p>{MODAL_MESSAGES.DAY_REGENERATION}</p>
 			</ConfirmationModal>
 			<ConfirmationModal
 				isOpen={isRegenerateTaskModalOpen}
@@ -619,19 +630,19 @@ const PlanEdit: React.FC = () => {
 				onConfirm={handleRegenerateConfirm}
 				title="Task Regeneration"
 			>
-				<p>
-					We will create a new task for you and replace this one. Do you want to
-					proceed?
-				</p>
+				<p>{MODAL_MESSAGES.TASK_REGENERATION}</p>
 			</ConfirmationModal>
 
 			<ConfirmationModal
 				isOpen={isDeleteTaskModalOpen}
-				message="You sure you want to permanently delete this task?"
+				message="You are about to delete this task."
 				onCancel={handleDeleteCancel}
 				onConfirm={handleDeleteConfirm}
 				title="Task Deletion"
-			/>
+			>
+				<p>{MODAL_MESSAGES.TASK_DELETION}</p>
+			</ConfirmationModal>
+
 			<Modal
 				isOpen={isNewTaskModalOpen}
 				onClose={handleCreateTaskModalClose}

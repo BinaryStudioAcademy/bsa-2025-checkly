@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.30.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.29.0...frontend-v1.30.0) (2025-08-29)
+
+
+### Features
+
+* * update manage-link cy-461 ([4b5fd90](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/4b5fd90ed100fb720c7cf2d4efde080d59182477))
+* * update my-plan download link cy-461 ([ff0da12](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ff0da12b1b3b2a736b39a348b26272f08754e69f))
+* * update plan-edit to add manage button cy-461 ([3455919](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/34559191aec3aba7ed26fb43e9e3cac286614190))
+* * update plan-task-create-form component cy-461 ([939972a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/939972adcead51188b99eb6d7e710a290474f7ee))
+* * update plan-task-create-form cy-431 ([c3f8b53](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c3f8b531f4c66e7c9bced87a0f54e2cc5ced3102))
+* * update validation schema cy-431 ([666f64a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/666f64af91e53000aff91e476b2a994f5699decd))
+* add button to edit page cy-461 ([bb114b0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/bb114b0916880ffb4d30a72f9d88e9d3a42f395f))
+* add modal windows for day, task deletion, regeneration cy-432 ([ea642b2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ea642b25c464c6bf3e482a25343eafc086425a34))
+* **backend:** improve white list for individual methods cy-400 ([512ede1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/512ede124bd6e039c5aa5f16823055be02265774))
+* **backend:** improve white list for individual methods cy-400 ([e3c9ec8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e3c9ec8951815f0ebb2d93b7f855f6d92c587639))
+* **frontend:** add modal windows and informative messages cy-432 ([0263ea0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0263ea08a7f1deb350d9032c66930417f7fa0110))
+* merge main into local branch cy-432 ([74f7d18](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/74f7d18ff8165d81a4bec34cb678e7b1218528f5))
+* plan edit page inhancements cy-431 ([a081200](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a08120079e33154fe7602375f1a9a80e75047c29))
+
+
+### Bug Fixes
+
+* day regeneration cy-202 ([6c6a2a0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6c6a2a02c9f0af879bac0af7fde463ac431e9197))
+* day regeneration, change day skeleton, add userNotes cy-202 ([e3e449f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e3e449f14a035bb87b97b830cf107b004aabf6da))
+
 ## [1.29.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.28.0...frontend-v1.29.0) (2025-08-29)
 
 
