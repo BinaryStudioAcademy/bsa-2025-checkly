@@ -26,7 +26,10 @@ ${extra}
 `;
 
 const SYSTEM_PROMPT_FOR_PLAN = makeSystemPrompt(PLAN_SCHEMA);
-const SYSTEM_PROMPT_FOR_DAY = makeSystemPrompt(DAY_SCHEMA);
+const SYSTEM_PROMPT_FOR_DAY = makeSystemPrompt(
+	DAY_SCHEMA,
+	"Instruction: Generate only one single day.",
+);
 
 const SYSTEM_PROMPT_FOR_TASK = makeSystemPrompt(
 	TASK_SCHEMA,

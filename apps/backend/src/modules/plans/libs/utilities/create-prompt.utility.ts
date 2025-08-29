@@ -67,7 +67,6 @@ const createPrompt = ({
 	answers,
 	category,
 	context,
-	notes,
 }: CreatePrompt): string => {
 	const styleResponse = (
 		answers.find((a) => a.questionText.includes(STYLE_QUESTION_TEXT)) || {
@@ -118,6 +117,11 @@ const createPrompt = ({
 	const existingTask = buildExistingTasksContext(context);
 	const isNumberOfDaysExists = isPlan && numberOfDays !== null;
 
+	const userNotes = answers
+		.filter((answer) => answer.userInput && answer.userInput.trim() !== "")
+		.map((answer) => answer.userInput)
+		.join(", ");
+
 	return [
 		`${PROMPT_HEADER} - ${category.replaceAll("_", " ")}`,
 		dynamicInstruction,
@@ -137,8 +141,8 @@ You must generate a new task that:
 - Complements them by adding a new perspective, activity.
 - Avoids reusing the plan's title or any existing task wording.
 Existing tasks are listed above.`,
-		notes &&
-			`User notes (just for your reference): ${sanitizeTextInput(notes)}`,
+		userNotes &&
+			`User notes (just for your reference): ${sanitizeTextInput(userNotes)}`,
 		USER_DATA_END,
 	].join("\n");
 };
