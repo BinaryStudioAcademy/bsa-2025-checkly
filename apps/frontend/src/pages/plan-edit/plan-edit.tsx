@@ -542,25 +542,14 @@ const PlanEdit: React.FC = () => {
 							/>
 							<span className="visually-hidden">Back to the previous page</span>
 						</Link>
-						<div className={getClassNames("cluster", styles["nav-left-title"])}>
-							<h2 className={styles["plan-title"]}>{plan.title}</h2>
-							<div className={styles["nav-left-manage-link"]}>
-								<Link
-									asButtonSize="small"
-									asButtonVariant="secondary"
-									to={AppRoute.PLAN}
-								>
-									Manage plan
-								</Link>
-							</div>
-						</div>
-						<Button
-							className={getClassNames(styles["select-day"])}
-							label={`Day ${String(selectedDay + ONE)}`}
-							onClick={toggleSelect}
-							variant={ButtonVariants.TRANSPARENT}
-						/>
+						<h2 className={styles["plan-title"]}>{plan.title}</h2>
 					</div>
+					<Button
+						className={getClassNames(styles["select-day"])}
+						label={`Day ${String(selectedDay + ONE)}`}
+						onClick={toggleSelect}
+						variant={ButtonVariants.TRANSPARENT}
+					/>
 				</div>
 				<div className={styles["content"]}>
 					<div className={styles["content__days-wrapper"]}>
