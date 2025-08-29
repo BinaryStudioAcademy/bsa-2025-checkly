@@ -18,10 +18,6 @@ type ErrorPayload = {
 
 type ServerErrorTypeValue = EnumValue<typeof ServerErrorType>;
 
-// src/libs/helpers/init-error-mapper-middleware.js
-
-// ...
-
 const initErrorMapperMiddleware = () => {
 	return async (
 		request: FastifyRequest,
