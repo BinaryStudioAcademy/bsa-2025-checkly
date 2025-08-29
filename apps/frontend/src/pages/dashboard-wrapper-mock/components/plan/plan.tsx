@@ -228,7 +228,7 @@ const Plan: React.FC = () => {
 						/>
 						<NavLink
 							className={getClassNames(styles["nav-link"])}
-							to={AppRoute.CHOOSE_STYLE}
+							to={AppRoute.OVERVIEW_PAGE}
 						>
 							<Button
 								icon={<DownloadIcon />}
