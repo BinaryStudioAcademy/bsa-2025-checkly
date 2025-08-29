@@ -117,7 +117,7 @@ class FeedbackController extends BaseController {
 					options as APIBodyOptions<FeedbackUpdateRequestDto> &
 						AuthIdParametersOption,
 				),
-			method: HTTPRequestMethod.PUT,
+			method: HTTPRequestMethod.PATCH,
 			path: FeedbackApiPath.FEEDBACK,
 			validation: {
 				body: feedbackUpdateValidationSchema,
