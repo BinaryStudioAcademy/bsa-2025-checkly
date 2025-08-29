@@ -60,7 +60,7 @@ const CurrentPlan: FC = () => {
 
 	return (
 		<div className={getClassNames("flow-loose", styles["container"])}>
-			<h2 className={styles["title"]}>Current active plan</h2>
+			<h2 className={styles["title"]}>Selected plan</h2>
 			<div className={styles["plan-card"]}>
 				<PlanStyle
 					inputStyle={getPlanStyleName(currentPlan.styleId)}
