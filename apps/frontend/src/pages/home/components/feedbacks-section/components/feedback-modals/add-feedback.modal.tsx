@@ -40,14 +40,13 @@ const AddFeedbackModal: React.FC<Properties> = ({
 		useAppForm<FeedbackCreateRequestDto>({
 			defaultValues: {
 				text: existingFeedback?.text ?? "",
-				userId,
 			},
 			validationSchema: feedbackCreateValidationSchema,
 		});
 
 	useEffect(() => {
 		if (existingFeedback) {
-			reset({ text: existingFeedback.text, userId: existingFeedback.userId });
+			reset({ text: existingFeedback.text });
 		}
 	}, [existingFeedback, reset]);
 

@@ -95,7 +95,6 @@ const FeedbacksSection: FC = () => {
 					<EditFeedbackModal
 						id={feedbackIdToEdit}
 						onClose={handleCloseModalAndUpdate}
-						userId={user?.id}
 					/>
 				</Modal>
 			)}
