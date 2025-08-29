@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.19.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.19.0...backend-v1.19.1) (2025-08-29)
+
+
+### Bug Fixes
+
+* add production print url cy-0 ([b93555f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b93555f8f9fde37158b1ec73cd1d3dd6b6076687))
+* **backend:** add production print url cy-0 ([20a2451](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/20a2451f5df3e9d614edcff4a4c26026ba6aad7d))
+
 ## [1.19.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.18.0...backend-v1.19.0) (2025-08-29)
 
 
