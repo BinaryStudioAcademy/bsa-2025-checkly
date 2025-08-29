@@ -10,8 +10,8 @@ import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 
 import { type ExecutionTimeTypeValue } from "./libs/types/types.js";
 import {
-	taskCreateFormSchema,
 	type TaskCreateFormValues,
+	taskCreatePartialValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
 import { selectStyles } from "./plan-task-select-styles.js";
 import styles from "./styles.module.css";
@@ -34,7 +34,7 @@ const PlanTaskCreateForm = ({
 				title: "",
 			},
 			mode: "onBlur",
-			validationSchema: taskCreateFormSchema,
+			validationSchema: taskCreatePartialValidationSchema,
 		});
 
 	const handleTimeChange = useCallback(
