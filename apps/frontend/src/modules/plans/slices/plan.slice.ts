@@ -161,6 +161,16 @@ const { actions, name, reducer } = createSlice({
 				].tasks.filter((task) => task.id !== taskId);
 			}
 		},
+		resetPlanState: (state) => {
+			state.dataStatus = initialState.dataStatus;
+			state.days = initialState.days;
+			state.pendingDayRegenerations = initialState.pendingDayRegenerations;
+			state.pendingTaskRegenerations = initialState.pendingTaskRegenerations;
+			state.plan = initialState.plan;
+			state.selectedStyle = initialState.selectedStyle;
+			state.userPlans = initialState.userPlans;
+			state.userPlansDataStatus = initialState.userPlansDataStatus;
+		},
 		setCurrentPlan: (state, action: PayloadAction<PlanWithCategoryDto>) => {
 			state.plan = action.payload;
 			void storage.set(StorageKey.PLAN_ID, action.payload.id.toString());

@@ -5,6 +5,7 @@ import { AppRoute, ErrorMessage } from "~/libs/enums/enums.js";
 import { HTTPError } from "~/libs/modules/http/http.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
+import { actions as planActions } from "~/modules/plans/plans.js";
 import {
 	type ForgotPasswordRequestDto,
 	type ResetPasswordRequestDto,
@@ -177,11 +178,13 @@ const logout = createAsyncThunk<null, undefined, AsyncThunkConfig>(
 
 		try {
 			await storage.drop(StorageKey.TOKEN);
+			await storage.drop(StorageKey.PLAN_ID);
 		} catch {
 			notifications.error(MESSAGES.AUTH.LOGOUT_FAILED);
 		}
 
 		dispatch(authSliceActions.resetAuthState());
+		dispatch(planActions.resetPlanState());
 
 		return null;
 	},
