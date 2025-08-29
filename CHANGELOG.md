@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.38.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.37.0...v1.38.0) (2025-08-29)
+
+
+### Features
+
+* bug fixes, and add task button cy-432 ([fb31f1b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/fb31f1b4c2307e6b884ea4805f22d49c55eb88d7))
+* Disable buttons on regeneration cy-464 ([9ddc388](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9ddc388e2b8c667c5ca837569680bf6f964d4e5d))
+* **frontend/backend:** bug fixes, and add task button cy-432 ([0614cde](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0614cde37567743b27dfc95f865224c383f38eb3))
+* reworked feedback flow cy-390 ([141fa0a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/141fa0a68bf4f7b32632b4053412138620889c76))
+
+
+### Bug Fixes
+
+* change current active plan to selected plan, remove profile header cy-468 ([1d7ba77](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1d7ba77837bc27fef5a44b32d2c8ac2b336f8e74))
+* display the selected plan on the edit page cy-468 ([444acf5](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/444acf564f3631a3671cee2492d63a813b023043))
+* **frontend:** fixed get call after deletion and others issues cy-390 ([510fbe4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/510fbe49886843853d6d305391d37f2fe39f0102))
+* **frontend:** fixed packge-lock and other small fixes cy-390 ([fffdba0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/fffdba01200d5fc8ea89b4a578b40c767720c5c6))
+* merge main into local branch cy-432 ([05d5b37](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/05d5b37820c1ef78b7e93088d32c7d8af51ae24e))
+* Past Plan Not Set as Active After Continue cy-468 ([c78e213](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c78e2132c320b61ad118271cc5107d287683589b))
+* prevent double modal for day regeneration on edit page, merge 'main' cy-464 ([d3a747b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d3a747b4aa0d67131b4b3bfda96820c827918376))
+* return selected plan on a dashboard cy-468 ([000d71f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/000d71feaf8d77a9767bf03feef17d988b78ed6f))
+* selected plan remain on search, download button navigates to overview page cy-468 ([f996118](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/f996118d1f737cc64f3f1d1e467d5158fa9d35d6))
+* transit selected plan to the lan page cy-468 ([726ea7b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/726ea7bdb1852e0edd0643925cd4dfbe7c613b81))
+
 ## [1.37.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.36.0...v1.37.0) (2025-08-29)
 
 
