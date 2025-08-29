@@ -1,4 +1,4 @@
-import { type FC, useCallback, useEffect } from "react";
+import { type FC, useCallback } from "react";
 
 import { Button, Loader } from "~/libs/components/components.js";
 import { DataStatus } from "~/libs/enums/enums.js";
@@ -25,12 +25,6 @@ const DeleteFeedbackModal: FC<Properties> = ({
 
 	const feedbackToDelete = feedbacks.find((feedback) => feedback.id === id);
 	const isDeleting = dataStatus === DataStatus.PENDING;
-
-	useEffect(() => {
-		if (!feedbackToDelete) {
-			void dispatch(actions.fetchFeedbackById(id));
-		}
-	}, [dispatch, id, feedbackToDelete]);
 
 	const handleDeleteClick = useCallback(async () => {
 		const result = await dispatch(actions.deleteFeedback(id)).unwrap();
