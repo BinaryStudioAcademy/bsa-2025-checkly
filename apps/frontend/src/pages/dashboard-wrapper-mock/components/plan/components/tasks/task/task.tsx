@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Edit, Regenerate, Remove, Save } from "~/assets/img/icons/icons.js";
+import { Apply, Edit, Regenerate, Remove } from "~/assets/img/icons/icons.js";
 import {
 	Button,
 	ConfirmationModal,
@@ -154,7 +154,7 @@ const Task: React.FC<Properties> = ({
 							<div className={styles["save-button-wrapper"]}>
 								<Button
 									className={getClassNames(styles["save-button"])}
-									icon={<Save />}
+									icon={<Apply />}
 									isIconOnly
 									label="Save"
 									onClick={handleSaveClick}

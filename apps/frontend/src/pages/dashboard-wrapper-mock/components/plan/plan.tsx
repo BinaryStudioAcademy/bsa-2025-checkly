@@ -2,7 +2,12 @@ import { useCallback, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { DownloadIcon } from "~/assets/img/icons/icons.js";
-import { Button, ConfirmationModal } from "~/libs/components/components.js";
+import {
+	Button,
+	ConfirmationModal,
+	Modal,
+} from "~/libs/components/components.js";
+import { PlanTaskCreateForm } from "~/libs/components/plan-task-create-form/plan-task-create-form.js";
 import { ONE, ZERO } from "~/libs/constants/constants.js";
 import {
 	AppRoute,
@@ -12,12 +17,16 @@ import {
 } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
+import { type TaskResponseDto } from "~/libs/types/types.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
 import { TASK_INDEXES } from "~/modules/tasks/libs/constants/constants.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
 import { DayList, TaskList } from "./components/components.js";
-import { MODAL_MESSAGES } from "./components/libs/constants/constants.js";
+import {
+	DEFAULT_TASK_AMOUNT,
+	MODAL_MESSAGES,
+} from "./components/libs/constants/constants.js";
 import { useLoadingIds } from "./libs/hooks/hooks.js";
 import styles from "./styles.module.css";
 
@@ -27,6 +36,7 @@ const Plan: React.FC = () => {
 	const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
 	const [isRegeneratePlanModalOpen, setIsRegeneratePlanModalOpen] =
 		useState<boolean>(false);
+	const [isNewTaskModalOpen, setIsNewTaskModalOpen] = useState<boolean>(false);
 	const tasksLoading = useLoadingIds();
 	const daysLoading = useLoadingIds();
 
@@ -34,6 +44,9 @@ const Plan: React.FC = () => {
 	const navigate = useNavigate();
 	const plan = useAppSelector((state) => state.plan.plan);
 	const planDaysNumber = useAppSelector((state) => state.plan.days);
+	const planDay = plan?.days[selectedDay];
+	const tasksAmountPerSelectedDay =
+		planDay?.tasks.length ?? DEFAULT_TASK_AMOUNT;
 
 	useEffect(() => {
 		void dispatch(planActions.getPlan());
@@ -101,6 +114,38 @@ const Plan: React.FC = () => {
 	const handlePlanRegenerateCancel = useCallback((): void => {
 		setIsRegeneratePlanModalOpen(false);
 	}, []);
+
+	const handleCreateTaskModalClose = useCallback(() => {
+		setIsNewTaskModalOpen(false);
+	}, []);
+
+	const handleCreateTaskModalOpen = useCallback(() => {
+		setIsNewTaskModalOpen(true);
+	}, []);
+
+	const handleCreateTask = useCallback(
+		async (taskData: Pick<TaskResponseDto, "executionTimeType" | "title">) => {
+			const planDay = plan?.days[selectedDay];
+
+			if (!planDay || !taskData.executionTimeType) {
+				return;
+			}
+
+			const taskPayload = {
+				executionTimeType: taskData.executionTimeType,
+				isCompleted: false,
+				order: Number(planDay.tasks.length) + ONE,
+				planDayId: planDay.id,
+				title: taskData.title,
+			};
+
+			handleCreateTaskModalClose();
+
+			await dispatch(taskActions.create(taskPayload));
+			await dispatch(planActions.getPlan());
+		},
+		[dispatch, plan, selectedDay, handleCreateTaskModalClose],
+	);
 
 	useEffect(() => {
 		const allTasks =
@@ -192,6 +237,14 @@ const Plan: React.FC = () => {
 							tasks={plan?.days[selectedDay]?.tasks ?? []}
 							tasksLoading={tasksLoading}
 						/>
+						<Button
+							isDisabled={tasksAmountPerSelectedDay >= DEFAULT_TASK_AMOUNT}
+							label="Add task"
+							onClick={handleCreateTaskModalOpen}
+							size={ButtonSizes.LARGE}
+							type={ElementTypes.BUTTON}
+							variant={ButtonVariants.PRIMARY}
+						/>
 						<NavLink
 							className={getClassNames(styles["nav-link"])}
 							to={AppRoute.CHOOSE_STYLE}
@@ -215,6 +268,16 @@ const Plan: React.FC = () => {
 				onConfirm={handlePlanRegenerateConfirm}
 				title="Plan Regeneration"
 			/>
+			<Modal
+				isOpen={isNewTaskModalOpen}
+				onClose={handleCreateTaskModalClose}
+				title="Add Task"
+			>
+				<PlanTaskCreateForm
+					onCancel={handleCreateTaskModalClose}
+					onSubmit={handleCreateTask}
+				/>
+			</Modal>
 		</>
 	);
 };

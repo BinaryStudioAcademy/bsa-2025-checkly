@@ -22,6 +22,7 @@ type EnvironmentSchema = {
 	};
 	FRONTEND: {
 		PLAN_PRINT_URL: string;
+		PLAN_PRINT_URL_PRODUCTION: string;
 	};
 	OPEN_AI: {
 		OPEN_AI_KEY: string;
