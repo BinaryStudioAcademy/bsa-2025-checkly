@@ -13,7 +13,29 @@
 }
 
 .nav-left {
+	--cluster-vertical-alignment: flex-start;
+	--cluster-horizontal-alignment: justify-content;
 	--gutter: var(--space-m);
+
+	width: 100%;
+}
+
+.nav-left-title {
+	--cluster-direction: column;
+}
+
+@media (width >= 768px) {
+	.nav-left-title {
+		--cluster-direction: row;
+		--cluster-vertical-alignment: center;
+		--cluster-horizontal-alignment: justify-content;
+
+		flex: 1;
+	}
+
+	.nav-left-manage-link {
+		margin-left: auto;
+	}
 }
 
 .no-plans-container {
@@ -56,6 +78,7 @@
 .select-day {
 	display: block;
 	padding: var(--space-2xs) var(--space-m);
+	margin-left: auto;
 	font-size: var(--text-body);
 	font-weight: var(--font-weight-body);
 	text-transform: none;
