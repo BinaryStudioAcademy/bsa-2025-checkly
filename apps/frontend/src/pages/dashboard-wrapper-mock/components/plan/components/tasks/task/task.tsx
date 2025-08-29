@@ -9,6 +9,7 @@ import {
 } from "~/assets/img/icons/icons.js";
 import {
 	Button,
+	ConfirmationModal,
 	DecorativeImage,
 	Modal,
 } from "~/libs/components/components.js";
@@ -18,6 +19,7 @@ import { actions as planActions } from "~/modules/plans/plans.js";
 import { TaskValidationRule } from "~/modules/tasks/libs/enums/enums.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
+import { MODAL_MESSAGES } from "../../libs/constants/constants.js";
 import { type TaskDto } from "../../libs/types/types.js";
 import styles from "../../shared/task/styles.module.css";
 
@@ -32,14 +34,12 @@ const Task: React.FC<Properties> = ({
 	item,
 	onRegenerate,
 }: Properties) => {
-	const handleRegenerate = useCallback(() => {
-		onRegenerate(item.id);
-	}, [item, onRegenerate]);
-
 	const [isEditing, setIsEditing] = useState<boolean>(false);
 	const [editedTitle, setEditedTitle] = useState<string>(item.title);
 
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+	const [isRegenerateTaskModalOpen, setIsRegenerateTaskModalOpen] =
+		useState<boolean>(false);
 
 	const dispatch = useAppDispatch();
 
@@ -92,6 +92,19 @@ const Task: React.FC<Properties> = ({
 
 	const handleCancelDelete = useCallback((): void => {
 		setIsDeleteModalOpen(false);
+	}, []);
+
+	const handleRegenerateClick = useCallback((): void => {
+		setIsRegenerateTaskModalOpen(true);
+	}, []);
+
+	const handleRegenerateConfirm = useCallback((): void => {
+		onRegenerate(item.id);
+		setIsRegenerateTaskModalOpen(false);
+	}, [item.id, onRegenerate]);
+
+	const handleRegenerateCancel = useCallback((): void => {
+		setIsRegenerateTaskModalOpen(false);
 	}, []);
 
 	return (
@@ -158,7 +171,7 @@ const Task: React.FC<Properties> = ({
 							icon={<DecorativeImage src={Regenerate} />}
 							isIconOnly
 							label="Regenerate task"
-							onClick={handleRegenerate}
+							onClick={handleRegenerateClick}
 						/>
 						<Button
 							className={getClassNames(styles["item-actions_button"])}
@@ -176,7 +189,7 @@ const Task: React.FC<Properties> = ({
 				title="Delete Task"
 			>
 				<div className={styles["delete-modal-content"]}>
-					<p>Are you sure you want to delete &ldquo;{item.title}&rdquo;?</p>
+					<p>{MODAL_MESSAGES.TASK_DELETION}</p>
 					<div className={styles["delete-modal-actions"]}>
 						<Button
 							className={getClassNames(styles["modal-actions-button"])}
@@ -193,6 +206,13 @@ const Task: React.FC<Properties> = ({
 					</div>
 				</div>
 			</Modal>
+			<ConfirmationModal
+				isOpen={isRegenerateTaskModalOpen}
+				message={MODAL_MESSAGES.TASK_REGENERATION}
+				onCancel={handleRegenerateCancel}
+				onConfirm={handleRegenerateConfirm}
+				title="Task Regeneration"
+			/>
 		</>
 	);
 };

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { DownloadIcon } from "~/assets/img/icons/icons.js";
-import { Button } from "~/libs/components/components.js";
+import { Button, ConfirmationModal } from "~/libs/components/components.js";
 import { ONE, ZERO } from "~/libs/constants/constants.js";
 import {
 	AppRoute,
@@ -17,6 +17,7 @@ import { TASK_INDEXES } from "~/modules/tasks/libs/constants/constants.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
 import { DayList, TaskList } from "./components/components.js";
+import { MODAL_MESSAGES } from "./components/libs/constants/constants.js";
 import { useLoadingIds } from "./libs/hooks/hooks.js";
 import styles from "./styles.module.css";
 
@@ -24,6 +25,8 @@ const Plan: React.FC = () => {
 	const [selectedDay, setSelectedDay] = useState<number>(ZERO);
 	const [isPlanRegenerating, setIsPlanRegenerating] = useState<boolean>(false);
 	const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
+	const [isRegeneratePlanModalOpen, setIsRegeneratePlanModalOpen] =
+		useState<boolean>(false);
 	const tasksLoading = useLoadingIds();
 	const daysLoading = useLoadingIds();
 
@@ -86,6 +89,19 @@ const Plan: React.FC = () => {
 		});
 	}, [dispatch, plan]);
 
+	const handlePlanRegenerateClick = useCallback((): void => {
+		setIsRegeneratePlanModalOpen(true);
+	}, []);
+
+	const handlePlanRegenerateConfirm = useCallback((): void => {
+		handlePlanRegenerate();
+		setIsRegeneratePlanModalOpen(false);
+	}, [handlePlanRegenerate]);
+
+	const handlePlanRegenerateCancel = useCallback((): void => {
+		setIsRegeneratePlanModalOpen(false);
+	}, []);
+
 	useEffect(() => {
 		const allTasks =
 			plan?.days.flatMap((day) =>
@@ -125,72 +141,81 @@ const Plan: React.FC = () => {
 	}
 
 	return (
-		<div className={styles["plan"]}>
-			<div className={styles["nav"]}>
-				<h2 className={styles["nav-text"]}>{plan?.title}</h2>
-				<Button
-					className={styles["regenerate-button"]}
-					label="Regenerate plan"
-					onClick={handlePlanRegenerate}
-					size="small"
-					type="button"
-					variant="secondary"
-				/>
-				<Button
-					className={getClassNames(styles["select-day"])}
-					label={`Day ${String(selectedDay + ONE)}`}
-					onClick={toggleSelect}
-					variant={ButtonVariants.TRANSPARENT}
-				/>
-			</div>
-			<div className={styles["content"]}>
-				<div className={styles["content__days-wrapper"]}>
+		<>
+			<div className={styles["plan"]}>
+				<div className={styles["nav"]}>
+					<h2 className={styles["nav-text"]}>{plan?.title}</h2>
+					<Button
+						className={styles["regenerate-button"]}
+						label="Regenerate plan"
+						onClick={handlePlanRegenerateClick}
+						size="small"
+						type="button"
+						variant="secondary"
+					/>
+					<Button
+						className={getClassNames(styles["select-day"])}
+						label={`Day ${String(selectedDay + ONE)}`}
+						onClick={toggleSelect}
+						variant={ButtonVariants.TRANSPARENT}
+					/>
+				</div>
+				<div className={styles["content"]}>
+					<div className={styles["content__days-wrapper"]}>
+						<div
+							className={getClassNames(
+								styles["content__days"],
+								isSelectOpen ? styles["content__days__open"] : "",
+							)}
+						>
+							<DayList
+								isOpen={isSelectOpen}
+								onRegenerate={handleDayRegenerate}
+								plan={plan}
+								planDaysNumber={planDaysNumber}
+								selectedDay={selectedDay}
+								setIsOpen={setIsSelectOpen}
+								setSelectedDay={setSelectedDay}
+							/>
+						</div>
+					</div>
 					<div
 						className={getClassNames(
-							styles["content__days"],
-							isSelectOpen ? styles["content__days__open"] : "",
+							styles["content__tasks"],
+							"cluster grid-pattern flow-loose",
 						)}
 					>
-						<DayList
-							isOpen={isSelectOpen}
-							onRegenerate={handleDayRegenerate}
-							plan={plan}
-							planDaysNumber={planDaysNumber}
-							selectedDay={selectedDay}
-							setIsOpen={setIsSelectOpen}
-							setSelectedDay={setSelectedDay}
+						<TaskList
+							daysLoading={daysLoading}
+							onRegenerate={handleTaskRegenerate}
+							selectedDayId={plan?.days[selectedDay]?.id ?? ZERO}
+							tasks={plan?.days[selectedDay]?.tasks ?? []}
+							tasksLoading={tasksLoading}
 						/>
+						<NavLink
+							className={getClassNames(styles["nav-link"])}
+							to={AppRoute.CHOOSE_STYLE}
+						>
+							<Button
+								icon={<DownloadIcon />}
+								iconOnlySize="medium"
+								label="Download"
+								size={ButtonSizes.LARGE}
+								type={ElementTypes.BUTTON}
+								variant={ButtonVariants.PRIMARY}
+							/>
+						</NavLink>
 					</div>
 				</div>
-				<div
-					className={getClassNames(
-						styles["content__tasks"],
-						"cluster grid-pattern flow-loose",
-					)}
-				>
-					<TaskList
-						daysLoading={daysLoading}
-						onRegenerate={handleTaskRegenerate}
-						selectedDayId={plan?.days[selectedDay]?.id ?? ZERO}
-						tasks={plan?.days[selectedDay]?.tasks ?? []}
-						tasksLoading={tasksLoading}
-					/>
-					<NavLink
-						className={getClassNames(styles["nav-link"])}
-						to={AppRoute.CHOOSE_STYLE}
-					>
-						<Button
-							icon={<DownloadIcon />}
-							iconOnlySize="medium"
-							label="Download"
-							size={ButtonSizes.LARGE}
-							type={ElementTypes.BUTTON}
-							variant={ButtonVariants.PRIMARY}
-						/>
-					</NavLink>
-				</div>
 			</div>
-		</div>
+			<ConfirmationModal
+				isOpen={isRegeneratePlanModalOpen}
+				message={MODAL_MESSAGES.PLAN_REGENERATION}
+				onCancel={handlePlanRegenerateCancel}
+				onConfirm={handlePlanRegenerateConfirm}
+				title="Plan Regeneration"
+			/>
+		</>
 	);
 };
 
