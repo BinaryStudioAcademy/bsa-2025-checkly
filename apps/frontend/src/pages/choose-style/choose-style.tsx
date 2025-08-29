@@ -91,7 +91,7 @@ const ChooseStyle: React.FC = () => {
 
 		try {
 			await planApi.updateStyle(validation.planId, validation.styleId);
-			await dispatch(planActions.getAllUserPlans());
+			await dispatch(planActions.getPlan());
 			notifications.success(CHOOSE_STYLE_MESSAGES.PLAN_STYLE_UPDATED_SUCCESS);
 			void navigate(AppRoute.OVERVIEW_PAGE);
 		} catch {
