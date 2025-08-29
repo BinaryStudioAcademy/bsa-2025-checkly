@@ -11,6 +11,7 @@ export { Link } from "./link/link.js";
 export { Loader } from "./loader/loader.js";
 export { Logo } from "./logo/logo.js";
 export { Modal } from "./modal/modal.js";
+export { PlanTaskCreateForm } from "./plan-task-create-form/plan-task-create-form.js";
 export { ProtectedRoute } from "./protected-route/protected-route.js";
 export { RouterProvider } from "./router-provider/router-provider.js";
 export { Tabs } from "./tabs/tabs.js";

@@ -1,5 +1,9 @@
 import { type JSX, useCallback } from "react";
-import Select, { type SingleValue } from "react-select";
+import Select, {
+	type GroupBase,
+	type SingleValue,
+	type StylesConfig,
+} from "react-select";
 
 import { ZERO } from "./libs/enums/enums.js";
 import { type ExecutionTimeTypeValue } from "./libs/types/types.js";
@@ -18,12 +22,16 @@ const timeOptions: TimeOption[] = [
 
 type TimeSelectorProperties = {
 	currentTime: ExecutionTimeTypeValue;
+	inputId?: string;
 	onTimeChange: (newTime: ExecutionTimeTypeValue) => void;
+	selectStyles?: StylesConfig<TimeOption, false, GroupBase<TimeOption>>;
 };
 
 const TaskTimeSelector = ({
 	currentTime,
+	inputId = "time-select",
 	onTimeChange,
+	selectStyles = timeSelectStyles,
 }: TimeSelectorProperties): JSX.Element => {
 	const selectedOption =
 		timeOptions.find((option) => option.value === currentTime) ||
@@ -39,12 +47,13 @@ const TaskTimeSelector = ({
 
 	return (
 		<Select
+			inputId={inputId}
 			isClearable={false}
 			isSearchable={false}
 			onChange={handleTimeChange}
 			options={timeOptions}
 			placeholder="Select time..."
-			styles={timeSelectStyles}
+			styles={selectStyles}
 			value={selectedOption}
 		/>
 	);

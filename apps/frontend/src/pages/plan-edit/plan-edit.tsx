@@ -1,5 +1,6 @@
 import { type JSX, useCallback, useEffect, useState } from "react";
 import { useFieldArray } from "react-hook-form";
+import { type TaskResponseDto } from "shared";
 
 import { ArrowLeft, Regenerate, Remove } from "~/assets/img/icons/icons.js";
 import {
@@ -9,6 +10,8 @@ import {
 	DecorativeImage,
 	Input,
 	Link,
+	Modal,
+	PlanTaskCreateForm,
 	TaskTimeSelector,
 } from "~/libs/components/components.js";
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
@@ -42,6 +45,7 @@ import { tasksEditValidationSchema } from "./libs/validation-schema/validation-s
 import styles from "./styles.module.css";
 
 const SKELETON_TASKS_NUMBER = 5;
+const MAX_TASKS_AMOUNT = 5;
 const FORM_MODE = "onBlur";
 const FORM_FIELD_NAME = "tasks";
 
@@ -64,10 +68,14 @@ const PlanEdit: React.FC = () => {
 		null,
 	);
 
+	const [isNewTaskModalOpen, setIsNewTaskModalOpen] = useState<boolean>(false);
+
 	const tasksLoading = useLoadingIds();
 	const daysLoading = useLoadingIds();
 	const dispatch = useAppDispatch();
 	const plan = useAppSelector((state) => state.plan.plan);
+	const planDay = plan?.days[selectedDay];
+	const tasksAmountPerSelectedDay = planDay?.tasks.length ?? MAX_TASKS_AMOUNT;
 	const planDaysNumber = useAppSelector((state) => state.plan.days);
 
 	useEffect(() => {
@@ -116,8 +124,6 @@ const PlanEdit: React.FC = () => {
 
 	const handleTaskRegenerate = useCallback(
 		(taskId: number) => {
-			const planDay = plan?.days[selectedDay];
-
 			if (!planDay) {
 				return;
 			}
@@ -140,7 +146,7 @@ const PlanEdit: React.FC = () => {
 					tasksLoading.remove(taskId);
 				});
 		},
-		[plan, tasksLoading, selectedDay, dispatch],
+		[plan, tasksLoading, dispatch, planDay],
 	);
 
 	const handleRegenerateConfirm = useCallback(() => {
@@ -204,7 +210,7 @@ const PlanEdit: React.FC = () => {
 		[FORM_FIELD_NAME]: TaskDto[];
 	}>({
 		defaultValues: {
-			[FORM_FIELD_NAME]: plan?.days[selectedDay]?.[FORM_FIELD_NAME] ?? [],
+			[FORM_FIELD_NAME]: planDay?.[FORM_FIELD_NAME] ?? [],
 		},
 		mode: FORM_MODE,
 		validationSchema: tasksEditValidationSchema,
@@ -212,9 +218,9 @@ const PlanEdit: React.FC = () => {
 
 	useEffect(() => {
 		reset({
-			[FORM_FIELD_NAME]: plan?.days[selectedDay]?.[FORM_FIELD_NAME] ?? [],
+			[FORM_FIELD_NAME]: planDay?.[FORM_FIELD_NAME] ?? [],
 		});
-	}, [selectedDay, reset, plan?.days]);
+	}, [planDay, reset, plan?.days]);
 
 	const { fields } = useFieldArray({
 		control,
@@ -242,7 +248,7 @@ const PlanEdit: React.FC = () => {
 				return;
 			}
 
-			const originalTask = plan?.days[selectedDay]?.tasks[index];
+			const originalTask = planDay?.tasks[index];
 
 			if (originalTask && originalTask.title.trim() === trimmedTitle) {
 				return;
@@ -271,7 +277,7 @@ const PlanEdit: React.FC = () => {
 					notifications.error(TaskNotificationMessage.UPDATE_ERROR);
 				});
 		},
-		[getValues, dispatch, selectedDay, dirtyFields?.tasks, plan?.days],
+		[getValues, dispatch, selectedDay, dirtyFields?.tasks, planDay?.tasks],
 	);
 
 	const createTaskRegenerateHandler = useCallback(
@@ -351,20 +357,16 @@ const PlanEdit: React.FC = () => {
 					}),
 				);
 
-				const taskIndex = plan?.days[selectedDay]?.tasks.findIndex(
+				const taskIndex = planDay?.tasks.findIndex(
 					(task) => task.id === taskId,
 				);
 
-				if (
-					taskIndex !== undefined &&
-					taskIndex !== -ONE &&
-					plan?.days[selectedDay]
-				) {
+				if (taskIndex !== undefined && taskIndex !== -ONE && planDay) {
 					dispatch(
 						planActions.updateTaskInPlan({
 							dayIndex: selectedDay,
 							task: {
-								...plan.days[selectedDay].tasks[taskIndex],
+								...planDay.tasks[taskIndex],
 								executionTimeType: newTime,
 							} as TaskDto,
 							taskIndex,
@@ -373,7 +375,7 @@ const PlanEdit: React.FC = () => {
 				}
 			};
 		},
-		[dispatch, plan, selectedDay],
+		[dispatch, selectedDay, planDay],
 	);
 
 	const renderTaskInput = (
@@ -479,6 +481,34 @@ const PlanEdit: React.FC = () => {
 		);
 	};
 
+	const handleCreateTaskModalClose = useCallback(() => {
+		setIsNewTaskModalOpen(false);
+	}, []);
+
+	const handleCreateTaskModalOpen = useCallback(() => {
+		setIsNewTaskModalOpen(true);
+	}, []);
+
+	const handleCreateTask = useCallback(
+		async (taskData: Pick<TaskResponseDto, "executionTimeType" | "title">) => {
+			const taskPayload = {
+				executionTimeType: taskData.executionTimeType,
+				isCompleted: false,
+				order: Number(tasksAmountPerSelectedDay) + ONE,
+				planDayId: planDay?.id,
+				title: taskData.title,
+			};
+
+			handleCreateTaskModalClose();
+
+			await dispatch(taskActions.create(taskPayload as TaskDto));
+			await dispatch(planActions.getPlan());
+
+			notifications.success("New task created successfully");
+		},
+		[dispatch, planDay, tasksAmountPerSelectedDay, handleCreateTaskModalClose],
+	);
+
 	if (!plan) {
 		return (
 			<div
@@ -550,6 +580,14 @@ const PlanEdit: React.FC = () => {
 								className={getClassNames("flow-loose-lg", styles["tasks-list"])}
 							>
 								{renderContent()}
+								<Button
+									className={styles["add-task-button"]}
+									isDisabled={tasksAmountPerSelectedDay >= MAX_TASKS_AMOUNT}
+									label="Add task"
+									onClick={handleCreateTaskModalOpen}
+									size="small"
+									variant="primary"
+								/>
 							</div>
 							<div>
 								<PlanStyle
@@ -594,6 +632,20 @@ const PlanEdit: React.FC = () => {
 				onConfirm={handleDeleteConfirm}
 				title="Task Deletion"
 			/>
+			<Modal
+				isOpen={isNewTaskModalOpen}
+				onClose={handleCreateTaskModalClose}
+				title="Add Task"
+			>
+				{/* <TaskCreateForm
+					onCancel={handleCreateTaskModalClose}
+					onSubmit={handleCreateTask}
+				/> */}
+				<PlanTaskCreateForm
+					onCancel={handleCreateTaskModalClose}
+					onSubmit={handleCreateTask}
+				/>
+			</Modal>
 		</>
 	);
 };
