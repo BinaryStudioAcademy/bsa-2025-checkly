@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.36.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.35.0...v1.36.0) (2025-08-29)
+
+
+### Features
+
+* add mobile export cy-323 ([2b09834](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2b09834d38a79ff0adaea0a9cec691bf99ba1847))
+
+
+### Bug Fixes
+
+* enhance category selection by clearing quiz state on change cy-435 ([1e6824c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1e6824cc7e6b021a5b9f0dbf9098fc6befbc7715))
+* quiz category issues cy-435 ([8a848e0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8a848e00777d45d82fdf96673ba68d624720f13e))
+
 ## [1.35.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.34.1...v1.35.0) (2025-08-28)
 
 
