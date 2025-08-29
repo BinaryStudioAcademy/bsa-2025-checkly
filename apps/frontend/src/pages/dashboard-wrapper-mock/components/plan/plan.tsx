@@ -207,6 +207,34 @@ const Plan: React.FC = () => {
 						</NavLink>
 					</div>
 				</div>
+				<div
+					className={getClassNames(
+						styles["content__tasks"],
+						"cluster grid-pattern flow-loose",
+					)}
+				>
+					<TaskList
+						daysLoading={daysLoading}
+						onRegenerate={handleTaskRegenerate}
+						selectedDayId={plan?.days[selectedDay]?.id ?? ZERO}
+						tasks={plan?.days[selectedDay]?.tasks ?? []}
+						tasksLoading={tasksLoading}
+					/>
+					<NavLink
+						className={getClassNames(styles["nav-link"])}
+						tabIndex={-1}
+						to={AppRoute.OVERVIEW_PAGE}
+					>
+						<Button
+							icon={<DownloadIcon />}
+							iconOnlySize="medium"
+							label="Download"
+							size={ButtonSizes.LARGE}
+							type={ElementTypes.BUTTON}
+							variant={ButtonVariants.PRIMARY}
+						/>
+					</NavLink>
+				</div>
 			</div>
 			<ConfirmationModal
 				isOpen={isRegeneratePlanModalOpen}
