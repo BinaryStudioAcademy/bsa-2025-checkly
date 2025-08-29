@@ -35,7 +35,7 @@ type ReturnValue<T extends FieldValues = FieldValues> = {
 	reset: UseFormReset<T>;
 	setError?: UseFormSetError<T>;
 	setValue: UseFormSetValue<T>;
-	watch?: UseFormWatch<T>;
+	watch: UseFormWatch<T>;
 };
 
 const useAppForm = <T extends FieldValues = FieldValues>({
