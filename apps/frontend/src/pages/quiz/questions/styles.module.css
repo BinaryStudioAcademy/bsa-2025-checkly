@@ -79,3 +79,23 @@
 	font-size: var(--text-size-body);
 	color: var(--color-text-secondary);
 }
+
+.question-container {
+	margin-bottom: clamp(12rem, 12vh, 14rem);
+}
+
+.question-navigation {
+	--grid-opacity: 0.1;
+
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	z-index: 2;
+	display: grid;
+	align-items: flex-end;
+	width: 100%;
+	height: clamp(10rem, 12vh, 12rem);
+	padding-bottom: var(--space-xl);
+	backdrop-filter: blur(8px);
+	transform: translateX(-50%);
+}

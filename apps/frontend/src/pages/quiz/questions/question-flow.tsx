@@ -238,16 +238,25 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 							totalQuestions={totalSteps}
 						/>
 					</div>
-					<NotesPage />
-					<QuestionNavigation
-						currentQuestion={currentQuestion}
-						isNextDisabled={false}
-						isQuestionRequired={false}
-						onBack={handleBack}
-						onNext={handleNotesNext}
-						onSkip={handleNotesSkip}
-						totalQuestions={totalSteps}
-					/>
+					<div className={styles["question-container"]}>
+						<NotesPage />
+					</div>
+					<div
+						className={getClassNames(
+							"grid-pattern",
+							styles["question-navigation"],
+						)}
+					>
+						<QuestionNavigation
+							currentQuestion={currentQuestion}
+							isNextDisabled={false}
+							isQuestionRequired={false}
+							onBack={handleBack}
+							onNext={handleNotesNext}
+							onSkip={handleNotesSkip}
+							totalQuestions={totalSteps}
+						/>
+					</div>
 				</>
 			);
 		}
@@ -278,21 +287,30 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 						totalQuestions={totalSteps}
 					/>
 				</div>
-				<QuestionPage
-					currentAnswer={currentAnswer as QuizAnswer}
-					onAnswer={handleAnswer}
-					question={currentQuestionData}
-					questionNumber={currentQuestion}
-				/>
-				<QuestionNavigation
-					currentQuestion={currentQuestion}
-					isNextDisabled={isNextDisabledValue}
-					isQuestionRequired={!currentQuestionData.isOptional}
-					onBack={handleBack}
-					onNext={handleNext}
-					onSkip={handleSkip}
-					totalQuestions={totalSteps}
-				/>
+				<div className={styles["question-container"]}>
+					<QuestionPage
+						currentAnswer={currentAnswer as QuizAnswer}
+						onAnswer={handleAnswer}
+						question={currentQuestionData}
+						questionNumber={currentQuestion}
+					/>
+				</div>
+				<div
+					className={getClassNames(
+						"grid-pattern",
+						styles["question-navigation"],
+					)}
+				>
+					<QuestionNavigation
+						currentQuestion={currentQuestion}
+						isNextDisabled={isNextDisabledValue}
+						isQuestionRequired={!currentQuestionData.isOptional}
+						onBack={handleBack}
+						onNext={handleNext}
+						onSkip={handleSkip}
+						totalQuestions={totalSteps}
+					/>
+				</div>
 			</>
 		);
 	};
