@@ -3,7 +3,9 @@ import { useLocation } from "react-router-dom";
 
 import { ZERO } from "~/libs/constants/constants.js";
 import { type AppRoute } from "~/libs/enums/app-route.enum.js";
+import { DataStatus } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
+import { useAppSelector } from "~/libs/hooks/hooks.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
 import { Link } from "../components.js";
@@ -28,6 +30,18 @@ const NavigationItem: React.FC<Properties> = ({
 	navigateTo,
 	onClick,
 }: Properties) => {
+	const planStatus = useAppSelector(({ plan }) => plan.dataStatus);
+	const pendingTaskRegenerations = useAppSelector(
+		({ plan }) => plan.pendingTaskRegenerations,
+	);
+	const pendingDayRegenerations = useAppSelector(
+		({ plan }) => plan.pendingDayRegenerations,
+	);
+	const isPendingPlan =
+		planStatus === DataStatus.PENDING ||
+		pendingTaskRegenerations > ZERO ||
+		pendingDayRegenerations > ZERO;
+
 	const itemClass = getClassNames(
 		styles["menu-item"],
 		styles[`menu-item--${buttonType}`],
@@ -62,6 +76,7 @@ const NavigationItem: React.FC<Properties> = ({
 						aria-label={buttonText}
 						className={itemClass}
 						data-dropdown-button="true"
+						disabled={isPendingPlan}
 						role="menuitem"
 						tabIndex={ZERO}
 						type="button"
