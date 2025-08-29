@@ -59,7 +59,10 @@ class PlanRepository implements Repository {
 	}
 
 	public async find(id: number): Promise<null | PlanEntity> {
-		const plan = await this.planModel.query().findById(id);
+		const plan = await this.planModel
+			.query()
+			.findById(id)
+			.withGraphFetched("days.tasks");
 
 		return plan ? PlanEntity.initialize(plan) : null;
 	}
@@ -74,7 +77,7 @@ class PlanRepository implements Repository {
 		const plan = await this.planModel
 			.query()
 			.where({ userId })
-			.orderBy("created_at", "desc")
+			.orderBy("updated_at", "desc")
 			.withGraphFetched("days(orderByDayNumber).[tasks(orderByTaskOrder)]")
 			.modifiers({
 				orderByDayNumber(builder) {
@@ -99,9 +102,9 @@ class PlanRepository implements Repository {
 		return await this.planModel
 			.query()
 			.where({ userId })
-			.orderBy("createdAt", "desc")
-			.withGraphFetched("days.tasks")
+			.withGraphFetched("days(orderByDayNumber).tasks(orderByOrder)")
 			.withGraphFetched("category")
+			.orderBy("updated_at", "desc")
 			.then((plans) => plans.map((plan) => PlanEntity.initialize(plan)));
 	}
 
@@ -109,15 +112,7 @@ class PlanRepository implements Repository {
 		const plan = await this.planModel
 			.query()
 			.findById(id)
-			.withGraphFetched("days(orderByDayNumber).[tasks(orderByTaskOrder)]")
-			.modifiers({
-				orderByDayNumber(builder) {
-					builder.orderBy("dayNumber", "asc");
-				},
-				orderByTaskOrder(builder) {
-					builder.orderBy("order", "asc");
-				},
-			});
+			.withGraphFetched("days(orderByDayNumber).tasks(orderByOrder)");
 
 		return plan ? PlanEntity.initialize(plan) : null;
 	}
@@ -249,7 +244,6 @@ class PlanRepository implements Repository {
 			return (
 				relatedDay?.tasks.map((task) =>
 					TaskEntity.initializeNew({
-						description: task.description,
 						executionTimeType: task.executionTimeType,
 						order: task.order,
 						planDayId,

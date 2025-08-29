@@ -23,14 +23,12 @@ type Properties = {
 	existingFeedback?: FeedbackDto;
 	onClose: () => void;
 	onDeleteClick: (id: number) => void;
-	userId?: number;
 };
 
 const AddFeedbackModal: React.FC<Properties> = ({
 	existingFeedback,
 	onClose,
 	onDeleteClick,
-	userId,
 }: Properties) => {
 	const dispatch = useAppDispatch();
 	const { dataStatus } = useAppSelector((state) => state.feedbacks);
@@ -40,14 +38,13 @@ const AddFeedbackModal: React.FC<Properties> = ({
 		useAppForm<FeedbackCreateRequestDto>({
 			defaultValues: {
 				text: existingFeedback?.text ?? "",
-				userId,
 			},
 			validationSchema: feedbackCreateValidationSchema,
 		});
 
 	useEffect(() => {
 		if (existingFeedback) {
-			reset({ text: existingFeedback.text, userId: existingFeedback.userId });
+			reset({ text: existingFeedback.text });
 		}
 	}, [existingFeedback, reset]);
 

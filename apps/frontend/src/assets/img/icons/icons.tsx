@@ -1,8 +1,6 @@
-export { default as ArrowLeft } from "./arrow-left.svg";
-export { default as ArrowLeftIcon } from "./arrow-left.svg?react";
+export { default as ArrowLeft } from "./arrow-left.svg?react";
 export { default as CreateDoc } from "./create_doc.svg?react";
 export { default as Dashboard } from "./dashboard.svg?react";
-export { default as Download } from "./download.svg";
 export { default as DownloadIcon } from "./download.svg?react";
 export { default as EditPhoto } from "./edit-photo.svg";
 export { default as Edit } from "./edit.svg";
@@ -14,7 +12,6 @@ export { default as MonitorIcon } from "./monitor.svg?react";
 export { default as Palette } from "./palette.svg?react";
 export { default as Regenerate } from "./regenerate.svg";
 export { default as Remove } from "./remove.svg";
-export { default as Save } from "./save.svg";
+export { default as Save } from "./save.svg?react";
 export { default as Search } from "./search.svg?react";
 export { default as SmartphoneIcon } from "./smartphone.svg?react";
-export { default as Timer } from "./timer.svg";

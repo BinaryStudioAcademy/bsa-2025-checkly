@@ -1,7 +1,0 @@
-.panel {
-	padding: var(--spacing-600);
-	background-color: var(--white);
-	border: 1px solid var(--gray-200);
-	border-radius: var(--spacing-200);
-	box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
-}

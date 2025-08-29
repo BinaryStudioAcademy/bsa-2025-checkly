@@ -79,7 +79,6 @@ const FeedbackManager: FC<Properties> = ({ modalReference, type }) => {
 						existingFeedback={existingFeedback}
 						onClose={handleCloseModal}
 						onDeleteClick={handleOpenDeleteModal}
-						userId={user?.id}
 					/>
 				</Modal>
 			)}
@@ -90,11 +89,7 @@ const FeedbackManager: FC<Properties> = ({ modalReference, type }) => {
 					onClose={handleCloseModal}
 					title={modalTitle}
 				>
-					<EditFeedbackModal
-						id={feedbackIdToEdit}
-						onClose={handleCloseModal}
-						userId={user?.id}
-					/>
+					<EditFeedbackModal id={feedbackIdToEdit} onClose={handleCloseModal} />
 				</Modal>
 			)}
 			{openModal === "DELETE" && feedbackIdToDelete && (

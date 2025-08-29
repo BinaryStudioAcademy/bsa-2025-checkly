@@ -23,21 +23,76 @@ type UserUpdateData = Partial<UserUpdateRequestDto> & {
 type ValidateAndPrepareUpdateDataParameters = {
 	encryptor: Encryptor;
 	id: number;
+	isReseting: boolean;
 	payload: UserUpdateRequestDto;
+	userRepository: UserRepository;
+};
+
+type ValidateDataParameters = {
+	currentPassword?: null | string;
+	email?: null | string;
+	encryptor: Encryptor;
+	id: number;
+	isReseting: boolean;
+	password?: null | string;
 	userRepository: UserRepository;
 };
 
 const validateAndPrepareUpdateData = async ({
 	encryptor,
 	id,
+	isReseting = false,
 	payload,
 	userRepository,
 }: ValidateAndPrepareUpdateDataParameters): Promise<UserUpdateData> => {
 	const email = normalizeField(payload.email);
 	const password = normalizeField(payload.password);
-	const currentPassword = normalizeField(payload.currentPassword);
+	const currentPassword = isReseting
+		? undefined
+		: normalizeField(payload.currentPassword);
 	const name = normalizeField(payload.name);
 
+	await validateData({
+		currentPassword,
+		email,
+		encryptor,
+		id,
+		isReseting,
+		password,
+		userRepository,
+	});
+
+	let updateData: UserUpdateData = {};
+
+	if (payload.dob !== undefined) {
+		updateData.dob = normalizeField(payload.dob);
+	}
+
+	if (email) {
+		updateData.email = email;
+	}
+
+	if (name) {
+		updateData.name = name;
+	}
+
+	if (password) {
+		const { hash, salt } = await encryptor.encrypt(password);
+		updateData = { ...updateData, passwordHash: hash, passwordSalt: salt };
+	}
+
+	return updateData;
+};
+
+const validateData = async ({
+	currentPassword,
+	email,
+	encryptor,
+	id,
+	isReseting,
+	password,
+	userRepository,
+}: ValidateDataParameters): Promise<void> => {
 	if (email) {
 		const userWithSameEmail = await userRepository.findByField("email", email);
 
@@ -49,7 +104,7 @@ const validateAndPrepareUpdateData = async ({
 		}
 	}
 
-	if (password) {
+	if (password && !isReseting) {
 		if (!currentPassword) {
 			throw new HTTPError({
 				message: UserValidationMessage.CURRENT_PASSWORD_REQUIRED,
@@ -80,27 +135,6 @@ const validateAndPrepareUpdateData = async ({
 			});
 		}
 	}
-
-	let updateData: UserUpdateData = {};
-
-	if (payload.dob !== undefined) {
-		updateData.dob = normalizeField(payload.dob);
-	}
-
-	if (email) {
-		updateData.email = email;
-	}
-
-	if (name) {
-		updateData.name = name;
-	}
-
-	if (password) {
-		const { hash, salt } = await encryptor.encrypt(password);
-		updateData = { ...updateData, passwordHash: hash, passwordSalt: salt };
-	}
-
-	return updateData;
 };
 
 export { validateAndPrepareUpdateData };

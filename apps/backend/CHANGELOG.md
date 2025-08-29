@@ -1,5 +1,112 @@
 # Changelog
 
+## [1.17.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.16.3...backend-v1.17.0) (2025-08-28)
+
+
+### Features
+
+* improve prompting cy-202 ([46418e4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/46418e482bd89efc055f2c75ea3d3ae20a51a30a))
+
+
+### Bug Fixes
+
+* remove dirname puppeteerrc cy-202 ([32dc11a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/32dc11a6e71f693a60cf401602ef8a8f210e1ffe))
+
+## [1.16.3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.16.2...backend-v1.16.3) (2025-08-28)
+
+
+### Bug Fixes
+
+* indents cy-0 ([0fec9c0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0fec9c0c72c6794a8329cbb1131baa6a7ccf6de3))
+* remove invalid dep name cy-0 ([c6023c6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c6023c6140bd4b1ade0759089a9369a882674f2e))
+
+## [1.16.2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.16.1...backend-v1.16.2) (2025-08-28)
+
+
+### Bug Fixes
+
+* move file to .cjs cy-0 ([b45461c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b45461ce03f3626bddf54f15d2791152ee008cb6))
+* move file to .cjs cy-0 ([160a183](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/160a1835b165a96c4ac596f2d14639debfdc9ba7))
+
+## [1.16.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.16.0...backend-v1.16.1) (2025-08-28)
+
+
+### Bug Fixes
+
+* add new deps cy-0 ([c85b046](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c85b046ccbb3b0c541b89243546b323714110753))
+* add new deps cy-0 ([770cfd6](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/770cfd61ccf0a814a379ce09b5076ca2e32b2d36))
+
+## [1.16.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.15.0...backend-v1.16.0) (2025-08-28)
+
+
+### Features
+
+* **frontend/backend/shared:** add pdf export cy-348 ([797d4ba](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/797d4ba1a5e5f7509d6dc78b2fc194084d8cefe9))
+* merge main branch into current branch cy-348 ([7bb14ed](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7bb14edce4b2b93a1f41b465cfaa20dcaac32e02))
+* Use real data in post-quiz flow cy-348 ([16db48a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/16db48a7338b512d13da0afdf4416b059fec784a))
+
+
+### Bug Fixes
+
+* display the result of edit and delete on the plan page cy-409 ([55edbd4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/55edbd47a154547abcfad649ce927590719ce7c8))
+* manually edited tasks are not displayed cy-409 ([6d5bf16](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6d5bf162a7919cc588a6e286894ed444cff6de05))
+* merge changes into local branch cy-348 ([a7bcfcd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a7bcfcdf92b1737a0091d04768936518a94c4816))
+* seperate useref function from useeffect cy-348 ([9fefaaa](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9fefaaad1cbe7cd8fa196156b2cd2d0187b59305))
+* use pupeeter headless option cy-348 ([4f54598](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/4f54598fbb023e7dbfc0383fd1c2b8ae0e3b0aff))
+
+## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.14.0...backend-v1.15.0) (2025-08-28)
+
+
+### Features
+
+* disable validation for calendar export data cy-399 ([6ef2368](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6ef23686eb09a71f21548d14ff7051c52ce72acc))
+
+
+### Bug Fixes
+
+* remove duplicated button cy-399 ([b8e1d29](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b8e1d291f452f7191184be8740e00d0e4b13d164))
+
+## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.13.0...backend-v1.14.0) (2025-08-27)
+
+
+### Features
+
+* add improvements to prompt cy-256 ([2c802d2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2c802d208a98317596584716166057198b108834))
+* add improvements to prompt cy-256 ([ce6f15c](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ce6f15c3664f98f0b8b3fde109d8d24f5facdc68))
+
+## [1.13.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.12.0...backend-v1.13.0) (2025-08-27)
+
+
+### Features
+
+* add desktop export cy-291 ([a1eaae4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a1eaae49907f60a572f60750931fdf7edaea3d2f))
+* add export to calendar cy-294 ([306600d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/306600d604437c494805e88efc0d13520c4bb71d))
+* add feedback flow cy-170 ([2e9238a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2e9238abe15aa8ec9372855a8a983380c3a3f64f))
+* add plan export to .ics and confirmation modal on preview cy-294 ([c547e37](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/c547e376109884fda567f47a34a804280b70e822))
+* add quiz generate plan flow, rewrite save generate plan cy-202 ([9eaafec](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9eaafecac28a9840e04e6d12682b97f933564f9c))
+* add sorting for tasks cy-202 ([40e7be0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/40e7be0f842c6a1aa725a848e2529159d03e3f84))
+* merge with main and fix conflicts cy-291 ([2b4bd4b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/2b4bd4b21b327b1628cb2f4c937da43ca80eecad))
+* plan regeneration cy-202 ([9f3f249](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9f3f24981559bc5417bb4f15ce1d4e7f8991489c))
+
+
+### Bug Fixes
+
+* add quizId, add userId to plan generation if exists cy-382 ([eee97df](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/eee97dfbbb45ffa4d84050c0ac233e2ce0298c49))
+* add token validation on backend cy-385 ([3ea3c51](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3ea3c51be31d0964bb9e39fb64a69da23daeb08b))
+* address pr issues cy-291 ([1afeb9e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/1afeb9e9b7e1b8ccc30bebb234cc4050da6b7ff0))
+* **backend:** dob field doesn't accept nullish values cy-363 ([44b4e13](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/44b4e132bddc3d08c8ddfb236dd58b500a5c81cf))
+* delete duplicate seeds cy-291 ([ec4e685](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ec4e6856c42a884af57a092b5c9746085134c224))
+* delete unused dependencies cy-291 ([24d1a6d](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/24d1a6d12d96b4c04eeb4b9ddf789072ebadafc7))
+* dob field doesn't accept nullish values cy-363 ([ef66a95](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ef66a959d204b34ad4cf4c7f37ccadc2301f7a05))
+* forgot/reset password endpoints – security and validation issues cy-385 ([7181a76](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/7181a76ed278e9d34dfbb4cb165bb5d0c9acad33))
+* handle invalid types in forgot password cy-385 ([d0ec1fe](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d0ec1fe060895a732e658a99fc97a8dd8d8eb81a))
+* improve validation logic with reseting cy-371 ([6311c97](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6311c97f122bd51d1f572a6d5857cea070216ece))
+* merge conflicts cy-291 ([ba9ddb7](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/ba9ddb73d317dbd681844cee3c08d8fefd0bd7f9))
+* password reset endpoint requiring current password + duplicate success toasts cy-371 ([aba1a54](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/aba1a542a10ec5ceee5608418fbce204a466c4f5))
+* plan regeneration cy-382 ([773aed8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/773aed82754114dee9600ac16c8f3bf23a6d70a6))
+* resolve merge conflicts cy-202 ([b89ea1b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/b89ea1b5fb3d58e1709fe3bed16099961bad7b26))
+* update validation before updating password cy-371 ([434a31e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/434a31ed3548d1c021c6566495f3f5bcdfe7080a))
+
 ## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.11.0...backend-v1.12.0) (2025-08-26)
 
 

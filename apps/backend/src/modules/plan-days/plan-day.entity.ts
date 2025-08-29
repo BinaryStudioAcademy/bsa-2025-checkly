@@ -58,6 +58,7 @@ class PlanDayEntity implements Entity {
 			dayNumber,
 			id: null,
 			planId,
+			tasks: [],
 		});
 	}
 
@@ -88,7 +89,6 @@ class PlanDayEntity implements Entity {
 			...this.toObject(),
 			tasks: this.tasks.map((task) => ({
 				completedAt: task.completedAt,
-				description: task.description,
 				executionTimeType: task.executionTimeType,
 				id: task.id,
 				isCompleted: task.isCompleted,

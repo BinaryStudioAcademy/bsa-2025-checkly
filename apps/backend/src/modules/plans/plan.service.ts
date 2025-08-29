@@ -133,7 +133,10 @@ class PlanService implements Service {
 		payload: GeneratePlanRequestDto,
 		actionType: PlanActionType,
 	): Promise<PlanActionTypeMap[T]> {
-		const userPrompt = createPrompt(payload.quizAnswers);
+		const userPrompt = createPrompt({
+			...payload.quizAnswers,
+			actionType,
+		});
 
 		const result = await this.openAIService.generate({
 			actionType,
@@ -146,14 +149,7 @@ class PlanService implements Service {
 	public async generatePlan(
 		payload: GeneratePlanRequestDto,
 	): Promise<GeneratedPlanDTO | null> {
-		const { quizAnswers, quizId, userId } = payload;
-
-		if (!userId) {
-			throw new HTTPError({
-				message: ErrorMessage.USER_NOT_FOUND,
-				status: HTTPCode.NOT_FOUND,
-			});
-		}
+		const { quizId, userId } = payload;
 
 		if (!quizId) {
 			throw new HTTPError({
@@ -162,7 +158,28 @@ class PlanService implements Service {
 			});
 		}
 
-		const existingCategory = await this.quizRepository.find(quizId);
+		const quizAnswers =
+			await this.quizAnswerRepository.findAllWithOption(quizId);
+
+		if (quizAnswers.length === ZERO) {
+			throw new HTTPError({
+				message: ErrorMessage.ANSWERS_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const existingQuiz = await this.quizRepository.find(quizId);
+
+		if (!existingQuiz) {
+			throw new HTTPError({
+				message: ErrorMessage.CATEGORY_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const { categoryId } = existingQuiz;
+
+		const existingCategory = await this.planCategoryRepository.find(categoryId);
 
 		if (!existingCategory) {
 			throw new HTTPError({
@@ -171,11 +188,16 @@ class PlanService implements Service {
 			});
 		}
 
-		const { categoryId } = existingCategory;
+		const { title } = existingCategory.toObject();
+
+		const answers = {
+			answers: quizAnswers,
+			category: title as QuizCategoryType,
+		};
 
 		const plan = (await this.generate(
 			{
-				quizAnswers,
+				quizAnswers: answers,
 			},
 			PlanAction.PLAN,
 		)) as GeneratedPlanDTO;
@@ -186,7 +208,7 @@ class PlanService implements Service {
 			plan,
 			quizId,
 			styleId,
-			userId,
+			userId: userId ?? null,
 		});
 
 		const newPlan = await this.planRepository.findWithRelations(planId);

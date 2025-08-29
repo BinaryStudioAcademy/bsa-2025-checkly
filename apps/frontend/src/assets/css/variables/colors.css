@@ -47,4 +47,5 @@
 	--color-surface: var(--color-bg-white);
 	--color-selection-bg: var(--color-card-yellow);
 	--color-bg-sidebar: var(--color-bg-light);
+	--dashboard-grid-opacity: 0.3;
 }

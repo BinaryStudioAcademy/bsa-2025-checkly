@@ -35,6 +35,7 @@ class QuizAnswerController extends BaseController {
 				this.createAnswerWithOptions(
 					options as APIBodyOptions<QuizAnswerOptionsRequestDto>,
 				),
+			isPublic: true,
 			method: HTTPRequestMethod.POST,
 			path: QuizAnswerApiPath.ANSWER_OTPIONS,
 		});

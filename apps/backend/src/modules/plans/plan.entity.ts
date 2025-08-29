@@ -1,17 +1,18 @@
-import { type PlanCategoryDto } from "shared";
-
-import { type ExecutionTimeType } from "~/libs/enums/enums.js";
-import { type Entity, type ValueOf } from "~/libs/types/types.js";
+import { type Entity } from "~/libs/types/types.js";
 import {
 	type PlanDayDto,
 	type PlanDaysTaskDto,
 	type PlanWithCategoryDto,
 } from "~/modules/plans/plans.js";
 
+import { type PlanCategoryDto, type TaskDto } from "./libs/types/types.js";
+
 class PlanEntity implements Entity {
 	private category?: PlanCategoryDto;
 
 	private categoryId: number;
+
+	private createdAt?: string;
 
 	private days: PlanDayDto[];
 
@@ -27,11 +28,14 @@ class PlanEntity implements Entity {
 
 	private title: string;
 
+	private updatedAt?: string;
+
 	private userId: null | number;
 
 	private constructor({
 		category,
 		categoryId,
+		createdAt,
 		days = [],
 		duration,
 		id,
@@ -39,10 +43,12 @@ class PlanEntity implements Entity {
 		quizId,
 		styleId,
 		title,
+		updatedAt,
 		userId,
 	}: {
 		category?: PlanCategoryDto;
 		categoryId: number;
+		createdAt?: string;
 		days?: PlanDayDto[];
 		duration: number;
 		id: null | number;
@@ -50,6 +56,7 @@ class PlanEntity implements Entity {
 		quizId: number;
 		styleId: number;
 		title: string;
+		updatedAt?: string;
 		userId: null | number;
 	}) {
 		this.id = id;
@@ -61,12 +68,15 @@ class PlanEntity implements Entity {
 		this.days = days;
 		this.categoryId = categoryId;
 		this.category = category;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 		this.styleId = styleId;
 	}
 
 	public static initialize({
 		category,
 		categoryId,
+		createdAt,
 		days = [],
 		duration,
 		id,
@@ -74,10 +84,12 @@ class PlanEntity implements Entity {
 		quizId,
 		styleId,
 		title,
+		updatedAt,
 		userId,
 	}: {
 		category?: PlanCategoryDto;
 		categoryId: number;
+		createdAt?: string;
 		days?: PlanDayDto[];
 		duration: number;
 		id: number;
@@ -85,11 +97,13 @@ class PlanEntity implements Entity {
 		quizId: number;
 		styleId: number;
 		title: string;
+		updatedAt?: string;
 		userId: null | number;
 	}): PlanEntity {
 		return new PlanEntity({
 			category,
 			categoryId,
+			createdAt,
 			days,
 			duration,
 			id,
@@ -97,6 +111,7 @@ class PlanEntity implements Entity {
 			quizId,
 			styleId,
 			title,
+			updatedAt,
 			userId,
 		});
 	}
@@ -120,6 +135,7 @@ class PlanEntity implements Entity {
 	}): PlanEntity {
 		return new PlanEntity({
 			categoryId,
+			createdAt: "",
 			days: [],
 			duration,
 			id: null,
@@ -127,6 +143,7 @@ class PlanEntity implements Entity {
 			quizId,
 			styleId,
 			title,
+			updatedAt: "",
 			userId,
 		});
 	}
@@ -153,22 +170,26 @@ class PlanEntity implements Entity {
 
 	public toObject(): {
 		categoryId: number;
+		createdAt?: string;
 		duration: number;
 		id: number;
 		intensity: string;
 		quizId: number;
 		styleId: number;
 		title: string;
+		updatedAt?: string;
 		userId: null | number;
 	} {
 		return {
 			categoryId: this.categoryId,
+			createdAt: this.createdAt,
 			duration: this.duration,
 			id: this.id as number,
 			intensity: this.intensity,
 			quizId: this.quizId,
 			styleId: this.styleId,
 			title: this.title,
+			updatedAt: this.updatedAt,
 			userId: this.userId,
 		};
 	}
@@ -187,12 +208,9 @@ class PlanEntity implements Entity {
 				dayNumber: day.dayNumber,
 				id: day.id,
 				planId: day.planId,
-				tasks: day.tasks.map((task) => ({
+				tasks: day.tasks.map((task: TaskDto) => ({
 					completedAt: task.completedAt,
-					description: task.description,
-					executionTimeType: task.executionTimeType as null | ValueOf<
-						typeof ExecutionTimeType
-					>,
+					executionTimeType: task.executionTimeType,
 					id: task.id,
 					isCompleted: task.isCompleted,
 					order: task.order,

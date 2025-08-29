@@ -1,4 +1,4 @@
-import { type RelationMappings } from "objection";
+import { type Modifiers, type RelationMappings } from "objection";
 
 import {
 	AbstractModel,
@@ -10,6 +10,12 @@ import { PlanDayModel } from "../plan-days/plan-day.model.js";
 import { type ExecutionTimeType } from "./libs/enums/enums.js";
 
 class TaskModel extends AbstractModel {
+	static readonly modifiers: Modifiers = {
+		orderByOrder(builder) {
+			builder.orderBy("order", "asc");
+		},
+	};
+
 	public static override get relationMappings(): RelationMappings {
 		return {
 			planDay: {
@@ -28,8 +34,6 @@ class TaskModel extends AbstractModel {
 	}
 
 	public completedAt!: null | string;
-
-	public description!: string;
 
 	public executionTimeType!: null | ValueOf<typeof ExecutionTimeType>;
 
