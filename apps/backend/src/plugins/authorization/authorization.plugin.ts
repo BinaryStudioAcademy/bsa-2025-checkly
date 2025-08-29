@@ -22,7 +22,7 @@ declare module "fastify" {
 
 type AuthPluginOptions = {
 	userService: UserService;
-	whiteRoutes: string[];
+	whiteRoutes: Array<{ method: string; path: string }>;
 };
 
 const authStrategy = "Bearer ";
@@ -67,7 +67,11 @@ const extractUserFromRequest = async (
 	}
 };
 
-const checkIsWhiteRoute = (url: string, whiteRoutes: string[]): boolean => {
+const checkIsWhiteRoute = (
+	url: string,
+	method: string,
+	whiteRoutes: Array<{ method: string; path: string }>,
+): boolean => {
 	const regex = /^\/api\/v\d+(\/.+)$/;
 	const isAPIRoute = regex.test(url);
 
@@ -77,7 +81,13 @@ const checkIsWhiteRoute = (url: string, whiteRoutes: string[]): boolean => {
 
 	const [routeWithoutQuery] = url.split("?");
 
-	return whiteRoutes.includes(routeWithoutQuery as string);
+	const normalizedMethod = method.toUpperCase();
+
+	return whiteRoutes.some(
+		(route) =>
+			route.path === (routeWithoutQuery as string) &&
+			route.method.toUpperCase() === normalizedMethod,
+	);
 };
 
 const authorization = fp<AuthPluginOptions>(
@@ -89,7 +99,11 @@ const authorization = fp<AuthPluginOptions>(
 		fastify.addHook("preHandler", async (request: FastifyRequest) => {
 			const routeUrl = request.routeOptions.url ?? request.url;
 
-			const isWhiteRoute = checkIsWhiteRoute(routeUrl, whiteRoutes);
+			const isWhiteRoute = checkIsWhiteRoute(
+				routeUrl,
+				request.method,
+				whiteRoutes,
+			);
 
 			if (isWhiteRoute) {
 				return;

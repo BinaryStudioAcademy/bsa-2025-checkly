@@ -1,3 +1,4 @@
+import { type AuthBodyOptions } from "~/libs/modules/controller/libs/types/types.js";
 import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
 import { type Service } from "~/libs/types/types.js";
 import { FeedbackEntity } from "~/modules/feedbacks/feedback.entity.js";
@@ -25,12 +26,14 @@ class FeedbackService implements Service {
 		this.feedbackRepository = feedbackRepository;
 	}
 
-	public async create(payload: FeedbackCreateRequestDto): Promise<FeedbackDto> {
-		const sanitizedText = sanitizeFeedbackInput(payload.text);
+	public async create(
+		payload: AuthBodyOptions<FeedbackCreateRequestDto>,
+	): Promise<FeedbackDto> {
+		const sanitizedText = sanitizeFeedbackInput(payload.body.text);
 		const item = await this.feedbackRepository.create(
 			FeedbackEntity.initializeNew({
 				text: sanitizedText,
-				userId: payload.userId,
+				userId: payload.user.id,
 			}),
 		);
 
