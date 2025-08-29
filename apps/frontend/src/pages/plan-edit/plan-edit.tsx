@@ -547,7 +547,12 @@ const PlanEdit: React.FC = () => {
 							/>
 							<span className="visually-hidden">Back to the previous page</span>
 						</Link>
-						<h2 className={styles["plan-title"]}>{plan.title}</h2>
+						<h2 className={styles["plan-title"]}>
+							{plan.title} -{" "}
+							<Link className={styles["plan-title-link"]} to={AppRoute.PLAN}>
+								Manage plan
+							</Link>
+						</h2>
 					</div>
 					<Button
 						className={getClassNames(styles["select-day"])}

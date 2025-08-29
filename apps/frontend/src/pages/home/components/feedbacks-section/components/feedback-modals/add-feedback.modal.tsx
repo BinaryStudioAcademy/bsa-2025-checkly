@@ -50,7 +50,7 @@ const AddFeedbackModal: React.FC<Properties> = ({
 		}
 	}, [existingFeedback, reset]);
 
-	const textValue = watch?.("text") ?? "";
+	const textValue = watch("text");
 	const characterCount = textValue.length;
 	const maxCharacters = FeedbackValidationRule.TEXT_MAX_LENGTH;
 

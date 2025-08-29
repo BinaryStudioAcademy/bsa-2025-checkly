@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.17.0...backend-v1.18.0) (2025-08-29)
+
+
+### Features
+
+* **backend:** improve white list for individual methods cy-400 ([512ede1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/512ede124bd6e039c5aa5f16823055be02265774))
+* **backend:** improve white list for individual methods cy-400 ([e3c9ec8](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e3c9ec8951815f0ebb2d93b7f855f6d92c587639))
+* **frontend:** add modal windows and informative messages cy-432 ([0263ea0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0263ea08a7f1deb350d9032c66930417f7fa0110))
+* merge main into local branch cy-432 ([74f7d18](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/74f7d18ff8165d81a4bec34cb678e7b1218528f5))
+* plan edit page inhancements cy-431 ([a081200](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a08120079e33154fe7602375f1a9a80e75047c29))
+
+
+### Bug Fixes
+
+* day regeneration cy-202 ([6c6a2a0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/6c6a2a02c9f0af879bac0af7fde463ac431e9197))
+* day regeneration, change day skeleton, add userNotes cy-202 ([e3e449f](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e3e449f14a035bb87b97b830cf107b004aabf6da))
+* puppeteerrc type module fix cy-432 ([d5a0215](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/d5a02158365c12c082332ef4fe7de4d890a21e66))
+* remove uncorrect notes cy-202 ([45ed840](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/45ed840c7c0e8545c4c35966ac3a58b493a771c4))
+
 ## [1.17.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.16.3...backend-v1.17.0) (2025-08-28)
 
 

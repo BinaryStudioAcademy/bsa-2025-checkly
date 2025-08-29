@@ -51,7 +51,7 @@ class QuizAnswerService implements Service {
 				.filter((id) => Number.isInteger(id)),
 		}));
 
-		const quizAnswers = normalizedAnswers.map((answer) =>
+		const quizAnswers = answers.map((answer) =>
 			QuizAnswerEntity.initializeNew({
 				isSkipped: answer.isSkipped,
 				questionId: answer.questionId,
