@@ -14,8 +14,8 @@ import {
 	type FeedbackUpdateRequestDto,
 	feedbackUpdateValidationSchema,
 } from "~/modules/feedbacks/feedbacks.js";
+import { FeedbackLoaderContainer } from "~/pages/home/components/feedbacks-section/feedback-loader-container/feedback-loader-container.js";
 
-import { FeedbackLoaderContainer } from "../../feedback-loader-container/feedback-loader-container.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -101,6 +101,7 @@ const EditFeedbackModal: React.FC<Properties> = ({
 			<Textarea
 				control={control}
 				errors={errors}
+				fullSize
 				name="text"
 				placeholder="Enter a new testimonial"
 			/>

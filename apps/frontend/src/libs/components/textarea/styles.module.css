@@ -4,6 +4,10 @@
 	--gutter: var(--space-2xs);
 }
 
+.textarea-container--full-size {
+	width: 100%;
+}
+
 .textarea-label {
 	--cluster-horizontal-alignment: flex-start;
 

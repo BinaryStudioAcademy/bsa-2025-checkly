@@ -10,12 +10,11 @@ import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { actions, type UserPartialDto } from "~/modules/feedbacks/feedbacks.js";
 import {
 	FEEDBACKS_SWIPER_BREAKPOINTS,
+	FOUR_SLIDES_TO_LOOP,
 	LIMIT,
 	NO_ITEMS,
 	SINGLE_PAGE,
-	START_INDEX,
 	SWIPER_AUTOPLAY_OPTIONS,
-	TWO_SLIDES,
 } from "~/pages/home/lib/constants.js";
 
 import { FeedbackLoaderContainer } from "../../feedback-loader-container/feedback-loader-container.js";
@@ -23,12 +22,10 @@ import styles from "../../styles.module.css";
 import { FeedbackCard } from "../feedback-card/feedback-card.js";
 
 type Properties = {
-	onOpenModal: (type: "DELETE" | "EDIT", id: number) => () => void;
-	reloadTrigger: number;
 	user: null | UserPartialDto;
 };
 
-const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
+const FeedbackList: FC<Properties> = ({ user }) => {
 	const dispatch = useAppDispatch();
 	const { dataStatus, feedbacks, total } = useAppSelector(
 		(state) => state.feedbacks,
@@ -41,7 +38,7 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 		dataStatus === DataStatus.PENDING && currentPage === SINGLE_PAGE;
 	const isLoadingMore =
 		dataStatus === DataStatus.PENDING && currentPage > SINGLE_PAGE;
-	const hasEnoughSlidesForLoop = feedbacks.length > TWO_SLIDES;
+	const hasEnoughSlidesForLoop = feedbacks.length > FOUR_SLIDES_TO_LOOP;
 
 	const handleSlideChange = useCallback(
 		(swiper: SwiperClass) => {
@@ -55,7 +52,7 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 				setCurrentPage((previousPage) => previousPage + SINGLE_PAGE);
 			}
 		},
-		[feedbacks.length, total, dataStatus],
+		[feedbacks.length, total, dataStatus, setCurrentPage],
 	);
 
 	const handleSwiper = useCallback((swiper: SwiperClass) => {
@@ -82,19 +79,6 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 		}
 	}, [dispatch, currentPage]);
 
-	useEffect(() => {
-		if (reloadTrigger > NO_ITEMS) {
-			setCurrentPage(SINGLE_PAGE);
-			void dispatch(
-				actions.fetchAllFeedbacks({
-					limit: LIMIT,
-					page: SINGLE_PAGE,
-				}),
-			);
-			swiperReference.current?.slideTo(START_INDEX);
-		}
-	}, [dispatch, reloadTrigger]);
-
 	if (isLoadingInitial) {
 		return <FeedbackLoaderContainer />;
 	}
@@ -107,10 +91,18 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 		);
 	}
 
+	const autoplayTrigger = hasEnoughSlidesForLoop
+		? {
+				...SWIPER_AUTOPLAY_OPTIONS,
+				disableOnInteraction: false,
+				pauseOnMouseEnter: true,
+			}
+		: false;
+
 	return (
 		<div className={styles["feedbacks-list-wrapper"]}>
 			<Swiper
-				autoplay={hasEnoughSlidesForLoop ? SWIPER_AUTOPLAY_OPTIONS : false}
+				autoplay={autoplayTrigger}
 				breakpoints={FEEDBACKS_SWIPER_BREAKPOINTS}
 				className={styles["feedbacks-swiper"]}
 				loop={hasEnoughSlidesForLoop}
@@ -120,17 +112,15 @@ const FeedbackList: FC<Properties> = ({ onOpenModal, reloadTrigger, user }) => {
 				onSlideChange={handleSlideChange}
 				onSwiper={handleSwiper}
 				slidesPerView={1}
-				spaceBetween={50}
+				spaceBetween={20}
 			>
 				{feedbacks.map((item) => (
-					<SwiperSlide className={styles["custom-slide"]} key={item.id}>
-						<FeedbackCard
-							onDeleteClick={onOpenModal("DELETE", item.id)}
-							onEditClick={onOpenModal("EDIT", item.id)}
-							text={item.text}
-							user={item.user}
-							userId={user?.id}
-						/>
+					<SwiperSlide
+						className={styles["custom-slide"]}
+						key={item.id}
+						style={{ height: "auto" }}
+					>
+						<FeedbackCard text={item.text} user={item.user} userId={user?.id} />
 					</SwiperSlide>
 				))}
 				{isLoadingMore && (
