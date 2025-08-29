@@ -1,7 +1,7 @@
 import { createSlice, isAnyOf, type PayloadAction } from "@reduxjs/toolkit";
 import { type TaskDto } from "shared";
 
-import { DataStatus, PlanStyle, ZERO } from "~/libs/enums/enums.js";
+import { DataStatus, PlanStyle } from "~/libs/enums/enums.js";
 import { type PlanStyleOption, type ValueOf } from "~/libs/types/types.js";
 
 import { type PlanWithCategoryDto } from "../libs/types/types.js";
@@ -46,7 +46,6 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getAllUserPlans.fulfilled, (state, action) => {
 			state.userPlansDataStatus = DataStatus.FULFILLED;
 			state.userPlans = action.payload;
-			state.plan = action.payload.at(ZERO) ?? null;
 		});
 		builder.addCase(getAllUserPlans.rejected, (state) => {
 			state.userPlansDataStatus = DataStatus.REJECTED;
@@ -58,7 +57,6 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(searchPlan.fulfilled, (state, action) => {
 			state.userPlansDataStatus = DataStatus.FULFILLED;
 			state.userPlans = action.payload;
-			state.plan = action.payload.at(ZERO) ?? null;
 		});
 		builder.addCase(searchPlan.rejected, (state) => {
 			state.userPlansDataStatus = DataStatus.REJECTED;
