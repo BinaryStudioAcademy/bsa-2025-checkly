@@ -40,6 +40,19 @@ const tasksEdit = z.object({
 	tasks: z.array(taskCreate),
 });
 
+const taskCreatePartial = taskCreate.pick({
+	executionTimeType: true,
+	title: true,
+});
+
+type TaskCreateFormValues = z.infer<typeof taskCreatePartial>;
+
 type TaskCreateRequestDto = z.infer<typeof taskCreate>;
 
-export { taskCreate, type TaskCreateRequestDto, tasksEdit };
+export {
+	taskCreate,
+	type TaskCreateFormValues,
+	taskCreatePartial,
+	type TaskCreateRequestDto,
+	tasksEdit,
+};

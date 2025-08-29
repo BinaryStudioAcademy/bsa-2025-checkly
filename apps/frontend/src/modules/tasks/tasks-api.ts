@@ -4,6 +4,7 @@ import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
 import {
 	getIdParameter,
+	type TaskCreateRequestDto,
 	type TaskDto,
 	TasksApiPath,
 	type TaskUpdateRequestDto,
@@ -32,6 +33,20 @@ class TaskApi extends BaseHTTPApi {
 		);
 
 		return await response.json<TaskDto[]>();
+	}
+
+	public async create(payload: TaskCreateRequestDto): Promise<TaskDto> {
+		const response = await this.load(
+			this.getFullEndpoint(TasksApiPath.TASK_CREATE, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: HTTPRequestMethod.POST,
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<TaskDto>();
 	}
 
 	public async delete(id: number): Promise<void> {

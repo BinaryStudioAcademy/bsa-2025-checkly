@@ -13,6 +13,8 @@ export {
 	type TaskUpdateRequestDto,
 } from "./libs/types/types.js";
 export {
+	type TaskCreateFormValues,
+	taskCreatePartial as taskCreatePartialValidationSchema,
 	type TaskCreateRequestDto,
 	taskCreate as taskCreateValidationSchema,
 	tasksEdit as tasksEditValidationSchema,

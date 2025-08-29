@@ -14,6 +14,7 @@ export { taskApi };
 export { getIdParameter } from "./libs/helpers/helpers.js";
 export { actions, reducer } from "./slices/task.js";
 export {
+	type TaskCreateRequestDto,
 	type TaskDto,
 	TasksApiPath,
 	type TaskUpdateRequestDto,

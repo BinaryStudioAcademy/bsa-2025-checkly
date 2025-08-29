@@ -7,6 +7,7 @@ import { getClassNames } from "~/libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	children?: React.ReactNode;
 	isOpen: boolean;
 	message?: string;
 	onCancel: () => void;
@@ -16,6 +17,7 @@ type Properties = {
 };
 
 const ConfirmationModal: React.FC<Properties> = ({
+	children,
 	isOpen,
 	message,
 	onCancel,
@@ -35,6 +37,7 @@ const ConfirmationModal: React.FC<Properties> = ({
 		<Modal isOpen={isOpen} onClose={onCancel} title={title}>
 			<div className="flow-loose-lg">
 				<p className={styles["confirmation-message"]}>{message}</p>
+				{children}
 				<div
 					className={getClassNames("cluster", styles["confirmation-actions"])}
 				>

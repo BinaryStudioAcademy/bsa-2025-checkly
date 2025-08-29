@@ -15,6 +15,18 @@
 	border: none;
 }
 
+:global(section[data-plan-style="WITH_REMARKS"])
+	:global(ul[data-view="mobile"])
+	> :global([class*="day-item"]) {
+	border: 1px solid var(--color-border-soft-pink);
+}
+
+:global(section[data-plan-style="WITH_REMARKS"])
+	:global(ul[data-view="mobile"])
+	> :global([class*="notes"]) {
+	border: none;
+}
+
 .day-item:nth-child(odd) {
 	border-right: 1px solid var(--color-border-pink-red);
 	border-left: 1px solid var(--color-border-soft-pink);
