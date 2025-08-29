@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.19.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.18.0...backend-v1.19.0) (2025-08-29)
+
+
+### Features
+
+* bug fixes, and add task button cy-432 ([fb31f1b](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/fb31f1b4c2307e6b884ea4805f22d49c55eb88d7))
+* **frontend/backend:** bug fixes, and add task button cy-432 ([0614cde](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0614cde37567743b27dfc95f865224c383f38eb3))
+* reworked feedback flow cy-390 ([141fa0a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/141fa0a68bf4f7b32632b4053412138620889c76))
+
+
+### Bug Fixes
+
+* **frontend:** fixed packge-lock and other small fixes cy-390 ([fffdba0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/fffdba01200d5fc8ea89b4a578b40c767720c5c6))
+
 ## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/backend-v1.17.0...backend-v1.18.0) (2025-08-29)
 
 

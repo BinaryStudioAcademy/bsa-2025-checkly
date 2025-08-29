@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.19.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.18.0...shared-v1.19.0) (2025-08-29)
+
+
+### Features
+
+* reworked feedback flow cy-390 ([141fa0a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/141fa0a68bf4f7b32632b4053412138620889c76))
+
+
+### Bug Fixes
+
+* **frontend:** fixed get call after deletion and others issues cy-390 ([510fbe4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/510fbe49886843853d6d305391d37f2fe39f0102))
+
 ## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/shared-v1.17.0...shared-v1.18.0) (2025-08-29)
 
 
