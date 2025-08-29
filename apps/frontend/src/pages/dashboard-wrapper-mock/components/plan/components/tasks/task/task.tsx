@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
 
-import {
-	Edit,
-	Regenerate,
-	Remove,
-	Save,
-	Timer,
-} from "~/assets/img/icons/icons.js";
+import { Edit, Regenerate, Remove, Save } from "~/assets/img/icons/icons.js";
 import {
 	Button,
 	ConfirmationModal,
 	DecorativeImage,
 	Modal,
+	TaskTimeSelector,
 } from "~/libs/components/components.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
 import { useAppDispatch, useCallback } from "~/libs/hooks/hooks.js";
@@ -20,7 +15,10 @@ import { TaskValidationRule } from "~/modules/tasks/libs/enums/enums.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
 import { MODAL_MESSAGES } from "../../libs/constants/constants.js";
-import { type TaskDto } from "../../libs/types/types.js";
+import {
+	type ExecutionTimeTypeValue,
+	type TaskDto,
+} from "../../libs/types/types.js";
 import styles from "../../shared/task/styles.module.css";
 
 type Properties = {
@@ -70,6 +68,23 @@ const Task: React.FC<Properties> = ({
 			setIsEditing(false);
 		})();
 	}, [dispatch, item.id, editedTitle]);
+
+	const handleUpdateTaskTime = useCallback(
+		(newTime: ExecutionTimeTypeValue): void => {
+			void (async (): Promise<void> => {
+				await dispatch(
+					taskActions.updateTask({
+						id: item.id,
+						payload: {
+							executionTimeType: newTime,
+						},
+					}),
+				);
+				await dispatch(planActions.getPlan());
+			})();
+		},
+		[dispatch, item.id],
+	);
 
 	const handleTitleChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -154,9 +169,11 @@ const Task: React.FC<Properties> = ({
 					)}
 				</div>
 				<div className={styles["item-actions"]}>
-					<div className={styles["item-actions__time"]}>
-						<img alt="Timer" src={Timer} />
-						<span>{item.executionTimeType}</span>
+					<div>
+						<TaskTimeSelector
+							currentTime={item.executionTimeType}
+							onTimeChange={handleUpdateTaskTime}
+						/>
 					</div>
 					<div className={styles["item-actions_buttons-wrapper"]}>
 						<Button

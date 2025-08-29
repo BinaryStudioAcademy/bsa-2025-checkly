@@ -15,4 +15,3 @@ export { default as Remove } from "./remove.svg";
 export { default as Save } from "./save.svg?react";
 export { default as Search } from "./search.svg?react";
 export { default as SmartphoneIcon } from "./smartphone.svg?react";
-export { default as Timer } from "./timer.svg";

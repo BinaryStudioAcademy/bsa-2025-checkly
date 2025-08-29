@@ -1,4 +1,5 @@
 import {
+	create,
 	deleteTask,
 	updateTask,
 	updateTasks,
@@ -7,6 +8,7 @@ import { actions } from "~/modules/tasks/slices/task.slice.js";
 
 const allActions = {
 	...actions,
+	create,
 	deleteTask,
 	updateTask,
 	updateTasks,

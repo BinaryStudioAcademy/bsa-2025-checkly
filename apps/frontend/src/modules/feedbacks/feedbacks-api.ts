@@ -105,7 +105,7 @@ class FeedbackApi extends BaseHTTPApi {
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,
-				method: HTTPRequestMethod.PUT,
+				method: HTTPRequestMethod.PATCH,
 				payload: JSON.stringify(payload),
 			},
 		);

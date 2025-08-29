@@ -7,6 +7,7 @@ import {
 	BaseController,
 	type IdParametersOption,
 } from "~/libs/modules/controller/controller.js";
+import { type AuthBodyOptions } from "~/libs/modules/controller/libs/types/types.js";
 import { HTTPCode, HTTPRequestMethod } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type FeedbackService } from "~/modules/feedbacks/feedback.service.js";
@@ -59,27 +60,19 @@ import {
  *       type: object
  *       required:
  *         - text
- *         - userId
  *       properties:
  *         text:
  *           type: string
  *           example: "New feedback text."
- *         userId:
- *           type: integer
- *           example: 1
  *
  *     FeedbackUpdateRequestDto:
  *       type: object
  *       required:
  *         - text
- *         - userId
  *       properties:
  *         text:
  *           type: string
  *           example: "Updated feedback text."
- *         userId:
- *           type: integer
- *           example: 1
  */
 
 class FeedbackController extends BaseController {
@@ -110,7 +103,7 @@ class FeedbackController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.create(options as APIBodyOptions<FeedbackCreateRequestDto>),
+				this.create(options as AuthBodyOptions<FeedbackCreateRequestDto>),
 			method: HTTPRequestMethod.POST,
 			path: FeedbackApiPath.ROOT,
 			validation: {
@@ -161,9 +154,9 @@ class FeedbackController extends BaseController {
 	 */
 
 	private async create(
-		options: APIBodyOptions<FeedbackCreateRequestDto>,
+		options: AuthBodyOptions<FeedbackCreateRequestDto>,
 	): Promise<APIHandlerResponse> {
-		const feedback = await this.feedbackService.create(options.body);
+		const feedback = await this.feedbackService.create(options);
 
 		return {
 			payload: feedback,
@@ -278,7 +271,7 @@ class FeedbackController extends BaseController {
 	 *         content:
 	 *           application/json:
 	 *             schema:
-	 *               $ref: '#/components/schemas/Feedback'
+	 *               $ref: '#/components/schemas/FeedbackUpdateRequestDto'
 	 *       '401':
 	 *         description: Unauthorized
 	 *       '404':

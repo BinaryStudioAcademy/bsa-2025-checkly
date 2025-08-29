@@ -1,0 +1,8 @@
+.buttons-container {
+	--gutter: var(--space-m);
+	--cluster-horizontal-alignment: center;
+}
+
+.time-select {
+	font-weight: var(--font-weight-semi-bold);
+}
