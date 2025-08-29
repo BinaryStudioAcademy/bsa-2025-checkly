@@ -637,10 +637,6 @@ const PlanEdit: React.FC = () => {
 				onClose={handleCreateTaskModalClose}
 				title="Add Task"
 			>
-				{/* <TaskCreateForm
-					onCancel={handleCreateTaskModalClose}
-					onSubmit={handleCreateTask}
-				/> */}
 				<PlanTaskCreateForm
 					onCancel={handleCreateTaskModalClose}
 					onSubmit={handleCreateTask}

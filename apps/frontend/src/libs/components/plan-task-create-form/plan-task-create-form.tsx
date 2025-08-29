@@ -63,7 +63,7 @@ const PlanTaskCreateForm = ({
 	return (
 		<form className="flow-loose-xl" onSubmit={handleFormSubmit}>
 			<div className="flow-loose">
-				<div className={getClassNames("flow", styles["time-select"])}>
+				<div className={getClassNames("flow-tight", styles["time-select"])}>
 					<label htmlFor="time-selector">Select time period:</label>
 					<TaskTimeSelector
 						currentTime={getValues().executionTimeType}
