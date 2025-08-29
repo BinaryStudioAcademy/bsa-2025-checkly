@@ -1,19 +1,22 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 
 import { Regenerate } from "~/assets/img/icons/icons.js";
 import { ArrowBold } from "~/assets/img/shared/shapes/shapes.img.js";
 import {
 	Button,
-	ConfirmationModal,
 	DecorativeImage,
+	Loader,
 } from "~/libs/components/components.js";
+import { ZERO } from "~/libs/constants/constants.js";
 import { getClassNames } from "~/libs/helpers/helpers.js";
+import { useAppSelector } from "~/libs/hooks/hooks.js";
 
-import { MODAL_MESSAGES } from "../../libs/constants/constants.js";
+import { type useLoadingIds } from "../../../libs/hooks/hooks.js";
 import { type PlanDayDto } from "../../libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	daysLoading: ReturnType<typeof useLoadingIds>;
 	index: number;
 	isOpen: boolean;
 	item: PlanDayDto;
@@ -24,6 +27,7 @@ type Properties = {
 };
 
 const Day: React.FC<Properties> = ({
+	daysLoading,
 	index,
 	isOpen,
 	item,
@@ -33,8 +37,10 @@ const Day: React.FC<Properties> = ({
 	setSelectedDay,
 }: Properties) => {
 	const { dayNumber, id } = item;
-	const [isRegenerateDayModalOpen, setIsRegenerateDayModalOpen] =
-		useState<boolean>(false);
+
+	const pendingTaskRegenerations = useAppSelector(
+		({ plan }) => plan.pendingTaskRegenerations,
+	);
 
 	const handleDay = useCallback((): void => {
 		setSelectedDay(index);
@@ -44,18 +50,9 @@ const Day: React.FC<Properties> = ({
 		}
 	}, [index, isOpen, setIsOpen, setSelectedDay]);
 
-	const handleRegenerateClick = useCallback((): void => {
-		setIsRegenerateDayModalOpen(true);
-	}, []);
-
-	const handleRegenerateConfirm = useCallback((): void => {
+	const handleRegenerate = useCallback((): void => {
 		onRegenerate(id);
-		setIsRegenerateDayModalOpen(false);
 	}, [id, onRegenerate]);
-
-	const handleRegenerateCancel = useCallback((): void => {
-		setIsRegenerateDayModalOpen(false);
-	}, []);
 
 	return (
 		<>
@@ -63,10 +60,25 @@ const Day: React.FC<Properties> = ({
 				<div className={getClassNames(styles["regenerate-button"])}>
 					{selectedDay === index && (
 						<Button
-							icon={<DecorativeImage src={Regenerate} />}
+							icon={
+								!daysLoading.isLoading(id) && (
+									<DecorativeImage src={Regenerate} />
+								)
+							}
+							isDisabled={
+								daysLoading.isLoading(id) || pendingTaskRegenerations > ZERO
+							}
 							isIconOnly
 							label="Regenerate day"
-							onClick={handleRegenerateClick}
+							loader={
+								<Loader
+									container="inline"
+									isLoading={daysLoading.isLoading(id)}
+									size="small"
+									theme="accent"
+								/>
+							}
+							onClick={handleRegenerate}
 						/>
 					)}
 				</div>
@@ -83,13 +95,6 @@ const Day: React.FC<Properties> = ({
 					{selectedDay === index && <img alt="Arrow" src={ArrowBold} />}
 				</div>
 			</div>
-			<ConfirmationModal
-				isOpen={isRegenerateDayModalOpen}
-				message={MODAL_MESSAGES.DAY_REGENERATION}
-				onCancel={handleRegenerateCancel}
-				onConfirm={handleRegenerateConfirm}
-				title="Day Regeneration"
-			/>
 		</>
 	);
 };

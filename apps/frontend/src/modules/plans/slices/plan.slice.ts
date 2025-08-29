@@ -19,6 +19,8 @@ import {
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
 	days: null | number;
+	pendingDayRegenerations: number;
+	pendingTaskRegenerations: number;
 	plan: null | PlanWithCategoryDto;
 	selectedStyle: PlanStyleOption;
 	userPlans: PlanWithCategoryDto[];
@@ -28,6 +30,8 @@ type State = {
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
 	days: null,
+	pendingDayRegenerations: 0,
+	pendingTaskRegenerations: 0,
 	plan: null,
 	selectedStyle: PlanStyle.WITH_REMARKS,
 	userPlans: [],
@@ -104,6 +108,39 @@ const { actions, name, reducer } = createSlice({
 				state.dataStatus = DataStatus.REJECTED;
 			},
 		);
+		builder
+			.addMatcher(
+				(action: PayloadAction) =>
+					action.type.endsWith("regenerate-task/pending"),
+				(state) => {
+					state.pendingTaskRegenerations += 1;
+				},
+			)
+			.addMatcher(
+				(action: PayloadAction) =>
+					action.type.endsWith("regenerate-task/fulfilled") ||
+					action.type.endsWith("regenerate-task/rejected"),
+				(state) => {
+					state.pendingTaskRegenerations -= 1;
+				},
+			);
+
+		builder
+			.addMatcher(
+				(action: PayloadAction) =>
+					action.type.endsWith("regenerate-plan-day/pending"),
+				(state) => {
+					state.pendingDayRegenerations += 1;
+				},
+			)
+			.addMatcher(
+				(action: PayloadAction) =>
+					action.type.endsWith("regenerate-plan-day/fulfilled") ||
+					action.type.endsWith("regenerate-plan-day/rejected"),
+				(state) => {
+					state.pendingDayRegenerations -= 1;
+				},
+			);
 	},
 	initialState,
 	name: "plan",

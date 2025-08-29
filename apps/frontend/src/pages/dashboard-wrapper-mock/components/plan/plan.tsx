@@ -25,8 +25,16 @@ const Plan: React.FC = () => {
 	const [selectedDay, setSelectedDay] = useState<number>(ZERO);
 	const [isPlanRegenerating, setIsPlanRegenerating] = useState<boolean>(false);
 	const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
+
 	const [isRegeneratePlanModalOpen, setIsRegeneratePlanModalOpen] =
 		useState<boolean>(false);
+
+	const [isRegenerateDayModalOpen, setIsRegenerateDayModalOpen] =
+		useState<boolean>(false);
+	const [dayToRegenerateId, setDayToRegenerateId] = useState<null | number>(
+		null,
+	);
+
 	const tasksLoading = useLoadingIds();
 	const daysLoading = useLoadingIds();
 
@@ -35,11 +43,19 @@ const Plan: React.FC = () => {
 	const plan = useAppSelector((state) => state.plan.plan);
 	const planDaysNumber = useAppSelector((state) => state.plan.days);
 
+	const isPendingPlan =
+		tasksLoading.ids.length > ZERO || daysLoading.ids.length > ZERO;
+
 	useEffect(() => {
 		if (!plan) {
 			void dispatch(planActions.getPlan());
 		}
 	}, [dispatch, plan]);
+
+	const handleDayRegenerateClick = useCallback((dayId: number) => {
+		setDayToRegenerateId(dayId);
+		setIsRegenerateDayModalOpen(true);
+	}, []);
 
 	const handleDayRegenerate = useCallback(
 		(dayId: number) => {
@@ -56,6 +72,20 @@ const Plan: React.FC = () => {
 		},
 		[plan, daysLoading, dispatch],
 	);
+
+	const handleDayRegenerateConfirm = useCallback(() => {
+		if (dayToRegenerateId) {
+			handleDayRegenerate(dayToRegenerateId);
+		}
+
+		setIsRegenerateDayModalOpen(false);
+		setDayToRegenerateId(null);
+	}, [dayToRegenerateId, handleDayRegenerate]);
+
+	const handleDayRegenerateCancel = useCallback(() => {
+		setIsRegenerateDayModalOpen(false);
+		setDayToRegenerateId(null);
+	}, []);
 
 	const handleTaskRegenerate = useCallback(
 		(taskId: number) => {
@@ -149,6 +179,7 @@ const Plan: React.FC = () => {
 					<h2 className={styles["nav-text"]}>{plan?.title}</h2>
 					<Button
 						className={styles["regenerate-button"]}
+						isDisabled={isPendingPlan || isPlanRegenerating}
 						label="Regenerate plan"
 						onClick={handlePlanRegenerateClick}
 						size="small"
@@ -171,8 +202,9 @@ const Plan: React.FC = () => {
 							)}
 						>
 							<DayList
+								daysLoading={daysLoading}
 								isOpen={isSelectOpen}
-								onRegenerate={handleDayRegenerate}
+								onRegenerate={handleDayRegenerateClick}
 								plan={plan}
 								planDaysNumber={planDaysNumber}
 								selectedDay={selectedDay}
@@ -201,6 +233,7 @@ const Plan: React.FC = () => {
 							<Button
 								icon={<DownloadIcon />}
 								iconOnlySize="medium"
+								isDisabled={isPendingPlan || isPlanRegenerating}
 								label="Download"
 								size={ButtonSizes.LARGE}
 								type={ElementTypes.BUTTON}
@@ -210,13 +243,25 @@ const Plan: React.FC = () => {
 					</div>
 				</div>
 			</div>
+
 			<ConfirmationModal
 				isOpen={isRegeneratePlanModalOpen}
-				message={MODAL_MESSAGES.PLAN_REGENERATION}
+				message="You are about to regenerate the whole plan."
 				onCancel={handlePlanRegenerateCancel}
 				onConfirm={handlePlanRegenerateConfirm}
 				title="Plan Regeneration"
-			/>
+			>
+				<p>{MODAL_MESSAGES.PLAN_REGENERATION}</p>
+			</ConfirmationModal>
+			<ConfirmationModal
+				isOpen={isRegenerateDayModalOpen}
+				message="You are about to regenerate this day."
+				onCancel={handleDayRegenerateCancel}
+				onConfirm={handleDayRegenerateConfirm}
+				title="Day Regeneration"
+			>
+				<p>{MODAL_MESSAGES.DAY_REGENERATION}</p>
+			</ConfirmationModal>
 		</>
 	);
 };
