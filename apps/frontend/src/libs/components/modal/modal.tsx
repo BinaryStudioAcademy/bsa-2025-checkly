@@ -1,4 +1,5 @@
 import { type ReactNode, useCallback, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 import { Remove } from "~/assets/img/icons/icons.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
@@ -10,6 +11,7 @@ import styles from "./styles.module.css";
 type Properties = {
 	children: ReactNode;
 	isOpen: boolean;
+	modalReference?: React.RefObject<HTMLDialogElement | null>;
 	onClose: () => void;
 	title?: string;
 };
@@ -17,11 +19,17 @@ type Properties = {
 const Modal: React.FC<Properties> = ({
 	children,
 	isOpen,
+	modalReference,
 	onClose,
 	title,
 }: Properties) => {
+	const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
 	const [shouldRender, setShouldRender] = useState<boolean>(isOpen);
 	const [isClosing, setIsClosing] = useState<boolean>(false);
+
+	useEffect(() => {
+		setPortalElement(document.body);
+	}, []);
 
 	useEffect(() => {
 		if (isOpen) {
@@ -84,15 +92,20 @@ const Modal: React.FC<Properties> = ({
 		return null;
 	}
 
-	return (
+	if (!isOpen || !portalElement) {
+		return null;
+	}
+
+	return createPortal(
 		<dialog
 			className={getClassNames(
 				styles["modal-overlay"],
-				isOpen && !isClosing && styles["modal-open"],
+				!isClosing && styles["modal-open"],
 				isClosing && styles["modal-close"],
 			)}
 			onAnimationEnd={handleAnimationEnd}
 			open
+			ref={modalReference}
 		>
 			<div className={getClassNames("grid-pattern", styles["modal-content"])}>
 				{title && (
@@ -110,7 +123,8 @@ const Modal: React.FC<Properties> = ({
 				)}
 				<div className={styles["modal-body"]}>{children}</div>
 			</div>
-		</dialog>
+		</dialog>,
+		portalElement,
 	);
 };
 

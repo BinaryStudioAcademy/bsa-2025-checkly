@@ -5,6 +5,7 @@ import { config } from "~/libs/modules/config/config.js";
 import {
 	DEFAULT_IMAGE,
 	PLAN_PDF_EXPORT_ERRORS,
+	PLAN_PDF_EXPORT_HTTP_HEADERS,
 	PLAN_PDF_EXPORT_NETWORK_IDLES,
 	PLAN_PDF_EXPORT_ROUTES,
 	PLAN_PDF_EXPORT_SELECTORS,
@@ -43,13 +44,9 @@ class PlanPdfExportService {
 		const browser = await puppeteer.launch();
 		const page = await browser.newPage();
 
-		const printUrl = config.ENV.FRONTEND.PLAN_PRINT_URL;
+		await page.setExtraHTTPHeaders(PLAN_PDF_EXPORT_HTTP_HEADERS);
 
-		if (!printUrl) {
-			await browser.close();
-
-			throw new Error(PLAN_PDF_EXPORT_ERRORS.CONTAINER_NOT_FOUND);
-		}
+		const printUrl = this.getFrontendUrl();
 
 		const requested = dto.html?.trim() ?? "";
 		const isViewOption = (value: string): value is ViewOptions =>
@@ -100,8 +97,14 @@ class PlanPdfExportService {
 	}
 
 	private buildPrintUrl(dto: ExportPlanPdfDto): string {
-		const baseUrl =
-			config.ENV.FRONTEND.PLAN_PRINT_URL || PLAN_PDF_EXPORT_ROUTES.ROOT;
+		const baseUrl = this.getFrontendUrl();
+
+		if (baseUrl.startsWith("/")) {
+			return dto.planStyle
+				? `${baseUrl}?style=${encodeURIComponent(dto.planStyle)}&planId=${dto.planId?.toString() ?? ""}`
+				: `${baseUrl}?planId=${dto.planId?.toString() ?? ""}`;
+		}
+
 		const hasPath = baseUrl.includes(PLAN_PDF_EXPORT_ROUTES.PLAN_STYLE_PRINT);
 		const path = hasPath ? "" : PLAN_PDF_EXPORT_ROUTES.PLAN_STYLE_PRINT;
 
@@ -127,9 +130,29 @@ class PlanPdfExportService {
 		return Buffer.from(pdfBuffer);
 	}
 
+	private getFrontendUrl(): string {
+		const isProduction = config.ENV.APP.ENVIRONMENT === "production";
+
+		let baseUrl = config.ENV.FRONTEND.PLAN_PRINT_URL;
+
+		if (isProduction) {
+			baseUrl = config.ENV.FRONTEND.PLAN_PRINT_URL_PRODUCTION;
+		}
+
+		if (!baseUrl) {
+			baseUrl = PLAN_PDF_EXPORT_ROUTES.ROOT;
+		}
+
+		return baseUrl;
+	}
+
 	private async launchBrowser(): Promise<puppeteer.Browser> {
 		return await puppeteer.launch({
-			args: ["--no-sandbox", "--disable-setuid-sandbox"],
+			args: [
+				"--no-sandbox",
+				"--disable-setuid-sandbox",
+				"--disable-web-security",
+			],
 			headless: true,
 		});
 	}
@@ -138,6 +161,8 @@ class PlanPdfExportService {
 		page: puppeteer.Page,
 		printUrl: string,
 	): Promise<void> {
+		await page.setExtraHTTPHeaders(PLAN_PDF_EXPORT_HTTP_HEADERS);
+
 		await page.goto(printUrl, {
 			timeout: PLAN_PDF_EXPORT_TIMEOUTS.PDF_GENERATION,
 			waitUntil: PLAN_PDF_EXPORT_NETWORK_IDLES.IDLE_0,

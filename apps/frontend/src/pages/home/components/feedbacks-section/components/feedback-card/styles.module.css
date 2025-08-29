@@ -2,7 +2,8 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	height: clamp(260px, 11.11vw + 220px, 410px);
+	height: 100%;
+	min-height: 200px;
 	font-size: var(--text-size-heading-5);
 	cursor: pointer;
 	scrollbar-color: #f7b6d2 #fde7f1;
@@ -28,23 +29,11 @@
 	padding-right: var(--space-xs-s);
 	margin: 0 0 15px;
 	overflow-y: auto;
-	-webkit-line-clamp: 5;
-	line-clamp: 5;
 	text-indent: 1em;
-	word-break: break-all;
+	hyphens: auto;
+	word-break: normal;
 	overflow-wrap: break-word;
-	-webkit-box-orient: vertical;
-}
-
-.icon {
-	width: 20px;
-	height: 20px;
-	transition: all 300ms ease-in-out;
-}
-
-.icon:hover,
-.icon:focus {
-	stroke: var(--color-card-darkblue);
+	white-space: pre-wrap;
 }
 
 .footer {

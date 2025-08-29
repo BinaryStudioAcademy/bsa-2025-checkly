@@ -13,28 +13,26 @@ import {
 	actions,
 	type FeedbackCreateRequestDto,
 	feedbackCreateValidationSchema,
+	type FeedbackDto,
 	FeedbackValidationRule,
-	selectFeedbackByUserId,
 } from "~/modules/feedbacks/feedbacks.js";
 
 import styles from "./styles.module.css";
 
 type Properties = {
+	existingFeedback?: FeedbackDto;
 	onClose: () => void;
-	userId?: number;
+	onDeleteClick: (id: number) => void;
 };
 
 const AddFeedbackModal: React.FC<Properties> = ({
+	existingFeedback,
 	onClose,
-	userId,
+	onDeleteClick,
 }: Properties) => {
 	const dispatch = useAppDispatch();
 	const { dataStatus } = useAppSelector((state) => state.feedbacks);
 	const isLoading = dataStatus === DataStatus.PENDING;
-
-	const existingFeedback = useAppSelector((state) =>
-		selectFeedbackByUserId(state, userId),
-	);
 
 	const { control, errors, handleSubmit, reset, watch } =
 		useAppForm<FeedbackCreateRequestDto>({
@@ -80,38 +78,69 @@ const AddFeedbackModal: React.FC<Properties> = ({
 		[handleSubmit, handleFormSubmit],
 	);
 
+	const handleDeleteButtonClick = useCallback(() => {
+		if (existingFeedback) {
+			onDeleteClick(existingFeedback.id);
+		}
+	}, [onDeleteClick, existingFeedback]);
+
 	return (
-		<form
-			aria-labelledby="feedback-title"
-			className={getClassNames("cluster", styles["form"])}
-			noValidate
-			onSubmit={handleOnSubmit}
-		>
-			<Textarea
-				control={control}
-				errors={errors}
-				name="text"
-				placeholder="Enter your testimonial"
-				resize="horizontal"
-				rows={10}
-			/>
-			<div className={styles["character-counter"]}>
-				{characterCount}/{maxCharacters}
-			</div>
-			<Button
-				isDisabled={isLoading}
-				label="Add"
-				loader={
-					<Loader
-						container="inline"
-						isLoading={isLoading}
-						size="small"
-						theme="accent"
+		<>
+			<form
+				aria-labelledby="feedback-title"
+				className={getClassNames("cluster", styles["form"])}
+				noValidate
+				onSubmit={handleOnSubmit}
+			>
+				<Textarea
+					control={control}
+					errors={errors}
+					fullSize
+					name="text"
+					placeholder="Enter your testimonial"
+					resize="horizontal"
+					rows={10}
+				/>
+				<div className={styles["character-counter"]}>
+					{characterCount}/{maxCharacters}
+				</div>
+				<div
+					className={getClassNames("cluster", styles["feedback-modal-buttons"])}
+				>
+					<Button
+						isDisabled={isLoading}
+						label={existingFeedback ? "Edit" : "Add"}
+						loader={
+							<Loader
+								container="inline"
+								isLoading={isLoading}
+								size="small"
+								theme="accent"
+							/>
+						}
+						type="submit"
+						variant="secondary"
 					/>
-				}
-				type="submit"
-			/>
-		</form>
+					{existingFeedback && (
+						<Button
+							isDisabled={isLoading}
+							label="Delete"
+							loader={
+								<Loader
+									container="inline"
+									isLoading={isLoading}
+									size="small"
+									theme="accent"
+								/>
+							}
+							onClick={handleDeleteButtonClick}
+							type="button"
+							variant="secondary"
+						/>
+					)}
+				</div>
+			</form>
+		</>
 	);
 };
 

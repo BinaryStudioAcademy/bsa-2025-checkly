@@ -17,6 +17,7 @@ const MIN_CHARACTERS = 0;
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
+	fullSize?: boolean;
 	label?: string;
 	maxLength?: number;
 	name: FieldPath<T>;
@@ -29,6 +30,7 @@ type Properties<T extends FieldValues> = {
 const Textarea = <T extends FieldValues>({
 	control,
 	errors,
+	fullSize,
 	label,
 	maxLength,
 	name,
@@ -45,6 +47,7 @@ const Textarea = <T extends FieldValues>({
 	const textareaContainerClass = getClassNames(
 		"cluster",
 		styles["textarea-container"],
+		fullSize && styles["textarea-container--full-size"],
 	);
 	const textareaFieldClass = getClassNames(
 		styles["textarea-field"],
