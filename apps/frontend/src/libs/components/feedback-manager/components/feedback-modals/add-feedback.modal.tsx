@@ -95,6 +95,7 @@ const AddFeedbackModal: React.FC<Properties> = ({
 				<Textarea
 					control={control}
 					errors={errors}
+					fullSize
 					name="text"
 					placeholder="Enter your testimonial"
 					resize="horizontal"

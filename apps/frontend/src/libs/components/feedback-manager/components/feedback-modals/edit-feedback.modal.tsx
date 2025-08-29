@@ -101,6 +101,7 @@ const EditFeedbackModal: React.FC<Properties> = ({
 			<Textarea
 				control={control}
 				errors={errors}
+				fullSize
 				name="text"
 				placeholder="Enter a new testimonial"
 			/>
