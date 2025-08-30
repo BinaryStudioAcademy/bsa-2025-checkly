@@ -45,22 +45,25 @@ const Modal: React.FC<Properties> = ({
 	}, [isOpen, shouldRender]);
 
 	useEffect(() => {
-		if (shouldRender) {
-			const originalOverflow = document.body.style.overflow;
-			const originalPaddingRight = document.body.style.paddingRight;
+		const originalOverflow = document.body.style.overflow;
+		const originalPaddingRight = document.body.style.paddingRight;
 
+		if (isOpen) {
 			const scrollbarWidth =
 				window.innerWidth - document.documentElement.clientWidth;
 
 			document.body.style.overflow = "hidden";
 			document.body.style.paddingRight = `${String(scrollbarWidth)}px`;
-
-			return (): void => {
-				document.body.style.overflow = originalOverflow;
-				document.body.style.paddingRight = originalPaddingRight;
-			};
+		} else {
+			document.body.style.overflow = originalOverflow;
+			document.body.style.paddingRight = originalPaddingRight;
 		}
-	}, [shouldRender]);
+
+		return (): void => {
+			document.body.style.overflow = originalOverflow;
+			document.body.style.paddingRight = originalPaddingRight;
+		};
+	}, [isOpen]);
 
 	useEffect(() => {
 		if (!shouldRender) {
