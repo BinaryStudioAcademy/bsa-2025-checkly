@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.31.2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.31.1...frontend-v1.31.2) (2025-08-30)
+
+
+### Bug Fixes
+
+* Selected plan style enhancement cy-472 ([31c66dc](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/31c66dc77c4be251308aae9e1877fe742c38a989))
+
 ## [1.31.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.31.0...frontend-v1.31.1) (2025-08-30)
 
 
