@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.38.3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.38.2...v1.38.3) (2025-08-30)
+
+
+### Bug Fixes
+
+* Selected plan style enhancement cy-472 ([31c66dc](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/31c66dc77c4be251308aae9e1877fe742c38a989))
+
 ## [1.38.2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.38.1...v1.38.2) (2025-08-30)
 
 

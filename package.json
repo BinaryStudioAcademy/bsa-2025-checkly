@@ -1,6 +1,6 @@
 {
 	"name": "сheckly",
-	"version": "1.38.2",
+	"version": "1.38.3",
 	"type": "module",
 	"workspaces": [
 		"apps/backend",
