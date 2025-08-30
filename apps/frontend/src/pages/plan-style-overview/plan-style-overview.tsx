@@ -45,7 +45,7 @@ const PlanStyleOverview: React.FC = () => {
 
 		checkMobile();
 		window.addEventListener("resize", checkMobile);
-		
+
 		return (): void => {
 			window.removeEventListener("resize", checkMobile);
 		};
