@@ -184,6 +184,7 @@ const PlanStyleOverview: React.FC = () => {
 
 				<div className={styles["actions-section"]}>
 					<PlanActions
+						handleConfirmCalendarDownload={handleOpenCalendarModal}
 						isAuthenticated={isAuthenticated}
 						isDownloading={pdfExportStatus === DataStatus.PENDING}
 						onChooseStyle={handleChooseStyle}
