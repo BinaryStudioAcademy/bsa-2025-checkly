@@ -2,6 +2,7 @@ import { createSlice, isAnyOf, type PayloadAction } from "@reduxjs/toolkit";
 import { type TaskDto } from "shared";
 
 import { DataStatus, PlanStyle } from "~/libs/enums/enums.js";
+import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { type PlanStyleOption, type ValueOf } from "~/libs/types/types.js";
 
 import { type PlanWithCategoryDto } from "../libs/types/types.js";
@@ -166,8 +167,19 @@ const { actions, name, reducer } = createSlice({
 				].tasks.filter((task) => task.id !== taskId);
 			}
 		},
+		resetPlanState: (state) => {
+			state.dataStatus = initialState.dataStatus;
+			state.days = initialState.days;
+			state.pendingDayRegenerations = initialState.pendingDayRegenerations;
+			state.pendingTaskRegenerations = initialState.pendingTaskRegenerations;
+			state.plan = initialState.plan;
+			state.selectedStyle = initialState.selectedStyle;
+			state.userPlans = initialState.userPlans;
+			state.userPlansDataStatus = initialState.userPlansDataStatus;
+		},
 		setCurrentPlan: (state, action: PayloadAction<PlanWithCategoryDto>) => {
 			state.plan = action.payload;
+			void storage.set(StorageKey.PLAN_ID, action.payload.id.toString());
 		},
 		setSelectedStyle: (state, action: PayloadAction<PlanStyleOption>) => {
 			state.selectedStyle = action.payload;

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { StorageKey } from "~/libs/modules/storage/storage.js";
+import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 
 import {
@@ -77,7 +77,11 @@ const getPlan = createAsyncThunk<
 >(`${sliceName}/get`, async (_, { extra }) => {
 	const { planApi } = extra;
 
-	const plan = await planApi.getByUserId();
+	const currentPlanId = (await storage.get(StorageKey.PLAN_ID)) as string;
+
+	const plan = currentPlanId
+		? await planApi.findWithRelations(Number.parseInt(currentPlanId))
+		: await planApi.getByUserId();
 
 	return plan;
 });
