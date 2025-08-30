@@ -88,11 +88,7 @@ const Modal: React.FC<Properties> = ({
 		}
 	}, [isClosing]);
 
-	if (!shouldRender) {
-		return null;
-	}
-
-	if (!isOpen || !portalElement) {
+	if (!shouldRender || !portalElement) {
 		return null;
 	}
 
