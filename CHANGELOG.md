@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.38.4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.38.3...v1.38.4) (2025-08-30)
+
+
+### Bug Fixes
+
+* **frontend:** temporay fix for demo cy-482 ([63cd4fb](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/63cd4fb8977605ac4583e1f7d293c972a3b77a0d))
+
 ## [1.38.3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.38.2...v1.38.3) (2025-08-30)
 
 
