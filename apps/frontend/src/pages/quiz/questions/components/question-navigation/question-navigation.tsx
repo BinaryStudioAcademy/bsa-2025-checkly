@@ -46,7 +46,23 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 	}, [navigate]);
 
 	return (
-		<div className={styles["question-navigation"]}>
+		<div
+			className={getClassNames("flow-loose-lg", styles["question-navigation"])}
+		>
+			<div>
+				{showSkip && (
+					<Button
+						className={getClassNames(
+							styles["navigation-button"],
+							styles["navigation-button-skip"],
+						)}
+						label={ButtonLabels.SKIP}
+						onClick={onSkip}
+						size={ButtonSizes.SMALL}
+						variant={ButtonVariants.TRANSPARENT}
+					/>
+				)}
+			</div>
 			<div className={getClassNames("cluster", styles["navigation-buttons"])}>
 				{isFirst && (
 					<Button
@@ -74,16 +90,6 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 					size={ButtonSizes.LARGE}
 					variant={ButtonVariants.PRIMARY}
 				/>
-
-				{showSkip && (
-					<Button
-						className={styles["navigation-button"]}
-						label={ButtonLabels.SKIP}
-						onClick={onSkip}
-						size={ButtonSizes.LARGE}
-						variant={ButtonVariants.TRANSPARENT}
-					/>
-				)}
 			</div>
 		</div>
 	);
