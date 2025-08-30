@@ -51,7 +51,9 @@ const TaskList: React.FC<Properties> = ({
 		);
 	};
 
-	return <>{tasks.map((task, index) => renderTask(task, index))}</>;
+	const sortedTasks = [...tasks].sort((a, b) => a.order - b.order);
+
+	return <>{sortedTasks.map((task, index) => renderTask(task, index))}</>;
 };
 
 export { TaskList };

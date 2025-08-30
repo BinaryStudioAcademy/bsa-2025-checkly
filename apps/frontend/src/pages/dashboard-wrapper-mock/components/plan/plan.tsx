@@ -154,6 +154,20 @@ const Plan: React.FC = () => {
 		setIsNewTaskModalOpen(true);
 	}, []);
 
+	const MAX_TASKS_AMOUNT = 5;
+
+	const getLastTaskOrder = useCallback((): number => {
+		if (!planDay) {
+			return MAX_TASKS_AMOUNT;
+		}
+
+		if (planDay.tasks.length === ZERO) {
+			return MAX_TASKS_AMOUNT;
+		}
+
+		return Math.max(...planDay.tasks.map((t) => t.order));
+	}, [planDay]);
+
 	const handleCreateTask = useCallback(
 		async (taskData: Pick<TaskResponseDto, "executionTimeType" | "title">) => {
 			const planDay = plan?.days[selectedDay];
@@ -165,7 +179,7 @@ const Plan: React.FC = () => {
 			const taskPayload = {
 				executionTimeType: taskData.executionTimeType,
 				isCompleted: false,
-				order: Number(planDay.tasks.length) + ONE,
+				order: getLastTaskOrder() + ONE,
 				planDayId: planDay.id,
 				title: taskData.title,
 			};
@@ -175,7 +189,7 @@ const Plan: React.FC = () => {
 			await dispatch(taskActions.create(taskPayload));
 			await dispatch(planActions.getPlan());
 		},
-		[dispatch, plan, selectedDay, handleCreateTaskModalClose],
+		[dispatch, plan, selectedDay, handleCreateTaskModalClose, getLastTaskOrder],
 	);
 
 	useEffect(() => {
@@ -274,7 +288,7 @@ const Plan: React.FC = () => {
 							isDisabled={tasksAmountPerSelectedDay >= DEFAULT_TASK_AMOUNT}
 							label="Add task"
 							onClick={handleCreateTaskModalOpen}
-							size={ButtonSizes.LARGE}
+							size={ButtonSizes.SMALL}
 							type={ElementTypes.BUTTON}
 							variant={ButtonVariants.PRIMARY}
 						/>

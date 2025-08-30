@@ -62,6 +62,9 @@ const PlanEdit: React.FC = () => {
 	const [isDeleteTaskModalOpen, setIsDeleteTaskModalOpen] =
 		useState<boolean>(false);
 	const [taskToDeleteId, setTaskToDeleteId] = useState<null | number>(null);
+	const [taskToDeleteIndex, setTaskToDeleteIndex] = useState<null | number>(
+		null,
+	);
 
 	const [isRegenerateDayModalOpen, setIsRegenerateDayModalOpen] =
 		useState<boolean>(false);
@@ -78,6 +81,19 @@ const PlanEdit: React.FC = () => {
 	const plan = useAppSelector((state) => state.plan.plan);
 	const planDay = plan?.days[selectedDay];
 	const tasksAmountPerSelectedDay = planDay?.tasks.length ?? MAX_TASKS_AMOUNT;
+
+	const getLastTaskOrder = useCallback((): number => {
+		if (!planDay) {
+			return MAX_TASKS_AMOUNT;
+		}
+
+		if (planDay.tasks.length === ZERO) {
+			return MAX_TASKS_AMOUNT;
+		}
+
+		return Math.max(...planDay.tasks.map((t) => t.order));
+	}, [planDay]);
+
 	const planDaysNumber = useAppSelector((state) => state.plan.days);
 
 	const isPendingPlan =
@@ -174,13 +190,34 @@ const PlanEdit: React.FC = () => {
 		setIsSelectOpen((previous) => !previous);
 	}, []);
 
-	const handleTaskDeleteClick = useCallback((taskId: number) => {
+	const handleTaskDeleteClick = useCallback((taskId: number, index: number) => {
 		setTaskToDeleteId(taskId);
+		setTaskToDeleteIndex(index);
 		setIsDeleteTaskModalOpen(true);
 	}, []);
 
+	const { control, dirtyFields, errors, getValues, reset } = useAppForm<{
+		[FORM_FIELD_NAME]: TaskDto[];
+	}>({
+		defaultValues: {
+			[FORM_FIELD_NAME]: planDay?.[FORM_FIELD_NAME] ?? [],
+		},
+		mode: FORM_MODE,
+		validationSchema: tasksEditValidationSchema,
+	});
+
+	const { fields, remove } = useFieldArray({
+		control,
+		keyName: "fieldId",
+		name: FORM_FIELD_NAME,
+	});
+
 	const handleDeleteTask = useCallback(
-		(taskId: number): void => {
+		(taskId: number, index: null | number): void => {
+			if (index !== null) {
+				remove(index);
+			}
+
 			dispatch(
 				planActions.deleteTaskFromPlan({
 					dayIndex: selectedDay,
@@ -196,44 +233,30 @@ const PlanEdit: React.FC = () => {
 					notifications.error(TaskNotificationMessage.DELETE_ERROR);
 				});
 		},
-		[dispatch, selectedDay],
+		[dispatch, selectedDay, remove],
 	);
 
 	const handleDeleteConfirm = useCallback(() => {
-		if (taskToDeleteId) {
-			handleDeleteTask(taskToDeleteId);
+		if (taskToDeleteId && taskToDeleteIndex !== null) {
+			handleDeleteTask(taskToDeleteId, taskToDeleteIndex);
 		}
 
 		setIsDeleteTaskModalOpen(false);
 		setTaskToDeleteId(null);
-	}, [taskToDeleteId, handleDeleteTask]);
+		setTaskToDeleteIndex(null);
+	}, [taskToDeleteId, handleDeleteTask, taskToDeleteIndex]);
 
 	const handleDeleteCancel = useCallback(() => {
 		setIsDeleteTaskModalOpen(false);
 		setTaskToDeleteId(null);
+		setTaskToDeleteIndex(null);
 	}, []);
-
-	const { control, dirtyFields, errors, getValues, reset } = useAppForm<{
-		[FORM_FIELD_NAME]: TaskDto[];
-	}>({
-		defaultValues: {
-			[FORM_FIELD_NAME]: planDay?.[FORM_FIELD_NAME] ?? [],
-		},
-		mode: FORM_MODE,
-		validationSchema: tasksEditValidationSchema,
-	});
 
 	useEffect(() => {
 		reset({
 			[FORM_FIELD_NAME]: planDay?.[FORM_FIELD_NAME] ?? [],
 		});
 	}, [planDay, reset, plan?.days]);
-
-	const { fields } = useFieldArray({
-		control,
-		keyName: "fieldId",
-		name: FORM_FIELD_NAME,
-	});
 
 	const saveIndividualTask = useCallback(
 		(index: number) => {
@@ -297,9 +320,9 @@ const PlanEdit: React.FC = () => {
 	);
 
 	const createTaskDeleteHandler = useCallback(
-		(taskId: number) => {
+		(taskId: number, index: number) => {
 			return (): void => {
-				handleTaskDeleteClick(taskId);
+				handleTaskDeleteClick(taskId, index);
 			};
 		},
 		[handleTaskDeleteClick],
@@ -449,7 +472,7 @@ const PlanEdit: React.FC = () => {
 					iconOnlySize="small"
 					isIconOnly
 					label="Delete task"
-					onClick={createTaskDeleteHandler(field.id)}
+					onClick={createTaskDeleteHandler(field.id, index)}
 					size="small"
 					variant="transparent"
 				/>
@@ -472,9 +495,11 @@ const PlanEdit: React.FC = () => {
 			return <div>No tasks for this day yet.</div>;
 		}
 
+		const sortedFields = [...fields].sort((a, b) => a.order - b.order);
+
 		return (
 			<>
-				{fields.map((field, index) =>
+				{sortedFields.map((field, index) =>
 					renderTaskInput(field, index, {
 						control,
 						createTaskBlurHandler,
@@ -501,7 +526,7 @@ const PlanEdit: React.FC = () => {
 			const taskPayload = {
 				executionTimeType: taskData.executionTimeType,
 				isCompleted: false,
-				order: Number(tasksAmountPerSelectedDay) + ONE,
+				order: getLastTaskOrder() + ONE,
 				planDayId: planDay?.id,
 				title: taskData.title,
 			};
@@ -513,7 +538,7 @@ const PlanEdit: React.FC = () => {
 
 			notifications.success("New task created successfully");
 		},
-		[dispatch, planDay, tasksAmountPerSelectedDay, handleCreateTaskModalClose],
+		[dispatch, planDay, handleCreateTaskModalClose, getLastTaskOrder],
 	);
 
 	if (!plan) {
