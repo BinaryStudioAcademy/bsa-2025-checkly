@@ -70,16 +70,17 @@ const findPlan = createAsyncThunk<PlanDaysTaskDto, number, AsyncThunkConfig>(
 	},
 );
 
-const getPlan = createAsyncThunk<PlanDaysTaskDto, undefined, AsyncThunkConfig>(
-	`${sliceName}/get`,
-	async (_, { extra }) => {
-		const { planApi } = extra;
+const getPlan = createAsyncThunk<
+	null | PlanDaysTaskDto,
+	undefined,
+	AsyncThunkConfig
+>(`${sliceName}/get`, async (_, { extra }) => {
+	const { planApi } = extra;
 
-		const plan = await planApi.getByUserId();
+	const plan = await planApi.getByUserId();
 
-		return plan;
-	},
-);
+	return plan;
+});
 
 const regenerateTask = createAsyncThunk<
 	PlanDaysTaskDto,

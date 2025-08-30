@@ -86,8 +86,14 @@ const { actions, name, reducer } = createSlice({
 			),
 			(state, action) => {
 				state.dataStatus = DataStatus.FULFILLED;
-				state.plan = action.payload;
-				state.days = action.payload.duration;
+
+				if (action.payload) {
+					state.plan = action.payload;
+					state.days = action.payload.duration;
+				} else {
+					state.plan = null;
+					state.days = null;
+				}
 			},
 		);
 		builder.addMatcher(
