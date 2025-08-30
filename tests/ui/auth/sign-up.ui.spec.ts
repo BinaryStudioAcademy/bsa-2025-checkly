@@ -1,12 +1,12 @@
-// tests/ui/auth/sign-up.ui.spec.ts
-import { test, expect } from "@ui/fixtures/user.fixture.js";
-import { signUpUser } from "@ui/helpers/auth.js";
 import { SignUpPage } from "@tests/ui/controllers/sign-up-page.js";
 import {
 	uniqueEmail,
-	validPassword,
 	validName,
+	validPassword,
 } from "@tests/ui/helpers/user-data.js";
+// tests/ui/auth/sign-up.ui.spec.ts
+import { expect, test } from "@ui/fixtures/user.fixture.js";
+import { signUpUser } from "@ui/helpers/auth.js";
 
 test.describe("[Sign up - UI] Consolidated suite", () => {
 	test.afterEach(async ({ page }) => {
@@ -72,8 +72,8 @@ test.describe("[Sign up - UI] Consolidated suite", () => {
 	// 3) Happy path – successful submission
 	test.describe("[Sign up - UI] Successful form submission redirects or shows success message", () => {
 		// Run multiple times to mimic parametrized data from the JSON using faker-backed helpers
-		for (let i = 0; i < 6; i++) {
-			test(`Succeeds with valid, faker-generated data #${i + 1}`, async ({
+		for (let index = 0; index < 6; index++) {
+			test(`Succeeds with valid, faker-generated data #${index + 1}`, async ({
 				page,
 			}) => {
 				const signUp = new SignUpPage(page);
@@ -84,10 +84,10 @@ test.describe("[Sign up - UI] Consolidated suite", () => {
 				const password = validPassword();
 
 				await signUp.fillForm({
-					name,
-					email,
-					password,
 					confirmPassword: password,
+					email,
+					name,
+					password,
 				});
 				await signUp.submit();
 				await signUp.expectSuccessRedirect();
@@ -108,10 +108,10 @@ test.describe("[Sign up - UI] Consolidated suite", () => {
 
 		const signUp = new SignUpPage(page);
 		await signUp.goto();
-		await signUp.fillForm({ name, email, password, confirmPassword: password });
+		await signUp.fillForm({ confirmPassword: password, email, name, password });
 		await signUp.submit();
 
-		await expect(signUp.emailInUseError).toBeVisible({ timeout: 10000 });
+		await expect(signUp.emailInUseError).toBeVisible({ timeout: 10_000 });
 		await signUp.expectOnRegisterUrl();
 	});
 
@@ -123,10 +123,10 @@ test.describe("[Sign up - UI] Consolidated suite", () => {
 		await signUp.goto();
 
 		await signUp.fillForm({
-			name: validName(),
-			email: uniqueEmail(),
-			password: "Password123",
 			confirmPassword: "Password456",
+			email: uniqueEmail(),
+			name: validName(),
+			password: "Password123",
 		});
 		await signUp.submit();
 
@@ -149,25 +149,25 @@ test.describe("[Sign up - UI] Consolidated suite", () => {
 			"user@domain_.com",
 		];
 
-		invalidEmails.forEach((badEmail, idx) => {
-			test(`Invalid email format #${idx + 1}: ${badEmail}`, async ({
+		for (const [index, badEmail] of invalidEmails.entries()) {
+			test(`Invalid email format #${index + 1}: ${badEmail}`, async ({
 				page,
 			}) => {
 				const signUp = new SignUpPage(page);
 				await signUp.goto();
 
 				await signUp.fillForm({
-					name: validName(),
-					email: badEmail,
-					password: "Password123",
 					confirmPassword: "Password123",
+					email: badEmail,
+					name: validName(),
+					password: "Password123",
 				});
 				await signUp.submit();
 
 				await signUp.expectOnRegisterUrl();
-				await expect(signUp.emailFormatError).toBeVisible({ timeout: 10000 });
+				await expect(signUp.emailFormatError).toBeVisible({ timeout: 10_000 });
 			});
-		});
+		}
 	});
 
 	// 7) Weak/invalid password matrix (static negative samples accepted)
@@ -180,47 +180,47 @@ test.describe("[Sign up - UI] Consolidated suite", () => {
 			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA1a", // > 32 chars
 		];
 
-		weakPasswords.forEach((pwd, idx) => {
-			test(`Weak/invalid password #${idx + 1}`, async ({ page }) => {
+		for (const [index, pwd] of weakPasswords.entries()) {
+			test(`Weak/invalid password #${index + 1}`, async ({ page }) => {
 				const signUp = new SignUpPage(page);
 				await signUp.goto();
 
 				await signUp.fillForm({
-					name: validName(),
-					email: uniqueEmail(),
-					password: pwd,
 					confirmPassword: pwd,
+					email: uniqueEmail(),
+					name: validName(),
+					password: pwd,
 				});
 				await signUp.submit();
 
 				await signUp.expectOnRegisterUrl();
 				await expect(signUp.passwordPolicyError).toBeVisible({
-					timeout: 10000,
+					timeout: 10_000,
 				});
 			});
-		});
+		}
 	});
 
 	// 8) Invalid name length (static edge cases)
 	test.describe("[Sign up - UI] Registration fails when name has invalid length", () => {
 		const badNames = ["Vi", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"]; // <3 and >32
 
-		badNames.forEach((badName, idx) => {
-			test(`Invalid name length #${idx + 1}`, async ({ page }) => {
+		for (const [index, badName] of badNames.entries()) {
+			test(`Invalid name length #${index + 1}`, async ({ page }) => {
 				const signUp = new SignUpPage(page);
 				await signUp.goto();
 
 				await signUp.fillForm({
-					name: badName,
-					email: uniqueEmail(),
-					password: "Password123",
 					confirmPassword: "Password123",
+					email: uniqueEmail(),
+					name: badName,
+					password: "Password123",
 				});
 				await signUp.submit();
 
 				await signUp.expectOnRegisterUrl();
-				await expect(signUp.nameLengthError).toBeVisible({ timeout: 10000 });
+				await expect(signUp.nameLengthError).toBeVisible({ timeout: 10_000 });
 			});
-		});
+		}
 	});
 });

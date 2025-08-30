@@ -1,8 +1,7 @@
-import { test as base, expect as baseExpect } from "@playwright/test";
-import { test, expect } from "@ui/fixtures/user.fixture.js";
 import { SignInPage } from "@tests/ui/controllers/signin-page.js";
-import { signUpUser } from "@ui/helpers/auth.js";
 import { DashboardPage } from "@ui/controllers/dashboard-page.js";
+import { expect, test } from "@ui/fixtures/user.fixture.js";
+import { signUpUser } from "@ui/helpers/auth.js";
 
 test.describe("[Sign in - UI] Consolidated suite", () => {
 	test.afterEach(async ({ page }) => {
@@ -45,7 +44,7 @@ test.describe("[Sign in - UI] Consolidated suite", () => {
 			const signInPage = new SignInPage(page);
 			await signInPage.submit();
 
-			const invalidInputs = signInPage.invalidInputs;
+			const { invalidInputs } = signInPage;
 			await expect(invalidInputs).toHaveCount(2);
 		});
 
@@ -56,7 +55,7 @@ test.describe("[Sign in - UI] Consolidated suite", () => {
 			await signInPage.passwordInput.fill("SomePassword123");
 			await signInPage.submit();
 
-			const invalidInputs = signInPage.invalidInputs;
+			const { invalidInputs } = signInPage;
 			await expect(invalidInputs).toHaveCount(1);
 			await expect(invalidInputs.first()).toHaveAttribute("name", "email");
 		});
@@ -68,7 +67,7 @@ test.describe("[Sign in - UI] Consolidated suite", () => {
 			await signInPage.emailInput.fill("user@example.com");
 			await signInPage.submit();
 
-			const invalidInputs = signInPage.invalidInputs;
+			const { invalidInputs } = signInPage;
 			await expect(invalidInputs).toHaveCount(1);
 			await expect(invalidInputs.first()).toHaveAttribute("name", "password");
 		});
@@ -105,7 +104,7 @@ test.describe("[Sign in - UI] Consolidated suite", () => {
 
 				// Retry-safe backend error validation
 				await expect(signInPage.emailFormatError).toBeVisible({
-					timeout: 10000,
+					timeout: 10_000,
 				});
 
 				// Assert user is still on Sign In page

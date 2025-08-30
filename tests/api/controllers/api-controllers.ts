@@ -1,4 +1,5 @@
-import { APIRequestContext } from "@playwright/test";
+import { type APIRequestContext } from "@playwright/test";
+
 import { AuthController } from "./auth-controller.js";
 
 export class ApiControllers {

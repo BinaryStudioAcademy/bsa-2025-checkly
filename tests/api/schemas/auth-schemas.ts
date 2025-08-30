@@ -1,40 +1,38 @@
 export const registerResponseSchema = {
-	type: "object",
 	properties: {
+		token: { type: "string" },
 		user: {
-			type: "object",
 			properties: {
-				id: { type: "number" },
 				email: { type: "string" },
+				id: { type: "number" },
 				name: { type: "string" },
 			},
+			type: "object",
 		},
-		token: { type: "string" },
 	},
 	required: ["user", "token"],
-};
-
-export const loginResponseSchema = {
 	type: "object",
+};
+export const loginResponseSchema = {
 	properties: {
+		token: { type: "string" },
 		user: {
-			type: "object",
 			properties: {
 				email: { type: "string" },
 				password: { type: "string" },
 			},
+			type: "object",
 		},
-		token: { type: "string" },
 	},
 	required: ["user", "token"],
-};
-
-export const getCurrentUserSchema = {
 	type: "object",
+};
+export const getCurrentUserSchema = {
 	properties: {
-		id: { type: "number" },
 		email: { type: "string" },
+		id: { type: "number" },
 		name: { type: "string" },
 	},
 	required: ["id", "email", "name"],
+	type: "object",
 };

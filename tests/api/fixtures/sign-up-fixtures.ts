@@ -1,5 +1,6 @@
-import { test as baseTest } from "./base-fixtures.js";
 import { generateUser } from "@test-helpers-api/generators.js";
+
+import { test as baseTest } from "./base-fixtures.js";
 
 export const test = baseTest.extend<{
 	validUser: ReturnType<typeof generateUser>;

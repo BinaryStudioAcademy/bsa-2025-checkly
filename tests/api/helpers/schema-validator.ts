@@ -1,5 +1,5 @@
-import { Ajv } from "ajv";
 import { expect } from "@playwright/test";
+import { Ajv } from "ajv";
 
 const ajv = new Ajv({ strict: false });
 

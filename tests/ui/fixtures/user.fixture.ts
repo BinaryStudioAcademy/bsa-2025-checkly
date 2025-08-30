@@ -1,4 +1,5 @@
-import { test as base, expect } from "@playwright/test";
+import { test as base } from "@playwright/test";
+
 import { signUpUser } from "../helpers/auth.js";
 
 type UserFixture = {
@@ -23,5 +24,4 @@ export const test = base.extend<{}, { testUser: UserFixture }>({
 		{ scope: "worker" },
 	],
 });
-
-export { expect };
+export { expect } from "@playwright/test";

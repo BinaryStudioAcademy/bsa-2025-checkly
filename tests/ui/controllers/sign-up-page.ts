@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from "@playwright/test";
+import { expect, type Locator, type Page } from "@playwright/test";
 
 /**
  * SignUpPage POM
@@ -7,23 +7,27 @@ import { Page, Locator, expect } from "@playwright/test";
  * - Tolerant field-type validation (email input is type="text" in your form).
  */
 export class SignUpPage {
-	readonly page: Page;
-
-	// Inputs
-	readonly nameInput: Locator;
-	readonly emailInput: Locator;
-	readonly passwordInput: Locator;
 	readonly confirmPasswordInput: Locator;
 
+	readonly emailFormatError: Locator;
+	readonly emailInput: Locator;
+	// Inline errors (copy-tolerant)
+	readonly emailInUseError: Locator;
+	// Inputs
+	readonly nameInput: Locator;
+
+	readonly nameLengthError: Locator;
+
+	readonly page: Page;
+	readonly passwordInput: Locator;
+	readonly passwordMismatchError: Locator;
+	readonly passwordPolicyError: Locator;
 	// Actions
 	readonly submitButton: Locator;
 
-	// Inline errors (copy-tolerant)
-	readonly emailInUseError: Locator;
-	readonly emailFormatError: Locator;
-	readonly passwordPolicyError: Locator;
-	readonly passwordMismatchError: Locator;
-	readonly nameLengthError: Locator;
+	get invalidInputs(): Locator {
+		return this.page.locator("input:invalid");
+	}
 
 	constructor(page: Page) {
 		this.page = page;
@@ -59,6 +63,56 @@ export class SignUpPage {
 		);
 	}
 
+	// ---------- Fill helpers ----------
+
+	/** Expect to still be on the sign-up page (used by negative cases) */
+	async expectOnRegisterUrl() {
+		await expect(this.page).toHaveURL(/\/sign-up\/?$/);
+	}
+	/** Accept either redirect to sign-in or to dashboard after success */
+	async expectSuccessRedirect() {
+		await expect(this.page).toHaveURL(/\/(sign-in|dashboard)\/?$/);
+	}
+	async fillConfirmPassword(value: string) {
+		await this.confirmPasswordInput.fill(value);
+	}
+	async fillEmail(value: string) {
+		await this.emailInput.fill(value);
+	}
+
+	async fillForm(parameters: {
+		confirmPassword?: string;
+		email?: string;
+		name?: string;
+		password?: string;
+	}) {
+		const { confirmPassword, email, name, password } = parameters;
+
+		if (name !== undefined) {
+			await this.fillName(name);
+		}
+
+		if (email !== undefined) {
+			await this.fillEmail(email);
+		}
+
+		if (password !== undefined) {
+			await this.fillPassword(password);
+		}
+
+		if (confirmPassword !== undefined) {
+			await this.fillConfirmPassword(confirmPassword);
+		}
+	}
+
+	async fillName(value: string) {
+		await this.nameInput.fill(value);
+	}
+
+	async fillPassword(value: string) {
+		await this.passwordInput.fill(value);
+	}
+
 	/** Navigate to the sign-up screen and wait until the form is ready */
 	async goto() {
 		await this.page.goto("/sign-up", { waitUntil: "domcontentloaded" });
@@ -66,49 +120,9 @@ export class SignUpPage {
 		await this.submitButton.waitFor({ state: "visible" });
 	}
 
-	// ---------- Fill helpers ----------
-
-	async fillName(value: string) {
-		await this.nameInput.fill(value);
-	}
-	async fillEmail(value: string) {
-		await this.emailInput.fill(value);
-	}
-	async fillPassword(value: string) {
-		await this.passwordInput.fill(value);
-	}
-	async fillConfirmPassword(value: string) {
-		await this.confirmPasswordInput.fill(value);
-	}
-
-	async fillForm(params: {
-		name?: string;
-		email?: string;
-		password?: string;
-		confirmPassword?: string;
-	}) {
-		const { name, email, password, confirmPassword } = params;
-		if (name !== undefined) await this.fillName(name);
-		if (email !== undefined) await this.fillEmail(email);
-		if (password !== undefined) await this.fillPassword(password);
-		if (confirmPassword !== undefined)
-			await this.fillConfirmPassword(confirmPassword);
-	}
-
 	async submit() {
 		await this.submitButton.click();
 	}
-
-	/** Expect to still be on the sign-up page (used by negative cases) */
-	async expectOnRegisterUrl() {
-		await expect(this.page).toHaveURL(/\/sign-up\/?$/);
-	}
-
-	/** Accept either redirect to sign-in or to dashboard after success */
-	async expectSuccessRedirect() {
-		await expect(this.page).toHaveURL(/\/(sign-in|dashboard)\/?$/);
-	}
-
 	/**
 	 * Sanity: required fields are visible and typed.
 	 * - Name: JS property 'type' must be 'text' (attribute may be omitted).
@@ -129,6 +143,7 @@ export class SignUpPage {
 		const emailType = (
 			await this.emailInput.getAttribute("type")
 		)?.toLowerCase();
+
 		if (emailType) {
 			expect.soft(["email", "text"]).toContain(emailType);
 		}
@@ -138,6 +153,7 @@ export class SignUpPage {
 		const pwdType = (
 			await this.passwordInput.getAttribute("type")
 		)?.toLowerCase();
+
 		if (pwdType) {
 			expect.soft(pwdType).toBe("password");
 		}
@@ -147,14 +163,12 @@ export class SignUpPage {
 		const cpwdType = (
 			await this.confirmPasswordInput.getAttribute("type")
 		)?.toLowerCase();
+
 		if (cpwdType) {
 			expect.soft(cpwdType).toBe("password");
 		}
 
 		// Submit button
 		await expect(this.submitButton).toBeVisible();
-	}
-	get invalidInputs(): Locator {
-		return this.page.locator("input:invalid");
 	}
 }

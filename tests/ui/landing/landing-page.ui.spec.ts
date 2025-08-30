@@ -1,5 +1,5 @@
-import { test } from "@ui/fixtures/landing-sections.fixture.js";
 import { expect } from "@playwright/test";
+import { test } from "@ui/fixtures/landing-sections.fixture.js";
 
 test.describe("Page Title", async () => {
 	test("Landing page has Checkly Title", async ({ page }) => {
@@ -141,12 +141,12 @@ test.describe("Categories", async () => {
 			"hobby",
 		];
 
-		for (let i = 0; i < categoriesTitles.length; i++) {
-			const button = categoriesButtons.nth(i);
+		for (const [index, categoriesTitle] of categoriesTitles.entries()) {
+			const button = categoriesButtons.nth(index);
 			const h2 = button.locator("h3");
 			const img = button.locator("img");
 
-			const title = categoriesTitles[i]!;
+			const title = categoriesTitle;
 			await expect(h2).toHaveText(title);
 			await expect(img).toBeVisible();
 			await expect(button).toHaveAttribute("aria-pressed", /true|false/); //Check if buttons are clickable
@@ -173,8 +173,9 @@ test.describe("Layouts", async () => {
 	}) => {
 		const layoutsCards = layoutsSection.locator("li");
 		const count = await layoutsCards.count();
-		for (let i = 0; i < count; i++) {
-			const card = layoutsCards.nth(i);
+
+		for (let index = 0; index < count; index++) {
+			const card = layoutsCards.nth(index);
 			const img = card.locator("img");
 
 			await expect(img).toBeVisible();
@@ -202,8 +203,9 @@ test.describe("Testimonials", async () => {
 	}) => {
 		const testimonialsCards = testimonialsSection.locator('[class*="card"]');
 		const count = await testimonialsCards.count();
-		for (let i = 0; i < count; i++) {
-			const card = testimonialsCards.nth(i);
+
+		for (let index = 0; index < count; index++) {
+			const card = testimonialsCards.nth(index);
 
 			const text = card.locator("p");
 			await expect(text).not.toHaveText("");
@@ -234,20 +236,21 @@ test.describe("Footer", async () => {
 		const socialIcons = footer.locator("svg");
 		const count = await socialIcons.count();
 		expect(count).toBe(3);
-		for (let i = 0; i < count; i++) {
-			await expect(socialIcons.nth(i)).toBeVisible();
+
+		for (let index = 0; index < count; index++) {
+			await expect(socialIcons.nth(index)).toBeVisible();
 		}
 	});
 
 	//Change for corresponding links once they're added
 	test("Footer elements have corresponding links", async ({ footer }) => {
 		const legalLinks = [
-			{ name: "Terms of Service", href: "/" },
-			{ name: "Privacy Policy", href: "/" },
-			{ name: "Contact Us", href: "/" },
+			{ href: "/", name: "Terms of Service" },
+			{ href: "/", name: "Privacy Policy" },
+			{ href: "/", name: "Contact Us" },
 		];
 
-		for (const { name, href } of legalLinks) {
+		for (const { href, name } of legalLinks) {
 			const link = footer.getByRole("link", { name });
 			await expect(link, `${name} should be visible`).toBeVisible();
 			await expect(link, `${name} should have correct href`).toHaveAttribute(
@@ -259,8 +262,8 @@ test.describe("Footer", async () => {
 		const socialLinks = footer.locator('nav[aria-label="Social links"] a');
 		const count = await socialLinks.count();
 
-		for (let i = 0; i < count; i++) {
-			const link = socialLinks.nth(i);
+		for (let index = 0; index < count; index++) {
+			const link = socialLinks.nth(index);
 			await expect(link).toBeVisible();
 			await expect(link).toHaveAttribute("href", "/");
 		}

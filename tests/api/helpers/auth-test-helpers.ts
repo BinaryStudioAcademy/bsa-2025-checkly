@@ -1,27 +1,44 @@
 import { expect } from "@playwright/test";
-
-import { ApiControllers } from "@tests/api/controllers/api-controllers.js";
+import { expectDataToMatch } from "@test-helpers-api/data-validator.js";
+import { expectToMatchSchema } from "@test-helpers-api/schema-validator.js";
+import { type ApiControllers } from "@tests/api/controllers/api-controllers.js";
 import {
-	registerResponseSchema,
-	loginResponseSchema,
 	getCurrentUserSchema,
+	loginResponseSchema,
+	registerResponseSchema,
 } from "@tests/api/schemas/auth-schemas.js";
 import { errorSchema } from "@tests/api/schemas/error-schemas.js";
-import { expectToMatchSchema } from "@test-helpers-api/schema-validator.js";
-import { expectDataToMatch } from "@test-helpers-api/data-validator.js";
 
-export async function expectSuccessfulRegistration(
+export async function expectGetCurrentUserError(
 	api: ApiControllers,
-	email: string,
-	name: string,
-	password: string,
+	token: string,
 ) {
-	const response = await api.auth.register(email, name, password);
+	const response = await api.auth.getCurrentUser(token);
 	const responseBody = await response.json();
 
-	expect(response.status(), "Status Code should be 201").toBe(201);
-	expectToMatchSchema(responseBody, registerResponseSchema);
-	expectDataToMatch(responseBody.user, { email, name });
+	expect(response.status(), "Status Code should be 401").toBe(401);
+	expectToMatchSchema(responseBody, errorSchema);
+	expect(responseBody.message).toBe("Authentication failed.");
+
+	return { response, responseBody };
+}
+
+export async function expectLoginError(
+	api: ApiControllers,
+	email: string,
+	password: string,
+	expectedStatus: number,
+	expectedMessage?: string,
+) {
+	const response = await api.auth.login(email, password);
+	const responseBody = await response.json();
+
+	expect(response.status()).toBe(expectedStatus);
+	expectToMatchSchema(responseBody, errorSchema);
+
+	if (expectedMessage) {
+		expect(responseBody.message).toBe(expectedMessage);
+	}
 
 	return { response, responseBody };
 }
@@ -35,41 +52,6 @@ export async function expectRegistrationError(
 	expectedMessage?: string,
 ) {
 	const response = await api.auth.register(email, name, password);
-	const responseBody = await response.json();
-
-	expect(response.status()).toBe(expectedStatus);
-	expectToMatchSchema(responseBody, errorSchema);
-
-	if (expectedMessage) {
-		expect(responseBody.message).toBe(expectedMessage);
-	}
-
-	return { response, responseBody };
-}
-
-export async function expectSuccessfulLogin(
-	api: ApiControllers,
-	email: string,
-	password: string,
-) {
-	const response = await api.auth.login(email, password);
-	const responseBody = await response.json();
-
-	expect(response.status(), "Status Code should be 200").toBe(200);
-	expectToMatchSchema(responseBody, loginResponseSchema);
-	expectDataToMatch(responseBody.user, { email });
-
-	return { response, responseBody };
-}
-
-export async function expectLoginError(
-	api: ApiControllers,
-	email: string,
-	password: string,
-	expectedStatus: number,
-	expectedMessage?: string,
-) {
-	const response = await api.auth.login(email, password);
 	const responseBody = await response.json();
 
 	expect(response.status()).toBe(expectedStatus);
@@ -97,16 +79,33 @@ export async function expectSuccessfulGetCurrentUser(
 	return { response, responseBody };
 }
 
-export async function expectGetCurrentUserError(
+export async function expectSuccessfulLogin(
 	api: ApiControllers,
-	token: string,
+	email: string,
+	password: string,
 ) {
-	const response = await api.auth.getCurrentUser(token);
+	const response = await api.auth.login(email, password);
 	const responseBody = await response.json();
 
-	expect(response.status(), "Status Code should be 401").toBe(401);
-	expectToMatchSchema(responseBody, errorSchema);
-	expect(responseBody.message).toBe("Authentication failed.");
+	expect(response.status(), "Status Code should be 200").toBe(200);
+	expectToMatchSchema(responseBody, loginResponseSchema);
+	expectDataToMatch(responseBody.user, { email });
+
+	return { response, responseBody };
+}
+
+export async function expectSuccessfulRegistration(
+	api: ApiControllers,
+	email: string,
+	name: string,
+	password: string,
+) {
+	const response = await api.auth.register(email, name, password);
+	const responseBody = await response.json();
+
+	expect(response.status(), "Status Code should be 201").toBe(201);
+	expectToMatchSchema(responseBody, registerResponseSchema);
+	expectDataToMatch(responseBody.user, { email, name });
 
 	return { response, responseBody };
 }

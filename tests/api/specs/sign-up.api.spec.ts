@@ -1,9 +1,9 @@
+import { faker } from "@faker-js/faker";
 import { test } from "@tests/api/fixtures/sign-up-fixtures.js";
 import {
-	expectSuccessfulRegistration,
 	expectRegistrationError,
+	expectSuccessfulRegistration,
 } from "@tests/api/helpers/auth-test-helpers.js";
-import { faker } from "@faker-js/faker";
 
 test.describe("[CHECKLY-1] Successful registration with valid data", () => {
 	test("Regular valid data", async ({ api, validUser }) => {
@@ -161,57 +161,57 @@ test("[CHECKLY-4] Registration fails when email field is empty", async ({
 
 test.describe("[CHECKLY-5] Registration fails when name as an invalid value", () => {
 	const invalidNameTests = [
-		{ name: "Name is empty", value: "", errorMessage: "Field is required" },
+		{ errorMessage: "Field is required", name: "Name is empty", value: "" },
 		{
+			errorMessage:
+				"Name must have at least 3 characters and maximum of 32 characters",
 			name: "Name is too short (less than 3 characters)",
 			value: "Ma",
-			errorMessage:
-				"Name must have at least 3 characters and maximum of 32 characters",
 		},
 		{
+			errorMessage:
+				"Name must have at least 3 characters and maximum of 32 characters",
 			name: "Name is too long (more than 32 characters)",
 			value: "a".repeat(33),
-			errorMessage:
-				"Name must have at least 3 characters and maximum of 32 characters",
 		},
 		{
+			errorMessage:
+				"Spaces and hyphens are allowed, as long as they are surrounded by letters",
 			name: "Space as first character",
 			value: " Max",
-			errorMessage:
-				"Spaces and hyphens are allowed, as long as they are surrounded by letters",
 		},
 		{
+			errorMessage:
+				"Spaces and hyphens are allowed, as long as they are surrounded by letters",
 			name: "Space as last character",
 			value: "Max ",
-			errorMessage:
-				"Spaces and hyphens are allowed, as long as they are surrounded by letters",
 		},
 		{
+			errorMessage:
+				"Spaces and hyphens are allowed, as long as they are surrounded by letters",
 			name: "Hyphen as first character",
 			value: "-Max",
-			errorMessage:
-				"Spaces and hyphens are allowed, as long as they are surrounded by letters",
 		},
 		{
+			errorMessage:
+				"Spaces and hyphens are allowed, as long as they are surrounded by letters",
 			name: "Hyphen as last character",
 			value: "Max-",
-			errorMessage:
-				"Spaces and hyphens are allowed, as long as they are surrounded by letters",
 		},
 		{
+			errorMessage: "Digits and special characters are not allowed",
 			name: "Invalid Characters #1 - Non Latin Characters",
 			value: "Максим",
-			errorMessage: "Digits and special characters are not allowed",
 		},
 		{
+			errorMessage: "Digits and special characters are not allowed",
 			name: "Invalid Characters #2 - Special Characters",
 			value: "Max #Mustermann",
-			errorMessage: "Digits and special characters are not allowed",
 		},
 		{
+			errorMessage: "Digits and special characters are not allowed",
 			name: "Invalid Characters #3 - Digits",
 			value: "Max123",
-			errorMessage: "Digits and special characters are not allowed",
 		},
 	];
 
@@ -231,36 +231,36 @@ test.describe("[CHECKLY-5] Registration fails when name as an invalid value", ()
 
 test.describe("[CHECKLY-6] Registration fails with empty or weak password", () => {
 	const invalidPasswordTests = [
-		{ name: "Password is empty", value: "", errorMessage: "Field is required" },
+		{ errorMessage: "Field is required", name: "Password is empty", value: "" },
 		{
+			errorMessage:
+				"Password should contain between 8 to 32 characters, at least one lowercase letter, one uppercase letter and one digit",
 			name: "Password is too short (less than 8 characters)",
 			value: "12345Ab",
-			errorMessage:
-				"Password should contain between 8 to 32 characters, at least one lowercase letter, one uppercase letter and one digit",
 		},
 		{
+			errorMessage:
+				"Password should contain between 8 to 32 characters, at least one lowercase letter, one uppercase letter and one digit",
 			name: "Password is too long (more than 32 characters)",
 			value: "1A" + "a".repeat(31),
-			errorMessage:
-				"Password should contain between 8 to 32 characters, at least one lowercase letter, one uppercase letter and one digit",
 		},
 		{
+			errorMessage:
+				"Password should contain between 8 to 32 characters, at least one lowercase letter, one uppercase letter and one digit",
 			name: "Password does not contain lowercase letter",
 			value: "123456AB",
-			errorMessage:
-				"Password should contain between 8 to 32 characters, at least one lowercase letter, one uppercase letter and one digit",
 		},
 		{
+			errorMessage:
+				"Password should contain between 8 to 32 characters, at least one lowercase letter, one uppercase letter and one digit",
 			name: "Password does not contain uppercase letter",
 			value: "123456ab",
-			errorMessage:
-				"Password should contain between 8 to 32 characters, at least one lowercase letter, one uppercase letter and one digit",
 		},
 		{
-			name: "Password does not contain digit",
-			value: "Abcdefgh",
 			errorMessage:
 				"Password should contain between 8 to 32 characters, at least one lowercase letter, one uppercase letter and one digit",
+			name: "Password does not contain digit",
+			value: "Abcdefgh",
 		},
 	];
 

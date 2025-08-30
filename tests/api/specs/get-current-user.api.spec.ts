@@ -1,11 +1,10 @@
+import { generateUser } from "@test-helpers-api/generators.js";
 import { test } from "@tests/api/fixtures/base-fixtures.js";
-
 import {
-	expectSuccessfulGetCurrentUser,
 	expectGetCurrentUserError,
+	expectSuccessfulGetCurrentUser,
 	expectSuccessfulRegistration,
 } from "@tests/api/helpers/auth-test-helpers.js";
-import { generateUser } from "@test-helpers-api/generators.js";
 
 let currentUser = {};
 let currentToken = "";

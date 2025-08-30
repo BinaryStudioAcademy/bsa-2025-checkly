@@ -1,15 +1,15 @@
-import { test } from "@tests/api/fixtures/base-fixtures.js";
-import {
-	expectSuccessfulRegistration,
-	expectSuccessfulLogin,
-	expectLoginError,
-} from "@tests/api/helpers/auth-test-helpers.js";
 import { faker } from "@faker-js/faker";
 import { generateUser } from "@test-helpers-api/generators.js";
+import { test } from "@tests/api/fixtures/base-fixtures.js";
+import {
+	expectLoginError,
+	expectSuccessfulLogin,
+	expectSuccessfulRegistration,
+} from "@tests/api/helpers/auth-test-helpers.js";
 
 const user = {
-	name: "",
 	email: "",
+	name: "",
 	password: "",
 };
 

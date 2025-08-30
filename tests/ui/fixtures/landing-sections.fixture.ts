@@ -1,19 +1,24 @@
-import { test as base, Locator, Page } from "@playwright/test";
+import { test as base, type Locator, type Page } from "@playwright/test";
 
 //export Locators for each segment of the page. Using "sectionSection" format for segments that have the <section> tag
 export const test = base.extend<{
-	page: Page;
+	categoriesSection: Locator;
+	footer: Locator;
 	header: Locator;
 	heroSection: Locator;
 	howItWorksSection: Locator;
-	categoriesSection: Locator;
 	layoutsSection: Locator;
+	page: Page;
 	testimonialsSection: Locator;
-	footer: Locator;
 }>({
-	page: async ({ page }, use) => {
-		await page.goto("/");
-		await use(page);
+	categoriesSection: async ({ page }, use) => {
+		const section = page.locator("section", { hasText: /^categories/i });
+		await use(section);
+	},
+
+	footer: async ({ page }, use) => {
+		const footer = page.locator("footer");
+		await use(footer);
 	},
 
 	header: async ({ page }, use) => {
@@ -33,11 +38,6 @@ export const test = base.extend<{
 		await use(section);
 	},
 
-	categoriesSection: async ({ page }, use) => {
-		const section = page.locator("section", { hasText: /^categories/i });
-		await use(section);
-	},
-
 	layoutsSection: async ({ page }, use) => {
 		const section = page.locator("section", {
 			hasText: /^Sample visual layouts/i,
@@ -45,13 +45,13 @@ export const test = base.extend<{
 		await use(section);
 	},
 
+	page: async ({ page }, use) => {
+		await page.goto("/");
+		await use(page);
+	},
+
 	testimonialsSection: async ({ page }, use) => {
 		const section = page.locator("section", { hasText: /^testimonials/i });
 		await use(section);
-	},
-
-	footer: async ({ page }, use) => {
-		const footer = page.locator("footer");
-		await use(footer);
 	},
 });

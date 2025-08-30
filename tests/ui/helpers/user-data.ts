@@ -13,13 +13,11 @@ const makeUnique = (base: string) => `${base}.${runId}`;
  * NAME (3..32)
  * =======================*/
 export const validName = (): string => faker.person.firstName();
-
 /* =========================
  * EMAIL
  * =======================*/
 export const uniqueEmail = (prefix = "user"): string =>
 	`${makeUnique(prefix)}@${faker.internet.domainName()}`;
-
 /* =========================
  * PASSWORD (8..32, 1U/1l/1d)
  * =======================*/
