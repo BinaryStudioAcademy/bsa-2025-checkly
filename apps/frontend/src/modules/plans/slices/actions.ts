@@ -70,20 +70,21 @@ const findPlan = createAsyncThunk<PlanDaysTaskDto, number, AsyncThunkConfig>(
 	},
 );
 
-const getPlan = createAsyncThunk<PlanDaysTaskDto, undefined, AsyncThunkConfig>(
-	`${sliceName}/get`,
-	async (_, { extra }) => {
-		const { planApi } = extra;
+const getPlan = createAsyncThunk<
+	null | PlanDaysTaskDto,
+	undefined,
+	AsyncThunkConfig
+>(`${sliceName}/get`, async (_, { extra }) => {
+	const { planApi } = extra;
 
-		const currentPlanId = (await storage.get(StorageKey.PLAN_ID)) as string;
+	const currentPlanId = (await storage.get(StorageKey.PLAN_ID)) as string;
 
-		const plan = currentPlanId
-			? await planApi.findWithRelations(Number.parseInt(currentPlanId))
-			: await planApi.getByUserId();
+	const plan = currentPlanId
+		? await planApi.findWithRelations(Number.parseInt(currentPlanId))
+		: await planApi.getByUserId();
 
-		return plan;
-	},
-);
+	return plan;
+});
 
 const regenerateTask = createAsyncThunk<
 	PlanDaysTaskDto,
