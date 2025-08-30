@@ -75,3 +75,8 @@
 	background-color: var(--color-selected-category);
 	border-radius: var(--radius-s);
 }
+
+.modal-actions {
+	--cluster-horizontal-alignment: center;
+	--gutter: var(--space-m);
+}
