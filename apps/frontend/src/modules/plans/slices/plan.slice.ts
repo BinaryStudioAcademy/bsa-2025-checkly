@@ -1,38 +1,46 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf, type PayloadAction } from "@reduxjs/toolkit";
+import { type TaskDto } from "shared";
 
-import { DataStatus } from "~/libs/enums/enums.js";
-import { type ValueOf } from "~/libs/types/types.js";
-import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
+import { DataStatus, PlanStyle } from "~/libs/enums/enums.js";
+import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
+import { type PlanStyleOption, type ValueOf } from "~/libs/types/types.js";
 
-import { generatePlan, getAllUserPlans, searchPlan } from "./actions.js";
+import { type PlanWithCategoryDto } from "../libs/types/types.js";
+import {
+	findPlan,
+	generatePlan,
+	getAllUserPlans,
+	getPlan,
+	regeneratePlan,
+	regeneratePlanDay,
+	regenerateTask,
+	searchPlan,
+} from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
-	plan: null | PlanDaysTaskDto;
-	userPlans: PlanDaysTaskDto[];
+	days: null | number;
+	pendingDayRegenerations: number;
+	pendingTaskRegenerations: number;
+	plan: null | PlanWithCategoryDto;
+	selectedStyle: PlanStyleOption;
+	userPlans: PlanWithCategoryDto[];
 	userPlansDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
+	days: null,
+	pendingDayRegenerations: 0,
+	pendingTaskRegenerations: 0,
 	plan: null,
+	selectedStyle: PlanStyle.WITH_REMARKS,
 	userPlans: [],
 	userPlansDataStatus: DataStatus.IDLE,
 };
 
 const { actions, name, reducer } = createSlice({
 	extraReducers(builder) {
-		builder.addCase(generatePlan.pending, (state) => {
-			state.dataStatus = DataStatus.PENDING;
-		});
-		builder.addCase(generatePlan.fulfilled, (state, action) => {
-			state.dataStatus = DataStatus.FULFILLED;
-			state.plan = action.payload;
-		});
-		builder.addCase(generatePlan.rejected, (state) => {
-			state.dataStatus = DataStatus.REJECTED;
-			state.plan = null;
-		});
 		builder.addCase(getAllUserPlans.pending, (state) => {
 			state.userPlansDataStatus = DataStatus.PENDING;
 		});
@@ -55,10 +63,142 @@ const { actions, name, reducer } = createSlice({
 			state.userPlansDataStatus = DataStatus.REJECTED;
 			state.userPlans = [];
 		});
+		builder.addMatcher(
+			isAnyOf(
+				generatePlan.pending,
+				getPlan.pending,
+				regenerateTask.pending,
+				regeneratePlanDay.pending,
+				findPlan.pending,
+				regeneratePlan.pending,
+			),
+			(state) => {
+				state.dataStatus = DataStatus.PENDING;
+			},
+		);
+		builder.addMatcher(
+			isAnyOf(
+				generatePlan.fulfilled,
+				getPlan.fulfilled,
+				regenerateTask.fulfilled,
+				regeneratePlanDay.fulfilled,
+				findPlan.fulfilled,
+				regeneratePlan.fulfilled,
+			),
+			(state, action) => {
+				state.dataStatus = DataStatus.FULFILLED;
+
+				if (action.payload) {
+					state.plan = action.payload;
+					state.days = action.payload.duration;
+				} else {
+					state.plan = null;
+					state.days = null;
+				}
+			},
+		);
+		builder.addMatcher(
+			isAnyOf(generatePlan.rejected, getPlan.rejected, findPlan.rejected),
+			(state) => {
+				state.dataStatus = DataStatus.REJECTED;
+				state.plan = null;
+			},
+		);
+		builder.addMatcher(
+			isAnyOf(
+				regenerateTask.rejected,
+				regeneratePlanDay.rejected,
+				regeneratePlan.rejected,
+			),
+			(state) => {
+				state.dataStatus = DataStatus.REJECTED;
+			},
+		);
+		builder
+			.addMatcher(
+				(action: PayloadAction) =>
+					action.type.endsWith("regenerate-task/pending"),
+				(state) => {
+					state.pendingTaskRegenerations += 1;
+				},
+			)
+			.addMatcher(
+				(action: PayloadAction) =>
+					action.type.endsWith("regenerate-task/fulfilled") ||
+					action.type.endsWith("regenerate-task/rejected"),
+				(state) => {
+					state.pendingTaskRegenerations -= 1;
+				},
+			);
+
+		builder
+			.addMatcher(
+				(action: PayloadAction) =>
+					action.type.endsWith("regenerate-plan-day/pending"),
+				(state) => {
+					state.pendingDayRegenerations += 1;
+				},
+			)
+			.addMatcher(
+				(action: PayloadAction) =>
+					action.type.endsWith("regenerate-plan-day/fulfilled") ||
+					action.type.endsWith("regenerate-plan-day/rejected"),
+				(state) => {
+					state.pendingDayRegenerations -= 1;
+				},
+			);
 	},
 	initialState,
 	name: "plan",
-	reducers: {},
+	reducers: {
+		clearPlan(state) {
+			state.plan = null;
+			state.dataStatus = DataStatus.IDLE;
+		},
+		deleteTaskFromPlan: (
+			state,
+			action: PayloadAction<{ dayIndex: number; taskId: number }>,
+		) => {
+			const { dayIndex, taskId } = action.payload;
+
+			if (state.plan?.days[dayIndex]) {
+				state.plan.days[dayIndex].tasks = state.plan.days[
+					dayIndex
+				].tasks.filter((task) => task.id !== taskId);
+			}
+		},
+		resetPlanState: (state) => {
+			state.dataStatus = initialState.dataStatus;
+			state.days = initialState.days;
+			state.pendingDayRegenerations = initialState.pendingDayRegenerations;
+			state.pendingTaskRegenerations = initialState.pendingTaskRegenerations;
+			state.plan = initialState.plan;
+			state.selectedStyle = initialState.selectedStyle;
+			state.userPlans = initialState.userPlans;
+			state.userPlansDataStatus = initialState.userPlansDataStatus;
+		},
+		setCurrentPlan: (state, action: PayloadAction<PlanWithCategoryDto>) => {
+			state.plan = action.payload;
+			void storage.set(StorageKey.PLAN_ID, action.payload.id.toString());
+		},
+		setSelectedStyle: (state, action: PayloadAction<PlanStyleOption>) => {
+			state.selectedStyle = action.payload;
+		},
+		updateTaskInPlan: (
+			state,
+			action: PayloadAction<{
+				dayIndex: number;
+				task: TaskDto;
+				taskIndex: number;
+			}>,
+		) => {
+			const { dayIndex, task, taskIndex } = action.payload;
+
+			if (state.plan?.days[dayIndex]?.tasks[taskIndex]) {
+				state.plan.days[dayIndex].tasks[taskIndex] = task;
+			}
+		},
+	},
 });
 
 export { actions, name, reducer };

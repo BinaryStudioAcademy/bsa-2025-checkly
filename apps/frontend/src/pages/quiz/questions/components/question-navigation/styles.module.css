@@ -1,19 +1,10 @@
-.question-navigation {
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-l);
-	align-items: center;
-	padding: var(--space-xl) 0;
-	border-top: 1px solid var(--color-border);
-}
-
 .navigation-buttons {
 	--cluster-horizontal-alignment: center;
-	--gutter: var(--space-m);
+	--gutter: var(--space-l);
 }
 
 .question-counter {
-	font-size: var(--font-size-s);
+	font-size: var(--font-size-xs);
 	font-weight: 500;
 	color: var(--color-text-secondary);
 }

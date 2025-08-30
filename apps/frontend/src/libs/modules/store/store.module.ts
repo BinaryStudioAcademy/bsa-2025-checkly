@@ -9,12 +9,32 @@ import { AppEnvironment } from "~/libs/enums/enums.js";
 import { type Config } from "~/libs/modules/config/config.js";
 import { storage } from "~/libs/modules/storage/storage.js";
 import { authApi, reducer as authReducer } from "~/modules/auth/auth.js";
+import { calendarExportApi } from "~/modules/calendar-export/index.js";
+import { reducer as calendarExportReducer } from "~/modules/calendar-export/slices/calendar-export.js";
+import {
+	feedbackApi,
+	reducer as feedbackReducer,
+} from "~/modules/feedbacks/feedbacks.js";
+import { pdfExportApi } from "~/modules/pdf-export/pdf-export.js";
+import { reducer as pdfExportReducer } from "~/modules/pdf-export/slices/pdf-export.js";
 import {
 	planCategoryApi,
 	reducer as planCategoryReducer,
 } from "~/modules/plan-categories/plan-categories.js";
+import {
+	planStylesApi,
+	reducer as planStylesReducer,
+} from "~/modules/plan-styles/plan-styles.js";
 import { planApi, reducer as planReducer } from "~/modules/plans/plans.js";
-import { quizApi, reducer as quizReducer } from "~/modules/quiz/quiz.js";
+import {
+	quizAnswerApi,
+	reducer as quizAnswerReducer,
+} from "~/modules/quiz-answers/quiz-answers.js";
+import {
+	quizQuestionApi,
+	reducer as quizQuestionReducer,
+} from "~/modules/quiz-questions/quiz-questions.js";
+import { quizApi } from "~/modules/quiz/quiz.js";
 import { taskApi, reducer as taskReducer } from "~/modules/tasks/tasks.js";
 import { userApi } from "~/modules/users/users.js";
 
@@ -24,10 +44,16 @@ import { listenerMiddleware } from "./listener-middleware/listener-middleware.js
 
 type ExtraArguments = {
 	authApi: typeof authApi;
+	calendarExportApi: typeof calendarExportApi;
+	feedbackApi: typeof feedbackApi;
 	notifications: typeof notifications;
+	pdfExportApi: typeof pdfExportApi;
 	planApi: typeof planApi;
 	planCategoryApi: typeof planCategoryApi;
+	planStylesApi: typeof planStylesApi;
+	quizAnswerApi: typeof quizAnswerApi;
 	quizApi: typeof quizApi;
+	quizQuestionApi: typeof quizQuestionApi;
 	storage: BaseStorage;
 	taskApi: typeof taskApi;
 	userApi: typeof userApi;
@@ -35,9 +61,14 @@ type ExtraArguments = {
 
 type RootReducer = {
 	auth: ReturnType<typeof authReducer>;
+	calendarExport: ReturnType<typeof calendarExportReducer>;
+	feedbacks: ReturnType<typeof feedbackReducer>;
+	pdfExport: ReturnType<typeof pdfExportReducer>;
 	plan: ReturnType<typeof planReducer>;
 	planCategory: ReturnType<typeof planCategoryReducer>;
-	quiz: ReturnType<typeof quizReducer>;
+	planStyles: ReturnType<typeof planStylesReducer>;
+	quizAnswer: ReturnType<typeof quizAnswerReducer>;
+	quizQuestion: ReturnType<typeof quizQuestionReducer>;
 	task: ReturnType<typeof taskReducer>;
 };
 
@@ -53,10 +84,16 @@ class Store {
 	public get extraArguments(): ExtraArguments {
 		return {
 			authApi,
+			calendarExportApi,
+			feedbackApi,
 			notifications,
+			pdfExportApi,
 			planApi,
 			planCategoryApi,
+			planStylesApi,
+			quizAnswerApi,
 			quizApi,
+			quizQuestionApi,
 			storage,
 			taskApi,
 			userApi,
@@ -75,9 +112,14 @@ class Store {
 			},
 			reducer: {
 				auth: authReducer,
+				calendarExport: calendarExportReducer,
+				feedbacks: feedbackReducer,
+				pdfExport: pdfExportReducer,
 				plan: planReducer,
 				planCategory: planCategoryReducer,
-				quiz: quizReducer,
+				planStyles: planStylesReducer,
+				quizAnswer: quizAnswerReducer,
+				quizQuestion: quizQuestionReducer,
 				task: taskReducer,
 			},
 		});

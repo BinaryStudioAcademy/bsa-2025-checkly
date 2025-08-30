@@ -1,5 +1,3 @@
-import { buildQueryString } from "shared/src/libs/helpers/helpers.js";
-
 import { APIPath, ContentType, HTTPRequestMethod } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
@@ -7,10 +5,13 @@ import { type Storage } from "~/libs/modules/storage/storage.js";
 import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
 import { PlansApiPath } from "./libs/enums/enums.js";
+import { buildQueryString } from "./libs/helpers/helpers.js";
 import {
+	type GeneratePlanRequestDto,
+	type PlanDayRegenerationRequestDto,
 	type PlanSearchQueryParameter,
 	type PlanWithCategoryDto,
-	type QuizAnswersRequestDto,
+	type TaskRegenerationRequestDto,
 } from "./libs/types/types.js";
 
 type Constructor = {
@@ -24,11 +25,24 @@ class PlanApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.PLANS, storage });
 	}
 
+	public async findWithRelations(planId: number): Promise<PlanDaysTaskDto> {
+		const response = await this.load(
+			this.getFullEndpoint(PlansApiPath.$ID, { id: String(planId) }),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: HTTPRequestMethod.GET,
+			},
+		);
+
+		return await response.json<PlanDaysTaskDto>();
+	}
+
 	public async generate(
-		payload: QuizAnswersRequestDto,
+		payload: GeneratePlanRequestDto,
 	): Promise<PlanDaysTaskDto> {
 		const response = await this.load(
-			this.getFullEndpoint(PlansApiPath.PLAN_GENERATE, {}),
+			this.getFullEndpoint(PlansApiPath.GENERATE, {}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: false,
@@ -40,7 +54,7 @@ class PlanApi extends BaseHTTPApi {
 		return await response.json<PlanDaysTaskDto>();
 	}
 
-	public async getAllUserPlans(): Promise<PlanDaysTaskDto[]> {
+	public async getAllUserPlans(): Promise<PlanWithCategoryDto[]> {
 		const response = await this.load(
 			this.getFullEndpoint(PlansApiPath.ROOT, {}),
 			{
@@ -50,7 +64,79 @@ class PlanApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<PlanDaysTaskDto[]>();
+		return await response.json<PlanWithCategoryDto[]>();
+	}
+
+	public async getByUserId(): Promise<PlanDaysTaskDto> {
+		const response = await this.load(
+			this.getFullEndpoint(PlansApiPath.ACTIVE, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: HTTPRequestMethod.GET,
+			},
+		);
+
+		return await response.json<PlanDaysTaskDto>();
+	}
+
+	public async regeneratePlan(payload: number): Promise<PlanDaysTaskDto> {
+		const response = await this.load(
+			this.getFullEndpoint(PlansApiPath.REGENERATE, {
+				id: payload,
+			}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: HTTPRequestMethod.PUT,
+				payload: JSON.stringify({}),
+			},
+		);
+
+		return await response.json<PlanDaysTaskDto>();
+	}
+
+	public async regeneratePlanDay(
+		payload: PlanDayRegenerationRequestDto,
+	): Promise<PlanDaysTaskDto> {
+		const { dayId, planId } = payload;
+
+		const response = await this.load(
+			this.getFullEndpoint(PlansApiPath.REGENERATE_DAY, {
+				dayId,
+				planId,
+			}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: HTTPRequestMethod.PATCH,
+				payload: JSON.stringify({}),
+			},
+		);
+
+		return await response.json<PlanDaysTaskDto>();
+	}
+
+	public async regenerateTask(
+		payload: TaskRegenerationRequestDto,
+	): Promise<PlanDaysTaskDto> {
+		const { dayId, planId, taskId } = payload;
+
+		const response = await this.load(
+			this.getFullEndpoint(PlansApiPath.REGENERATE_TASK, {
+				dayId,
+				planId,
+				taskId,
+			}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: HTTPRequestMethod.PATCH,
+				payload: JSON.stringify({}),
+			},
+		);
+
+		return await response.json<PlanDaysTaskDto>();
 	}
 
 	public async search({
@@ -80,6 +166,23 @@ class PlanApi extends BaseHTTPApi {
 		});
 
 		return await response.json<PlanWithCategoryDto[]>();
+	}
+
+	public async updateStyle(
+		planId: number,
+		styleId: number,
+	): Promise<PlanDaysTaskDto> {
+		const response = await this.load(
+			this.getFullEndpoint(PlansApiPath.PLAN_STYLE, { id: planId.toString() }),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: HTTPRequestMethod.PATCH,
+				payload: JSON.stringify({ styleId }),
+			},
+		);
+
+		return await response.json<PlanDaysTaskDto>();
 	}
 }
 

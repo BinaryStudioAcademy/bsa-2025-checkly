@@ -1,3 +1,4 @@
+export { type PlanActionType } from "./plan-action.type.js";
 export {
 	type PlanDayDto,
 	type PlanDaysTaskDto,
@@ -7,4 +8,6 @@ export {
 export { type PlanGetAllResponseDto } from "./plan-get-all-response-dto.type.js";
 export { type PlanResponseDto } from "./plan-response-dto.type.js";
 export { type PlanSearchQueryParameter } from "./plan-search-query-parameters.type.js";
+export { type PlanStyleUpdateRequestDto } from "./plan-style-update.type.js";
 export { type PlanUpdateRequestDto } from "./plan-update-request-dto.type.js";
+export { type PlanStyleType } from "shared";

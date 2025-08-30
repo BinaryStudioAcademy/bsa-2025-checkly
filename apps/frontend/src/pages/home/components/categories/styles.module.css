@@ -30,3 +30,53 @@
 	width: 126px;
 	height: 118px;
 }
+
+.quiz-cards-container {
+	--wrapper-max-width: 1064px;
+	--grid-min-item-size: 6.75rem;
+	--gutter: var(--space-l);
+
+	width: 100%;
+	margin-inline: auto;
+}
+
+@media (width >= 500px) {
+	.quiz-cards-container {
+		--grid-columns: 3;
+
+		max-width: 600px;
+	}
+}
+
+.modal-wrapper {
+	--flow-space: var(--space-m);
+}
+
+.modal-content {
+	--cluster-direction: column;
+	--cluster-vertical-alignment: center;
+
+	margin-inline: auto;
+	font-size: var(--text-size-heading-5);
+	text-align: center;
+	text-wrap: balance;
+}
+
+.modal-content-icon {
+	height: clamp(5rem, 10vw, 6rem);
+}
+
+.modal-selected-category {
+	--color-selected-category: var(--color-card-pink);
+
+	padding: 0.15em 0.3em;
+	font-weight: var(--font-weight-semi-bold);
+	text-transform: capitalize;
+	background-color: var(--color-selected-category);
+	border-radius: var(--radius-s);
+}
+
+.modal-actions {
+	--cluster-horizontal-alignment: center;
+	--gutter: var(--space-m);
+}

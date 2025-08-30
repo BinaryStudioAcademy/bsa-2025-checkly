@@ -3,7 +3,7 @@ import { type MultipleAnswers } from "~/libs/types/types.js";
 import {
 	type QuestionDto,
 	type QuizAnswer,
-} from "~/modules/quiz/libs/types/types.js";
+} from "~/modules/quiz-questions/libs/types/types.js";
 
 const OTHER_OPTION_TITLE = "✍️ Other";
 
@@ -43,8 +43,8 @@ const isQuestionRequired = (currentQuestionData: QuestionDto): boolean => {
 };
 
 const isNextDisabled = (
-	currentAnswer: QuizAnswer | undefined,
-	currentQuestionData: QuestionDto | undefined,
+	currentAnswer?: QuizAnswer,
+	currentQuestionData?: QuestionDto,
 ): boolean => {
 	if (!currentQuestionData || !isQuestionRequired(currentQuestionData)) {
 		return false;
@@ -63,14 +63,14 @@ const isNextDisabled = (
 };
 
 const isOptionSelected = (
-	option: string,
+	option: number,
 	selectedOptions?: MultipleAnswers[],
 ): boolean => {
 	return selectedOptions?.includes(option) ?? false;
 };
 
 const toggleOption = (
-	option: string,
+	option: number,
 	selectedOptions: MultipleAnswers[],
 	checked: boolean,
 ): MultipleAnswers[] => {

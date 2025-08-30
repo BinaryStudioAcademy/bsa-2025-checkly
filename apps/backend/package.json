@@ -1,7 +1,7 @@
 {
 	"name": "backend",
 	"type": "module",
-	"version": "1.8.1",
+	"version": "1.19.1",
 	"engines": {
 		"node": "22.x.x",
 		"npm": "10.x.x"
@@ -33,6 +33,7 @@
 		"dotenv": "17.2.0",
 		"fastify": "5.4.0",
 		"fastify-plugin": "5.0.1",
+		"ical-generator": "9.0.0",
 		"jose": "6.0.12",
 		"knex": "3.1.0",
 		"objection": "3.1.5",
@@ -40,12 +41,15 @@
 		"pg": "8.16.3",
 		"pino": "9.7.0",
 		"pino-pretty": "13.0.0",
+		"puppeteer": "24.16.2",
+		"resend": "6.0.1",
 		"shared": "*",
 		"swagger-jsdoc": "6.2.8"
 	},
 	"devDependencies": {
 		"@types/convict": "6.1.6",
 		"@types/swagger-jsdoc": "6.0.4",
+		"ts-node": "10.9.2",
 		"ts-paths-esm-loader": "1.4.3",
 		"tsx": "4.20.3"
 	}

@@ -11,8 +11,8 @@ const RadioQuestion: React.FC<RadioQuestionProperties> = ({
 	question,
 }: RadioQuestionProperties): React.ReactElement => {
 	const handleOptionSelect = useCallback(
-		(optionText: string) => (): void => {
-			onAnswer(optionText);
+		(optionId: number) => (): void => {
+			onAnswer(optionId);
 		},
 		[onAnswer],
 	);
@@ -20,18 +20,22 @@ const RadioQuestion: React.FC<RadioQuestionProperties> = ({
 	return (
 		<div className={styles["radio-question"]}>
 			{question.options.map((option) => (
-				<label className={styles["radio-option"]} key={option.text}>
+				<label className={styles["radio-option"]} key={option.id}>
 					<input
-						checked={currentAnswer === option.text}
+						checked={currentAnswer === option.id}
 						className={styles["radio-input"]}
 						name="radio-option"
-						onChange={handleOptionSelect(option.text)}
+						onChange={handleOptionSelect(option.id)}
 						type={ElementTypes.RADIO}
-						value={option.text}
+						value={option.id}
 					/>
 					<div className={styles["radio-custom"]}>
-						{currentAnswer === option.text && (
-							<img alt="Selected" src={logoIcon} />
+						{currentAnswer === option.id && (
+							<img
+								alt="Selected"
+								className={styles["radio-icon"]}
+								src={logoIcon}
+							/>
 						)}
 					</div>
 					<span className={styles["radio-text"]}>{option.text}</span>

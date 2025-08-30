@@ -1,8 +1,12 @@
+export { type QuestionCategoryDto } from "./question-category.dto.js";
 export { type QuestionOptionDto } from "./question-option.dto.js";
 export { type QuestionDto } from "./question.dto.js";
+export { type QuizAnswerOptionsRequestDto } from "./quiz-answer-option-request-dto.type.js";
 export { type QuizAnswer } from "./quiz-answer.type.js";
 export { type QuizCategoryType } from "./quiz-category.type.js";
+export { type QuizContext } from "./quiz-context.type.js";
 export { type QuestionType } from "./quiz-question.type.js";
 export { type QuizQuestionsResponseDto } from "./quiz-questions-response-dto.type.js";
+export { type QuizResponseDto } from "./quiz-response.dto.js";
 export { type QuizAnswersRequestDto } from "./quiz-submit-answers-request-dto.type.js";
 export { type QuizAnswersResponseDto } from "./quiz-submit-answers-response-dto.type.js";

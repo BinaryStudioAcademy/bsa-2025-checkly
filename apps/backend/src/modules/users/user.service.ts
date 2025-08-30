@@ -1,5 +1,4 @@
 import { type FastifyRequest } from "fastify";
-import { UserValidationMessage } from "shared";
 
 import { type Encryptor } from "~/libs/modules/encryptor/encryptor.js";
 import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
@@ -11,6 +10,8 @@ import {
 	handleAvatarRemove,
 	handleAvatarUpload,
 } from "./helpers/avatar.helper.js";
+import { validateAndPrepareUpdateData } from "./helpers/user-validation.helper.js";
+import { UserValidationMessage } from "./libs/enums/enums.js";
 import {
 	type UserDto,
 	type UserGetAllResponseDto,
@@ -74,36 +75,26 @@ class UserService implements Service {
 	public async update(
 		id: number,
 		payload: UserUpdateRequestDto,
+		isReseting: boolean = false,
 	): Promise<null | UserDto> {
-		const userWithSameEmail = await this.userRepository.findByField(
-			"email",
-			payload.email,
-		);
+		const updateData = await validateAndPrepareUpdateData({
+			encryptor: this.encryptor,
+			id,
+			isReseting,
+			payload,
+			userRepository: this.userRepository,
+		});
 
-		if (userWithSameEmail && userWithSameEmail.toObject().id !== id) {
+		try {
+			const updatedUser = await this.userRepository.update(id, updateData);
+
+			return updatedUser ? updatedUser.toObject() : null;
+		} catch {
 			throw new HTTPError({
-				message: UserValidationMessage.EMAIL_ALREADY_EXISTS,
-				status: HTTPCode.CONFLICT,
+				message: UserValidationMessage.FAILED_TO_UPDATE_PROFILE,
+				status: HTTPCode.INTERNAL_SERVER_ERROR,
 			});
 		}
-
-		const updateData = {
-			dob: payload.dob ?? null,
-			email: payload.email.trim(),
-			name: payload.name.trim(),
-		};
-
-		if (payload.password?.trim()) {
-			const { hash, salt } = await this.encryptor.encrypt(payload.password);
-			Object.assign(updateData, {
-				passwordHash: hash,
-				passwordSalt: salt,
-			});
-		}
-
-		const updatedUser = await this.userRepository.update(id, updateData);
-
-		return updatedUser ? updatedUser.toObject() : null;
 	}
 
 	public async uploadAvatar(

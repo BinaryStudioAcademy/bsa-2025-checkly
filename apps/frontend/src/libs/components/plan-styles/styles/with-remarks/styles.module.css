@@ -4,7 +4,23 @@
 @import url("../../components/notes/styles.module.css");
 
 .container {
+	width: 100%;
 	background-color: var(--color-bg-plan-style-with-remarks);
+}
+
+.container[class*="colourful"],
+.container[class*="minimal"] {
+	background-color: transparent;
+}
+
+.plan-body {
+	width: 100%;
+	height: auto;
+	background-color: var(--color-bg-plan-style-with-remarks);
+}
+
+.container:not([class*="with-remarks"]) .plan-body {
+	background-color: transparent;
 }
 
 .day-list {
@@ -13,4 +29,19 @@
 	grid-auto-rows: 1fr;
 	padding: 0;
 	list-style: none;
+}
+
+@media print {
+	.container {
+		height: auto;
+		min-height: 100%;
+	}
+
+	.plan-body {
+		min-height: 100%;
+	}
+
+	.day-list {
+		min-height: 100%;
+	}
 }

@@ -15,10 +15,20 @@ type GeneratedPlanDTO = {
 };
 
 type GeneratedTaskDTO = {
-	description: string;
 	executionTimeType: null | ValueOf<typeof ExecutionTimeType>;
 	order: number;
 	title: string;
 };
 
-export { type GeneratedPlanDTO };
+type PlanActionTypeMap = {
+	day: GeneratedDayDTO;
+	plan: GeneratedPlanDTO;
+	task: GeneratedTaskDTO;
+};
+
+export {
+	type GeneratedDayDTO,
+	type GeneratedPlanDTO,
+	type GeneratedTaskDTO,
+	type PlanActionTypeMap,
+};

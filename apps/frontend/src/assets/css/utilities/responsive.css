@@ -29,3 +29,13 @@
 		display: block;
 	}
 }
+
+.show-mobile-large-up {
+	display: none;
+}
+
+@media (width >= 480px) {
+	.show-mobile-large-up {
+		display: block;
+	}
+}

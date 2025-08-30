@@ -2,6 +2,7 @@ import { type Service } from "~/libs/types/types.js";
 import { TaskEntity } from "~/modules/tasks/task.entity.js";
 import { type TaskRepository } from "~/modules/tasks/task.repository.js";
 
+import { type TaskDto } from "../plans/libs/types/types.js";
 import {
 	type TaskCreateRequestDto,
 	type TaskGetAllResponseDto,
@@ -14,6 +15,18 @@ class TaskService implements Service {
 
 	public constructor(taskRepository: TaskRepository) {
 		this.taskRepository = taskRepository;
+	}
+
+	public async bulkUpdate(
+		payload: Partial<TaskDto>[],
+	): Promise<(null | TaskEntity)[]> {
+		const updatedTasks = await Promise.all(
+			payload.map((item) =>
+				this.taskRepository.update(item.id as number, item),
+			),
+		);
+
+		return updatedTasks;
 	}
 
 	public async create(payload: TaskCreateRequestDto): Promise<TaskResponseDto> {
@@ -45,10 +58,10 @@ class TaskService implements Service {
 	public async update(
 		id: number,
 		payload: TaskUpdateRequestDto,
-	): Promise<null | TaskResponseDto> {
+	): Promise<TaskResponseDto> {
 		const item = await this.taskRepository.update(id, payload);
 
-		return item ? item.toObject() : null;
+		return item.toObject();
 	}
 }
 

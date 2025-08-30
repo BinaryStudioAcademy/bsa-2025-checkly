@@ -1,28 +1,42 @@
-import {
-	Avatar01,
-	Avatar02,
-	Avatar03,
-} from "~/assets/img/shared/avatars/avatars.img.js";
+const LIMIT = 6;
+const NO_ITEMS = 0;
+const SINGLE_PAGE = 1;
+const FOUR_SLIDES_TO_LOOP = 4;
 
-const FEEDBACKS = [
-	{
-		avatar: Avatar01,
-		id: 1,
-		name: "Roy",
-		text: "Lorem ipsum dolor amet, consectetur adipiscing elit. Cras sed dui sagittis, scelerisque lectus at, porttitor lectus. Sed libero est, tincidunt eget purus nec, dignissim consequat mauris",
+const FEEDBACKS_SWIPER_BREAKPOINTS = {
+	320: {
+		slidesPerView: 1,
+		spaceBetween: 8,
 	},
-	{
-		avatar: Avatar02,
-		id: 2,
-		name: "Emma",
-		text: "Nulla et nulla pulvinar, congue justo id, cursus ligula. Nunc pharetra sapien libero, vel blandit orci rhoncus ut. Sed aliquam efficitur semper.",
+	480: {
+		slidesPerView: 1,
+		spaceBetween: 12,
 	},
-	{
-		avatar: Avatar03,
-		id: 3,
-		name: "Joan",
-		text: "Nullam tempus, elit non tempus molestie, tellus diam sagittis urna, vel viverra velit risus in nunc. Cras in quam leo. Nullam mattis at lacus eget pretium. Etiam quis pulvinar",
+	640: {
+		slidesPerView: 2,
+		spaceBetween: 16,
 	},
-] as const;
+	768: {
+		slidesPerView: 3,
+		spaceBetween: 20,
+	},
+	1024: {
+		slidesPerView: 3,
+		spaceBetween: 24,
+	},
+	1280: {
+		slidesPerView: "auto",
+		spaceBetween: 30,
+	},
+} as const;
 
-export { FEEDBACKS };
+const SWIPER_AUTOPLAY_OPTIONS = { delay: 5000, disableOnInteraction: false };
+
+export {
+	FEEDBACKS_SWIPER_BREAKPOINTS,
+	FOUR_SLIDES_TO_LOOP,
+	LIMIT,
+	NO_ITEMS,
+	SINGLE_PAGE,
+	SWIPER_AUTOPLAY_OPTIONS,
+};

@@ -2,12 +2,12 @@ import { DecorativeImage, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
-import { DECORATIVE_IMAGES_LIST } from "./libs/constants.js";
+import { DECORATIVE_IMAGES } from "./libs/constants.js";
 import styles from "./styles.module.css";
 
 const Hero: React.FC = () => {
 	const renderDecorativeImages = (): React.ReactNode =>
-		DECORATIVE_IMAGES_LIST.map((image) => (
+		DECORATIVE_IMAGES.map((image) => (
 			<DecorativeImage
 				className={getClassNames(
 					styles["floating-image"],
@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
 					<Link
 						asButtonSize="large"
 						asButtonVariant="primary"
-						to={AppRoute.TEST_PAGE}
+						to={AppRoute.QUIZ}
 					>
 						Start
 					</Link>

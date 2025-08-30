@@ -1,4 +1,12 @@
-export { ONE, ZERO } from "./libs/constants/constants.js";
+export {
+	BASE_DIMENSIONS,
+	EDITOR_ROWS,
+	LAST_INDEX,
+	MAX_AGE,
+	MIN_AGE,
+	ONE,
+	ZERO,
+} from "./libs/constants/constants.js";
 export {
 	UPLOAD_MAX_FILE_SIZE_BYTES,
 	UPLOAD_MAX_FILE_SIZE_MB,
@@ -11,6 +19,7 @@ export {
 	ErrorConstants,
 	ErrorMessage,
 	FastifyHook,
+	FileExtension,
 	QuizCategory,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
@@ -19,7 +28,12 @@ export {
 	HTTPError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
-export { configureString, sanitizeTextInput } from "./libs/helpers/helpers.js";
+export {
+	configureString,
+	getIdParameter,
+	sanitizeFeedbackInput,
+	sanitizeTextInput,
+} from "./libs/helpers/helpers.js";
 export { type Config } from "./libs/modules/config/config.js";
 export {
 	type HTTP,
@@ -40,22 +54,72 @@ export {
 	type ServerValidationErrorResponse,
 	type ValidationSchema,
 	type ValueOf,
+	ViewOption,
+	type ViewOptions,
+	type WindowSize,
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
-export { type GeneratedPlanDTO } from "./modules/openai/openai.js";
+export {
+	FeedbackApiPath,
+	type FeedbackCreateRequestDto,
+	feedbackCreateValidationSchema,
+	type FeedbackDeleteResponseDto,
+	type FeedbackDto,
+	FeedbackGetAllOption,
+	type FeedbackPaginationOptions,
+	type FeedbackUpdateRequestDto,
+	type FeedbackUpdateResponseDto,
+	feedbackUpdateValidationSchema,
+	FeedbackValidationRule,
+	type IdParameter,
+	type Pagination,
+	type UserPartialDto,
+} from "./modules/feedbacks/feedbacks.js";
+export {
+	type GeneratedDayDTO,
+	type GeneratedPlanDTO,
+	type GeneratedTaskDTO,
+	type GeneratePlanRequestDto,
+	generatePlanValidationSchema,
+	type PlanActionTypeMap,
+} from "./modules/openai/openai.js";
+export {
+	type ExportDataDto,
+	PlanCalendarExportApiPath,
+	type PlanCalendarExportRequestDto,
+	planCalendarExportSchema,
+	planCalendarRequestSchema,
+} from "./modules/plan-calendar-export/plan-calendar-export.js";
 export {
 	PlanCategoriesApiPath,
 	type PlanCategoryDto,
+	type PlanCategoryWithColorDto,
+	SKELETON_COUNT,
 	ZERO_CATEGORY_ID,
 } from "./modules/plan-categories/plan-categories.js";
 export {
 	type PlanDayCreateRequestDto,
 	planDayCreateValidationSchema,
 	type PlanDayGetAllResponseDto,
+	type PlanDayRegenerationRequestDto,
 	type PlanDayResponseDto,
 	PlanDaysApiPath,
 } from "./modules/plan-days/plan-days.js";
 export {
+	type ExportPlanPdfDto,
+	PaperFormat,
+	PlanPdfExportApiPath,
+	planPdfExportValidationSchema,
+} from "./modules/plan-pdf-export/plan-pdf-export.js";
+export {
+	PlanStyle,
+	type PlanStyleDto,
+	type PlanStyleOption,
+	type PlanStyleType,
+} from "./modules/plan-styles/plan-styles.js";
+export {
+	PlanAction,
+	type PlanActionType,
 	type PlanCreateRequestDto,
 	planCreateValidationSchema,
 	type PlanDayDto,
@@ -67,40 +131,72 @@ export {
 	type PlanSearchQueryDto,
 	type PlanSearchQueryParameter,
 	planSearchQueryParametersValidationSchema,
+	type PlanStyleUpdateRequestDto,
 	type PlanUpdateRequestDto,
 	type PlanWithCategoryDto,
 } from "./modules/plans/plans.js";
 export {
+	QuizAnswerApiPath,
+	type QuizAnswerCreateRequestDto,
+	quizAnswerCreateValidationSchema,
+	type QuizAnswerGetAllResponseDto,
+	type QuizAnswerResponseDto,
+	type QuizAnswerUpdateRequestDto,
+} from "./modules/quiz-answers/quiz-answers.js";
+export {
+	type QuestionCategoryDto,
+	questionCategoryValidationSchema,
 	type QuestionDto,
 	type QuestionOptionDto,
 	type QuestionType,
 	type QuizAnswer,
+	QuizAnswerOptionApiPath,
+	type QuizAnswerOptionCreateRequestDto,
+	type QuizAnswerOptionsRequestDto,
+	quizAnswerOptionValidationSchema,
 	type QuizAnswersRequestDto,
 	type QuizAnswersResponseDto,
 	QuizAnswersRule,
 	quizAnswersValidationSchema,
 	QuizApiPath,
 	type QuizCategoryType,
+	type QuizContext,
+	type QuizCreateRequestDto,
+	quizCreateValidationSchema,
 	QuizIndexes,
+	QuizQuestionApiPath,
 	QuizQuestionFormat,
+	QuizQuestionFormatLabels,
 	type QuizQuestionsResponseDto,
+	type QuizResponseDto,
 	quizStateValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
 	ExecutionTimeType,
+	type ExecutionTimeTypeValue,
+	type TaskCreateFormValues,
+	taskCreatePartialValidationSchema,
 	type TaskCreateRequestDto,
 	taskCreateValidationSchema,
 	type TaskDto,
 	type TaskGetAllResponseDto,
 	TaskMessage,
+	type TaskRegenerationRequestDto,
 	type TaskResponseDto,
 	TasksApiPath,
+	tasksEditValidationSchema,
 	type TaskUpdateRequestDto,
 	taskUpdateValidationSchema,
 	TaskValidationRule,
 } from "./modules/tasks/tasks.js";
 export {
 	AvatarTypes,
+	type ForgotPasswordRequestDto,
+	forgotPasswordValidationSchema,
+	type ResetPasswordFormValidationSchema,
+	type ResetPasswordRequestDto,
+	resetPasswordValidationSchema,
+	resetPasswordWithTokenValidationSchema,
 	S3BucketIndex,
 	type SignUpFormValidationSchema,
 	type UserDto,
@@ -117,4 +213,5 @@ export {
 	userUpdateValidationSchema,
 	UserValidationMessage,
 	UserValidationRule,
+	type VerifyTokenRequestDto,
 } from "./modules/users/users.js";

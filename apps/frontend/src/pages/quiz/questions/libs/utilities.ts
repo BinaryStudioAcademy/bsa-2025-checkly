@@ -13,7 +13,6 @@ export {
 	canSubmitQuiz,
 	hasError,
 	isLoading,
-	shouldFetchQuestions,
 	shouldRedirectToQuiz,
 } from "./initialization-utilities.js";
 export {

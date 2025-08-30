@@ -1,12 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
-import { type PlanDaysTaskDto } from "~/modules/plans/plans.js";
 
 import {
+	type PlanDayRegenerationRequestDto,
+	type PlanDaysTaskDto,
 	type PlanSearchQueryParameter,
 	type PlanWithCategoryDto,
 	type QuizAnswersRequestDto,
+	type TaskRegenerationRequestDto,
 } from "../libs/types/types.js";
 import { name as sliceName } from "./plan.slice.js";
 
@@ -14,9 +17,23 @@ const generatePlan = createAsyncThunk<
 	PlanDaysTaskDto,
 	QuizAnswersRequestDto,
 	AsyncThunkConfig
->(`${sliceName}/generate`, async (payload, { extra }) => {
-	const { planApi } = extra;
-	const plan = await planApi.generate(payload);
+>(`${sliceName}/generate`, async (payload, { extra, getState }) => {
+	const { planApi, storage } = extra;
+
+	const state = getState();
+
+	const stored = await storage.get(StorageKey.QUIZ_ID);
+	const quizId = Number(stored);
+
+	const plan = await planApi.generate({
+		quizAnswers: payload,
+		quizId,
+		userId: state.auth.user?.id,
+	});
+
+	if (!plan.userId) {
+		await storage.set(StorageKey.PLAN_ID, String(plan.id));
+	}
 
 	return plan;
 });
@@ -33,7 +50,7 @@ const searchPlan = createAsyncThunk<
 });
 
 const getAllUserPlans = createAsyncThunk<
-	PlanDaysTaskDto[],
+	PlanWithCategoryDto[],
 	undefined,
 	AsyncThunkConfig
 >(`${sliceName}/getAllUserPlans`, async (_, { extra }) => {
@@ -43,4 +60,75 @@ const getAllUserPlans = createAsyncThunk<
 	return plan;
 });
 
-export { generatePlan, getAllUserPlans, searchPlan };
+const findPlan = createAsyncThunk<PlanDaysTaskDto, number, AsyncThunkConfig>(
+	`${sliceName}/:id`,
+	async (payload, { extra }) => {
+		const { planApi } = extra;
+		const plan = await planApi.findWithRelations(payload);
+
+		return plan;
+	},
+);
+
+const getPlan = createAsyncThunk<
+	null | PlanDaysTaskDto,
+	undefined,
+	AsyncThunkConfig
+>(`${sliceName}/get`, async (_, { extra }) => {
+	const { planApi } = extra;
+
+	const currentPlanId = (await storage.get(StorageKey.PLAN_ID)) as string;
+
+	const plan = currentPlanId
+		? await planApi.findWithRelations(Number.parseInt(currentPlanId))
+		: await planApi.getByUserId();
+
+	return plan;
+});
+
+const regenerateTask = createAsyncThunk<
+	PlanDaysTaskDto,
+	TaskRegenerationRequestDto,
+	AsyncThunkConfig
+>(`${sliceName}/regenerate-task`, async (payload, { extra }) => {
+	const { planApi } = extra;
+
+	const plan = await planApi.regenerateTask(payload);
+
+	return plan;
+});
+
+const regeneratePlanDay = createAsyncThunk<
+	PlanDaysTaskDto,
+	PlanDayRegenerationRequestDto,
+	AsyncThunkConfig
+>(`${sliceName}/regenerate-plan-day`, async (payload, { extra }) => {
+	const { planApi } = extra;
+
+	const plan = await planApi.regeneratePlanDay(payload);
+
+	return plan;
+});
+
+const regeneratePlan = createAsyncThunk<
+	PlanDaysTaskDto,
+	number,
+	AsyncThunkConfig
+>(`${sliceName}/regenerate-plan`, async (payload, { extra }) => {
+	const { planApi } = extra;
+
+	const plan = await planApi.regeneratePlan(payload);
+
+	return plan;
+});
+
+export {
+	findPlan,
+	generatePlan,
+	getAllUserPlans,
+	getPlan,
+	regeneratePlan,
+	regeneratePlanDay,
+	regenerateTask,
+	searchPlan,
+};

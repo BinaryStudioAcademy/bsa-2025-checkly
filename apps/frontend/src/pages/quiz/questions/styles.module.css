@@ -1,13 +1,9 @@
 .question-flow {
-	--grid-opacity: 0.2;
+	--grid-opacity: 0.1;
 
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-l);
-	align-items: center;
 	width: 100%;
 	min-height: 100vh;
-	padding: var(--space-xl);
+	padding-block: var(--space-xl);
 	background-color: var(--color-card-pink);
 }
 
@@ -82,18 +78,4 @@
 .no-questions p {
 	font-size: var(--text-size-body);
 	color: var(--color-text-secondary);
-}
-
-@media (width <= 768px) {
-	.question-flow {
-		gap: var(--space-s);
-		padding: var(--space-m);
-	}
-}
-
-@media (width <= 320px) {
-	.question-flow {
-		gap: var(--space-xs);
-		padding: var(--space-s);
-	}
 }

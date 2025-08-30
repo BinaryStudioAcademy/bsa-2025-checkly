@@ -1,5 +1,9 @@
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { Button } from "~/libs/components/components.js";
 import {
+	AppRoute,
 	ButtonLabels,
 	ButtonSizes,
 	ButtonVariants,
@@ -31,11 +35,30 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 	);
 	const nextButtonLabel = getNextButtonLabel(currentQuestion, totalQuestions);
 
+	const navigate = useNavigate();
+
+	const handleBack = useCallback((): void => {
+		const redirect = async (): Promise<void> => {
+			await navigate(AppRoute.QUIZ);
+		};
+
+		void redirect();
+	}, [navigate]);
+
 	return (
 		<div className={styles["question-navigation"]}>
 			<div className={getClassNames("cluster", styles["navigation-buttons"])}>
+				{isFirst && (
+					<Button
+						label={ButtonLabels.BACK_TO_START_QUIZ_PAGE}
+						onClick={handleBack}
+						variant={ButtonVariants.SECONDARY}
+					/>
+				)}
+
 				{!isFirst && (
 					<Button
+						className={styles["navigation-button"]}
 						label={ButtonLabels.BACK}
 						onClick={onBack}
 						size={ButtonSizes.LARGE}
@@ -44,6 +67,7 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 				)}
 
 				<Button
+					className={styles["navigation-button"]}
 					isDisabled={isNextDisabled}
 					label={nextButtonLabel}
 					onClick={onNext}
@@ -53,16 +77,13 @@ const QuestionNavigation: React.FC<QuestionNavigationProperties> = ({
 
 				{showSkip && (
 					<Button
+						className={styles["navigation-button"]}
 						label={ButtonLabels.SKIP}
 						onClick={onSkip}
 						size={ButtonSizes.LARGE}
 						variant={ButtonVariants.TRANSPARENT}
 					/>
 				)}
-			</div>
-
-			<div className={styles["question-counter"]}>
-				Question {currentQuestion} of {totalQuestions}
 			</div>
 		</div>
 	);

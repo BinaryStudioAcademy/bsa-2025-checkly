@@ -3,6 +3,7 @@
 	--cluster-horizontal-alignment: center;
 	--gutter: var(--space-l);
 	--grid-color: var(--color-text-primary);
+	--grid-opacity: 0.15;
 
 	width: 100%;
 	min-height: 100vh;
@@ -10,7 +11,10 @@
 }
 
 .progress {
+	padding: var(--gutter);
+	font-size: var(--text-size-heading-2);
 	color: var(--color-bg-white);
+	text-align: center;
 }
 
 .progress-number {

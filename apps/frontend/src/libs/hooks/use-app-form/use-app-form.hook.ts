@@ -4,11 +4,15 @@ import {
 	type DefaultValues,
 	type FieldErrors,
 	type FieldValues,
+	type FormState,
 	useForm,
+	type UseFormGetValues,
 	type UseFormHandleSubmit,
 	type UseFormProps,
 	type UseFormReset,
 	type UseFormSetError,
+	type UseFormSetValue,
+	type UseFormWatch,
 	type ValidationMode,
 } from "react-hook-form";
 
@@ -22,12 +26,16 @@ type Parameters<T extends FieldValues = FieldValues> = {
 
 type ReturnValue<T extends FieldValues = FieldValues> = {
 	control: Control<T, null>;
+	dirtyFields?: FormState<T>["dirtyFields"];
 	errors: FieldErrors<T>;
+	getValues: UseFormGetValues<T>;
 	handleSubmit: UseFormHandleSubmit<T>;
 	isDirty: boolean;
 	isSubmitting: boolean;
 	reset: UseFormReset<T>;
 	setError?: UseFormSetError<T>;
+	setValue: UseFormSetValue<T>;
+	watch: UseFormWatch<T>;
 };
 
 const useAppForm = <T extends FieldValues = FieldValues>({
@@ -49,20 +57,27 @@ const useAppForm = <T extends FieldValues = FieldValues>({
 
 	const {
 		control,
-		formState: { errors, isDirty, isSubmitting },
+		formState: { dirtyFields, errors, isDirty, isSubmitting },
+		getValues,
 		handleSubmit,
 		reset,
 		setError,
+		setValue,
+		watch,
 	} = useForm<T>(parameters);
 
 	return {
 		control,
+		dirtyFields,
 		errors,
+		getValues,
 		handleSubmit,
 		isDirty,
 		isSubmitting,
 		reset,
 		setError,
+		setValue,
+		watch,
 	};
 };
 

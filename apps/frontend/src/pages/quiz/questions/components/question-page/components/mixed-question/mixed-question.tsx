@@ -33,13 +33,13 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 	);
 
 	const handleOptionChange = useCallback(
-		(option: string, isChecked: boolean): void => {
+		(option: number, optionText: string, isChecked: boolean): void => {
 			const newSelectedOptions = toggleOption(
 				option,
 				selectedOptions,
 				isChecked,
 			);
-			const isSwitchingFromOther = isOtherOption(option) && !isChecked;
+			const isSwitchingFromOther = isOtherOption(optionText) && !isChecked;
 			const newUserInput = isSwitchingFromOther ? "" : userInput;
 
 			setSelectedOptions(newSelectedOptions);
@@ -56,37 +56,49 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 	);
 
 	const handleInputChange = useCallback(
-		(optionText: string) =>
+		(optionId: number, optionText: string) =>
 			(event_: React.ChangeEvent<HTMLInputElement>): void => {
-				handleOptionChange(optionText, event_.target.checked);
+				handleOptionChange(optionId, optionText, event_.target.checked);
 			},
 		[handleOptionChange],
 	);
 
 	const handleTextChange = useCallback(
 		(event_: React.ChangeEvent<HTMLInputElement>): void => {
-			const newUserInput = sanitizeTextInput(event_.target.value);
+			const newUserInput = event_.target.value;
 			setUserInput(newUserInput);
 			onAnswer({ selectedOptions, userInput: newUserInput });
 		},
 		[onAnswer, selectedOptions],
 	);
 
+	const handleTextBlur = useCallback((): void => {
+		const sanitizedValue = sanitizeTextInput(userInput);
+		setUserInput(sanitizedValue);
+		onAnswer({ selectedOptions, userInput: sanitizedValue });
+	}, [onAnswer, selectedOptions, userInput]);
+
 	return (
-		<div className={styles["mixed-question"]}>
+		<div
+			className={`${styles["mixed-question"] ?? ""} ${isOthersSelected ? (styles["has-text-input"] ?? "") : ""}`}
+		>
 			<div className={styles["checkbox-section"]}>
 				<div className={styles["options-container"]}>
 					{question.options.map((option) => (
-						<label className={styles["checkbox-option"]} key={option.text}>
+						<label className={styles["checkbox-option"]} key={option.id}>
 							<input
-								checked={isOptionSelected(option.text, selectedOptions)}
+								checked={isOptionSelected(option.id, selectedOptions)}
 								className={styles["checkbox-input"]}
-								onChange={handleInputChange(option.text)}
+								onChange={handleInputChange(option.id, option.text)}
 								type={ElementTypes.CHECKBOX}
 							/>
 							<div className={styles["checkbox-custom"]}>
-								{isOptionSelected(option.text, selectedOptions) && (
-									<img alt="Selected" src={logoIcon} />
+								{isOptionSelected(option.id, selectedOptions) && (
+									<img
+										alt="Selected"
+										className={styles["checkbox-icon"]}
+										src={logoIcon}
+									/>
 								)}
 							</div>
 							<span className={styles["option-text"]}>{option.text}</span>
@@ -103,6 +115,7 @@ const MixedQuestion: React.FC<MixedQuestionProperties> = ({
 					<input
 						className={styles["text-input"]}
 						id="mixed-text-answer"
+						onBlur={handleTextBlur}
 						onChange={handleTextChange}
 						placeholder={PlaceholderValues.ENTER_YOUR_ADDITIONAL_OPTIONS}
 						type={ElementTypes.TEXT}

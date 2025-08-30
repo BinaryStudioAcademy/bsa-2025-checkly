@@ -1,3 +1,5 @@
+import { ONE } from "../constants/constants.js";
+
 const formatDateForInput = (dateString: null | string): string => {
 	if (!dateString) {
 		return "";
@@ -8,4 +10,11 @@ const formatDateForInput = (dateString: null | string): string => {
 	return date ?? "";
 };
 
-export { formatDateForInput };
+const addDays = (date: Date, days = ONE): Date => {
+	const result = new Date(date);
+	result.setDate(result.getDate() + days);
+
+	return result;
+};
+
+export { addDays, formatDateForInput };

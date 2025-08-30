@@ -1,6 +1,6 @@
 {
-	"name": "checkly",
-	"version": "1.22.1",
+	"name": "сheckly",
+	"version": "1.38.4",
 	"type": "module",
 	"workspaces": [
 		"apps/backend",
@@ -79,6 +79,7 @@
 	},
 	"dependencies": {
 		"@aws-sdk/client-s3": "3.864.0",
-		"@fastify/multipart": "9.0.3"
+		"@fastify/multipart": "9.0.3",
+		"swiper": "11.2.10"
 	}
 }

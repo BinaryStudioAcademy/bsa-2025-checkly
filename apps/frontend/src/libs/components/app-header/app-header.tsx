@@ -19,6 +19,8 @@ const DEFAULT_USER_NAME = "User";
 const AppHeader: React.FC = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 	const menuReference = useRef<HTMLDivElement>(null);
+	const modalReference = useRef<HTMLDialogElement | null>(null);
+
 	const user = useAppSelector((state) => state.auth.user);
 
 	const { pathname } = useLocation();
@@ -42,6 +44,7 @@ const AppHeader: React.FC = () => {
 	useDropdownMenu({
 		isMenuOpen,
 		menuReference,
+		modalReference,
 		onClose: handleMenuClose,
 	});
 
@@ -108,7 +111,7 @@ const AppHeader: React.FC = () => {
 						</button>
 					</>
 				)}
-				{isMenuOpen && <UserMenu isOpen />}
+				{isMenuOpen && <UserMenu isOpen modalReference={modalReference} />}
 			</div>
 		</header>
 	);

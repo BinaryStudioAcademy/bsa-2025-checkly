@@ -18,15 +18,18 @@ import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
 import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { actions as planActions } from "~/modules/plans/plans.js";
-import { actions as quizActions } from "~/modules/quiz/quiz.js";
-import { type QuizState } from "~/modules/quiz/slices/quiz.slice.js";
+import { actions as quizActions } from "~/modules/quiz-questions/quiz-questions.js";
+import { type QuizState } from "~/modules/quiz-questions/slices/quiz-questions.slice.js";
 import {
 	type QuizAnswersRequestDto,
 	type QuizCategoryType,
 } from "~/pages/plan-generation/libs/types/types.js";
 
 import { ImageSlider } from "./components/slider/slider.js";
-import { DEFAULT_QUIZ_STATE } from "./libs/constants/constants.js";
+import {
+	DEFAULT_QUIZ_STATE,
+	LOADING_MESSAGES,
+} from "./libs/constants/constants.js";
 import { useProgress } from "./libs/hooks/hooks.js";
 import styles from "./styles.module.css";
 
@@ -46,6 +49,7 @@ const SLIDES = [
 const PlanGeneration: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const status = useAppSelector((state) => state.plan.dataStatus);
+	const user = useAppSelector((state) => state.auth.user);
 
 	const navigate = useNavigate();
 
@@ -66,16 +70,20 @@ const PlanGeneration: React.FC = () => {
 		};
 
 		void generatePlan();
-	}, [dispatch]);
+	}, [dispatch, user]);
 
 	const progress = useProgress({
 		onComplete: (): void => {
 			dispatch(quizActions.resetQuiz());
 			void storage.drop(StorageKey.QUIZ_STATE);
-			void navigate(AppRoute.PLAN);
+			void navigate(AppRoute.OVERVIEW_PAGE);
 		},
 		status,
 	});
+
+	const message =
+		LOADING_MESSAGES.find(({ max, min }) => progress >= min && progress < max)
+			?.text ?? "";
 
 	const containerClasses = getClassNames(
 		styles["container"],
@@ -87,7 +95,7 @@ const PlanGeneration: React.FC = () => {
 		<main className={containerClasses}>
 			<ImageSlider slides={SLIDES} />
 			<h1 className={styles["progress"]}>
-				Analyzing{" "}
+				{message}{" "}
 				<span className={styles["progress-number"]}>
 					{Math.floor(progress)}%
 				</span>

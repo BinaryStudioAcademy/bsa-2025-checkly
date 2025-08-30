@@ -4,16 +4,15 @@ import { ElementTypes, KeyboardKeys, QuizIndexes } from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { type QuizCategoryCardProperties } from "~/libs/types/types.js";
-import { formatCategoryTitle } from "~/modules/quiz/libs/helpers/format-category-title.js";
 
 import styles from "./styles.module.css";
 
 const QuizCategoryCard: React.FC<QuizCategoryCardProperties> = ({
-	category,
 	color,
-	icon,
+	iconHref,
+	isSelected,
 	onSelect,
-	selected,
+	title,
 }: QuizCategoryCardProperties): React.ReactElement => {
 	const handleChange = useCallback((): void => {
 		onSelect();
@@ -34,13 +33,13 @@ const QuizCategoryCard: React.FC<QuizCategoryCardProperties> = ({
 
 	return (
 		<div
-			aria-label={`Select ${formatCategoryTitle(category)} category`}
-			aria-pressed={selected}
+			aria-label={`Select ${title} category`}
+			aria-pressed={isSelected}
 			className={getClassNames(
 				"flow",
 				styles["quiz-category-card"],
 				styles[`quiz-category-card-${color}`],
-				selected && styles["quiz-category-card-selected"],
+				isSelected && styles["quiz-category-card-selected"],
 			)}
 			onClick={onSelect}
 			onKeyDown={handleKeyDown}
@@ -50,22 +49,21 @@ const QuizCategoryCard: React.FC<QuizCategoryCardProperties> = ({
 			<div className={styles["quiz-category-card-image"]}>
 				<DecorativeImage
 					className={styles["quiz-category-card-icon"] || ""}
-					src={icon}
+					src={iconHref}
 				/>
 			</div>
-			<h2 className={styles["quiz-category-card-title"]}>
-				{formatCategoryTitle(category)}
-			</h2>
+			<h2 className={styles["quiz-category-card-title"]}>{title}</h2>
 			<input
-				checked={selected}
+				checked={isSelected}
 				className={styles["quiz-category-card-input"]}
-				id={`quiz-category-${category}`}
+				id={`quiz-category-${title}`}
 				name="quiz-category"
 				onChange={handleChange}
+				tabIndex={-1}
 				type={ElementTypes.RADIO}
-				value={category}
+				value={title}
 			/>
-			{selected && (
+			{isSelected && (
 				<div className={styles["quiz-category-card-tick"]}>
 					<DecorativeImage src={logoIcon} />
 				</div>

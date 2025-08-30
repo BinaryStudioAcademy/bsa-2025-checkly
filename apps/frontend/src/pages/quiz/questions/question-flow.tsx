@@ -1,8 +1,14 @@
 import React, { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { Loader } from "~/libs/components/components.js";
-import { AppRoute, ErrorMessage, QuizIndexes } from "~/libs/enums/enums.js";
+import {
+	AppRoute,
+	ErrorMessage,
+	QuizIndexes,
+	ZERO,
+} from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import {
 	useAppDispatch,
@@ -11,7 +17,13 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AppRouteType } from "~/libs/types/types.js";
-import { actions, type QuizAnswer } from "~/modules/quiz/quiz.js";
+import { actions as categoryActions } from "~/modules/plan-categories/plan-categories.js";
+import { actions as quizAnswerActions } from "~/modules/quiz-answers/quiz-answers.js";
+import {
+	actions,
+	type QuizAnswer,
+} from "~/modules/quiz-questions/quiz-questions.js";
+import { type QuizState } from "~/modules/quiz-questions/slices/quiz-questions.slice.js";
 
 import { NotesPage } from "./components/notes-page/notes-page.js";
 import { ProgressBar } from "./components/progress-bar/progress-bar.js";
@@ -29,7 +41,6 @@ import {
 	isNextDisabled,
 	isNotesPage,
 	isQuestionNotFound,
-	shouldFetchQuestions,
 	shouldMoveToNext,
 	shouldRedirectToQuiz,
 } from "./libs/utilities.js";
@@ -40,7 +51,8 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 	const navigate = useNavigate();
 
 	const { answers, currentQuestion, dataStatus, questions, selectedCategory } =
-		useAppSelector((state) => state.quiz);
+		useAppSelector((state) => state.quizQuestion);
+	const { planCategories } = useAppSelector((state) => state.planCategory);
 
 	useQuizSaved();
 
@@ -55,12 +67,22 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 		[navigate],
 	);
 
+	const categoryId = planCategories.find(
+		(category) => category.key === selectedCategory,
+	)?.id;
+
+	useEffect(() => {
+		if (categoryId) {
+			void dispatch(actions.fetchQuestions({ categoryId }));
+		}
+	}, [categoryId, dispatch]);
+
+	useEffect(() => {
+		void dispatch(categoryActions.getAll());
+	}, [dispatch]);
+
 	useEffect(() => {
 		const initializeQuiz = async (): Promise<void> => {
-			if (shouldFetchQuestions(selectedCategory, questions, dataStatus)) {
-				void dispatch(actions.fetchQuestions());
-			}
-
 			const hasSavedState = await storage.has(StorageKey.QUIZ_STATE);
 
 			if (shouldRedirectToQuiz(selectedCategory, hasSavedState)) {
@@ -69,19 +91,37 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 		};
 
 		void initializeQuiz();
-	}, [dataStatus, dispatch, questions, selectedCategory, handleSafeNavigate]);
+	}, [selectedCategory, handleSafeNavigate]);
 
 	const handleQuizComplete = useCallback(async (): Promise<void> => {
 		if (!canSubmitQuiz(selectedCategory, questions)) {
 			return;
 		}
 
-		if (!selectedCategory) {
+		if (!categoryId) {
 			return;
 		}
 
-		await handleSafeNavigate(AppRoute.PLAN_GENERATION);
-	}, [handleSafeNavigate, questions, selectedCategory]);
+		const stored = await storage.get(StorageKey.QUIZ_STATE);
+
+		if (!stored) {
+			toast.error(ErrorMessage.QUIZ_NOT_COMPLETED);
+
+			return;
+		}
+
+		const quizState = JSON.parse(stored) as QuizState;
+		const answers = Object.values(quizState.answers);
+
+		if (answers.length === ZERO) {
+			toast.error(ErrorMessage.QUIZ_NO_ANSWERS);
+
+			return;
+		}
+
+		await dispatch(quizAnswerActions.saveAnswers({ answers, categoryId }));
+		void handleSafeNavigate(AppRoute.PLAN_GENERATION);
+	}, [handleSafeNavigate, categoryId, dispatch, questions, selectedCategory]);
 
 	const handleNext = useCallback((): void => {
 		if (shouldMoveToNext(questions, currentQuestion)) {
@@ -192,10 +232,12 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 		if (isNotesPageValue) {
 			return (
 				<>
-					<ProgressBar
-						currentQuestion={currentQuestion}
-						totalQuestions={totalSteps}
-					/>
+					<div className="show-mobile-large-up">
+						<ProgressBar
+							currentQuestion={currentQuestion}
+							totalQuestions={totalSteps}
+						/>
+					</div>
 					<NotesPage />
 					<QuestionNavigation
 						currentQuestion={currentQuestion}
@@ -230,10 +272,12 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 
 		return (
 			<>
-				<ProgressBar
-					currentQuestion={currentQuestion}
-					totalQuestions={totalSteps}
-				/>
+				<div className="show-mobile-large-up">
+					<ProgressBar
+						currentQuestion={currentQuestion}
+						totalQuestions={totalSteps}
+					/>
+				</div>
 				<QuestionPage
 					currentAnswer={currentAnswer as QuizAnswer}
 					onAnswer={handleAnswer}
@@ -255,7 +299,7 @@ const QuestionFlow: React.FC = (): React.ReactElement => {
 
 	return (
 		<div className={getClassNames(styles["question-flow"], "grid-pattern")}>
-			{renderContent()}
+			<div className="wrapper flow-loose-xl">{renderContent()}</div>
 		</div>
 	);
 };

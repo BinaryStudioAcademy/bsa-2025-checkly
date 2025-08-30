@@ -9,7 +9,7 @@ const taskRepository = new TaskRepository(TaskModel);
 const taskService = new TaskService(taskRepository);
 const taskController = new TaskController(logger, taskService);
 
-export { taskController };
+export { taskController, taskRepository };
 export {
 	type TaskCreateRequestDto,
 	type TaskUpdateRequestDto,

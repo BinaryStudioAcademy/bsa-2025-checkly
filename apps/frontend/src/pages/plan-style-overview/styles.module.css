@@ -1,0 +1,136 @@
+.page-container {
+	--grid-color: var(--color-light-grey);
+	--grid-opacity: var(--dashboard-grid-opacity);
+
+	min-height: 100vh;
+	padding-bottom: var(--space-xl);
+}
+
+.mobile-padding-top {
+	padding-top: 38px;
+}
+
+.container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	padding-top: var(--space-l);
+	overflow-x: hidden;
+}
+
+.plan-content {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	max-width: 900px;
+	padding: var(--space-s) var(--space-s) var(--space-s);
+	margin: 0;
+}
+
+.actions-section {
+	--grid-opacity: var(--dashboard-grid-opacity);
+	--grid-color: var(--color-light-grey);
+
+	width: 100%;
+}
+
+.yellow-stars {
+	position: absolute;
+	top: 35%;
+	right: -180px;
+	z-index: 10;
+	pointer-events: none;
+	transform: translateY(-100%);
+}
+
+.yellow-stars-reflection {
+	position: absolute;
+	bottom: 35%;
+	left: -200px;
+	z-index: 1;
+	pointer-events: none;
+	opacity: 0.6;
+	transform: translateY(50%) scaleX(-1) scaleY(-1);
+}
+
+.header-section {
+	position: relative;
+	display: flex;
+	gap: var(--space-l);
+	align-items: center;
+	justify-content: center;
+	padding: 8px var(--space-m);
+	margin-top: 65px;
+	background-color: var(--color-bg-white);
+	border-bottom: 3px solid var(--color-card-gray);
+}
+
+.back-button {
+	position: absolute;
+	left: var(--space-m);
+	cursor: pointer;
+	background: none;
+	border: none;
+}
+
+.back-icon {
+	border-radius: 50%;
+	transition: all 0.3s ease;
+}
+
+.back-button:hover .back-icon {
+	padding: 4px;
+	border: 1px solid rgb(0 0 0 / 15%);
+	box-shadow: 0 2px 6px rgb(0 0 0 / 10%);
+	transform: scale(1.3);
+}
+
+.calendar-modal {
+	display: flex;
+	flex-direction: row;
+	gap: var(--space-s);
+	justify-content: flex-end;
+	margin-top: var(--space-m);
+}
+
+@media (width <= 768px) {
+	.header-section {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: var(--space-s) var(--space-s);
+		margin-top: 64px;
+	}
+
+	.back-button {
+		position: absolute;
+		left: var(--space-m);
+		display: flex;
+		flex-shrink: 0;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.plan-content {
+		justify-content: center;
+		max-width: 100%;
+		padding: var(--space-s) var(--space-xs) var(--space-s);
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+	}
+
+	.actions-section {
+		padding: var(--space-xs) var(--space-s) var(--space-xs);
+	}
+
+	.yellow-stars,
+	.yellow-stars-reflection {
+		display: none;
+	}
+}

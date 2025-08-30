@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { type JSX, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -8,28 +8,60 @@ import {
 	TwinklesYellow,
 } from "~/assets/img/shared/shapes/shapes.img.js";
 import { Button, DecorativeImage } from "~/libs/components/components.js";
-import { AppRoute, ButtonLabels, ButtonVariants } from "~/libs/enums/enums.js";
+import { SKELETON_COUNT } from "~/libs/constants/category-skeleton-count.js";
+import {
+	AppRoute,
+	ButtonLabels,
+	ButtonVariants,
+	ZERO,
+} from "~/libs/enums/enums.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
-import { type QuizCategoryValue } from "~/modules/quiz/libs/types/types.js";
-import { actions } from "~/modules/quiz/quiz.js";
+import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
+import {
+	actions as planActions,
+	type PlanCategoryWithColorDto,
+} from "~/modules/plan-categories/plan-categories.js";
+import { actions } from "~/modules/quiz-questions/quiz-questions.js";
 import { QuizCategoryCard } from "~/pages/quiz/components/quiz-category-card/quiz-category-card.js";
-import { QUIZ_CATEGORIES } from "~/pages/quiz/mock-data/mock-data.js";
 
+import { QuizCategoryCardSkeleton } from "./components/quiz-category-card/quiz-category-card-skeleton.js";
 import styles from "./styles.module.css";
 
 const Quiz: React.FC = (): React.ReactElement => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
-	const { selectedCategory } = useAppSelector((state) => state.quiz);
+	useEffect(() => {
+		void dispatch(planActions.getAll());
+	}, [dispatch]);
+
+	const { dataStatus: planCategoriesDataStatus, planCategories } =
+		useAppSelector((state) => state.planCategory);
+	const { selectedCategory } = useAppSelector((state) => state.quizQuestion);
 
 	const handleCategorySelect = useCallback(
-		(category: QuizCategoryValue): void => {
-			dispatch(actions.setCategory(category));
+		(clickedCategory: string): void => {
+			if (clickedCategory !== selectedCategory) {
+				const clearStateAndSetCategory = async (): Promise<void> => {
+					await storage.drop(StorageKey.QUIZ_STATE);
+					dispatch(actions.resetQuiz());
+					dispatch(actions.setCategory(clickedCategory));
+				};
+
+				void clearStateAndSetCategory();
+			}
 		},
-		[dispatch],
+		[dispatch, selectedCategory],
 	);
+
+	const handleBack = useCallback((): void => {
+		const redirect = async (): Promise<void> => {
+			await navigate(AppRoute.ROOT);
+		};
+
+		void redirect();
+	}, [navigate]);
 
 	const handleNext = useCallback((): void => {
 		const redirect = async (): Promise<void> => {
@@ -42,13 +74,34 @@ const Quiz: React.FC = (): React.ReactElement => {
 	}, [selectedCategory, navigate]);
 
 	const handleSelect = useCallback(
-		(category: QuizCategoryValue): (() => void) => {
+		(category: string): (() => void) => {
 			return (): void => {
 				handleCategorySelect(category);
 			};
 		},
 		[handleCategorySelect],
 	);
+
+	const renderCategories = (
+		categories: PlanCategoryWithColorDto[],
+	): JSX.Element[] => {
+		if (planCategoriesDataStatus.length === ZERO) {
+			return Array.from({ length: SKELETON_COUNT }, (_, index) => (
+				<QuizCategoryCardSkeleton key={`skeleton-${String(index)}`} />
+			));
+		}
+
+		return categories.map((category) => (
+			<QuizCategoryCard
+				color={category.color}
+				iconHref={category.iconHref}
+				isSelected={category.key === selectedCategory}
+				key={category.id}
+				onSelect={handleSelect(category.key)}
+				title={category.title}
+			/>
+		));
+	};
 
 	return (
 		<div
@@ -84,26 +137,24 @@ const Quiz: React.FC = (): React.ReactElement => {
 					src={Arrow}
 				/>
 
-				<div className={getClassNames("wrapper", styles["wrapper"])}>
-					<div className="flow-loose">
+				<div className={getClassNames("wrapper", styles["quiz-wrapper"])}>
+					<div className="flow-loose-xl">
 						<h1 className={styles["title"]}>
 							Pick the field you&apos;d like to improve
 						</h1>
 
-						<div className={getClassNames("cluster", styles["container"])}>
-							{QUIZ_CATEGORIES.map((category) => (
-								<QuizCategoryCard
-									category={category.category}
-									color={category.color}
-									icon={category.icon}
-									key={category.category}
-									onSelect={handleSelect(category.category)}
-									selected={selectedCategory === category.category}
-								/>
-							))}
+						<div
+							className={getClassNames("grid", styles["quiz-cards-container"])}
+						>
+							{planCategories.length > ZERO && renderCategories(planCategories)}
 						</div>
 
 						<div className={getClassNames("cluster", styles["actions"])}>
+							<Button
+								label={ButtonLabels.BACK_TO_MAIN_PAGE}
+								onClick={handleBack}
+								variant={ButtonVariants.SECONDARY}
+							/>
 							<Button
 								isDisabled={!selectedCategory}
 								label={ButtonLabels.NEXT}

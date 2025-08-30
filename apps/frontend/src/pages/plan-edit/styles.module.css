@@ -1,0 +1,229 @@
+.plan {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	height: 100%;
+	margin-top: var(--app-header-height);
+}
+
+.plan-title {
+	max-width: clamp(15rem, 50vw, 100%);
+	font-size: var(--text-size-heading-3);
+	text-wrap: balance;
+}
+
+.plan-title-link {
+	color: var(--color-text-secondary);
+}
+
+.nav-left {
+	--gutter: var(--space-m);
+}
+
+.no-plans-container {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	padding: var(--gutter);
+	text-align: center;
+
+	--grid-color: var(--color-light-grey);
+	--grid-opacity: var(--dashboard-grid-opacity);
+}
+
+.no-plans-title {
+	margin-bottom: var(--space-m);
+	font-size: var(--text-size-heading-3);
+	font-weight: var(--font-weight-body);
+}
+
+.no-plans-message {
+	margin-bottom: var(--space-l);
+	font-size: var(--text-size-heading-4);
+	color: var(--color-text-secondary);
+}
+
+.nav {
+	display: flex;
+	justify-content: space-between;
+	padding: var(--gutter);
+	border-bottom: 1px solid var(--color-border-grey);
+}
+
+.nav-link {
+	text-decoration: none;
+}
+
+.select-day {
+	display: block;
+	padding: var(--space-2xs) var(--space-m);
+	font-size: var(--text-body);
+	font-weight: var(--font-weight-body);
+	text-transform: none;
+	border: 2px solid black;
+}
+
+.content {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+}
+
+.content__days.content__days__open {
+	display: flex;
+}
+
+.content__days-wrapper {
+	position: relative;
+	width: clamp(180px, 20vw, 200px);
+}
+
+.content__days {
+	position: static;
+	display: none;
+	flex-flow: row nowrap;
+	width: 100vw;
+	height: auto;
+	padding-block: var(--space-m);
+	overflow-x: auto;
+}
+
+.content__tasks {
+	--grid-color: var(--color-light-grey);
+	--grid-opacity: var(--dashboard-grid-opacity);
+
+	flex: 1;
+	padding-top: var(--space-l);
+	padding-bottom: var(--space-xl);
+}
+
+.content__tasks > button:nth-last-child(2) {
+	margin-top: auto;
+}
+
+@media (width >= 768px) {
+	.select-day {
+		display: none;
+	}
+
+	.content {
+		flex-direction: row;
+	}
+
+	.content__days {
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2xs);
+		align-items: center;
+		width: 100%;
+		height: auto;
+		height: 100%;
+		padding-top: var(--space-l);
+		padding-bottom: var(--space-xl);
+		overflow: hidden auto;
+		border-right: 1px solid var(--color-border-grey);
+	}
+}
+
+.tasks-form {
+	--gutter: var(--space-xl);
+
+	grid-template-columns: 1fr;
+	justify-items: center;
+}
+
+@media (width >= 1200px) {
+	.tasks-form {
+		grid-template-columns: 1fr 1.25fr;
+	}
+}
+
+.tasks-list {
+	width: 100%;
+}
+
+.input-wrapper {
+	--cluster-vertical-alignment: flex-start;
+	--cluster-direction: row;
+	--gutter: var(--space-xs);
+}
+
+.input-container {
+	position: relative;
+	flex: 1;
+}
+
+.time-selector {
+	position: absolute;
+	top: -12%;
+	right: 0;
+}
+
+.input-control {
+	margin-top: var(--space-l);
+}
+
+.input-control:not(:disabled):hover {
+	background: white;
+}
+
+.day-skeleton {
+	width: 100%;
+}
+
+.task-skeleton-item {
+	--cluster-vertical-alignment: flex-start;
+	--cluster-direction: row;
+	--gutter: var(--space-xs);
+}
+
+.skeleton-button {
+	width: var(--space-l);
+	height: var(--space-l);
+	margin-top: var(--space-l);
+	background: linear-gradient(90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
+	background-size: 200% 100%;
+	border-radius: var(--radius-full);
+	animation: shimmer 1.5s infinite;
+}
+
+.skeleton-input-container {
+	flex: 1;
+}
+
+.skeleton-label {
+	width: 50px;
+	height: var(--text-body);
+	background: linear-gradient(90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
+	background-size: 200% 100%;
+	border-radius: var(--radius-xs);
+	animation: shimmer 1.5s infinite;
+}
+
+.skeleton-input {
+	height: var(--space-xl);
+	background: linear-gradient(90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
+	background-size: 200% 100%;
+	border-radius: var(--radius-s);
+	animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: -200% 0;
+	}
+
+	100% {
+		background-position: 200% 0;
+	}
+}
+
+.add-task-button {
+	margin-inline: auto;
+}

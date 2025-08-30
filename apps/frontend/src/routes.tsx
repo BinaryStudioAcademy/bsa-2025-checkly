@@ -10,10 +10,13 @@ import {
 	LogoutPage,
 	NotFound,
 	PlanGeneration,
+	PlanStyleOverview,
+	PlanStylePrint,
 	Profile,
 	QuestionFlow,
 	Quiz,
 } from "./pages/pages.js";
+import { PlanEdit } from "./pages/plan-edit/plan-edit.js";
 import { TestPage } from "./pages/test-page/test-page.js";
 
 type CustomRouteObject = RouteObject & { handle: RouteHandle };
@@ -39,14 +42,34 @@ const routes: CustomRouteObject[] = [
 		path: AppRoute.SIGN_UP,
 	},
 	{
+		element: <PlanStyleOverview />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.OVERVIEW_PAGE,
+	},
+	{
 		element: <LogoutPage />,
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.LOGOUT,
 	},
 	{
+		element: <Auth />,
+		handle: { access: RouteAccess.NOT_AUTHENTICATED },
+		path: AppRoute.FORGOT_PASSWORD,
+	},
+	{
+		element: <Auth />,
+		handle: { access: RouteAccess.NOT_AUTHENTICATED },
+		path: AppRoute.RESET_PASSWORD,
+	},
+	{
 		element: <QuestionFlow />,
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.QUIZ_QUESTIONS,
+	},
+	{
+		element: <PlanEdit />,
+		handle: { access: RouteAccess.AUTHENTICATED },
+		path: AppRoute.PLAN_EDIT,
 	},
 	{
 		element: <Quiz />,
@@ -67,7 +90,7 @@ const routes: CustomRouteObject[] = [
 			},
 			{
 				element: <Plan />,
-				handle: { access: RouteAccess.PUBLIC },
+				handle: { access: RouteAccess.AUTHENTICATED },
 				path: AppRoute.PLAN,
 			},
 		],
@@ -94,6 +117,11 @@ const routes: CustomRouteObject[] = [
 		element: <PlanGeneration />,
 		handle: { access: RouteAccess.PUBLIC },
 		path: AppRoute.PLAN_GENERATION,
+	},
+	{
+		element: <PlanStylePrint />,
+		handle: { access: RouteAccess.PUBLIC },
+		path: AppRoute.PLAN_STYLE_PRINT,
 	},
 ];
 

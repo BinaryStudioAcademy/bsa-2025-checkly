@@ -1,17 +1,23 @@
 .progress-bar {
+	--circle-size: var(--text-size-heading-2);
+
 	width: 100%;
-	padding: var(--space-l) 0;
-	margin-bottom: var(--space-xl);
+	padding: var(--space-m) 0;
+	color: var(--color-bg-dark);
 }
 
 .progress-container {
 	position: relative;
 	display: flex;
-	gap: var(--space-s);
+	gap: var(--space-2xs);
 	align-items: center;
 	justify-content: center;
-	max-width: 600px;
-	margin: 0 auto;
+}
+
+@media (width >= 768px) {
+	.progress-container {
+		gap: var(--space-s);
+	}
 }
 
 .progress-container::before {
@@ -19,11 +25,17 @@
 	top: 50%;
 	left: 50%;
 	z-index: 1;
-	width: calc(100% - 80px);
+	width: calc(var(--circle-size) * 16);
 	height: 2px;
 	content: "";
 	background-color: var(--color-text-primary);
 	transform: translate(-50%, -50%);
+}
+
+@media (width >= 768px) {
+	.progress-container::before {
+		width: calc(var(--circle-size) * 19);
+	}
 }
 
 .progress-circle {
@@ -32,34 +44,38 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 32px;
-	height: 32px;
-	background-color: white;
-	border: 2px solid var(--color-text-primary);
+	width: var(--circle-size);
+	height: var(--circle-size);
+	line-height: 0;
+	background-color: var(--color-bg-white);
+	border: 2px solid var(--color-bg-dark);
 	border-radius: 50%;
-	transition: all 0.3s ease;
 }
 
 .progress-circle.current {
-	color: white;
-	background-color: var(--color-text-primary);
-	border-color: var(--color-text-primary);
+	color: var(--color-text-primary);
+	background-color: var(--color-card-mint);
+}
+
+.answered {
+	background-color: var(--color-border-light-blue);
+}
+
+.progress-circle:not(.answered) {
+	cursor: not-allowed;
 }
 
 .progress-circle.completed {
-	color: white;
+	color: var(--color-bg-white);
 	background-color: var(--color-text-primary);
 	border-color: var(--color-text-primary);
 }
 
 .progress-circle .number {
-	font-size: var(--text-size-body);
-	font-weight: var(--font-weight-semi-bold);
-	color: var(--color-text-primary);
+	font-weight: var(--font-weight-bold);
 }
 
 .progress-circle .checkmark {
-	font-size: var(--text-size-body);
-	font-weight: var(--font-weight-bold);
-	color: white;
+	font-size: 1.5em;
+	color: var(--color-bg-white);
 }

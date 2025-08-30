@@ -1,5 +1,8 @@
-.wrapper {
+.feedback-wrapper {
+	--grid-size: 12px;
+
 	position: relative;
+	min-width: 100%;
 	padding-block: var(--section-padding-block);
 }
 
@@ -10,6 +13,8 @@
 }
 
 .landing-section {
+	--wrapper-max-width: 100%;
+
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -19,49 +24,81 @@
 	--flow-space: var(--space-2xl);
 
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	width: 100%;
-	max-width: 1200px;
+	max-width: 100%;
 	margin: 0 auto;
 }
 
 .title {
+	z-index: 3;
 	font-size: var(--text-size-heading-2);
 	text-align: center;
 }
 
-.grid {
-	position: relative;
+.no-feedbacks-title {
+	font-size: var(--text-size-heading-3);
+}
+
+.custom-slide {
+	box-sizing: border-box;
 	display: flex;
-	flex-wrap: wrap;
-	gap: var(--step-2);
-	justify-content: center;
-	width: 100%;
-}
-
-.grid > * {
-	flex: 0 0 360px;
-	height: clamp(180px, 12vw + 120px, 240px);
+	width: clamp(180px, 16.07vw + 128.58px, 360px);
+	height: auto;
 	padding: var(--space-m);
+	padding-top: 38px;
 	background-color: var(--color-bg-white);
+	border: 2px solid var(--color-bg-dark);
+	border-radius: var(--radius-m);
 }
 
-@media (width <= 1024px) {
-	.grid {
-		gap: 16px;
+.custom-slide > * {
+	flex: 1;
+	min-height: 0;
+}
+
+.feedbacks-list-wrapper .custom-slide {
+	width: clamp(180px, 16.07vw + 128.58px, 360px);
+}
+
+.feedbacks-list-wrapper {
+	width: 72%;
+	max-width: 100%;
+	min-height: 200px;
+}
+
+.swiper-wrapper {
+	display: flex;
+	align-items: stretch;
+}
+
+.loader-container {
+	--cluster-horizontal-alignment: center;
+
+	min-height: 200px;
+}
+
+@media (width >= 768px) {
+	.feedback-wrapper {
+		--grid-size: unset;
+
+		min-width: 768px;
 	}
 
-	.grid > * {
-		flex: 0 0 360px;
+	.feedbacks-list-wrapper {
+		width: 100%;
 	}
 }
 
-@media (width <= 768px) {
-	.grid > * {
-		flex: 0 1 360px;
-		height: clamp(180px, 12vw + 100px, 200px);
+@media (width >= 1024px) {
+	.landing-section {
+		--wrapper-max-width: unset;
 	}
 
-	.wrapper {
-		--grid-size: 12px;
+	.feedback-wrapper {
+		min-width: 1024px;
 	}
 }

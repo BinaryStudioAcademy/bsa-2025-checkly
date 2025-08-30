@@ -5,8 +5,8 @@ import { getAllUserPlans, searchPlan } from "~/modules/plans/slices/actions.js";
 import { useAppDispatch, useAppSelector, useDebounce } from "../hooks.js";
 import { DataStatus, ZERO_CATEGORY_ID } from "./libs/enums/enums.js";
 import {
-	type PlanDaysTaskDto,
 	type PlanSearchQueryParameter,
+	type PlanWithCategoryDto,
 } from "./libs/types/types.js";
 
 const prepareSearchPayload = (
@@ -24,7 +24,7 @@ const useUserPlanSearch = (): {
 	setCategoryId: React.Dispatch<React.SetStateAction<number>>;
 	setTitle: React.Dispatch<React.SetStateAction<string>>;
 	title: string;
-	userPlans: PlanDaysTaskDto[];
+	userPlans: PlanWithCategoryDto[];
 } => {
 	const dispatch = useAppDispatch();
 	const [categoryId, setCategoryId] = useState<number>(ZERO_CATEGORY_ID);

@@ -5,6 +5,25 @@
 	color: var(--color-text-deep-blue);
 }
 
+@media print {
+	.notes {
+		position: relative;
+		grid-column: 1 / -1;
+		padding: 25px;
+		margin: 0;
+		background-color: transparent;
+	}
+
+	.notes::before {
+		display: none;
+	}
+
+	.print-container--with-remarks .notes {
+		position: relative;
+		background-color: transparent;
+	}
+}
+
 .notes-title {
 	font-family: var(--font-family-avenir);
 	font-size: calc(12px * var(--coefficient));

@@ -3,15 +3,16 @@ import { type SingleValue } from "react-select";
 
 import { PlanStyle } from "~/libs/components/plan-styles/plan-style/plan-style.js";
 import { ZERO } from "~/libs/constants/constants.js";
-import { getClassNames } from "~/libs/helpers/get-class-names.js";
+import { getClassNames, getPlanStyleName } from "~/libs/helpers/helpers.js";
 import {
 	useAppDispatch,
 	useAppSelector,
 	useUserPlanSearch,
 } from "~/libs/hooks/hooks.js";
 import { actions as planCategoryActions } from "~/modules/plan-categories/plan-categories.js";
+import { type PlanWithCategoryDto } from "~/modules/plans/libs/types/types.js";
+import { actions as planActions } from "~/modules/plans/plans.js";
 
-import { ZERO_CATEGORY_ID } from "../libs/enums/enums.js";
 import { PlanCategorySelect } from "./components/plan-category-select/plan-category-select.js";
 import { PlanSearchInput } from "./components/plan-search-input/plan-search-input.js";
 import { PlansFoundBlock } from "./components/plans-found-block/plans-found-block.js";
@@ -76,7 +77,7 @@ const PastPlans: FC = () => {
 
 	const handleCategoryChange = useCallback(
 		(selectedOption: SingleValue<CategoryOption>): void => {
-			const id = selectedOption?.value ?? ZERO_CATEGORY_ID;
+			const id = selectedOption?.value ?? ZERO;
 			setCategoryId(id);
 		},
 		[setCategoryId],
@@ -90,17 +91,43 @@ const PastPlans: FC = () => {
 	);
 
 	const handleClearFilters = useCallback((): void => {
-		setCategoryId(ZERO_CATEGORY_ID);
+		setCategoryId(ZERO);
 		setTitle("");
 	}, [setCategoryId, setTitle]);
+
+	const handlePlanSelect = useCallback(
+		(event: React.MouseEvent<HTMLDivElement>): void => {
+			const planId = Number.parseInt(
+				event.currentTarget.dataset["planId"] as string,
+			);
+			const currentPlan = userPlans.find(
+				(plan) => plan.id === planId,
+			) as PlanWithCategoryDto;
+
+			dispatch(planActions.setCurrentPlan(currentPlan));
+		},
+		[dispatch, userPlans],
+	);
 
 	const renderPlanCards = (): JSX.Element => (
 		<>
 			{userPlans.map((plan) => (
-				<div className={styles["plan-card"]} key={plan.id}>
+				<div
+					aria-hidden="true"
+					className={getClassNames(
+						styles["plan-card"],
+						styles[
+							`plan-card__bg-${getPlanStyleName(plan.styleId).toLowerCase()}`
+						],
+					)}
+					data-plan-id={plan.id}
+					key={plan.id}
+					onClick={handlePlanSelect}
+					role="button"
+				>
 					<PlanStyle
-						inputStyle="WITH_REMARKS"
-						planTitle={plan.title}
+						inputStyle={getPlanStyleName(plan.styleId)}
+						plan={plan}
 						view="selection"
 					/>
 				</div>

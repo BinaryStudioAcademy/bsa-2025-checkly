@@ -7,8 +7,16 @@
 	border-right: var(--sidebar-border-width) solid var(--color-border-grey);
 }
 
+.side-panel-container {
+	--cluster-direction: column;
+	--cluster-horizontal-alignment: flex-start;
+
+	height: 100%;
+}
+
 .navigation {
 	display: flex;
+	flex-grow: 1;
 	flex-direction: column;
 	padding: var(--space-m) var(--space-l) 0;
 }

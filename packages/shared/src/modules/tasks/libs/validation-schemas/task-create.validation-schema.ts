@@ -7,12 +7,6 @@ import {
 } from "../enums/enums.js";
 
 const taskCreate = z.object({
-	description: z
-		.string()
-		.trim()
-		.min(TaskValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
-			message: TaskValidationMessage.FIELD_REQUIRED,
-		}),
 	executionTimeType: z
 		.nativeEnum(ExecutionTimeType)
 		.nullable()
@@ -42,6 +36,23 @@ const taskCreate = z.object({
 		}),
 });
 
+const tasksEdit = z.object({
+	tasks: z.array(taskCreate),
+});
+
+const taskCreatePartial = taskCreate.pick({
+	executionTimeType: true,
+	title: true,
+});
+
+type TaskCreateFormValues = z.infer<typeof taskCreatePartial>;
+
 type TaskCreateRequestDto = z.infer<typeof taskCreate>;
 
-export { taskCreate, type TaskCreateRequestDto };
+export {
+	taskCreate,
+	type TaskCreateFormValues,
+	taskCreatePartial,
+	type TaskCreateRequestDto,
+	tasksEdit,
+};

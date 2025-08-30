@@ -58,12 +58,40 @@ class BaseConfig implements Config {
 					format: Number,
 				},
 			},
+			EMAIL_SERVICE: {
+				EMAIL_API_KEY: {
+					default: null,
+					doc: "API key for email service",
+					env: "EMAIL_API_KEY",
+					format: String,
+				},
+				RESET_PASSWORD_LINK: {
+					default: null,
+					doc: "Link to reset password",
+					env: "RESET_PASSWORD_LINK",
+					format: String,
+				},
+			},
 			ENCRYPTOR: {
 				SALT_SIZE: {
 					default: null,
 					doc: "Salt size for encryption",
 					env: "SALT_SIZE",
 					format: Number,
+				},
+			},
+			FRONTEND: {
+				PLAN_PRINT_URL: {
+					default: null,
+					doc: "Frontend plan print URL",
+					env: "FRONTEND_PLAN_PRINT_URL",
+					format: String,
+				},
+				PLAN_PRINT_URL_PRODUCTION: {
+					default: null,
+					doc: "Frontend plan print URL for production",
+					env: "FRONTEND_PLAN_PRINT_URL_PRODUCTION",
+					format: String,
 				},
 			},
 			OPEN_AI: {
@@ -78,6 +106,14 @@ class BaseConfig implements Config {
 					doc: "OpenAI text generation model",
 					env: "TEXT_GENERATION_MODEL",
 					format: String,
+				},
+			},
+			PASSWORD_TOKEN: {
+				KEY_SIZE: {
+					default: null,
+					doc: "Key size to generate password token",
+					env: "KEY_SIZE",
+					format: Number,
 				},
 			},
 			S3: {

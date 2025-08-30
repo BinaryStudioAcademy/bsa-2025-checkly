@@ -1,5 +1,6 @@
 import { FbIcon, IgIcon, YtIcon } from "~/assets/img/footer/footer.img.js";
 import { Link, Logo } from "~/libs/components/components.js";
+import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getClassNames } from "~/libs/helpers/get-class-names.js";
 
 import styles from "./styles.module.css";
@@ -14,22 +15,22 @@ const Footer: React.FC = () => {
 						aria-label="Footer navigation"
 						className={getClassNames("cluster", styles["nav-links"])}
 					>
-						<Link to="/">Terms of Service</Link>
-						<Link to="/">Privacy Policy</Link>
-						<Link to="/">Contact Us</Link>
+						<Link to={AppRoute.TERMS_OF_SERVICE}>Terms of Service</Link>
+						<Link to={AppRoute.PRIVACY_POLICY}>Privacy Policy</Link>
+						<Link to={AppRoute.CONTACT_US}>Contact Us</Link>
 					</nav>
 				</div>
 				<nav
 					aria-label="Social links"
 					className={getClassNames("cluster", styles["social-links"])}
 				>
-					<Link aria-label="Instagram" to="/">
+					<Link aria-label="Instagram" to={AppRoute.IG}>
 						<IgIcon aria-hidden="true" />
 					</Link>
-					<Link aria-label="Facebook" to="/">
+					<Link aria-label="Facebook" to={AppRoute.FB}>
 						<FbIcon aria-hidden="true" />
 					</Link>
-					<Link aria-label="YouTube" to="/">
+					<Link aria-label="YouTube" to={AppRoute.YT}>
 						<YtIcon aria-hidden="true" />
 					</Link>
 				</nav>

@@ -16,6 +16,7 @@
 .layout-list {
 	display: flex;
 	gap: clamp(15px, 2.1vw, 25px);
+	justify-content: center;
 	padding: 10px;
 	overflow: auto hidden;
 	list-style-type: none;
@@ -86,4 +87,10 @@
 	height: auto;
 	pointer-events: none;
 	transform: translate(-120%, -170%);
+}
+
+@media (width <= 600px) {
+	.layout-list {
+		justify-content: flex-start;
+	}
 }

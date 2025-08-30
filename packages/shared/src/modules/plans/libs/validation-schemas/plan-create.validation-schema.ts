@@ -21,6 +21,15 @@ const planCreate = z.object({
 		.max(PlanValidationRule.INTENSITY_MAX_LENGTH, {
 			message: PlanValidationMessage.INTENSITY_LENGTH,
 		}),
+	quizId: z.number({
+		required_error: PlanValidationMessage.FIELD_REQUIRED,
+	}),
+	styleId: z
+		.number({
+			required_error: PlanValidationMessage.FIELD_REQUIRED,
+		})
+		.int()
+		.positive(),
 	title: z
 		.string()
 		.trim()
@@ -30,9 +39,11 @@ const planCreate = z.object({
 		.max(PlanValidationRule.TITLE_MAX_LENGTH, {
 			message: PlanValidationMessage.TITLE_LENGTH,
 		}),
-	userId: z.number({
-		required_error: PlanValidationMessage.FIELD_REQUIRED,
-	}),
+	userId: z
+		.number({
+			required_error: PlanValidationMessage.FIELD_REQUIRED,
+		})
+		.nullable(),
 });
 
 type PlanCreateRequestDto = z.infer<typeof planCreate>;

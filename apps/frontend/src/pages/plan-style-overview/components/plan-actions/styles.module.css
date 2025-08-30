@@ -1,0 +1,48 @@
+.actions-container,
+.actions-sub-container {
+	--cluster-direction: column;
+	--cluster-vertical-alignment: center;
+	--cluster-horizontal-alignment: stretch;
+
+	margin-inline: auto;
+}
+
+.actions-container > *,
+.actions-sub-container > * {
+	--button-padding-inline: var(--space-xl);
+
+	width: clamp(12rem, 50vw, 18rem);
+}
+
+@media (width >= 1200px) {
+	.actions-sub-container {
+		--cluster-direction: row;
+
+		width: auto;
+	}
+
+	.actions-sub-container > * {
+		width: auto;
+	}
+}
+
+@media (width <= 768px) {
+	.actions-container > *,
+	.actions-sub-container > * {
+		--button-padding-inline: var(--space-l);
+	}
+}
+
+.footer-message {
+	max-width: 60%;
+	margin-inline: auto;
+	font-family: var(--font-family-onest);
+	font-weight: var(--font-weight-semi-bold);
+	text-align: center;
+	text-wrap: balance;
+}
+
+.login-link {
+	color: var(--color-primary-blue, #007bff);
+	cursor: pointer;
+}

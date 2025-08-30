@@ -14,27 +14,41 @@ import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
+	disabled?: boolean;
+	errorMessage?: string;
 	errors: FieldErrors<T>;
 	isRequired?: boolean;
 	label: string;
+	max?: string;
+	maxLength?: number;
+	min?: string;
 	name: FieldPath<T>;
+	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 	placeholder?: string;
 	type?: "date" | "email" | "password" | "text";
 };
 
+const INPUT_DEFAULT_MAX_LENGTH = 100;
+
 const Input = <T extends FieldValues>({
 	control,
+	disabled = false,
+	errorMessage,
 	errors,
 	isRequired,
 	label,
+	max,
+	maxLength = INPUT_DEFAULT_MAX_LENGTH,
+	min,
 	name,
+	onBlur,
 	placeholder = "",
 	type = "text",
 }: Properties<T>): JSX.Element => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const inputId = useId();
 	const { field } = useFormController({ control, name });
-	const error = errors[name]?.message;
+	const error = errors[name]?.message ?? errorMessage;
 	const hasError = Boolean(error);
 	const isPasswordField = type === "password";
 	const inputType = isPasswordField && showPassword ? "text" : type;
@@ -47,10 +61,22 @@ const Input = <T extends FieldValues>({
 		styles["input-container"],
 		"cluster",
 	);
+
 	const inputFieldClass = getClassNames(
 		styles["input-field"],
 		hasError && styles["input-field--error"],
 		isPasswordField && styles["input-field--password"],
+	);
+
+	const handleBlur = useCallback(
+		(event: React.FocusEvent<HTMLInputElement>) => {
+			field.onBlur();
+
+			if (onBlur) {
+				onBlur(event);
+			}
+		},
+		[field, onBlur],
 	);
 
 	const passwordIcon = showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />;
@@ -63,8 +89,13 @@ const Input = <T extends FieldValues>({
 					{...field}
 					aria-invalid={hasError}
 					className={inputFieldClass}
+					disabled={disabled}
 					id={inputId}
+					max={max}
+					maxLength={maxLength}
+					min={min}
 					name={name}
+					onBlur={handleBlur}
 					placeholder={placeholder}
 					required={isRequired}
 					type={inputType}

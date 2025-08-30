@@ -1,17 +1,22 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { MESSAGES } from "~/libs/constants/messages.constants.js";
-import { ErrorMessage } from "~/libs/enums/enums.js";
+import { AppRoute, ErrorMessage } from "~/libs/enums/enums.js";
 import { HTTPError } from "~/libs/modules/http/http.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
+import { actions as planActions } from "~/modules/plans/plans.js";
 import {
+	type ForgotPasswordRequestDto,
+	type ResetPasswordRequestDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
 	type UserUpdateRequestDto,
 } from "~/modules/users/users.js";
 
+import { authApi } from "../auth.js";
+import { type VerifyTokenThunkArgument } from "../libs/types/types.js";
 import {
 	actions as authSliceActions,
 	name as sliceName,
@@ -25,10 +30,12 @@ const signIn = createAsyncThunk<
 	`${sliceName}/sign-in`,
 	async (registerPayload, { extra, rejectWithValue }) => {
 		const { authApi, storage } = extra;
+		const planId = await storage.get(StorageKey.PLAN_ID);
 
 		try {
-			const { token, user } = await authApi.signIn(registerPayload);
+			const { token, user } = await authApi.signIn(planId, registerPayload);
 			await storage.set(StorageKey.TOKEN, token);
+			await storage.drop(StorageKey.PLAN_ID);
 
 			return user;
 		} catch {
@@ -43,12 +50,67 @@ const signUp = createAsyncThunk<
 	AsyncThunkConfig
 >(`${sliceName}/sign-up`, async (registerPayload, { extra }) => {
 	const { authApi, storage } = extra;
+	const planId = await storage.get(StorageKey.PLAN_ID);
 
-	const { token, user } = await authApi.signUp(registerPayload);
+	const { token, user } = await authApi.signUp(planId, registerPayload);
 	await storage.set(StorageKey.TOKEN, token);
+	await storage.drop(StorageKey.PLAN_ID);
 
 	return user;
 });
+
+const sendResetLink = createAsyncThunk<
+	null,
+	ForgotPasswordRequestDto,
+	AsyncThunkConfig
+>(`${sliceName}/send-reset-link`, async (registerPayload) => {
+	return await authApi.sendResetLink(registerPayload);
+});
+
+const verifyToken = createAsyncThunk<
+	null,
+	VerifyTokenThunkArgument,
+	AsyncThunkConfig
+>(
+	`${sliceName}/verify-token`,
+	async ({ navigate, token, userId }, { rejectWithValue }) => {
+		try {
+			await authApi.verifyToken({ token, userId });
+		} catch (error) {
+			const errorMessage =
+				error instanceof HTTPError
+					? error.message
+					: ErrorMessage.DEFAULT_ERROR_MESSAGE;
+			await navigate(AppRoute.ROOT);
+
+			return rejectWithValue(errorMessage);
+		}
+
+		return null;
+	},
+);
+
+const resetPassword = createAsyncThunk<
+	null,
+	ResetPasswordRequestDto,
+	AsyncThunkConfig
+>(
+	`${sliceName}/reset-password`,
+	async ({ password, token, userId }, { rejectWithValue }) => {
+		try {
+			await authApi.resetPassword({ password, token, userId });
+		} catch (error) {
+			const errorMessage =
+				error instanceof HTTPError
+					? error.message
+					: ErrorMessage.DEFAULT_ERROR_MESSAGE;
+
+			return rejectWithValue(errorMessage);
+		}
+
+		return null;
+	},
+);
 
 const getCurrentUser = createAsyncThunk<
 	null | UserDto,
@@ -116,11 +178,13 @@ const logout = createAsyncThunk<null, undefined, AsyncThunkConfig>(
 
 		try {
 			await storage.drop(StorageKey.TOKEN);
+			await storage.drop(StorageKey.PLAN_ID);
 		} catch {
 			notifications.error(MESSAGES.AUTH.LOGOUT_FAILED);
 		}
 
 		dispatch(authSliceActions.resetAuthState());
+		dispatch(planActions.resetPlanState());
 
 		return null;
 	},
@@ -131,7 +195,10 @@ export {
 	avatarUpload,
 	getCurrentUser,
 	logout,
+	resetPassword,
+	sendResetLink,
 	signIn,
 	signUp,
 	updateProfile,
+	verifyToken,
 };

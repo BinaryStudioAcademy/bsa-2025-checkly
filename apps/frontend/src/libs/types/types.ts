@@ -2,11 +2,6 @@ export { type AppRouteType } from "./app-route.type.js";
 export { type AsyncThunkConfig } from "./async-thunk-config.type.js";
 export { type ButtonSize } from "./button-size.type.js";
 export { type ButtonVariant } from "./button-variant.type.js";
-export { type PlanDay } from "./plan/plan-day.type.js";
-export { type PlanStyleOption } from "./plan/plan-style-option.type.js";
-export { type ViewOptions } from "./plan/plan-view-option.type.js";
-export { type Plan } from "./plan/plan.type.js";
-export { type Task } from "./plan/task.type.js";
 export {
 	type CheckboxQuestionProperties,
 	type MixedAnswer,
@@ -16,7 +11,6 @@ export {
 	type QuestionNavigationProperties,
 	type QuestionPageProperties,
 	type QuizCategoryCardProperties,
-	type QuizCategoryProperties,
 	type RadioQuestionProperties,
 	type SingleAnswer,
 	type SingleChoiceWithTextAnswer,
@@ -24,10 +18,19 @@ export {
 	type TextQuestionProperties,
 } from "./quiz-components-properties.type.js";
 export {
+	type ExecutionTimeTypeValue,
 	type Nullable,
+	type PlanDayDto,
+	type PlanStyleOption,
 	type QuestionDto,
+	type QuizAnswer,
 	type ServerErrorDetail,
 	type ServerErrorResponse,
+	type TaskResponseDto,
 	type ValidationSchema,
 	type ValueOf,
+	type VerifyTokenRequestDto,
+	ViewOption,
+	type ViewOptions,
+	type WindowSize,
 } from "shared";

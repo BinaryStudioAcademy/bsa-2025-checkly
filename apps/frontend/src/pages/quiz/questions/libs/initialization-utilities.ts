@@ -1,17 +1,5 @@
 import { DataStatus } from "~/libs/enums/enums.js";
-import { type QuizQuestionsResponseDto } from "~/modules/quiz/libs/types/types.js";
-
-const isIdleStatus = (dataStatus: string): boolean => {
-	return dataStatus === DataStatus.IDLE;
-};
-
-const shouldFetchQuestions = (
-	selectedCategory: null | string,
-	questions: null | QuizQuestionsResponseDto,
-	dataStatus: string,
-): boolean => {
-	return !!selectedCategory && !questions && isIdleStatus(dataStatus);
-};
+import { type QuizQuestionsResponseDto } from "~/modules/quiz-questions/libs/types/types.js";
 
 const shouldRedirectToQuiz = (
 	selectedCategory: null | string,
@@ -41,10 +29,4 @@ const hasError = (dataStatus: string): boolean => {
 	return dataStatus === DataStatus.REJECTED;
 };
 
-export {
-	canSubmitQuiz,
-	hasError,
-	isLoading,
-	shouldFetchQuestions,
-	shouldRedirectToQuiz,
-};
+export { canSubmitQuiz, hasError, isLoading, shouldRedirectToQuiz };

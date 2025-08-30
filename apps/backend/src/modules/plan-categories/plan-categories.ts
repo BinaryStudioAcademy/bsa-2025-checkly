@@ -12,4 +12,4 @@ const planCategoryController = new PlanCategoryController(
 	planCategoryService,
 );
 
-export { planCategoryController };
+export { planCategoryController, planCategoryRepository };

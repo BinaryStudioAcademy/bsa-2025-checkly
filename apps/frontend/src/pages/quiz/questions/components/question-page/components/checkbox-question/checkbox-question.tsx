@@ -15,7 +15,7 @@ const CheckboxQuestion: React.FC<CheckboxQuestionProperties> = ({
 	question,
 }: CheckboxQuestionProperties): React.ReactElement => {
 	const handleOptionChange = useCallback(
-		(option: string, isChecked: boolean): void => {
+		(option: number, isChecked: boolean): void => {
 			const currentSelections = currentAnswer ?? [];
 			const newSelections = toggleOption(option, currentSelections, isChecked);
 			onAnswer(newSelections);
@@ -24,9 +24,9 @@ const CheckboxQuestion: React.FC<CheckboxQuestionProperties> = ({
 	);
 
 	const handleInputChange = useCallback(
-		(optionText: string) =>
+		(optionId: number) =>
 			(event_: React.ChangeEvent<HTMLInputElement>): void => {
-				handleOptionChange(optionText, event_.target.checked);
+				handleOptionChange(optionId, event_.target.checked);
 			},
 		[handleOptionChange],
 	);
@@ -35,19 +35,23 @@ const CheckboxQuestion: React.FC<CheckboxQuestionProperties> = ({
 		<div className={styles["checkbox-question"]}>
 			<div className={styles["options-container"]}>
 				{question.options.map((option) => (
-					<label className={styles["checkbox-option"]} key={option.text}>
+					<label className={styles["checkbox-option"]} key={option.id}>
 						<input
-							checked={isOptionSelected(option.text, currentAnswer)}
+							checked={isOptionSelected(option.id, currentAnswer)}
 							className={styles["checkbox-input"]}
-							onChange={handleInputChange(option.text)}
+							onChange={handleInputChange(option.id)}
 							type={ElementTypes.CHECKBOX}
 						/>
 						<div className={styles["checkbox-custom"]}>
-							{isOptionSelected(option.text, currentAnswer) && (
-								<img alt="Selected" src={logoIcon} />
+							{isOptionSelected(option.id, currentAnswer) && (
+								<img
+									alt="Selected"
+									className={styles["checkbox-icon"]}
+									src={logoIcon}
+								/>
 							)}
 						</div>
-						<span className={styles["option-text"]}>{option.text}</span>
+						<span className={styles["option-text"]}>{option.id}</span>
 					</label>
 				))}
 			</div>
