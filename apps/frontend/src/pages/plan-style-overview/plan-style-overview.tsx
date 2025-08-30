@@ -36,6 +36,20 @@ import {
 import styles from "./styles.module.css";
 
 const PlanStyleOverview: React.FC = () => {
+	const RESPONSIVE_BREAKPOINT = 768;
+	const [isMobile, setIsMobile] = useState<boolean>(false);
+	useEffect(() => {
+		const checkMobile = (): void => {
+			setIsMobile(window.innerWidth <= RESPONSIVE_BREAKPOINT);
+		};
+
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+
+		return (): void => {
+			window.removeEventListener("resize", checkMobile);
+		};
+	}, []);
 	const user = useAppSelector((state) => state.auth.user);
 	const currentPlan = useAppSelector(({ plan }) => plan.plan);
 	const isAuthenticated = Boolean(user);
@@ -152,17 +166,25 @@ const PlanStyleOverview: React.FC = () => {
 	}
 
 	return (
-		<div className={getClassNames("grid-pattern", styles["page-container"])}>
+		<div
+			className={getClassNames(
+				"grid-pattern",
+				styles["page-container"],
+				isMobile && styles["mobile-padding-top"],
+			)}
+		>
 			<AppHeader />
-			<div className={styles["header-section"]}>
-				<PlanStyleCategory
-					actionButtonDisabled={isCalendarDownloading}
-					actionButtonLabel="Calendar File"
-					onActionButtonClick={handleOpenCalendarModal}
-					onSelect={handleCategorySelect}
-					selectedCategory={selectedCategory}
-				/>
-			</div>
+			{!isMobile && (
+				<div className={styles["header-section"]}>
+					<PlanStyleCategory
+						actionButtonDisabled={isCalendarDownloading}
+						actionButtonLabel="Calendar File"
+						onActionButtonClick={handleOpenCalendarModal}
+						onSelect={handleCategorySelect}
+						selectedCategory={selectedCategory}
+					/>
+				</div>
+			)}
 			<div className="flow-loose-xl">
 				<div className={getClassNames(styles["container"])}>
 					<div className={getClassNames("wrapper", styles["plan-content"])}>
@@ -184,6 +206,7 @@ const PlanStyleOverview: React.FC = () => {
 
 				<div className={styles["actions-section"]}>
 					<PlanActions
+						handleConfirmCalendarDownload={handleOpenCalendarModal}
 						isAuthenticated={isAuthenticated}
 						isDownloading={pdfExportStatus === DataStatus.PENDING}
 						onChooseStyle={handleChooseStyle}

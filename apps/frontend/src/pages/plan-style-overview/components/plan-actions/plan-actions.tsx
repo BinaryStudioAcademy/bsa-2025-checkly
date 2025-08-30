@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import {
@@ -17,6 +17,7 @@ import { useLocation } from "~/libs/hooks/hooks.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	handleConfirmCalendarDownload?: () => void;
 	isAuthenticated: boolean;
 	isDownloading: boolean;
 	onChooseStyle: () => void;
@@ -26,6 +27,7 @@ type Properties = {
 };
 
 const PlanActions: React.FC<Properties> = ({
+	handleConfirmCalendarDownload,
 	isAuthenticated,
 	isDownloading,
 	onChooseStyle,
@@ -33,14 +35,34 @@ const PlanActions: React.FC<Properties> = ({
 	onEdit,
 	onGoToDashboard,
 }: Properties) => {
+	const RESPONSIVE_BREAKPOINT = 768;
 	const location = useLocation();
+	const [isMobile, setIsMobile] = useState<boolean>(false);
+
+	useEffect(() => {
+		const checkMobile = (): void => {
+			setIsMobile(window.innerWidth <= RESPONSIVE_BREAKPOINT);
+		};
+
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+
+		return (): void => {
+			window.removeEventListener("resize", checkMobile);
+		};
+	}, []);
+
 	const handleEditClick = useCallback((): void => {
 		onEdit();
 	}, [onEdit]);
 
 	const handleDownloadClick = useCallback((): void => {
-		onDownload();
-	}, [onDownload]);
+		if (isMobile && typeof handleConfirmCalendarDownload === "function") {
+			handleConfirmCalendarDownload();
+		} else {
+			onDownload();
+		}
+	}, [onDownload, isMobile, handleConfirmCalendarDownload]);
 
 	const handleGoToDashboardClick = useCallback((): void => {
 		onGoToDashboard();

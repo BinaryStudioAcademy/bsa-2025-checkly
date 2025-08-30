@@ -6,6 +6,10 @@
 	padding-bottom: var(--space-xl);
 }
 
+.mobile-padding-top {
+	padding-top: 38px;
+}
+
 .container {
 	position: relative;
 	display: flex;

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { LuCalendarArrowDown } from "react-icons/lu";
 
 import {
@@ -28,6 +28,7 @@ const PlanStyleCategory: React.FC<Properties> = ({
 	onSelect,
 	selectedCategory,
 }: Properties) => {
+	const RESPONSIVE_BREAKPOINT = 768;
 	const handleSelectPdf = useCallback((): void => {
 		onSelect(PlanCategoryId.PDF);
 	}, [onSelect]);
@@ -40,11 +41,27 @@ const PlanStyleCategory: React.FC<Properties> = ({
 		onSelect(PlanCategoryId.DESKTOP);
 	}, [onSelect]);
 
+	const [isMobile, setIsMobile] = useState<boolean>(false);
+
+	useEffect(() => {
+		const checkMobile = (): void => {
+			setIsMobile(window.innerWidth <= RESPONSIVE_BREAKPOINT);
+		};
+
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+
+		return (): void => {
+			window.removeEventListener("resize", checkMobile);
+		};
+	}, []);
+
 	return (
 		<div className={styles["header-buttons"]}>
 			<Button
 				className={styles["header-buttons-button"]}
 				icon={<FileIcon aria-hidden="true" />}
+				isDisabled={isMobile}
 				label="PDF"
 				onClick={handleSelectPdf}
 				size="small"
@@ -56,6 +73,7 @@ const PlanStyleCategory: React.FC<Properties> = ({
 				className={styles["header-buttons-button"]}
 				icon={<SmartphoneIcon aria-hidden="true" />}
 				iconOnlySize="large"
+				isDisabled={isMobile}
 				label="Mobile Wallpaper"
 				onClick={handleSelectMobile}
 				size="small"
@@ -66,6 +84,7 @@ const PlanStyleCategory: React.FC<Properties> = ({
 			<Button
 				className={styles["header-buttons-button"]}
 				icon={<MonitorIcon aria-hidden="true" />}
+				isDisabled={isMobile}
 				label="Desktop Wallpaper"
 				onClick={handleSelectDesktop}
 				size="small"
@@ -81,7 +100,7 @@ const PlanStyleCategory: React.FC<Properties> = ({
 						styles["download-button"],
 					)}
 					icon={<LuCalendarArrowDown aria-hidden="true" />}
-					isDisabled={Boolean(actionButtonDisabled)}
+					isDisabled={isMobile || Boolean(actionButtonDisabled)}
 					label={actionButtonLabel}
 					onClick={onActionButtonClick}
 					size="small"
