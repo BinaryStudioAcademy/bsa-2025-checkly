@@ -16,7 +16,7 @@ type RenderTaskInputField = FieldArrayWithId<
 type RenderTaskInputProperties = {
 	control: Control<{ tasks: TaskDto[] }, null>;
 	createTaskBlurHandler: (index: number) => () => void;
-	createTaskDeleteHandler: (taskId: number) => () => void;
+	createTaskDeleteHandler: (taskId: number, index: number) => () => void;
 	createTaskRegenerateHandler: (taskId: number) => () => void;
 	errors: FieldErrors<{ tasks: TaskDto[] }>;
 	tasksLoading: { isLoading: (id: number) => boolean };

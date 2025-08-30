@@ -142,7 +142,7 @@ const Categories: React.FC = () => {
 								</p>
 							</div>
 						</div>
-						<div className="cluster">
+						<div className={getClassNames("cluster", styles["modal-actions"])}>
 							<Button
 								label="Cancel"
 								onClick={handleModalClose}
