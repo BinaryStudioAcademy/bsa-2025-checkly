@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.38.2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.38.1...v1.38.2) (2025-08-30)
+
+
+### Bug Fixes
+
+* prevent pending state for getPlan, show chosen style immediately cy-476 ([9221c1a](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/9221c1a14f7d73334c250e07a39881bf7735ce8c))
+* restore scrollbar after task regeneration cy-479 ([dfe3cf2](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/dfe3cf23b9b82188a76962a045371631b8e0f096))
+* restore scrollbar after task regeneration cy-479 ([a8f9ddb](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/a8f9ddbe6a234ade867dbf3802382d914b1a0f19))
+* Sidebar is not usable on /dashboard when no plans are created cy-476 ([0a0e1d0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/0a0e1d0415e991e8e05156b5fbafd080bf03b516))
+
 ## [1.38.1](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.38.0...v1.38.1) (2025-08-29)
 
 
