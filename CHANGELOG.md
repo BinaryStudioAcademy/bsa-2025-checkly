@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.39.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.38.4...v1.39.0) (2025-09-01)
+
+
+### Features
+
+* * update categories modal cy-485 ([3f776bd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3f776bd00b9323bd0457416f628898f20735ecfa))
+* **main:** integrate Playwright testing package cy-217 ([e30d825](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e30d825f89dc92b2119d9ef7c612522cc3537903))
+
+
+### Bug Fixes
+
+* fixing lint errors cy-217 ([e065f6e](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e065f6e62565987a7c21a169c53beed03b733bde))
+* fixing lint errors cy-217 ([e1d18c4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/e1d18c4318f2d6e139792a24e1a1a9e7389fcbab))
+* knip cy-217 ([8c66653](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/8c6665353c809d1459251517fdc1ec1d96ff33f1))
+* update task adding and task deletion cy-485 ([cdbb7cd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cdbb7cd07209ef3b905c693b2722f9eea3e374da))
+
 ## [1.38.4](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/v1.38.3...v1.38.4) (2025-08-30)
 
 
