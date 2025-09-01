@@ -29,7 +29,12 @@
 		"lint:trash": "knip",
 		"format": "npm run _prettier -- --write",
 		"lint": "concurrently \"npm:lint:*\" && npm run lint --workspaces",
-		"ci:prepare": "simple-git-hooks"
+		"ci:prepare": "simple-git-hooks",
+		"postinstall": "npx playwright install --with-deps",
+		"test": "npx playwright test",
+		"test:ui": "npx playwright test --project=ui",
+		"test:api": "npx playwright test --project=api",
+		"report": "npx playwright show-report"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "19.8.1",
@@ -61,7 +66,12 @@
 		"stylelint-config-recess-order": "7.1.0",
 		"stylelint-config-standard": "38.0.0",
 		"tsc-alias": "1.8.16",
-		"typescript": "5.8.3"
+		"typescript": "5.8.3",
+		"@playwright/test": "^1.54.1",
+		"@types/node": "^24.1.0",
+		"dotenv": "^17.2.1",
+		"ajv": "^8.17.1",
+		"@faker-js/faker": "^9.9.0"
 	},
 	"simple-git-hooks": {
 		"pre-commit": "npm run lint:type && npm run git:hook:precommit",

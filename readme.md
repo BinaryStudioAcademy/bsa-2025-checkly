@@ -219,3 +219,56 @@ Examples:
 ## 8. Deployment
 
 CI/CD implemented using [GitHub Actions](https://docs.github.com/en/actions)
+
+## 9. Running Tests
+
+Automated **API** and **UI** tests for the Checkly monorepo, developed as part of the **Binary Studio Academy 2025** program.
+
+This package uses [Playwright](https://playwright.dev/) to test both backend and frontend functionality of Checkly.
+Includes Continuous Integration via GitHub Actions and generates HTML test reports as build artifacts.
+
+---
+
+### 9.1 Tech Stack
+
+- [Playwright](https://playwright.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Faker](https://www.npmjs.com/package/@faker-js/faker) – fake test data
+- [Ajv](https://ajv.js.org/) – schema validation
+- [dotenv](https://www.npmjs.com/package/dotenv) – environment configuration
+
+---
+
+### 9.2 Useful Commands
+
+npm run test Run all tests with the default configuration.
+
+npm run test:ui Run only UI tests using
+
+npm run test:api Run only API tests
+
+npm run report Shows test report
+
+npm run test --ui Open the interactive Playwright Test Runner UI
+
+---
+
+### 9.4 Environment Configuration
+
+The playwright.config.ts automatically reads:
+
+apps/frontend/.env → VITE_APP_DEVELOPMENT_PORT, VITE_APP_API_ORIGIN_URL
+
+apps/backend/.env → HOST, PORT
+
+From these, it calculates:
+
+WEB_BASE_URL → defaults to http://localhost:3000
+
+API_BASE_URL → defaults to http://localhost:3001/api/v1
+
+To override on the fly:
+
+WEB_BASE_URL=http://localhost:5173 \
+API_BASE_URL=http://localhost:4000/api/v1 \
+npx playwright test
