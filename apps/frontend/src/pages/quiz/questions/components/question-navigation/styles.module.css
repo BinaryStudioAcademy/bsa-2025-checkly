@@ -8,3 +8,7 @@
 	font-weight: 500;
 	color: var(--color-text-secondary);
 }
+
+.navigation-button-skip {
+	margin-inline: auto;
+}
