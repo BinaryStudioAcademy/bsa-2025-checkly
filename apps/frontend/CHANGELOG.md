@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.32.0](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.31.3...frontend-v1.32.0) (2025-09-01)
+
+
+### Features
+
+* * update categories modal cy-485 ([3f776bd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/3f776bd00b9323bd0457416f628898f20735ecfa))
+
+
+### Bug Fixes
+
+* update task adding and task deletion cy-485 ([cdbb7cd](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/commit/cdbb7cd07209ef3b905c693b2722f9eea3e374da))
+
 ## [1.31.3](https://github.com/BinaryStudioAcademy/bsa-2025-checkly/compare/frontend-v1.31.2...frontend-v1.31.3) (2025-08-30)
 
 
